@@ -204,7 +204,7 @@ StyleSheets:
     - ".t-headline.th.regular.not-localize"
     - ".t-headline.th.bold.not-localize"
     properties:
-        text-fontSize: 30.000000
+        text-fontSize: 20.000000
         text-letterSpacing: 0.400000
         text-ascendScale: 0.650000
         text-descendScale: 0.500000
