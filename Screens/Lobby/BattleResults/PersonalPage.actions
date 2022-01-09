@@ -1,0 +1,24 @@
+action TEST()
+{
+   PlaySound("GUI/buttons/box_prize");
+}
+action SET_TICKETS_VALUE(int Value)
+{
+    ChangeData(ticketsCount, Value);
+}
+action GET_TICKET()
+{
+    parallel
+    {
+    if( ticketsCount > 0 )
+    {
+        ChangeData(ticketsCount, ticketsCount - 1);
+        PlaySound("GUI/buttons/sell");
+    }
+    else
+    {
+        PlaySound("GUI/buttons/box_prize");
+        BroadcastEvent("BACK_EVENT","**/Header");
+    }
+	}
+}

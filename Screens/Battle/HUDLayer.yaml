@@ -1305,6 +1305,8 @@ Prototypes:
             actionsPath: "~res:/UI/Screens/Battle/ButtonPressFadeAnimation.actions"
         StyleSheet:
             styles: "~res:/UI/Screens/Battle/Styles/HUDLayerStyles.yaml"
+        UIShortcutEventComponent:
+            shortcuts: "EXIT_TO_HANGAR,Escape;EXIT_TO_HANGAR,Back;EXIT_TO_HANGAR,F2"
     children:
     -   class: "UIControl"
         name: "TableContainer"
@@ -1521,6 +1523,8 @@ Prototypes:
             actionsPath: "~res:/UI/Screens/Battle/ButtonPressFadeAnimation.actions"
         StyleSheet:
             styles: "~res:/UI/Styles/ButtonSoundStyles.yaml"
+        UIShortcutEventComponent:
+            shortcuts: "SWITCH_TO_PREV_PLAYER,Left;SWITCH_TO_NEXT_PLAYER,Right"
     children:
     -   prototype: "TransparentButton/TransparentButton"
         name: "PrevPlayerButton"

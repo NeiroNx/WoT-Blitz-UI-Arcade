@@ -48,6 +48,7 @@ Prototypes:
             - ["int64", "time", "22272L", "22272L"]
             - ["bool", "showXPFactor", "false", "true"]
             - ["bool", "pingIndicatorVisible", "false", "true"]
+            - ["string", "buttonText", "localize(\"hangar/BattleButton\")","localize(\"hangar/BattleButton\")"]
             events:
             - "DEV_LOGOUT"
             - "ON_DEV_BUTTON"
@@ -62,7 +63,6 @@ Prototypes:
             - ["string", "boosterButtonDisabledStyle", "when isGeneralPackLoaded -> \"\", \"disabled\""]
             - ["string", "boosterButtonStyle", "str(boosterSlotStatus, eBoosterSlotStatus, \"style\")"]
             - ["string", "battleTypeSprite", "when battleType == \"1\" -> \"~res:/Gfx/Shared/icons/icon_game-mode_random_colored\", battleType == \"7\" -> \"~res:/Gfx/Shared/icons/icon_game-mode_rating_colored\", \"~res:/Gfx/Shared/icons/icon_game-mode_realistic_colored\""]
-            - ["string", "buttonText", "when isRepair and packIsAvailibleForBattle and not isRandomBan -> localize(\"hangar/RepairButton\"), localize(\"hangar/BattleButton\")"]
             - ["bool", "squadPrebattleButton", "not isSquadType or isSquadCreator or not isJoined"]
             - ["bool", "squadButtonPlayer", "not (isReadyToBattle and squadTeamMateReady and squadTeamMateIsJoined and isSquadReady) and (isReadyToBattle or squadTeamMateReady or squadTeamMateIsJoined or isSquadReady)"]
             - ["bool", "squadButtonTeamMate", "isSquadType and isJoined"]
@@ -144,7 +144,7 @@ Prototypes:
                 components:
                     SizePolicy:
                         horizontalPolicy: "FixedSize"
-                        horizontalValue: 184.000000
+                        horizontalValue: 250.000000
                         verticalPolicy: "FixedSize"
                         verticalValue: 56.000000
                     UIAttachLayoutMasterComponent:

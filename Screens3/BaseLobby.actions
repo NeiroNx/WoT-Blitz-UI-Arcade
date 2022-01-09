@@ -1,3 +1,7 @@
+action GET_TICKET()
+{
+   DirectEvent("GET_TICKET", "**/Page");
+}
 action AnimateScreenShot(float animTime)
 {
 	ChangeProperty("**/ScreenSwitchScreenShot", "", "visible", true);

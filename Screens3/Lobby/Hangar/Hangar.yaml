@@ -44,7 +44,7 @@ Prototypes:
             virtualKeyAction: "Options"
             keyDownEvent: "GO_TO_SHOP"
         UIShortcutEventComponent:
-            shortcuts: "CAPTURED_BACK_EVENT,Escape;CAPTURED_BACK_EVENT,Back;SHOW_UI,SHIFT+L;SHOW_DEV_UI,SHIFT+K"
+            shortcuts: "TEST,F3;BATTLE,Escape;BATTLE,Back;PREVIOUS_TANK,A;PREVIOUS_TANK,W;NEXT_TANK,D;NEXT_TANK,S;PREVIOUS_TANK,LEFT;PREVIOUS_TANK,UP;NEXT_TANK,RIGHT;NEXT_TANK,DOWN;SHOW_TANKS_TREE,SHIFT+T;HIDE_ARCADE,SHIFT+A;ON_ISERT_COIN,F1;BATTLE,F2"
         UIDataParamsComponent:
             params:
             - ["TankModulesTreeModel", "modulesData", "null", "{ }"]
@@ -73,6 +73,12 @@ Prototypes:
             - ["bool", "enableBlur", "false"]
             - ["bool", "captureInput", "false"]
             - ["bool", "showXpBonusHint", "false"]
+            - ["bool", "hideArcade", "false"]
+            - ["string", "priceUnit", "\"рублей\""]
+            - ["int", "countCredits", "0"]
+            - ["int", "gameCredits", "50"]
+            - ["int", "coinCredits", "10"]
+            - ["string", "lowCredits", "\"Проведите картой\""]
         UIDataLocalBindingsComponent:
             data:
             - ["map<eNintendoSwitchControls,string>", "nintendoNavigationFilterLabels", "{ eNintendoSwitchControls.Y = \"Switch/HubridPanel/VehicleFilter/SaveClose\"; eNintendoSwitchControls.X = \"Switch/HubridPanel/VehicleFilter/Reset\"; }"]
@@ -95,14 +101,14 @@ Prototypes:
             - ["bool", "offeredTankSelected", "tanksPanel.offeredTankSelected and not isNull(tanksPanel.offeredTank.tank)"]
             - ["bool", "isSquad", "account.prebattleModel.settings.prebattleType == PrebattleType.SQUAD"]
             - ["bool", "isSquadFormed", "isSquad and not isNull(account.prebattleModel.squadTeamMateInfo)"]
-            - ["bool", "advertisingAvailable", "app.sDlc.isGeneralPackLoaded and not account.tutorialData.isTutorialActive and session.shopData.advertising.hangarLimit > 0 and session.stats.hangarAds.remainingAds > 0 and session.stats.hangarAds.nextViewTime <= session.serverTime and not app.netease.neteaseAvailable and lobby.advertising.hangarAdAvailable and not lobby.advertising.playingAd"]
+            - ["bool", "advertisingAvailable", "hideArcade and app.sDlc.isGeneralPackLoaded and not account.tutorialData.isTutorialActive and session.shopData.advertising.hangarLimit > 0 and session.stats.hangarAds.remainingAds > 0 and session.stats.hangarAds.nextViewTime <= session.serverTime and not app.netease.neteaseAvailable and lobby.advertising.hangarAdAvailable and not lobby.advertising.playingAd"]
             - ["bool", "showTanksPanel", "not (account.tutorialData.isTutorialActive and account.tutorialData.currentLesson < eTutorialLesson.kBattle4)"]
             - ["bool", "isHasRating", "battleRating.state == eBattleRatingState.HAS_RATING"]
             - ["bool", "pingIndicatorVisible", "lobby.pingState == ePingState.MIDDLE or lobby.pingState == ePingState.BAD or lobby.pingState == ePingState.NOT_PINGED"]
             - ["bool", "DLCDownloadButtonVisible", "app.sDlc.state != SmartDLCState.kDone"]
             - ["bool", "DLCDownloadErrorVisible", "app.sDlc.state == SmartDLCState.kError"]
             - ["bool", "DLCDownloadHintVisible", "(not lobby.arePacksAvailableForBattle) and (app.sDlc.state != SmartDLCState.kError) and (app.sDlc.state != SmartDLCState.kDone) and (not offeredTankSelected) and (not isNull(session.playerTanks.currentTank))"]
-            - ["bool", "showOffers", "app.sDlc.isGeneralPackLoaded and lobby.prmpOffersData.placements.Contains(ePrmpOfferPlacement.Hangar) and not lobby.prmpOffersData.placements[ePrmpOfferPlacement.Hangar].offers.Empty()"]
+            - ["bool", "showOffers", "hideArcade and app.sDlc.isGeneralPackLoaded and lobby.prmpOffersData.placements.Contains(ePrmpOfferPlacement.Hangar) and not lobby.prmpOffersData.placements[ePrmpOfferPlacement.Hangar].offers.Empty()"]
             - ["eCurrentScreen", "currentScreen", "eCurrentScreen.kHangar"]
             - ["string", "xButtonText", "when account.prebattleModel.settings.prebattleType == PrebattleType.TRAINING and app.sDlc.isGeneralPackLoaded -> \"hangar/TrainingRoomButton\", not isNull(session.playerTanks.currentTank) and session.playerTanks.currentTank.repairCost > 0 and lobby.arePacksAvailableForBattle and not lobby.punishmentRandomBan -> \"hangar/RepairButton\", \"hangar/BattleButton\""]
         UIActionComponent:
@@ -139,6 +145,14 @@ Prototypes:
             eventName: "ON_CLOSE_TEST_PAGE"
             modelFieldExpression: "showTestPage"
             dataExpression: "not showTestPage"
+        UIDataOnEventComponent8:
+            eventName: "HIDE_ARCADE"
+            modelFieldExpression: "hideArcade"
+            dataExpression: "not hideArcade"
+        UIDataOnEventComponent9:
+            eventName: "BATTLE_BUTTON_PRESSED"
+            modelFieldExpression: "countCredits"
+            dataExpression: "when countCredits >= gameCredits -> countCredits - gameCredits, countCredits"
     children:
     -   class: "UIControl"
         name: "Content"
@@ -273,6 +287,9 @@ Prototypes:
                                         "firstLessonCompleted": "currentLesson > eTutorialLesson.kTurretUnlock"
                                         "showBackButton": "false"
                                         "isFullScreen": "false"
+                                        "showShopButton": "hideArcade"
+                                        "showStatsPanel": "hideArcade"
+                                        "headerInfo": "format(\"Цена игры %(game) %(unit), внесено %(credit) %(unit)\",{\"game\" = str(gameCredits);\"credit\" = str(countCredits);\"unit\" = priceUnit})"
                                     eventActions:
                                     - ["GO_TO_SHOP", "GO_TO_SHOP", ""]
                                     - ["PREMIUM_INFO_EVENT", "PREMIUM_INFO_EVENT", ""]
@@ -376,8 +393,8 @@ Prototypes:
                                                         "isGeneralPackLoaded": "app.sDlc.isGeneralPackLoaded"
                                                         "isPrebattleTraining": "account.prebattleModel.settings.prebattleType == PrebattleType.TRAINING"
                                                         "boosterSlotStatus": "lobby.boostersState.globalState"
-                                                        "boostersButtonIsVisible": "not account.tutorialData.isTutorialActive"
-                                                        "tankIsAccept": "when isNull(session.playerTanks.currentTank) -> false, session.playerTanks.currentTank.lockReason != LOCK_REASON.ON_ARENA"
+                                                        "boostersButtonIsVisible": "not account.tutorialData.isTutorialActive and hideArcade"
+                                                        "tankIsAccept": "when isNull(session.playerTanks.currentTank) -> false,when countCredits < gameCredits and not hideArcade -> false, session.playerTanks.currentTank.lockReason != LOCK_REASON.ON_ARENA"
                                                         "isSquadReady": "lobby.isSquadReady"
                                                         "isBadgeVisible": "session.gameModesBadges.hasGlobalBadge"
                                                         "isVehicleFitsForGameMode": "not isNull(session.playerTanks.currentTank) and session.playerTanks.currentTank.allowedForGameMode and not session.playerTanks.currentTank.needsTopMastery and not session.playerTanks.currentTank.needsTopModules"
@@ -393,12 +410,13 @@ Prototypes:
                                                         "isSquadCreator": "session.dbid == account.prebattleModel.settings.squadCreator"
                                                         "battleType": "session.gameModesAccountModel.mode.battleType"
                                                         "availabilityStatus": "session.gameModesAccountModel.mode.availabilityStatus == eGameModeAvailability.AVAILABLE"
-                                                        "isBattleTypeButtonVIsible": "account.tutorialSyncData.isBattleTypeButtonVisible"
+                                                        "isBattleTypeButtonVIsible": "account.tutorialSyncData.isBattleTypeButtonVisible ans hideArcade"
                                                         "dailyXPFactor": "int(session.shopData.dailyXPFactor)"
                                                         "serverTime": "session.serverTime"
                                                         "time": "session.shopData.nextResetTimestamp"
                                                         "showXPFactor": "not session.shopData.isDailyXPTimesEmpty and not account.tutorialData.isTutorialActive"
                                                         "pingIndicatorVisible": "pingIndicatorVisible"
+                                                        "buttonText": "when session.playerTanks.currentTank.repairCost > 0 and lobby.arePacksAvailableForBattle and not lobby.punishmentRandomBan -> localize(\"hangar/RepairButton\"), countCredits == 0 -> \"Проведите картой\", countCredits != gameCredits -> \"Баланс \" + badge(countCredits), localize(\"hangar/BattleButton\")"
                                                     eventActions:
                                                     - ["ON_DEV_INFO_BUTTON", "ON_DEV_INFO_BUTTON", ""]
                                                     - ["DEV_LOGOUT", "DEV_LOGOUT", ""]
@@ -466,7 +484,7 @@ Prototypes:
                                                     horizontalPolicy: "PercentOfFirstChild"
                                                     verticalPolicy: "PercentOfFirstChild"
                                                 UIChildComponent0:
-                                                    condition: "app.sDlc.isGeneralPackLoaded and stuffQuests.quests.Size() > 0"
+                                                    condition: "hideArcade and app.sDlc.isGeneralPackLoaded and stuffQuests.quests.Size() > 0"
                                                     prototypePath: "~res:/UI/Screens3/Lobby/Hangar/Quests/StuffQuestWidget/StuffQuestWidget.yaml"
                                                     args:
                                                         "serverTime": "session.serverTime"
@@ -488,7 +506,7 @@ Prototypes:
                                                     verticalPolicy: "PercentOfParent"
                                                 UIChildComponent0:
                                                     childType: "kPrototype"
-                                                    condition: "app.sDlc.isGeneralPackLoaded and not account.tutorialData.isTutorialActive"
+                                                    condition: "hideArcade and app.sDlc.isGeneralPackLoaded and not account.tutorialData.isTutorialActive"
                                                     prototypePath: "~res:/UI/Screens3/Lobby/Hangar/Story/StoryFragment.yaml"
                                                     args:
                                                         "serverTime": "session.serverTime"
@@ -504,7 +522,7 @@ Prototypes:
                                                     - ["ON_BATTLEPASS_BTN_CLICKED", "ON_BATTLEPASS_BTN_CLICKED", ""]
                                                     - ["STORY_BUTTON_PRESSED", "STORY_BUTTON_PRESSED", "_event.storyName"]
                                             bindings:
-                                            - ["visible", "not account.tutorialData.isTutorialActive"]
+                                            - ["visible", "hideArcade and not account.tutorialData.isTutorialActive"]
                                     -   class: "UIControl"
                                         name: "Center"
                                         input: false
@@ -678,7 +696,7 @@ Prototypes:
                                                         args:
                                                             "locked": "not app.sDlc.isGeneralPackLoaded"
                                                             "isBgVisible": "true"
-                                                            "visible": "account.tutorialSyncData.isChatAvailable"
+                                                            "visible": "hideArcade and account.tutorialSyncData.isChatAvailable"
                                                             "image": "\"~res:/Gfx/Lobby/icons/icon_chat_n.psd\""
                                                             "type": "eButtonType.OPTIONAL_DARK"
                                                             "sound": "eButtonSound.OK"
@@ -795,7 +813,7 @@ Prototypes:
                 components:
                     Anchor:
                         leftAnchorEnabled: true
-                        leftAnchor: 88.000000
+                        leftAnchor: "when hideArcade ->88.000000, 0.000000"
                         rightAnchorEnabled: true
                         bottomAnchorEnabled: true
                     IgnoreLayout: {}
@@ -812,7 +830,7 @@ Prototypes:
                             "filter": "tanksPanel.filter"
                             "tanks": "tanksPanel.tanks"
                             "resources": "lobby.battleResources"
-                            "offeredTank": "tanksPanel.offeredTank"
+                            "offeredTank": "when hideArcade -> tanksPanel.offeredTank, null"
                             "selectedVehicle": "tanksPanel.selectedVehicle"
                             "levelSharedBonus": "session.stats.levelSharedDailyBonus"
                             "birthdayXpFactor": "session.shopData.birthdayXPFactor"
@@ -823,6 +841,7 @@ Prototypes:
                             "prebattle": "account.prebattleModel"
                             "freeSlots": "session.stats.slots - session.playerTanks.tanks.Size()"
                             "bestCertificateFactor": "session.playerTanks.bestCertificateFactor"
+                            "showSlot": "hideArcade"
                         eventActions:
                         - ["SHOW_TANKS_TREE", "SHOW_TANKS_TREE", ""]
                         - ["RESET_FILTER", "RESET_FILTER", ""]
@@ -857,6 +876,7 @@ Prototypes:
                         horizontalPolicy: "PercentOfMaxChild"
                     UIChildComponent0:
                         childType: "kPrototype"
+                        condition: "hideArcade"
                         prototypePath: "~res:/UI/Screens3/Lobby/Hangar/Sidebar/SideBarHangar.yaml"
                         args:
                             "lobby": "lobby"
@@ -885,6 +905,8 @@ Prototypes:
                         - ["TASK_JOURNAL_PRESSED", "TASK_JOURNAL_PRESSED", "_event.tab, _event.slotIndex"]
                         - ["STORAGE_PRESSED", "STORAGE_PRESSED", ""]
                         - ["TRAINING_PRESSED", "TRAINING_PRESSED", ""]
+                    bindings:
+                    - ["visible", "hideArcade"]
             -   class: "UIControl"
                 name: "UITestPage"
                 input: false

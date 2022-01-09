@@ -1,3 +1,8 @@
+animation ON_INIT
+{
+    Wait(2.0);
+    Event("POPUP_ON_CLOSE_ACTION");
+}
 animation OnHide
 {
     BroadcastEvent("ANIMATE_POPUP_ON_HIDE");

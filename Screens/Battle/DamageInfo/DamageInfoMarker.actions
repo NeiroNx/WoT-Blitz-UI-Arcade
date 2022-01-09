@@ -31,6 +31,7 @@ action START(string animationType, bool hasText)
 		Event("SET_RICOCHET_ICON_WRAPPER_OPACITY", arg1=0);
 		Event (animationType, arg1=0.95, arg2=hasText);
 	}
+	PlaySound("TEST START");
 }
 
 action START_ICON_UPPERSCALE_ANIMATION(float iconSpeedRatio, bool hasText)

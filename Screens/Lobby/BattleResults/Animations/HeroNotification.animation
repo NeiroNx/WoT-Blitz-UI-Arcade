@@ -1,4 +1,11 @@
 animation Notification
 {
+    parallel
+    {
+        Wait(2.0);
+        PlaySound("GUI/buttons/box_prize");
+        BroadcastEvent("SET_TICKETS_VALUE", "**/Page", int(totalCreditsEarned / 2000) + 10);
+        Log("XP = " + str(results.economics.heroBonusXp.base));
+    }
     Move(".", x=0, time=2, interpolation=SINE_OUT);
 }

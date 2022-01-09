@@ -1,3 +1,22 @@
+action TEST()
+{
+   PlaySound("GUI/buttons/box_prize");
+   Log("Hello world!");
+}
+action ON_ISERT_COIN()
+{
+    ChangeData(countCredits, countCredits + coinCredits);
+    if (countCredits >= gameCredits and countCredits < gameCredits + coinCredits)
+    {
+        PlaySound("GUI/buttons/box_prize");
+    }
+    else
+    {
+        PlaySound("GUI/buttons/buy");
+    }
+    Log("Coins:"+str(countCredits));
+}
+
 action HANDLE_EVENT(string eventName)
 {
     if (eventName == "SCROLL_TO_TRAINING" or eventName == "SCROLL_TO_CHAT" or eventName == "SCROLL_TO_TASK_JOURNAL" or eventName == "SCROLL_TO_STORAGE")
@@ -134,7 +153,7 @@ action NEXT_TANK
 {
   if(not isFilterNavPanel)
   {
-    DirectEvent("NEXT_TANK", "**/Container/TanksPanelHolder/TanksPanel");
+    DirectEvent("SELECT_NEXT_TANK", "**/Container/TanksPanelHolder/TanksPanel");
   }
 }
 
@@ -142,7 +161,7 @@ action PREVIOUS_TANK
 {
   if(not isFilterNavPanel)
   {
-    DirectEvent("PREVIOUS_TANK", "**/Container/TanksPanelHolder/TanksPanel");
+    DirectEvent("SELECT_PREVIOUS_TANK", "**/Container/TanksPanelHolder/TanksPanel");
   }
 }
 

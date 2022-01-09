@@ -30,6 +30,7 @@ Prototypes:
             - ["bool", "showFreeXp", "true", "true"]
             - ["bool", "showShopButton", "true", "true"]
             - ["bool", "isFullScreen", "false", "true"]
+            - ["string", "headerInfo", "null", "null"]
             events:
             - "GO_TO_SHOP"
             - "PREMIUM_INFO_EVENT"
@@ -57,6 +58,7 @@ Prototypes:
                 "showFreeXp": "showFreeXp"
                 "showShopButton": "showShopButton"
                 "isFullScreen": "isFullScreen"
+                "headerInfo": "headerInfo"
             eventActions:
             - ["GO_TO_SHOP", "GO_TO_SHOP", ""]
             - ["SHOP_BUTTON", "SHOP_BUTTON", "_event.requiredResource"]

@@ -16,6 +16,7 @@ Prototypes:
             - ["control", "rightContent", "null", "null"]
             - ["control", "button", "null", "null"]
             - ["control", "backButton", "null", "null"]
+            - ["string", "headerInfo", "null", "null"]
     children:
     -   class: "UIControl"
         name: "BackButton"
@@ -52,6 +53,21 @@ Prototypes:
                     childType: "kControl"
                     condition: "not isNull(leftContent)"
                     control: "leftContent"
+        -   class: "UIControl"
+            name: "CenterContent"
+            input: false
+            classes: "t-content-h4 bold white-wild-sand-text"
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                UITextComponent:
+                    fitting: "FITTING_REDUCE"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml"
+            bindings:
+            - ["visible", "not isNull(headerInfo)"]
+            - ["UITextComponent.text", "headerInfo"]
         -   class: "UIControl"
             name: "RightContent"
             input: false

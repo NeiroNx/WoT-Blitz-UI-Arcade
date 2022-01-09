@@ -71,7 +71,7 @@ action ScrollContentPositionChanged(float positionX, float contentWidth, float s
 
 action SELECT_NEXT_TANK
 {
-  if((currentIndex + 1) < Size(tanks))
+  if((currentIndex + 1) < Size(tanks) )
   {
       PlaySound(sound="GUI/buttons/choose");
       ChangeData(currentIndex, (currentIndex + 1));
@@ -88,7 +88,7 @@ action SELECT_NEXT_TANK
     else
     {
       PlaySound(sound="GUI/buttons/choose");
-      ChangeData(currentIndex, 0);
+      ChangeData(currentIndex, Size(tanks) - 1);
       DirectEvent("ON_TANK_PRESS", "**/Carousel/TanksList/ScrollableArea/scrollContainerControl/PlayerTanks/" + (format("TankCell:%(tNation):%(tName)", { "tNation" = str(tanks[currentIndex].info.nation, eNation, "autotests"); "tName" = tanks[currentIndex].info.technicalName; })));
     }
   }
@@ -104,11 +104,17 @@ action SELECT_PREVIOUS_TANK
   }
   else
   {
-    if(((currentIndex - 1) == -1) and hasOfferedTank)
+    if(hasOfferedTank)
     {
       PlaySound(sound="GUI/buttons/choose");
       ChangeData(currentIndex, (currentIndex - 1));
       DirectEvent("TANK_PRESSED", "**/Carousel/TanksList/ScrollableArea/scrollContainerControl/OfferedTank/OferredTankCell");
+    }
+    else
+    {
+      PlaySound(sound="GUI/buttons/choose");
+      ChangeData(currentIndex, 0 );
+      DirectEvent("ON_TANK_PRESS", "**/Carousel/TanksList/ScrollableArea/scrollContainerControl/PlayerTanks/" + (format("TankCell:%(tNation):%(tName)", { "tNation" = str(tanks[currentIndex].info.nation, eNation, "autotests"); "tName" = tanks[currentIndex].info.technicalName; })));
     }
   }
 }

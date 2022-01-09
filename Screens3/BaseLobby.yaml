@@ -17,7 +17,8 @@ Prototypes:
         UIVirtualActionEventComponent0:
             virtualKeyAction: "Escape"
             keyDownEvent: "BACK_EVENT"
-        UIShortcutEventComponent: {}
+        UIShortcutEventComponent:
+            shortcuts: "TEST,F3;GET_TICKET,F4"
         UIDataParamsComponent:
             params:
             - ["TutorialDataModel", "tutorialData", "null", "{ }"]
@@ -128,7 +129,7 @@ Prototypes:
         - ["Anchor.bottomAnchor", "bottomAnchorDistance"]
     -   class: "UIControl"
         name: "NavigationPanel"
-        input: false
+        input: true
         components:
             Anchor:
                 leftAnchorEnabled: true

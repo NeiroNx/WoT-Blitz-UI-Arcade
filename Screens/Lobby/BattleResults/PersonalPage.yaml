@@ -480,7 +480,10 @@ Prototypes:
             - ["string", "finishReasonStr", "when results.finishReason == FinishReason.UNKNOWN -> \"#battle_results:Reason_unknown\", results.finishReason == FinishReason.EXTERMINATION and results.battleResult == BattleResult.WIN -> \"#battle_results:Reason_extermination_Win\", results.finishReason == FinishReason.EXTERMINATION and results.battleResult == BattleResult.LOSE -> \"#battle_results:Reason_extermination_Lose\", results.finishReason == FinishReason.EXTERMINATION and results.battleResult == BattleResult.TIE -> \"#battle_results:Reason_extermination_Tie\", results.finishReason == FinishReason.BASE and results.battleResult == BattleResult.WIN -> \"#battle_results:Reason_base_Win\", results.finishReason == FinishReason.BASE and results.battleResult == BattleResult.LOSE -> \"#battle_results:Reason_base_Lose\", results.finishReason == FinishReason.BASE and results.battleResult == BattleResult.TIE -> \"#battle_results:Reason_base_Tie\", results.finishReason == FinishReason.TIMEOUT -> \"#battle_results:Reason_timeout\", results.finishReason == FinishReason.FAILURE -> \"#battle_results:Reason_failure\", results.finishReason == FinishReason.TECHNICAL -> \"#battle_results:Reason_technical\", results.finishReason == FinishReason.WIN_POINTS and results.battleResult == BattleResult.WIN -> \"#battle_results:Reason_MaxScore_Win\", results.finishReason == FinishReason.WIN_POINTS and results.battleResult == BattleResult.LOSE -> \"#battle_results:Reason_MaxScore_Lose\", results.finishReason == FinishReason.WIN_POINTS and results.battleResult == BattleResult.TIE -> \"#battle_results:Reason_MaxScore_Tie\", results.finishReason == FinishReason.SUPERMACY_OUT_OF_TIME and results.battleResult == BattleResult.WIN -> \"#battle_results:Reason_BiggerScore_Win\", results.finishReason == FinishReason.SUPERMACY_OUT_OF_TIME and results.battleResult == BattleResult.LOSE -> \"#battle_results:Reason_BiggerScore_Lose\", results.finishReason == FinishReason.SUPERMACY_OUT_OF_TIME and results.battleResult == BattleResult.TIE -> \"#battle_results:Reason_BiggerScore_Tie\", results.finishReason == FinishReason.CHOSEN_DRAW_WINNER -> drawWinReasonStr, \"\""]
             - ["string", "bannerPath", "when results.battleResult == BattleResult.WIN and results.gameplayMode != eGameMode.Rating -> \"~res:/UI/Screens/Lobby/BattleResults/BannerWin.yaml\", results.battleResult == BattleResult.WIN and results.gameplayMode == eGameMode.Rating -> \"~res:/UI/Screens/Lobby/BattleResults/BannerWinRating.yaml\", results.battleResult == BattleResult.LOSE and results.gameplayMode != eGameMode.Rating -> \"~res:/UI/Screens/Lobby/BattleResults/BannerLose.yaml\", results.battleResult == BattleResult.LOSE and results.gameplayMode == eGameMode.Rating -> \"~res:/UI/Screens/Lobby/BattleResults/BannerLoseRating.yaml\", results.battleResult == BattleResult.TIE and results.gameplayMode != eGameMode.Rating -> \"~res:/UI/Screens/Lobby/BattleResults/BannerTieRating.yaml\", results.battleResult == BattleResult.TIE and results.gameplayMode == eGameMode.Rating -> \"~res:/UI/Screens/Lobby/BattleResults/BannerTieRating.yaml\", \"\""]
             - ["string", "ratingXpBonus", "\"+\" + str1000Separated(results.economics.ratingXpBonus)"]
+            - ["int", "ticketsCount", "int(totalCreditsEarned / 3000) + 3"]
             writeAllowed: true
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens/Lobby/BattleResults/PersonalPage.actions"
     children:
     -   class: "UIControl"
         name: "Banner"
@@ -1279,13 +1282,13 @@ Prototypes:
                         components:
                             UITextComponent: {}
                         bindings:
-                        - ["classes", "\"header1 \" + totalCreditsColor"]
-                        - ["UITextComponent.text", "str1000Separated(totalCreditsEarned)"]
+                        - ["classes", "\"header0 \" + totalCreditsColor"]
+                        - ["UITextComponent.text", "str(ticketsCount)+\" тикетов\""]
                     -   path: "ValueContainer/Icon"
                         components:
                             Background:
-                                sprite: "~res:/Gfx/UI/LobbyCommon/CurrencyIconsBig"
-                                frame: 1
+                                sprite: "~res:/Gfx/UI/LobbyCommon/CurrencyIconsHuge"
+                                frame: 8
                     -   path: "Label"
                         components:
                             UITextComponent:

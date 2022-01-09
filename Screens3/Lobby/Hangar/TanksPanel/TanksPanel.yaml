@@ -66,6 +66,8 @@ Prototypes:
             - "SWITCH_TANK_FAVORITE"
             - "SELECT_PLAYER_TANK"
             - "SELECT_OFFERED_TANK"
+            - "SELECT_NEXT_TANK"
+            - "SELECT_PREVIOUS_TANK"
             - "BUY_SLOTS"
             - "SWITCH_FILTER(bool show)"
             - "FILTER_ANIMATION_FINISHED"
