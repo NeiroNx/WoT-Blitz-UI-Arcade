@@ -1,0 +1,11 @@
+animation HIDECAPTCHA
+{
+	parallel 
+	{
+	ChangeProperty("**/CaptchaContainer","SizePolicy","verticalValue", 0, 0); 
+	ChangeProperty("**/CaptchaContainer","","visible", false);
+	Opacity("**/CaptchaImage", 0, 0);
+	Opacity("**/CaptchaText", 0, 0);
+	}
+
+}

@@ -1,0 +1,188 @@
+Header:
+    version: 141
+Prototypes:
+-   class: "UIControl"
+    name: "FriendsListCell"
+    size: [348.000000, 64.000000]
+    classes: "long-element tank-list-cell button-choose-sound"
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "FixedSize"
+            verticalValue: 48.000000
+        UIInputEventComponent:
+            onTouchUpInside: "ON_FRIEND_CLICKED"
+            onTouchUpInsideData: "player.id"
+        UIDataParamsComponent:
+            params:
+            - ["bool", "select", "false", "true"]
+            - ["bool", "lastChild", "false", "false"]
+            - ["FriendContact", "player", "{ }", "{ \"onlineStatus\" = true; }"]
+            events:
+            - "ON_FRIEND_CLICKED"
+        UIDataLocalBindingsComponent:
+            data:
+            - ["string", "onlineStyle", "when player.onlineStatus -> \"green-green-bg\", \"gray-cape-cod-bg\""]
+        Sound: {}
+        StyleSheet:
+            styles: "~res:/UI/Screens3/ButtonSound.style.yaml;~res:/UI/Screens3/Common/Touch.style.yaml"
+    children:
+    -   class: "UIControl"
+        name: "SelectorHolder"
+        input: false
+        components:
+            Anchor:
+                rightAnchorEnabled: true
+            LinearLayout:
+                orientation: "TopDown"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                horizontalValue: 70.000000
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Profile/Common/TankListCellSelector.yaml"
+                args:
+                    "addDeltaPercents": "25"
+                    "selected": "select"
+    -   class: "UIControl"
+        name: "Bg"
+        visible: false
+        input: false
+        classes: "white-wild-sand-15-bg"
+        components:
+            Background:
+                drawType: "DRAW_STRETCH_BOTH"
+                sprite: "~res:/Gfx/Lobby/backgrounds/bg_r1"
+                leftRightStretchCap: 1.000000
+                topBottomStretchCap: 1.000000
+            IgnoreLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+    -   class: "UIControl"
+        name: "Hover"
+        input: false
+        classes: "hover white-wild-sand-10-bg"
+        components:
+            Background:
+                drawType: "DRAW_STRETCH_BOTH"
+                sprite: "~res:/Gfx/Lobby/backgrounds/bg_r1"
+                leftRightStretchCap: 1.000000
+                topBottomStretchCap: 1.000000
+            UIOpacityComponent: {}
+            IgnoreLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/Common/Hover.style.yaml"
+    -   class: "UIControl"
+        name: "Selection"
+        input: false
+        classes: "orange-orange-peel-bg"
+        components:
+            Background: {}
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 4.000000
+                verticalPolicy: "PercentOfParent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+        bindings:
+        - ["visible", "select"]
+    -   class: "UIControl"
+        name: "Content"
+        pivot: [0.500000, 0.500000]
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 16.000000
+                rightAnchorEnabled: true
+                rightAnchor: 16.000000
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+            LinearLayout:
+                spacing: 8.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Lobby/Common/Sidebar/SidebarItem/SideBarItem.style.yaml"
+        children:
+        -   class: "UIControl"
+            name: "ContentWrapper"
+            pivot: [0.500000, 0.500000]
+            input: false
+            components:
+                UIOpacityComponent: {}
+                Anchor:
+                    topAnchorEnabled: true
+                LinearLayout:
+                    spacing: 16.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Lobby/Hangar/SquadPanel/SquadListCell.style.yaml"
+            children:
+            -   class: "UIControl"
+                name: "OnlineIndicator"
+                input: false
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 18.000000
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 18.000000
+                children:
+                -   class: "UIControl"
+                    name: "OnlineIndication"
+                    input: false
+                    components:
+                        Background:
+                            drawType: "DRAW_SCALE_PROPORTIONAL"
+                            sprite: "~res:/Gfx/Lobby/backgrounds/bg_oval_40"
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "FixedSize"
+                            horizontalValue: 12.000000
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 12.000000
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Color.style.yaml"
+                    bindings:
+                    - ["classes", "onlineStyle"]
+            -   class: "UIControl"
+                name: "Content"
+                input: false
+                components:
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    LinearLayout:
+                        orientation: "LeftToRight"
+                        padding: "0; 12"
+                        skipInvisible: false
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfMaxChild"
+                children:
+                -   class: "UIControl"
+                    name: "LeftBlock"
+                    input: false
+                    components:
+                        LinearLayout:
+                            orientation: "TopDown"
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfChildrenSum"
+                        UIChildComponent0:
+                            prototypePath: "~res:/UI/Screens3/Lobby/Gifts/FriendName.yaml"
+                            args:
+                                "playerName": "player.name"
+                                "clanTag": "player.tag"
+                                "playerNameSize": "ePlayerSize.kNormal"

@@ -1,0 +1,49 @@
+Header:
+    version: "79"
+Prototypes:
+-   class: "UIControl"
+    name: "EmptySlot"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 32.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 32.000000
+    children:
+    -   class: "UIControl"
+        name: "Bg"
+        input: false
+        classes: "red-tamarillo-bg"
+        components:
+            Background:
+                drawType: "DRAW_SCALE_PROPORTIONAL"
+                sprite: "~res:/Gfx/Lobby/backgrounds/bg_radial-gradient_full"
+            UIOpacityComponent:
+                opacity: 0.400000
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 24.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 24.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+    -   class: "UIControl"
+        name: "Icon"
+        input: false
+        classes: "orange-orange-peel-bg"
+        components:
+            Background:
+                drawType: "DRAW_ALIGNED"
+                sprite: "~res:/Gfx/Lobby/icons/icon_plus_s"
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"

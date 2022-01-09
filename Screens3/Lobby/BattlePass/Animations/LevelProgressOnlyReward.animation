@@ -1,0 +1,14 @@
+animation LEVEL_PROGRESS_ANIMATION_ONLY_REWARD
+{
+	if (level.showEffects)
+	{
+		if (isNeedAnimation)
+		{
+			if (level.index >= oldLevelProgressIndex and level.index <= newLevelProgressIndex)
+			{
+				BroadcastEvent("SetRewardToReadyForTaking", "**/FreeRewards", isLevelPassedForReal);
+				BroadcastEvent("SetRewardToReadyForTaking", "**/PaidRewards", isLevelPassedForReal);
+			}	
+		}
+	}	
+}

@@ -1,0 +1,64 @@
+Header:
+    version: "74"
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/List/ListCell.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "ContentWrapper"
+    position: [0.000000, 32.000000]
+    size: [400.000000, 1040.000000]
+    input: false
+    components:
+        LinearLayout:
+            padding: "16"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfMaxChild"
+        UIDataParamsComponent:
+            params:
+            - ["DossierDescr", "dossier", "null", "{ }"]
+        UIDataLocalsComponent:
+            locals:
+            - ["int", "maxXp", "dossier.maxXp"]
+            - ["int", "maxFrags", "dossier.maxFrags"]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            LinearLayout:
+                orientation: "TopDown"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfChildrenSum"
+        children:
+        -   prototype: "ListCell/ListCell"
+            name: "MaxFrags"
+            components:
+                UIDataParamsComponent:
+                    args:
+                        "visible": "true"
+                        "name": "localize(\"#achievementScreen:Tanks/MaxDestroyed\")"
+                        "value": "str(maxFrags)"
+                        "showBottomSeparator": "false"
+            children:
+            -   path: "MainParamWrapper/MainParam/Title"
+                components:
+                    UITextComponent: {}
+                bindings:
+                - ["UITextComponent.text", "name", "Read"]
+        -   prototype: "ListCell/ListCell"
+            name: "MaxBattleExperience"
+            components:
+                UIDataParamsComponent:
+                    args:
+                        "visible": "true"
+                        "name": "localize(\"#achievementScreen:Tanks/MaxExp\")"
+                        "value": "str1000Separated(maxXp)"
+                        "showBottomSeparator": "false"
+            children:
+            -   path: "MainParamWrapper/MainParam/Title"
+                components:
+                    UITextComponent: {}
+                bindings:
+                - ["UITextComponent.text", "name", "Read"]

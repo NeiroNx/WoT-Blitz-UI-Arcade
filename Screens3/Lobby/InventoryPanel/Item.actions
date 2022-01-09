@@ -1,0 +1,51 @@
+action SHOW_ITEM(bool showRequested, eInventoryPanelAnimation animationType)
+{
+  if (showRequested)
+  {
+    Wait(showAnimationTimeDelay * panelAnimationIndex);
+    parallel
+    {
+      Move(".", y=0.0, time=showAnimationTime, interpolation=SINE_OUT);
+      Opacity(".", opacity=itemOpacity, time=showAnimationTime*1.2, interpolation=SINE_OUT);
+    }
+  }
+  else
+  {
+    parallel
+    {
+      Move(".", y=(when animationType == eInventoryPanelAnimation.kFallDown -> -animationVerticalOffset, animationVerticalOffset), time=showAnimationTime, interpolation=SINE_OUT);
+      Opacity(".", opacity=0.0, time=showAnimationTime, interpolation=SINE_OUT);
+    }
+  }
+}
+
+action HoverAnim(bool isHovered)
+{
+	if (not hasLock)
+	{
+		if (isHovered)
+		{
+			parallel
+			{
+				if (not panel.tabsMode)
+				{
+					ChangeProperty("**/TitleWrapper/Title", "Anchor", "topAnchor", -4, 0.16, EASE_IN_EASE_OUT);
+				}
+				Event("HOVER_START");
+				Log("hover-start");
+			}
+		}
+		else 
+		{
+			parallel
+			{
+				if (not panel.tabsMode)
+				{
+					ChangeProperty("**/TitleWrapper/Title", "Anchor", "topAnchor", 0, 0.08, EASE_IN_EASE_OUT);
+				}
+				Event("HOVER_END");
+			}
+		}
+
+	}
+}

@@ -1,0 +1,146 @@
+Header:
+    version: 125
+Prototypes:
+-   class: "UIControl"
+    name: "LoadingStatus"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "_INIT, ~res:/UI/Screens3/Common/Loaders/LoadingStatus.animation"
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+        UIDataParamsComponent:
+            params:
+            - ["bool", "isError", "true", "true"]
+            - ["bool", "isLoading", "true", "true"]
+            - ["string", "errorText", "\"Error\"", "\"Error\""]
+            - ["string", "loadingText", "\"Loading...\"", "\"Loading...\""]
+        UIDataLocalVarsComponent:
+            data:
+            - ["float", "errorOpacity", "0.000000"]
+            - ["float", "loadingOpacity", "0.000000"]
+            - ["float", "opacityAnimationTime", "0.300000"]
+            - ["float", "loaderAnimationTime", "1.600000"]
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/Common/Loaders/LoadingStatus.actions"
+        UIEventOnDataComponent0:
+            watchedDataExpression: "isLoading"
+            ifExpression: "true"
+            eventName: "RefreshLoading"
+        UIEventOnDataComponent1:
+            watchedDataExpression: "isError"
+            ifExpression: "true"
+            eventName: "RefreshError"
+    children:
+    -   class: "UIControl"
+        name: "Error"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            UIOpacityComponent: {}
+            LinearLayout:
+                spacing: 4.000000
+                dynamicSpacing: true
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "childrenSum + 8"
+                verticalPolicy: "PercentOfParent"
+        bindings:
+        - ["UIOpacityComponent.opacity", "errorOpacity"]
+        children:
+        -   class: "UIControl"
+            name: "Icon"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_PROPORTIONAL_ONE"
+                    sprite: "~res:/Gfx/Lobby/icons/icon_dialog_attention"
+                UIOpacityComponent: {}
+                Anchor:
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 20.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 20.000000
+            bindings:
+            - ["UIOpacityComponent.opacity", "errorOpacity"]
+        -   class: "UIControl"
+            name: "Text"
+            input: false
+            classes: "t-body bold color=orange-orange-peel-text"
+            components:
+                UITextComponent:
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                    align: ["LEFT", "VCENTER"]
+                Anchor:
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+            bindings:
+            - ["UITextComponent.text", "localize(errorText)"]
+    -   class: "UIControl"
+        name: "Loading"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            UIOpacityComponent: {}
+            LinearLayout:
+                dynamicPadding: true
+                spacing: 4.000000
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "childrenSum + 8"
+                verticalPolicy: "PercentOfParent"
+        bindings:
+        - ["UIOpacityComponent.opacity", "loadingOpacity"]
+        children:
+        -   class: "UIControl"
+            name: "Loader"
+            position: [8.000000, 8.000000]
+            size: [32.000000, 32.000000]
+            pivot: [0.500000, 0.500000]
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_PROPORTIONAL_ONE"
+                    sprite: "~res:/Gfx/Shared/backgrounds/bg_loader-circle"
+                    perPixelAccuracy: "PER_PIXEL_ACCURACY_FORCED"
+                UIOpacityComponent: {}
+                UIClipPolygon:
+                    enabled: true
+                RadialProgressComponent:
+                    startAngle: 90.000000
+                    endAngle: 360.000000
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 16.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 16.000000
+            bindings:
+            - ["UIOpacityComponent.opacity", "loadingOpacity"]
+        -   class: "UIControl"
+            name: "Text"
+            input: false
+            classes: "t-body bold color=white-wild-sand-text"
+            components:
+                UITextComponent:
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                    align: ["LEFT", "VCENTER"]
+                Anchor:
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+            bindings:
+            - ["UITextComponent.text", "localize(loadingText)"]

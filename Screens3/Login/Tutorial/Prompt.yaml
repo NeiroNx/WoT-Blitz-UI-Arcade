@@ -1,0 +1,33 @@
+Header:
+    version: 125
+Prototypes:
+-   class: "UIControl"
+    name: "Prompt"
+    size: [583.000000, 48.000000]
+    input: false
+    classes: "t-subtitle regular color=white-wild-sand-70-text"
+    components:
+        UIOpacityComponent: {}
+        UITextComponent:
+            colorInheritType: "COLOR_IGNORE_PARENT"
+            multiline: "MULTILINE_ENABLED"
+            align: ["HCENTER", "VCENTER"]
+        Anchor:
+            leftAnchorEnabled: true
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            verticalPolicy: "PercentOfContent"
+        UIDataParamsComponent:
+            params:
+            - ["int", "width", "583", "583"]
+            - ["string", "promptKey", "\"\"", "\"#Не переживайте за первоначальный выбор нации и танка.\nВ любой момент игры вы можете прокачивать танки другой нации.\""]
+            - ["float", "opacity", "0.000000", "0.000000"]
+            - ["int", "offset", "0", "0"]
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+    bindings:
+    - ["UIOpacityComponent.opacity", "opacity"]
+    - ["UITextComponent.text", "localize(promptKey)"]
+    - ["Anchor.leftAnchor", "offset"]
+    - ["SizePolicy.horizontalValue", "width"]

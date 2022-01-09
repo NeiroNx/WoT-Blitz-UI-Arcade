@@ -1,0 +1,57 @@
+animation PointToControl
+{
+	// Move frame to control
+    parallel
+    {
+        MoveToMaster("**/LT", controlId, -16.0, masterY / 2, 0.6, SINE_OUT);
+        MoveToMaster("**/LB", controlId, -43.3, masterY / 2.0 + 11.3, 0.6, SINE_OUT);
+        MoveToMaster("**/RT", controlId, -59.3, masterY / 2.0 - 11.3, 0.6, SINE_OUT);
+        MoveToMaster("**/RB", controlId, -86.6, masterY / 2, 0.6, SINE_OUT);
+		
+		Rotate("**/LT", 135, 0.6, SINE_OUT);
+        Rotate("**/LB", 225, 0.6, SINE_OUT);
+        Rotate("**/RT", 45, 0.6, SINE_OUT);
+        Rotate("**/RB", 315, 0.6, SINE_OUT);
+    }
+
+	// Pulsation
+    parallel
+    {
+		repeat
+		{
+			// Pulsation out
+			parallel
+			{
+				MoveRel("**/LT", -16, 0, 0.3, SINE_OUT);
+				MoveRel("**/LB", -16, 0, 0.3, SINE_OUT);
+				MoveRel("**/RT", -16, 0, 0.3, SINE_OUT);
+				MoveRel("**/RB", -16, 0, 0.3, SINE_OUT);
+			}
+			
+			// Pulsation in
+			parallel
+			{
+				MoveRel("**/LT", 16, 0, 0.3, SINE_OUT);
+				MoveRel("**/LB", 16, 0, 0.3, SINE_OUT);
+				MoveRel("**/RT", 16, 0, 0.3, SINE_OUT);
+				MoveRel("**/RB", 16, 0, 0.3, SINE_OUT);
+			}
+			Wait(0.2);
+		}
+		
+		{
+			WaitEvent("Disappear");
+			
+			// Fade out and fly away
+			parallel
+			{
+				ChangeProperty("**/Frames", "UIOpacityComponent", "opacity", 0, 0.3, SINE_OUT);
+				MoveRel("**/LT", -32, 0, 0.3, SINE_OUT);
+				MoveRel("**/LB", -32, 0, 0.3, SINE_OUT);
+				MoveRel("**/RT", -32, 0, 0.3, SINE_OUT);
+				MoveRel("**/RB", -32, 0, 0.3, SINE_OUT);
+			}
+			Stop();
+		}
+	}
+}

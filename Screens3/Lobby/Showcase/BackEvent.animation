@@ -1,0 +1,4 @@
+animation Back
+{
+	PlaySound(sound="GUI/buttons/close");
+}

@@ -1,0 +1,767 @@
+Header:
+    version: 115
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/BattleResults/DetailsRewardSubpage.yaml"
+- "~res:/UI/Screens/Lobby/BattleResults/BattleResultsCommon.yaml"
+Prototypes:
+-   prototype: "DetailsRewardSubpage/Page"
+    name: "Page"
+    components:
+        UIDataParamsComponent:
+            params:
+            - ["BattleResultsViewModel", "results", "null", "{ }"]
+            - ["SessionDataModel", "session", "null", "{ }"]
+            - ["AccountDataModel", "account", "null", "{ }"]
+            events:
+            - "BUY_PREMIUM"
+        UIDataLocalBindingsComponent:
+            data:
+            - ["bool", "showPremiumBanners", "not session.stats.isPremiumAccount and not results.isTutorial and not results.flagTraining"]
+            - ["bool", "showXpFactor", "int(results.economics.xpFactor) > 1"]
+            - ["bool", "showHeroXpReward", "results.economics.heroBonusXp.base > 0 or results.economics.heroBonusXp.premium > 0"]
+            - ["bool", "earnedQuestVhclXp", "results.economics.questXp.base > 0 or results.economics.questXp.premium > 0"]
+            - ["bool", "earnedQuestFreeXp", "results.economics.questFreeXp.base > 0 or results.economics.questFreeXp.premium > 0"]
+            - ["bool", "earnedQuestCrewXp", "account.tutorialSyncData.isCrewLessonIsCompleted and (results.economics.questCrewXp.base > 0 or results.economics.questCrewXp.premium > 0)"]
+            - ["bool", "earnedAnyQuestXp", "earnedQuestVhclXp or earnedQuestFreeXp or earnedQuestCrewXp"]
+            - ["bool", "earnedAnyVhclXp", "results.economics.totalXp.base > 0 or results.economics.totalXp.premium > 0"]
+            - ["bool", "earnedAnyFreeXp", "results.economics.totalFreeXp.base > 0 or results.economics.totalFreeXp.premium > 0"]
+            - ["bool", "earnedAnyCrewXp", "account.tutorialSyncData.isCrewLessonIsCompleted and (results.economics.totalCrewXp.base > 0 or results.economics.totalCrewXp.premium > 0)"]
+            - ["string", "xpFactorStr", "localize(\"XP_FACTOR_FORMAT\", { \"xpFactor\" = str(results.economics.xpFactor, 0); })"]
+            - ["string", "xpFactorWithBrackets", "\"(\" + xpFactorStr + \")\""]
+            - ["string", "baseCellsBgColorClass", "when results.economics.withPremium -> \"color-white-25\", \"color-white\""]
+            - ["string", "premCellsBgColorClass", "when results.economics.withPremium -> \"color-white\", \"color-white-25\""]
+            - ["string", "totalLableValue", "when results.economics.usedXpBoosters -> localize(\"#battle_results:DetailsPage/ExperiencePage/TotalWithBoosters\"), localize(\"#battle_results:DetailsPage/CreditsExperiencePage/Total\")"]
+    children:
+    -   path: "Content"
+        components:
+            Background:
+                drawType: "DRAW_ALIGNED"
+        children: []
+    -   path: "Content/UIScrollView/scrollContainerControl/Container/Header/WithoutPrem"
+        bindings:
+        - ["classes", "baseCellsBgColorClass"]
+        children: []
+    -   path: "Content/UIScrollView/scrollContainerControl/Container/Header/WithPrem"
+        bindings:
+        - ["classes", "premCellsBgColorClass"]
+        children: []
+    -   path: "Content/UIScrollView/scrollContainerControl/Container/Table"
+        children:
+        -   prototype: "DetailsRewardSubpage/RewardRow"
+            name: "Earned"
+            children:
+            -   path: "Label"
+                components:
+                    LinearLayout:
+                        spacing: 5.000000
+                children:
+                -   class: "UIControl"
+                    name: "Label"
+                    input: false
+                    classes: "text1"
+                    components:
+                        UITextComponent:
+                            text: "#battle_results:DetailsPage/ExperiencePage/Xp"
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfParent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens/Fonts.yaml"
+                -   class: "UIControl"
+                    name: "LabelRecord"
+                    position: [185.000000, 0.000000]
+                    size: [370.000000, 32.000000]
+                    input: false
+                    classes: "text1"
+                    components:
+                        UITextComponent:
+                            text: "#battle_results:DetailsPage/CreditsExperiencePage/EarnedRecord"
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfParent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens/Fonts.yaml"
+                    bindings:
+                    - ["visible", "results.economics.recordXp"]
+                -   class: "UIControl"
+                    name: "LabelXpFactor"
+                    position: [185.000000, 0.000000]
+                    size: [370.000000, 32.000000]
+                    input: false
+                    classes: "text1"
+                    components:
+                        UITextComponent:
+                            fontName: "WarHeliosCondC_21"
+                            colorInheritType: "COLOR_IGNORE_PARENT"
+                            align: ["LEFT", "VCENTER"]
+                            useRtlAlign: "DONT_USE"
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfParent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens/Fonts.yaml"
+                    bindings:
+                    - ["visible", "showXpFactor"]
+                    - ["UITextComponent.text", "xpFactorWithBrackets"]
+            -   path: "VerticalBox"
+                children:
+                -   prototype: "DetailsRewardSubpage/RewardCell"
+                    name: "RewardCell"
+                    position: [56.000000, -6.000000]
+                    children:
+                    -   path: "WithPrem"
+                        bindings:
+                        - ["classes", "premCellsBgColorClass"]
+                        children: []
+                    -   path: "WithPrem/Icon"
+                        components:
+                            Background:
+                                frame: 3
+                    -   path: "WithPrem/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "str1000Separated(results.economics.battleXp.premium)"]
+                    -   path: "WithoutPrem"
+                        bindings:
+                        - ["classes", "baseCellsBgColorClass"]
+                        children: []
+                    -   path: "WithoutPrem/Icon"
+                        components:
+                            Background:
+                                frame: 3
+                    -   path: "WithoutPrem/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "str1000Separated(results.economics.battleXp.base)"]
+        -   prototype: "DetailsRewardSubpage/RewardSubRow"
+            name: "Damage"
+            children:
+            -   path: "Label"
+                components:
+                    UITextComponent:
+                        text: "#battle_results:DetailsPage/ExperiencePage/XpForDamage"
+            -   path: "VerticalBox"
+                children:
+                -   prototype: "DetailsRewardSubpage/RewardCell"
+                    name: "RewardCell"
+                    position: [56.000000, -6.000000]
+                    children:
+                    -   path: "WithPrem"
+                        bindings:
+                        - ["classes", "premCellsBgColorClass"]
+                        children: []
+                    -   path: "WithPrem/Icon"
+                        components:
+                            Background:
+                                frame: 3
+                    -   path: "WithPrem/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "str1000Separated(results.economics.damageXp.premium)"]
+                    -   path: "WithoutPrem"
+                        bindings:
+                        - ["classes", "baseCellsBgColorClass"]
+                        children: []
+                    -   path: "WithoutPrem/Icon"
+                        components:
+                            Background:
+                                frame: 3
+                    -   path: "WithoutPrem/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "str1000Separated(results.economics.damageXp.base)"]
+        -   prototype: "DetailsRewardSubpage/RewardSubRow"
+            name: "Healing"
+            bindings:
+            - ["visible", "results.economics.hasHealingReward"]
+            children:
+            -   path: "Label"
+                components:
+                    UITextComponent:
+                        text: "#battle_results:DetailsPage/ExperiencePage/XpForHealedHP"
+            -   path: "VerticalBox"
+                children:
+                -   prototype: "DetailsRewardSubpage/RewardCell"
+                    name: "RewardCell"
+                    position: [56.000000, -6.000000]
+                    children:
+                    -   path: "WithPrem"
+                        bindings:
+                        - ["classes", "premCellsBgColorClass"]
+                        children: []
+                    -   path: "WithPrem/Icon"
+                        components:
+                            Background:
+                                frame: 3
+                    -   path: "WithPrem/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "str1000Separated(results.economics.healingXp.premium)"]
+                    -   path: "WithoutPrem"
+                        bindings:
+                        - ["classes", "baseCellsBgColorClass"]
+                        children: []
+                    -   path: "WithoutPrem/Icon"
+                        components:
+                            Background:
+                                frame: 3
+                    -   path: "WithoutPrem/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "str1000Separated(results.economics.healingXp.base)"]
+        -   prototype: "DetailsRewardSubpage/RewardSubRow"
+            name: "Assist"
+            children:
+            -   path: "Label"
+                components:
+                    UITextComponent:
+                        text: "#battle_results:DetailsPage/ExperiencePage/XpForHelp"
+            -   path: "VerticalBox"
+                children:
+                -   prototype: "DetailsRewardSubpage/RewardCell"
+                    name: "RewardCell"
+                    position: [56.000000, -6.000000]
+                    children:
+                    -   path: "WithPrem"
+                        bindings:
+                        - ["classes", "premCellsBgColorClass"]
+                        children: []
+                    -   path: "WithPrem/Icon"
+                        components:
+                            Background:
+                                frame: 3
+                    -   path: "WithPrem/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "str1000Separated(results.economics.supportXp.premium)"]
+                    -   path: "WithoutPrem"
+                        bindings:
+                        - ["classes", "baseCellsBgColorClass"]
+                        children: []
+                    -   path: "WithoutPrem/Icon"
+                        components:
+                            Background:
+                                frame: 3
+                    -   path: "WithoutPrem/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "str1000Separated(results.economics.supportXp.base)"]
+        -   prototype: "DetailsRewardSubpage/RewardSubRow"
+            name: "Other"
+            children:
+            -   path: "Label"
+                components:
+                    UITextComponent:
+                        text: "#battle_results:DetailsPage/ExperiencePage/OtherXp"
+            -   path: "VerticalBox"
+                children:
+                -   prototype: "DetailsRewardSubpage/RewardCell"
+                    name: "RewardCell"
+                    position: [56.000000, -6.000000]
+                    children:
+                    -   path: "WithPrem"
+                        bindings:
+                        - ["classes", "premCellsBgColorClass"]
+                        children: []
+                    -   path: "WithPrem/Icon"
+                        components:
+                            Background:
+                                frame: 3
+                    -   path: "WithPrem/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "str1000Separated(results.economics.actionsXp.premium)"]
+                    -   path: "WithoutPrem"
+                        bindings:
+                        - ["classes", "baseCellsBgColorClass"]
+                        children: []
+                    -   path: "WithoutPrem/Icon"
+                        components:
+                            Background:
+                                frame: 3
+                    -   path: "WithoutPrem/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "str1000Separated(results.economics.actionsXp.base)"]
+        -   prototype: "DetailsRewardSubpage/RewardSubRow"
+            name: "TeamBonus"
+            children:
+            -   path: "Label"
+                components:
+                    UITextComponent:
+                        text: "#battle_results:DetailsPage/ExperiencePage/TeamBonus"
+            -   path: "VerticalBox"
+                children:
+                -   prototype: "DetailsRewardSubpage/RewardCell"
+                    name: "RewardCell"
+                    position: [56.000000, -6.000000]
+                    children:
+                    -   path: "WithPrem"
+                        bindings:
+                        - ["classes", "premCellsBgColorClass"]
+                        children: []
+                    -   path: "WithPrem/Icon"
+                        components:
+                            Background:
+                                frame: 3
+                    -   path: "WithPrem/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "str1000Separated(results.economics.teamBonusXp.premium)"]
+                    -   path: "WithoutPrem"
+                        bindings:
+                        - ["classes", "baseCellsBgColorClass"]
+                        children: []
+                    -   path: "WithoutPrem/Icon"
+                        components:
+                            Background:
+                                frame: 3
+                    -   path: "WithoutPrem/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "str1000Separated(results.economics.teamBonusXp.base)"]
+        -   prototype: "DetailsRewardSubpage/RewardSubRow"
+            name: "HeroReward"
+            bindings:
+            - ["visible", "showHeroXpReward"]
+            children:
+            -   path: "Label"
+                components:
+                    UITextComponent:
+                        text: "#battle_results:DetailsPage/ExperiencePage/heroRewardXp"
+            -   path: "VerticalBox"
+                children:
+                -   prototype: "DetailsRewardSubpage/RewardCell"
+                    name: "RewardCell"
+                    position: [56.000000, -6.000000]
+                    children:
+                    -   path: "WithPrem"
+                        bindings:
+                        - ["classes", "premCellsBgColorClass"]
+                        children: []
+                    -   path: "WithPrem/Icon"
+                        components:
+                            Background:
+                                frame: 3
+                    -   path: "WithPrem/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "str1000Separated(results.economics.heroBonusXp.premium)"]
+                    -   path: "WithoutPrem"
+                        bindings:
+                        - ["classes", "baseCellsBgColorClass"]
+                        children: []
+                    -   path: "WithoutPrem/Icon"
+                        components:
+                            Background:
+                                frame: 3
+                    -   path: "WithoutPrem/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "str1000Separated(results.economics.heroBonusXp.base)"]
+        -   prototype: "DetailsRewardSubpage/RewardRow"
+            name: "QuestsReward"
+            position: [0.000000, 192.000000]
+            bindings:
+            - ["visible", "earnedAnyQuestXp"]
+            children:
+            -   path: "Label"
+                components:
+                    UITextComponent:
+                        text: "#battle_results:DetailsPage/CreditsExperiencePage/Quest_Reward"
+            -   path: "VerticalBox"
+                children:
+                -   prototype: "DetailsRewardSubpage/RewardCell"
+                    name: "VehicleXp"
+                    position: [56.000000, -6.000000]
+                    bindings:
+                    - ["visible", "earnedQuestVhclXp"]
+                    children:
+                    -   path: "WithPrem"
+                        bindings:
+                        - ["classes", "premCellsBgColorClass"]
+                        children: []
+                    -   path: "WithPrem/Icon"
+                        components:
+                            Background:
+                                frame: 3
+                    -   path: "WithPrem/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "str1000Separated(results.economics.questXp.premium)"]
+                    -   path: "WithoutPrem"
+                        bindings:
+                        - ["classes", "baseCellsBgColorClass"]
+                        children: []
+                    -   path: "WithoutPrem/Icon"
+                        components:
+                            Background:
+                                frame: 3
+                    -   path: "WithoutPrem/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "str1000Separated(results.economics.questXp.base)"]
+                -   prototype: "DetailsRewardSubpage/RewardCell"
+                    name: "FreeXp"
+                    position: [56.000000, -6.000000]
+                    bindings:
+                    - ["visible", "earnedQuestFreeXp"]
+                    children:
+                    -   path: "WithPrem"
+                        bindings:
+                        - ["classes", "premCellsBgColorClass"]
+                        children: []
+                    -   path: "WithPrem/Icon"
+                        components:
+                            Background:
+                                frame: 2
+                    -   path: "WithPrem/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "str1000Separated(results.economics.questFreeXp.premium)"]
+                    -   path: "WithoutPrem"
+                        bindings:
+                        - ["classes", "baseCellsBgColorClass"]
+                        children: []
+                    -   path: "WithoutPrem/Icon"
+                        components:
+                            Background:
+                                frame: 2
+                    -   path: "WithoutPrem/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "str1000Separated(results.economics.questFreeXp.base)"]
+                -   prototype: "DetailsRewardSubpage/RewardCell"
+                    name: "CrewXp"
+                    position: [56.000000, -6.000000]
+                    bindings:
+                    - ["visible", "earnedQuestCrewXp"]
+                    children:
+                    -   path: "WithPrem"
+                        bindings:
+                        - ["classes", "premCellsBgColorClass"]
+                        children: []
+                    -   path: "WithPrem/Icon"
+                        components:
+                            Background:
+                                frame: 4
+                    -   path: "WithPrem/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "str1000Separated(results.economics.questCrewXp.premium)"]
+                    -   path: "WithoutPrem"
+                        bindings:
+                        - ["classes", "baseCellsBgColorClass"]
+                        children: []
+                    -   path: "WithoutPrem/Icon"
+                        components:
+                            Background:
+                                frame: 4
+                    -   path: "WithoutPrem/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "str1000Separated(results.economics.questCrewXp.base)"]
+        -   prototype: "DetailsRewardSubpage/RewardRow"
+            name: "Free"
+            components:
+                UIAttachLayoutMasterComponent:
+                    attachId: "FREE_XP_BATTLE_RESULTS"
+                UIShadowHoleComponent:
+                    leftOffset: 8.000000
+                    rightOffset: 8.000000
+                    bottomOffset: 8.000000
+            bindings:
+            - ["UIShadowHoleComponent.isEnabled", "account.tutorialData.currentHint == eTutorialHint.kObtainFreeXP"]
+            children:
+            -   path: "Label"
+                components:
+                    LinearLayout:
+                        spacing: 5.000000
+                children:
+                -   class: "UIControl"
+                    name: "Label"
+                    input: false
+                    classes: "text1"
+                    components:
+                        UITextComponent:
+                            text: "#battle_results:DetailsPage/ExperiencePage/FreeXp"
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfParent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens/Fonts.yaml"
+                -   class: "UIControl"
+                    name: "LabelXpFactor"
+                    position: [185.000000, 0.000000]
+                    size: [370.000000, 32.000000]
+                    input: false
+                    classes: "text1"
+                    components:
+                        UITextComponent: {}
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfParent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens/Fonts.yaml"
+                    bindings:
+                    - ["visible", "showXpFactor"]
+                    - ["UITextComponent.text", "xpFactorWithBrackets"]
+            -   path: "VerticalBox"
+                children:
+                -   prototype: "DetailsRewardSubpage/RewardCell"
+                    name: "RewardCell"
+                    position: [56.000000, -6.000000]
+                    children:
+                    -   path: "WithPrem"
+                        bindings:
+                        - ["classes", "premCellsBgColorClass"]
+                        children: []
+                    -   path: "WithPrem/Icon"
+                        components:
+                            Background:
+                                frame: 2
+                    -   path: "WithPrem/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "str1000Separated(results.economics.freeXp.premium)"]
+                    -   path: "WithoutPrem"
+                        bindings:
+                        - ["classes", "baseCellsBgColorClass"]
+                        children: []
+                    -   path: "WithoutPrem/Icon"
+                        components:
+                            Background:
+                                frame: 2
+                    -   path: "WithoutPrem/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "str1000Separated(results.economics.freeXp.base)"]
+        -   prototype: "DetailsRewardSubpage/RewardRow"
+            name: "Avatar"
+            position: [0.000000, 256.000000]
+            bindings:
+            - ["visible", "account.tutorialSyncData.isCrewLessonIsCompleted"]
+            children:
+            -   path: "Label"
+                components:
+                    LinearLayout:
+                        spacing: 5.000000
+                children:
+                -   class: "UIControl"
+                    name: "Label"
+                    input: false
+                    classes: "text1"
+                    components:
+                        UITextComponent:
+                            text: "#battle_results:DetailsPage/ExperiencePage/CrewXp"
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfParent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens/Fonts.yaml"
+                -   class: "UIControl"
+                    name: "LabelXpFactor"
+                    position: [185.000000, 0.000000]
+                    size: [370.000000, 32.000000]
+                    input: false
+                    classes: "text1"
+                    components:
+                        UITextComponent: {}
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfParent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens/Fonts.yaml"
+                    bindings:
+                    - ["visible", "showXpFactor"]
+                    - ["UITextComponent.text", "xpFactorWithBrackets"]
+            -   path: "VerticalBox"
+                children:
+                -   prototype: "DetailsRewardSubpage/RewardCell"
+                    name: "RewardCell"
+                    position: [56.000000, -6.000000]
+                    children:
+                    -   path: "WithPrem"
+                        bindings:
+                        - ["classes", "premCellsBgColorClass"]
+                        children: []
+                    -   path: "WithPrem/Icon"
+                        components:
+                            Background:
+                                frame: 4
+                    -   path: "WithPrem/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "str1000Separated(results.economics.crewXp.premium)"]
+                    -   path: "WithoutPrem"
+                        bindings:
+                        - ["classes", "baseCellsBgColorClass"]
+                        children: []
+                    -   path: "WithoutPrem/Icon"
+                        components:
+                            Background:
+                                frame: 4
+                    -   path: "WithoutPrem/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "str1000Separated(results.economics.crewXp.base)"]
+    -   path: "Content/UIScrollView/scrollContainerControl/Container/Total/Label"
+        components:
+            UITextComponent: {}
+        bindings:
+        - ["UITextComponent.text", "totalLableValue"]
+    -   path: "Content/UIScrollView/scrollContainerControl/Container/Total/VerticalBox"
+        children:
+        -   prototype: "DetailsRewardSubpage/RewardCell"
+            name: "VehicleXp"
+            position: [56.000000, -6.000000]
+            children:
+            -   path: "WithPrem"
+                bindings:
+                - ["classes", "premCellsBgColorClass"]
+                children: []
+            -   path: "WithPrem/Icon"
+                components:
+                    Background:
+                        frame: 3
+            -   path: "WithPrem/Value"
+                components:
+                    UITextComponent: {}
+                bindings:
+                - ["UITextComponent.text", "str1000Separated(results.economics.totalXp.premium)"]
+            -   path: "WithoutPrem"
+                bindings:
+                - ["classes", "baseCellsBgColorClass"]
+                children: []
+            -   path: "WithoutPrem/Icon"
+                components:
+                    Background:
+                        frame: 3
+            -   path: "WithoutPrem/Value"
+                components:
+                    UITextComponent: {}
+                bindings:
+                - ["UITextComponent.text", "str1000Separated(results.economics.totalXp.base)"]
+        -   prototype: "DetailsRewardSubpage/RewardCell"
+            name: "FreeXp"
+            position: [56.000000, -6.000000]
+            bindings:
+            - ["visible", "earnedAnyFreeXp"]
+            children:
+            -   path: "WithPrem"
+                bindings:
+                - ["classes", "premCellsBgColorClass"]
+                children: []
+            -   path: "WithPrem/Icon"
+                components:
+                    Background:
+                        frame: 2
+            -   path: "WithPrem/Value"
+                components:
+                    UITextComponent: {}
+                bindings:
+                - ["UITextComponent.text", "str1000Separated(results.economics.totalFreeXp.premium)"]
+            -   path: "WithoutPrem"
+                bindings:
+                - ["classes", "baseCellsBgColorClass"]
+                children: []
+            -   path: "WithoutPrem/Icon"
+                components:
+                    Background:
+                        frame: 2
+            -   path: "WithoutPrem/Value"
+                components:
+                    UITextComponent: {}
+                bindings:
+                - ["UITextComponent.text", "str1000Separated(results.economics.totalFreeXp.base)"]
+        -   prototype: "DetailsRewardSubpage/RewardCell"
+            name: "CrewXp"
+            position: [56.000000, -6.000000]
+            bindings:
+            - ["visible", "earnedAnyCrewXp"]
+            children:
+            -   path: "WithPrem"
+                bindings:
+                - ["classes", "premCellsBgColorClass"]
+                children: []
+            -   path: "WithPrem/Icon"
+                components:
+                    Background:
+                        frame: 4
+            -   path: "WithPrem/Value"
+                components:
+                    UITextComponent: {}
+                bindings:
+                - ["UITextComponent.text", "str1000Separated(results.economics.totalCrewXp.premium)"]
+            -   path: "WithoutPrem"
+                bindings:
+                - ["classes", "baseCellsBgColorClass"]
+                children: []
+            -   path: "WithoutPrem/Icon"
+                components:
+                    Background:
+                        frame: 4
+            -   path: "WithoutPrem/Value"
+                components:
+                    UITextComponent: {}
+                bindings:
+                - ["UITextComponent.text", "str1000Separated(results.economics.totalCrewXp.base)"]
+    -   path: "Banner"
+        bindings:
+        - ["visible", "showPremiumBanners"]
+        children: []
+    -   path: "Banner/PremiumBanner"
+        classes: ""
+    -   class: "UIControl"
+        name: "TrainingNoteContainer"
+        size: [1024.000000, 50.000000]
+        input: false
+        classes: "notch-tightly-bottom-inset"
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                bottomAnchorEnabled: true
+            IgnoreLayout: {}
+            UIAnchorSafeAreaComponent: {}
+            StyleSheet:
+                styles: "~res:/UI/Styles/SafeAreaStyles.yaml"
+        children:
+        -   prototype: "BattleResultsCommon/TrainingNote"
+            name: "TrainingNote"
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    rightAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                IgnoreLayout: {}
+                SizePolicy:
+                    horizontalPolicy: "Ignore"
+                DebugRender:
+                    enabled: false
+            bindings:
+            - ["visible", "results.flagTraining"]

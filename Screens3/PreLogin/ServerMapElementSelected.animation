@@ -1,0 +1,32 @@
+animation Select
+{
+	PlaySound("play_ui_btn_server_select");
+	Scale(path="./PointHolder", time = 0.3, x = 0.5, y = 0.5, interpolation = SINE_IN_SINE_OUT);
+
+	parallel
+	{
+		sequence
+		{
+			WaitEvent("OnRegionDeselected");
+           	Stop();
+		}
+
+		repeat
+		{
+			parallel
+			{
+				sequence
+				{
+					Rotate(path="./PointHolder/Point", angle = 0, time = 0);
+					Rotate(path="./PointHolder/Point", angle = 180, time = 0.8, interpolation = SINE_IN_SINE_OUT);
+				}
+
+				sequence
+				{
+					Scale(path="./PointHolder/Point", time = 0.4, x = 0.85, y = 0.85, interpolation = SINE_IN_SINE_OUT);
+					Scale(path="./PointHolder/Point", time = 0.4, x = 1.25, y = 1.25, interpolation = SINE_IN_SINE_OUT);
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,132 @@
+Header:
+    version: "100"
+ImportedPackages:
+- "~res:/UI/Screens/Common/Switch.yaml"
+- "~res:/UI/Screens/Common/StyledButton.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "DebugUIOptionItem"
+    size: [400.000000, 80.000000]
+    input: false
+    classes: "row"
+    components:
+        Background: {}
+        UIDataParamsComponent:
+            params:
+            - ["bool", "buttonInsteadToggle", "false", "false"]
+            - ["string", "name", "\"\"", "\"Option Name\""]
+            - ["bool", "readOnly", "false", "false"]
+            - ["bool", "enabled", "false", "true"]
+            - ["string", "description", "\"\"", "\"Optional Description\""]
+            events:
+            - "ON_OPTION_CLICKED"
+            - "ON_OPTION_CHANGED(bool isEnabled)"
+        StyleSheet:
+            styles: "~res:/UI/Screens/Common/Settings/SettingsCommon.yaml;~res:/UI/Styles/BackgroundStyles.yaml"
+    children:
+    -   class: "UIControl"
+        name: "Bg"
+        input: false
+        classes: "pane-bg"
+        components:
+            Background: {}
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+            IgnoreLayout: {}
+    -   class: "UIControl"
+        name: "ContentLinearLayout"
+        input: false
+        components:
+            LinearLayout:
+                padding: "10.000000"
+                spacing: 10.000000
+                dynamicSpacing: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "TextVerticalLayout"
+            size: [131.000000, 80.000000]
+            input: false
+            components:
+                LinearLayout:
+                    orientation: "TopDown"
+                    dynamicPadding: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            children:
+            -   class: "UIControl"
+                name: "GroupCaption"
+                size: [105.000000, 40.000000]
+                input: false
+                components:
+                    Background:
+                        align: ["LEFT", "VCENTER"]
+                    UITextComponent:
+                        fitting: "FITTING_REDUCE"
+                        align: ["LEFT", "VCENTER"]
+                        useRtlAlign: "USE_BY_SYSTEM"
+                    Anchor:
+                        leftAnchorEnabled: true
+                        useRtl: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfContent"
+                bindings:
+                - ["classes", "\"header4 \" + (when readOnly -> \"text-color-white-70\", \"text-color-white\")"]
+                - ["UITextComponent.text", "name"]
+            -   class: "UIControl"
+                name: "Description"
+                size: [7.000000, 40.000000]
+                input: false
+                components:
+                    Background:
+                        align: ["LEFT", "VCENTER"]
+                    UITextComponent:
+                        multiline: "MULTILINE_ENABLED"
+                        align: ["LEFT", "TOP"]
+                        useRtlAlign: "USE_BY_SYSTEM"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfContent"
+                bindings:
+                - ["visible", "not empty(description)"]
+                - ["classes", "\"text2-small \" + (when readOnly -> \"text-color-grey\", \"text-color-blue\")"]
+                - ["UITextComponent.text", "description"]
+        -   prototype: "Switch/Switch"
+            name: "Switch"
+            position: [151.000000, 15.000000]
+            components:
+                Background:
+                    colorInherit: "COLOR_MULTIPLY_ON_PARENT"
+                Anchor:
+                    vCenterAnchorEnabled: true
+                UIInputEventComponent:
+                    onValueChanged: "ON_OPTION_CHANGED"
+                    onValueChangedData: "_isTurnedOn"
+            bindings:
+            - ["visible", "not buttonInsteadToggle"]
+            - ["enabled", "not readOnly"]
+            - ["isTurnedOn", "enabled"]
+        -   prototype: "StyledButton/StyledButton"
+            name: "StyledButton"
+            size: [80.000000, 50.000000]
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                UIInputEventComponent:
+                    onTouchUpInside: "ON_OPTION_CLICKED"
+            bindings:
+            - ["visible", "buttonInsteadToggle"]
+            - ["enabled", "not readOnly"]
+            children:
+            -   path: "Caption"
+                components:
+                    UITextComponent:
+                        text: ". . ."

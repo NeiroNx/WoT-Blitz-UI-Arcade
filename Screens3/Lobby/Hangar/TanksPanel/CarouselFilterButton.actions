@@ -1,0 +1,35 @@
+action CHANGE_STATE
+{
+    if (showBadge)
+    {
+        parallel
+        {
+	        ChangeProperty("**/Indicator","UIOpacityComponent", "opacity", 1, 0.3, SINE_IN);
+        	ChangeProperty("**/Indicator","SizePolicy", "horizontalValue", indicatorWidth, 0.3, SINE_IN);
+        }
+    }
+    else 
+    {
+    	parallel
+        {
+	        ChangeProperty("**/Indicator","UIOpacityComponent", "opacity", 0, 0.4, SINE_OUT);
+	        ChangeProperty("**/Indicator","SizePolicy", "horizontalValue", 0, 0.4, SINE_OUT);
+        }
+    }
+}
+
+
+action SWITCH_ICON (bool showFilter, float animationTime)
+{
+    parallel 
+    {
+        Scale ("**/Content/Icon", 0.1, 0.1, animationTime/2, EASE_IN);
+        Opacity("**/Content/Icon", opacity=0.0, time=animationTime/2, interpolation=EASE_IN);
+    }
+    Event("ANIMATION_SWITCH_ICON", arg1=showFilter);
+    parallel 
+    {
+        Scale ("**/Content/Icon", 1, 1, animationTime, EASE_OUT);
+        Opacity("**/Content/Icon", opacity=1, time=animationTime/2, interpolation=EASE_OUT);
+    }
+}

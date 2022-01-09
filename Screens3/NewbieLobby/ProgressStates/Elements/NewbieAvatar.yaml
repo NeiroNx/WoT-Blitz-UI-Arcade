@@ -1,0 +1,69 @@
+Header:
+    version: 123
+Prototypes:
+-   class: "UIControl"
+    name: "NewbieAvatar"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 212.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 256.000000
+        UIDataParamsComponent:
+            params:
+            - ["PlayerAvatar", "avatar", "null", "{ \"iconPathOrUrl\" = \"~res:/Gfx/UI/CommonUIElements/avatars/avatar-default-icon\"; \"iconType\" = eAvatarIconType.RESOURCE; \"grade\" = ArtefactGrade.rare; }"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["ArtefactGrade", "grade", "when isNull(avatar) -> ArtefactGrade.unknown, avatar.grade"]
+            - ["string", "gradeStyle", "when grade == ArtefactGrade.unknown -> \"grade-unknown\", when grade == ArtefactGrade.common -> \"grade-common\", when grade == ArtefactGrade.rare -> \"grade-rare\", when grade == ArtefactGrade.unique -> \"grade-unique\", when grade == ArtefactGrade.legendary -> \"grade-legendary\", \"\""]
+            - ["string", "icon", "when isNull(avatar) -> \"\", avatar.iconPathOrUrl"]
+            - ["bool", "isPath", "when isNull(avatar) -> false, avatar.iconType == eAvatarIconType.RESOURCE"]
+            - ["bool", "isUrl", "when isNull(avatar) -> false, avatar.iconType == eAvatarIconType.URL"]
+        StyleSheet:
+            styles: "~res:/UI/Screens3/NewbieLobby/ProgressStates/Elements/NewbieAvatar.style.yaml"
+    bindings:
+    - ["classes", "gradeStyle"]
+    children:
+    -   class: "UIControl"
+        name: "Avatar"
+        size: [100.000000, 100.000000]
+        pivot: [0.500000, 0.500000]
+        input: false
+        components:
+            Background:
+                drawType: "DRAW_TILED_MULTILAYER"
+                mask: "~res:/Gfx/Shared/avatars/avatar-mask-256"
+                detail: "~res:/Gfx/Shared/avatars/avatar-details-256"
+                contour: "~res:/Gfx/Shared/avatars/avatar-details-256"
+                perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+            UIUrlImageComponent:
+                useGradientSprite: true
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                horizontalValue: 100.000000
+                verticalPolicy: "PercentOfParent"
+                verticalValue: 100.000000
+        bindings:
+        - ["Background.gradient", "when isPath -> icon, \"\""]
+        - ["UIUrlImageComponent.imageUrl", "when isUrl -> icon, \"\""]
+    -   class: "UIControl"
+        name: "Grade"
+        size: [32.000000, 32.000000]
+        pivot: [0.500000, 0.500000]
+        input: false
+        components:
+            Background:
+                sprite: "~res:/Gfx/Shared/avatars/avatar-grade-256"
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                horizontalValue: 100.000000
+                verticalPolicy: "PercentOfParent"
+                verticalValue: 100.000000

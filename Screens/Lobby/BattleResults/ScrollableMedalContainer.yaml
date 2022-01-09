@@ -1,0 +1,89 @@
+Header:
+    version: "23"
+ImportedPackages:
+- "~res:/UI/Styles/ButtonStyle.yaml"
+Prototypes:
+-   class: "UIControl"
+    customClass: "UIScrollableMedalContainer"
+    name: "MedalContainer"
+    size: [1024.000000, 70.000000]
+    noInput: true
+    components:
+        Update: {}
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Lobby/BattleResults/ScrollableMedalContainer.yaml"
+    children:
+    -   class: "UIControl"
+        name: "MedalsBg"
+        size: [1024.000000, 70.000000]
+        noInput: true
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 0.000000
+                rightAnchorEnabled: true
+                rightAnchor: 0.000000
+                topAnchorEnabled: true
+                topAnchor: 0.000000
+                bottomAnchorEnabled: true
+                bottomAnchor: 0.000000
+        children:
+        -   class: "UIControl"
+            name: "RightImagePart"
+            position: [512.000000, 0.000000]
+            size: [512.000000, 70.000000]
+            noInput: true
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    hCenterAnchor: 0.000000
+                    rightAnchorEnabled: true
+                    rightAnchor: 0.000000
+                    vCenterAnchorEnabled: true
+                    vCenterAnchor: 0.000000
+                Background:
+                    drawType: "DRAW_SCALE_TO_RECT"
+                    sprite: "~res:/Gfx/UI/LobbyCommon/bgMedalsRight"
+        -   class: "UIControl"
+            name: "LeftImagePart"
+            size: [512.000000, 70.000000]
+            noInput: true
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 0.000000
+                    hCenterAnchorEnabled: true
+                    hCenterAnchor: 0.000000
+                    vCenterAnchorEnabled: true
+                    vCenterAnchor: 0.000000
+                Background:
+                    drawType: "DRAW_SCALE_TO_RECT"
+                    sprite: "~res:/Gfx/UI/LobbyCommon/bgMedalsLeft"
+    -   class: "UIScrollView"
+        name: "Medals"
+        size: [760.000000, 110.000000]
+        noInput: true
+        autoUpdate: true
+        centerContent: true
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 110.000000
+                rightAnchorEnabled: true
+                rightAnchor: 110.000000
+                vCenterAnchorEnabled: true
+                vCenterAnchor: 0.000000
+            UIAnchorSafeAreaComponent:
+                leftSafeInset: "INSET"
+                rightSafeInset: "INSET"
+            ClipContent:
+                enabled: false
+        children:
+        -   class: "UIScrollViewContainer"
+            name: "scrollContainerControl"
+            size: [0.000000, 110.000000]
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfFirstChild"
+                    verticalPolicy: "PercentOfParent"

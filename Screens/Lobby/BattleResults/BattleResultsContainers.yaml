@@ -1,0 +1,192 @@
+Header:
+    version: "21"
+ImportedPackages:
+- "~res:/UI/Screens/Common.yaml"
+- "~res:/UI/Screens/Fonts.yaml"
+- "~res:/UI/Screens/Lobby/Common/SectionHeader3.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "Container"
+    position: [0.000000, 0.000000]
+    size: [422.000000, 30.000000]
+    noInput: true
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfChildrenSum"
+    children:
+    -   class: "UIStaticText"
+        name: "Header"
+        position: [0.000000, 0.000000]
+        size: [422.000000, 30.000000]
+        noInput: true
+        classes: "header1 text-color-white"
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 0.000000
+                rightAnchorEnabled: true
+                rightAnchor: 0.000000
+                topAnchorEnabled: true
+                topAnchor: -30.000000
+            UITextComponent:
+                colorInheritType: "COLOR_IGNORE_PARENT"
+                align: ["LEFT", "VCENTER"]
+                useRtlAlign: "DONT_USE"
+    -   class: "UIControl"
+        name: "Table"
+        size: [422.000000, 0.000000]
+        components:
+            LinearLayout:
+                orientation: "TopDown"
+            SizePolicy:
+                verticalPolicy: "PercentOfChildrenSum"
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+        children:
+        -   prototype: "Common/BlueBoldLine"
+            name: "TopBlueBoldLine"
+            size: [422.000000, 2.000000]
+            components:
+                IgnoreLayout: {}
+                Anchor:
+                    leftAnchorEnabled: true
+                    rightAnchorEnabled: true
+                    topAnchorEnabled: true
+        -   prototype: "Common/BlueBoldLine"
+            name: "BottomBlueBoldLine"
+            size: [422.000000, 2.000000]
+            components:
+                IgnoreLayout: {}
+                Anchor:
+                    leftAnchorEnabled: true
+                    rightAnchorEnabled: true
+                    bottomAnchorEnabled: true
+-   class: "UIControl"
+    name: "TableRow"
+    size: [467.000000, 32.000000]
+    noInput: true
+    components:
+        Anchor:
+            leftAnchorEnabled: true
+            rightAnchorEnabled: true
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        size: [467.000000, 32.000000]
+        noInput: true
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 0.000000
+                rightAnchorEnabled: true
+                rightAnchor: 0.000000
+                topAnchorEnabled: true
+                topAnchor: 0.000000
+            Background:
+                align: ["HCENTER", "BOTTOM"]
+        children:
+        -   class: "UIStaticText"
+            name: "Text"
+            size: [397.000000, 32.000000]
+            noInput: true
+            classes: "text2 text-color-white"
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 0.000000
+                    rightAnchorEnabled: true
+                    rightAnchor: 70.000000
+                    topAnchorEnabled: true
+                    topAnchor: 0.000000
+                    bottomAnchorEnabled: true
+                    bottomAnchor: 0.000000
+                Background:
+                    align: ["LEFT", "VCENTER"]
+                UITextComponent:
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                    shadowOffset: [0.000000, 1.000000]
+                    align: ["LEFT", "VCENTER"]
+                    useRtlAlign: "DONT_USE"
+        -   class: "UIStaticText"
+            name: "Value"
+            position: [467.000000, 0.000000]
+            size: [0.000000, 32.000000]
+            noInput: true
+            classes: "header4 text-color-white"
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                Anchor:
+                    rightAnchorEnabled: true
+                    rightAnchor: 0.000000
+                    topAnchorEnabled: true
+                    topAnchor: 0.000000
+                Background:
+                    align: ["RIGHT", "VCENTER"]
+                UITextComponent:
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                    shadowOffset: [0.000000, 1.000000]
+                    align: ["RIGHT", "VCENTER"]
+                    useRtlAlign: "DONT_USE"
+        -   class: "UIControl"
+            name: "SplitLine"
+            position: [0.000000, 31.000000]
+            size: [467.000000, 1.000000]
+            noInput: true
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    rightAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                Background:
+                    drawType: "DRAW_SCALE_TO_RECT"
+                    sprite: "~res:/Gfx/UI/BattleResultsScreen/TableLine"
+                    perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+-   prototype: "TableRow"
+    name: "TableSubRow"
+    children:
+    -   path: "Content"
+        components:
+            Anchor:
+                leftAnchor: 30.000000
+        children: []
+    -   path: "Content/Text"
+        classes: "text2 text-color-blue"
+-   class: "UIControl"
+    name: "ScrollPanel"
+    noInput: true
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfChildrenSum"
+    children:
+    -   prototype: "SectionHeader3/SectionHeader3"
+        name: "HeaderMedals"
+        children:
+        -   class: "UIStaticText"
+            name: "Header3"
+            classes: "header3 text-color-white"
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    topAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                UITextComponent:
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+    -   class: "UIControl"
+        name: "Content"
+        components:
+            FlowLayout:
+                hDynamicInLinePadding: true
+                hSpacing: 10.000000
+                vPadding: 10.000000
+                vSpacing: 10.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfChildrenSum"

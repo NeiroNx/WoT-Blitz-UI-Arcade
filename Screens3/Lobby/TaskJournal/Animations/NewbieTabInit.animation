@@ -1,0 +1,5 @@
+animation MainScreenInit(bool arg)
+{
+	ChangeData(displayingDailyProgress, realDailyProgress);
+	ChangeData(isInited, true);
+}

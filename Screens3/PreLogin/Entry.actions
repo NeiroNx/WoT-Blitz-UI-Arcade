@@ -1,0 +1,16 @@
+action ENTER_SHORTCUT
+{
+    PlaySound(sound="GUI/buttons/open");
+    Event("LOGIN_PRESSED");
+}
+
+action BACK_SHORTCUT
+{
+    PlaySound(sound="GUI/buttons/cancel");
+    Event("BACK_PRESSED");   
+}
+
+action KEYBOARD_EVENT(float height)
+{
+    ChangeData(keyboardHeight, height, time = 0.3, interpolation = EASE_OUT);
+}

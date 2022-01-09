@@ -1,0 +1,9 @@
+statusClass = when (status == eRefundStatus.NEW and isSelected) -> "color=text-color-white",
+                   (status == eRefundStatus.NEW and not isSelected) -> "color=text-color-grey",
+                   (status == eRefundStatus.IN_PROGRESS) -> "color=text-color-orange",
+                   (status == eRefundStatus.FINISHED) -> "color=text-color-green",
+                   "";
+statusString = when (status == eRefundStatus.NEW) -> localize("refund_ban/PaymentScreen/NotDeliveredPayment"),
+                    (status == eRefundStatus.IN_PROGRESS) -> localize("refund_ban/PaymentScreen/ProcessingPayment"),
+                    (status == eRefundStatus.FINISHED) -> localize("refund_ban/PaymentScreen/DeliveredPayment"),
+                    "";

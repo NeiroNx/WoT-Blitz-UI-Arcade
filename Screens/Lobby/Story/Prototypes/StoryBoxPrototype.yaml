@@ -1,0 +1,256 @@
+Header:
+    version: 123
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/Common/Timer.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "StoryBoxPrototype"
+    classes: "button button-open-sound"
+    components:
+        Anchor:
+            leftAnchorEnabled: true
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 160.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 200.000000
+        UIInputEventComponent:
+            onTouchUpInside: "BOX_PRESSED"
+            onTouchUpInsideData: "id"
+        UIDataSourceComponent0:
+            source: "~res:/UI/Examples/Model/Lobby/Story/StoryBoxPrototype.model"
+        UIDataSourceComponent1:
+            sourceType: "File"
+            source: "~res:/UI/Screens/Lobby/Story/ViewModels/StoryBoxPrototypeView.model"
+        UIEventOnDataComponent0:
+            watchedDataExpression: "isReady"
+            eventName: "START_ANIMATION"
+            broadcast: true
+        Sound: {}
+        StyleSheet:
+            styles: "~res:/UI/Styles/ButtonStyle.yaml;~res:/UI/Styles/ButtonSoundStyles.yaml;~res:/UI/Styles/ColorStyles.yaml"
+    bindings:
+    - ["visible", "not isBuyStage"]
+    children:
+    -   class: "UIParticles"
+        name: "Glow"
+        pivot: [0.500000, 0.500000]
+        visible: false
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+    -   class: "UIControl"
+        name: "Box"
+        pivot: [0.500000, 1.000000]
+        input: false
+        components:
+            UITextureComponent:
+                perPixelAccuracy: "PER_PIXEL_ACCURACY_FORCED"
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+    -   class: "UIParticles"
+        name: "Flow1"
+        size: [32.000000, 32.000000]
+        scale: [0.500000, 0.500000]
+        pivot: [0.500000, 0.500000]
+        visible: false
+        input: false
+        components:
+            Anchor:
+                rightAnchorEnabled: true
+                rightAnchor: 20.000000
+                bottomAnchorEnabled: true
+                bottomAnchor: 20.000000
+    -   class: "UIParticles"
+        name: "Flow2"
+        size: [32.000000, 32.000000]
+        pivot: [0.500000, 0.500000]
+        visible: false
+        input: false
+        components:
+            Anchor:
+                rightAnchorEnabled: true
+                rightAnchor: 20.000000
+                bottomAnchorEnabled: true
+                bottomAnchor: 20.000000
+    -   class: "UIControl"
+        name: "Claim"
+        pivot: [0.500000, 0.500000]
+        input: false
+        classes: "color-black-122"
+        components:
+            Background:
+                drawType: "DRAW_STRETCH_BOTH"
+                sprite: "~res:/Gfx/UI/CommonUIElements/square_BigAngle.psd"
+                leftRightStretchCap: 6.000000
+                topBottomStretchCap: 6.000000
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+                vCenterAnchor: 16.000000
+            LinearLayout:
+                padding: "8"
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "FixedSize"
+                verticalValue: 32.000000
+        bindings:
+        - ["visible", "isProcessStage and isReady"]
+        children:
+        -   class: "UIControl"
+            name: "Text"
+            input: false
+            classes: "header4 text-color-white"
+            components:
+                UITextComponent:
+                    text: "blitz_birthday_event/get_reward/button"
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                    vCenterAnchor: -2.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens/Fonts.yaml"
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                bottomAnchorEnabled: true
+            LinearLayout:
+                orientation: "TopDown"
+                spacing: 16.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfChildrenSum"
+        bindings:
+        - ["visible", "not isReady"]
+        children:
+        -   class: "UIControl"
+            name: "Progress"
+            input: false
+            classes: "color-black-122"
+            components:
+                Background:
+                    sprite: "~res:/Gfx/UI/StorageItemIcons/BTH2019/BG.psd"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+            bindings:
+            - ["visible", "isProcessStage"]
+            children:
+            -   class: "UIControl"
+                name: "Text"
+                input: false
+                classes: "header0 text-color-white"
+                components:
+                    UITextComponent:
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                        vCenterAnchor: -5.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens/Fonts.yaml"
+                bindings:
+                - ["UITextComponent.text", "level"]
+            -   class: "UIControl"
+                name: "ProgressBar"
+                input: false
+                classes: "color-black-122"
+                components:
+                    Background:
+                        drawType: "DRAW_STRETCH_BOTH"
+                        sprite: "~res:/Gfx/UI/StorageItemIcons/BTH2019/Progress.psd"
+                        leftRightStretchCap: 2.000000
+                    Anchor:
+                        leftAnchorEnabled: true
+                        leftAnchor: 4.000000
+                        rightAnchorEnabled: true
+                        rightAnchor: 4.000000
+                        bottomAnchorEnabled: true
+                        bottomAnchor: 10.000000
+                    SizePolicy:
+                        horizontalPolicy: "Ignore"
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 4.000000
+                children:
+                -   class: "UIControl"
+                    name: "Value"
+                    input: false
+                    classes: "color-progress"
+                    components:
+                        Background:
+                            drawType: "DRAW_STRETCH_BOTH"
+                            sprite: "~res:/Gfx/UI/StorageItemIcons/BTH2019/Progress.psd"
+                            leftRightStretchCap: 2.000000
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfParent"
+                    bindings:
+                    - ["SizePolicy.horizontalValue", "progress"]
+        -   class: "UIControl"
+            name: "TimerHolder"
+            pivot: [0.500000, 0.500000]
+            input: false
+            classes: "color-black-122"
+            components:
+                Background:
+                    drawType: "DRAW_STRETCH_BOTH"
+                    sprite: "~res:/Gfx/UI/CommonUIElements/square_BigAngle.psd"
+                    leftRightStretchCap: 6.000000
+                    topBottomStretchCap: 6.000000
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "maxChild +16"
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 32.000000
+            children:
+            -   prototype: "Timer/TimerPrototype"
+                name: "ExpireTimer"
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                    LinearLayout:
+                        spacing: 4.000000
+                        useRtl: true
+                    SizePolicy:
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 24.000000
+                    UIDataSourceComponent0:
+                        sourceType: "Expression"
+                        source: "stage"
+                children:
+                -   path: "Icon"
+                    components:
+                        Background:
+                            sprite: "~res:/Gfx/UI/LobbyCommon/timer_icon2.psd"
+                            colorInherit: "COLOR_IGNORE_PARENT"
+                    bindings:
+                    - ["classes", "bgStyleClasses"]
+                -   path: "Time"
+                    components:
+                        UITextComponent:
+                            colorInheritType: "COLOR_IGNORE_PARENT"
+                    bindings:
+                    - ["classes", "\"text2-small \" + textColorClass"]

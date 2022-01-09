@@ -1,0 +1,435 @@
+Header:
+    version: 141
+Prototypes:
+-   class: "UIControl"
+    name: "KeyArt"
+    size: [1024.000000, 768.000000]
+    visible: true
+    input: false
+    components:
+        Anchor:
+            leftAnchorEnabled: true
+            rightAnchorEnabled: true
+            topAnchorEnabled: true
+            bottomAnchorEnabled: true
+    children:
+    -   class: "UIControl"
+        name: "Holder"
+        position: [512.000000, 384.000000]
+        size: [1364.000000, 768.000000]
+        pivot: [0.500000, 0.500000]
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            ScalePolicy:
+                horizontalFormula: "max(parentSize.X / size.X, parentSize.Y / size.Y)"
+                verticalFormula: "max(parentSize.X / size.X, parentSize.Y / size.Y)"
+        children:
+        -   class: "UIControl"
+            name: "Layer"
+            size: [1024.000000, 768.000000]
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            children:
+            -   class: "UIControl"
+                name: "0"
+                position: [8.000000, 0.000000]
+                size: [1024.000000, 768.000000]
+                input: false
+                components:
+                    Background:
+                        drawType: "DRAW_SCALE_TO_RECT"
+                        sprite: "~res:/Gfx2/UI/KeyArt/keyart"
+                        frame: 0
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                children:
+                -   class: "UIParticles"
+                    name: "Smoke_1"
+                    position: [439.000000, 311.000000]
+                    size: [32.000000, 32.000000]
+                    scale: [0.700000, 0.700000]
+                    pivot: [0.500000, 0.500000]
+                    angle: 20.000000
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreen8.6/Smoke_1.sc2"
+                    autoStart: true
+                -   class: "UIParticles"
+                    name: "Smoke_2"
+                    position: [263.000000, 557.000000]
+                    size: [32.000000, 32.000000]
+                    scale: [1.000000, 1.000000]
+                    pivot: [0.500000, 0.500000]
+                    angle: -10.000000
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreen8.6/Smoke_2.sc2"
+                    autoStart: true
+                -   class: "UIParticles"
+                    name: "Sparks_1"
+                    position: [413.000000, 289.000000]
+                    size: [32.000000, 47.000000]
+                    scale: [1.350000, 0.950000]
+                    pivot: [0.500000, 0.500000]
+                    angle: 10.000000
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreen8.6/sparks_2.sc2"
+                    autoStart: true
+                -   class: "UIParticles"
+                    name: "Sparks_2"
+                    position: [521.000000, 271.000000]
+                    size: [32.000000, 47.000000]
+                    scale: [1.350000, 1.100000]
+                    pivot: [0.500000, 0.500000]
+                    angle: 100.000000
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreen8.6/sparks_2.sc2"
+                    autoStart: true
+                -   class: "UIParticles"
+                    name: "Flowing_Smoke"
+                    position: [993.000000, 650.000000]
+                    size: [32.000000, 32.000000]
+                    scale: [1.500000, 1.000000]
+                    pivot: [0.500000, 0.500000]
+                    angle: 0.000000
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreen8.6/FlowingSmoke.sc2"
+                    autoStart: true
+                -   class: "UIParticles"
+                    name: "glow_1"
+                    position: [1183.000000, 39.000000]
+                    size: [32.000000, 32.000000]
+                    scale: [1.000000, 1.000000]
+                    pivot: [0.500000, 0.500000]
+                    angle: 0.000000
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreen8.6/glow_1.sc2"
+                    autoStart: true
+                -   class: "UIParticles"
+                    name: "glow_2"
+                    position: [1136.000000, 46.000000]
+                    size: [32.000000, 32.000000]
+                    scale: [1.000000, 1.000000]
+                    pivot: [0.500000, 0.500000]
+                    angle: 0.000000
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreen8.6/glow_1.sc2"
+                    autoStart: true
+                -   class: "UIParticles"
+                    name: "glow_3"
+                    position: [1089.000000, 55.000000]
+                    size: [32.000000, 32.000000]
+                    scale: [1.000000, 1.000000]
+                    pivot: [0.500000, 0.500000]
+                    angle: 0.000000
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreen8.6/glow_1.sc2"
+                    autoStart: true
+                -   class: "UIParticles"
+                    name: "glow_4"
+                    position: [1037.000000, 65.000000]
+                    size: [32.000000, 32.000000]
+                    scale: [1.000000, 1.000000]
+                    pivot: [0.500000, 0.500000]
+                    angle: 0.000000
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreen8.6/glow_1.sc2"
+                    autoStart: true
+                -   class: "UIParticles"
+                    name: "glow_5"
+                    position: [979.000000, 73.000000]
+                    size: [32.000000, 32.000000]
+                    scale: [1.000000, 1.000000]
+                    pivot: [0.500000, 0.500000]
+                    angle: 0.000000
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreen8.6/glow_1.sc2"
+                    autoStart: true
+                -   class: "UIParticles"
+                    name: "glow_6"
+                    position: [929.000000, 78.000000]
+                    size: [32.000000, 32.000000]
+                    scale: [1.000000, 1.000000]
+                    pivot: [0.500000, 0.500000]
+                    angle: 0.000000
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreen8.6/glow_1.sc2"
+                    autoStart: true
+                -   class: "UIParticles"
+                    name: "glow_7"
+                    position: [873.000000, 89.000000]
+                    size: [32.000000, 32.000000]
+                    scale: [1.000000, 1.000000]
+                    pivot: [0.500000, 0.500000]
+                    angle: 0.000000
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreen8.6/glow_1.sc2"
+                    autoStart: true
+                -   class: "UIParticles"
+                    name: "glow_8"
+                    position: [816.000000, 96.000000]
+                    size: [32.000000, 32.000000]
+                    scale: [1.000000, 1.000000]
+                    pivot: [0.500000, 0.500000]
+                    angle: 0.000000
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreen8.6/glow_1.sc2"
+                    autoStart: true
+                -   class: "UIParticles"
+                    name: "glow_9"
+                    position: [764.000000, 100.000000]
+                    size: [32.000000, 32.000000]
+                    scale: [1.000000, 1.000000]
+                    pivot: [0.500000, 0.500000]
+                    angle: 0.000000
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreen8.6/glow_1.sc2"
+                    autoStart: true
+                -   class: "UIParticles"
+                    name: "glow_10"
+                    position: [700.000000, 107.000000]
+                    size: [32.000000, 32.000000]
+                    scale: [1.000000, 1.000000]
+                    pivot: [0.500000, 0.500000]
+                    angle: 0.000000
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreen8.6/glow_1.sc2"
+                    autoStart: true
+                -   class: "UIParticles"
+                    name: "glow_11"
+                    position: [625.000000, 113.000000]
+                    size: [32.000000, 32.000000]
+                    scale: [1.000000, 1.000000]
+                    pivot: [0.500000, 0.500000]
+                    angle: 0.000000
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreen8.6/glow_1.sc2"
+                    autoStart: true
+                -   class: "UIParticles"
+                    name: "glow_12"
+                    position: [567.000000, 118.000000]
+                    size: [32.000000, 32.000000]
+                    scale: [1.000000, 1.000000]
+                    pivot: [0.500000, 0.500000]
+                    angle: 0.000000
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreen8.6/glow_1.sc2"
+                    autoStart: true
+                -   class: "UIParticles"
+                    name: "glow_13"
+                    position: [499.000000, 124.000000]
+                    size: [32.000000, 32.000000]
+                    scale: [1.000000, 1.000000]
+                    pivot: [0.500000, 0.500000]
+                    angle: 0.000000
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreen8.6/glow_1.sc2"
+                    autoStart: true
+                -   class: "UIParticles"
+                    name: "glow_14"
+                    position: [424.000000, 128.000000]
+                    size: [32.000000, 32.000000]
+                    scale: [1.000000, 1.000000]
+                    pivot: [0.500000, 0.500000]
+                    angle: 0.000000
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreen8.6/glow_1.sc2"
+                    autoStart: true
+                -   class: "UIParticles"
+                    name: "glow_15"
+                    position: [359.000000, 130.000000]
+                    size: [32.000000, 32.000000]
+                    scale: [1.000000, 1.000000]
+                    pivot: [0.500000, 0.500000]
+                    angle: 0.000000
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreen8.6/glow_1.sc2"
+                    autoStart: true
+                -   class: "UIParticles"
+                    name: "glow_16"
+                    position: [281.000000, 132.000000]
+                    size: [32.000000, 32.000000]
+                    scale: [1.000000, 1.000000]
+                    pivot: [0.500000, 0.500000]
+                    angle: 0.000000
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreen8.6/glow_1.sc2"
+                    autoStart: true
+                -   class: "UIParticles"
+                    name: "glow_17"
+                    position: [198.000000, 131.000000]
+                    size: [32.000000, 32.000000]
+                    scale: [1.000000, 1.000000]
+                    pivot: [0.500000, 0.500000]
+                    angle: 0.000000
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreen8.6/glow_1.sc2"
+                    autoStart: true
+                -   class: "UIParticles"
+                    name: "glow_18"
+                    position: [123.000000, 130.000000]
+                    size: [32.000000, 32.000000]
+                    scale: [1.000000, 1.000000]
+                    pivot: [0.500000, 0.500000]
+                    angle: 0.000000
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreen8.6/glow_1.sc2"
+                    autoStart: true
+                -   class: "UIParticles"
+                    name: "glow_19"
+                    position: [380.000000, 300.000000]
+                    size: [32.000000, 32.000000]
+                    scale: [0.500000, 0.500000]
+                    pivot: [0.500000, 0.500000]
+                    angle: 0.000000
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreen8.6/glow_1.sc2"
+                    autoStart: true
+                -   class: "UIParticles"
+                    name: "glow_20"
+                    position: [353.000000, 303.000000]
+                    size: [32.000000, 32.000000]
+                    scale: [0.500000, 0.500000]
+                    pivot: [0.500000, 0.500000]
+                    angle: 0.000000
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreen8.6/glow_1.sc2"
+                    autoStart: true
+                -   class: "UIParticles"
+                    name: "glow_21"
+                    position: [323.000000, 305.000000]
+                    size: [32.000000, 32.000000]
+                    scale: [0.500000, 0.500000]
+                    pivot: [0.500000, 0.500000]
+                    angle: 0.000000
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreen8.6/glow_1.sc2"
+                    autoStart: true
+                -   class: "UIParticles"
+                    name: "glow_22"
+                    position: [297.000000, 305.000000]
+                    size: [32.000000, 32.000000]
+                    scale: [0.500000, 0.500000]
+                    pivot: [0.500000, 0.500000]
+                    angle: 0.000000
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreen8.6/glow_1.sc2"
+                    autoStart: true
+                -   class: "UIParticles"
+                    name: "glow_23"
+                    position: [269.000000, 308.000000]
+                    size: [32.000000, 32.000000]
+                    scale: [0.500000, 0.500000]
+                    pivot: [0.500000, 0.500000]
+                    angle: 0.000000
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreen8.6/glow_1.sc2"
+                    autoStart: true
+                -   class: "UIParticles"
+                    name: "glow_24"
+                    position: [239.000000, 308.000000]
+                    size: [32.000000, 32.000000]
+                    scale: [0.500000, 0.500000]
+                    pivot: [0.500000, 0.500000]
+                    angle: 0.000000
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreen8.6/glow_1.sc2"
+                    autoStart: true
+                -   class: "UIParticles"
+                    name: "glow_25"
+                    position: [212.000000, 308.000000]
+                    size: [32.000000, 32.000000]
+                    scale: [0.500000, 0.500000]
+                    pivot: [0.500000, 0.500000]
+                    angle: 0.000000
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreen8.6/glow_1.sc2"
+                    autoStart: true
+                -   class: "UIParticles"
+                    name: "glow_26"
+                    position: [182.000000, 309.000000]
+                    size: [32.000000, 32.000000]
+                    scale: [0.500000, 0.500000]
+                    pivot: [0.500000, 0.500000]
+                    angle: 0.000000
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreen8.6/glow_1.sc2"
+                    autoStart: true
+                -   class: "UIParticles"
+                    name: "glow_27"
+                    position: [197.000000, 383.000000]
+                    size: [32.000000, 32.000000]
+                    scale: [1.500000, 1.500000]
+                    pivot: [0.500000, 0.500000]
+                    angle: 0.000000
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreen8.6/glow_1.sc2"
+                    autoStart: true
+                -   class: "UIParticles"
+                    name: "glow_28"
+                    position: [825.000000, 401.000000]
+                    size: [32.000000, 32.000000]
+                    scale: [2.000000, 2.000000]
+                    pivot: [0.500000, 0.500000]
+                    angle: 0.000000
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreen8.6/glow_1.sc2"
+                    autoStart: true
+                -   class: "UIParticles"
+                    name: "glow_29"
+                    position: [1001.000000, 375.000000]
+                    size: [32.000000, 32.000000]
+                    scale: [2.000000, 2.000000]
+                    pivot: [0.500000, 0.500000]
+                    angle: 0.000000
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreen8.6/glow_1.sc2"
+                    autoStart: true
+                -   class: "UIParticles"
+                    name: "glow_30"
+                    position: [502.000000, 246.000000]
+                    size: [32.000000, 32.000000]
+                    scale: [1.000000, 1.000000]
+                    pivot: [0.500000, 0.500000]
+                    angle: 0.000000
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreen8.6/glow_1.sc2"
+                    autoStart: true
+                -   class: "UIParticles"
+                    name: "star"
+                    position: [157.000000, 527.000000]
+                    size: [32.000000, 32.000000]
+                    scale: [4.000000, 3.250000]
+                    pivot: [0.500000, 0.500000]
+                    angle: 0.000000
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreen8.6/star.sc2"
+                    autoStart: true
+                -   class: "UIParticles"
+                    name: "frozen_1"
+                    position: [682.000000, 384.000000]
+                    size: [32.000000, 32.000000]
+                    scale: [1.370000, 0.770000]
+                    pivot: [0.500000, 0.500000]
+                    angle: 0.000000
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreen8.6/frozen_1.sc2"
+                    autoStart: true
+                -   class: "UIParticles"
+                    name: "snow"
+                    position: [682.000000, -29.000000]
+                    size: [32.000000, 32.000000]
+                    scale: [0.730000, 0.730000]
+                    pivot: [0.500000, 0.500000]
+                    angle: -105.000000
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreen8.6/Snow.sc2"
+                    autoStart: true

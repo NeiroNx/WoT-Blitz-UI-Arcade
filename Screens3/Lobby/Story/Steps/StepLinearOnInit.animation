@@ -1,0 +1,19 @@
+animation StepLinearOnInit
+{
+    if (model.isSelected)
+    {
+        parallel
+        {
+            ChangeData(opacity, 1.0);
+            ChangeData(offset, 64.0);
+        }
+    }
+    else
+    {
+        parallel
+        {
+            ChangeData(opacity, 0.0);
+            ChangeData(offset, 0.0);
+        }
+    }
+}

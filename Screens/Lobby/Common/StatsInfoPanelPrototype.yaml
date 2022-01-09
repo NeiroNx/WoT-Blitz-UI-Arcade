@@ -1,0 +1,183 @@
+Header:
+    version: 120
+Prototypes:
+-   class: "UIControl"
+    name: "Stat"
+    size: [96.000000, 80.000000]
+    classes: "button button-open-sound no-general-pack-disabled"
+    components:
+        Background: {}
+        Anchor:
+            topAnchorEnabled: true
+            vCenterAnchorEnabled: true
+            bottomAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+        UIInputEventComponent:
+            onTouchUpInside: "SHOP_BUTTON"
+        Sound: {}
+        StyleSheet:
+            styles: "~res:/UI/Styles/ButtonStyle.yaml;~res:/UI/Styles/ButtonSoundStyles.yaml;~res:/UI/Styles/SmartDLCStyles.yaml"
+    children:
+    -   class: "UIControl"
+        name: "Value"
+        size: [42.000000, 32.000000]
+        input: false
+        components:
+            Background:
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+            Anchor:
+                rightAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                padding: "5.000000"
+                spacing: 2.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+        children:
+        -   class: "UIControl"
+            name: "Text"
+            size: [0.000000, 30.000000]
+            input: false
+            classes: "header1"
+            components:
+                Background:
+                    colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                UITextComponent:
+                    fitting: "FITTING_REDUCE"
+                    align: ["RIGHT", "VCENTER"]
+                Anchor:
+                    leftAnchorEnabled: true
+                    rightAnchorEnabled: true
+                    rightAnchor: 33.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    horizontalMax: 115.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens/Fonts.yaml"
+        -   class: "UIControl"
+            name: "IconWrapper"
+            input: false
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfLastChild"
+            children:
+            -   class: "UIControl"
+                name: "Plus"
+                position: [0.000000, 8.000000]
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    Background:
+                        sprite: "~res:/Gfx/UI/Hangar/plus_btn.psd"
+                        colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                    Anchor:
+                        rightAnchorEnabled: true
+                        rightAnchor: -8.000000
+                        topAnchorEnabled: true
+                        topAnchor: -4.000000
+                    IgnoreLayout: {}
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+            -   class: "UIControl"
+                name: "Icon"
+                input: false
+                components:
+                    Background:
+                        drawType: "DRAW_ALIGNED"
+                        sprite: "~res:/Gfx/UI/LobbyCommon/CurrencyIconsBig"
+                        colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 30.000000
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 30.000000
+-   class: "UIControl"
+    name: "StatisticsPanel"
+    size: [313.000000, 80.000000]
+    input: false
+    components:
+        Anchor:
+            rightAnchorEnabled: true
+            vCenterAnchorEnabled: true
+        LinearLayout:
+            padding: "8.000000"
+            dynamicPadding: true
+            spacing: 10.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+        UIDataParamsComponent:
+            params:
+            - ["int", "gold", "0", "4634"]
+            - ["int", "credits", "0", "5352"]
+            - ["int", "freeXp", "0", "123"]
+            - ["bool", "showFreeXp", "false", "true"]
+            - ["bool", "showGold", "false", "true"]
+            events:
+            - "SHOP_BUTTON(eRequiredResource resource)"
+    children:
+    -   class: "UIControl"
+        name: "StatContainer"
+        position: [9.000000, 0.000000]
+        size: [0.000000, 80.000000]
+        input: false
+        components:
+            Background:
+                color: [0.000000, 0.000000, 0.000000, 1.000000]
+            Anchor:
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+            LinearLayout:
+                orientation: "RightToLeft"
+                spacing: 10.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+        children:
+        -   prototype: "Stat"
+            name: "FreeXP"
+            components:
+                UIInputEventComponent:
+                    onTouchUpInsideData: "eRequiredResource.kFreeExperience"
+            bindings:
+            - ["visible", "showFreeXp"]
+            children:
+            -   path: "Value/Text"
+                components:
+                    UITextComponent: {}
+                bindings:
+                - ["UITextComponent.text", "str1000Separated(freeXp)"]
+            -   path: "Value/IconWrapper/Icon"
+                components:
+                    Background:
+                        frame: 2
+        -   prototype: "Stat"
+            name: "Credits"
+            components:
+                UIInputEventComponent:
+                    onTouchUpInsideData: "eRequiredResource.kCredits"
+            children:
+            -   path: "Value/Text"
+                components:
+                    UITextComponent: {}
+                bindings:
+                - ["UITextComponent.text", "str1000Separated(credits)"]
+            -   path: "Value/IconWrapper/Icon"
+                components:
+                    Background:
+                        frame: 1
+        -   prototype: "Stat"
+            name: "Gold"
+            components:
+                UIInputEventComponent:
+                    onTouchUpInsideData: "eRequiredResource.kGold"
+            bindings:
+            - ["visible", "showGold"]
+            children:
+            -   path: "Value/Text"
+                components:
+                    UITextComponent: {}
+                bindings:
+                - ["UITextComponent.text", "str1000Separated(gold)"]

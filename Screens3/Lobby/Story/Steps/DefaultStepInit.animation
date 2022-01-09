@@ -1,0 +1,19 @@
+animation ON_INIT
+{
+    parallel
+    {
+        if (model.isSelected)
+        {
+            Event("EXPAND", arg1 = animationTime);
+        }
+
+        if (model.isHighlighted)
+        {
+            Event("HIGHLIGHT", arg1 = animationTime);
+        }
+
+        ChangeProperty("**/Button", "SizePolicy", "horizontalPolicy", 7);
+        ChangeProperty("**/Button", "SizePolicy", "verticalValue", 0);
+        ChangeProperty("**/DetailsButton", "", "visible", true);
+    }
+}

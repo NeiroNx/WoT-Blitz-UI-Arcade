@@ -1,0 +1,102 @@
+Header:
+    version: 120
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/Selection.yaml"
+- "~res:/UI/Screens3/Lobby/Common/BadgeHolder.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "Slot"
+    components:
+        UIOpacityComponent: {}
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 128.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 128.000000
+        UIInputEventComponent:
+            onTouchUpInside: "ON_SLOT_CLICKED"
+            onTouchUpInsideData: "slotId"
+        UIDataParamsComponent:
+            params:
+            - ["string", "additionalStyles", "\"\"", "\"\""]
+            - ["int", "slotId", "0", "0"]
+            - ["bool", "disabled", "false", "false"]
+            - ["string", "texture", "\"\"", "\"~res:/Gfx/Lobby/icons/icon_keyboard_l\""]
+            - ["bool", "selected", "false", "false"]
+            - ["bool", "backgroundVisible", "true", "false"]
+            events:
+            - "ON_SLOT_CLICKED"
+        Sound: {}
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Lobby/Common/BigSlot.style.yaml;~res:/UI/Screens3/ButtonSound.style.yaml"
+    bindings:
+    - ["selected", "selected"]
+    - ["input", "not selected"]
+    - ["classes", "\"slot pressed-opacity button-choose-sound\" + (when disabled -> \"disabled \", \"\") + additionalStyles"]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        position: [32.000000, 32.000000]
+        pivot: [0.500000, 0.500000]
+        input: false
+        classes: "content-area"
+        components:
+            UIOpacityComponent: {}
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+        children:
+        -   class: "UIControl"
+            name: "Background"
+            size: [32.000000, 32.000000]
+            input: false
+            classes: "background black-25-bg"
+            components:
+                Background: {}
+                UIOpacityComponent: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/Lobby/Common/BigSlot.style.yaml"
+            bindings:
+            - ["visible", "backgroundVisible"]
+        -   class: "UIControl"
+            name: "Hover"
+            size: [32.000000, 32.000000]
+            input: false
+            classes: "hover black-25-bg"
+            components:
+                Background: {}
+                UIOpacityComponent: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/Lobby/Common/BigSlot.style.yaml"
+        -   prototype: "Selection/Selection"
+            name: "Selection"
+            components:
+                UIDataParamsComponent:
+                    args:
+                        "isVisible": "selected"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "Texture"
+            input: false
+            components:
+                UIOpacityComponent: {}
+                UITextureComponent: {}
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 72.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 72.000000
+            bindings:
+            - ["UITextureComponent.spritePath", "texture"]

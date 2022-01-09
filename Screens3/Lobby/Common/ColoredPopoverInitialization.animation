@@ -1,0 +1,8 @@
+animation Initialization
+{
+  if (not startVisible)
+  {
+    ChangeProperty("**/Content", "UIOpacityComponent", "opacity", 0);
+    ChangeProperty("**/Content", "Anchor", "vCenterAnchor", anchorOffset);
+  }
+}

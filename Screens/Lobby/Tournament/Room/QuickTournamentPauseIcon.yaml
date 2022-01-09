@@ -1,0 +1,72 @@
+Header:
+    version: "108"
+Prototypes:
+-   class: "UIControl"
+    name: "QuickTournamentPauseIcon"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens/Lobby/Tournament/Room/QuickTournamentPauseOrSearchIcon.animation"
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 130.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 130.000000
+    children:
+    -   class: "UIControl"
+        name: "Base"
+        size: [32.000000, 32.000000]
+        pivot: [0.500000, 0.500000]
+        input: false
+        components:
+            UITextureComponent:
+                spritePath: "~res:/Gfx/Lobby/backgrounds/tournament/bg_pause-tournaments_1"
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+    -   class: "UIControl"
+        name: "Circle1"
+        size: [32.000000, 32.000000]
+        pivot: [0.500000, 0.500000]
+        input: false
+        components:
+            UITextureComponent:
+                spritePath: "~res:/Gfx/Lobby/backgrounds/tournament/bg_pause-tournaments_2"
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+    -   class: "UIControl"
+        name: "Circle2"
+        size: [32.000000, 32.000000]
+        pivot: [0.500000, 0.500000]
+        input: false
+        components:
+            UITextureComponent:
+                spritePath: "~res:/Gfx/Lobby/backgrounds/tournament/bg_pause-tournaments_4"
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+    -   class: "UIControl"
+        name: "Figure"
+        size: [32.000000, 32.000000]
+        pivot: [0.500000, 0.500000]
+        input: false
+        components:
+            UITextureComponent:
+                spritePath: "~res:/Gfx/Lobby/backgrounds/tournament/bg_pause-tournaments_3"
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"

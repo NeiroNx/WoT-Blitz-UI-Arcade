@@ -1,0 +1,1555 @@
+Header:
+    version: 138
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/BattleResults/ScrollableMedalContainer.yaml"
+- "~res:/UI/Screens/Lobby/Common/Footer.yaml"
+- "~res:/UI/Screens/Common/IconButton.yaml"
+- "~res:/UI/Screens/Common/PlayerNameWithTag.yaml"
+- "~res:/UI/Screens/Lobby/Common/BattleRatingBinded.yaml"
+- "~res:/UI/Screens/Lobby/BattleResults/HeroNotifier.yaml"
+- "~res:/UI/Screens3/Lobby/Common/Vehicle/VehicleInfo.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "InfoPanel"
+    size: [180.000000, 80.000000]
+    input: false
+    children:
+    -   class: "UIControl"
+        name: "ValueContainer"
+        size: [4.000000, 54.000000]
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                topAnchorEnabled: true
+                topAnchor: 26.000000
+                bottomAnchorEnabled: true
+            LinearLayout:
+                spacing: 4.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+        children:
+        -   class: "UIStaticText"
+            name: "Value"
+            classes: "header1"
+            components:
+                UITextComponent:
+                    shadowOffset: [0.000000, 1.000000]
+                    align: ["RIGHT", "VCENTER"]
+                    useRtlAlign: "USE_BY_CONTENT"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfParent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens/Fonts.yaml"
+        -   class: "UIControl"
+            name: "Icon"
+            size: [0.000000, 54.000000]
+            input: false
+            components:
+                Background:
+                    align: ["LEFT", "VCENTER"]
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfParent"
+    -   class: "UIStaticText"
+        name: "Label"
+        size: [180.000000, 44.000000]
+        classes: "text1 text-color-blue"
+        components:
+            UITextComponent:
+                shadowOffset: [0.000000, 1.000000]
+                useRtlAlign: "USE_BY_CONTENT"
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+            StyleSheet:
+                styles: "~res:/UI/Screens/Fonts.yaml"
+    -   class: "UIControl"
+        name: "Border"
+        size: [180.000000, 80.000000]
+        input: false
+        classes: "gray-border"
+        components:
+            Background:
+                drawType: "DRAW_STRETCH_BOTH"
+                sprite: "~res:/Gfx/UI/LobbyCommon/whiteramka"
+                perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                leftRightStretchCap: 2.000000
+                topBottomStretchCap: 2.000000
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+            StyleSheet:
+                styles: "~res:/UI/Styles/ColorStyles.yaml"
+-   class: "UIControl"
+    name: "RewardPanel"
+    input: false
+    classes: "gray-border"
+    components:
+        Background:
+            drawType: "DRAW_STRETCH_BOTH"
+            sprite: "~res:/Gfx/UI/LobbyCommon/whiteramka"
+            perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+            leftRightStretchCap: 2.000000
+            topBottomStretchCap: 2.000000
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 225.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 120.000000
+        StyleSheet:
+            styles: "~res:/UI/Styles/ColorStyles.yaml"
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        position: [0.000000, 0.000000]
+        size: [220.000000, 120.000000]
+        input: false
+        components:
+            Background: {}
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 0.000000
+                rightAnchorEnabled: true
+                rightAnchor: 0.000000
+                topAnchorEnabled: true
+                topAnchor: 0.000000
+                bottomAnchorEnabled: true
+                bottomAnchor: 0.000000
+        children:
+        -   class: "UIStaticText"
+            name: "TextLabel"
+            size: [220.000000, 44.000000]
+            input: false
+            classes: "text1 text-color-white"
+            components:
+                Background:
+                    colorInherit: "COLOR_MULTIPLY_ON_PARENT"
+                UITextComponent:
+                    shadowOffset: [0.000000, 1.000000]
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 0.000000
+                    rightAnchorEnabled: true
+                    rightAnchor: 0.000000
+                    topAnchorEnabled: true
+                    topAnchor: 0.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens/Fonts.yaml"
+        -   class: "UIControl"
+            name: "SplitLine"
+            input: false
+            classes: "gray-border"
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_TO_RECT"
+                    sprite: "~res:/Gfx/UI/LobbyCommon/whiteramka"
+                    frame: 1
+                    leftRightStretchCap: 2.000000
+                Anchor:
+                    topAnchorEnabled: true
+                    topAnchor: 44.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 8.000000
+        -   class: "UIControl"
+            name: "Experience"
+            input: false
+            components:
+                Background:
+                    colorInherit: "COLOR_MULTIPLY_ON_PARENT"
+                Anchor:
+                    rightAnchorEnabled: true
+                    topAnchorEnabled: true
+                    topAnchor: 45.000000
+                LinearLayout:
+                    padding: "0; 6"
+                    spacing: 2.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   class: "UIControl"
+                customClass: "UIAnimatedNumber"
+                name: "Value"
+                position: [0.000000, 1.000000]
+                size: [93.000000, 28.000000]
+                input: false
+                components:
+                    Background:
+                        colorInherit: "COLOR_MULTIPLY_ON_PARENT"
+                        align: ["RIGHT", "VCENTER"]
+                    ClipContent: {}
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 32.000000
+                    StyleSheet:
+                        styles: "~res:/UI/Screens/Fonts.yaml"
+            -   class: "UIControl"
+                name: "BonusContainer"
+                size: [6.000000, 32.000000]
+                visible: false
+                input: false
+                components:
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    LinearLayout:
+                        orientation: "RightToLeft"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 32.000000
+                children:
+                -   class: "UIStaticText"
+                    name: "BonusValue"
+                    size: [0.000000, 28.000000]
+                    classes: "header1 text-color-green"
+                    components:
+                        UITextComponent:
+                            text: ""
+                            colorInheritType: "COLOR_MULTIPLY_ALPHA_ONLY"
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens/Fonts.yaml"
+                -   class: "UIControl"
+                    name: "Spacer"
+                    size: [6.000000, 32.000000]
+            -   class: "UIControl"
+                name: "CurrencyAndFactor"
+                input: false
+                components:
+                    LinearLayout:
+                        spacing: -2.000000
+                        skipInvisible: false
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        verticalPolicy: "PercentOfMaxChild"
+                children:
+                -   class: "UIControl"
+                    name: "Currency"
+                    position: [95.000000, -1.000000]
+                    size: [32.000000, 32.000000]
+                    input: false
+                    components:
+                        Background:
+                            sprite: "~res:/Gfx/UI/LobbyCommon/CurrencyIconsBig"
+                            frame: 3
+                            colorInherit: "COLOR_MULTIPLY_ON_PARENT"
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                -   class: "UIStaticText"
+                    name: "Factor"
+                    size: [30.000000, 20.000000]
+                    input: false
+                    classes: "header3 text-color-white"
+                    components:
+                        Background:
+                            colorInherit: "COLOR_MULTIPLY_ON_PARENT"
+                            align: ["LEFT", "TOP"]
+                        UITextComponent:
+                            text: "x99"
+                            shadowOffset: [0.000000, 1.000000]
+                            align: ["LEFT", "VCENTER"]
+                            useRtlAlign: "DONT_USE"
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "FixedSize"
+                            horizontalValue: 30.000000
+                            verticalPolicy: "PercentOfContent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens/Fonts.yaml"
+        -   class: "UIControl"
+            name: "Credits"
+            input: false
+            components:
+                Background:
+                    colorInherit: "COLOR_MULTIPLY_ON_PARENT"
+                Anchor:
+                    rightAnchorEnabled: true
+                    topAnchorEnabled: true
+                    topAnchor: 84.000000
+                LinearLayout:
+                    orientation: "LeftToRight"
+                    padding: "0; 6"
+                    spacing: 2.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   class: "UIControl"
+                customClass: "UIAnimatedNumber"
+                name: "Value"
+                position: [0.000000, 2.000000]
+                size: [93.000000, 26.000000]
+                input: false
+                components:
+                    Background:
+                        colorInherit: "COLOR_MULTIPLY_ON_PARENT"
+                        align: ["RIGHT", "VCENTER"]
+                    ClipContent: {}
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                        vCenterAnchor: 0.000000
+                    StyleSheet:
+                        styles: "~res:/UI/Screens/Fonts.yaml"
+            -   class: "UIControl"
+                name: "CurrencyAndFactor"
+                input: false
+                components:
+                    LinearLayout:
+                        spacing: -2.000000
+                        skipInvisible: false
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        verticalPolicy: "PercentOfMaxChild"
+                children:
+                -   class: "UIControl"
+                    name: "Currency"
+                    position: [93.000000, -1.000000]
+                    size: [32.000000, 32.000000]
+                    input: false
+                    components:
+                        Background:
+                            sprite: "~res:/Gfx/UI/LobbyCommon/CurrencyIconsBig"
+                            frame: 1
+                            colorInherit: "COLOR_MULTIPLY_ON_PARENT"
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                            vCenterAnchor: 0.000000
+                -   class: "UIStaticText"
+                    name: "Factor"
+                    size: [20.000000, 20.000000]
+                    input: false
+                    classes: "header3 text-color-white"
+                    components:
+                        Background:
+                            colorInherit: "COLOR_MULTIPLY_ON_PARENT"
+                            align: ["LEFT", "TOP"]
+                        UITextComponent:
+                            text: "x9"
+                            shadowOffset: [0.000000, 1.000000]
+                            align: ["LEFT", "VCENTER"]
+                            useRtlAlign: "DONT_USE"
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                            vCenterAnchor: 0.000000
+                        SizePolicy:
+                            horizontalPolicy: "FixedSize"
+                            horizontalValue: 20.000000
+                            verticalPolicy: "PercentOfContent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens/Fonts.yaml"
+-   class: "UIControl"
+    name: "FooterInfo"
+    size: [0.000000, 0.000000]
+    input: false
+    components:
+        Background: {}
+        Anchor:
+            vCenterAnchorEnabled: true
+        LinearLayout:
+            orientation: "TopDown"
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfChildrenSum"
+    children:
+    -   class: "UIStaticText"
+        name: "TextValue1"
+        classes: "header2 text-color-white"
+        components:
+            UITextComponent:
+                text: "Text1"
+                align: ["LEFT", "VCENTER"]
+                useRtlAlign: "USE_BY_CONTENT"
+            Anchor:
+                leftAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens/Fonts.yaml"
+    -   class: "UIStaticText"
+        name: "TextValue2"
+        classes: "text1 text-color-blue"
+        components:
+            UITextComponent:
+                text: "Text2"
+                fitting: "FITTING_POINTS"
+                align: ["LEFT", "VCENTER"]
+                useRtlAlign: "USE_BY_CONTENT"
+            Anchor:
+                leftAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens/Fonts.yaml"
+-   prototype: "PlayerNameWithTag/PlayerNameWithTag"
+    name: "PlayerNameWithTag"
+    components:
+        Anchor:
+            vCenterAnchorEnabled: true
+        LinearLayout:
+            useRtl: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            horizontalFormula: "childrenSum"
+            verticalFormula: "maxChild"
+    children:
+    -   path: "name"
+        components:
+            UITextComponent: {}
+            SizePolicy:
+                horizontalFormula: "min(100, content)"
+        bindings:
+        - ["UITextComponent.text", "playerName"]
+    -   path: "tag"
+        components:
+            UITextComponent: {}
+        bindings:
+        - ["visible", "not empty(playerClan)"]
+        - ["UITextComponent.text", "\"[\" + playerClan + \"]\""]
+-   class: "UIControl"
+    customClass: "UIBattleResultsPersonalPageControl"
+    name: "Page"
+    size: [960.000000, 560.000000]
+    input: false
+    components:
+        Anchor:
+            leftAnchorEnabled: true
+            rightAnchorEnabled: true
+            topAnchorEnabled: true
+            bottomAnchorEnabled: true
+        LinearLayout:
+            orientation: "TopDown"
+        UIDataParamsComponent:
+            params:
+            - ["BattleResultsViewModel", "results", "null", "{ }"]
+            - ["SessionDataModel", "session", "null", "{ }"]
+            - ["LobbyDataModel", "lobby", "null", "{ }"]
+            - ["AccountDataModel", "account", "null", "{ }"]
+            - ["AppDataModel", "app", "null", "{ }"]
+            events:
+            - "SHOW_QUESTS"
+            - "BUY_PREMIUM"
+            - "OnRibbonTap"
+            - "OnMedalTap"
+        UIDataLocalBindingsComponent:
+            data:
+            - ["bool", "hasBooster", "results.economics.aDropData.Contains(\"booster\")"]
+            - ["int", "boosterGold", "when hasBooster -> results.economics.aDropData[\"booster\"].gold, 0"]
+            - ["ResourceModel", "totalGold", "{ \"quantity\" = boosterGold; \"type\" = ResourceType.gold; \"discount\" = { \"value\" = 0.0; }; }"]
+            - ["int", "medalsBgFrame", "when results.battleResult == BattleResult.WIN -> 0, results.battleResult == BattleResult.LOSE -> 2, 1"]
+            - ["int", "totalCreditsEarned", "when results.economics.withPremium -> results.economics.creditsResult.premium, results.economics.creditsResult.base"]
+            - ["int", "maxFactor", "max(int(results.economics.creditsFactor), int(results.economics.xpFactor))"]
+            - ["bool", "showPremiumButtons", "not session.stats.isPremiumAccount and not results.isTutorial"]
+            - ["bool", "showCreditsFactor", "int(results.economics.creditsFactor) > 1"]
+            - ["bool", "showXpFactor", "int(results.economics.xpFactor) > 1"]
+            - ["bool", "noKilledByInfo", "empty(results.battleStats.killedBy.playerName)"]
+            - ["bool", "showRatingXp", "results.economics.ratingXpBonus > 0"]
+            - ["bool", "showRatingBonus", "(showRatingXp or results.economics.receivedRatingBonusStuff)"]
+            - ["bool", "hasHeroBonus", "when session.stats.isPremiumAccount -> results.economics.heroBonusXp.premium > 0 or results.economics.heroRewardCredits.premium > 0, results.economics.heroBonusXp.base > 0 or results.economics.heroRewardCredits.base > 0"]
+            - ["bool", "adPlaysiteActive", "app.sDlc.isGeneralPackLoaded and lobby.advertising.battleResultsAdAvailable and session.shopData.advertising.battleResultsLimit > 0 and session.stats.battleResultsAds.remainingAds > 0 and session.stats.battleResultsAds.nextViewTime <= session.serverTime"]
+            - ["bool", "adBonusValid", "results.economics.adBonus.expirationTime > session.serverTime and not results.economics.adBonus.rewards.Empty()"]
+            - ["bool", "canWatchAd", "not app.netease.neteaseAvailable and not account.tutorialData.isTutorialActive and not results.isTutorial and adPlaysiteActive and adBonusValid"]
+            - ["bool", "isDescriptionVisible", "results.gameplayMode != eGameMode.BossMode"]
+            - ["string", "creditsFactorStr", "localize(\"XP_FACTOR_FORMAT\", { \"xpFactor\" = str(results.economics.creditsFactor, 0); })"]
+            - ["string", "xpFactorStr", "localize(\"XP_FACTOR_FORMAT\", { \"xpFactor\" = str(results.economics.xpFactor, 0); })"]
+            - ["string", "baseCellsBgColorClass", "when results.economics.withPremium -> \"color-white-25\", \"color-white\""]
+            - ["string", "premCellsBgColorClass", "when results.economics.withPremium -> \"color-white\", \"color-white-25\""]
+            - ["string", "totalCreditsColor", "when totalCreditsEarned < 0 -> \"text-color-red\", \"text-color-white\""]
+            - ["string", "gameTypeStr", "when results.gameType == eArenaGameplayType.domination -> localize(\"#arenas:type/domination/name\"), results.gameType == eArenaGameplayType.supremacy -> localize(\"#arenas:type/supremacy/name\"), \"\""]
+            - ["string", "deathReasonStr", "when results.battleStats.deathReason == ATTACK_REASONS.NOT_KILLED -> localize(\"#battle_results:ATTACK_REASONS_NOT_KILLED\"), when results.battleStats.deathReason == ATTACK_REASONS.ATTACK and not noKilledByInfo -> localize(\"#battle_results:ATTACK_REASONS_ATTACK\", { \"killer\" = \"<player_name/>\"; }), when results.battleStats.deathReason == ATTACK_REASONS.ATTACK and noKilledByInfo -> localize(\"#battle_results:ATTACK_REASONS_ATTACK\", { \"killer\" = \"\"; }) + localize(\"unknownPlayerName\"), when results.battleStats.deathReason == ATTACK_REASONS.FIRE -> localize(\"#battle_results:ATTACK_REASONS_FIRE\"), when results.battleStats.deathReason == ATTACK_REASONS.RAMMING -> localize(\"#battle_results:ATTACK_REASONS_RAMMING\"), when results.battleStats.deathReason == ATTACK_REASONS.WORLD_COLLISION -> localize(\"#battle_results:ATTACK_REASONS_WORLD_COLLISION\"), when results.battleStats.deathReason == ATTACK_REASONS.DEATH_ZONE -> localize(\"#battle_results:ATTACK_REASONS_DEATH_ZONE\"), when results.battleStats.deathReason == ATTACK_REASONS.DROWNING -> localize(\"#battle_results:ATTACK_REASONS_DROWNING\"), \"\""]
+            - ["string", "resultStr", "when results.battleResult == BattleResult.WIN -> localize(\"#battle_results:Result_Win\"), results.battleResult == BattleResult.LOSE -> localize(\"#battle_results:Result_Lose\"), localize(\"#battle_results:Result_Tie\")"]
+            - ["string", "drawWinReasonStr", "when results.drawWinReason == COND_WIN_IF_DRAW.FRAGS and results.battleResult == BattleResult.WIN -> \"#battle_results:Reason_MoreDestroyed_Win\", results.drawWinReason == COND_WIN_IF_DRAW.FRAGS and results.battleResult == BattleResult.LOSE -> \"#battle_results:Reason_MoreDestroyed_Lose\", results.drawWinReason == COND_WIN_IF_DRAW.FRAGS and results.battleResult == BattleResult.TIE -> \"#battle_results:Reason_MoreDestroyed_Tie\", results.drawWinReason == COND_WIN_IF_DRAW.DAMAGE and results.battleResult == BattleResult.WIN -> \"#battle_results:Reason_MoreDamage_Win\", results.drawWinReason == COND_WIN_IF_DRAW.DAMAGE and results.battleResult == BattleResult.LOSE -> \"#battle_results:Reason_MoreDamage_Lose\", results.drawWinReason == COND_WIN_IF_DRAW.DAMAGE and results.battleResult == BattleResult.TIE -> \"#battle_results:Reason_MoreDamage_Tie\", results.drawWinReason == COND_WIN_IF_DRAW.RANDOM -> \"#battle_results:Reason_Random\", \"\""]
+            - ["string", "finishReasonStr", "when results.finishReason == FinishReason.UNKNOWN -> \"#battle_results:Reason_unknown\", results.finishReason == FinishReason.EXTERMINATION and results.battleResult == BattleResult.WIN -> \"#battle_results:Reason_extermination_Win\", results.finishReason == FinishReason.EXTERMINATION and results.battleResult == BattleResult.LOSE -> \"#battle_results:Reason_extermination_Lose\", results.finishReason == FinishReason.EXTERMINATION and results.battleResult == BattleResult.TIE -> \"#battle_results:Reason_extermination_Tie\", results.finishReason == FinishReason.BASE and results.battleResult == BattleResult.WIN -> \"#battle_results:Reason_base_Win\", results.finishReason == FinishReason.BASE and results.battleResult == BattleResult.LOSE -> \"#battle_results:Reason_base_Lose\", results.finishReason == FinishReason.BASE and results.battleResult == BattleResult.TIE -> \"#battle_results:Reason_base_Tie\", results.finishReason == FinishReason.TIMEOUT -> \"#battle_results:Reason_timeout\", results.finishReason == FinishReason.FAILURE -> \"#battle_results:Reason_failure\", results.finishReason == FinishReason.TECHNICAL -> \"#battle_results:Reason_technical\", results.finishReason == FinishReason.WIN_POINTS and results.battleResult == BattleResult.WIN -> \"#battle_results:Reason_MaxScore_Win\", results.finishReason == FinishReason.WIN_POINTS and results.battleResult == BattleResult.LOSE -> \"#battle_results:Reason_MaxScore_Lose\", results.finishReason == FinishReason.WIN_POINTS and results.battleResult == BattleResult.TIE -> \"#battle_results:Reason_MaxScore_Tie\", results.finishReason == FinishReason.SUPERMACY_OUT_OF_TIME and results.battleResult == BattleResult.WIN -> \"#battle_results:Reason_BiggerScore_Win\", results.finishReason == FinishReason.SUPERMACY_OUT_OF_TIME and results.battleResult == BattleResult.LOSE -> \"#battle_results:Reason_BiggerScore_Lose\", results.finishReason == FinishReason.SUPERMACY_OUT_OF_TIME and results.battleResult == BattleResult.TIE -> \"#battle_results:Reason_BiggerScore_Tie\", results.finishReason == FinishReason.CHOSEN_DRAW_WINNER -> drawWinReasonStr, \"\""]
+            - ["string", "bannerPath", "when results.battleResult == BattleResult.WIN and results.gameplayMode != eGameMode.Rating -> \"~res:/UI/Screens/Lobby/BattleResults/BannerWin.yaml\", results.battleResult == BattleResult.WIN and results.gameplayMode == eGameMode.Rating -> \"~res:/UI/Screens/Lobby/BattleResults/BannerWinRating.yaml\", results.battleResult == BattleResult.LOSE and results.gameplayMode != eGameMode.Rating -> \"~res:/UI/Screens/Lobby/BattleResults/BannerLose.yaml\", results.battleResult == BattleResult.LOSE and results.gameplayMode == eGameMode.Rating -> \"~res:/UI/Screens/Lobby/BattleResults/BannerLoseRating.yaml\", results.battleResult == BattleResult.TIE and results.gameplayMode != eGameMode.Rating -> \"~res:/UI/Screens/Lobby/BattleResults/BannerTieRating.yaml\", results.battleResult == BattleResult.TIE and results.gameplayMode == eGameMode.Rating -> \"~res:/UI/Screens/Lobby/BattleResults/BannerTieRating.yaml\", \"\""]
+            - ["string", "ratingXpBonus", "\"+\" + str1000Separated(results.economics.ratingXpBonus)"]
+            writeAllowed: true
+    children:
+    -   class: "UIControl"
+        name: "Banner"
+        input: false
+        components:
+            Background:
+                drawType: "DRAW_SCALE_PROPORTIONAL_ONE"
+                align: ["HCENTER", "BOTTOM"]
+            ClipContent: {}
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 0.000000
+                rightAnchorEnabled: true
+                rightAnchor: 0.000000
+                topAnchorEnabled: true
+                topAnchor: 0.000000
+            SizePolicy:
+                verticalPolicy: "PercentOfParent"
+                verticalValue: 200.000000
+            UIAttachLayoutMasterComponent:
+                attachId: "Notifier"
+        children:
+        -   class: "UIControl"
+            name: "Background"
+            pivot: [0.500000, 0.500000]
+            input: false
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    rightAnchorEnabled: true
+                    topAnchorEnabled: true
+                    bottomAnchorEnabled: true
+            children:
+            -   class: "UIControl"
+                name: "Holder"
+                pivot: [0.500000, 0.500000]
+                input: false
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfMaxChild"
+                        verticalPolicy: "PercentOfMaxChild"
+                    ScalePolicy:
+                        horizontalFormula: "max(parentSize.X / size.X, parentSize.Y / size.Y)"
+                        verticalFormula: "max(parentSize.X / size.X, parentSize.Y / size.Y)"
+                    UIDataChildFactoryComponent:
+                        package: "bannerPath"
+                        control: "\"BannerBackground\""
+        -   class: "UIControl"
+            name: "BattleResultTextHolder"
+            pivot: [0.500000, 0.500000]
+            input: false
+            classes: "title-spacing"
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    rightAnchorEnabled: true
+                    topAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                LinearLayout:
+                    orientation: "TopDown"
+                    dynamicPadding: true
+                StyleSheet:
+                    styles: "~res:/UI/Screens/Lobby/BattleResults/Styles/PersonalPageStyles.yaml"
+            children:
+            -   class: "UIStaticText"
+                name: "ResultText"
+                size: [1024.000000, 65.000000]
+                input: false
+                classes: "fs-50 bold"
+                components:
+                    Background:
+                        align: ["HCENTER", "BOTTOM"]
+                    UITextComponent:
+                        shadowOffset: [0.000000, 1.000000]
+                        align: ["HCENTER", "BOTTOM"]
+                        useRtlAlign: "DONT_USE"
+                    Anchor:
+                        leftAnchorEnabled: true
+                        rightAnchorEnabled: true
+                    StyleSheet:
+                        styles: "~res:/UI/Screens/Fonts.yaml"
+                bindings:
+                - ["UITextComponent.text", "resultStr"]
+            -   class: "UIStaticText"
+                name: "ReasonText"
+                size: [1024.000000, 45.000000]
+                input: false
+                classes: "header1 text-color-white"
+                components:
+                    Background:
+                        align: ["HCENTER", "TOP"]
+                    UITextComponent:
+                        shadowOffset: [0.000000, 1.000000]
+                        multiline: "MULTILINE_ENABLED"
+                        align: ["HCENTER", "TOP"]
+                        useRtlAlign: "DONT_USE"
+                    Anchor:
+                        leftAnchorEnabled: true
+                        rightAnchorEnabled: true
+                    StyleSheet:
+                        styles: "~res:/UI/Screens/Fonts.yaml"
+                bindings:
+                - ["visible", "isDescriptionVisible"]
+                - ["UITextComponent.text", "localize(finishReasonStr)"]
+        -   class: "UIControl"
+            name: "NotifierHolder"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                UIAttachLayoutSlaveComponent:
+                    attachId: "Notifier"
+                    masterAlign: "LeftCenter"
+                    slaveAlign: "LeftCenter"
+                    slaveSizePolicy: "MasterSize"
+            children:
+            -   prototype: "HeroNotifier/Notifier"
+                name: "Notifier"
+                components:
+                    UIAnimationComponent:
+                        animations: "_INIT,~res:/UI/Screens/Lobby/BattleResults/Animations/HeroNotification.animation"
+                    UIAnchorSafeAreaComponent:
+                        leftSafeInset: "INSET_ONLY_IF_NOTCH"
+                bindings:
+                - ["visible", "results.firstShow and hasHeroBonus"]
+    -   prototype: "ScrollableMedalContainer/MedalContainer"
+        name: "MedalContainer"
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+        bindings:
+        - ["visible", "results.showAchievementsPanel"]
+        children:
+        -   path: "MedalsBg/RightImagePart"
+            components:
+                Background: {}
+            bindings:
+            - ["Background.frame", "medalsBgFrame"]
+        -   path: "MedalsBg/LeftImagePart"
+            components:
+                Background: {}
+            bindings:
+            - ["Background.frame", "medalsBgFrame"]
+        -   path: "Medals"
+            components:
+                ClipContent:
+                    enabled: false
+            children: []
+        -   path: "Medals/scrollContainerControl"
+            children:
+            -   class: "UIControl"
+                name: "Holders"
+                position: [-14.000000, 0.000000]
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                    LinearLayout: {}
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        verticalPolicy: "PercentOfParent"
+                children:
+                -   class: "UIControl"
+                    name: "MedalsHolder"
+                    input: false
+                    components:
+                        LinearLayout:
+                            skipInvisible: false
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfChildrenSum"
+                            verticalPolicy: "PercentOfParent"
+                        UIRepeatComponent:
+                            control: "~res:/UI/Screens/Lobby/Common/BindableAchievementItem.yaml"
+                            dataContainer: "results.battleMedalsContainer"
+                            args:
+                                "achievement": "_item"
+                                "firstShowMedalAnimation": "results.firstShowMedalAnimation"
+                                "firstAnimationIndex": "results.firstAnimationIndex"
+                                "lastAnimationIndex": "results.lastAnimationIndex"
+                                "time": "results.time"
+                            eventActions:
+                            - ["OnMedalTap", "OnMedalTap", "_item.tapInfo"]
+                -   class: "UIControl"
+                    name: "RibbonsHolder"
+                    input: false
+                    components:
+                        LinearLayout:
+                            skipInvisible: false
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfChildrenSum"
+                            verticalPolicy: "PercentOfParent"
+                        UIRepeatComponent:
+                            control: "~res:/UI/Screens/Lobby/BattleResults/PersonalPageRibbon.yaml"
+                            dataContainer: "results.ribbonsContainer"
+                            args:
+                                "ribbon": "_item"
+                                "firstShowMedalAnimation": "results.firstShowMedalAnimation"
+                                "firstAnimationIndex": "results.firstAnimationIndex"
+                                "lastAnimationIndex": "results.lastAnimationIndex"
+                                "time": "results.time"
+                            eventActions:
+                            - ["OnRibbonTap", "OnRibbonTap", "_item.numberId"]
+            -   class: "UIControl"
+                name: "Animations"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                    LinearLayout:
+                        skipInvisible: false
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        verticalPolicy: "PercentOfParent"
+                bindings:
+                - ["visible", "results.firstShowMedalAnimation"]
+                children:
+                -   class: "UIControl"
+                    name: "AnimationMedals"
+                    input: false
+                    components:
+                        LinearLayout:
+                            skipInvisible: false
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfChildrenSum"
+                            verticalPolicy: "PercentOfParent"
+                        UIRepeatComponent:
+                            control: "~res:/UI/Screens/Lobby/Common/BindableAchievementItemAnimated.yaml"
+                            dataContainer: "results.battleMedalsContainer"
+                            args:
+                                "achievement": "_item"
+                                "firstShowMedalAnimation": "results.firstShowMedalAnimation"
+                                "firstAnimationIndex": "results.firstAnimationIndex"
+                                "lastAnimationIndex": "results.lastAnimationIndex"
+                                "time": "results.time"
+                            eventActions:
+                            - ["OnMedalTap", "OnMedalTap", "_item.tapInfo"]
+                -   class: "UIControl"
+                    name: "AnimationRibbons"
+                    input: false
+                    components:
+                        LinearLayout:
+                            skipInvisible: false
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfChildrenSum"
+                            verticalPolicy: "PercentOfParent"
+                        UIRepeatComponent:
+                            control: "~res:/UI/Screens/Lobby/BattleResults/PersonalPageRibbonAnimated.yaml"
+                            dataContainer: "results.ribbonsContainer"
+                            args:
+                                "ribbon": "_item"
+                                "firstShowMedalAnimation": "results.firstShowMedalAnimation"
+                                "firstAnimationIndex": "results.firstAnimationIndex"
+                                "lastAnimationIndex": "results.lastAnimationIndex"
+                                "time": "results.time"
+        -   class: "UIControl"
+            name: "QuestsButton"
+            size: [91.000000, 126.000000]
+            classes: "button button-open-sound"
+            components:
+                Background:
+                    sprite: "~res:/Gfx/UI/BattleResultsScreen/bag_animation"
+                Anchor:
+                    rightAnchorEnabled: true
+                    rightAnchor: 27.000000
+                    bottomAnchorEnabled: true
+                    bottomAnchor: -14.000000
+                UIAnchorSafeAreaComponent:
+                    rightSafeInset: "INSET"
+                UIInputEventComponent:
+                    onTouchUpInside: "SHOW_QUESTS"
+                Sound: {}
+                StyleSheet:
+                    styles: "~res:/UI/Styles/ButtonStyle.yaml;~res:/UI/Styles/ButtonSoundStyles.yaml"
+            bindings:
+            - ["visible", "results.showQuestsButton"]
+            children:
+            -   class: "UIControl"
+                name: "Img"
+                size: [91.000000, 126.000000]
+                input: false
+                components:
+                    Background:
+                        sprite: "~res:/Gfx/UI/BattleResultsScreen/bag_animation"
+                        frame: 1
+                        colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                    Anchor:
+                        leftAnchorEnabled: true
+                        leftAnchor: 0.000000
+                        rightAnchorEnabled: true
+                        rightAnchor: 0.000000
+                        topAnchorEnabled: true
+                        topAnchor: 0.000000
+                        bottomAnchorEnabled: true
+                        bottomAnchor: 0.000000
+    -   class: "UIControl"
+        name: "Body"
+        position: [0.000000, 221.000000]
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+            SizePolicy:
+                verticalPolicy: "PercentOfParent"
+                verticalValue: 600.000000
+                verticalMin: 245.000000
+        children:
+        -   class: "UIControl"
+            name: "Content"
+            input: false
+            components:
+                Anchor:
+                    vCenterAnchorEnabled: true
+                    vCenterAnchor: -5.000000
+                LinearLayout:
+                    orientation: "TopDown"
+                    dynamicPadding: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 294.000000
+                StyleSheet:
+                    styles: "~res:/UI/Styles/DesktopStyles.yaml"
+            children:
+            -   class: "UIControl"
+                name: "RewardTitleContainer"
+                position: [393.000000, 0.000000]
+                input: false
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                    LinearLayout:
+                        spacing: 5.000000
+                        useRtl: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        verticalPolicy: "PercentOfMaxChild"
+                bindings:
+                - ["visible", "not results.isTutorial"]
+                children:
+                -   class: "UIStaticText"
+                    name: "EventRewardText"
+                    size: [141.000000, 30.000000]
+                    classes: "header4 text-color-white"
+                    components:
+                        UITextComponent:
+                            text: "#battle_results:ItemsReceived"
+                            shadowOffset: [0.000000, 1.000000]
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 30.000000
+                        StyleSheet:
+                            styles: "~res:/UI/Screens/Fonts.yaml"
+                -   class: "UIStaticText"
+                    name: "EventRatingRewardText"
+                    classes: "header4 text-color-green"
+                    components:
+                        UITextComponent:
+                            text: "#battle_results:RatingItemsReceived"
+                            shadowOffset: [0.000000, 1.000000]
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 30.000000
+                        StyleSheet:
+                            styles: "~res:/UI/Screens/Fonts.yaml"
+                    bindings:
+                    - ["visible", "showRatingBonus"]
+            -   class: "UIControl"
+                name: "spacer"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 4.000000
+            -   class: "UIControl"
+                name: "RewardsContainer"
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfMaxChild"
+                children:
+                -   class: "UIControl"
+                    name: "VideoAdBonus"
+                    pivot: [1.000000, 0.000000]
+                    input: false
+                    components:
+                        UIAnimationComponent:
+                            animations: "_INIT,~res:/UI/Screens/Lobby/BattleResults/Animations/ShowVideoAdBonus.animation;AD_BONUS_ACTIVATED,~res:/UI/Screens/Lobby/BattleResults/Animations/ShowVideoAdBonus.animation"
+                        Background:
+                            drawType: "DRAW_STRETCH_BOTH"
+                            sprite: "~res:/Gfx/UI/LobbyCommon/info_background_rotated.psd"
+                            leftRightStretchCap: 7.000000
+                            topBottomStretchCap: 7.000000
+                        LinearLayout:
+                            padding: "10"
+                            spacing: 10.000000
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfChildrenSum"
+                            verticalPolicy: "PercentOfParent"
+                        UIDataOnEventComponent0:
+                            eventName: "AD_BONUS_ANIMATION_STARTED"
+                            modelFieldExpression: "results.skipAdBonusAnimation"
+                            dataExpression: "true"
+                        UIEventOnDataComponent0:
+                            watchedDataExpression: "canWatchAd"
+                            ifExpression: "_value"
+                            eventName: "AD_BONUS_ACTIVATED"
+                    bindings:
+                    - ["visible", "canWatchAd"]
+                    children:
+                    -   class: "UIControl"
+                        name: "Spacer"
+                        input: false
+                        components:
+                            SizePolicy:
+                                horizontalPolicy: "Formula"
+                                horizontalFormula: "safeAreaInsets.left"
+                                verticalPolicy: "PercentOfParent"
+                    -   class: "UIControl"
+                        name: "TextContainer"
+                        size: [32.000000, 32.000000]
+                        input: false
+                        components:
+                            Background: {}
+                            Anchor:
+                                vCenterAnchorEnabled: true
+                            LinearLayout:
+                                orientation: "TopDown"
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfMaxChild"
+                                verticalPolicy: "PercentOfChildrenSum"
+                            UIRepeatComponent:
+                                control: "~res:/UI/Screens/Lobby/BattleResults/BattleAdRewardResource.yaml"
+                                dataContainer: "results.economics.adBonus.rewards"
+                                args:
+                                    "resource": "_item"
+                    -   prototype: "IconButton/IconButton"
+                        name: "VideoAdButton"
+                        classes: "button button-color-green button-open-sound"
+                        components:
+                            Anchor:
+                                vCenterAnchorEnabled: true
+                            SizePolicy:
+                                horizontalPolicy: "FixedSize"
+                                horizontalValue: 80.000000
+                                verticalPolicy: "FixedSize"
+                                verticalValue: 64.000000
+                            UIInputEventComponent:
+                                onTouchUpInside: "PLAY_VIDEO_AD"
+                            StyleSheet:
+                                styles: "~res:/UI/Styles/ButtonStyle.yaml;~res:/UI/Screens3/ButtonSound.style.yaml"
+                        children:
+                        -   path: "icon"
+                            components:
+                                Background:
+                                    sprite: "~res:/Gfx/Lobby/icons/icon_video"
+                    -   class: "UIControl"
+                        name: "Spacer"
+                        input: false
+                        components:
+                            SizePolicy:
+                                horizontalPolicy: "FixedSize"
+                                horizontalValue: 8.000000
+                                verticalPolicy: "PercentOfParent"
+                -   class: "UIControl"
+                    name: "CurrentRewards"
+                    input: false
+                    components:
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                        LinearLayout: {}
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfChildrenSum"
+                            verticalPolicy: "PercentOfMaxChild"
+                        UIShadowHoleComponent:
+                            leftOffset: 16.000000
+                            rightOffset: 116.000000
+                            topOffset: 8.000000
+                            bottomOffset: 8.000000
+                    bindings:
+                    - ["UIShadowHoleComponent.isEnabled", "account.tutorialData.currentHint == eTutorialHint.kBuyPremium"]
+                    children:
+                    -   prototype: "RewardPanel"
+                        name: "WithoutPremium"
+                        children:
+                        -   path: "Content"
+                            components:
+                                StyleSheet:
+                                    inheritsStylesFromParent: false
+                                    styles: "~res:/UI/Styles/ColorStyles.yaml"
+                            bindings:
+                            - ["classes", "baseCellsBgColorClass"]
+                            children: []
+                        -   path: "Content/TextLabel"
+                            components:
+                                UITextComponent: {}
+                            bindings:
+                            - ["UITextComponent.text", "when results.isTutorial -> localize(\"#battle_results:ItemsReceived\"), localize(\"#battle_results:WithBaseAccount\")"]
+                        -   path: "Content/Experience/BonusContainer"
+                            bindings:
+                            - ["visible", "showRatingXp"]
+                            children: []
+                        -   path: "Content/Experience/BonusContainer/BonusValue"
+                            components:
+                                UITextComponent: {}
+                            bindings:
+                            - ["UITextComponent.text", "ratingXpBonus"]
+                        -   path: "Content/Experience/CurrencyAndFactor/Factor"
+                            components:
+                                UITextComponent: {}
+                                SizePolicy: {}
+                            bindings:
+                            - ["visible", "showXpFactor"]
+                            - ["UITextComponent.text", "xpFactorStr"]
+                            - ["SizePolicy.horizontalValue", "when maxFactor < 2 -> 20, maxFactor > 9 -> 36, 24"]
+                        -   path: "Content/Credits/CurrencyAndFactor/Factor"
+                            components:
+                                UITextComponent: {}
+                                SizePolicy: {}
+                            bindings:
+                            - ["visible", "showCreditsFactor"]
+                            - ["UITextComponent.text", "creditsFactorStr"]
+                            - ["SizePolicy.horizontalValue", "when maxFactor < 2 -> 20, maxFactor > 9 -> 36, 24"]
+                    -   prototype: "RewardPanel"
+                        name: "WithPremium"
+                        bindings:
+                        - ["visible", "not results.isTutorial"]
+                        children:
+                        -   path: "Content"
+                            components:
+                                StyleSheet:
+                                    styles: "~res:/UI/Styles/ColorStyles.yaml"
+                            bindings:
+                            - ["classes", "premCellsBgColorClass"]
+                            children: []
+                        -   path: "Content/TextLabel"
+                            components:
+                                UITextComponent:
+                                    text: "#battle_results:WithPremiumAccount"
+                                    fitting: "FITTING_REDUCE"
+                                Anchor:
+                                    leftAnchor: 8.000000
+                                    rightAnchor: 8.000000
+                        -   path: "Content/Experience/BonusContainer"
+                            bindings:
+                            - ["visible", "showRatingXp"]
+                            children: []
+                        -   path: "Content/Experience/BonusContainer/BonusValue"
+                            components:
+                                UITextComponent: {}
+                            bindings:
+                            - ["UITextComponent.text", "ratingXpBonus"]
+                        -   path: "Content/Experience/BonusContainer/Spacer"
+                            position: [0.000000, 0.000000]
+                        -   path: "Content/Experience/CurrencyAndFactor/Factor"
+                            components:
+                                UITextComponent: {}
+                                SizePolicy: {}
+                            bindings:
+                            - ["visible", "showXpFactor"]
+                            - ["UITextComponent.text", "xpFactorStr"]
+                            - ["SizePolicy.horizontalValue", "when maxFactor < 2 -> 20, maxFactor > 9 -> 36, 24"]
+                        -   path: "Content/Credits/CurrencyAndFactor/Factor"
+                            components:
+                                UITextComponent: {}
+                                SizePolicy: {}
+                            bindings:
+                            - ["visible", "showCreditsFactor"]
+                            - ["UITextComponent.text", "creditsFactorStr"]
+                            - ["SizePolicy.horizontalValue", "when maxFactor < 2 -> 20, maxFactor > 9 -> 36, 24"]
+                    -   class: "UIControl"
+                        name: "PremiumButtonAnchor"
+                        input: false
+                        components:
+                            Anchor:
+                                vCenterAnchorEnabled: true
+                        children:
+                        -   class: "UIControl"
+                            name: "PremiumButtonContainer"
+                            pivot: [0.000000, 0.500000]
+                            input: false
+                            components:
+                                SizePolicy:
+                                    horizontalPolicy: "PercentOfMaxChild"
+                                    horizontalValue: 115.000000
+                                    verticalPolicy: "PercentOfMaxChild"
+                                    verticalValue: 130.000000
+                                UIAttachLayoutMasterComponent:
+                                    attachId: "BUY_PREMIUM_BUTTON"
+                            children:
+                            -   class: "UIControl"
+                                name: "BuyPremiumButton"
+                                size: [87.000000, 69.000000]
+                                classes: "button button-ok-sound"
+                                components:
+                                    Background:
+                                        sprite: "~res:/Gfx/UI/BattleResultsScreen/offerShop"
+                                        align: ["LEFT", "TOP"]
+                                    Anchor:
+                                        leftAnchorEnabled: true
+                                        vCenterAnchorEnabled: true
+                                    UIInputEventComponent:
+                                        onTouchUpInside: "BUY_PREMIUM"
+                                    Sound: {}
+                                    StyleSheet:
+                                        styles: "~res:/UI/Styles/ButtonSoundStyles.yaml;~res:/UI/Styles/ButtonStyle.yaml"
+                                bindings:
+                                - ["visible", "showPremiumButtons"]
+                                children:
+                                -   class: "UIControl"
+                                    name: "highlight"
+                                    position: [43.500000, 34.500000]
+                                    size: [87.000000, 69.000000]
+                                    pivot: [0.500000, 0.500000]
+                                    visible: false
+                                    input: false
+                                    components:
+                                        Background:
+                                            sprite: "~res:/Gfx/UI/BattleResultsScreen/glow_offerShop"
+                                        Anchor:
+                                            leftAnchorEnabled: true
+                                            leftAnchor: 0.000000
+                                            rightAnchorEnabled: true
+                                            rightAnchor: 0.000000
+                                            topAnchorEnabled: true
+                                            topAnchor: 0.000000
+                                            bottomAnchorEnabled: true
+                                            bottomAnchor: 0.000000
+            -   class: "UIControl"
+                name: "spacer_1"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 8.000000
+            -   class: "UIControl"
+                name: "RewardItems"
+                position: [0.000000, 166.000000]
+                size: [1024.000000, 0.000000]
+                input: false
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: false
+                    LinearLayout:
+                        spacing: 25.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        verticalPolicy: "PercentOfMaxChild"
+                children:
+                -   class: "UIControl"
+                    name: "RewardContainer"
+                    position: [512.000000, 0.000000]
+                    size: [100.000000, 0.000000]
+                    pivot: [0.500000, 0.500000]
+                    input: false
+                    components:
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                            topAnchorEnabled: true
+                            topAnchor: 0.000000
+                        LinearLayout:
+                            enabled: true
+                            dynamicPadding: true
+                            spacing: 25.000000
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfChildrenSum"
+                            horizontalMin: 100.000000
+                            verticalPolicy: "PercentOfMaxChild"
+                        UIDataListComponent:
+                            cellPackage: "~res:/UI/Screens/Lobby/Common/Resource/ResourceSmall.yaml"
+                            cellControl: "ResourceSmallBinded"
+                            dataContainer: "results.economics.stuff"
+                    bindings:
+                    - ["visible", "not Empty(results.economics.stuff)"]
+                -   class: "UIControl"
+                    name: "BoosterRewards"
+                    size: [32.000000, 32.000000]
+                    input: false
+                    components:
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfMaxChild"
+                            verticalPolicy: "PercentOfMaxChild"
+                        UIChildComponent0:
+                            condition: "boosterGold > 0"
+                            prototypePath: "~res:/UI/Screens/Lobby/Common/Resource/ResourceSmallBinded.yaml"
+                            args:
+                                "forButton": "true"
+                                "resource": "totalGold"
+            -   class: "UIControl"
+                name: "spacer_2"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 8.000000
+            -   class: "UIControl"
+                name: "BattleStats"
+                position: [153.500000, 174.000000]
+                size: [717.000000, 80.000000]
+                input: false
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        topAnchor: 152.000000
+                    LinearLayout:
+                        spacing: -1.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        verticalPolicy: "PercentOfMaxChild"
+                children:
+                -   prototype: "InfoPanel"
+                    name: "RatingInfo"
+                    bindings:
+                    - ["visible", "results.gameplayMode == eGameMode.Rating"]
+                    children:
+                    -   path: "ValueContainer"
+                        visible: false
+                        children: []
+                    -   path: "ValueContainer/Icon"
+                        components:
+                            Background:
+                                sprite: "~res:/Gfx/UI/BattleResultsScreen/statIcon"
+                                frame: 3
+                    -   path: "Label"
+                        components:
+                            UITextComponent:
+                                text: "#battle_results:PersonalPage/Rating"
+                    -   prototype: "BattleRatingBinded/Rating"
+                        name: "Rating"
+                        components:
+                            Anchor:
+                                hCenterAnchorEnabled: true
+                                topAnchorEnabled: true
+                                topAnchor: 26.000000
+                                bottomAnchorEnabled: true
+                            UIDataSourceComponent0:
+                                sourceType: "Expression"
+                                source: "results.rating"
+                        children:
+                        -   path: "CurrentRating"
+                            classes: "header1 text-color-white"
+                        -   path: "RatingDiff"
+                            classes: "header1"
+                -   prototype: "InfoPanel"
+                    name: "DamageInfo"
+                    children:
+                    -   path: "ValueContainer/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "str1000Separated(results.battleStats.damageDealt)"]
+                    -   path: "ValueContainer/Icon"
+                        components:
+                            Background:
+                                sprite: "~res:/Gfx/UI/BattleResultsScreen/statIcon"
+                                frame: 3
+                    -   path: "Label"
+                        components:
+                            UITextComponent:
+                                text: "#battle_results:PersonalPage/DamageDealed"
+                    -   path: "Border"
+                        position: [0.000000, 0.000000]
+                -   prototype: "InfoPanel"
+                    name: "CreditsInfo"
+                    position: [358.000000, 0.000000]
+                    children:
+                    -   path: "ValueContainer"
+                        components:
+                            LinearLayout:
+                                spacing: 2.000000
+                        children: []
+                    -   path: "ValueContainer/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["classes", "\"header1 \" + totalCreditsColor"]
+                        - ["UITextComponent.text", "str1000Separated(totalCreditsEarned)"]
+                    -   path: "ValueContainer/Icon"
+                        components:
+                            Background:
+                                sprite: "~res:/Gfx/UI/LobbyCommon/CurrencyIconsBig"
+                                frame: 1
+                    -   path: "Label"
+                        components:
+                            UITextComponent:
+                                text: "#battle_results:PersonalPage/CreditsTotal"
+                -   prototype: "InfoPanel"
+                    name: "KillsInfo"
+                    position: [537.000000, 0.000000]
+                    children:
+                    -   path: "ValueContainer/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "str1000Separated(results.battleStats.vehiclesDestroyed)"]
+                    -   path: "ValueContainer/Icon"
+                        components:
+                            Background:
+                                sprite: "~res:/Gfx/UI/BattleResultsScreen/statIcon"
+                                frame: 2
+                    -   path: "Label"
+                        components:
+                            UITextComponent:
+                                text: "#battle_results:PersonalPage/DestroyedTotal"
+    -   prototype: "Footer/Footer"
+        name: "Footer"
+        components:
+            LinearLayout:
+                padding: "8.000000"
+        children:
+        -   path: "FooterBackground"
+            components:
+                IgnoreLayout: {}
+        -   class: "UIControl"
+            name: "CenterLayout"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            children:
+            -   class: "UIControl"
+                name: "LayoutContainer"
+                input: false
+                classes: "limited-width"
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                    LinearLayout:
+                        padding: "12.000000"
+                        spacing: 20.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                    StyleSheet:
+                        styles: "~res:/UI/Styles/DesktopStyles.yaml"
+                children:
+                -   prototype: "FooterInfo"
+                    name: "MapInfo"
+                    position: [0.000000, 32.500000]
+                    children:
+                    -   path: "TextValue1"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "localize(results.mapName)"]
+                    -   path: "TextValue2"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "gameTypeStr"]
+                -   class: "UIControl"
+                    name: "CenterInfo"
+                    input: false
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 94.000000
+                    children:
+                    -   class: "UIControl"
+                        name: "VehicleCell"
+                        position: [170.000000, 7.000000]
+                        size: [128.000000, 80.000000]
+                        input: false
+                        classes: "vehicle-info"
+                        components:
+                            Anchor:
+                                hCenterAnchorEnabled: true
+                                vCenterAnchorEnabled: true
+                            LinearLayout: {}
+                            SizePolicy:
+                                horizontalPolicy: "Formula"
+                                horizontalFormula: "firstChild * 2"
+                            StyleSheet:
+                                styles: "~res:/UI/Screens/Lobby/BattleResults/Styles/PersonalPageStyles.yaml"
+                        children:
+                        -   class: "UIControl"
+                            name: "Icon"
+                            size: [128.000000, 80.000000]
+                            input: false
+                            components:
+                                Background:
+                                    drawType: "DRAW_SCALE_PROPORTIONAL_ONE"
+                                    align: ["RIGHT", "VCENTER"]
+                                Anchor:
+                                    leftAnchorEnabled: true
+                                    topAnchorEnabled: true
+                                    bottomAnchorEnabled: true
+                            bindings:
+                            - ["Background.sprite", "results.tank.bigIconWithCamo"]
+                            children:
+                            -   prototype: "VehicleInfo/VehicleInfo"
+                                name: "VehicleInfo"
+                                components:
+                                    Anchor:
+                                        leftAnchorEnabled: true
+                                        topAnchorEnabled: true
+                                    UIDataParamsComponent:
+                                        args:
+                                            "class": "results.tank.info.tankClass"
+                                            "level": "results.tank.info.level"
+                                            "type": "when results.tank.info.isPremium -> eVehicleDescriptionType.PREMIUM, results.tank.info.isCollectible -> eVehicleDescriptionType.COLLECTIBLE, results.tank.stats.isPremiumized -> eVehicleDescriptionType.PREMIUMISED, eVehicleDescriptionType.NORMAL"
+                                            "elite": "results.tank.stats.isElite"
+                        -   class: "UIControl"
+                            name: "FooterInfo"
+                            position: [128.000000, 12.500000]
+                            size: [200.000000, 55.000000]
+                            input: false
+                            components:
+                                Background: {}
+                                Anchor:
+                                    vCenterAnchorEnabled: true
+                                LinearLayout:
+                                    orientation: "TopDown"
+                                SizePolicy:
+                                    horizontalPolicy: "Formula"
+                                    horizontalFormula: "min(150, maxChild)"
+                                    verticalPolicy: "PercentOfChildrenSum"
+                                UIAnchorSafeAreaComponent:
+                                    bottomSafeInset: "INSET"
+                            children:
+                            -   class: "UIStaticText"
+                                name: "TextValue1"
+                                size: [50.000000, 29.000000]
+                                classes: "header2 text-color-white"
+                                components:
+                                    UITextComponent:
+                                        align: ["LEFT", "VCENTER"]
+                                        useRtlAlign: "USE_BY_CONTENT"
+                                    Anchor:
+                                        leftAnchorEnabled: true
+                                        vCenterAnchorEnabled: true
+                                    SizePolicy:
+                                        horizontalPolicy: "PercentOfContent"
+                                        verticalPolicy: "PercentOfContent"
+                                    StyleSheet:
+                                        styles: "~res:/UI/Screens/Fonts.yaml"
+                                bindings:
+                                - ["UITextComponent.text", "localize(results.tank.nameWithCamo)"]
+                            -   class: "UIControl"
+                                name: "RichTextResultControl"
+                                position: [0.000000, 29.000000]
+                                size: [219.000000, 31.000000]
+                                input: false
+                                components:
+                                    RichContent:
+                                        baseClasses: "text1 text-color-blue"
+                                    RichContentAliases0:
+                                        aliases:
+                                        - ["player_name", "<object path=\"~res:/UI/Screens/Lobby/BattleResults/PersonalPage.yaml\" prototype=\"PlayerNameWithTag\"/>"]
+                                    SizePolicy:
+                                        horizontalPolicy: "PercentOfChildrenSum"
+                                        verticalPolicy: "PercentOfMaxChild"
+                                    FlowLayout:
+                                        hSpacing: 5.000000
+                                        useRtl: true
+                                    UIDataSourceComponent0:
+                                        sourceType: "Expression"
+                                        source: "results.battleStats.killedBy"
+                                    StyleSheet:
+                                        styles: "~res:/UI/Screens/Fonts.yaml"
+                                bindings:
+                                - ["RichContent.text", "deathReasonStr"]
+                -   prototype: "FooterInfo"
+                    name: "DateInfo"
+                    children:
+                    -   path: "TextValue1"
+                        components:
+                            UITextComponent: {}
+                            Anchor:
+                                leftAnchorEnabled: false
+                                rightAnchorEnabled: true
+                        bindings:
+                        - ["UITextComponent.text", "results.battleDate"]
+                    -   path: "TextValue2"
+                        components:
+                            UITextComponent: {}
+                            Anchor:
+                                leftAnchorEnabled: false
+                                rightAnchorEnabled: true
+                        bindings:
+                        - ["UITextComponent.text", "results.battleStartTime"]
+        -   class: "UIControl"
+            name: "RightContainer"
+            size: [90.000000, 64.000000]
+            classes: "button notch-tightly-bottom-inset"
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                LinearLayout:
+                    spacing: 10.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfFirstChild"
+                UIAnchorSafeAreaComponent:
+                    rightSafeInset: "INSET"
+            children:
+            -   prototype: "IconButton/IconButton"
+                name: "StartReplayButton"
+                size: [80.000000, 64.000000]
+                classes: "button button-color-gray button-ok-sound"
+                components:
+                    UIAttachLayoutMasterComponent:
+                        attachId: "REPLAY_BUTTON"
+                    UIInputEventComponent:
+                        onTouchUpInside: "START_REPLAY"
+                    StyleSheet:
+                        inheritsStylesFromParent: false
+                        styles: "~res:/UI/Styles/ButtonStyle.yaml;~res:/UI/Styles/ButtonSoundStyles.yaml"
+                bindings:
+                - ["visible", "not app.constants.nsb and account.tutorialSyncData.isReplaysAvailable"]
+                children:
+                -   path: "icon"
+                    size: [32.000000, 32.000000]
+                    components:
+                        Background:
+                            sprite: "~res:/Gfx/UI/Hangar/SidebarIcons.psd"
+                            frame: 5
+                            perPixelAccuracy: "PER_PIXEL_ACCURACY_DISABLED"
+                -   class: "UIParticles"
+                    name: "Replay"
+                    position: [0.000000, 0.000000]
+                    size: [40.000000, 40.000000]
+                    pivot: [0.489000, 0.530000]
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/replay.sc2"
+                    autoStart: true
+                    components:
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                            vCenterAnchorEnabled: true
+            -   class: "UIControl"
+                name: "SocialNetworkSharingSection"
+                classes: "button notch-tightly-bottom-inset"
+                components:
+                    LinearLayout:
+                        spacing: 7.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        verticalPolicy: "PercentOfFirstChild"
+                    UIAnchorSafeAreaComponent: {}
+                    UIAttachLayoutMasterComponent:
+                        attachId: "SHARE_BATTLE_RESULTS"
+                    StyleSheet:
+                        styles: "~res:/UI/Styles/SafeAreaStyles.yaml;~res:/UI/Styles/ButtonStyle.yaml"
+                bindings:
+                - ["visible", "not app.constants.nsb"]

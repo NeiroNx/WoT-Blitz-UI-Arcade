@@ -1,0 +1,49 @@
+Header:
+    version: 120
+ImportedPackages:
+- "~res:/UI/Screens3/Common/PopupMenu.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "TimerPopup"
+    size: [960.000000, 640.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["string", "masterId", "\"\"", "\"\""]
+            - ["SessionDataModel", "session", "null", "{ }"]
+            - ["ClanTasksData", "model", "null", "{ }"]
+            - ["int", "taskLeft", "0", "2"]
+            - ["int", "taskTotal", "0", "10"]
+            - ["bool", "showDiffTime", "false", "false"]
+            events:
+            - "FINISH_HIDE_POPUP_ANIMATION"
+            - "POPUP_ON_CLOSE_ACTION"
+            - "ON_POPUP_BUTTON_CLICKED"
+        UIDataLocalBindingsComponent:
+            data:
+            - ["int64", "time", "model.activeWeek.periodEndTime"]
+            - ["int64", "serverTime", "session.serverTime"]
+            - ["string", "diffTime", "timeDiff(time - serverTime)"]
+            - ["string", "timeDescription", "localize(\"clanMissions/tooltips/clanReward/timeLeft\", { \"time\" = diffTime; })"]
+            - ["string", "tasksDescription", "localize(\"clanMissions/tooltips/incompletedMissions\", { \"taskLeft\" = taskLeft; })"]
+            - ["string", "tasksTimerDescription", "localize(\"clanMissions/tooltips/clanReward/completeMissions\", { \"taskLeft\" = taskLeft; \"time\" = diffTime; })"]
+            - ["string", "tasksNotEnough", "localize(\"clanMissions/tooltips/incompletedMissionsTotal\", { \"taskTotal\" = taskTotal; })"]
+            - ["string", "description", "when taskLeft <= 0 -> timeDescription, showDiffTime -> tasksTimerDescription, serverTime > time -> tasksNotEnough, tasksDescription"]
+    children:
+    -   prototype: "PopupMenu/Slave"
+        name: "Slave"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "title": "\"\""
+                    "slaveAlign": "ePositionAlign.Bottom"
+                    "text": "description"
+                    "masterId": "masterId"
+                eventActions:
+                - ["ON_CLICK_BUTTON", "ON_POPUP_BUTTON_CLICKED", ""]
+                - ["POPUP_ON_CLOSE_ACTION", "POPUP_ON_CLOSE_ACTION", ""]
+                - ["FINISH_HIDE_POPUP_ANIMATION", "FINISH_HIDE_POPUP_ANIMATION", ""]

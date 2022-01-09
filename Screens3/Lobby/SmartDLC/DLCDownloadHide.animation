@@ -1,0 +1,10 @@
+animation DLCDownloadHide
+{
+    Wait(delayBeforeHideAnim);
+
+	parallel
+	{
+		Move ("**/TapArea", 0, -100, 0.3);
+		ChangeProperty (".","UIOpacityComponent","opacity", 0.0, 0.2, SINE_IN);
+	}
+}

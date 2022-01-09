@@ -1,0 +1,20 @@
+action ItemUpdate(float positionY, int index)
+{
+	Event("STORAGE_ITEM_UPDATE", arg1 = positionY, arg2 =  index);
+}
+
+action StartCombineAnimation()
+{
+	StartParticles("**/CombineEffect");
+	ChangeData(model.startCombineEffect, false);
+} 
+
+action StartInstallAnimation()
+{
+	StartParticles("**/InstallEffect");
+} 
+
+action ICON_LOADED
+{
+	DirectEvent("IMAGE_LOADED", "**/AnimatedLoader");
+} 

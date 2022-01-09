@@ -1,0 +1,86 @@
+Header:
+    version: 135
+Prototypes:
+-   class: "UIControl"
+    name: "AimConsumableProgressPrototype"
+    size: [220.000000, 220.000000]
+    input: false
+    components:
+        Anchor:
+            hCenterAnchorEnabled: true
+            vCenterAnchorEnabled: true
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens/Battle/Aims/AimConsumableProgress.actions"
+    children:
+    -   class: "UIControl"
+        name: "ProgressBG"
+        input: false
+        components:
+            Anchor:
+                rightAnchorEnabled: true
+                bottomAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 110.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 110.000000
+        children:
+        -   class: "UIControl"
+            name: "Default"
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_ALIGNED"
+                    sprite: "~res:/Gfx/Battle/HUD/aim/polish-consumable/bg_default"
+                    perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                Anchor:
+                    rightAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+        -   class: "UIControl"
+            name: "Active"
+            position: [-1.000000, 14.000000]
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_ALIGNED"
+                    sprite: "~res:/Gfx/Battle/HUD/aim/polish-consumable/bg_active"
+                    perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                Anchor:
+                    rightAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+    -   class: "UIControl"
+        name: "ProgressLine"
+        position: [86.000000, 0.000000]
+        size: [32.000000, 32.000000]
+        input: false
+        classes: "white-wild-sand-bg"
+        components:
+            Background:
+                drawType: "DRAW_ALIGNED"
+                sprite: "~res:/Gfx/Battle/HUD/aim/polish-consumable/bg_progress-line"
+                perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+            UIOpacityComponent:
+                opacity: 0.000000
+            UIClipPolygon: {}
+            RadialProgressComponent:
+                progress: 0.000000
+                startAngle: 180.000000
+                endAngle: 109.000000
+                verticalAlign: "Top"
+                horizontalAlign: "Left"
+            Anchor:
+                rightAnchorEnabled: true
+                bottomAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 110.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 110.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"

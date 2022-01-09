@@ -1,0 +1,71 @@
+Header:
+    version: 123
+Prototypes:
+-   class: "UIControl"
+    name: "OfferedOptionSection"
+    size: [272.000000, 0.000000]
+    input: false
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfChildrenSum"
+        UIDataParamsComponent:
+            params:
+            - ["OfferedOptionSection", "section", "null", "{ }"]
+    children:
+    -   class: "UIControl"
+        name: "IconText"
+        input: false
+        components:
+            LinearLayout:
+                padding: "26"
+                spacing: 26.000000
+                useRtl: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   class: "UIControl"
+            name: "Icon"
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_TO_RECT"
+                UIUrlImageComponent: {}
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 64.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 64.000000
+            bindings:
+            - ["visible", "not empty(section.iconUrl)"]
+            - ["UIUrlImageComponent.imageUrl", "section.iconUrl"]
+        -   class: "UIControl"
+            name: "Text"
+            input: false
+            components:
+                Anchor:
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfFirstChild"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens3/Lobby/Hangar/Offers/PRMP/Common/OfferTextDescription.yaml"
+                    args:
+                        "text": "section.text"
+    -   class: "UIControl"
+        name: "BottomImage"
+        input: false
+        components:
+            Background:
+                drawType: "DRAW_SCALE_PROPORTIONAL"
+            UIUrlImageComponent: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "Formula"
+                verticalFormula: "min(content,32)"
+        bindings:
+        - ["visible", "not empty(section.bottomIconUrl)"]
+        - ["UIUrlImageComponent.imageUrl", "section.bottomIconUrl"]

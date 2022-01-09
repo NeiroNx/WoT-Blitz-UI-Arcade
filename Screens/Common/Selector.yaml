@@ -1,0 +1,148 @@
+Header:
+    version: "24"
+ImportedPackages:
+- "~res:/UI/Screens/Fonts.yaml"
+StyleSheets:
+-   selector: ".selection-item:selected #Text"
+    properties:
+        text-color: [1.000000, 1.000000, 1.000000, 1.000000]
+-   selector: ".selection-item #Text"
+    properties:
+        text-color: [0.627451, 0.725490, 0.800000, 1.000000]
+-   selector: ".selection-item #Background"
+    properties:
+        visible: false
+-   selector: ".selection-item:selected #Background"
+    properties:
+        visible: true
+Prototypes:
+-   class: "UIControl"
+    name: "ItemLeft"
+    size: [60.000000, 38.000000]
+    noInput: true
+    classes: "selection-item"
+    components:
+        Anchor:
+            vCenterAnchorEnabled: true
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Common/Selector.yaml"
+    children:
+    -   class: "UIControl"
+        name: "Background"
+        size: [60.000000, 38.000000]
+        noInput: true
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+            Background:
+                drawType: "DRAW_STRETCH_BOTH"
+                sprite: "~res:/Gfx/UI/CommonUIElements/TabSelectorLeft"
+                leftRightStretchCap: 5.000000
+    -   class: "UIStaticText"
+        name: "Text"
+        size: [60.000000, 32.000000]
+        classes: "header3"
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            UITextComponent:
+                colorInheritType: "COLOR_IGNORE_PARENT"
+-   class: "UIControl"
+    name: "ItemRight"
+    size: [60.000000, 38.000000]
+    noInput: true
+    classes: "selection-item"
+    components:
+        Anchor:
+            vCenterAnchorEnabled: true
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Common/Selector.yaml"
+    children:
+    -   class: "UIControl"
+        name: "Background"
+        size: [60.000000, 38.000000]
+        noInput: true
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+            Background:
+                drawType: "DRAW_STRETCH_BOTH"
+                sprite: "~res:/Gfx/UI/CommonUIElements/TabSelectorLeft"
+                spriteModification: ["FLIP_HORIZONTAL"]
+                leftRightStretchCap: 5.000000
+    -   class: "UIStaticText"
+        name: "Text"
+        size: [60.000000, 32.000000]
+        classes: "header3"
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            UITextComponent:
+                colorInheritType: "COLOR_IGNORE_PARENT"
+-   class: "UIControl"
+    name: "ItemMiddle"
+    size: [60.000000, 38.000000]
+    noInput: true
+    classes: "selection-item"
+    components:
+        Anchor:
+            vCenterAnchorEnabled: true
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Common/Selector.yaml"
+    children:
+    -   class: "UIControl"
+        name: "Background"
+        size: [60.000000, 38.000000]
+        noInput: true
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+            Background:
+                drawType: "DRAW_STRETCH_BOTH"
+                sprite: "~res:/Gfx/UI/CommonUIElements/TabSelectorMiddle"
+                leftRightStretchCap: 5.000000
+    -   class: "UIStaticText"
+        name: "Text"
+        size: [60.000000, 32.000000]
+        classes: "header3"
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            UITextComponent:
+                colorInheritType: "COLOR_IGNORE_PARENT"
+-   class: "UIControl"
+    customClass: "UITabSwitcher"
+    name: "SelectorPanel"
+    noInput: true
+    components:
+        LinearLayout:
+            padding: 2.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "FixedSize"
+            verticalValue: 42.000000
+        Background:
+            drawType: "DRAW_STRETCH_BOTH"
+            sprite: "~res:/Gfx/UI/CommonUIElements/TabSelectorBorder"
+            leftRightStretchCap: 10.000000
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Common/Selector.yaml"

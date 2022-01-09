@@ -1,0 +1,73 @@
+Header:
+    version: 140
+Prototypes:
+-   class: "UIControl"
+    name: "SideBarItem"
+    exclusiveInput: true
+    classes: "battlepass-reward button-open-sound"
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens3/Lobby/Shop/SideBarItemInitialization.animation"
+        UIOpacityComponent: {}
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 88.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 72.000000
+        UIInputEventComponent:
+            onTouchUpInside: "ON_SECTION_SELECTED"
+        UIDataParamsComponent:
+            params:
+            - ["int", "index", "0", "0"]
+            - ["bool", "enabled", "false", "true"]
+            - ["string", "iconUrl", "\"~res:/Gfx/Lobby/currency/currency_battle-xp_xl\"", "\"https://static-wgt.ggdev.io:443/wotb/images/compressed/15e6d319c9bf4d7588c4fbbf44ede9df.png\""]
+            - ["eBadgeType", "badgeType", "eBadgeType.DIGIT", "eBadgeType.GIFT"]
+            - ["string", "badge", "\"\"", "\"1\""]
+            events:
+            - "ON_SECTION_SELECTED"
+        Sound: {}
+        UIIdentifierComponent:
+            id: "shop_tab_item"
+            params:
+            - ["int", "index", "index"]
+        StyleSheet:
+            styles: "~res:/UI/Screens3/ButtonSound.style.yaml;~res:/UI/Screens3/Common/Touch.style.yaml"
+    bindings:
+    - ["input", "enabled"]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        pivot: [0.500000, 0.500000]
+        input: false
+        classes: "content-area"
+        components:
+            Background:
+                drawType: "DRAW_SCALE_PROPORTIONAL_ONE"
+            UIUrlImageComponent: {}
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 48.000000
+                verticalPolicy: "PercentOfContent"
+        bindings:
+        - ["UIUrlImageComponent.imageUrl", "iconUrl"]
+    -   class: "UIControl"
+        name: "badge"
+        input: false
+        components:
+            Anchor:
+                rightAnchorEnabled: true
+                rightAnchor: 8.000000
+                topAnchorEnabled: true
+                topAnchor: 8.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfMaxChild"
+            UIChildComponent0:
+                condition: "not (badge == \"0\")"
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/BadgeHolder.yaml"
+                args:
+                    "value": "badge"
+                    "type": "badgeType"

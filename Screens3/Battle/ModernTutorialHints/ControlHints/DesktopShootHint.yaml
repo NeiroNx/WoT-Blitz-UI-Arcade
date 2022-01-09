@@ -1,0 +1,48 @@
+Header:
+    version: 123
+ImportedPackages:
+- "~res:/UI/Screens3/Battle/ModernTutorialControls/Mouse.yaml"
+- "~res:/UI/Screens3/Battle/ModernTutorialHints/TutorialHintBasic.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "DesktopShootHint"
+    size: [1024.000000, 768.000000]
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens3/Battle/ModernTutorialHints/FadeIn.animation;Disappear,~res:/UI/Screens3/Battle/ModernTutorialHints/FadeOut.animation"
+        UIOpacityComponent: {}
+        Anchor:
+            hCenterAnchorEnabled: true
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            horizontalMax: 1200.000000
+            verticalPolicy: "PercentOfParent"
+    children:
+    -   prototype: "TutorialHintBasic/HintContainer"
+        name: "HintContainer"
+        classes: "ArrowBottom"
+        components:
+            Anchor:
+                rightAnchorEnabled: true
+                rightAnchor: 210.000000
+                vCenterAnchorEnabled: true
+                vCenterAnchor: -100.000000
+            UIDataParamsComponent:
+                args:
+                    "text": "\"ModernTutorial/MouseShootHint\""
+    -   prototype: "Mouse/Mouse"
+        name: "Mouse"
+        classes: "clicked"
+        components:
+            Anchor:
+                rightAnchorEnabled: true
+                rightAnchor: 166.000000
+                vCenterAnchorEnabled: true
+                vCenterAnchor: 0.000000
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 88.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 164.000000

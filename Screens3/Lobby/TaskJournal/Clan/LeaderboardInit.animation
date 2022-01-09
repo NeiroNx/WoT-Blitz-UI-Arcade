@@ -1,0 +1,7 @@
+animation _INIT()
+{	
+    if (isDataLoaded)
+	{
+		ScrollToEnsureControlOnScreen("**/position" + str(week.playerLeaderboardPosition - 1), time=2.0, yPolicy=eScrollToControlPolicy.kCenter);
+	}
+}

@@ -1,0 +1,11 @@
+Header:
+    version: "111"
+StyleSheets:
+-   selectors:
+    - "#Button"
+    properties:
+        visible: false
+-   selectors:
+    - ".clicked #Button"
+    properties:
+        visible: true

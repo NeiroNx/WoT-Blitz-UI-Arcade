@@ -1,0 +1,43 @@
+Header:
+    version: 121
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/Notifications/Popups/KarmaRich.yaml"
+- "~res:/UI/Styles/ButtonSoundStyles.yaml"
+Controls:
+-   prototype: "KarmaRich/KarmaRich"
+    customClass: "UIKarmaComplaintNotification"
+    name: "KarmaComplaint"
+    components:
+        UIDataParamsComponent:
+            params:
+            - ["bool", "showDetailsButton", "false", "true"]
+            - ["string", "reasonKey", "\"\"", "\"Karma/Complaints/UnsportingBehaviour\""]
+    children:
+    -   path: "Body"
+        components:
+            LinearLayout:
+                padding: "10"
+        children: []
+    -   path: "Body/icon"
+        classes: "notification-icon-attention white-wild-sand-bg"
+    -   path: "Body/Content"
+        components:
+            SizePolicy:
+                horizontalFormula: "parent-155"
+        children: []
+    -   path: "Body/Content/Title"
+        components:
+            UITextComponent:
+                text: "hangarNotification/complaintReceived/header"
+                useRtlAlign: "USE_BY_SYSTEM"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+    -   path: "Body/Content/Description"
+        components:
+            RichContent: {}
+        bindings:
+        - ["RichContent.text", "format(localize(\"hangarNotification/complaintReceived/descr\"), { \"reason\" = localize(reasonKey); })"]
+    -   path: "Body/ActionButton"
+        bindings:
+        - ["visible", "showDetailsButton"]
+        children: []

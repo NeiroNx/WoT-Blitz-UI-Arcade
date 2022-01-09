@@ -1,0 +1,73 @@
+Header:
+    version: "83"
+ImportedPackages:
+- "~res:/UI/Screens/Fonts.yaml"
+- "~res:/UI/Screens/Lobby/Common/RichText.yaml"
+Prototypes:
+-   prototype: "RichText/RichText"
+    name: "Title"
+    components:
+        RichContent:
+            text: "Название"
+            baseClasses: "fs-50 bold text-color-white"
+        RichContentAliases0:
+            aliases: "text_blue,<span class=\"text-color-blue text1\" />;timer,<object name=\"Timer\" path=\"~res:/UI/Screens/Lobby/Comon/Timer.yaml\" prototype=\"Timer\" />;price,<object class=\"gold\" name=\"Price\" path=\"~res:/UI/Screens/Lobby/Common/Price.yaml\" prototype=\"Price\" />;player_name_with_tag,<object path=\"~res:/UI/Screens/Common/PlayerNameWithTag.yaml\" prototype=\"PlayerNameWithTag\" />;player_teams_header_text,<span class=\"header1\" />;clan_name_with_tag,<object path=\"~res:/UI/Screens/Common/ClanNameWithTag.yaml\" prototype=\"ClanNameWithTag\" />;player_name_with_tag_header1,<object path=\"~res:/UI/Screens/Common/PlayerNameWithTag.yaml\" prototype=\"PlayerNameWithTagHeader1\" />;clan_name_with_tag_header1,<object path=\"~res:/UI/Screens/Common/ClanNameWithTag.yaml\" prototype=\"ClanNameWithTagHeader1\" />;elite_vehicle_icon,<object control=\"EliteIcon\" path=\"~res:/UI/Screens/Lobby/Common/CommonIcons.yaml\" />;elite_premium_vehicle_icon,<object control=\"ElitePremiumIcon\" path=\"~res:/UI/Screens/Lobby/Common/CommonIcons.yaml\" />;fs-50-regular-op-70,<span class=\"fs-50 regular text-color-white-70\" />;fs-50-bold,<span class=\"fs-50 bold\" />"
+        SizePolicy:
+            verticalPolicy: "PercentOfChildrenSum"
+        FlowLayout:
+            hPadding: "0.000000"
+-   prototype: "RichText/RichText"
+    name: "RichText"
+    components:
+        RichContent:
+            text: "<text_blue>Put your text here</text_blue>"
+        RichContentAliases1:
+            aliases: "text1_white,<span class=\"text-color-white text1\" />;text1_blue,<span class=\"text-color-blue text1\" />;text1_red,<span class=\"text-color-red text1\" />;text1_gold,<span class=\"text-color-legendary text1\" />;text2_white,<span class=\"text-color-white text2\" />;text2_blue,<span class=\"text-color-blue text2\" />;text2_red,<span class=\"text-color-red text2\" />;text2_gold,<span class=\"text-color-legendary text2\" />;text2small_white,<span class=\"text-color-white text2-small\" />;text2small_blue,<span class=\"text-color-blue text2-small\" />;text2small_red,<span class=\"text-color-red text2-small\" />;text2small_gold,<span class=\"text-color-legendary text2-small\" />;h0,<span class=\"text-color-white header0\" />;h1,<span class=\"text-color-white header1\" />;h2,<span class=\"text-color-white header2\" />;h3,<span class=\"text-color-white header3\" />;h4,<span class=\"text-color-white header4\" />;tank_name,<span class=\"text-color-white header4\" />;premtank_name,<span class=\"text-color-legendary header4\" />;colltank_name,<span class=\"text-color-collectible header4\" />;"
+        RichContentAliases4:
+            aliases: "currency_gold,<object class=\"gold\" name=\"Price\" path=\"~res:/UI/Screens/Lobby/Common/Price.yaml\" prototype=\"Price\" />;currency_silver,<object class=\"credits\" name=\"Price\" path=\"~res:/UI/Screens/Lobby/Common/Price.yaml\" prototype=\"Price\" />;currency_freeXP,<object class=\"freeXP\" name=\"Price\" path=\"~res:/UI/Screens/Lobby/Common/Price.yaml\" prototype=\"Price\" />;currency_crewXP,<object class=\"experience\" name=\"Price\" path=\"~res:/UI/Screens/Lobby/Common/Price.yaml\" prototype=\"Price\" />;currency_XP,<object class=\"XP\" name=\"Price\" path=\"~res:/UI/Screens/Lobby/Common/Price.yaml\" prototype=\"Price\" />;currency_eliteXP,<object class=\"eliteXP\" name=\"Price\" path=\"~res:/UI/Screens/Lobby/Common/Price.yaml\" prototype=\"Price\" />;"
+        RichContentAliases5:
+            aliases: "tank_def_light,<object class=\"default light\" name=\"VehicleType\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"VehicleType\" />;tank_def_medium,<object class=\"default medium\" name=\"VehicleType\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"VehicleType\" />;tank_def_heavy,<object class=\"default heavy\" name=\"VehicleType\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"VehicleType\" />;tank_def_destroyer,<object class=\"default destroyer\" name=\"VehicleType\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"VehicleType\" />;tank_prem_light,<object class=\"prem light\" name=\"VehicleType\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"VehicleType\" />;tank_prem_medium,<object class=\"prem medium\" name=\"VehicleType\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"VehicleType\" />;tank_prem_heavy,<object class=\"prem heavy\" name=\"VehicleType\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"VehicleType\" />;tank_prem_destroyer,<object class=\"prem destroyer\" name=\"VehicleType\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"VehicleType\" />;tank_coll_light,<object class=\"coll light\" name=\"VehicleType\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"VehicleType\" />;tank_coll_medium,<object class=\"coll medium\" name=\"VehicleType\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"VehicleType\" />;tank_coll_heavy,<object class=\"coll heavy\" name=\"VehicleType\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"VehicleType\" />;tank_coll_destroyer,<object class=\"coll destroyer\" name=\"VehicleType\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"VehicleType\" />;"
+        RichContentAliases6:
+            aliases: "tank_def_lvl-1,<object class=\"default-lvl lvl-1\" name=\"VehicleLevel\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"VehicleLevel\" />;tank_def_lvl-2,<object class=\"default-lvl lvl-2\" name=\"VehicleLevel\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"VehicleLevel\" />;tank_def_lvl-3,<object class=\"default-lvl lvl-3\" name=\"VehicleLevel\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"VehicleLevel\" />;tank_def_lvl-4,<object class=\"default-lvl lvl-4\" name=\"VehicleLevel\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"VehicleLevel\" />;tank_def_lvl-5,<object class=\"default-lvl lvl-5\" name=\"VehicleLevel\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"VehicleLevel\" />;tank_def_lvl-6,<object class=\"default-lvl lvl-6\" name=\"VehicleLevel\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"VehicleLevel\" />;tank_def_lvl-7,<object class=\"default-lvl lvl-7\" name=\"VehicleLevel\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"VehicleLevel\" />;tank_def_lvl-8,<object class=\"default-lvl lvl-8\" name=\"VehicleLevel\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"VehicleLevel\" />;tank_def_lvl-9,<object class=\"default-lvl lvl-9\" name=\"VehicleLevel\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"VehicleLevel\" />;tank_def_lvl-10,<object class=\"default-lvl lvl-10\" name=\"VehicleLevel\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"VehicleLevel\" />;tank_prem_lvl-1,<object class=\"prem-lvl lvl-1\" name=\"VehicleLevel\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"VehicleLevel\" />;tank_prem_lvl-2,<object class=\"prem-lvl lvl-2\" name=\"VehicleLevel\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"VehicleLevel\" />;tank_prem_lvl-3,<object class=\"prem-lvl lvl-3\" name=\"VehicleLevel\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"VehicleLevel\" />;tank_prem_lvl-4,<object class=\"prem-lvl lvl-4\" name=\"VehicleLevel\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"VehicleLevel\" />;tank_prem_lvl-5,<object class=\"prem-lvl lvl-5\" name=\"VehicleLevel\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"VehicleLevel\" />;tank_prem_lvl-6,<object class=\"prem-lvl lvl-6\" name=\"VehicleLevel\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"VehicleLevel\" />;tank_prem_lvl-7,<object class=\"prem-lvl lvl-7\" name=\"VehicleLevel\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"VehicleLevel\" />;tank_prem_lvl-8,<object class=\"prem-lvl lvl-8\" name=\"VehicleLevel\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"VehicleLevel\" />;tank_prem_lvl-9,<object class=\"prem-lvl lvl-9\" name=\"VehicleLevel\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"VehicleLevel\" />;tank_prem_lvl-10,<object class=\"prem-lvl lvl-10\" name=\"VehicleLevel\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"VehicleLevel\" />;tank_coll_lvl-1,<object class=\"coll-lvl lvl-1\" name=\"VehicleLevel\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"VehicleLevel\" />;tank_coll_lvl-2,<object class=\"coll-lvl lvl-2\" name=\"VehicleLevel\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"VehicleLevel\" />;tank_coll_lvl-3,<object class=\"coll-lvl lvl-3\" name=\"VehicleLevel\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"VehicleLevel\" />;tank_coll_lvl-4,<object class=\"coll-lvl lvl-4\" name=\"VehicleLevel\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"VehicleLevel\" />;tank_coll_lvl-5,<object class=\"coll-lvl lvl-5\" name=\"VehicleLevel\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"VehicleLevel\" />;tank_coll_lvl-6,<object class=\"coll-lvl lvl-6\" name=\"VehicleLevel\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"VehicleLevel\" />;tank_coll_lvl-7,<object class=\"coll-lvl lvl-7\" name=\"VehicleLevel\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"VehicleLevel\" />;tank_coll_lvl-8,<object class=\"coll-lvl lvl-8\" name=\"VehicleLevel\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"VehicleLevel\" />;tank_coll_lvl-9,<object class=\"coll-lvl lvl-9\" name=\"VehicleLevel\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"VehicleLevel\" />;tank_coll_lvl-10,<object class=\"coll-lvl lvl-10\" name=\"VehicleLevel\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"VehicleLevel\" />;"
+        RichContentAliases7:
+            aliases: "flag_ussr,<object class=\"flag-ussr\" name=\"NationFlag\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"NationFlag\" />;flag_usa,<object class=\"flag-usa\" name=\"NationFlag\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"NationFlag\" />;flag_china,<object class=\"flag-china\" name=\"NationFlag\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"NationFlag\" />;flag_japan,<object class=\"flag-japan\" name=\"NationFlag\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"NationFlag\" />;flag_france,<object class=\"flag-france\" name=\"NationFlag\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"NationFlag\" />;flag_germany,<object class=\"flag-germany\" name=\"NationFlag\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"NationFlag\" />;flag_uk,<object class=\"flag-uk\" name=\"NationFlag\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"NationFlag\" />;flag_other,<object class=\"flag-other\" name=\"NationFlag\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"NationFlag\" />;flag_finland,<object class=\"flag-finland\" name=\"NationFlag\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"NationFlag\" />;flag_poland,<object class=\"flag-poland\" name=\"NationFlag\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"NationFlag\" />;flag_sweden,<object class=\"flag-sweden\" name=\"NationFlag\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"NationFlag\" />;flag_italy,<object class=\"flag-italy\" name=\"NationFlag\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"NationFlag\" />;flag_australia,<object class=\"flag-australia\" name=\"NationFlag\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"NationFlag\" />;flag_canada,<object class=\"flag-canada\" name=\"NationFlag\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"NationFlag\" />;flag_czech,<object class=\"flag-czech\" name=\"NationFlag\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"NationFlag\" />;flag_european,<object class=\"flag-european\" name=\"NationFlag\" path=\"~res:/UI/Screens/Lobby/Common/VehicleType.yaml\" prototype=\"NationFlag\" />"
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Lobby/Common/RichText.yaml;~res:/UI/Screens/Fonts.yaml"
+-   class: "UIControl"
+    name: "DescriptionContainer"
+    input: false
+    classes: "color-red-2"
+    components:
+        Background:
+            drawType: "DRAW_FILL"
+        SizePolicy:
+            horizontalPolicy: "Formula"
+            horizontalFormula: "maxChild + 16"
+            verticalPolicy: "Formula"
+            verticalFormula: "maxChild + 6"
+        StyleSheet:
+            styles: "~res:/UI/Styles/ColorStyles.yaml"
+    children:
+    -   class: "UIControl"
+        name: "Description"
+        input: false
+        classes: "header5 color=text-color-white"
+        components:
+            UITextComponent:
+                text: "Offer Type"
+                colorInheritType: "COLOR_IGNORE_PARENT"
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 8.000000
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens/Fonts.yaml"
+-   prototype: "RichText"
+    name: "DetailedDescription"
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"

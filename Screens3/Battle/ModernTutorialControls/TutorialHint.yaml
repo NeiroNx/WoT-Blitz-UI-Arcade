@@ -1,0 +1,100 @@
+Header:
+    version: 115
+Prototypes:
+-   class: "UIControl"
+    name: "Hint"
+    input: false
+    components:
+        LinearLayout:
+            dynamicPadding: true
+            spacing: -8.000000
+        SizePolicy:
+            horizontalPolicy: "Formula"
+            horizontalFormula: "maxChild + 32"
+            verticalPolicy: "Formula"
+            verticalFormula: "maxChild + 32"
+        UIDataParamsComponent:
+            params:
+            - ["eOrientation", "orientation", "eOrientation.TopDown", "eOrientation.TopDown"]
+            - ["string", "key", "\"\"", "\"hello\""]
+    bindings:
+    - ["LinearLayout.orientation", "orientation"]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        position: [16.000000, 16.000000]
+        classes: "grey-shark-70-bg"
+        components:
+            Background:
+                drawType: "DRAW_FILL"
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                leftRightStretchCap: 8.000000
+                topBottomStretchCap: 8.000000
+            UIRoundedCornersComponent:
+                radius: "4"
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 16.000000
+                rightAnchorEnabled: true
+                rightAnchor: 16.000000
+                topAnchorEnabled: true
+                topAnchor: 16.000000
+                bottomAnchorEnabled: true
+                bottomAnchor: 16.000000
+            LinearLayout:
+                orientation: "TopDown"
+                padding: "16"
+                spacing: 0.000000
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "maxChild + 32"
+                verticalPolicy: "PercentOfChildrenSum"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+        children:
+        -   class: "UIControl"
+            name: "Text"
+            input: false
+            components:
+                RichContent:
+                    baseClasses: "t-old-text2-small color=white-wild-sand-text"
+                RichContentAliases0:
+                    aliases:
+                    - ["highlight", "<span class=\"t-old-text2-small orange-orange-peel-text\" />"]
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    horizontalMax: 248.000000
+                    verticalPolicy: "PercentOfChildrenSum"
+                FlowLayout:
+                    hSpacing: 4.000000
+                    useRtl: true
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/OldFont.style.yaml;~res:/UI/Screens3/Color.style.yaml;"
+            bindings:
+            - ["RichContent.text", "localize(key)"]
+    -   class: "UIControl"
+        name: "Arrow"
+        input: false
+        classes: "grey-shark-50-bg"
+        components:
+            Background:
+                drawType: "DRAW_FILL"
+                spriteModification: ["FLIP_VERTICAL"]
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                align: []
+            UIRoundedCornersComponent:
+                radius: "8"
+                isRound: false
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 16.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 16.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"

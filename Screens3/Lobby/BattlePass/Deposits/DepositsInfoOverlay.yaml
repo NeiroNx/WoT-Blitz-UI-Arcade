@@ -1,0 +1,99 @@
+Header:
+    version: 127
+Prototypes:
+-   class: "UIControl"
+    name: "DepositInfoOverlay"
+    size: [1000.000000, 900.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            events:
+            - "BACK_EVENT"
+            - "OVERLAY_OPEN_FINISH"
+            - "CLOSE_OVERLAY"
+        UIDataLocalBindingsComponent:
+            data:
+            - ["string", "title", "\"BattlePass/SafeDeposit/InfoScreen/Header\""]
+        UIChildComponent0:
+            prototypePath: "~res:/UI/Screens3/Lobby/Common/Overlay/Overlay.yaml"
+            args:
+                "content": "InfoContent"
+                "playerName": "localize(title)"
+            eventActions:
+            - ["OVERLAY_OPEN_FINISH", "OVERLAY_OPEN_FINISH", ""]
+            - ["BACK_EVENT", "BACK_EVENT", ""]
+Slots:
+-   class: "UIControl"
+    name: "InfoContent"
+    size: [1200.000000, 4684.000000]
+    input: false
+    components:
+        Anchor:
+            hCenterAnchorEnabled: true
+        LinearLayout:
+            orientation: "TopDown"
+        SizePolicy:
+            horizontalPolicy: "Formula"
+            horizontalFormula: "when parent < 1200 -> 800, 1040"
+            verticalPolicy: "PercentOfChildrenSum"
+    children:
+    -   class: "UIControl"
+        name: "spacer"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 50.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 60.000000
+    -   class: "UIControl"
+        name: "question0"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfChildrenSum"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/BattlePass/Deposits/DepositInfoViewBlock.yaml"
+                args:
+                    "title": "\"BattlePass/SafeDeposit/InfoScreen/EarningTerms/Title\""
+                    "description": "\"BattlePass/SafeDeposit/InfoScreen/EarningTerms/Description\""
+    -   class: "UIControl"
+        name: "question1"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfChildrenSum"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/BattlePass/Deposits/DepositInfoViewBlock.yaml"
+                args:
+                    "title": "\"BattlePass/SafeDeposit/InfoScreen/GoldSafe/Title\""
+                    "description": "\"BattlePass/SafeDeposit/InfoScreen/GoldSafe/Description\""
+    -   class: "UIControl"
+        name: "question2"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfChildrenSum"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/BattlePass/Deposits/DepositInfoViewBlock.yaml"
+                args:
+                    "title": "\"BattlePass/SafeDeposit/InfoScreen/IncreaseLimit/Title\""
+                    "description": "\"BattlePass/SafeDeposit/InfoScreen/IncreaseLimit/Description\""
+    -   class: "UIControl"
+        name: "question3"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfChildrenSum"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/BattlePass/Deposits/DepositInfoViewBlock.yaml"
+                args:
+                    "title": "\"BattlePass/SafeDeposit/InfoScreen/ClaimReward/Title\""
+                    "description": "\"BattlePass/SafeDeposit/InfoScreen/ClaimReward/Description\""

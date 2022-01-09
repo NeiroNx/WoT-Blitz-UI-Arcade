@@ -1,0 +1,9 @@
+action SCREEN_SIZE_CHANGED(vector2 size)
+{
+    ChangeData(screenSize, size);
+}
+
+action CONTENT_SIZE_CHANGED(vector2 size)
+{
+    ChangeData(contentSize, size);
+}

@@ -1,0 +1,45 @@
+Header:
+    version: "83"
+ImportedPackages:
+- "~res:/UI/Screens3/Common/Touch.style.yaml"
+- "~res:/UI/Screens3/Common/Hover.style.yaml"
+StyleSheets:
+-   selectors:
+    - ".achievement-item.default * .content-area"
+    properties:
+        opacity-opacity:
+            value: 1.000000
+            transitionTime: 0.080000
+            transitionFunction: "EASE_IN_EASY_OUT"
+-   selectors:
+    - ".achievement-item.default:pressed_inside * .content-area"
+    - ".achievement-item.battle-results.Desktop:pressed_inside:hover * .content-area"
+    - ".achievement-item.battle-results:pressed_inside * .content-area"
+    properties:
+        opacity-opacity:
+            value: 0.700000
+            transitionTime: 0.080000
+            transitionFunction: "EASE_IN_EASY_OUT"
+-   selectors:
+    - ".achievement-item.battle-results.Desktop:pressed_inside * .content-area"
+    properties:
+        scale: [1.000000, 1.000000]
+-   selectors:
+    - ".achievement-item.battle-results * .hover"
+    properties:
+        visible: false
+-   selectors:
+    - ".achievement-item.battle-results * .battle-results-hover"
+    - ".achievement-item.battle-results:pressed_inside:hover * .battle-results-hover"
+    properties:
+        anchor-topAnchor:
+            value: 0.000000
+            transitionTime: 0.150000
+            transitionFunction: "SINE_OUT"
+-   selectors:
+    - ".achievement-item.battle-results:hover * .battle-results-hover"
+    properties:
+        anchor-topAnchor:
+            value: -8.000000
+            transitionTime: 0.150000
+            transitionFunction: "SINE_OUT"

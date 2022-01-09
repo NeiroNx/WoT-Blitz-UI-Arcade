@@ -1,0 +1,59 @@
+Header:
+    version: 127
+Prototypes:
+-   class: "UIControl"
+    name: "HorizontalDividerWithCaption"
+    size: [300.000000, 27.000000]
+    input: false
+    components:
+        Anchor:
+            hCenterAnchorEnabled: true
+        LinearLayout:
+            spacing: 16.000000
+            useRtl: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfMaxChild"
+        UIDataParamsComponent:
+            params:
+            - ["string", "text", "\"#Caption\"", "\"#Caption\""]
+    children:
+    -   class: "UIControl"
+        name: "LeftLine"
+        size: [32.000000, 1.000000]
+        input: false
+        classes: "white-wild-sand-15-bg"
+        components:
+            Background: {}
+            Anchor:
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+    -   class: "UIControl"
+        name: "Caption"
+        input: false
+        classes: "t-caps bold color=white-wild-sand-text"
+        components:
+            UITextComponent: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml"
+        bindings:
+        - ["UITextComponent.text", "text"]
+    -   class: "UIControl"
+        name: "RightLine"
+        size: [32.000000, 1.000000]
+        input: false
+        classes: "white-wild-sand-15-bg"
+        components:
+            Background: {}
+            Anchor:
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"

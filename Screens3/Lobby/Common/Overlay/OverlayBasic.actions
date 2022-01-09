@@ -1,0 +1,18 @@
+action ScreenSizeChanged(vector2 size)
+{
+	if (not (int(size.X) == int(screenSize.X)))
+	{
+    	ChangeData(screenSize, size);
+        Event("OVERLAY_WIDTH_CHANGED", arg1 = int(size.X));
+    }
+    if (not (int(size.Y) == int(screenSize.Y)))
+    {
+        ChangeData(screenSize, size);
+        Event("OVERLAY_HEIGHT_CHANGED", arg1 = int(size.Y));
+    }
+}
+
+action UpdateCurrentHeight(int height)
+{
+    ChangeData(currentResultH, height);
+}

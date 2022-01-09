@@ -1,0 +1,108 @@
+Header:
+    version: 127
+ImportedPackages:
+- "~res:/UI/Screens3/Battle/ModernTutorialHints/TutorialHintBasic.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "TouchCameraHint"
+    size: [1024.000000, 768.000000]
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens3/Battle/ModernTutorialHints/FadeIn.animation;Disappear,~res:/UI/Screens3/Battle/ModernTutorialHints/FadeOut.animation"
+        UIOpacityComponent: {}
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+    children:
+    -   prototype: "TutorialHintBasic/HintContainer"
+        name: "HintContainer"
+        classes: "ArrowBottom"
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+                vCenterAnchor: -150.000000
+            UIDataParamsComponent:
+                args:
+                    "text": "\"ModernTutorial/TouchCameraHint\""
+    -   class: "UIControl"
+        name: "Control"
+        size: [383.000000, 81.000000]
+        input: false
+        components:
+            UIOpacityComponent: {}
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+                vCenterAnchor: -90.000000
+        children:
+        -   class: "UIControl"
+            name: "TouchCameraHint"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                UIOpacityComponent: {}
+                LinearLayout:
+                    orientation: "TopDown"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfChildrenSum"
+            children:
+            -   class: "UIControl"
+                name: "SlideArrow"
+                size: [383.000000, 810.000000]
+                input: false
+                components:
+                    LinearLayout:
+                        spacing: -4.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        verticalPolicy: "PercentOfMaxChild"
+                children:
+                -   class: "UIControl"
+                    name: "ArrowSlide"
+                    size: [32.000000, 32.000000]
+                    input: false
+                    components:
+                        Background:
+                            drawType: "DRAW_SCALE_PROPORTIONAL_ONE"
+                            sprite: "~res:/Gfx/Battle/BattleHints/hand/ArrowSlaid"
+                        SizePolicy:
+                            horizontalPolicy: "FixedSize"
+                            horizontalValue: 115.000000
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 81.000000
+                -   class: "UIControl"
+                    name: "ArrowSlideTail"
+                    size: [32.000000, 32.000000]
+                    input: false
+                    components:
+                        Background:
+                            drawType: "DRAW_SCALE_PROPORTIONAL_ONE"
+                            sprite: "~res:/Gfx/Battle/BattleHints/hand/ArrowSlaidTail"
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "FixedSize"
+                            horizontalValue: 272.000000
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 31.000000
+        -   class: "UIControl"
+            name: "JoypadFinger"
+            position: [383.000000, 20.000000]
+            size: [200.000000, 352.000000]
+            pivot: [0.500000, 0.000000]
+            input: false
+            components:
+                UIAnimationComponent:
+                    animations: "_INIT,~res:/UI/Screens3/Battle/ModernTutorialHints/ControlHints/FingerCameraAnimation.animation"
+                Background:
+                    drawType: "DRAW_ALIGNED"
+                    sprite: "~res:/Gfx/Battle/BattleHints/hand/HandSlaid"
+                UIOpacityComponent: {}
+CustomData:
+    Guides:
+        TouchCameraHint:
+            Horizontal:
+            - 255.000000

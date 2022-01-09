@@ -1,0 +1,58 @@
+Header:
+    version: "80"
+Controls:
+-   class: "UIControl"
+    name: "GameModeAvailabilityGroup"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfMaxChild"
+        UIAttachLayoutSlaveComponent:
+            attachId: "BATTLE_BUTTON"
+            masterAlign: "BottomCenter"
+            slaveAlign: "TopCenter"
+            additionalOffset: [0.000000, 8.000000]
+        UIDataParamsComponent:
+            params:
+            - ["bool", "isSeasonMismatch", "false", "false"]
+            - ["bool", "isTraining", "false", "false"]
+            - ["bool", "isVehicleLevelMismatch", "false", "true"]
+            - ["string", "availabilityMessage", "\"Mode is available\"", "\"Mode is available\""]
+    bindings:
+    - ["visible", "(isSeasonMismatch or isVehicleLevelMismatch) and not isTraining"]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        classes: "black-50-bg"
+        components:
+            Background:
+                drawType: "DRAW_STRETCH_BOTH"
+                sprite: "~res:/Gfx/Lobby/backgrounds/bg_r8.psd"
+                leftRightStretchCap: 8.000000
+                topBottomStretchCap: 8.000000
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "maxChild + 32"
+                verticalPolicy: "Formula"
+                verticalFormula: "maxChild + 32"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+        children:
+        -   class: "UIControl"
+            name: "AvailabilityMessage"
+            input: false
+            classes: "t-body bold white-wild-sand-text"
+            components:
+                UITextComponent: {}
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+            bindings:
+            - ["UITextComponent.text", "availabilityMessage"]

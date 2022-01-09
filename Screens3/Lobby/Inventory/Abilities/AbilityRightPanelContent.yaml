@@ -1,0 +1,53 @@
+Header:
+    version: "85"
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/RichText.yaml"
+- "~res:/UI/Screens3/Lobby/Inventory/Common/RightPanelContent.yaml"
+- "~res:/UI/Screens3/Lobby/Inventory/Common/RightPanelHeader.yaml"
+Prototypes:
+-   prototype: "RightPanelContent/RightPanelContent"
+    name: "RightPanelContent"
+    components:
+        UIDataParamsComponent:
+            params:
+            - ["AbilityItem", "item", "null", "{ }"]
+    children:
+    -   prototype: "RightPanelHeader/RightPanelHeader"
+        name: "RightPanelHeader"
+        components:
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Lobby/Inventory/Abilities/AbilityItemImage.style.yaml"
+        bindings:
+        - ["classes", "\"ability_item \" + item.abilityTypeName"]
+        children:
+        -   path: "ImageWrapper/Img"
+            classes: "ability-img"
+        -   path: "SubTitle"
+            components:
+                UITextComponent: {}
+            bindings:
+            - ["UITextComponent.text", "item.title"]
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfChildrenSum"
+        children:
+        -   prototype: "RichText/RichText"
+            name: "RichText"
+            components:
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "min(parentRest, childrenSum)"
+                UIDataParamsComponent:
+                    args:
+                        "baseFontSize": "\"t-body\""
+                        "baseFontStyle": "\"regular\""
+                        "baseFontColor": "\"white-wild-sand-50-text\""
+                        "key": "item.description"
+                        "resource1Model": "null"
+                        "resource2Model": "null"
+                        "resource3Model": "null"
+                        "resource4Model": "null"

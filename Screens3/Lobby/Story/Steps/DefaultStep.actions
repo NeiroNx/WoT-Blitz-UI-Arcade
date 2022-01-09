@@ -1,0 +1,63 @@
+action EXPAND(float time)
+{
+    parallel
+    {
+        ChangeProperty("**/Step/Content", "SizePolicy", "horizontalValue", sizeMax.X, time, EASE_OUT);
+        ChangeProperty("**/Step/Content", "SizePolicy", "verticalValue", sizeMax.Y, time, EASE_OUT);
+
+        ChangeProperty("**/Repeats", "SizePolicy", "horizontalValue", repeatsSizeMax.X, time, EASE_OUT);
+        ChangeProperty("**/Repeats", "SizePolicy", "verticalValue", repeatsSizeMax.Y, time, EASE_OUT);
+
+        ChangeProperty("**/DetailsButton/Button", "SizePolicy", "verticalValue", 48, time, EASE_OUT);
+
+        Opacity("**/DetailsButton", 1.0, time, LINEAR);
+        Opacity("**/BgExpand", 1.0, time, LINEAR);
+        Opacity("**/BgShrink", 0.0, time, LINEAR);
+
+        Opacity("**/Price", 0.0, time, LINEAR);
+        Opacity("**/Progress", 1.0, time, LINEAR);
+    }
+}
+
+action SHRINK(float time)
+{
+    parallel
+    {
+        ChangeProperty("**/Step/Content", "SizePolicy", "horizontalValue", sizeMin.X, time, EASE_OUT);
+        ChangeProperty("**/Step/Content", "SizePolicy", "verticalValue", sizeMin.Y, time, EASE_OUT);
+
+        ChangeProperty("**/Repeats", "SizePolicy", "horizontalValue", repeatsSizeMin.X, time, EASE_OUT);
+        ChangeProperty("**/Repeats", "SizePolicy", "verticalValue", repeatsSizeMin.Y, time, EASE_OUT);
+
+        ChangeProperty("**/DetailsButton/Button", "SizePolicy", "verticalValue", 0, time, EASE_OUT);
+
+        Opacity("**/DetailsButton", 0.0, time, LINEAR);
+        Opacity("**/BgShrink", 1.0, time, LINEAR);
+        Opacity("**/BgExpand", 0.0, time, LINEAR);
+
+        Opacity("**/Price", 1.0, time, LINEAR);
+        Opacity("**/Progress", 0.0, time, LINEAR);
+    }
+}
+
+action HIGHLIGHT(float time)
+{
+    Opacity("**/Highlight", 1.0, time, LINEAR);
+}
+
+action LOWLIGHT(float time)
+{
+    Opacity("**/Highlight", 0.0, time, LINEAR);
+}
+
+action SELECT(int id)
+{
+    if (not model.isSelected)
+    {
+        Event("SELECT_STEP", arg1 = id);
+    }
+    else
+    {
+        Event("SHOW_STEP_INFO", arg1 = id);
+    }
+}

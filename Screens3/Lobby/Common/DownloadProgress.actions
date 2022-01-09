@@ -1,0 +1,19 @@
+action ReconnectAnimation(int count)
+{
+	parallel
+	{
+		sequence 
+		{
+			Rotate ("**/Bar", 0);
+			Rotate ("**/Bar", 360, reconnectAnimationTime, SINE_IN_SINE_OUT);
+		}
+	}
+	if (model.reconnecting and count < reconnectMaxRotateCount)
+	{
+		Event("ReconnectAnimation", arg1 = count + 1);
+	}
+	else
+	{
+		Event("ReconnectAnimationFinished");
+	}
+}

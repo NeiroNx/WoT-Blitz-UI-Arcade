@@ -1,0 +1,7 @@
+animation FadeInBackButtonNew {
+	sequence {
+		Opacity("**/BackButtonNew/TapArea", opacity=0, time=0.0, interpolation=EASE_IN_EASE_OUT);
+		ChangeProperty("**/BackButtonNew", "", "visible", true);
+		Opacity("**/BackButtonNew/TapArea", opacity=1, time=0.6, interpolation=EASE_IN_EASE_OUT);
+	}
+};

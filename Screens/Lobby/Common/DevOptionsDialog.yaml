@@ -1,0 +1,135 @@
+Header:
+    version: 130
+ImportedPackages:
+- "~res:/UI/Screens/Common.yaml"
+- "~res:/UI/Screens/Common/StyledButton.yaml"
+Controls:
+-   class: "UIControl"
+    customClass: "GameOptionsUI"
+    name: "DevOptionsDialog"
+    size: [1024.000000, 768.000000]
+    components:
+        Anchor:
+            enabled: true
+            leftAnchorEnabled: true
+            rightAnchorEnabled: true
+            topAnchorEnabled: true
+            bottomAnchorEnabled: true
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Lobby/Common/DevOptionsDialog.yaml"
+    children:
+    -   class: "UIControl"
+        customClass: "DraggableDialog"
+        name: "optionsDialog"
+        position: [202.000000, 19.200012]
+        size: [620.000000, 729.599976]
+        components:
+            Background:
+                drawType: "DRAW_STRETCH_BOTH"
+                sprite: "~res:/Gfx/UI/CommonUIElements/PopupBackMiddle"
+                leftRightStretchCap: 5.000000
+                topBottomStretchCap: 5.000000
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                verticalPolicy: "PercentOfParent"
+                verticalValue: 95.000000
+        children:
+        -   class: "UIControl"
+            name: "optionsList"
+            position: [15.000000, 40.000000]
+            size: [590.000000, 589.599976]
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 15.000000
+                    rightAnchorEnabled: true
+                    rightAnchor: 15.000000
+                    topAnchorEnabled: true
+                    topAnchor: 40.000000
+                    bottomAnchorEnabled: true
+                    bottomAnchor: 100.000000
+                UIIdentifierComponent:
+                    id: "dev_options_list"
+            children:
+            -   class: "UIList"
+                name: "PropertiesList"
+                orientation: "ORIENTATION_VERTICAL"
+                components:
+                    Anchor:
+                        leftAnchorEnabled: true
+                        rightAnchorEnabled: true
+                        topAnchorEnabled: true
+                        bottomAnchorEnabled: true
+            -   prototype: "Common/VerticalScrollBar"
+                name: "Scroll"
+                components:
+                    Anchor:
+                        rightAnchorEnabled: true
+                        rightAnchor: -10.000000
+                        topAnchorEnabled: true
+                        bottomAnchorEnabled: true
+        -   class: "UIStaticText"
+            name: "titleText"
+            size: [620.000000, 40.000000]
+            input: false
+            classes: "header3 text-color-white"
+            components:
+                Background:
+                    align: ["LEFT", "TOP"]
+                UITextComponent:
+                    text: "Options"
+                    fontName: "WarHeliosCondC_Bold_21"
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 0.000000
+                    rightAnchorEnabled: true
+                    rightAnchor: 0.000000
+                    topAnchorEnabled: true
+                    topAnchor: 0.000000
+        -   prototype: "StyledButton/StyledButton"
+            name: "cancelButton"
+            size: [180.000000, 70.000000]
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 15.000000
+                    bottomAnchorEnabled: true
+                    bottomAnchor: 15.000000
+            children:
+            -   path: "Caption"
+                components:
+                    UITextComponent:
+                        text: "Cancel"
+        -   prototype: "StyledButton/StyledButton"
+            name: "clearButton"
+            size: [180.000000, 70.000000]
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                    bottomAnchor: 15.000000
+            children:
+            -   path: "Caption"
+                components:
+                    UITextComponent:
+                        text: "Clear"
+        -   prototype: "StyledButton/StyledButton"
+            name: "okButton"
+            size: [180.000000, 70.000000]
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+                    rightAnchor: 15.000000
+                    bottomAnchorEnabled: true
+                    bottomAnchor: 15.000000
+                UIIdentifierComponent:
+                    id: "dev_options_ok_button"
+            children:
+            -   path: "Caption"
+                components:
+                    UITextComponent:
+                        text: "OK"

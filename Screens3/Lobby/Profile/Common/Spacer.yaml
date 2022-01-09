@@ -1,0 +1,12 @@
+Header:
+    version: "63"
+Prototypes:
+-   class: "UIControl"
+    name: "Spacer"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "FixedSize"
+            verticalValue: 22.000000

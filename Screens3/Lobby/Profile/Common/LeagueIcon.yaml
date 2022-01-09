@@ -1,0 +1,58 @@
+Header:
+    version: "105"
+Prototypes:
+-   class: "UIControl"
+    name: "LeagueIcon"
+    input: false
+    components:
+        Anchor:
+            hCenterAnchorEnabled: true
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 144.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 144.000000
+        UIDataParamsComponent:
+            params:
+            - ["bool", "showAnimation", "true", "true"]
+            - ["eLeague", "league", "eLeague.NO_LEAGUE", "eLeague.GOLD"]
+        UIDataLocalsComponent:
+            locals:
+            - ["bool", "showParticles", "showAnimation and league != eLeague.NO_LEAGUE"]
+            - ["string", "icon", "when league == eLeague.NO_LEAGUE -> \"~res:/Gfx/Lobby/leagues/league_icon_calibration_l\", when league == eLeague.BRONZE -> \"~res:/Gfx/Lobby/leagues/league_icon_bronze_l\", when league == eLeague.SILVER -> \"~res:/Gfx/Lobby/leagues/league_icon_silver_l\", when league == eLeague.GOLD -> \"~res:/Gfx/Lobby/leagues/league_icon_gold_l\", when league == eLeague.PLATINUM -> \"~res:/Gfx/Lobby/leagues/league_icon_platinum_l\", when league == eLeague.DIAMOND -> \"~res:/Gfx/Lobby/leagues/league_icon_brilliant_l\", \"~res:/Gfx/Lobby/leagues/league_icon_no-league\""]
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens3/Lobby/Profile/Common/LeagueInfoPrototype.yaml"
+    children:
+    -   class: "UIParticles"
+        name: "Animation"
+        scale: [1.200000, 1.200000]
+        pivot: [0.500000, 0.500000]
+        input: false
+        effectPath: "~res:/3d/FX/UI/player_profile_icon.sc2"
+        autoStart: true
+        startDelay: 2.000000
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        bindings:
+        - ["visible", "showParticles"]
+    -   class: "UIControl"
+        name: "LeagueIcon"
+        input: false
+        components:
+            UITextureComponent:
+                drawType: "DRAW_SCALE_PROPORTIONAL_ONE"
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        bindings:
+        - ["UITextureComponent.spritePath", "icon"]

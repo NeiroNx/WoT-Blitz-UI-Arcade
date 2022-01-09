@@ -1,0 +1,56 @@
+Header:
+    version: 140
+Prototypes:
+-   class: "UIControl"
+    name: "Big"
+    size: [160.000000, 160.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIAttachLayoutMasterComponent: {}
+        UIDataParamsComponent:
+            params:
+            - ["ResourceDetailed", "resource", "{ }", "{ \"type\" = ResourceType.vehicle; }"]
+            - ["control", "fx", "null", "null"]
+            - ["control", "overlay", "null", "null"]
+            - ["string", "attachId", "\"\"", "\"\""]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["bool", "isBasicResource", "resource.type == ResourceType.gold or resource.type == ResourceType.free_xp or resource.type == ResourceType.elite_xp or resource.type == ResourceType.premium or resource.type == ResourceType.xp or resource.type == ResourceType.tankmenXP or resource.type == ResourceType.credits or resource.type == ResourceType.slots or resource.type == ResourceType.equipment_slots"]
+    bindings:
+    - ["UIAttachLayoutMasterComponent.attachId", "attachId"]
+    children:
+    -   class: "UIControl"
+        name: "ContentHolder"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                childType: "kPrototype"
+                condition: "resource.type == ResourceType.stuff and not isNull(resource.stuff)"
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/Detailed/StuffBig.yaml"
+                args:
+                    "fx": "fx"
+                    "overlay": "overlay"
+                    "stuff": "resource.stuff"
+            UIChildComponent1:
+                childType: "kPrototype"
+                condition: "resource.type == ResourceType.vehicle"
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/Detailed/VehicleBig.yaml"
+                args:
+                    "fx": "fx"
+                    "overlay": "overlay"
+                    "vehicle": "resource.vehicle"
+            UIChildComponent2:
+                childType: "kPrototype"
+                condition: "isBasicResource and not isNull(resource.basic)"
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/Detailed/BasicBig.yaml"
+                args:
+                    "fx": "fx"
+                    "overlay": "overlay"
+                    "type": "resource.type"
+                    "basic": "resource.basic"

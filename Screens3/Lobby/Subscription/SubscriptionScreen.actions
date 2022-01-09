@@ -1,0 +1,4 @@
+action ScrollToCurrentStage
+{
+    Scroll ("**/HorizontalScrollView/StagesScrollView", (stageControlWidth + stagesSpacing) * lobby.subscription.currentStageIndex, 0, 2);
+}

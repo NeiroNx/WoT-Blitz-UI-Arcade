@@ -1,0 +1,80 @@
+Header:
+    version: 140
+ImportedPackages:
+- "~res:/UI/Screens/Battle/EquipmentItemControl.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "consumablesPanel"
+    size: [64.000000, 366.000000]
+    pivot: [1.000000, 0.500000]
+    input: false
+    classes: "intersecting_with_chat_commands"
+    components:
+        Background:
+            colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 64.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 315.000000
+        StyleSheet:
+            styles: "~res:/UI/Screens/Battle/Styles/ConsumablesPanelStyles.yaml"
+    children:
+    -   class: "UIControl"
+        name: "scalableContent"
+        size: [64.000000, 346.000000]
+        pivot: [1.000000, 0.500000]
+        input: false
+        components:
+            Background:
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+            Anchor:
+                rightAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                orientation: "TopDown"
+                padding: "10.000000"
+                spacing: -5.000000
+            SizePolicy:
+                verticalPolicy: "PercentOfChildrenSum"
+        children:
+        -   prototype: "EquipmentItemControl/EquipmentItemControl"
+            name: "equipment0"
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+            children:
+            -   path: "iconContainer/icon"
+                components:
+                    UIAttachLayoutMasterComponent:
+                        attachId: "eq_0"
+        -   prototype: "EquipmentItemControl/EquipmentItemControl"
+            name: "equipment1"
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+            children:
+            -   path: "iconContainer/icon"
+                components:
+                    UIAttachLayoutMasterComponent:
+                        attachId: "eq_1"
+        -   prototype: "EquipmentItemControl/EquipmentItemControl"
+            name: "equipment2"
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+            children:
+            -   path: "iconContainer/icon"
+                components:
+                    UIAttachLayoutMasterComponent:
+                        attachId: "eq_2"
+        -   prototype: "EquipmentItemControl/EquipmentItemControl"
+            name: "equipment3"
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+        -   prototype: "EquipmentItemControl/EquipmentItemControl"
+            name: "equipment4"
+            components:
+                Anchor:
+                    rightAnchorEnabled: true

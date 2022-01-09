@@ -1,0 +1,514 @@
+Header:
+    version: 128
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/IconButton.yaml"
+- "~res:/UI/Screens3/Lobby/Common/Slider.yaml"
+- "~res:/UI/Screens3/Lobby/Inventory/Ammo/AmmoInfoLine.yaml"
+- "~res:/UI/Screens3/Lobby/Common/Resource/Currency.yaml"
+- "~res:/UI/Screens3/Common/DiscountLabel.yaml"
+- "~res:/UI/Screens3/Lobby/Common/SliderThumb.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "AmmoSlider"
+    size: [900.000000, 96.000000]
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfMaxChild"
+        UIDataParamsComponent:
+            params:
+            - ["InventoryAmmoModel", "ammoModel", "null", "{ \"maxAmmo\" = 30; \"freeSpace\" = 10; }"]
+            - ["InventoryAmmoSlot", "slot", "null", "{ \"currentAmmo\" = 5; \"iconType\" = \"he\"; \"iconTitle\" = \"he\"; \"title\" = \"HE\"; \"price\" = { }; \"discountValue\" = 0.250000; \"hasGold\" = true; }"]
+            - ["TutorialDataModel", "tutorialData", "null", "{ }"]
+            - ["string", "taskJournalLessonMasterId", "\"\"", "\"\""]
+            events:
+            - "ON_SLIDER_EDITING_FINISHED(float value, int index)"
+            - "ON_SLIDER_TOUCHED(int index)"
+            - "ON_SLIDER_CHANGED(float value, int index)"
+            - "ON_SLIDER_PLUS(int index)"
+            - "ON_SLIDER_MINUS(int index)"
+            - "ON_SLIDER_CONVERT"
+            - "ON_SHELL_ICON_PRESSED"
+        UIDataLocalVarsComponent:
+            data:
+            - ["bool", "needAnimationStop", "false"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["eTutorialHighlights", "valueHighlightId", "when (not slot.conversionAvailable and not slot.isExplosive) -> eTutorialHighlights.kNormalAmmoValue, when (slot.conversionAvailable and not slot.isExplosive) -> eTutorialHighlights.kGoldAmmoValue, when (not slot.conversionAvailable and slot.isExplosive) -> eTutorialHighlights.kExplosiveAmmoValue, eTutorialHighlights.kUnknown"]
+            - ["eTutorialHighlights", "infoHighlightId", "when (not slot.conversionAvailable and not slot.isExplosive) -> eTutorialHighlights.kNormalAmmoInfo, when (slot.conversionAvailable and not slot.isExplosive) -> eTutorialHighlights.kGoldAmmoInfo, when (not slot.conversionAvailable and slot.isExplosive) -> eTutorialHighlights.kExplosiveAmmoInfo, eTutorialHighlights.kUnknown"]
+            - ["string", "valueAttachId", "when tutorialData.stepsData.Contains(valueHighlightId) -> tutorialData.stepsData[valueHighlightId].attachId, \"\""]
+            - ["string", "infoAttachId", "when tutorialData.stepsData.Contains(infoHighlightId) -> tutorialData.stepsData[infoHighlightId].attachId, \"\""]
+            - ["bool", "isValueHighlighted", "valueHighlightId == tutorialData.currentHighlightControl and valueHighlightId != eTutorialHighlights.kUnknown"]
+            - ["bool", "isInfoHighlighted", "infoHighlightId == tutorialData.currentHighlightControl and valueHighlightId != eTutorialHighlights.kUnknown"]
+            - ["bool", "exchangeButtonIsVisible", "slot.conversionAvailable and slot.currentAmmo - slot.tankAmmo >= 0"]
+            - ["int", "iconFrame", "when slot.iconType == \"ap\" -> 0, when slot.iconType == \"ap_premium\" -> 1, when slot.iconType == \"ap_cr\" -> 2, when slot.iconType == \"he\" -> 3, when slot.iconType == \"he_premium\" -> 4, when slot.iconType == \"hc\" -> 5, when slot.iconType == \"atgm_heat\" -> 6, when slot.iconType == \"atgm_he\" -> 7, 0"]
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/Lobby/Inventory/Ammo/AmmoSlider.actions"
+        UIDataOnEventComponent0:
+            eventName: "ANIMATE_AMMO_SELL"
+            modelFieldExpression: "needAnimationStop"
+            dataExpression: "false"
+        UIDataOnEventComponent1:
+            eventName: "ANIMATE_AMMO_BUY"
+            modelFieldExpression: "needAnimationStop"
+            dataExpression: "false"
+        UIDataOnEventComponent2:
+            eventName: "ON_SLIDER_TOUCH_DOWN"
+            modelFieldExpression: "needAnimationStop"
+            dataExpression: "true"
+        UIDataOnEventComponent3:
+            eventName: "ON_SLIDER_EDITING_FINISHED"
+            modelFieldExpression: "needAnimationStop"
+            dataExpression: "true"
+        UIShadowHoleComponent:
+            isEnabled: false
+            rightOffset: -8.000000
+            topOffset: 8.000000
+            bottomOffset: 8.000000
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                topAnchorEnabled: true
+            LinearLayout:
+                orientation: "TopDown"
+                spacing: 8.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfChildrenSum"
+        children:
+        -   class: "UIControl"
+            name: "Header"
+            input: false
+            components:
+                LinearLayout:
+                    spacing: 4.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   class: "UIControl"
+                name: "ProjectileTitleWrapper"
+                position: [1.000000, 0.000000]
+                input: false
+                components:
+                    LinearLayout:
+                        padding: "8"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfLastChild"
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 24.000000
+                children:
+                -   class: "UIControl"
+                    name: "Bg"
+                    input: false
+                    components:
+                        Background: {}
+                        IgnoreLayout:
+                            enabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfParent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Color.style.yaml"
+                    bindings:
+                    - ["classes", "when slot.isPrem -> \"orange-meteor-bg\", \"black-25-bg\""]
+                -   class: "UIControl"
+                    name: "ProjectileTitleValue"
+                    input: false
+                    classes: "t-caps bold color=white-wild-sand-text"
+                    components:
+                        UITextComponent: {}
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfContent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Font.style.yaml"
+                    bindings:
+                    - ["UITextComponent.text", "localize(slot.title)"]
+            -   prototype: "DiscountLabel/DiscountLabel"
+                name: "DiscountLabel"
+                components:
+                    UIDataParamsComponent:
+                        args:
+                            "discountReason": "slot.discountReason"
+                            "discount": "slot.discountValue"
+                            "display": "when slot.discountValue == 0.000000 -> false, true"
+        -   class: "UIControl"
+            name: "Ammo"
+            position: [0.000000, 32.000000]
+            input: false
+            components:
+                LinearLayout: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   class: "UIControl"
+                name: "Left"
+                input: false
+                components:
+                    LinearLayout:
+                        orientation: "LeftToRight"
+                        spacing: 16.000000
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 224.000000
+                        verticalPolicy: "PercentOfMaxChild"
+                children:
+                -   class: "UIControl"
+                    name: "AmmoInfoBtn"
+                    input: true
+                    classes: "ammo-button button-open-sound"
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "FixedSize"
+                            horizontalValue: 64.000000
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 64.000000
+                        UIInputEventComponent:
+                            onTouchUpInside: "ON_SHELL_ICON_PRESSED"
+                            onTouchUpInsideData: "slot.index"
+                        Sound: {}
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/ButtonSound.style.yaml"
+                    children:
+                    -   class: "UIControl"
+                        name: "Content"
+                        position: [0.000000, 0.000000]
+                        size: [64.000000, 64.000000]
+                        pivot: [0.500000, 0.500000]
+                        input: false
+                        classes: "content-area"
+                        components:
+                            UIOpacityComponent: {}
+                            Anchor:
+                                leftAnchorEnabled: true
+                                rightAnchorEnabled: true
+                                topAnchorEnabled: true
+                                bottomAnchorEnabled: true
+                            StyleSheet:
+                                styles: "~res:/UI/Screens3/Lobby/Inventory/Ammo/InventoryAmmoSlider.style.yaml"
+                        children:
+                        -   class: "UIControl"
+                            name: "bg"
+                            input: false
+                            classes: "white-wild-sand-15-bg"
+                            components:
+                                Background:
+                                    drawType: "DRAW_STRETCH_BOTH"
+                                    sprite: "~res:/Gfx/Lobby/backgrounds/bg_r1"
+                                    leftRightStretchCap: 1.000000
+                                    topBottomStretchCap: 1.000000
+                                SizePolicy:
+                                    horizontalPolicy: "PercentOfParent"
+                                    verticalPolicy: "PercentOfParent"
+                                StyleSheet:
+                                    styles: "~res:/UI/Screens3/Color.style.yaml"
+                        -   class: "UIControl"
+                            name: "Hover"
+                            input: false
+                            classes: "hover white-wild-sand-10-bg"
+                            components:
+                                Background: {}
+                                UIOpacityComponent: {}
+                                SizePolicy:
+                                    horizontalPolicy: "PercentOfParent"
+                                    verticalPolicy: "PercentOfParent"
+                                StyleSheet:
+                                    styles: "~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/Lobby/Inventory/Ammo/InventoryAmmoSlider.style.yaml"
+                        -   class: "UIControl"
+                            name: "Icon"
+                            input: false
+                            components:
+                                UITextureComponent:
+                                    spritePath: "~res:/Gfx/UI/InventoryIcons/Big/Ammunition/ammo.psd"
+                                    drawType: "DRAW_SCALE_PROPORTIONAL"
+                                SizePolicy:
+                                    horizontalPolicy: "PercentOfParent"
+                                    verticalPolicy: "PercentOfParent"
+                            bindings:
+                            - ["UITextureComponent.frame", "iconFrame"]
+                        -   class: "UIControl"
+                            name: "TitleCaption"
+                            position: [4.000000, 2.000000]
+                            input: false
+                            classes: "t-overline bold color=white-wild-sand-text"
+                            components:
+                                UITextComponent: {}
+                                Anchor:
+                                    leftAnchorEnabled: true
+                                    leftAnchor: 4.000000
+                                    topAnchorEnabled: true
+                                    topAnchor: 2.000000
+                                SizePolicy:
+                                    horizontalPolicy: "PercentOfContent"
+                                    verticalPolicy: "PercentOfContent"
+                                StyleSheet:
+                                    styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+                            bindings:
+                            - ["UITextComponent.text", "localize(slot.iconTitle)"]
+                        -   class: "UIControl"
+                            name: "InfoIcon"
+                            position: [40.000000, 0.000000]
+                            input: false
+                            components:
+                                Background:
+                                    drawType: "DRAW_ALIGNED"
+                                    sprite: "~res:/Gfx/Lobby/icons/icon_info-color_xs"
+                                    colorInherit: "COLOR_IGNORE_PARENT"
+                                Anchor:
+                                    rightAnchorEnabled: true
+                                    topAnchorEnabled: true
+                                SizePolicy:
+                                    horizontalPolicy: "FixedSize"
+                                    horizontalValue: 24.000000
+                                    verticalPolicy: "FixedSize"
+                                    verticalValue: 24.000000
+                -   class: "UIControl"
+                    name: "AmmoDesc"
+                    input: false
+                    components:
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        LinearLayout:
+                            orientation: "TopDown"
+                            spacing: 4.000000
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfMaxChild"
+                            verticalPolicy: "PercentOfChildrenSum"
+                    children:
+                    -   prototype: "AmmoInfoLine/DamageInfoLine"
+                        name: "Penetration"
+                        components:
+                            UIDataParamsComponent:
+                                args:
+                                    "isDamage": "false"
+                                    "maxValue": "slot.piercingMax"
+                                    "minValue": "slot.piercingMin"
+                    -   prototype: "AmmoInfoLine/DamageInfoLine"
+                        name: "Damage"
+                        components:
+                            UIDataParamsComponent:
+                                args:
+                                    "isDamage": "true"
+                                    "maxValue": "slot.damageMax"
+                                    "minValue": "slot.damageMin"
+            -   class: "UIControl"
+                name: "TutorialInfoControl"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    Anchor:
+                        bottomAnchorEnabled: true
+                    IgnoreLayout: {}
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 180.000000
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 85.000000
+                    UIAttachLayoutMasterComponent: {}
+                bindings:
+                - ["UIAttachLayoutMasterComponent.attachId", "infoAttachId"]
+            -   class: "UIControl"
+                name: "TaskJournalLessonControl"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    Anchor:
+                        bottomAnchorEnabled: true
+                    IgnoreLayout: {}
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 180.000000
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 85.000000
+                    UIAttachLayoutMasterComponent: {}
+                bindings:
+                - ["UIAttachLayoutMasterComponent.attachId", "taskJournalLessonMasterId"]
+            -   class: "UIControl"
+                name: "Center"
+                position: [224.000000, 0.000000]
+                input: false
+                components:
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    LinearLayout: {}
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfMaxChild"
+                children:
+                -   prototype: "Slider/Slider"
+                    name: "Slider"
+                    components:
+                        UIDataParamsComponent:
+                            args:
+                                "sound": "eButtonSound.DRAG"
+                                "thumbMasterId": "valueAttachId"
+                                "tutorialLayer": "when isValueHighlighted -> 1, 0"
+                                "displayedValue": "str(slot.currentAmmo)"
+                                "index": "slot.index"
+                                "step": "1.000000"
+                                "maxAllowedValue": "when slot.maxAllowedValue > 0.000000 -> slot.maxAllowedValue, float(slot.currentAmmo + ammoModel.freeSpace)"
+                                "minAllowedValue": "slot.minAllowedValue"
+                                "minValue": "0.000000"
+                                "maxValue": "float(ammoModel.maxAmmo)"
+                                "currentValue": "slot.sliderValue"
+                                "thumbSize": "32.000000"
+                            eventActions:
+                            - ["ON_SLIDER_EDITING_FINISHED", "ON_SLIDER_EDITING_FINISHED", "_event.value, slot.index"]
+                            - ["ON_SLIDER_TOUCHED", "ON_SLIDER_TOUCHED", "_event.index"]
+                            - ["ON_SLIDER_CHANGED", "ON_SLIDER_CHANGED", "_event.value, slot.index"]
+                            - ["ON_SLIDER_PLUS", "ON_SLIDER_PLUS", "_event.index"]
+                            - ["ON_SLIDER_MINUS", "ON_SLIDER_MINUS", "_event.index"]
+            -   class: "UIControl"
+                name: "Right"
+                input: false
+                components:
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    LinearLayout:
+                        orientation: "LeftToRight"
+                        spacing: 16.000000
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 192.000000
+                        verticalPolicy: "PercentOfMaxChild"
+                children:
+                -   class: "UIControl"
+                    name: "Spacer"
+                    input: false
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfParent"
+                -   class: "UIControl"
+                    name: "CostWrapper"
+                    input: false
+                    components:
+                        LinearLayout:
+                            orientation: "TopDown"
+                            dynamicPadding: true
+                            spacing: 4.000000
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfMaxChild"
+                            verticalPolicy: "PercentOfParent"
+                    children:
+                    -   class: "UIControl"
+                        name: "LabelToGet"
+                        input: false
+                        classes: "t-caption regular color=white-wild-sand-50-text"
+                        components:
+                            UITextComponent:
+                                colorInheritType: "COLOR_IGNORE_PARENT"
+                            Anchor:
+                                rightAnchorEnabled: true
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfContent"
+                                verticalPolicy: "PercentOfContent"
+                            StyleSheet:
+                                styles: "~res:/UI/Screens3/Font.style.yaml"
+                        bindings:
+                        - ["UITextComponent.text", "when slot.currentAmmo - slot.tankAmmo < 0 -> localize(\"INVENTORY_TO_GET\"), \"\""]
+                    -   class: "UIControl"
+                        name: "Cost"
+                        input: false
+                        components:
+                            Anchor:
+                                rightAnchorEnabled: true
+                            LinearLayout:
+                                spacing: 5.000000
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfChildrenSum"
+                                verticalPolicy: "PercentOfMaxChild"
+                        children:
+                        -   class: "UIControl"
+                            name: "Multiplier"
+                            input: false
+                            classes: "t-subtitle regular color=white-wild-sand-50-text"
+                            components:
+                                UITextComponent:
+                                    text: "1 x"
+                                    colorInheritType: "COLOR_IGNORE_PARENT"
+                                SizePolicy:
+                                    horizontalPolicy: "PercentOfContent"
+                                    verticalPolicy: "PercentOfContent"
+                                StyleSheet:
+                                    styles: "~res:/UI/Screens3/Font.style.yaml"
+                            bindings:
+                            - ["visible", "slot.multiplierVisible"]
+                        -   prototype: "Currency/Currency"
+                            name: "Currency"
+                            components:
+                                UIDataParamsComponent:
+                                    args:
+                                        "isPlusTopPaneVisible": "false"
+                                        "serverTime": "0L"
+                                        "plusVisible": "false"
+                                        "resource": "slot.price"
+                -   class: "UIControl"
+                    name: "ButtonWrapper"
+                    input: false
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "FixedSize"
+                            horizontalValue: 48.000000
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 48.000000
+                    children:
+                    -   prototype: "IconButton/IconButton"
+                        name: "IconButtonLight"
+                        components:
+                            UIDataParamsComponent:
+                                args:
+                                    "visible": "exchangeButtonIsVisible"
+                                    "image": "\"~res:/Gfx/Lobby/icons/icon_angled-arrow\""
+                                    "type": "eButtonType.OPTIONAL_LIGHT"
+                                    "sound": "eButtonSound.CHECKBOX"
+                                    "enabled": "true"
+                                eventActions:
+                                - ["ON_CLICK_BUTTON", "ON_SLIDER_CONVERT", "_event"]
+                    -   class: "UIControl"
+                        name: "GoldIcon"
+                        input: false
+                        components:
+                            UITextureComponent:
+                                spritePath: "~res:/Gfx/UI/LobbyCommon/CurrencyIconsHuge"
+                                drawType: "DRAW_SCALE_TO_RECT"
+                            Anchor:
+                                leftAnchorEnabled: true
+                                leftAnchor: 4.000000
+                                topAnchorEnabled: true
+                                topAnchor: 8.000000
+                            SizePolicy:
+                                horizontalPolicy: "FixedSize"
+                                horizontalValue: 20.000000
+                                verticalPolicy: "FixedSize"
+                                verticalValue: 20.000000
+                        bindings:
+                        - ["visible", "exchangeButtonIsVisible"]
+                        - ["UITextureComponent.frame", "when slot.hasGold -> 0, 1"]
+                    -   class: "UIControl"
+                        name: "SilverIcon"
+                        input: false
+                        components:
+                            UITextureComponent:
+                                spritePath: "~res:/Gfx/UI/LobbyCommon/CurrencyIconsHuge"
+                                drawType: "DRAW_SCALE_TO_RECT"
+                            Anchor:
+                                rightAnchorEnabled: true
+                                rightAnchor: 4.000000
+                                bottomAnchorEnabled: true
+                                bottomAnchor: 8.000000
+                            SizePolicy:
+                                horizontalPolicy: "FixedSize"
+                                horizontalValue: 20.000000
+                                verticalPolicy: "FixedSize"
+                                verticalValue: 20.000000
+                        bindings:
+                        - ["visible", "exchangeButtonIsVisible"]
+                        - ["UITextureComponent.frame", "when slot.hasGold -> 1, 0"]

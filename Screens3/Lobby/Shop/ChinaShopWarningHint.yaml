@@ -1,0 +1,28 @@
+Header:
+    version: "100"
+ImportedPackages:
+- "~res:/UI/Screens3/Common/PopupMenuWithRichText.yaml"
+Controls:
+-   class: "UIControl"
+    name: "ChinaShopWarningHint"
+    input: false
+    components:
+        Anchor:
+            leftAnchorEnabled: true
+            rightAnchorEnabled: true
+            topAnchorEnabled: true
+            bottomAnchorEnabled: true
+    children:
+    -   prototype: "PopupMenuWithRichText/Slave"
+        name: "Slave"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "offset": "0"
+                    "buttonVisible": "false"
+                    "isAlignLeft": "true"
+                    "title": "\"\""
+                    "text": "localize(\"ChinaShopWarning/Content\")"
+                    "colorClass": "\"color=white-wild-sand-text\""
+                    "slaveAlign": "ePositionAlign.Bottom"
+                    "masterId": "\"CHINA_SHOP_WARNING_ID\""

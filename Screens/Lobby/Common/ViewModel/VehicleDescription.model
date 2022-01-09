@@ -1,0 +1,33 @@
+eVehicleDescriptionType =
+{
+    NORMAL = 0;
+    PREMIUM = 1; 
+    PREMIUMISED = 2;
+    COLLECTIBLE = 3
+};
+
+ICONS_COUNT = 5;
+
+eTankClass = {
+  TANK_CLASS_NONE = -1;
+  TANK_CLASS_LIGHT = 0;
+  TANK_CLASS_MEDIUM = 1;
+  TANK_CLASS_HEAVY = 2;
+  TANK_CLASS_SPG = 3;
+  TANK_CLASS_AT_SPG = 4;
+};
+levelNumberWidths = [12; 16; 22; 22; 17; 22; 27; 32; 22; 18];
+
+levelNumberFrame = level - 1 + type * 10;
+levelNumberWidth = levelNumberWidths[level - 1];
+tankClassFrame = (when class == eTankClass.TANK_CLASS_LIGHT -> 1,
+                      class == eTankClass.TANK_CLASS_MEDIUM -> 2,
+                      class == eTankClass.TANK_CLASS_HEAVY -> 3,
+                      class == eTankClass.TANK_CLASS_AT_SPG -> 4, 0) + type * ICONS_COUNT;
+                      
+tankEliteFrame = type * ICONS_COUNT;
+vehicleNameStyle = when type == eVehicleDescriptionType.NORMAL -> "text-color-white",
+                     type == eVehicleDescriptionType.PREMIUM -> "text-color-premium",
+                     type == eVehicleDescriptionType.PREMIUMISED -> "text-color-premium",
+                     type == eVehicleDescriptionType.COLLECTIBLE -> "text-color-collectible",
+                     "text-color-white";

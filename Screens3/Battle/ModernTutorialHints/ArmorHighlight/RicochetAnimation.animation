@@ -1,0 +1,89 @@
+animation RicochetAnimation
+{	
+	Wait (0.5);
+	repeat(99999)
+	{
+		Wait (1);
+		parallel
+		{
+			sequence
+			{
+				Rotate ("**/Shell", -30);
+				Move ("**/Shell", 63, 81);
+				
+				Opacity ("**/Shell", 1, 0.3);
+				Wait (0.3);
+				Move ("**/Shell", 39, 41, 0.5);
+				Rotate ("**/Shell", 60);
+				Move ("**/Shell", 68, 24, 0.4);
+				Opacity ("**/Shell", 0, 0.3);
+				Rotate ("**/Shell", -30);
+				Move ("**/Shell", 63, 81);
+				Wait (0.5);
+			}
+
+			sequence
+			{
+				Wait (0.9);
+				Opacity ("**/Element1", 1, 0.1);
+				Wait (0.1);
+				Opacity ("**/Element2", 1, 0.1);
+				Wait (0.1);
+				parallel
+				{
+					Opacity ("**/Element3", 1, 0.1);
+					Opacity ("**/Element4", 1, 0.1);
+				}
+				Wait (0.1);
+				Opacity ("**/Element5", 1, 0.1);
+				Wait (0.1);
+				Opacity ("**/Element1", 0, 0.1);
+				Wait (0.1);
+				Opacity ("**/Element2", 0, 0.1);
+				Wait (0.1);
+				parallel
+				{
+					Opacity ("**/Element3", 0, 0.1);
+					Opacity ("**/Element4", 0, 0.1);
+				}
+				Wait (0.1);
+				Opacity ("**/Element5", 0, 0.1);
+			}
+
+			sequence
+			{
+				Wait (1.1);
+				
+				parallel
+				{
+					Move ("**/Shard1", 29, 37);
+					Opacity ("**/Shard1", 1, 0);
+					Move ("**/Shard1", 19, 33, 1, EASE_OUT);
+					sequence
+					{
+						Wait(0.5);
+						Opacity ("**/Shard1", 0, 0.5, EASE_OUT);
+					}
+
+					Move ("**/Shard2", 31, 42);
+					Opacity ("**/Shard2", 1, 0);
+					Move ("**/Shard2", 21, 45, 1, EASE_OUT);
+					sequence
+					{
+						Wait(0.5);
+						Opacity ("**/Shard2", 0, 0.5, EASE_OUT);
+					}
+					
+					Move ("**/Shard3", 33, 34);
+					Opacity ("**/Shard3", 1, 0);
+					Move ("**/Shard3", 29, 25, 1, EASE_OUT);
+					sequence
+					{
+						Wait(0.5);
+						Opacity ("**/Shard3", 0, 0.5, EASE_OUT);
+					}
+				}
+			}
+		}
+	}
+}

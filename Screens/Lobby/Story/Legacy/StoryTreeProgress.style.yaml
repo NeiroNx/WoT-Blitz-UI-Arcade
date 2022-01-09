@@ -1,0 +1,19 @@
+Header:
+    version: "96"
+StyleSheets:
+-   selectors:
+    - "#Bg"
+    properties:
+        visible: false
+-   selectors:
+    - "#Bg.SPRING2020 #Layout #Top"
+    properties:
+        texture-spritePath: "~res:/Gfx/Lobby/events/event_2020-spring_bg"
+-   selectors:
+    - "#Bg.SPRING2020.Desktop #Layout #Top"
+    properties:
+        texture-spritePath: "~res:/Gfx2/Lobby/events/event_2020-spring_bg"
+-   selectors:
+    - "#Bg.SPRING2020"
+    properties:
+        visible: true

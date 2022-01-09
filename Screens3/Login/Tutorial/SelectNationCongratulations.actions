@@ -1,0 +1,66 @@
+action GoToNextPrompt()
+{
+	if (currentPromptIndex < promptsCount - 1)
+	{
+		ChangeData(promptInputDisabled, true);
+		ChangeData(currentPromptOpacity, 1.0);
+		ChangeData(nextPromptOpacity, 0.0);
+		parallel
+		{
+			ChangeData(currentPromptOpacity, 0.0, 0.7, EASE_OUT);
+			ChangeData(nextPromptOpacity, 1.0, 0.7, EASE_IN);
+			ChangeData(promptOffset, currentPromptIndex*descriptionWidth + descriptionWidth, 0.7, EASE_OUT);
+		}
+		ChangeData(currentPromptIndex, currentPromptIndex + 1);
+		ChangeData(currentPromptOpacity, 1.0);
+		ChangeData(nextPromptOpacity, 0.0);
+		ChangeData(promptInputDisabled, false);
+	}
+}
+
+action GoToPrevPrompt()
+{
+	if (currentPromptIndex > 0)
+	{
+		ChangeData(promptInputDisabled, true);
+		ChangeData(currentPromptOpacity, 1.0);	
+		ChangeData(prevPromptOpacity, 0.0);
+		parallel
+		{
+			ChangeData(currentPromptOpacity, 0.0, 0.7, EASE_OUT);
+			ChangeData(prevPromptOpacity, 1.0, 0.7, EASE_IN);
+			ChangeData(promptOffset, currentPromptIndex*descriptionWidth - descriptionWidth, 0.7, EASE_OUT);
+		}
+		ChangeData(currentPromptIndex, currentPromptIndex - 1);
+		ChangeData(currentPromptOpacity, 1.0);
+		ChangeData(prevPromptOpacity, 0.0);
+		ChangeData(promptInputDisabled, false);
+	}
+}
+
+action NextPromptAnimation()
+{
+	Wait(promptAnimationPeriod);
+	if (currentPromptIndex < promptsCount - 1)
+	{
+		DirectEvent("GoToNextPrompt", ".");
+	}
+}
+
+action TutorialPackLoaded()
+{	
+	Wait(2.0);	
+	Opacity("**/StartHangarWrapper", 0.0);
+	ChangeProperty("**/StartHangarWrapper", "", "visible", true);
+	ChangeProperty("**/DownloadWrapper", "", "visible", true);
+	parallel
+	{
+		Opacity("**/DownloadWrapper", 0.0, 0.4, EASE_OUT);
+        	ChangeProperty("**/DownloadWrapper", "Anchor", "vCenterAnchor", 50, 0.4, EASE_OUT);
+		Opacity("**/DescriptionWithButtons", 0.0, 0.4, EASE_OUT);
+        	ChangeProperty("**/DescriptionWithButtons", "Anchor", "vCenterAnchor", 50, 0.4, EASE_OUT);
+	}
+	Wait(0.2);
+	Opacity("**/StartHangarWrapper", 1.0, 0.4, EASE_OUT);
+	ChangeProperty("**/DownloadWrapper", "", "visible", false);
+} 

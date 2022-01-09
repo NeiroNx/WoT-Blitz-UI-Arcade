@@ -1,0 +1,48 @@
+Header:
+    version: 121
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/Notifications/Popups/Notification.yaml"
+- "~res:/UI/Screens/Lobby/Notifications/Popups/OldStyleRichText.yaml"
+Controls:
+-   class: "UIControl"
+    customClass: "UIClanApplicationAcceptedNotification"
+    name: "ClanApplicationAcceptedNotification"
+    size: [32.000000, 32.000000]
+    input: true
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+            padding: "8;0"
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfMaxChild"
+    children:
+    -   prototype: "Notification/Notification"
+        name: "ClanApplicationAcceptedNotificationItem"
+        input: false
+        components:
+            LinearLayout: {}
+        children:
+        -   prototype: "Notification/icon"
+            name: "icon"
+            classes: "notification-icon-clan"
+        -   prototype: "Notification/Content"
+            name: "Content"
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+            children:
+            -   prototype: "OldStyleRichText/RichText"
+                name: "Description"
+                components:
+                    RichContent:
+                        text: "Default <t-caption_highlighted>bold </t-caption_highlighted> default Default <t-caption_highlighted>bold </t-caption_highlighted> default  Default <t-caption_highlighted>bold </t-caption_highlighted> default Default <t-caption_highlighted>bold </t-caption_highlighted> default  Default <t-caption_highlighted>bold </t-caption_highlighted> default "
+                    SizePolicy:
+                        horizontalPolicy: "Formula"
+                        horizontalFormula: "parent - 16"
+                        verticalPolicy: "PercentOfChildrenSum"
+                    UIAnchorSafeAreaComponent:
+                        leftSafeInset: "INSET"
+                        rightSafeInset: "INSET"
+                    FlowLayout:
+                        useRtl: true

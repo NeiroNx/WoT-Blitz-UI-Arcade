@@ -1,0 +1,72 @@
+Header:
+    version: "23"
+StyleSheets:
+-   selector: ".quick-wait-icon ? ? ? #WaitContainer"
+    properties:
+        visible: true
+-   selector: ".quick-wait-icon ? ? ? #SearchContainer"
+    properties:
+        visible: false
+-   selector: ".quick-search-icon ? ? ? #WaitContainer"
+    properties:
+        visible: false
+-   selector: ".quick-search-icon ? ? ? #SearchContainer"
+    properties:
+        visible: true
+-   selector: ".quick-paused-icon ? ? ? #WaitContainer"
+    properties:
+        visible: false
+-   selector: ".quick-paused-icon ? ? ? #SearchContainer"
+    properties:
+        visible: false
+-   selector: ".quick-paused-icon ? ? ? #PauseContainer"
+    properties:
+        visible: true
+-   selector: ".quick-search-icon ? ? ? #PauseContainer"
+    properties:
+        visible: false
+-   selector: ".quick-wait-icon ? ? ? #PauseContainer"
+    properties:
+        visible: false
+-   selector: ".quick-role-captain ? ? ? ? #PauseButton"
+    properties:
+        visible: true
+-   selector: ".quick-role-noncaptain ? ? ? ? #PauseButton"
+    properties:
+        visible: false
+-   selector: ".quick-role-captain-nopause ? ? ? ? #PauseButton"
+    properties:
+        visible: false
+-   selector: ".quick-role-captain-nopause ? ? ? ? #HintNoPauses"
+    properties:
+        visible: true
+-   selector: ".quick-role-noncaptain ? ? ? ? #HintNoPauses"
+    properties:
+        visible: false
+-   selector: ".quick-role-captain ? ? ? ? #HintNoPauses"
+    properties:
+        visible: false
+-   selector: ".quick-role-noncaptain ? ? ? ? #SearchResumeHint"
+    properties:
+        visible: true
+-   selector: ".quick-role-captain ? ? ? ? #SearchResumeHint"
+    properties:
+        visible: false
+-   selector: ".quick-role-noncaptain ? ? ? #PauseContainer #Hint"
+    properties:
+        visible: false
+-   selector: ".quick-role-noncaptain ? ? ? #PauseContainer #Pauses"
+    properties:
+        visible: false
+-   selector: ".quick-role-captain ? ? ? #PauseContainer #Pauses"
+    properties:
+        visible: true
+-   selector: ".quick-role-captain-nopause ? ? ? #PauseContainer #Pauses"
+    properties:
+        visible: false
+-   selector: ".quick-role-captain-nopause ? ? ? #PauseContainer #SearchResumeWarning"
+    properties:
+        visible: false
+-   selector: ".quick-role-captain ? ? ? #PauseContainer #SearchResumeWarning"
+    properties:
+        visible: false

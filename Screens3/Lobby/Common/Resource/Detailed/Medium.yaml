@@ -1,0 +1,53 @@
+Header:
+    version: 130
+Prototypes:
+-   class: "UIControl"
+    name: "Medium"
+    size: [86.000000, 104.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["ResourceDetailed", "resource", "{ }", "{ \"type\" = ResourceType.vehicle; }"]
+            - ["control", "fx", "null", "null"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["bool", "isBasicResource", "resource.type == ResourceType.gold or resource.type == ResourceType.free_xp or resource.type == ResourceType.elite_xp or resource.type == ResourceType.premium or resource.type == ResourceType.xp or resource.type == ResourceType.tankmenXP or resource.type == ResourceType.credits or resource.type == ResourceType.slots"]
+    children:
+    -   class: "UIControl"
+        name: "ContentHolder"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                childType: "kPrototype"
+                condition: "resource.type == ResourceType.stuff and not isNull(resource.stuff)"
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/Detailed/StuffMedium.yaml"
+                args:
+                    "fx": "fx"
+                    "stuff": "resource.stuff"
+            UIChildComponent1:
+                childType: "kPrototype"
+                condition: "resource.type == ResourceType.vehicle"
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/Detailed/VehicleMedium.yaml"
+                args:
+                    "fx": "fx"
+                    "vehicle": "resource.vehicle"
+            UIChildComponent2:
+                childType: "kPrototype"
+                condition: "isBasicResource and not isNull(resource.basic)"
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/Detailed/BasicMedium.yaml"
+                args:
+                    "fx": "fx"
+                    "type": "resource.type"
+                    "basic": "resource.basic"
+            UIChildComponent3:
+                condition: "resource.type == Resource.equipment_slots and not isNull(resource.devices)"
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/Detailed/DevicesMedium.yaml"
+                args:
+                    "devices": "resource.devices"

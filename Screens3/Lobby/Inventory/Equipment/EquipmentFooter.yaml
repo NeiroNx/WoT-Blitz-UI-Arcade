@@ -1,0 +1,113 @@
+Header:
+    version: 128
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/Button.yaml"
+- "~res:/UI/Screens3/Lobby/Common/ToggleWithLabel.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "PriceFooter"
+    size: [809.000000, 109.000000]
+    input: true
+    components:
+        UIAnimationComponent:
+            animations: "ON_ACTION,~res:/UI/Screens3/Lobby/Inventory/Equipment/EquipmentFooter.animation;GET_BUTTON_TEXT,~res:/UI/Screens3/Lobby/Inventory/Equipment/EquipmentFooterInit.animation;_INIT,~res:/UI/Screens3/Lobby/Inventory/Equipment/EquipmentFooterInit.animation"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIVirtualActionEventComponent0:
+            virtualKeyAction: "Extra2"
+            keyDownEvent: "ON_ACTION"
+        Focus:
+            state: "Enabled"
+        UIDataParamsComponent:
+            params:
+            - ["ArtefactProviderModel", "artefacts", "null", "{ }"]
+            - ["StatsDataModel", "stats", "null", "{ }"]
+            - ["bool", "autoResupply", "false", "false"]
+            - ["eShopFooterState", "state", "eShopFooterState.BUY_ENABLED", "eShopFooterState.BUY_ENABLED"]
+            - ["string", "customButtonText", "\"\"", "\"\""]
+            - ["Price", "priceGet", "null", "{ }"]
+            - ["Price", "pricePay", "null", "{ }"]
+            events:
+            - "ON_AUTO_RESUPPLY_CHANGED(bool isResupplyOn)"
+            - "ON_CLICK_ACTION"
+        UIDataLocalBindingsComponent:
+            data:
+            - ["eButtonType", "buttonType", "when state == eShopFooterState.SELL -> eButtonType.NEGATIVE, eButtonType.POSITIVE"]
+            - ["string", "buttonName", "when state == eShopFooterState.APPLY_ENABLED -> \"Apply\", state == eShopFooterState.APPLY_DISABLED -> \"Apply\", state == eShopFooterState.BUY_ENABLED -> \"Purchase\", state == eShopFooterState.BUY_DISABLED -> \"Purchase\", state == eShopFooterState.SELL -> \"Sell\", state == eShopFooterState.OPEN -> \"#common:DialogButton/Unlock\", state == eShopFooterState.ACTION -> \"#common:DialogButton/Go\", state == eShopFooterState.REPLACE -> \"#camouflages:Shop/BuyCamouflage/Change\", \"\""]
+        UIEventOnDataComponent0:
+            watchedDataExpression: "state"
+            eventName: "BUTTON_STATE_CHANGED"
+            eventData: "buttonName"
+    children:
+    -   class: "UIControl"
+        name: "LeftPart"
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                spacing: 18.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   prototype: "ToggleWithLabel/ToggleWithLabel"
+            name: "ToggleWithLabel"
+            components:
+                UIDataParamsComponent:
+                    args:
+                        "text": "\"InventoryPanel/Footer/AutoRecharge\""
+                        "isDarkMode": "false"
+                        "turnedOn": "autoResupply"
+                    eventActions:
+                    - ["ON_TOGGLE_CHANGED", "ON_AUTO_RESUPPLY_CHANGED", "_event.isTurnedOn"]
+    -   class: "UIControl"
+        name: "RightPart"
+        input: false
+        components:
+            Anchor:
+                rightAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                spacing: 32.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   class: "UIControl"
+            name: "Price"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Anchor:
+                    vCenterAnchorEnabled: true
+                LinearLayout:
+                    spacing: 28.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/Price.yaml"
+                    args:
+                        "artefacts": "artefacts"
+                        "stats": "stats"
+                        "priceGet": "priceGet"
+                        "pricePay": "pricePay"
+        -   prototype: "Button/Button"
+            name: "ButtonPositive"
+            position: [131.000000, 30.000000]
+            components:
+                Anchor:
+                    vCenterAnchorEnabled: true
+                UIAttachLayoutMasterComponent:
+                    attachId: "NEWBIE_CONSUMABLES_INSTALL"
+                UIDataParamsComponent:
+                    args:
+                        "caption": "when customButtonText == \"\" -> buttonName, customButtonText"
+                        "type": "buttonType"
+                        "size": "eButtonSize.NORMAL"
+                        "enabled": "true"
+                    eventActions:
+                    - ["ON_CLICK_BUTTON", "ON_CLICK_ACTION", ""]

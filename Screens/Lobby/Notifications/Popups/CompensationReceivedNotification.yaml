@@ -1,0 +1,129 @@
+Header:
+    version: 121
+Prototypes:
+-   class: "UIControl"
+    customClass: "UIGenericNotification"
+    name: "CompensationReceivedNotification"
+    size: [608.000000, 72.000000]
+    input: true
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+            padding: "8; 0"
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfMaxChild"
+        UIDataParamsComponent:
+            params:
+            - ["CompensationNotificationViewModel", "model", "null", "{ }"]
+    children:
+    -   class: "UIControl"
+        name: "NotificationBase"
+        position: [0.000000, 8.000000]
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfChildrenSum"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Notifications/NotificationBase.yaml"
+                args:
+                    "content": "Content"
+                    "iconPath": "\"~res:/Gfx/Lobby/icons/icon_finance_s\""
+                    "isButtonVisible": "false"
+Slots:
+-   class: "UIControl"
+    name: "Content"
+    size: [608.000000, 20.000000]
+    input: false
+    components:
+        Anchor:
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "Formula"
+            verticalFormula: "when parent == 0 -> childrenSum, min(parent, childrenSum)"
+    children:
+    -   class: "UIControl"
+        name: "MessageContent"
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                vCenterAnchorEnabled: true
+                useRtl: true
+            LinearLayout:
+                spacing: 8.000000
+                useRtl: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   class: "UIControl"
+            name: "RichText"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfChildrenSum"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens3/Lobby/Common/RichTextSimpleParameter.yaml"
+                    args:
+                        "baseFontSize": "\"t-caption\""
+                        "key": "\"HANGAR_NOTIFICATION_RECEIVED_COMPENSATION\""
+                        "value": "model.tankName"
+        -   class: "UIControl"
+            name: "CompensationWrapper"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                LinearLayout: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfMaxChild"
+            bindings:
+            - ["visible", "not isNull(model.compensation)"]
+            children:
+            -   class: "UIControl"
+                name: "LeftBrace"
+                size: [32.000000, 32.000000]
+                input: false
+                classes: "t-caption regular"
+                components:
+                    UITextComponent:
+                        text: "("
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/Font.style.yaml"
+            -   class: "UIControl"
+                name: "CompensationValue"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        verticalPolicy: "PercentOfMaxChild"
+                    UIChildComponent0:
+                        condition: "not isNull(model.compensation)"
+                        prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/Currencies.yaml"
+                        args:
+                            "currencySize": "eCurrencySize.SMALL"
+                            "price": "model.compensation"
+                            "showDiscount": "false"
+            -   class: "UIControl"
+                name: "RightBrace"
+                size: [32.000000, 32.000000]
+                input: false
+                classes: "t-caption regular"
+                components:
+                    UITextComponent:
+                        text: ")"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/Font.style.yaml"

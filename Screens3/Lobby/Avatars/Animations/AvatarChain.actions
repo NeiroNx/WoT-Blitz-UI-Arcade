@@ -1,0 +1,9 @@
+action ChainAvatarContainerUpdate(float itemHeight, float containerHeight, float positionY)
+{
+	Event("CHAIN_AVATAR_CONTAINER_UPDATE", arg1 = itemHeight, arg2 = containerHeight, arg3 = positionY + containerPositionOffsetY);
+}
+
+action ContainerPositionUpdate(float positionY)
+{
+	ChangeData(containerPositionOffsetY, positionY);
+}

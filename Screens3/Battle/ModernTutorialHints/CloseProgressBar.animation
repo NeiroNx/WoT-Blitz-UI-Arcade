@@ -1,0 +1,6 @@
+animation CloseProgressBar
+{
+    ChangeProperty("./FullscreenHintProto/Top/Content/Content/Wrapper/CloseButton/Loader","RadialProgressComponent","progress", 0, 0);
+    ChangeProperty("./FullscreenHintProto/Top/Content/Content/Wrapper/CloseButton/Loader","RadialProgressComponent","progress", 1, 10);
+    Event("OnCloseHint");
+}

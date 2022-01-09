@@ -1,0 +1,5 @@
+animation MainScreenInit
+{
+	ChangeData(displayingDailyProgress, realDailyProgress, 0.0);
+	ChangeData(displayingWeeklyProgress, realWeeklyProgress, 0.0);
+}

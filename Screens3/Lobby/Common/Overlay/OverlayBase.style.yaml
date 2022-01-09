@@ -1,0 +1,11 @@
+Header:
+    version: "106"
+StyleSheets:
+-   selectors:
+    - ".content-area.unlimited-width"
+    properties:
+        sizePolicy-horizontalPolicy: "PercentOfParent"
+-   selectors:
+    - ".content-area"
+    properties:
+        sizePolicy-horizontalPolicy: "Formula"

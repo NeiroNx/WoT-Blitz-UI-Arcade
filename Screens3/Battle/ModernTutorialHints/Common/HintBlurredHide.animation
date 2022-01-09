@@ -1,0 +1,13 @@
+animation HintHide
+{
+    parallel
+    {
+	    ChangeProperty("**/FadeWrapper", "UIOpacityComponent", "opacity", 0, 0.5, SINE_OUT);
+	    ChangeProperty("**/Description", "UIOpacityComponent", "opacity", 0, 0.5, SINE_OUT);
+	    ChangeProperty("**/Description", "Anchor", "leftAnchor", -80, 0.5, SINE_OUT);
+	    ChangeProperty("**/Title", "UIOpacityComponent", "opacity", 0, 0.5, SINE_OUT);
+	    ChangeProperty("**/Title", "Anchor", "leftAnchor", -80, 0.5, SINE_OUT);
+    }
+
+    ChangeProperty("**/Icon", "UIOpacityComponent", "opacity", 0, 0.25, SINE_OUT);
+}

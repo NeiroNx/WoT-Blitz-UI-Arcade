@@ -1,0 +1,29 @@
+Header:
+    version: "77"
+Prototypes:
+-   class: "UIControl"
+    name: "TankAwardsTab"
+    size: [399.000000, 304.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfChildrenSum"
+        FlowLayout:
+            hDynamicPadding: true
+        UIDataParamsComponent:
+            params:
+            - ["ProfileViewModel", "profile", "null", "{ }"]
+            events:
+            - "SHOW_ACHIEVEMENT_INFO"
+        UIRepeatComponent:
+            control: "~res:/UI/Screens3/Lobby/Profile/Common/AchievementItem.yaml"
+            dataContainer: "profile.selectedTankAchievements"
+            args:
+                "visible": "true"
+                "showDescription": "true"
+                "achievement": "_item"
+            eventActions:
+            - ["ON_PRESSED", "SHOW_ACHIEVEMENT_INFO", "_event"]
+            elementName: "_item.name"
+            holderName: "_item.name"

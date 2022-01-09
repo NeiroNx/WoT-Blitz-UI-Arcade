@@ -1,0 +1,24 @@
+animation PauseOrSearchIcon
+{
+    repeat
+    {
+        parallel
+        {
+            //Base
+            {
+                Rotate("Base", 0, 0);
+                Rotate("Base", -360, 4);
+            }
+            //Circle1
+            {
+                Rotate("Circle1", 0, 0);
+                Rotate("Circle1", 360, 4);
+            }
+            //Circle2
+            {
+                Rotate("Circle2", 0, 0);
+                Rotate("Circle2", -360, 4);
+            }
+        }
+    }
+}

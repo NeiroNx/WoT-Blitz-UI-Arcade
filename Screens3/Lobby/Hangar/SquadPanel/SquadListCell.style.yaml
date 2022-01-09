@@ -1,0 +1,17 @@
+Header:
+    version: "71"
+ImportedPackages:
+- "~res:/UI/Screens3/Common/Touch.style.yaml"
+StyleSheets:
+-   selector: ".squad-item * .hover"
+    properties:
+        visible: false
+-   selector: ".squad-item * .content-area"
+    properties:
+        opacity-opacity: 1.000000
+-   selector: ".squad-item:hover * .hover, .squad-item * .separator"
+    properties:
+        visible: true
+-   selector: ".squad-item:pressed_inside * .content-area"
+    properties:
+        opacity-opacity: 0.700000

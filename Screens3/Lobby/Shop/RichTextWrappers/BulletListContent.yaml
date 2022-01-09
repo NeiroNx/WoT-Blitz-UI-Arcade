@@ -1,0 +1,40 @@
+Header:
+    version: "102"
+Prototypes:
+-   class: "UIControl"
+    name: "Control"
+    input: false
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfChildrenSum"
+    children:
+    -   class: "UIControl"
+        name: "spacer"
+        input: false
+        components:
+            SizePolicy:
+                verticalPolicy: "FixedSize"
+                verticalValue: 8.000000
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 24.000000
+                rightAnchorEnabled: true
+            LinearLayout:
+                orientation: "TopDown"
+                spacing: 8.000000
+            SizePolicy:
+                verticalPolicy: "PercentOfChildrenSum"
+    -   class: "UIControl"
+        name: "spacer"
+        input: false
+        components:
+            SizePolicy:
+                verticalPolicy: "FixedSize"
+                verticalValue: 8.000000

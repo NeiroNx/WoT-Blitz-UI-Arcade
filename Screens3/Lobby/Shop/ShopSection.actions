@@ -1,0 +1,11 @@
+action SCROLL_TO_SELECTED(int index)
+{
+	if (smallScreen)
+	{
+		ScrollToEnsureControlOnScreen("./Children/SmallScreenChildren/ShopSectionItem" + str(index), 0.3);
+	}
+	else
+	{
+		ScrollToEnsureControlOnScreen("./Children/DefaultChildren/ShopSectionItem" + str(index), 0.3);
+	}
+}

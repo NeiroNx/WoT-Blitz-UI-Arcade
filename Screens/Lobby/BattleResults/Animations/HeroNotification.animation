@@ -1,0 +1,4 @@
+animation Notification
+{
+    Move(".", x=0, time=2, interpolation=SINE_OUT);
+}

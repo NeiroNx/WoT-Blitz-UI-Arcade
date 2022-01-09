@@ -1,0 +1,174 @@
+Header:
+    version: "79"
+Prototypes:
+-   class: "UIControl"
+    name: "ProgressBar"
+    size: [320.000000, 8.000000]
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfChildrenSum"
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Styles/ProgressBarStyles.yaml"
+    children:
+    -   class: "UIControl"
+        name: "BarContainer"
+        input: false
+        components:
+            LinearLayout:
+                spacing: 5.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "FixedSize"
+                verticalValue: 8.000000
+        children:
+        -   class: "UIControl"
+            name: "Bar"
+            classes: "progress-bar=progress-bar-not-ready color-white-20"
+            components:
+                Background:
+                    drawType: "DRAW_FILL"
+                LinearLayout: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                    verticalValue: 100.000000
+                StyleSheet:
+                    inheritsStylesFromParent: true
+                    styles: "~res:/UI/Styles/ColorStyles.yaml"
+            children:
+            -   class: "UIControl"
+                name: "Overlay"
+                size: [320.000000, 8.000000]
+                components:
+                    Background:
+                        drawType: "DRAW_FILL"
+                    Anchor:
+                        leftAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+-   prototype: "ProgressBar"
+    name: "ProgressBarCaption"
+    components:
+        LinearLayout:
+            spacing: 5.000000
+    children:
+    -   class: "UIControl"
+        name: "Caption"
+        size: [16.000000, 0.000000]
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+            LinearLayout:
+                spacing: 2.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   class: "UIStaticText"
+            name: "CurrentAmount"
+            classes: "text2 text-color-white"
+            components:
+                UITextComponent:
+                    text: "0"
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                    align: ["RIGHT", "VCENTER"]
+                    useRtlAlign: "USE_BY_CONTENT"
+                Anchor:
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens/Fonts.yaml"
+        -   class: "UIStaticText"
+            name: "Delimiter"
+            classes: "text2 text-color-white"
+            components:
+                UITextComponent:
+                    text: "/"
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                    align: ["RIGHT", "VCENTER"]
+                    useRtlAlign: "USE_BY_CONTENT"
+                Anchor:
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens/Fonts.yaml"
+        -   class: "UIStaticText"
+            name: "MaxAmount"
+            classes: "text2 text-color-white"
+            components:
+                UITextComponent:
+                    text: "1000"
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                    align: ["RIGHT", "VCENTER"]
+                    useRtlAlign: "USE_BY_CONTENT"
+                Anchor:
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens/Fonts.yaml"
+        -   class: "UIControl"
+            name: "AmountResourceContainer"
+            size: [10.000000, 0.000000]
+            input: false
+            components:
+                LinearLayout:
+                    padding: "5.000000"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfMaxChild"
+-   prototype: "ProgressBar"
+    name: "ProgressBarAnimated"
+    children:
+    -   path: "BarContainer/Bar"
+        children:
+        -   class: "UIControl"
+            name: "ProgressGrowth"
+            size: [64.000000, 8.000000]
+            components:
+                Background:
+                    drawType: "DRAW_FILL"
+                Anchor:
+                    rightAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    horizontalValue: 20.000000
+                    verticalPolicy: "PercentOfParent"
+            children:
+            -   class: "UIControl"
+                name: "Embelishments"
+                size: [64.000000, 8.000000]
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+            -   class: "UIControl"
+                name: "ProgressAnimation"
+                size: [0.000000, 0.000000]
+                input: false
+                components:
+                    Anchor:
+                        leftAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                children:
+                -   class: "UIParticles"
+                    name: "Effect"
+                    pivot: [0.500000, 0.500000]
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/Progress_bar_glow.sc2"
+                    autoStart: true
+    -   path: "BarContainer/Bar/Overlay"
+        components:
+            SizePolicy:
+                horizontalValue: 40.000000

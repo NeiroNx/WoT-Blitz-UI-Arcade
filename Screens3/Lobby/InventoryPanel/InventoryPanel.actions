@@ -1,0 +1,64 @@
+action SHOW_INVENTORY_PANEL(bool requestedShow, eInventoryPanelAnimation animationType, float animationTime)
+{
+    if (requestedShow)
+    {
+        parallel
+        {
+            Scale (path="./HangarBackground", time=animationTime, x=1.0 ,y=1.0, interpolation=SINE_OUT);
+            Opacity(".", opacity=1.0, time=animationTime, interpolation=SINE_OUT);
+        }
+        BroadcastEvent("SHOW_ITEM", dest="**/TabsContainer", arg1=true, arg2=animationType);
+    }
+    else
+    {
+        parallel
+        {
+            Scale (path="./HangarBackground", time=animationTime, x=1.0 ,y=0.01, interpolation=SINE_OUT);
+            Opacity(".", opacity=0.0, time=animationTime, interpolation=SINE_OUT);
+            BroadcastEvent("SHOW_ITEM", dest="**/TabsContainer", arg1=false, arg2=animationType);
+        }
+    }
+}
+
+action SKIP_TO_NEXT_TAB()
+{
+	if(panel.camoIsDisabled)
+	{
+		if(selectedTab == InventoryTabType.MODULES)
+		{
+			Event("ON_INVENTORY_TAB_SELECT_ACTION", arg1=nextTab);
+		}
+        else
+        {
+            Event("ON_INVENTORY_TAB_SELECT_ACTION", arg1=InventoryTabType.PROVISIONS);
+        }
+	}
+}
+
+action SKIP_TO_PREVIOUS_TAB()
+{
+    if(panel.camoIsDisabled)
+    {
+        if(selectedTab == InventoryTabType.MODULES)
+        {
+            if(crewFragmentVisible)
+            {
+                Event("ON_INVENTORY_TAB_SELECT_ACTION", arg1=InventoryTabType.CREW);
+            }
+            else
+            {
+                Event("ON_INVENTORY_TAB_SELECT_ACTION", arg1=lastTab);
+            }
+        }
+        if(selectedTab == nextTab)
+        {
+             Event("ON_INVENTORY_TAB_SELECT_ACTION", arg1=InventoryTabType.MODULES);
+        }
+    }
+}
+
+action  ON_INVENTORY_TAB_SELECT_ACTION(InventoryTabType selected)
+{
+    PlaySound(sound="GUI/buttons/open");
+    Event("ON_INVENTORY_TAB_SELECT", arg1=selected);
+}

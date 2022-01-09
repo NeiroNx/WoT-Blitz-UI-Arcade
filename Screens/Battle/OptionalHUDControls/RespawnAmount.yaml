@@ -1,0 +1,49 @@
+Header:
+    version: "70"
+Prototypes:
+-   class: "UIControl"
+    name: "RespawnAmount"
+    input: false
+    classes: "respawn-amount"
+    components:
+        Anchor:
+            leftAnchorEnabled: true
+            leftAnchor: 0.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfMaxChild"
+        StyleSheet:
+            styles: "~res:/UI/Screens/Battle/Styles/HUDLayerHellgamesStyles.yaml;~res:/UI/Styles/BackgroundStyles.yaml"
+    children:
+    -   class: "UIControl"
+        name: "Background"
+        input: false
+        classes: "screen-background"
+        components:
+            Background:
+                drawType: "DRAW_STRETCH_BOTH"
+                spriteModification: ["FLIP_HORIZONTAL"]
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 0.000000
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 81.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 20.000000
+            StyleSheet:
+                inheritsStylesFromParent: true
+                styles: "~res:/UI/Styles/ColorStyles.yaml"
+    -   class: "UIControl"
+        name: "LivesContainer"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 16.000000
+            LinearLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfMaxChild"

@@ -1,0 +1,17 @@
+Header:
+    version: "31"
+Prototypes:
+-   class: "UIControl"
+    name: "TrainingNote"
+    input: false
+    classes: "text2 color=text-color-blue"
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfContent"
+            verticalPolicy: "PercentOfContent"
+        UITextComponent:
+            text: "#battle_results:TrainingRooms/NoEarnings"
+            colorInheritType: "COLOR_IGNORE_PARENT"
+            multiline: "MULTILINE_ENABLED"
+        StyleSheet:
+            styles: "~res:/UI/Screens/Fonts.yaml"

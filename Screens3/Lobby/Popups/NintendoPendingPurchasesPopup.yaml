@@ -1,0 +1,43 @@
+Header:
+    version: "110"
+ImportedPackages:
+- "~res:/UI/Screens3/Common/PopupMenu.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "NintendoPendingPurchasesPopup"
+    size: [960.000000, 640.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["string", "masterId", "\"\"", "\"level_0_0_0\""]
+            events:
+            - "FINISH_HIDE_POPUP_ANIMATION"
+            - "POPUP_ON_CLOSE_ACTION"
+            - "ON_POPUP_BUTTON_CLICKED"
+        UIDataLocalsComponent:
+            locals:
+            - ["string", "name", "\"PendingPurchases/Popup/Title\""]
+            - ["string", "description", "\"PendingPurchases/Popup/Text\""]
+            - ["ArtefactGrade", "grade", "ArtefactGrade.common"]
+            - ["string", "gradeColor", "\"white-wild-sand-text\""]
+    children:
+    -   prototype: "PopupMenu/Slave"
+        name: "Slave"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "titleColor": "gradeColor"
+                    "isAlignLeft": "false"
+                    "title": "localize(name)"
+                    "slaveAlign": "ePositionAlign.Bottom"
+                    "text": "localize(description)"
+                    "masterId": "masterId"
+                    "buttonCaption": "\"\""
+                eventActions:
+                - ["ON_CLICK_BUTTON", "ON_POPUP_BUTTON_CLICKED", ""]
+                - ["POPUP_ON_CLOSE_ACTION", "POPUP_ON_CLOSE_ACTION", ""]
+                - ["FINISH_HIDE_POPUP_ANIMATION", "FINISH_HIDE_POPUP_ANIMATION", ""]

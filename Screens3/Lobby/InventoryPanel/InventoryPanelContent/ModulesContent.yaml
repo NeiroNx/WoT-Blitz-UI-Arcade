@@ -1,0 +1,167 @@
+Header:
+    version: "103"
+Prototypes:
+-   class: "UIControl"
+    name: "ModulesContent"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 66.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 32.000000
+        UIDataParamsComponent:
+            params:
+            - ["int", "freeXp", "0", "400000"]
+            - ["InventoryPanelModuleViewModel", "module", "null", "{ \"cost\" = 250000; \"iconPath\" = \"vehicleTurret\"; }"]
+            - ["OwnedTank", "tank", "null", "{ }"]
+            events:
+            - "ON_MODULE_PROGRESS_ANIMATION_ENDED"
+        UIDataLocalsComponent:
+            locals:
+            - ["bool", "isModuleVisible", "module.cost != 0"]
+            - ["string", "moduleIcon", "when module.iconPath != \"\" -> \"~res:/Gfx/UI/ModulesTechTree/\" + module.iconPath, \"\""]
+            - ["string", "iconSprite", "when not isNull(tank) and tank.stats.isElite -> \"~res:/Gfx/Lobby/currency/currency_elite-xp_m\", \"~res:/Gfx/Lobby/currency/currency_battle-xp_m\""]
+            - ["int", "xp", "when not isNull(tank) -> tank.stats.xp, 0"]
+            - ["string", "arrowAnimation", "when module.lastDisplayedTankXp >= module.cost -> \"~res:/3d/FX/UI/ModuleFx/Strelka.sc2\", when module.lastDisplayedTankXp + freeXp >= module.cost -> \"~res:/3d/FX/UI/ModuleFx/strelka_red.sc2\", \"\""]
+            - ["string", "glowAnimation", "when module.lastDisplayedTankXp >= module.cost -> \"~res:/3d/FX/UI/ModuleFx/Glow_blue.sc2\", when module.lastDisplayedTankXp + freeXp >= module.cost -> \"~res:/3d/FX/UI/ModuleFx/Glow_red.sc2\", \"\""]
+    children:
+    -   class: "UIControl"
+        name: "Xp"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                orientation: "RightToLeft"
+                spacing: 4.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfMaxChild"
+        bindings:
+        - ["visible", "not isModuleVisible"]
+        children:
+        -   class: "UIControl"
+            name: "XpIcon"
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_PROPORTIONAL"
+                Anchor:
+                    hCenterAnchorEnabled: false
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 24.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 24.000000
+            bindings:
+            - ["Background.sprite", "iconSprite"]
+        -   class: "UIControl"
+            name: "XpValue"
+            position: [28.000000, 4.000000]
+            input: false
+            classes: "t-subtitle regular color=white-wild-sand-text"
+            components:
+                UITextComponent: {}
+                Anchor:
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml"
+            bindings:
+            - ["UITextComponent.text", "shortStr(xp)"]
+    -   class: "UIControl"
+        name: "Module"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfLastChild"
+                verticalPolicy: "PercentOfLastChild"
+        bindings:
+        - ["visible", "isModuleVisible"]
+        children:
+        -   class: "UIParticles"
+            name: "ModuleEffect"
+            position: [16.000000, 16.000000]
+            size: [32.000000, 32.000000]
+            scale: [0.500000, 0.500000]
+            pivot: [0.500000, 0.500000]
+            input: false
+            autoStart: true
+            startDelay: 0.400000
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    hCenterAnchor: 2.500000
+                    vCenterAnchorEnabled: true
+                    vCenterAnchor: 0.000000
+            bindings:
+            - ["visible", "glowAnimation != \"\""]
+            - ["effectPath", "glowAnimation"]
+        -   class: "UIControl"
+            name: "ModuleIcon"
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_PROPORTIONAL"
+                Anchor:
+                    hCenterAnchorEnabled: false
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 36.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 36.000000
+            bindings:
+            - ["Background.sprite", "moduleIcon"]
+        -   class: "UIParticles"
+            name: "Arrow"
+            size: [32.000000, 32.000000]
+            scale: [1.000000, 1.000000]
+            pivot: [0.500000, 0.500000]
+            input: false
+            autoStart: true
+            startDelay: 0.400000
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    hCenterAnchor: 2.500000
+                    vCenterAnchorEnabled: true
+            bindings:
+            - ["visible", "arrowAnimation != \"\""]
+            - ["effectPath", "arrowAnimation"]
+    -   class: "UIControl"
+        name: "ModuleProgress"
+        position: [0.000000, 32.000000]
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Anchor:
+                bottomAnchorEnabled: true
+                bottomAnchor: -3.000000
+            IgnoreLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "FixedSize"
+                verticalValue: 3.000000
+            UIChildComponent0:
+                condition: "isModuleVisible"
+                prototypePath: "~res:/UI/Screens3/Lobby/ModulesTree/ModuleProgressBar.yaml"
+                args:
+                    "tankDescr": "tank.info.tankDescriptor"
+                    "lastDisplayedTankXp": "module.lastDisplayedTankXp"
+                    "moduleCost": "module.cost"
+                    "tankXp": "xp"
+                    "freeXp": "freeXp"
+                eventActions:
+                - ["ON_ANIMATION_ENDED", "ON_MODULE_PROGRESS_ANIMATION_ENDED", ""]

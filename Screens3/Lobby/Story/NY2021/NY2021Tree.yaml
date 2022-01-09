@@ -1,0 +1,661 @@
+Header:
+    version: 124
+ImportedPackages:
+- "~res:/UI/Screens3/Common/HorizontalScrollBar.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "NY2021Tree"
+    size: [960.000000, 512.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["eBlitzDevice", "deviceType", "eBlitzDevice.DEVICE_PHONE", "eBlitzDevice.DEVICE_PHONE"]
+            - ["StoryView", "storyView", "null", "{ }"]
+            - ["int64", "serverTime", "0L", "1556668800L"]
+            - ["bool", "isGfx2", "false", "false"]
+            - ["vector2", "screenSize", "vec2(0.000000, 0.000000)", "vec2(960.000000, 640.000000)"]
+            events:
+            - "DESELECT"
+            - "STEPS_SHOWN"
+            - "SHOW_STEP_INFO(int id)"
+            - "SHOW_CHEST_INFO(int id)"
+            - "SELECT_STEP(int id)"
+            - "SELECT_COMPOSITE_STEP(string name)"
+            - "PARALLAX_SHIFT(float shift)"
+        UIDataLocalVarsComponent:
+            data:
+            - ["vector2", "scrollSize", "vec2(0.000000, 0.000000)"]
+            - ["bool", "isScrolled", "false"]
+            - ["bool", "isAligned", "false"]
+            - ["float", "stepsOpacity", "0.000000"]
+            - ["int", "gfx", "when isGfx2 -> 2, 1"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["float", "scaleFactor", "max(screenSize.X / (1024 / 0.750000), screenSize.Y / 768)"]
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/Lobby/Story/NY2021/NY2021Tree.actions"
+        UIEventOnDataComponent0:
+            watchedDataExpression: "screenSize"
+            ifExpression: "not floatEqual(scrollSize.X, 0.000000)"
+            eventName: "ON_SCREEN_SIZE_CHANGED"
+        UIEventOnDataComponent1:
+            watchedDataExpression: "scrollSize"
+            ifExpression: "not floatEqual(screenSize.X, 0.000000)"
+            eventName: "ON_SCREEN_SIZE_CHANGED"
+        UIEventOnDataComponent2:
+            watchedDataExpression: "isScrolled"
+            ifExpression: "isAligned"
+            eventName: "SHOW_STEPS"
+        UIEventOnDataComponent3:
+            watchedDataExpression: "isAligned"
+            ifExpression: "isScrolled"
+            eventName: "SHOW_STEPS"
+        UIEventOnDataComponent4:
+            watchedDataExpression: "stepsOpacity"
+            eventName: "STEPS_SHOWN"
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "InteractiveArea"
+            input: false
+            components:
+                LinearLayout:
+                    orientation: "TopDown"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            children:
+            -   class: "UIControl"
+                name: "StepsArea"
+                input: false
+                components:
+                    Anchor:
+                        topAnchorEnabled: true
+                    LinearLayout:
+                        orientation: "TopDown"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                children:
+                -   class: "UIControl"
+                    name: "ScrollArea"
+                    input: false
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfParent"
+                    children:
+                    -   class: "UIScrollView"
+                        name: "ScrollView"
+                        autoUpdate: true
+                        centerContent: true
+                        components:
+                            ClipContent:
+                                bottom: false
+                            Anchor:
+                                bottomAnchorEnabled: true
+                                bottomAnchor: -71.000000
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                verticalPolicy: "Formula"
+                                verticalFormula: "firstChild - 16"
+                        children:
+                        -   class: "UIScrollViewContainer"
+                            name: "scrollContainerControl"
+                            refreshStylesOnInteract: false
+                            scrollDirection: "kHorizontal"
+                            components:
+                                SizePolicy:
+                                    horizontalPolicy: "PercentOfFirstChild"
+                                    verticalPolicy: "PercentOfFirstChild"
+                                UILayoutEventComponent:
+                                    positionChangedEvent: "SCROLL_POSITION_CHANGED"
+                                    positionChangedEventData: "_position"
+                                UIInputEventComponent:
+                                    onTouchUpInside: "DESELECT"
+                                UIChildComponent0:
+                                    childType: "kControl"
+                                    control: "StepsWrapper"
+                -   class: "UIControl"
+                    name: "Spacer"
+                    input: false
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "FixedSize"
+                        UILayoutEventComponent:
+                            sizeChangedEvent: "ON_SCALE_FACTOR_CHANGED"
+                    bindings:
+                    - ["SizePolicy.verticalValue", "42 * scaleFactor"]
+            -   class: "UIControl"
+                name: "BoxesArea"
+                input: false
+                components:
+                    Anchor:
+                        bottomAnchorEnabled: true
+                        bottomAnchor: -4.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                children:
+                -   class: "UIControl"
+                    name: "BoxesHolder"
+                    input: false
+                    components:
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfFirstChild"
+                        UIChildComponent0:
+                            childType: "kControl"
+                            control: "BoxesWrapper"
+        -   prototype: "HorizontalScrollBar/HorizontalScrollBar"
+            name: "HorizontalScrollBar"
+            components:
+                Anchor:
+                    bottomAnchor: 4.000000
+                ScrollBarDelegate:
+                    delegate: "../InteractiveArea/StepsArea/ScrollArea/ScrollView"
+Slots:
+-   class: "UIControl"
+    name: "FxRoll"
+    size: [212.000000, 240.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+    children:
+    -   class: "UIParticles"
+        name: "Smokeglow"
+        position: [106.000000, 120.000000]
+        scale: [0.950000, 0.950000]
+        pivot: [0.500000, 0.500000]
+        input: false
+        effectPath: "~res:/3d/FX/UI/NY2021/SmokeGlow.sc2"
+        autoStart: true
+    -   class: "UIParticles"
+        name: "Sparks"
+        position: [106.000000, 139.000000]
+        scale: [0.900000, 0.900000]
+        pivot: [0.500000, 0.500000]
+        input: false
+        effectPath: "~res:/3d/FX/UI/NY2021/Sparks.sc2"
+        autoStart: true
+-   class: "UIControl"
+    name: "FxRollOverlay"
+    size: [212.000000, 240.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+    children:
+    -   class: "UIParticles"
+        name: "Fx"
+        position: [113.000000, 87.000000]
+        scale: [1.000000, 0.970000]
+        pivot: [0.500000, 0.500000]
+        input: false
+        effectPath: "~res:/3d/FX/UI/NY2021/BallWave.sc2"
+        autoStart: true
+-   class: "UIControl"
+    name: "FxBoxGreenIdle"
+    size: [212.000000, 240.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+    children:
+    -   class: "UIParticles"
+        name: "ScrollingLight"
+        position: [100.000000, 115.000000]
+        scale: [2.055000, 2.100000]
+        pivot: [0.500000, 0.500000]
+        input: false
+        effectPath: "~res:/3d/FX/UI/NY2021/GreenBox.sc2"
+        autoStart: true
+        components:
+            Anchor:
+                hCenterAnchorEnabled: false
+                vCenterAnchorEnabled: false
+-   class: "UIControl"
+    name: "FxBoxGreen"
+    size: [212.000000, 240.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+    children:
+    -   class: "UIParticles"
+        name: "StraightLight"
+        position: [100.000000, 161.000000]
+        scale: [1.200000, 1.500000]
+        pivot: [0.500000, 0.500000]
+        input: false
+        effectPath: "~res:/3d/FX/UI/NY2021/StraightLines.sc2"
+        autoStart: true
+        components:
+            Anchor:
+                hCenterAnchorEnabled: false
+                vCenterAnchorEnabled: false
+    -   class: "UIParticles"
+        name: "SnowBack"
+        position: [100.000000, 161.000000]
+        scale: [0.800000, 1.500000]
+        pivot: [0.500000, 0.500000]
+        visible: true
+        input: false
+        effectPath: "~res:/3d/FX/UI/NY2021/GlowDotsBack.sc2"
+        autoStart: true
+        components:
+            Anchor:
+                hCenterAnchorEnabled: false
+                vCenterAnchorEnabled: false
+    -   class: "UIParticles"
+        name: "GlowBg"
+        position: [116.000000, 186.000000]
+        scale: [1.200000, 1.200000]
+        pivot: [0.500000, 0.500000]
+        input: false
+        effectPath: "~res:/3d/FX/UI/NY2021/GlowBg.sc2"
+        autoStart: true
+        components:
+            Anchor:
+                hCenterAnchorEnabled: false
+                vCenterAnchorEnabled: false
+-   class: "UIControl"
+    name: "FxBoxGreenReady"
+    size: [212.000000, 240.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+    children:
+    -   class: "UIParticles"
+        name: "Fx"
+        position: [89.000000, 224.000000]
+        scale: [1.500000, 1.500000]
+        pivot: [0.500000, 0.500000]
+        input: false
+        effectPath: "~res:/3d/FX/UI/NY2020_chest/FrontSnow.sc2"
+        autoStart: true
+        components:
+            Anchor:
+                hCenterAnchorEnabled: false
+                vCenterAnchorEnabled: false
+-   class: "UIControl"
+    name: "FxBoxGoldIdle"
+    size: [212.000000, 240.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+    children:
+    -   class: "UIParticles"
+        name: "ScrollingLight"
+        position: [105.000000, 124.000000]
+        scale: [2.055000, 2.060000]
+        pivot: [0.500000, 0.500000]
+        input: false
+        effectPath: "~res:/3d/FX/UI/NY2021/GoldBox.sc2"
+        autoStart: true
+-   class: "UIControl"
+    name: "FxBoxGold"
+    size: [212.000000, 240.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+    children:
+    -   class: "UIParticles"
+        name: "StraightLight"
+        position: [100.000000, 161.000000]
+        scale: [1.200000, 1.500000]
+        pivot: [0.500000, 0.500000]
+        input: false
+        effectPath: "~res:/3d/FX/UI/NY2021/StraightLines.sc2"
+        autoStart: true
+        components:
+            Anchor:
+                hCenterAnchorEnabled: false
+                vCenterAnchorEnabled: false
+    -   class: "UIParticles"
+        name: "GlowBg"
+        position: [118.000000, 186.000000]
+        scale: [1.200000, 1.200000]
+        pivot: [0.500000, 0.500000]
+        input: false
+        effectPath: "~res:/3d/FX/UI/NY2021/GlowBg.sc2"
+        autoStart: true
+        components:
+            Anchor:
+                hCenterAnchorEnabled: false
+                vCenterAnchorEnabled: false
+    -   class: "UIParticles"
+        name: "SnowBack"
+        position: [100.000000, 161.000000]
+        scale: [0.800000, 1.500000]
+        pivot: [0.500000, 0.500000]
+        visible: true
+        input: false
+        effectPath: "~res:/3d/FX/UI/NY2021/GlowDotsBack.sc2"
+        autoStart: true
+        components:
+            Anchor:
+                hCenterAnchorEnabled: false
+                vCenterAnchorEnabled: false
+-   class: "UIControl"
+    name: "FxBoxGoldReady"
+    size: [212.000000, 240.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+    children:
+    -   class: "UIParticles"
+        name: "Fx"
+        position: [89.000000, 224.000000]
+        scale: [1.500000, 1.500000]
+        pivot: [0.500000, 0.500000]
+        input: false
+        effectPath: "~res:/3d/FX/UI/NY2020_chest/FrontSnow.sc2"
+        autoStart: true
+        components:
+            Anchor:
+                hCenterAnchorEnabled: false
+                vCenterAnchorEnabled: false
+-   class: "UIControl"
+    name: "StepsWrapper"
+    input: false
+    components:
+        UIOpacityComponent: {}
+        Anchor:
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfFirstChild"
+            verticalPolicy: "PercentOfFirstChild"
+        UILayoutEventComponent:
+            sizeChangedEvent: "SCROLL_SIZE_CHANGED"
+            sizeChangedEventData: "_size"
+    children:
+    -   class: "UIControl"
+        name: "SafeArea"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "firstChild + safeAreaInsets.left + safeAreaInsets.right + 48"
+                verticalPolicy: "PercentOfFirstChild"
+        children:
+        -   class: "UIControl"
+            name: "Content"
+            input: false
+            components:
+                UIOpacityComponent: {}
+                Anchor:
+                    hCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfLastChild"
+                    verticalPolicy: "PercentOfLastChild"
+            bindings:
+            - ["UIOpacityComponent.opacity", "stepsOpacity"]
+            children:
+            -   class: "UIControl"
+                name: "Arrows"
+                input: false
+                components:
+                    Anchor:
+                        leftAnchorEnabled: true
+                        leftAnchor: 120.000000
+                        vCenterAnchorEnabled: true
+                    LinearLayout:
+                        spacing: 115.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        verticalPolicy: "PercentOfFirstChild"
+                children:
+                -   class: "UIControl"
+                    name: "CommonArrows"
+                    input: false
+                    components:
+                        LinearLayout:
+                            spacing: 112.000000
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfChildrenSum"
+                            verticalPolicy: "PercentOfMaxChild"
+                        UIRepeatComponent:
+                            control: "~res:/UI/Screens3/Lobby/Story/Steps/Arrows/LeftRight.yaml"
+                            dataContainer: "storyView.tree.groups.common.steps"
+                            args:
+                                "isVisible": "_index != storyView.tree.groups.common.steps.Size() - 1"
+                                "width": "26.000000"
+                -   class: "UIControl"
+                    name: "Branching"
+                    input: false
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfMaxChild"
+                            verticalPolicy: "PercentOfParent"
+                    children:
+                    -   class: "UIControl"
+                        name: "TopArrow"
+                        angle: -45.000000
+                        input: false
+                        components:
+                            Anchor:
+                                vCenterAnchorEnabled: true
+                                vCenterAnchor: -59.000000
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfFirstChild"
+                                verticalPolicy: "PercentOfFirstChild"
+                            UIChildComponent0:
+                                prototypePath: "~res:/UI/Screens3/Lobby/Story/Steps/Arrows/LeftRight.yaml"
+                                args:
+                                    "width": "26.000000"
+                    -   class: "UIControl"
+                        name: "BottomArrow"
+                        angle: 45.000000
+                        input: false
+                        components:
+                            Anchor:
+                                vCenterAnchorEnabled: true
+                                vCenterAnchor: 59.000000
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfFirstChild"
+                                verticalPolicy: "PercentOfFirstChild"
+                            UIChildComponent0:
+                                prototypePath: "~res:/UI/Screens3/Lobby/Story/Steps/Arrows/LeftRight.yaml"
+                                args:
+                                    "width": "26.000000"
+            -   class: "UIControl"
+                name: "Steps"
+                input: false
+                components:
+                    LinearLayout:
+                        spacing: 10.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        verticalPolicy: "PercentOfMaxChild"
+                children:
+                -   class: "UIControl"
+                    name: "CommonSteps"
+                    input: false
+                    components:
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        LinearLayout:
+                            spacing: 10.000000
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfChildrenSum"
+                            verticalPolicy: "PercentOfMaxChild"
+                        UIRepeatComponent:
+                            control: "~res:/UI/Screens3/Lobby/Story/Components/Steps/Progression.yaml"
+                            dataContainer: "storyView.tree.groups.common.steps"
+                            args:
+                                "model": "_item"
+                                "index": "_index + 1"
+                                "opacity": "stepsOpacity"
+                                "stepSize": "eStepSize.M"
+                            eventActions:
+                            - ["DESELECT", "DESELECT", ""]
+                            - ["SELECT_STEP", "SCROLL_TO_STEP", "_event.id, \"**/Step\" + str(_event.id)"]
+                            - ["SHOW_STEP_INFO", "SHOW_STEP_INFO", "_event.id"]
+                            elementNameExpression: "\"Step\" + str(_item.step.id)"
+                -   class: "UIControl"
+                    name: "MainRewards"
+                    input: false
+                    components:
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        LinearLayout:
+                            orientation: "TopDown"
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfMaxChild"
+                            verticalPolicy: "PercentOfChildrenSum"
+                        UIRepeatComponent:
+                            control: "~res:/UI/Screens3/Lobby/Story/Components/Steps/Progression.yaml"
+                            dataContainer: "storyView.tree.groups.mainRewards.steps"
+                            args:
+                                "model": "_item"
+                                "opacity": "stepsOpacity"
+                                "stepSize": "eStepSize.ML"
+                            eventActions:
+                            - ["DESELECT", "DESELECT", ""]
+                            - ["SELECT_STEP", "SCROLL_TO_STEP", "_event.id, \"**/Step\" + str(_event.id)"]
+                            - ["SHOW_STEP_INFO", "SHOW_STEP_INFO", "_event.id"]
+                            elementNameExpression: "\"Step\" + str(_item.step.id)"
+-   class: "UIControl"
+    name: "BoxesWrapper"
+    size: [960.000000, 256.000000]
+    input: false
+    components:
+        Anchor:
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfFirstChild"
+    children:
+    -   class: "UIControl"
+        name: "SafeArea"
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "parent - safeAreaInsets.left - safeAreaInsets.right"
+                verticalPolicy: "PercentOfLastChild"
+        children:
+        -   class: "UIControl"
+            name: "TapArea"
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                UIInputEventComponent:
+                    onTouchUpInside: "DESELECT"
+        -   class: "UIControl"
+            name: "Content"
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                LinearLayout:
+                    spacing: 32.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   class: "UIControl"
+                name: "Gold"
+                input: false
+                components:
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    LinearLayout:
+                        spacing: 10.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        verticalPolicy: "PercentOfMaxChild"
+                    UIRepeatComponent:
+                        control: "~res:/UI/Screens3/Lobby/Story/Components/Steps/CustomRepeatable.yaml"
+                        dataContainer: "storyView.tree.groups.gold.steps"
+                        args:
+                            "model": "_item"
+                            "imagePath": "\"~res:/Gfx/Lobby/events/2021-new-year/event_2021-ny_box1\""
+                            "fx": "FxBoxGold"
+                            "overlayIdleFx": "FxBoxGoldIdle"
+                            "overlayReadyFx": "FxBoxGoldReady"
+                            "showPrice": "true"
+                        eventActions:
+                        - ["DESELECT", "DESELECT", ""]
+                        - ["SELECT_STEP", "SELECT_STEP", "_event.id"]
+                        - ["SHOW_STEP_INFO", "SHOW_CHEST_INFO", "_event.id"]
+            -   class: "UIControl"
+                name: "Roll"
+                input: false
+                components:
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    LinearLayout:
+                        spacing: 10.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        verticalPolicy: "PercentOfMaxChild"
+                    UIRepeatComponent:
+                        control: "~res:/UI/Screens3/Lobby/Story/Components/Steps/CustomRepeatable.yaml"
+                        dataContainer: "storyView.tree.groups.roll.steps"
+                        args:
+                            "model": "_item"
+                            "imagePath": "\"~res:/Gfx/Lobby/events/2021-new-year/event_2021-ny_bowl\""
+                            "fx": "FxRoll"
+                            "overlayReadyFx": "FxRollOverlay"
+                            "showPrice": "false"
+                        eventActions:
+                        - ["DESELECT", "DESELECT", ""]
+                        - ["SELECT_STEP", "SELECT_STEP", "_event.id"]
+                        - ["SHOW_STEP_INFO", "SHOW_CHEST_INFO", "_event.id"]
+            -   class: "UIControl"
+                name: "FreeXp"
+                input: false
+                components:
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    LinearLayout:
+                        spacing: 10.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        verticalPolicy: "PercentOfMaxChild"
+                    UIChildComponent0:
+                        condition: "not storyView.tree.compositeSteps.Empty() and storyView.tree.compositeSteps.Contains(\"freeXp\")"
+                        prototypePath: "~res:/UI/Screens3/Lobby/Story/Components/Steps/CustomRepeatable.yaml"
+                        args:
+                            "model": "storyView.tree.compositeSteps.freeXp"
+                            "imagePath": "\"~res:/Gfx/Lobby/events/2021-new-year/event_2021-ny_box2\""
+                            "fx": "FxBoxGreen"
+                            "overlayIdleFx": "FxBoxGreenIdle"
+                            "overlayReadyFx": "FxBoxGreenReady"
+                            "showPrice": "true"
+                        eventActions:
+                        - ["DESELECT", "DESELECT", ""]
+                        - ["SELECT_STEP", "SELECT_COMPOSITE_STEP", "\"freeXp\""]
+                        - ["SHOW_STEP_INFO", "SHOW_CHEST_INFO", "_event.id"]

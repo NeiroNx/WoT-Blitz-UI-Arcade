@@ -1,0 +1,295 @@
+Header:
+    version: 140
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/PlayerName.yaml"
+- "~res:/UI/Screens3/Lobby/Common/Resource/PlayerAvatar.yaml"
+- "~res:/UI/Screens3/Lobby/Common/Badge.yaml"
+- "~res:/UI/Screens3/Lobby/Hangar/SquadPanel/PlayerNameWithBadge.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "SquadListCell"
+    size: [348.000000, 64.000000]
+    classes: "squad-item long-element  button-open-sound"
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "FixedSize"
+            verticalValue: 64.000000
+        UIAttachLayoutMasterComponent: {}
+        UIInputEventComponent:
+            onTouchUpInside: "ON_SQUAD_CLICKED"
+            onTouchUpInsideData: "player.id"
+        UIDataParamsComponent:
+            params:
+            - ["bool", "lastChild", "false", "false"]
+            - ["SquadViewModel", "player", "{ }", "{ \"onlineStatus\" = true; }"]
+            events:
+            - "ON_AVATAR_CLICKED"
+            - "ON_SQUAD_CLICKED"
+        UIDataLocalVarsComponent:
+            data:
+            - ["bool", "sendedInvite", "false"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["string", "labelText", "when player.mutualFriend -> localize(\"hangar/PlatoonPanel/FriendMark\"), \"\""]
+            - ["string", "onlineStyle", "when player.onlineStatus -> \"green-green-bg\", \"gray-cape-cod-bg\""]
+        UIDataOnEventComponent0:
+            eventName: "ON_SQUAD_CLICKED"
+            modelFieldExpression: "sendedInvite"
+            dataExpression: "when player.canInviteSend -> not sendedInvite, false"
+        Sound: {}
+    bindings:
+    - ["input", "not sendedInvite"]
+    - ["UIAttachLayoutMasterComponent.attachId", "str(player.id)"]
+    children:
+    -   class: "UIControl"
+        name: "Hover"
+        position: [0.000000, -1.000000]
+        size: [32.000000, 32.000000]
+        input: false
+        classes: "hover black-15-bg"
+        components:
+            Background: {}
+            IgnoreLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/Lobby/Hangar/SquadPanel/SquadListCell.style.yaml"
+    -   class: "UIControl"
+        name: "Content"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 16.000000
+                rightAnchorEnabled: true
+                rightAnchor: 16.000000
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+            LinearLayout:
+                spacing: 8.000000
+        children:
+        -   class: "UIControl"
+            name: "ContentWrapper"
+            position: [150.000000, 32.000000]
+            size: [380.000000, 64.000000]
+            pivot: [0.500000, 0.500000]
+            input: false
+            classes: "content"
+            components:
+                UIOpacityComponent: {}
+                Anchor:
+                    topAnchorEnabled: true
+                LinearLayout:
+                    spacing: 16.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Lobby/Hangar/SquadPanel/SquadListCell.style.yaml"
+            children:
+            -   class: "UIControl"
+                name: "AvatarWrapper"
+                position: [0.000000, 8.000000]
+                size: [32.000000, 32.000000]
+                components:
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 48.000000
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 48.000000
+                    UIInputEventComponent:
+                        onTouchUpInside: "ON_AVATAR_CLICKED"
+                        onTouchUpInsideData: "player.id"
+                children:
+                -   prototype: "PlayerAvatar/PlayerAvatar"
+                    name: "PlayerAvatar"
+                    components:
+                        SizePolicy:
+                            horizontalValue: 48.000000
+                            verticalValue: 48.000000
+                        UIDataParamsComponent:
+                            args:
+                                "avatar": "player.avatar"
+                                "size": "eAvatarSize.SMALL"
+                                "visible": "true"
+                                "interactive": "true"
+                                "enabled": "true"
+                                "badge": "\"\""
+                                "animated": "true"
+                            eventActions:
+                            - ["ON_PRESSED", "ON_AVATAR_CLICKED", "player.id"]
+                    bindings:
+                    - ["input", "interactive"]
+                    children:
+                    -   path: "Content"
+                        position: [24.000000, 24.000000]
+                        children: []
+                -   class: "UIControl"
+                    name: "OnlineIndicator"
+                    size: [32.000000, 32.000000]
+                    input: false
+                    components:
+                        Anchor:
+                            rightAnchorEnabled: true
+                            rightAnchor: 1.000000
+                            bottomAnchorEnabled: true
+                            bottomAnchor: 1.000000
+                        SizePolicy:
+                            horizontalPolicy: "FixedSize"
+                            horizontalValue: 18.000000
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 18.000000
+                    children:
+                    -   class: "UIControl"
+                        name: "Bg"
+                        size: [32.000000, 32.000000]
+                        input: false
+                        classes: "grey-shark-bg"
+                        components:
+                            Background:
+                                drawType: "DRAW_SCALE_PROPORTIONAL"
+                                sprite: "~res:/Gfx/Lobby/backgrounds/bg_oval_40"
+                            UIOpacityComponent:
+                                opacity: 0.980000
+                            Anchor:
+                                hCenterAnchorEnabled: true
+                                vCenterAnchorEnabled: true
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                verticalPolicy: "PercentOfParent"
+                            StyleSheet:
+                                styles: "~res:/UI/Screens3/Color.style.yaml"
+                    -   class: "UIControl"
+                        name: "OnlineIndication"
+                        size: [32.000000, 32.000000]
+                        input: false
+                        components:
+                            Background:
+                                drawType: "DRAW_SCALE_PROPORTIONAL"
+                                sprite: "~res:/Gfx/Lobby/backgrounds/bg_oval_40"
+                            Anchor:
+                                hCenterAnchorEnabled: true
+                                vCenterAnchorEnabled: true
+                            SizePolicy:
+                                horizontalPolicy: "FixedSize"
+                                horizontalValue: 12.000000
+                                verticalPolicy: "FixedSize"
+                                verticalValue: 12.000000
+                            StyleSheet:
+                                styles: "~res:/UI/Screens3/Color.style.yaml"
+                        bindings:
+                        - ["classes", "onlineStyle"]
+            -   class: "UIControl"
+                name: "Conent"
+                position: [64.000000, 15.000000]
+                size: [284.000000, 34.000000]
+                input: false
+                components:
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    LinearLayout:
+                        orientation: "LeftToRight"
+                        padding: "0; 12"
+                        skipInvisible: false
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfMaxChild"
+                children:
+                -   class: "UIControl"
+                    name: "LeftBlock"
+                    size: [32.000000, 32.000000]
+                    input: false
+                    components:
+                        LinearLayout:
+                            orientation: "TopDown"
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfChildrenSum"
+                    children:
+                    -   prototype: "PlayerNameWithBadge/PlayerNameWithBadge"
+                        name: "PlayerNameWithBadge"
+                        components:
+                            Anchor:
+                                rightAnchorEnabled: true
+                            UIDataParamsComponent:
+                                args:
+                                    "playerName": "\"\""
+                                    "clanTag": "\"\""
+                                    "playerNameSize": "ePlayerSize.kNormal"
+                                    "player": "player"
+                        children:
+                        -   path: "PlayerName"
+                            components:
+                                SizePolicy:
+                                    horizontalPolicy: "Formula"
+                                    horizontalFormula: "when parent == 0 -> childrenSum, min(parentRest, childrenSum)"
+                                UIDataParamsComponent:
+                                    args:
+                                        "playerNameSize": "ePlayerSize.kNormal"
+                                        "clanTag": "player.tag"
+                                        "playerName": "player.name"
+                            children: []
+                        -   path: "PlayerName/UserName"
+                            components:
+                                SizePolicy:
+                                    horizontalPolicy: "Formula"
+                                    horizontalFormula: "when parent == 0 -> content, min(parentRest, content)"
+                    -   class: "UIControl"
+                        name: "Label"
+                        input: false
+                        classes: "t-caption regular color=white-wild-sand-50-text"
+                        components:
+                            UITextComponent:
+                                colorInheritType: "COLOR_IGNORE_PARENT"
+                                align: ["LEFT", "VCENTER"]
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfContent"
+                                verticalPolicy: "PercentOfContent"
+                            StyleSheet:
+                                styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+                        bindings:
+                        - ["UITextComponent.text", "labelText"]
+                -   class: "UIControl"
+                    name: "sendInviteFlag"
+                    size: [10.000000, 10.000000]
+                    classes: "green-la-palma-bg"
+                    components:
+                        Background:
+                            drawType: "DRAW_SCALE_PROPORTIONAL"
+                            sprite: "~res:/Gfx/Lobby/icons/icon_tick_m"
+                            perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                        Anchor:
+                            rightAnchorEnabled: true
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "FixedSize"
+                            horizontalValue: 24.000000
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 24.000000
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Color.style.yaml"
+                    bindings:
+                    - ["visible", "sendedInvite and player.canInviteSend"]
+        -   class: "UIControl"
+            name: "Separator"
+            size: [32.000000, 32.000000]
+            input: false
+            classes: "white-wild-sand-5-bg"
+            components:
+                Background: {}
+                Anchor:
+                    bottomAnchorEnabled: true
+                IgnoreLayout: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 1.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+            bindings:
+            - ["visible", "lastChild"]

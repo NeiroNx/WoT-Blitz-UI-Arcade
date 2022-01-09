@@ -1,0 +1,63 @@
+Header:
+    version: 135
+Prototypes:
+-   class: "UIControl"
+    name: "NotEnoughGoldDialog"
+    size: [640.000000, 480.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["ResourceDetailed", "goldRequired", "null", "{ \"type\" = ResourceType.gold; }"]
+            events:
+            - "CANCEL"
+            - "TO_STORE"
+        UIDataLocalVarsComponent:
+            data:
+            - ["string", "description", "\"notification/notEnoughResources/lackingGoldToShop\""]
+            - ["string", "solutionText", "\"Купить недостающее количество за <price/> и получить все награды за этап?\""]
+    children:
+    -   class: "UIControl"
+        name: "ContentHolder"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Dialog/TextDialog.yaml"
+                args:
+                    "type": "eDialogType.CHOOSE"
+                    "header": "\"\""
+                    "accentButton": "\"#common:DialogButton/OK\""
+                    "optionalButton": "\"#common:DialogButton/Cancel\""
+                    "contentControl": "Content"
+                eventActions:
+                - ["OPTIONAL_CLICKED", "CANCEL", ""]
+                - ["ACCENT_CLICKED", "TO_STORE", ""]
+Slots:
+-   class: "UIControl"
+    name: "Content"
+    size: [400.000000, 120.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfFirstChild"
+    children:
+    -   class: "UIControl"
+        name: "Description"
+        input: false
+        classes: "t-body regular white-wild-sand-70-text"
+        components:
+            UITextComponent: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml"
+        bindings:
+        - ["UITextComponent.text", "localize(description)"]

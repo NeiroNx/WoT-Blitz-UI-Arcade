@@ -1,0 +1,434 @@
+Header:
+    version: "53"
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/Common/Dialog.yaml"
+- "~res:/UI/Screens/Common/StyledButton.yaml"
+- "~res:/UI/Screens/Common/Selection.yaml"
+- "~res:/UI/Screens/Lobby/Common/DiscountLabel.yaml"
+- "~res:/UI/Screens/Lobby/Common/BlueSeparatorLine.yaml"
+- "~res:/UI/Screens/Common/ScrollBar.yaml"
+- "~res:/UI/Screens/Lobby/Common/Timer.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "SelectDiscountDialog"
+    size: [1024.000000, 800.000000]
+    input: false
+    classes: "screen-background"
+    components:
+        Background: {}
+        Anchor:
+            leftAnchorEnabled: true
+            rightAnchorEnabled: true
+            topAnchorEnabled: true
+            bottomAnchorEnabled: true
+        ModalInput: {}
+        StyleSheet:
+            styles: "~res:/UI/Styles/BackgroundStyles.yaml"
+    children:
+    -   prototype: "Dialog/Dialog"
+        name: "Dialog"
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                spacing: 20.000000
+            SizePolicy:
+                horizontalValue: 504.000000
+                verticalPolicy: "Formula"
+                verticalFormula: "min(parent - 160, childrenSum)"
+        children:
+        -   class: "UIControl"
+            name: "Content"
+            components:
+                LinearLayout:
+                    orientation: "TopDown"
+                    spacing: 20.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "Formula"
+                    verticalFormula: "when parent ==0 -> childrenSum, min(parent-104, childrenSum)"
+            children:
+            -   class: "UIControl"
+                name: "DecorationWrapper"
+                size: [175.000000, 95.000000]
+                components:
+                    Anchor:
+                        enabled: true
+                        hCenterAnchorEnabled: true
+                        topAnchorEnabled: false
+                    IgnoreLayout:
+                        enabled: false
+                    SizePolicy:
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 100.000000
+                children:
+                -   class: "UIControl"
+                    name: "Decoration"
+                    size: [175.000000, 190.000000]
+                    components:
+                        Background:
+                            sprite: "~res:/Gfx/UI/LobbyCommon/DiscountCertificateExp_Huge.psd"
+                            frame: 0
+                        Anchor:
+                            enabled: true
+                            hCenterAnchorEnabled: true
+                            topAnchorEnabled: true
+                            topAnchor: -80.000000
+                        IgnoreLayout:
+                            enabled: false
+            -   class: "UIStaticText"
+                name: "DialogText"
+                visible: true
+                input: false
+                classes: "text1 text-color-blue"
+                components:
+                    UITextComponent:
+                        text: "#modules_tech_tree:ChooseResearchCertificate/Description"
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                        multiline: "MULTILINE_ENABLED"
+                    Anchor:
+                        leftAnchorEnabled: true
+                        leftAnchor: 20.000000
+                        rightAnchorEnabled: true
+                        rightAnchor: 20.000000
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens/Fonts.yaml"
+            -   class: "UIScrollView"
+                name: "ScrollArea"
+                autoUpdate: true
+                components:
+                    Anchor:
+                        leftAnchorEnabled: true
+                        rightAnchorEnabled: true
+                    SizePolicy:
+                        verticalPolicy: "Formula"
+                        verticalFormula: "when parent == 0 -> childrenSum, min(parentRest, childrenSum)"
+                children:
+                -   class: "UIScrollViewContainer"
+                    name: "scrollContainerControl"
+                    components:
+                        LinearLayout:
+                            orientation: "TopDown"
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "Formula"
+                            verticalFormula: "childrenSum + 1"
+                -   prototype: "ScrollBar/VerticalScrollBar"
+                    name: "VerticalScrollBar"
+                    components:
+                        Anchor:
+                            rightAnchorEnabled: true
+                            topAnchorEnabled: true
+                            bottomAnchorEnabled: true
+                        IgnoreLayout: {}
+                        ScrollBarDelegate:
+                            delegate: ".."
+        -   prototype: "Dialog/ButtonHolder"
+            name: "ButtonHolder"
+            components:
+                SizePolicy:
+                    verticalPolicy: "Formula"
+                    verticalFormula: "maxChild + 20"
+            children:
+            -   prototype: "StyledButton/StyledButton"
+                name: "CancelButton"
+                classes: "button button-color-gray button-cancel-sound"
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                    StyleSheet:
+                        inheritsStylesFromParent: false
+                        styles: "~res:/UI/Styles/ButtonStyle.yaml;~res:/UI/Screens/Fonts.yaml;~res:/UI/Styles/ButtonSoundStyles.yaml"
+                children:
+                -   path: "Caption"
+                    components:
+                        UITextComponent:
+                            text: "#common:DialogButton/Cancel"
+                            fitting: "FITTING_REDUCE"
+                        Anchor:
+                            leftAnchor: 5.000000
+                            rightAnchor: 5.000000
+            -   prototype: "StyledButton/StyledButton"
+                name: "OkButton"
+                classes: "button button-color-green button-ok-sound"
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                    StyleSheet:
+                        inheritsStylesFromParent: false
+                        styles: "~res:/UI/Styles/ButtonStyle.yaml;~res:/UI/Screens/Fonts.yaml;~res:/UI/Styles/ButtonSoundStyles.yaml"
+                children:
+                -   path: "Caption"
+                    components:
+                        UITextComponent:
+                            text: "#modules_tech_tree:ResearchButton"
+                            fitting: "FITTING_REDUCE"
+                        Anchor:
+                            leftAnchor: 5.000000
+                            rightAnchor: 5.000000
+Controls:
+-   class: "UIControl"
+    name: "Cell"
+    classes: "cell "
+    components:
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 504.000000
+            verticalPolicy: "PercentOfLastChild"
+            verticalMin: 60.000000
+        StyleSheet:
+            styles: "~res:/UI/Screens/Lobby/ModulesTechTree/Styles/SelectDiscountDialogStyles.yaml"
+    children:
+    -   prototype: "BlueSeparatorLine/BlueLine"
+        name: "BlueLineTop"
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+    -   prototype: "BlueSeparatorLine/BlueLine"
+        name: "BlueLineBottom"
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                bottomAnchorEnabled: true
+                bottomAnchor: -1.000000
+    -   prototype: "Selection/Selection"
+        name: "Selection"
+        classes: "selection-color-orange"
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: -1.000000
+                rightAnchorEnabled: true
+                rightAnchor: -1.000000
+                topAnchorEnabled: true
+                topAnchor: -1.000000
+                bottomAnchorEnabled: true
+                bottomAnchor: -1.000000
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            Anchor:
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                padding: "20.000000"
+                dynamicSpacing: true
+                useRtl: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   class: "UIControl"
+            name: "CouponInfo"
+            position: [25.000000, 0.000000]
+            input: false
+            components:
+                Anchor:
+                    vCenterAnchorEnabled: true
+                LinearLayout:
+                    spacing: 2.000000
+                    useRtl: true
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "parentRest - 10"
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   class: "UIControl"
+                name: "DescriptionContainer"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    LinearLayout:
+                        orientation: "TopDown"
+                        padding: "8"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfChildrenSum"
+                children:
+                -   class: "UIControl"
+                    name: "Name"
+                    input: false
+                    classes: "text2 color=text-color-white"
+                    components:
+                        UITextComponent:
+                            text: "Сертификат со скидкой"
+                            colorInheritType: "COLOR_IGNORE_PARENT"
+                            multiline: "MULTILINE_ENABLED"
+                            fitting: "FITTING_POINTS"
+                            align: ["LEFT", "VCENTER"]
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfContent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens/Fonts.yaml"
+                -   prototype: "Timer/Timer"
+                    name: "ExpiresAt"
+                    components:
+                        Anchor:
+                            leftAnchorEnabled: true
+                            leftAnchor: 1.000000
+                    children:
+                    -   path: "Time"
+                        classes: "text2 text-color-white"
+            -   prototype: "DiscountLabel/DiscountLabel"
+                name: "Discount"
+                visible: true
+                components:
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                        vCenterAnchor: 2.000000
+                    StyleSheet:
+                        inheritsStylesFromParent: false
+        -   class: "UIControl"
+            name: "Price"
+            input: false
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+                    rightAnchor: 20.000000
+                    vCenterAnchorEnabled: true
+                LinearLayout:
+                    orientation: "TopDown"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfChildrenSum"
+            children:
+            -   class: "UIControl"
+                name: "Exp"
+                input: false
+                components:
+                    LinearLayout:
+                        spacing: 3.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        verticalPolicy: "PercentOfMaxChild"
+                children:
+                -   class: "UIControl"
+                    name: "Value"
+                    position: [29.000000, 20.000000]
+                    input: false
+                    classes: "header2 color=text-color-white"
+                    components:
+                        UITextComponent:
+                            text: "123"
+                            colorInheritType: "COLOR_IGNORE_PARENT"
+                            useRtlAlign: "USE_BY_CONTENT"
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfContent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens/Fonts.yaml"
+                -   class: "UIControl"
+                    name: "Icon"
+                    position: [53.000000, 0.500000]
+                    input: false
+                    components:
+                        Background:
+                            sprite: "~res:/Gfx/UI/LobbyCommon/CurrencyIconsBig"
+                            frame: 3
+                            perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "FixedSize"
+                            horizontalValue: 30.000000
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 30.000000
+            -   class: "UIControl"
+                name: "Silver"
+                input: false
+                components:
+                    LinearLayout:
+                        spacing: 3.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        verticalPolicy: "PercentOfMaxChild"
+                children:
+                -   class: "UIControl"
+                    name: "Value"
+                    position: [29.000000, 20.000000]
+                    input: false
+                    classes: "header2 color=text-color-white"
+                    components:
+                        UITextComponent:
+                            text: "123"
+                            colorInheritType: "COLOR_IGNORE_PARENT"
+                            useRtlAlign: "USE_BY_CONTENT"
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfContent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens/Fonts.yaml"
+                -   class: "UIControl"
+                    name: "Icon"
+                    position: [53.000000, 0.500000]
+                    input: false
+                    components:
+                        Background:
+                            sprite: "~res:/Gfx/UI/LobbyCommon/CurrencyIconsBig"
+                            frame: 1
+                            perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "FixedSize"
+                            horizontalValue: 30.000000
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 30.000000
+            -   class: "UIControl"
+                name: "Gold"
+                input: false
+                components:
+                    LinearLayout:
+                        spacing: 3.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        verticalPolicy: "PercentOfMaxChild"
+                children:
+                -   class: "UIControl"
+                    name: "Value"
+                    position: [29.000000, 20.000000]
+                    input: false
+                    classes: "header2 color=text-color-white"
+                    components:
+                        UITextComponent:
+                            text: "123"
+                            colorInheritType: "COLOR_IGNORE_PARENT"
+                            useRtlAlign: "USE_BY_CONTENT"
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfContent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens/Fonts.yaml"
+                -   class: "UIControl"
+                    name: "Icon"
+                    position: [53.000000, 0.500000]
+                    input: false
+                    components:
+                        Background:
+                            sprite: "~res:/Gfx/UI/LobbyCommon/CurrencyIconsBig"
+                            perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "FixedSize"
+                            horizontalValue: 30.000000
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 30.000000

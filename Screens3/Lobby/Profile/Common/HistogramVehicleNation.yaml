@@ -1,0 +1,51 @@
+Header:
+    version: "79"
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Profile/Common/HistogramWithValue.yaml"
+- "~res:/UI/Screens3/Lobby/Profile/Common/Spacer.yaml"
+- "~res:/UI/Screens3/Lobby/Common/Vehicle/VehicleClass.yaml"
+- "~res:/UI/Screens3/Lobby/Profile/Common/VehicleNation.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "HistogramVehicleType"
+    input: false
+    components:
+        Anchor:
+            bottomAnchorEnabled: true
+        LinearLayout:
+            orientation: "TopDown"
+            spacing: 8.000000
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 36.000000
+            verticalPolicy: "PercentOfChildrenSum"
+        UIDataParamsComponent:
+            params:
+            - ["int", "baseHistogramValue", "224", "224"]
+            - ["eNation", "tankNation", "eNation.UNKNOWN", "eNation.UNKNOWN"]
+            - ["string", "colorStyle", "\"\"", "\"\""]
+            - ["int", "maxHistogramValue", "0", "100"]
+            - ["int", "histogramValue", "0", "80"]
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/Lobby/Common/Vehicle/VehicleInfo.style.yaml"
+    children:
+    -   prototype: "HistogramWithValue/HistogramWithValue"
+        name: "HistogramWithValue"
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+            UIDataParamsComponent:
+                args:
+                    "baseHistogramValue": "baseHistogramValue"
+                    "colorStyle": "colorStyle"
+                    "maxHistogramValue": "maxHistogramValue"
+                    "histogramValue": "histogramValue"
+    -   prototype: "VehicleNation/VehicleNation"
+        name: "VehicleNation"
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+            UIDataParamsComponent:
+                args:
+                    "nation": "tankNation"

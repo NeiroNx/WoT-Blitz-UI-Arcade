@@ -1,0 +1,33 @@
+Header:
+    version: "77"
+StyleSheets:
+-   selector: ".karma.info #Body #Content #Title"
+    properties:
+        visible: false
+-   selector: ".karma.warning #Body #Content #Title"
+    properties:
+        text-color: [1.000000, 0.000000, 0.000000, 1.000000]
+-   selector: ".karma.punishment #Body #Content #Title"
+    properties:
+        text-color: [1.000000, 0.000000, 0.000000, 1.000000]
+-   selector: ".karma.increased #Body #Content #Title"
+    properties:
+        text-color: [0.007843, 0.933333, 0.039216, 1.000000]
+-   selector: ".karma.decreased #Body #Content #Title"
+    properties:
+        text-color: [0.960784, 0.960784, 0.960784, 1.000000]
+-   selector: ".karma.info #Body #icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/icons/icon_info_s"
+-   selector: ".karma.warning #Body #icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/icons/icon_attention_s"
+-   selector: ".karma.punishment #Body #icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/icons/icon_attention_s"
+-   selector: ".karma.decreased #Body #icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/icons/icon_dislike_s"
+-   selector: ".karma.increased #Body #icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/icons/icon_like_s"

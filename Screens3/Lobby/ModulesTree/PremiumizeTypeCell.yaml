@@ -1,0 +1,177 @@
+Header:
+    version: 140
+ImportedPackages:
+- "~res:/UI/Screens3/Common/RadioButton/RadioButton.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "PremiumizeTypeCell"
+    size: [400.000000, 56.000000]
+    classes: "button-checkbox-sound"
+    components:
+        LinearLayout:
+            spacing: 16.000000
+            useRtl: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "FixedSize"
+            verticalValue: 56.000000
+        UIInputEventComponent:
+            onHoverSet: "HOVER_START"
+            onHoverRemoved: "HOVER_END"
+        UISwitchBarElementComponent: {}
+        UIDataParamsComponent:
+            params:
+            - ["string", "typeName", "\"\"", "\"Временная\""]
+            - ["int64", "temporaryDuration", "0L", "259200L"]
+            - ["bool", "resourceCanAfford", "true", "true"]
+            - ["bool", "showDiscount", "false", "false"]
+            - ["bool", "isTemporary", "true", "true"]
+            - ["int", "elementID", "0", "0"]
+            - ["bool", "isSelected", "false", "true"]
+            - ["ResourceModel", "resource", "null", "{ }"]
+        UIDataLocalVarsComponent:
+            data:
+            - ["bool", "isHovered", "false"]
+        UIDataOnEventComponent0:
+            eventName: "HOVER_START"
+            modelFieldExpression: "isHovered"
+            dataExpression: "true"
+        UIDataOnEventComponent1:
+            eventName: "HOVER_END"
+            modelFieldExpression: "isHovered"
+            dataExpression: "false"
+        Sound: {}
+        StyleSheet:
+            styles: "~res:/UI/Screens3/ButtonSound.style.yaml"
+    bindings:
+    - ["input", "not isSelected"]
+    - ["UISwitchBarElementComponent.id", "elementID"]
+    children:
+    -   class: "UIControl"
+        name: "Left"
+        input: false
+        components:
+            Anchor:
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                spacing: 32.000000
+                useRtl: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   prototype: "RadioButton/RadioButton"
+            name: "RadioButton"
+            components:
+                UIDataParamsComponent:
+                    args:
+                        "withInput": "false"
+                        "isHovered": "isHovered"
+                        "isEnabled": "true"
+                        "isSelected": "isSelected"
+        -   class: "UIControl"
+            name: "TypeNameWrapper"
+            input: false
+            components:
+                Anchor:
+                    vCenterAnchorEnabled: true
+                LinearLayout:
+                    spacing: 8.000000
+                    useRtl: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    horizontalFormula: "min(parentRest, childrenSum)"
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   class: "UIControl"
+                name: "TypeName"
+                input: false
+                classes: "t-body regular white-wild-sand-text"
+                components:
+                    UITextComponent:
+                        fitting: "FITTING_POINTS"
+                    SizePolicy:
+                        horizontalPolicy: "Formula"
+                        horizontalFormula: "min(parentRest, content)"
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml"
+                bindings:
+                - ["UITextComponent.text", "localize(typeName)"]
+            -   class: "UIControl"
+                name: "TypeDescr"
+                input: false
+                components:
+                    LinearLayout:
+                        spacing: 6.000000
+                        useRtl: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        verticalPolicy: "PercentOfMaxChild"
+                bindings:
+                - ["visible", "isTemporary"]
+                children:
+                -   class: "UIControl"
+                    name: "Separator"
+                    input: false
+                    classes: "white-wild-sand-25-bg"
+                    components:
+                        Background:
+                            drawType: "DRAW_SCALE_PROPORTIONAL"
+                            sprite: "~res:/Gfx/Lobby/backgrounds/bg_oval_8"
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                            vCenterAnchor: 1.000000
+                        SizePolicy:
+                            horizontalPolicy: "FixedSize"
+                            horizontalValue: 4.000000
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 4.000000
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Color.style.yaml"
+                -   class: "UIControl"
+                    name: "Days"
+                    input: false
+                    classes: "t-body regular white-wild-sand-50-text"
+                    components:
+                        UITextComponent: {}
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfContent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Font.style.yaml"
+                    bindings:
+                    - ["UITextComponent.text", "timeDiffShort(temporaryDuration)"]
+    -   class: "UIControl"
+        name: "Right"
+        input: false
+        components:
+            Anchor:
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfMaxChild"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/CurrencyWithDiscount.yaml"
+                args:
+                    "currencySize": "eCurrencySize.BIG"
+                    "forButton": "false"
+                    "canAfford": "resourceCanAfford"
+                    "showDiscount": "showDiscount"
+                    "plusVisible": "false"
+                    "resource": "resource"
+    -   class: "UIControl"
+        name: "Separator"
+        input: false
+        classes: "white-wild-sand-5-bg"
+        components:
+            Background: {}
+            Anchor:
+                bottomAnchorEnabled: true
+            IgnoreLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "FixedSize"
+                verticalValue: 1.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"

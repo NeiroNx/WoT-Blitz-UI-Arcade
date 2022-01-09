@@ -1,0 +1,15 @@
+Header:
+    version: 128
+StyleSheets:
+-   selectors:
+    - ".BoostersPanelPadding"
+    properties:
+        linearLayout-padding: "0; 0"
+-   selectors:
+    - ".BoostersPanelPadding.keyboard-mouse"
+    properties:
+        linearLayout-padding: "0; 10"
+-   selectors:
+    - ".BoostersPanelPadding.gamepad"
+    properties:
+        linearLayout-padding: "0; 10"

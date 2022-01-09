@@ -1,0 +1,106 @@
+Header:
+    version: 133
+ImportedPackages:
+- "~res:/UI/Screens/Battle/Notifications/ChatTankName.yaml"
+Prototypes:
+-   class: "UIControl"
+    customClass: "UIChatMessageNotificationControl"
+    name: "UIChatMessageNotification"
+    size: [960.000000, 30.000000]
+    input: false
+    components:
+        Background: {}
+        Anchor:
+            hCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "FixedSize"
+            verticalValue: 20.000000
+    children:
+    -   class: "UIControl"
+        name: "LeftContainer"
+        position: [0.000000, 0.000000]
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                hCenterAnchorEnabled: true
+                hCenterAnchor: -38.000000
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                orientation: "RightToLeft"
+                spacing: 5.000000
+            SizePolicy:
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   prototype: "ChatTankName/TankNameContainer"
+            name: "TankNameContainer"
+        -   class: "UIControl"
+            name: "PlayerName"
+            position: [-98.000000, 3.000000]
+            size: [60.000000, 24.000000]
+            input: false
+            classes: "t-old-header5"
+            components:
+                UITextComponent:
+                    text: "PlayerName"
+                    color: [1.000000, 1.000000, 1.000000, 1.000000]
+                    shadowOffset: [1.000000, 1.000000]
+                    shadowColor: [0.000000, 0.000000, 0.000000, 0.750000]
+                    align: ["RIGHT", "VCENTER"]
+                Anchor:
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/OldFont.style.yaml"
+    -   class: "UIControl"
+        name: "Action"
+        position: [121.000000, -9.000000]
+        size: [76.000000, 48.000000]
+        input: false
+        components:
+            Background:
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+    -   class: "UIControl"
+        name: "RightContainer"
+        position: [17.000000, 0.000000]
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: false
+                hCenterAnchorEnabled: true
+                hCenterAnchor: 38.000000
+                rightAnchorEnabled: true
+                rightAnchor: 116.000000
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                orientation: "LeftToRight"
+                spacing: 3.000000
+            SizePolicy:
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "Message"
+            position: [-98.000000, 3.000000]
+            size: [-148.000000, 30.000000]
+            input: false
+            classes: "t-old-header5"
+            components:
+                UITextComponent:
+                    text: "Message"
+                    shadowOffset: [1.000000, 1.000000]
+                    fitting: "FITTING_POINTS"
+                    align: ["LEFT", "VCENTER"]
+                Anchor:
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/OldFont.style.yaml"

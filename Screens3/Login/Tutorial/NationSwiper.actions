@@ -1,0 +1,25 @@
+action SwipeOffset(int aLeftIndex, int aRightIndex, float aLeftPosition, float aRightPosition)
+{
+    ChangeData(parallaxBackgroundPositionX, (-aLeftIndex*pageSize + aLeftPosition)*parallaxBackgroundFactor);
+    ChangeData(parallaxMiddlePositionX, (-aLeftIndex*pageSize + aLeftPosition)*parallaxMiddleFactor);
+    ChangeData(parallaxGroundPositionX, (-aLeftIndex*pageSize + aLeftPosition)*parallaxGroundFactor);
+    ChangeData(rightIndex, aRightIndex);
+    ChangeData(rightPosition, aRightPosition);
+    ChangeData(currentIndex, aLeftIndex);
+}
+
+action PageChanged(int pageIndex)
+{
+    if (pageIndex != tutorialTanks.selectedPage)
+    {
+        Event("ON_PAGE_CHANGED", arg1=pageIndex);
+    }
+}
+
+action SwipeCanceled()
+{
+    if (currentIndex != tutorialTanks.selectedPage)
+    {
+        Event("ON_PAGE_CHANGED", arg1=currentIndex);
+    }
+}

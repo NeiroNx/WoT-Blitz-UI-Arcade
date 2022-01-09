@@ -1,0 +1,383 @@
+Header:
+    version: 141
+Prototypes:
+-   class: "UIControl"
+    name: "GiftPostcard"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 600.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 400.000000
+        UIDataParamsComponent:
+            params:
+            - ["bool", "showSender", "false", "false"]
+            - ["eGiftPostcardField", "currentField", "eGiftPostcardField.None", "eGiftPostcardField.Reciever"]
+            - ["bool", "editable", "false", "true"]
+            - ["ShopProduct", "product", "null", "{ }"]
+            - ["Gift", "gift", "null", "{ }"]
+            events:
+            - "ON_RECIEVER_REMOVED"
+            - "ON_RECIEVER_CLICKED"
+        UIDataLocalVarsComponent:
+            data:
+            - ["string", "fieldStyle", "\"orange-meteor-10-bg\""]
+            - ["string", "selectedFieldStyle", "\"orange-meteor-25-bg\""]
+    children:
+    -   class: "UIControl"
+        name: "Image"
+        input: false
+        components:
+            Background:
+                drawType: "DRAW_SCALE_PROPORTIONAL"
+                sprite: "~res:/Gfx/Lobby/backgrounds/present/icon_gift"
+                perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+    -   class: "UIControl"
+        name: "Fileds"
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                hCenterAnchor: -124.000000
+                topAnchorEnabled: true
+                topAnchor: 70.000000
+            LinearLayout:
+                orientation: "TopDown"
+                spacing: 16.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfChildrenSum"
+        children:
+        -   class: "UIControl"
+            name: "SenderWrapper"
+            input: false
+            components:
+                LinearLayout:
+                    orientation: "TopDown"
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 236.000000
+                    verticalPolicy: "PercentOfChildrenSum"
+                UIInputEventComponent:
+                    onTouchUpInside: "ON_RECIEVER_CLICKED"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+            bindings:
+            - ["visible", "showSender"]
+            children:
+            -   class: "UIControl"
+                name: "LabelWrapper"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    LinearLayout:
+                        padding: "8"
+                        useRtl: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfMaxChild"
+                bindings:
+                - ["visible", "not editable"]
+                children:
+                -   class: "UIControl"
+                    name: "Label"
+                    input: false
+                    classes: "t-caps bold color=grey-shark-60-text"
+                    components:
+                        UITextComponent:
+                            text: "Gifts/Postcard/Sender"
+                            colorInheritType: "COLOR_IGNORE_PARENT"
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfContent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+                -   class: "UIControl"
+                    name: "Spacer"
+                    size: [32.000000, 32.000000]
+                    input: false
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 0.000000
+            -   class: "UIControl"
+                name: "Seneder"
+                components:
+                    Background: {}
+                    UIRoundedCornersComponent:
+                        radius: "5"
+                    LinearLayout:
+                        padding: "8"
+                        spacing: 8.000000
+                        useRtl: true
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 236.000000
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 36.000000
+                    UIInputEventComponent:
+                        onTouchUpInside: "OnRecieverClicked"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+                bindings:
+                - ["input", "editable"]
+                - ["classes", "when currentField == eGiftPostcardField.Reciever and isNull(gift.initiator) -> selectedFieldStyle, fieldStyle"]
+                children:
+                -   class: "UIControl"
+                    name: "SenderHolder"
+                    input: false
+                    components:
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfMaxChild"
+                        UIChildComponent0:
+                            condition: "not isNull(gift.initiator)"
+                            prototypePath: "~res:/UI/Screens3/Lobby/Gifts/FriendName.yaml"
+                            args:
+                                "clanTagStyle": "\"t-subtitle bold color=grey-shark-text\""
+                                "playerNameStyle": "\"t-subtitle regular color=grey-shark-text\""
+                                "playerName": "gift.initiator.name"
+                                "clanTag": "gift.initiatorClanTag"
+                                "playerNameSize": "ePlayerSize.kNormal"
+        -   class: "UIControl"
+            name: "RecieverWrapper"
+            input: false
+            components:
+                LinearLayout:
+                    orientation: "TopDown"
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 236.000000
+                    verticalPolicy: "PercentOfChildrenSum"
+                UIInputEventComponent:
+                    onTouchUpInside: "ON_RECIEVER_CLICKED"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+            children:
+            -   class: "UIControl"
+                name: "LabelWrapper"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    LinearLayout:
+                        padding: "8"
+                        useRtl: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfMaxChild"
+                bindings:
+                - ["visible", "not editable"]
+                children:
+                -   class: "UIControl"
+                    name: "Label"
+                    input: false
+                    classes: "t-caps bold color=grey-shark-60-text"
+                    components:
+                        UITextComponent:
+                            text: "Gifts/Postcard/Receiver"
+                            colorInheritType: "COLOR_IGNORE_PARENT"
+                        Anchor:
+                            leftAnchorEnabled: true
+                            leftAnchor: 8.000000
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfContent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+                -   class: "UIControl"
+                    name: "Spacer"
+                    size: [32.000000, 32.000000]
+                    input: false
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 0.000000
+            -   class: "UIControl"
+                name: "Reciever"
+                components:
+                    Background: {}
+                    UIRoundedCornersComponent:
+                        radius: "5"
+                    LinearLayout:
+                        padding: "8; 8"
+                        spacing: 8.000000
+                        useRtl: true
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 236.000000
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 36.000000
+                    UIInputEventComponent:
+                        onTouchUpInside: "OnRecieverClicked"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+                bindings:
+                - ["input", "editable"]
+                - ["classes", "when currentField == eGiftPostcardField.Reciever and isNull(gift.initiator) -> selectedFieldStyle, fieldStyle"]
+                children:
+                -   class: "UIControl"
+                    name: "RecieverWrapper"
+                    size: [32.000000, 32.000000]
+                    input: false
+                    components:
+                        ClipContent: {}
+                        LinearLayout:
+                            useRtl: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfParent"
+                    children:
+                    -   class: "UIControl"
+                        name: "RecieverHolder"
+                        input: false
+                        components:
+                            Anchor:
+                                vCenterAnchorEnabled: true
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                verticalPolicy: "PercentOfMaxChild"
+                            UIChildComponent0:
+                                condition: "not isNull(gift.receiver)"
+                                prototypePath: "~res:/UI/Screens3/Lobby/Gifts/FriendName.yaml"
+                                args:
+                                    "clanTagStyle": "\"t-subtitle bold color=grey-shark-text\""
+                                    "playerNameStyle": "\"t-subtitle regular color=grey-shark-text\""
+                                    "playerName": "gift.receiver.name"
+                                    "clanTag": "gift.receiverClanTag"
+                                    "playerNameSize": "ePlayerSize.kNormal"
+                            UIChildComponent1:
+                                childType: "kControl"
+                                control: "RecieverDefault"
+                -   class: "UIControl"
+                    name: "RemoveButtonHolder"
+                    input: false
+                    components:
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfMaxChild"
+                            verticalPolicy: "PercentOfMaxChild"
+                        UIChildComponent0:
+                            condition: "not isNull(gift.receiver) and editable"
+                            prototypePath: "~res:/UI/Screens3/Lobby/Common/Button/ClickableInfoIconButton.yaml"
+                            args:
+                                "icon": "\"~res:/Gfx/Shared/icons/icon_close_n\""
+                            eventActions:
+                            - ["ON_CLICK_BUTTON", "ON_RECIEVER_REMOVED", ""]
+        -   class: "UIControl"
+            name: "BundleWrapper"
+            input: false
+            components:
+                LinearLayout:
+                    orientation: "TopDown"
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 236.000000
+                    verticalPolicy: "PercentOfChildrenSum"
+                UIInputEventComponent:
+                    onTouchUpInside: "ON_RECIEVER_CLICKED"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+            bindings:
+            - ["visible", "not isNull(product)"]
+            children:
+            -   class: "UIControl"
+                name: "LabelWrapper"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    LinearLayout:
+                        padding: "8"
+                        useRtl: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfMaxChild"
+                children:
+                -   class: "UIControl"
+                    name: "Label"
+                    input: false
+                    classes: "t-caps bold color=grey-shark-60-text"
+                    components:
+                        UITextComponent:
+                            text: "Gifts/Postcard/Contains"
+                            colorInheritType: "COLOR_IGNORE_PARENT"
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfContent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+                -   class: "UIControl"
+                    name: "Spacer"
+                    size: [32.000000, 32.000000]
+                    input: false
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 0.000000
+            -   class: "UIControl"
+                name: "Bundle"
+                input: false
+                components:
+                    Background: {}
+                    UIRoundedCornersComponent:
+                        radius: "5"
+                    LinearLayout:
+                        padding: "8"
+                        spacing: 8.000000
+                        useRtl: true
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 236.000000
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 36.000000
+                    UIInputEventComponent:
+                        onTouchUpInside: "OnRecieverClicked"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+                bindings:
+                - ["classes", "fieldStyle"]
+                children:
+                -   class: "UIControl"
+                    name: "BundleName"
+                    input: false
+                    classes: "t-subtitle regular color=grey-shark-text"
+                    components:
+                        UITextComponent:
+                            colorInheritType: "COLOR_IGNORE_PARENT"
+                            fitting: "FITTING_POINTS"
+                            align: ["LEFT", "HCENTER"]
+                            useRtlAlign: "USE_BY_SYSTEM"
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfContent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+                    bindings:
+                    - ["UITextComponent.text", "when isNull(product) -> \"\", product.name"]
+Slots:
+-   class: "UIControl"
+    name: "RecieverDefault"
+    input: false
+    classes: "t-subtitle regular color=grey-shark-60-text"
+    components:
+        UITextComponent:
+            align: ["LEFT", "VCENTER"]
+            useRtlAlign: "USE_BY_SYSTEM"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfContent"
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+    bindings:
+    - ["UITextComponent.text", "when currentField == eGiftPostcardField.Reciever and isNull(gift.receiver) -> localize(\"Gifts/ChooseFriend\"), \"\""]

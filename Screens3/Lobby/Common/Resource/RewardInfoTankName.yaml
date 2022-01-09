@@ -1,0 +1,70 @@
+Header:
+    version: 133
+Prototypes:
+-   class: "UIControl"
+    name: "VehicleName"
+    input: false
+    components:
+        LinearLayout:
+            spacing: 8.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "PercentOfMaxChild"
+        UIDataParamsComponent:
+            params:
+            - ["TankStats", "stats", "null", "{ }"]
+            - ["VehicleDataModel", "vehicle", "null", "{ }"]
+    children:
+    -   class: "UIControl"
+        name: "Flag"
+        input: false
+        components:
+            Anchor:
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/TankInfo/NationFlag.yaml"
+                args:
+                    "nation": "vehicle.nation"
+                    "subnation": "vehicle.subnation"
+    -   class: "UIControl"
+        name: "Class"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Vehicle/VehicleClass.yaml"
+                args:
+                    "class": "vehicle.tankClass"
+                    "type": "when vehicle.isPremium -> eVehicleDescriptionType.PREMIUM, vehicle.isCollectible -> eVehicleDescriptionType.COLLECTIBLE, stats.isPremiumized -> eVehicleDescriptionType.PREMIUMISED, eVehicleDescriptionType.NORMAL"
+                    "elite": "stats.isElite"
+    -   class: "UIControl"
+        name: "Level"
+        input: false
+        components:
+            UITextComponent: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml"
+        bindings:
+        - ["classes", "\"t-subtitle regular \" + (when vehicle.isPremium -> \"yellow-lightning-text\", vehicle.isCollectible -> \"blue-rimmi-text\", stats.isPremiumized -> \"yellow-chalky-text\", \"white-wild-sand-text\")"]
+        - ["UITextComponent.text", "roman(vehicle.level)"]
+    -   class: "UIControl"
+        name: "Name"
+        input: false
+        components:
+            UITextComponent: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml"
+        bindings:
+        - ["classes", "\"t-subtitle regular \" + (when vehicle.isPremium -> \"yellow-lightning-text\", vehicle.isCollectible -> \"blue-rimmi-text\", stats.isPremiumized -> \"yellow-chalky-text\", \"white-wild-sand-text\")"]
+        - ["UITextComponent.text", "localize(vehicle.name)"]

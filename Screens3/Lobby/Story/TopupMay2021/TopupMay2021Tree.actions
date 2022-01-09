@@ -1,0 +1,52 @@
+action CONTENT_AREA_CHANGED(vector2 size)
+{
+    ChangeData(contentArea, size);
+}
+
+action STEPS_AREA_CHANGED(vector2 size)
+{
+    ChangeData(stepsArea, size);
+}
+
+action SCROLL_TO_STEP(int stepId, string path)
+{
+    parallel
+    {
+        if (stepsArea.X > contentArea.X)
+        {
+            ScrollToEnsureControlOnScreen(path, 0.6, xPolicy = eScrollToControlPolicy.kCenter);
+        }
+        Event("SELECT_STEP", arg1 = stepId);
+    }
+}
+
+action ON_OPEN()
+{
+    if (stepsArea.X > contentArea.X)
+    {
+        if (not isNull(storyView.selectedStep))
+        {
+            if (storyView.tree.groups.common.steps.Contains(storyView.selectedStep.id))
+            {
+                ScrollToEnsureControlOnScreen("**/Step" + str(storyView.selectedStep.id), 0.0, xPolicy = eScrollToControlPolicy.kCenter);
+            }
+            else
+            {
+                ScrollToEnsureControlOnScreen("**/RepeatableSteps", 0.0, xPolicy = eScrollToControlPolicy.kCenter);
+            }
+        }
+        else
+        {
+            if (not isNull(storyView.story.inProgressStep) and storyView.tree.groups.common.steps.Contains(storyView.story.inProgressStep.id))
+            {
+                ScrollToEnsureControlOnScreen("**/Step" + str(storyView.story.inProgressStep.id), 0.0, xPolicy = eScrollToControlPolicy.kCenter);
+            }
+            else
+            {
+                ScrollToEnsureControlOnScreen("**/RepeatableSteps", 0.0, xPolicy = eScrollToControlPolicy.kCenter);
+            }
+        }
+    }
+
+    ChangeData(stepsOpacity, 1.0);
+}

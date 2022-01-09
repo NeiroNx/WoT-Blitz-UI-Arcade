@@ -1,0 +1,45 @@
+action InitFinished
+{
+    Wait(0.15);
+
+    if (enableAppearingAnimation)
+    {
+        Opacity("**/CaptionHolder", 0);
+        ChangeData(headerAnimShift, -20);
+        Opacity("**/ButtonHolder", 0);
+        ChangeData(buttonAnimShift, 20);
+		Scale("**/ContentWrapper", 0.5, 0.5);
+
+        parallel
+        {
+            Opacity("**/ContentWrapper", 1.0, 0.3);
+            Scale("**/ContentWrapper", 1.1, 1.1, 0.3, SINE_OUT);
+        }
+        Scale("**/ContentWrapper", 1.0, 1.0, 0.2, SINE_IN_SINE_OUT);
+		
+		parallel
+        {
+            Opacity("**/CaptionHolder", 1.0, 0.4, EASE_OUT);
+            ChangeData(headerAnimShift, 0, 0.4, EASE_OUT);
+        }
+        parallel
+        {
+            Opacity("**/ButtonHolder", 1.0, 0.4, EASE_OUT);
+            ChangeData(buttonAnimShift, 0, 0.4, EASE_OUT);
+        }
+    }
+    else
+    {
+        Opacity("**/ContentWrapper", 1.0);
+    }
+}
+
+action HolderSizeChanged(vector2 size)
+{
+    ChangeData(holderSize, size);
+}
+
+action WrapperSizeChanged(vector2 size)
+{
+    ChangeData(wrapperSize, size);
+}

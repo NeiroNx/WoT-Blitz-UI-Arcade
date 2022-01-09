@@ -1,0 +1,30 @@
+Header:
+    version: 134
+Prototypes:
+-   class: "UIControl"
+    name: "StuffQuestRewardOverlay"
+    size: [32.000000, 32.000000]
+    input: true
+    classes: "button-open-sound"
+    components:
+        Anchor:
+            hCenterAnchorEnabled: true
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 140.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 140.000000
+        UIAttachLayoutMasterComponent: {}
+        UIInputEventComponent:
+            onTouchUpInside: "ON_REWARD_CLICKED"
+            onTouchUpInsideData: "index"
+        UIDataParamsComponent:
+            params:
+            - ["string", "attachId", "\"\"", "\"\""]
+            - ["int", "index", "0", "0"]
+        Sound: {}
+        StyleSheet:
+            styles: "~res:/UI/Screens3/ButtonSound.style.yaml"
+    bindings:
+    - ["UIAttachLayoutMasterComponent.attachId", "attachId"]

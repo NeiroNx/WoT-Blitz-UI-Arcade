@@ -1,0 +1,18 @@
+Header:
+    version: "28"
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/Common/Link.yaml"
+Controls:
+-   prototype: "Link/Link"
+    name: "LinkSupport"
+    components:
+        UIInputEventComponent:
+            onTouchUpInside: "ON_SUPPORT_HYPERLINK_PRESSED"
+        UITextComponent: {}
+        StyleSheet:
+            styles: "~res:/UI/Screens/Fonts.yaml;~res:/UI/Screens/Lobby/BanForRefund/LinkSupport.yaml"
+    children:
+    -   path: "Text"
+        components:
+            UITextComponent:
+                text: "refund_ban/InfoScreen/PlayerSupport"

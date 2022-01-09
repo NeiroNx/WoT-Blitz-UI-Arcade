@@ -1,0 +1,13 @@
+Header:
+    version: "24"
+StyleSheets:
+-   selector: ".intersecting_with_chat_commands:disabled"
+    properties:
+        bg-color: [1.000000, 1.000000, 1.000000, 0.498039]
+-   selector: "#scalableContent.abilities_2"
+    properties:
+        linearLayout-padding: 0.000000
+        linearLayout-dynamicPadding: true
+        linearLayout-spacing: -5.000000
+        anchor-topAnchorEnabled: true
+        anchor-topAnchor: 12.000000

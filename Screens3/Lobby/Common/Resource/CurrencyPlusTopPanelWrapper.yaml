@@ -1,0 +1,66 @@
+Header:
+    version: 121
+Prototypes:
+-   class: "UIControl"
+    name: "CurrencyWrapperWithPlusTopPanel"
+    input: false
+    components:
+        Anchor:
+            hCenterAnchorEnabled: true
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            verticalPolicy: "FixedSize"
+        UIDataParamsComponent:
+            params:
+            - ["int", "iconSize", "20", "20"]
+            - ["control", "iconControl", "null", "null"]
+        UIChildComponent0:
+            childType: "kControl"
+            condition: "not isNull(iconControl)"
+            control: "iconControl"
+    bindings:
+    - ["SizePolicy.horizontalValue", "iconSize"]
+    - ["SizePolicy.verticalValue", "iconSize"]
+    children:
+    -   class: "UIControl"
+        name: "Bg"
+        input: false
+        classes: "green-la-palma-bg"
+        components:
+            Background:
+                drawType: "DRAW_STRETCH_BOTH"
+                sprite: "~res:/Gfx/Lobby/backgrounds/bg_r1"
+                perPixelAccuracy: "PER_PIXEL_ACCURACY_FORCED"
+                leftRightStretchCap: 1.000000
+                topBottomStretchCap: 1.000000
+            Anchor:
+                rightAnchorEnabled: true
+                rightAnchor: -4.000000
+                topAnchorEnabled: true
+                topAnchor: -4.000000
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 14.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 14.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+        children:
+        -   class: "UIControl"
+            name: "PlusIcon"
+            input: false
+            classes: "white-wild-sand-bg"
+            components:
+                Background:
+                    drawType: "DRAW_ALIGNED"
+                    sprite: "~res:/Gfx/Lobby/icons/icon_plus_xxs"
+                    perPixelAccuracy: "PER_PIXEL_ACCURACY_FORCED"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"

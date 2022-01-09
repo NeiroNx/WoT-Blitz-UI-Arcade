@@ -1,0 +1,9 @@
+Header:
+    version: "23"
+StyleSheets:
+-   selector: ".live-on #BroadcastLabel"
+    properties:
+        visible: true
+-   selector: ".live-off #BroadcastLabel"
+    properties:
+        visible: false

@@ -1,0 +1,46 @@
+Header:
+    version: 117
+Prototypes:
+-   class: "UIControl"
+    name: "VehicleIcon"
+    size: [96.000000, 96.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            horizontalMin: 0.001000
+            verticalPolicy: "PercentOfParent"
+            verticalMin: 0.001000
+        UIDataParamsComponent:
+            params:
+            - ["VehicleResource", "vehicle", "null", "{ }"]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        pivot: [0.500000, 0.500000]
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 160.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 100.000000
+            ScalePolicy:
+                horizontalFormula: "min(1.0, min(parentSize.X / size.X, parentSize.Y / size.Y))"
+                verticalFormula: "min(1.0, min(parentSize.X / size.X, parentSize.Y / size.Y))"
+        children:
+        -   class: "UIControl"
+            name: "Icon"
+            input: false
+            components:
+                UITextureComponent:
+                    drawType: "DRAW_SCALE_PROPORTIONAL"
+                    perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            bindings:
+            - ["UITextureComponent.spritePath", "when isNull(vehicle) -> \"~res:/Gfx/UI/LobbyCommon/covered_tank\", vehicle.info.bigIconPath"]

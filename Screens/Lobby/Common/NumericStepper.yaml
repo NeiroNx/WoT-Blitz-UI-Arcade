@@ -1,0 +1,115 @@
+Header:
+    version: "49"
+ImportedPackages:
+- "~res:/UI/Screens/Common/IconButton.yaml"
+- "~res:/UI/Screens/Common/NumericTextField.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "NumericStepper"
+    size: [270.000000, 52.000000]
+    input: false
+    classes: "stepper"
+    components:
+        Background: {}
+        LinearLayout:
+            spacing: 10.000000
+        SizePolicy:
+            verticalPolicy: "PercentOfMaxChild"
+        UIDataSourceComponent0:
+            source: "~res:/UI/Examples/Model/Lobby/Common/NumericStepper.model"
+        UIDataSourceComponent1:
+            sourceType: "File"
+            source: "~res:/UI/Screens/Lobby/Common/ViewModel/NumericStepper.model"
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Lobby/Common/Styles/NumericStepperStyles.yaml"
+    bindings:
+    - ["visible", "textFieldsVisibility", "Read"]
+    - ["enabled", "canEdit", "Read"]
+    children:
+    -   prototype: "IconButton/IconButton"
+        name: "MinusButton"
+        position: [0.000000, 0.000000]
+        size: [52.000000, 52.000000]
+        classes: "button button-color-gray button-ok-sound"
+        components:
+            Background:
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+            Anchor:
+                vCenterAnchorEnabled: true
+            UIInputEventComponent:
+                onTouchDown: "ON_VALUE_INCREMENT"
+                onTouchDownData: "-1"
+            UILongTapComponent:
+                pressTimeout: 0.200000
+                repeatDelay: 0.200000
+                event: "ON_VALUE_INCREMENT"
+                eventData: "-1"
+            StyleSheet:
+                inheritsStylesFromParent: false
+                styles: "~res:/UI/Styles/ButtonStyle.yaml;~res:/UI/Styles/ButtonSoundStyles.yaml"
+        bindings:
+        - ["enabled", "currentValue  > limitMin ", "Read"]
+        children:
+        -   path: "icon"
+            components:
+                Background:
+                    sprite: "~res:/Gfx/UI/CommonUIElements/IconsSmall"
+                    frame: 1
+    -   class: "UIControl"
+        name: "Background"
+        size: [144.000000, 50.000000]
+        input: false
+        components:
+            Background:
+                drawType: "DRAW_STRETCH_BOTH"
+                sprite: "~res:/Gfx/UI/CommonUIElements/search_back"
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                leftRightStretchCap: 4.000000
+                topBottomStretchCap: 4.000000
+            Anchor:
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+        children:
+        -   prototype: "NumericTextField/NumericTextField"
+            name: "NumericTextField"
+            textalign: ["HCENTER", "VCENTER"]
+            scrollOnKeyboardShowFlag: true
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    rightAnchorEnabled: true
+                    topAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                UIInputEventComponent: {}
+            bindings:
+            - ["text", "currentValue", "Read"]
+    -   prototype: "IconButton/IconButton"
+        name: "PlusButton"
+        size: [52.000000, 52.000000]
+        classes: "button button-color-gray button-ok-sound"
+        components:
+            Background:
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+            Anchor:
+                vCenterAnchorEnabled: true
+            UIInputEventComponent:
+                onTouchDown: "ON_VALUE_INCREMENT"
+                onTouchDownData: "1"
+            UILongTapComponent:
+                pressTimeout: 0.200000
+                repeatDelay: 0.200000
+                event: "ON_VALUE_INCREMENT"
+                eventData: "1"
+            StyleSheet:
+                inheritsStylesFromParent: false
+                styles: "~res:/UI/Styles/ButtonStyle.yaml;~res:/UI/Styles/ButtonSoundStyles.yaml"
+        bindings:
+        - ["enabled", "currentValue < limitMax", "Read"]
+        children:
+        -   path: "icon"
+            components:
+                Background:
+                    sprite: "~res:/Gfx/UI/CommonUIElements/IconsSmall"

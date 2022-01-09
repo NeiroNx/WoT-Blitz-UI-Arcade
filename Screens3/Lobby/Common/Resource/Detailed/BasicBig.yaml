@@ -1,0 +1,95 @@
+Header:
+    version: 120
+Prototypes:
+-   class: "UIControl"
+    name: "BasicBig"
+    size: [96.000000, 144.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            horizontalMin: 96.000000
+            verticalPolicy: "PercentOfParent"
+            verticalMin: 128.000000
+        UIDataParamsComponent:
+            params:
+            - ["ResourceType", "type", "ResourceType.undefined", "ResourceType.premium"]
+            - ["BasicResource", "basic", "null", "{ }"]
+            - ["control", "fx", "null", "null"]
+            - ["control", "overlay", "null", "null"]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            Anchor:
+                bottomAnchorEnabled: true
+            LinearLayout:
+                orientation: "TopDown"
+                spacing: 8.000000
+                skipInvisible: false
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfChildrenSum"
+        children:
+        -   class: "UIControl"
+            name: "IconWrapper"
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   class: "UIControl"
+                name: "FxHolder"
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                    UIChildComponent0:
+                        childType: "kControl"
+                        condition: "not isNull(fx)"
+                        control: "fx"
+            -   class: "UIControl"
+                name: "Icon"
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 96.000000
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 96.000000
+                    UIChildComponent0:
+                        prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/Detailed/BasicIcon.yaml"
+                        args:
+                            "type": "type"
+                            "basic": "basic"
+            -   class: "UIControl"
+                name: "Overlay"
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                    UIChildComponent0:
+                        childType: "kControl"
+                        condition: "not isNull(overlay)"
+                        control: "overlay"
+        -   class: "UIControl"
+            name: "Quantity"
+            input: false
+            classes: "t-headline bold white-wild-sand-text"
+            components:
+                UITextComponent: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "Formula"
+                    verticalFormula: "max(content, 24)"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml"
+            bindings:
+            - ["visible", "basic.quantity >= 0"]
+            - ["UITextComponent.text", "when type == ResourceType.premium -> timeDiffShort(basic.quantity), str1000Separated(basic.quantity)"]

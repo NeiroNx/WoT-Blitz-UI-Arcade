@@ -1,0 +1,58 @@
+Header:
+    version: 127
+Prototypes:
+-   class: "UIControl"
+    name: "NEWCOMERS2020End"
+    size: [960.000000, 592.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["VehicleResource", "vehicle", "null", "{ }"]
+            events:
+            - "CLOSE"
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/FullScreenPopup/NewComersEventNotification.yaml"
+                args:
+                    "fx": "FX_holder"
+                    "image": "\"~res:/Gfx/Lobby/events/okr_new-comers/okr_na_tank_free\""
+                    "header": "\"NEWCOMERS2020/Notification/End/Header\""
+                    "description": "\"NEWCOMERS2020/Notification/End/Description\""
+                    "vehicle": "vehicle"
+                eventActions:
+                - ["CLOSE", "CLOSE", ""]
+Slots:
+-   class: "UIControl"
+    name: "FX_holder"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+    children:
+    -   class: "UIParticles"
+        name: "Particle"
+        position: [16.000000, 228.000000]
+        size: [32.000000, 32.000000]
+        scale: [4.000000, 4.000000]
+        pivot: [0.500000, 0.500000]
+        input: false
+        effectPath: "~res:/3d/FX/UI/NewComers/Glow.sc2"
+        autoStart: true
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+                vCenterAnchor: 15.000000

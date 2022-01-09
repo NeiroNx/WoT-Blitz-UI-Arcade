@@ -1,0 +1,19 @@
+Header:
+    version: "106"
+ImportedPackages:
+- "~res:/UI/Screens3/Common/Hover.style.yaml"
+StyleSheets:
+-   selectors:
+    - ".leaderboard-row:hover * .background"
+    properties:
+        opacity-opacity:
+            value: 0.000000
+            transitionTime: 0.150000
+            transitionFunction: "EASE_IN_EASY_OUT"
+-   selectors:
+    - ".leaderboard-row * .background"
+    properties:
+        opacity-opacity:
+            value: 1.000000
+            transitionTime: 0.150000
+            transitionFunction: "EASE_IN_EASY_OUT"

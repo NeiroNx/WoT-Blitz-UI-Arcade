@@ -1,0 +1,15 @@
+Header:
+    version: 134
+Prototypes:
+-   class: "UIControl"
+    name: "TopHUDCaptureBonusesPanel"
+    input: false
+    components:
+        Anchor:
+            hCenterAnchorEnabled: true
+        LinearLayout:
+            spacing: 10.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "PercentOfMaxChild"
+            verticalValue: 110.000000

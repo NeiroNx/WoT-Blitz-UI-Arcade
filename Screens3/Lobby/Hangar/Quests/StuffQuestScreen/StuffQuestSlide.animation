@@ -1,0 +1,12 @@
+animation INIT
+{
+    ChangeProperty("**/BackgroundImage","UIPostProcessSourceComponent","id","QuestImage" + str(index));
+    ChangeProperty("**/BackgroundHSV","UIPostProcessInputComponent","id","QuestImage" + str(index));
+    ChangeProperty("**/BackgroundHSV","UIPostProcessSourceComponent","id","QuestImageHSV" + str(index));
+    ChangeProperty("**/MaskedBlurContainer/BlurMask","UIPostProcessSourceComponent","id","QuestsBlurMask" + str(index));
+    ChangeProperty("**/MaskedBlurContainer/MaskedBlur","UIPostProcessSourceComponent","id","QuestsMaskedBlur" + str(index));
+    ChangeProperty("**/MaskedBlurContainer/MaskedBlur/BlurLite","UIPostProcessInputComponent","id","QuestImage" + str(index));
+    ChangeProperty("**/MaskedBlurContainer/MaskedBlur/Mask","UIPostProcessInputComponent","id","QuestsBlurMask" + str(index));
+    ChangeProperty("**/MaskedBlurContainer/BackgroundUnderBlur","UIPostProcessInputComponent","id","QuestImageHSV" + str(index));
+    ChangeProperty("**/MaskedBlurContainer/ShowMaskedBlur","UIPostProcessInputComponent","id","QuestsMaskedBlur" + str(index));
+}

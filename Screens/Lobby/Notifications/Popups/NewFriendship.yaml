@@ -1,0 +1,79 @@
+Header:
+    version: 121
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/Notifications/Popups/SquadNotificationPrototype.yaml"
+- "~res:/UI/Screens3/Lobby/Common/NotificationButton.yaml"
+Controls:
+-   prototype: "SquadNotificationPrototype/Notification"
+    customClass: "UINewFriendshipNotification"
+    name: "NewFriendship"
+    children:
+    -   path: "Content/LeftPart/Icon"
+        components:
+            UITextureComponent:
+                spritePath: "~res:/Gfx/Lobby/icons/icon_friend_s"
+    -   path: "Content/LeftPart/Content"
+        children:
+        -   class: "UIControl"
+            name: "RichText"
+            size: [32.000000, 32.000000]
+            input: true
+            components:
+                RichContent:
+                    text: "Hello <bold>World</bold>!"
+                    baseClasses: "regular t-caption white-wild-sand-70-text"
+                RichContentAliases0:
+                    aliases:
+                    - ["bold", "<span class=\"bold t-caption white-wild-sand-text\"/>"]
+                Anchor:
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfChildrenSum"
+                FlowLayout:
+                    hSpacing: 5.000000
+                    vDynamicPadding: true
+                    useRtl: true
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml"
+    -   path: "Content/ButtonContent"
+        children:
+        -   prototype: "NotificationButton/NotificationButton"
+            name: "DeclineButton"
+            classes: "notification-button not-rounded button-cancel-sound"
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+                    rightAnchor: 65.000000
+                    vCenterAnchorEnabled: true
+            children:
+            -   path: "Bg/Bg"
+                components:
+                    Background:
+                        drawType: "DRAW_FILL"
+            -   path: "Icon"
+                components:
+                    Background:
+                        sprite: "~res:/Gfx/Shared/icons/icon_close_n"
+        -   class: "UIControl"
+            name: "Separator"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 1.000000
+                    verticalPolicy: "PercentOfParent"
+        -   prototype: "NotificationButton/NotificationButton"
+            name: "AcceptButton"
+            classes: "notification-button button-ok-sound"
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+            children:
+            -   path: "Icon"
+                components:
+                    Background:
+                        drawType: "DRAW_STRETCH_VERTICAL"
+                        sprite: "~res:/Gfx/Lobby/icons/icon_tick_l"

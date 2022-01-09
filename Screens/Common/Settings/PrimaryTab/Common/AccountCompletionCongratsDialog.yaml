@@ -1,0 +1,100 @@
+Header:
+    version: 134
+ImportedPackages:
+- "~res:/UI/Screens/Common.yaml"
+- "~res:/UI/Screens/Fonts.yaml"
+- "~res:/UI/Screens/Lobby/Common/Price.yaml"
+Controls:
+-   class: "UIControl"
+    name: "DialogBackground"
+    size: [1024.000000, 768.000000]
+    components:
+        Background:
+            drawType: "DRAW_FILL"
+            color: [0.070588, 0.125490, 0.160784, 0.894118]
+        Anchor:
+            leftAnchorEnabled: true
+            rightAnchorEnabled: true
+            topAnchorEnabled: true
+            bottomAnchorEnabled: true
+        ModalInput: {}
+        UIInputEventComponent:
+            onTouchUpInside: "OPTIONAL_CLICKED"
+        UIVirtualActionEventComponent0:
+            virtualKeyAction: "Escape"
+            keyDownEvent: "OPTIONAL_CLICKED"
+        UIShortcutEventComponent:
+            shortcuts: "OPTIONAL_CLICKED,Back;OPTIONAL_CLICKED,Escape;"
+        UIDataParamsComponent:
+            params:
+            - ["int", "rewardGold", "0", "250"]
+            events:
+            - "OPTIONAL_CLICKED"
+        StyleSheet:
+            styles: "~res:/UI/Screens/Fonts.yaml"
+    children:
+    -   class: "UIStaticText"
+        name: "Header"
+        position: [0.000000, 314.000000]
+        size: [1024.000000, 70.000000]
+        classes: "fs-50 bold text-color-white"
+        components:
+            UITextComponent:
+                text: "#account:Completion/Congrats/Header"
+                colorInheritType: "COLOR_IGNORE_PARENT"
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                vCenterAnchorEnabled: true
+                vCenterAnchor: -35.000000
+            UIIdentifierComponent:
+                id: "account_completion_notify"
+    -   class: "UIControl"
+        name: "Description"
+        size: [1024.000000, 60.000000]
+        input: false
+        components:
+            Background: {}
+            Anchor:
+                leftAnchorEnabled: false
+                hCenterAnchorEnabled: true
+                rightAnchorEnabled: false
+                vCenterAnchorEnabled: true
+                vCenterAnchor: 35.000000
+        children:
+        -   class: "UIControl"
+            name: "Control"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                LinearLayout: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfParent"
+            children:
+            -   class: "UIStaticText"
+                name: "Text"
+                size: [1024.000000, 60.000000]
+                classes: "header0 text-color-white"
+                components:
+                    UITextComponent:
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                    Anchor:
+                        leftAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                        vCenterAnchor: 0.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfParent"
+                bindings:
+                - ["UITextComponent.text", "localize(\"#account:Completion/Congrats/Text\") + \"   \" + str1000Separated(rewardGold)"]
+            -   prototype: "Price/Price"
+                name: "Price"
+                position: [632.000000, 15.000000]
+                classes: "gold"
+                components:
+                    Anchor:
+                        enabled: false

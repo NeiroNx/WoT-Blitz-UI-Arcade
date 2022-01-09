@@ -1,0 +1,118 @@
+Header:
+    version: "83"
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/IconButton.yaml"
+- "~res:/UI/Screens3/Lobby/Inventory/Ammo/InventoryAmmoInfoBody.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "PremuimInfoDialogContent"
+    position: [100.000000, 287.000000]
+    size: [600.000000, 193.000000]
+    input: false
+    components:
+        Anchor:
+            hCenterAnchorEnabled: true
+            vCenterAnchorEnabled: true
+        LinearLayout:
+            orientation: "LeftToRight"
+            spacing: 24.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            horizontalMax: 600.000000
+            verticalPolicy: "PercentOfMaxChild"
+        UIDataParamsComponent:
+            params:
+            - ["bool", "isPremium", "true", "false"]
+        UIDataLocalsComponent:
+            locals:
+            - ["int", "iconFrame", "when isPremium -> 6, 7"]
+            - ["string", "headerStringKey", "when isPremium -> \"TANK_TREE_PREMIUM_VEHICLES_LABEL\", \"tankTree/collectionVehicles/Header\""]
+            - ["string", "subheaderStringKey", "when isPremium -> \"TANK_TREE_PREM_BENEFITS\", \"tankTree/collectionVehicles/Subheader\""]
+            - ["string", "descriptionStringKey", "when isPremium -> \"TANK_TREE_INFO_BENEFITS\", \"tankTree/collectionVehicles/Info\""]
+    children:
+    -   class: "UIControl"
+        name: "PremiumVehicleIcon"
+        size: [85.000000, 64.000000]
+        input: false
+        components:
+            Background:
+                sprite: "~res:/Gfx/UI/LobbyCommon/Icons.psd"
+            Anchor:
+                topAnchorEnabled: true
+                topAnchor: -8.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+        bindings:
+        - ["Background.frame", "iconFrame"]
+    -   class: "UIControl"
+        name: "TextContainer"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            LinearLayout:
+                orientation: "TopDown"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfChildrenSum"
+        children:
+        -   class: "UIControl"
+            name: "PremiumVehicleLabel"
+            input: false
+            classes: "t-subtitle bold color=white-wild-sand-text align-left"
+            components:
+                UITextComponent:
+                    multiline: "MULTILINE_ENABLED"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml"
+            bindings:
+            - ["UITextComponent.text", "localize(headerStringKey)"]
+        -   class: "UIControl"
+            name: "Spacer"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 16.000000
+        -   class: "UIControl"
+            name: "PremiumBenefitsLabel"
+            input: false
+            classes: "t-body regular color=white-wild-sand-text align-left"
+            components:
+                UITextComponent:
+                    multiline: "MULTILINE_ENABLED"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml"
+            bindings:
+            - ["UITextComponent.text", "localize(subheaderStringKey)"]
+        -   class: "UIControl"
+            name: "Spacer_1"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 8.000000
+        -   class: "UIControl"
+            name: "BenefitsLabel"
+            input: false
+            classes: "t-body regular color=white-wild-sand-50-text align-left"
+            components:
+                UITextComponent:
+                    multiline: "MULTILINE_ENABLED"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml"
+            bindings:
+            - ["UITextComponent.text", "localize(descriptionStringKey)"]

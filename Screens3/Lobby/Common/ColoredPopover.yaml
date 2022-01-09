@@ -1,0 +1,69 @@
+Header:
+    version: 130
+Prototypes:
+-   class: "UIControl"
+    name: "ColoredPopover"
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens3/Lobby/Common/ColoredPopoverInitialization.animation"
+        SizePolicy:
+            horizontalPolicy: "PercentOfFirstChild"
+            verticalPolicy: "PercentOfFirstChild"
+        UIDataParamsComponent:
+            params:
+            - ["string", "text", "\"\"", "\"Удержать человека от ошибки — это воистину небесный дар.\""]
+            - ["string", "bgStyle", "\"red-tamarillo-bg\"", "\"red-tamarillo-bg\""]
+            - ["string", "textStyle", "\"regular t-body white-wild-sand-text\"", "\"regular t-body white-wild-sand-text\""]
+            - ["bool", "startVisible", "false", "true"]
+            events:
+            - "POPOVER_HIDDEN"
+        UIDataLocalVarsComponent:
+            data:
+            - ["float", "animationTime", "0.300000"]
+            - ["int", "anchorOffset", "80"]
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/Lobby/Common/Popover.actions"
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            Background: {}
+            UIOpacityComponent: {}
+            UIRoundedCornersComponent:
+                radius: "18"
+            Anchor:
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "firstChild + 64"
+                verticalPolicy: "Formula"
+                verticalFormula: "firstChild + 20"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+        bindings:
+        - ["classes", "bgStyle"]
+        children:
+        -   class: "UIControl"
+            name: "Text"
+            input: false
+            components:
+                UITextComponent:
+                    multiline: "MULTILINE_ENABLED"
+                    fitting: "FITTING_POINTS"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    horizontalMax: 640.000000
+                    verticalPolicy: "PercentOfContent"
+                    verticalMax: 40.000000
+                UIIdentifierComponent:
+                    id: "login_error_text"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml"
+            bindings:
+            - ["classes", "textStyle"]
+            - ["UITextComponent.text", "text"]

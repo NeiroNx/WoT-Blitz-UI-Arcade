@@ -1,0 +1,6 @@
+animation FadeIn
+{
+	PlaySound(sound="play_tut_2021_ui_battle_hints_on");
+    Opacity(".", opacity=0.0, time=0.0, interpolation=EASE_IN_EASE_OUT);
+    Opacity(".", opacity=1.0, time=0.5, interpolation=EASE_IN_EASE_OUT);
+}

@@ -1,0 +1,4 @@
+animation Init()
+{
+	Event("OnInit");
+}

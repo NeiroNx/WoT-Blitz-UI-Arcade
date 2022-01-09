@@ -1,0 +1,151 @@
+Header:
+    version: "111"
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/Resource/Currency.yaml"
+- "~res:/UI/Screens3/Lobby/Common/Dialog/TextContent.yaml"
+- "~res:/UI/Screens3/Lobby/Common/Dialog/TextDialog.yaml"
+- "~res:/UI/Screens3/Lobby/Common/Button/ButtonCurrency.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "PiggyBankConfirmationDialog"
+    size: [655.000000, 435.000000]
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "ACCENT_ACTION,~res:/UI/Screens3/Lobby/Hangar/Offers/PRMP/PiggyBankConfirmationDialog.animation"
+        Anchor:
+            leftAnchorEnabled: true
+            rightAnchorEnabled: true
+            topAnchorEnabled: true
+            bottomAnchorEnabled: true
+        UIDataParamsComponent:
+            params:
+            - ["Price", "price", "null", "{ }"]
+            - ["PiggyBankState", "piggyBank", "null", "{ }"]
+    children:
+    -   prototype: "TextDialog/TextDialog"
+        name: "InfoTextDialog"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "acceptButtonControl": "AcceptButton"
+                    "type": "eDialogType.CHOOSE"
+                    "header": "\"\""
+                    "accentButton": "\"#common:Button/Claim\""
+                    "optionalButton": "\"#common:DialogButton/Cancel\""
+                    "contentControl": "ContentControl"
+                    "metaphorContent": "MethaphorControl"
+                eventActions:
+                - ["ACCENT_CLICKED", "CONFIRMATION", ""]
+                - ["OPTIONAL_CLICKED", "OPTIONAL_CLICKED", ""]
+        children:
+        -   path: "DialogContent/Footer/OptionalButtonContainer"
+            position: [25.000000, 24.000000]
+            children: []
+Slots:
+-   class: "UIControl"
+    name: "ContentControl"
+    size: [379.000000, 132.000000]
+    input: false
+    components:
+        Anchor:
+            leftAnchorEnabled: true
+            leftAnchor: 25.000000
+            rightAnchorEnabled: true
+            rightAnchor: 25.000000
+        LinearLayout:
+            orientation: "TopDown"
+            spacing: 16.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfChildrenSum"
+    children:
+    -   prototype: "TextContent/Value"
+        name: "Value"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "contentText": "localize(\"piggy_bank/dialog/incompleteConfirmation\")"
+    -   class: "UIControl"
+        name: "ProgressHolder"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "FixedSize"
+                verticalValue: 24.000000
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Hangar/Offers/PRMP/PiggyBankProgress.yaml"
+                args:
+                    "state": "piggyBank"
+    -   prototype: "Currency/Currency"
+        name: "Currency"
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+            UIDataParamsComponent:
+                args:
+                    "resource": "piggyBank.current"
+-   class: "UIControl"
+    name: "AcceptButton"
+    size: [231.000000, 48.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfMaxChild"
+    children:
+    -   prototype: "ButtonCurrency/Button"
+        name: "Button"
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+            UIDataParamsComponent:
+                args:
+                    "resource": "price.resources[0]"
+                    "size": "eButtonSize.NORMAL"
+                    "type": "eButtonType.POSITIVE"
+                    "sound": "eButtonSound.UNKNOWN"
+                eventActions:
+                - ["ON_CLICK_BUTTON", "ACCENT_ACTION", "false"]
+-   class: "UIControl"
+    name: "MethaphorControl"
+    size: [174.000000, 170.000000]
+    input: false
+    components:
+        Anchor:
+            leftAnchorEnabled: true
+            rightAnchorEnabled: true
+            topAnchorEnabled: true
+            bottomAnchorEnabled: true
+        UIChildComponent0:
+            childType: "kControl"
+            condition: "not piggyBank.confirmationDialogIcon.empty()"
+            control: "imageControl"
+        UIChildComponent1:
+            childType: "kControl"
+            condition: "not piggyBank.confirmationDialogIconUrl.empty()"
+            control: "imageUrlControl"
+-   class: "UIControl"
+    name: "imageControl"
+    size: [117.000000, 110.000000]
+    input: false
+    components:
+        UITextureComponent: {}
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+    bindings:
+    - ["UITextureComponent.spritePath", "piggyBank.confirmationDialogIcon"]
+-   class: "UIControl"
+    name: "imageUrlControl"
+    size: [117.000000, 110.000000]
+    input: false
+    components:
+        Background: {}
+        UIUrlImageComponent: {}
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+    bindings:
+    - ["UIUrlImageComponent.imageUrl", "piggyBank.confirmationDialogIconUrl"]

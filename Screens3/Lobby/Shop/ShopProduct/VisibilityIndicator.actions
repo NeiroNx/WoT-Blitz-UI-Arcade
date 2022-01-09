@@ -1,0 +1,5 @@
+action OnInit()
+{
+	Wait(0.6);
+	Event("ON_VISIBLE");
+}

@@ -1,0 +1,50 @@
+Header:
+    version: 140
+Prototypes:
+-   class: "UIControl"
+    customClass: "UIGiftPopupNotification"
+    name: "GiftAcknowledgedPopupNotification"
+    size: [32.000000, 32.000000]
+    input: true
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfChildrenSum"
+        UIDataParamsComponent:
+            params:
+            - ["Gift", "gift", "null", "{ }"]
+    children:
+    -   class: "UIControl"
+        name: "NotificationBase"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfChildrenSum"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Notifications/NotificationBase.yaml"
+                args:
+                    "content": "Content"
+                    "iconPath": "\"~res:/Gfx/Lobby/icons/icon_tick_l\""
+                    "isButtonVisible": "false"
+Slots:
+-   class: "UIControl"
+    name: "Content"
+    size: [601.000000, 20.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfMaxChild"
+        UIChildComponent0:
+            prototypePath: "~res:/UI/Screens3/Lobby/Common/RichTextContent.yaml"
+            args:
+                "baseFontSize": "\"t-caption\""
+                "alignment": "eFlowLayoutAlignment.Left"
+                "playerClanTag": "gift.receiverClanTag"
+                "baseFontStyle": "\"bold\""
+                "baseFontColor": "\"green-green-text\""
+                "playerName": "gift.receiver.name"
+                "key": "\"Gifts/Notifications/GiftAcknowledgedPopup\""

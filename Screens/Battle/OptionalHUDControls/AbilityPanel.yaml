@@ -1,0 +1,212 @@
+Header:
+    version: 140
+ImportedPackages:
+- "~res:/UI/Screens/Battle/OptionalHUDControls/Ability.yaml"
+- "~res:/UI/Screens/Battle/HotKey.yaml"
+- "~res:/UI/Screens/Common/Selection.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "AbilityPanel"
+    size: [778.000000, 364.700012]
+    input: true
+    exclusiveInput: true
+    components:
+        UIOpacityComponent:
+            opacity: 0.000000
+        LinearLayout:
+            orientation: "TopDown"
+            spacing: 16.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfLastChild"
+            verticalPolicy: "PercentOfChildrenSum"
+        ModalInput: {}
+        UIVirtualActionEventComponent0:
+            virtualKeyAction: "Perform"
+            keyDownEvent: "TOGGLE_STATE"
+        UIVirtualActionEventComponent1:
+            virtualKeyAction: "BasePrevious"
+            keyDownEvent: "PREV_ABILITY"
+        UIVirtualActionEventComponent2:
+            virtualKeyAction: "BaseNext"
+            keyDownEvent: "NEXT_ABILITY"
+        UIShortcutEventComponent:
+            shortcuts: "FIRST_ABILITY_EVENT,1;SECOND_ABILITY_EVENT,2;THIRD_ABILITY_EVENT,3"
+    children:
+    -   class: "UIControl"
+        name: "AvailableStuffText"
+        size: [32.000000, 32.000000]
+        input: false
+        classes: "text2-small text-color-white-50"
+        components:
+            UITextComponent:
+                text: "#respawn/AbilityPanel/AvailableAmmunition"
+            Anchor:
+                hCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens/Fonts.yaml;~res:/UI/Screens/FontsColors.yaml"
+    -   class: "UIControl"
+        name: "PanelContainer"
+        size: [1000.000000, 327.700012]
+        input: true
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfLastChild"
+        children:
+        -   class: "UIControl"
+            name: "Gradient"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                LinearLayout: {}
+                IgnoreLayout: {}
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "parent * 1.3"
+                    verticalPolicy: "Formula"
+                    verticalFormula: "parent + 16"
+            children:
+            -   class: "UIControl"
+                name: "Control"
+                position: [164.000000, 0.000000]
+                size: [420.000000, 338.000000]
+                input: false
+                components:
+                    Background:
+                        drawType: "DRAW_SCALE_TO_RECT"
+                        sprite: "~res:/Gfx/UI/BattleLoadingScreen/gradient-separator.psd"
+                        frame: 0
+                        spriteModification: ["FLIP_HORIZONTAL"]
+                        gradientMode: "Multiply"
+                        color: [0.000000, 0.000000, 0.000000, 1.000000]
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+            -   class: "UIControl"
+                name: "Control_1"
+                position: [164.000000, 0.000000]
+                size: [420.000000, 338.000000]
+                input: false
+                components:
+                    Background:
+                        drawType: "DRAW_SCALE_TO_RECT"
+                        sprite: "~res:/Gfx/UI/BattleLoadingScreen/gradient-separator.psd"
+                        frame: 0
+                        spriteModification: []
+                        gradientMode: "Multiply"
+                        color: [0.000000, 0.000000, 0.000000, 1.000000]
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+        -   class: "UIControl"
+            name: "ButtonsContainer"
+            input: true
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                LinearLayout:
+                    spacing: 16.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   prototype: "Ability/Ability"
+                name: "Ability"
+                children:
+                -   path: "AbilityButton"
+                    components:
+                        UIInputEventComponent:
+                            onTouchUpInside: "FIRST_ABILITY_EVENT"
+                    children: []
+                -   path: "AbilityButton/Content/AbilityDetailContainer/AbilityDescription"
+                    position: [8.000000, 152.000000]
+                -   path: "HotKey"
+                    components:
+                        UITextComponent:
+                            text: "1"
+            -   prototype: "Ability/Ability"
+                name: "Ability2"
+                position: [200.000000, 0.000000]
+                children:
+                -   path: "AbilityButton"
+                    components:
+                        UIInputEventComponent:
+                            onTouchUpInside: "SECOND_ABILITY_EVENT"
+                    children: []
+                -   path: "HotKey"
+                    components:
+                        UITextComponent:
+                            text: "2"
+            -   prototype: "Ability/Ability"
+                name: "Ability3"
+                children:
+                -   path: "AbilityButton"
+                    components:
+                        UIInputEventComponent:
+                            onTouchUpInside: "THIRD_ABILITY_EVENT"
+                    children: []
+                -   path: "HotKey"
+                    components:
+                        UITextComponent:
+                            text: "3"
+        -   prototype: "HotKey/HotKey"
+            name: "HotKeyPrev"
+            position: [50.000000, 119.000000]
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: -44.000000
+                    hCenterAnchorEnabled: false
+                    vCenterAnchorEnabled: true
+                LinearLayout:
+                    orientation: "RightToLeft"
+                IgnoreLayout: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+            children:
+            -   path: "text"
+                components:
+                    UITextComponent:
+                        text: "L"
+                    SizePolicy:
+                        horizontalValue: 150.000000
+            -   path: "img"
+                classes: "gamepad-left"
+                components:
+                    Anchor:
+                        vCenterAnchor: 1.000000
+                    SizePolicy:
+                        horizontalValue: 150.000000
+        -   prototype: "HotKey/HotKey"
+            name: "HotKeyNext"
+            position: [50.000000, 119.000000]
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+                    rightAnchor: -44.000000
+                    vCenterAnchorEnabled: true
+                IgnoreLayout: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+            children:
+            -   path: "text"
+                components:
+                    UITextComponent:
+                        text: "R"
+                    SizePolicy:
+                        horizontalValue: 150.000000
+            -   path: "img"
+                classes: "gamepad-right"
+                components:
+                    Anchor:
+                        vCenterAnchor: 1.000000
+                    SizePolicy:
+                        horizontalValue: 150.000000

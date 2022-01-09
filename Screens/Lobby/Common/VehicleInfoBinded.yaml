@@ -1,0 +1,136 @@
+Header:
+    version: "31"
+Prototypes:
+-   class: "UIControl"
+    name: "VehicleInfoBig"
+    size: [77.000000, 43.000000]
+    input: false
+    components:
+        SizePolicy:
+            verticalPolicy: "PercentOfMaxChild"
+        Background:
+            colorInherit: "COLOR_MULTIPLY_ON_PARENT"
+        UIDataSourceComponent0:
+            source: "~res:/UI/Examples/Model/Common/VehicleInfo.model"
+        UIDataSourceComponent1:
+            sourceType: "File"
+            source: "~res:/UI/Screens/Lobby/Common/ViewModels/VehicleInfoView.model"
+    children:
+    -   class: "UIControl"
+        name: "EliteIcon"
+        position: [0.000000, 0.000000]
+        size: [46.000000, 43.000000]
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+            Background:
+                sprite: "~res:/Gfx/UI/LobbyCommon/TankTypesBig"
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+        bindings:
+        - ["Background.frame", "eliteFrame", "Read"]
+    -   class: "UIControl"
+        name: "ClassIcon"
+        position: [0.000000, 0.000000]
+        size: [46.000000, 43.000000]
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+            Background:
+                sprite: "~res:/Gfx/UI/LobbyCommon/TankTypesBig"
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+        bindings:
+        - ["Background.frame", "classFrame", "Read"]
+    -   class: "UIControl"
+        name: "LevelIcon"
+        position: [40.000000, 0.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 40.000000
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+            Background:
+                sprite: "~res:/Gfx/UI/LobbyCommon/TankLevelsNew"
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+        bindings:
+        - ["Background.frame", "levelFrame", "Read"]
+-   class: "UIControl"
+    name: "VehicleInfo"
+    size: [50.000000, 32.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "Ignore"
+            verticalPolicy: "PercentOfMaxChild"
+        Background:
+            colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+        UIDataSourceComponent0:
+            source: "~res:/UI/Examples/Model/Common/VehicleInfo.model"
+        UIDataSourceComponent1:
+            sourceType: "File"
+            source: "~res:/UI/Screens/Lobby/Common/ViewModels/VehicleInfoView.model"
+    children:
+    -   class: "UIControl"
+        name: "EliteIcon"
+        position: [0.000000, 0.000000]
+        size: [26.000000, 32.000000]
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+            Background:
+                sprite: "~res:/Gfx/UI/LobbyCommon/TankTypesSmall"
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+        bindings:
+        - ["Background.frame", "eliteFrame", "Read"]
+    -   class: "UIControl"
+        name: "ClassIcon"
+        position: [0.000000, 0.000000]
+        size: [26.000000, 32.000000]
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+            Background:
+                sprite: "~res:/Gfx/UI/LobbyCommon/TankTypesSmall"
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+        bindings:
+        - ["Background.frame", "classFrame", "Read"]
+    -   class: "UIControl"
+        name: "LevelIcon"
+        position: [22.000000, 0.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 22.000000
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+            Background:
+                sprite: "~res:/Gfx/UI/LobbyCommon/TankLevelsNew"
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+        bindings:
+        - ["Background.frame", "levelFrame", "Read"]

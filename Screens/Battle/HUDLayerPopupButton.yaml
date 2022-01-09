@@ -1,0 +1,16 @@
+Header:
+    version: "24"
+Prototypes:
+-   class: "UIControl"
+    name: "PopupButton"
+    size: [62.000000, 58.000000]
+    classes: "button button-open-sound"
+    components:
+        Anchor:
+            vCenterAnchorEnabled: true
+        Background:
+            drawType: "DRAW_SCALE_PROPORTIONAL"
+            sprite: "~res:/Gfx/UI/BattleScreenHUD/ChatMenu.psd"
+        Sound: {}
+        StyleSheet:
+            styles: "~res:/UI/Styles/ButtonStyle.yaml;~res:/UI/Styles/ButtonSoundStyles.yaml"

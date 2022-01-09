@@ -1,0 +1,65 @@
+Header:
+    version: 128
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/Notifications/Popups/TournamentNotification.yaml"
+- "~res:/UI/Screens3/Lobby/Common/NotificationButton.yaml"
+Controls:
+-   prototype: "TournamentNotification/TournamentNotification"
+    customClass: "UITournamentTeamInviteNotification"
+    name: "TournamentTeamInviteNotification"
+    children:
+    -   path: "Item/Content/Bg/LeftPart/Icon"
+        components:
+            UITextureComponent:
+                spritePath: "~res:/Gfx/Lobby/icons/icon_friend_s"
+                drawType: "DRAW_ALIGNED"
+    -   path: "Item/Content/Bg/LeftPart/Content"
+        components:
+            SizePolicy:
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "InvitationText"
+            position: [0.000000, 22.000000]
+            input: false
+            components:
+                RichContent:
+                    text: "Bla <bold>bla</bold>"
+                    baseClasses: "t-caption regular color=white-wild-sand-70-text"
+                RichContentAliases0:
+                    aliases:
+                    - ["t-caption_highlighted", "<span class=\"bold  t-caption white-wild-sand-text\"/>"]
+                Anchor:
+                    leftAnchorEnabled: false
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "parent - 16"
+                    verticalPolicy: "PercentOfChildrenSum"
+                FlowLayout:
+                    hSpacing: 3.000000
+                    vSpacing: 5.000000
+                    useRtl: true
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/Font.style.yaml"
+    -   path: "Item/Content/Bg/ButtonContent"
+        children:
+        -   prototype: "NotificationButton/NotificationButton"
+            name: "DeclineButton"
+            classes: "notification-button button-open-sound not-rounded"
+            children:
+            -   path: "Bg/Bg"
+                components:
+                    Background:
+                        drawType: "DRAW_FILL"
+            -   path: "Icon"
+                components:
+                    Background:
+                        sprite: "~res:/Gfx/Shared/icons/icon_close_n"
+        -   prototype: "NotificationButton/NotificationButton"
+            name: "AcceptButton"
+            children:
+            -   path: "Icon"
+                components:
+                    Background:
+                        sprite: "~res:/Gfx/Lobby/icons/icon_tick_l"

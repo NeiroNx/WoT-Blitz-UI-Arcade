@@ -1,0 +1,82 @@
+Header:
+    version: 130
+Prototypes:
+-   class: "UIControl"
+    name: "CamouflagesGroup"
+    size: [264.000000, 312.000000]
+    input: false
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfChildrenSum"
+        UIDataParamsComponent:
+            params:
+            - ["bool", "isSpacerVisible", "true", "true"]
+            - ["int", "currentItem", "0", "0"]
+            - ["int", "selectedItem", "0", "0"]
+            - ["CamouflagesGroup", "group", "null", "{ }"]
+            events:
+            - "ON_CAMO_CLICKED"
+    children:
+    -   class: "UIControl"
+        name: "Items"
+        size: [264.000000, 248.000000]
+        input: false
+        components:
+            LinearLayout:
+                orientation: "TopDown"
+                spacing: 16.000000
+                dynamicSpacing: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfChildrenSum"
+        bindings:
+        - ["visible", "not group.isAllCamouflagesHidden"]
+        children:
+        -   class: "UIControl"
+            name: "Title"
+            input: false
+            classes: "t-caps bold color=white-wild-sand-text"
+            components:
+                UITextComponent:
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 8.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+            bindings:
+            - ["visible", "not group.isAllCamouflagesHidden"]
+            - ["UITextComponent.text", "localize(group.groupName)"]
+        -   class: "UIControl"
+            name: "CamoList"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfChildrenSum"
+                FlowLayout:
+                    hPadding: "8"
+                    hSpacing: 16.000000
+                    vSpacing: 16.000000
+                UIRepeatComponent:
+                    control: "~res:/UI/Screens3/Lobby/Inventory/Camouflages/CamouflageItemWrapper.yaml"
+                    dataContainer: "group.camouflages"
+                    args:
+                        "currentItem": "currentItem"
+                        "selectedItem": "selectedItem"
+                        "camoItem": "group.camouflages[_index]"
+                        "masterId": "when (group.camouflages[_index].itemId == selectedItem) -> \"NEWBIE_CAMO_CHOOSE\", \"\""
+                    eventActions:
+                    - ["ON_CAMO_CLICKED", "ON_CAMO_CLICKED", "_event"]
+    -   class: "UIControl"
+        name: "SpacerBottom"
+        size: [32.000000, 32.000000]
+        input: false
+        bindings:
+        - ["visible", "not group.isAllCamouflagesHidden and isSpacerVisible"]

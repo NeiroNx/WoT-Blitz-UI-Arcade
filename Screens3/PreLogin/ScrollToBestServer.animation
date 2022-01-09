@@ -1,0 +1,4 @@
+animation Scroll
+{
+	Scroll("./HorizontalScrollView/ScrollArea",mapOffset,0.0,0.0);
+}

@@ -1,0 +1,26 @@
+Header:
+    version: 125
+ImportedPackages:
+- "~res:/UI/Screens3/Common/OverlayBlur.yaml"
+Controls:
+-   class: "UIControl"
+    name: "VigoBlurDialog"
+    size: [960.000000, 640.000000]
+    input: false
+    classes: ""
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        ModalInput: {}
+    children:
+    -   prototype: "OverlayBlur/BlurAndFade"
+        name: "BlurAndFade"
+        components:
+            UIInputEventComponent:
+                onTouchUpInside: ""
+        children:
+        -   path: "Fade"
+            components:
+                UIOpacityComponent:
+                    opacity: 0.350000

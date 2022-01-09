@@ -1,0 +1,34 @@
+Header:
+    version: 128
+Prototypes:
+-   class: "UIControl"
+    name: "NEWCOMERS2020End"
+    size: [960.000000, 592.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["StorySettings", "settings", "{ \"backgrounds\" = { \"NEWCOMERS7X7\" = \"~res:/Gfx/Lobby/events/2021-7x7/2021_event_7x7_bg\"; }; \"desktopBackgrounds\" = { \"NEWCOMERS7X7\" = \"~res:/Gfx2/Lobby/events/2021-7x7/2021_event_7x7_bg\"; }; }", "{ \"backgrounds\" = { \"NEWCOMERS7X7\" = \"~res:/Gfx/Lobby/events/2021-7x7/2021_event_7x7_bg\"; }; \"desktopBackgrounds\" = { \"NEWCOMERS7X7\" = \"~res:/Gfx2/Lobby/events/2021-7x7/2021_event_7x7_bg\"; }; }"]
+            events:
+            - "NEWCOMERS7X7_FINISHED"
+            - "CLOSE"
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/FullScreenPopup/Newcomers7x7EventNotificationContent.yaml"
+                args:
+                    "settings": "settings"
+                    "header": "\"NEWCOMERS7X7/Notification/End/Header\""
+                    "description": "\"NEWCOMERS7X7/Notification/End/Description\""
+                eventActions:
+                - ["CLOSE", "NEWCOMERS7X7_FINISHED", ""]
+                - ["CLOSE", "CLOSE", ""]

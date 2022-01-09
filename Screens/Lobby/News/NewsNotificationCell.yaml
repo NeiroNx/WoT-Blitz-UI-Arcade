@@ -1,0 +1,2140 @@
+Header:
+    version: 141
+ImportedPackages:
+- "~res:/UI/Screens/Fonts.yaml"
+- "~res:/UI/Screens/Common/PlayerNameWithTag.yaml"
+- "~res:/UI/Screens/Common/StyledButton.yaml"
+- "~res:/UI/Styles/BackgroundStyles.yaml"
+- "~res:/UI/Screens/Lobby/Common/BattleRating.yaml"
+- "~res:/UI/Screens/Lobby/Common/RichText.yaml"
+- "~res:/UI/Screens3/Lobby/Common/Button.yaml"
+StyleSheets:
+-   selectors:
+    - ".japan #Image"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/flags/flag_notification_japan"
+-   selectors:
+    - ".germany #Image"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/flags/flag_notification_germany"
+-   selectors:
+    - ".ussr #Image"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/flags/flag_notification_ussr"
+-   selectors:
+    - ".china #Image"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/flags/flag_notification_china"
+-   selectors:
+    - ".uk #Image"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/flags/flag_notification_uk"
+-   selectors:
+    - ".usa #Image"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/flags/flag_notification_usa"
+-   selectors:
+    - ".france #Image"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/flags/flag_notification_france"
+-   selectors:
+    - ".other #Image"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/flags/flag_notification_other"
+-   selectors:
+    - ".finland #Image"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/flags/flag_notification_finland"
+-   selectors:
+    - ".poland #Image"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/flags/flag_notification_poland"
+-   selectors:
+    - ".sweden #Image"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/flags/flag_notification_sweden"
+-   selectors:
+    - ".italy #Image"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/flags/flag_notification_italy"
+-   selectors:
+    - ".european #Image"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/flags/flag_notification_european"
+-   selectors:
+    - ".australia #Image"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/flags/flag_notification_australia"
+-   selectors:
+    - ".canada #Image"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/flags/flag_notification_canada"
+-   selectors:
+    - ".czech #Image"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/flags/flag_notification_czech"
+-   selectors:
+    - ".survey #Image"
+    properties:
+        bg-frame: 6
+-   selectors:
+    - ".touchable:pressed_inside #Background"
+    properties:
+        bg-color: [1.000000, 1.000000, 1.000000, 0.054902]
+-   selectors:
+    - ".touchable #Background"
+    properties:
+        bg-color: [1.000000, 1.000000, 1.000000, 0.109804]
+-   selectors:
+    - ".stuff #Image"
+    properties:
+        bg-sprite: ""
+-   selectors:
+    - ".invoice #Image"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/NewsScreen/IconsNotifications"
+-   selectors:
+    - ".karma.info #ShowKarma"
+    - ".karma.info #Content #Title"
+    properties:
+        visible: false
+-   selectors:
+    - ".karma.warning #Content #Title"
+    properties:
+        text-color: [0.960784, 0.650980, 0.137255, 1.000000]
+-   selectors:
+    - ".karma.punishment #Content #Title"
+    properties:
+        text-color: [1.000000, 0.000000, 0.000000, 1.000000]
+-   selectors:
+    - ".battle-result.rating #Details #Block2 #RatingIncomeInfo"
+    properties:
+        visible: true
+-   selectors:
+    - ".battle-result.type-regular #Details #Block2 #RatingIncomeInfo"
+    properties:
+        visible: false
+-   selectors:
+    - ".battle-result.type-regular #Image"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/NewsScreen/IconsNotifications"
+-   selectors:
+    - ".battle-result.type-rating #Image"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/NewsScreen/IconsNotifications_RatingBattle"
+Prototypes:
+-   class: "UIControl"
+    customClass: "NewsNotificationCell"
+    name: "NotificationCell"
+    size: [1024.000000, 100.000000]
+    exclusiveInput: true
+    components:
+        Anchor:
+            leftAnchorEnabled: true
+            rightAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfMaxChild"
+        UIAnchorSafeAreaComponent:
+            leftSafeInset: "INSET"
+            rightSafeInset: "INSET"
+        Sound:
+            touchUpInside: "GUI/buttons/ok"
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Lobby/News/NewsNotificationCell.yaml"
+    children:
+    -   class: "UIControl"
+        name: "Background"
+        input: false
+        classes: "pane-bg"
+        components:
+            Background: {}
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+                bottomAnchor: 1.000000
+            IgnoreLayout: {}
+            UIAnchorSafeAreaComponent:
+                leftSafeInset: "REVERSE"
+                rightSafeInset: "REVERSE"
+    -   class: "UIControl"
+        name: "Image"
+        size: [108.000000, 100.000000]
+        input: false
+        components:
+            Background: {}
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 16.000000
+                topAnchorEnabled: true
+                topAnchor: 0.000000
+                bottomAnchorEnabled: true
+                bottomAnchor: 0.000000
+-   class: "UIControl"
+    name: "ItemWithIcon"
+    size: [57.000000, 26.000000]
+    input: false
+    components:
+        Anchor:
+            vCenterAnchorEnabled: true
+        LinearLayout:
+            spacing: 3.000000
+            useRtl: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "PercentOfMaxChild"
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Lobby/News/NewsNotificationCell.yaml"
+    children:
+    -   class: "UIControl"
+        name: "Container"
+        input: false
+        components:
+            LinearLayout:
+                orientation: "LeftToRight"
+                spacing: 3.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   class: "UIStaticText"
+            name: "Value"
+            position: [0.000000, 0.000000]
+            size: [32.000000, 26.000000]
+            input: false
+            classes: "header5 text-color-white"
+            components:
+                Background:
+                    align: ["LEFT", "VCENTER"]
+                UITextComponent:
+                    text: "300"
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                    align: ["LEFT", "VCENTER"]
+                    useRtlAlign: "DONT_USE"
+                Anchor:
+                    bottomAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+        -   class: "UIControl"
+            name: "Icon"
+            input: false
+            components:
+                Background:
+                    sprite: "~res:/Gfx/UI/LobbyCommon/CurrencyIconsSmall"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+-   class: "UIControl"
+    name: "ItemWithBraces"
+    input: false
+    components:
+        Anchor:
+            vCenterAnchorEnabled: true
+        LinearLayout:
+            spacing: 3.000000
+            useRtl: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "PercentOfMaxChild"
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Lobby/News/NewsNotificationCell.yaml"
+    children:
+    -   class: "UIStaticText"
+        name: "Label"
+        input: false
+        classes: "text2-small"
+        components:
+            Background:
+                align: ["LEFT", "VCENTER"]
+            UITextComponent:
+                colorInheritType: "COLOR_IGNORE_PARENT"
+                align: ["LEFT", "VCENTER"]
+                useRtlAlign: "USE_BY_SYSTEM"
+            Anchor:
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+    -   class: "UIControl"
+        name: "Container"
+        input: false
+        components:
+            LinearLayout:
+                orientation: "LeftToRight"
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   class: "UIStaticText"
+            name: "OpenBrace"
+            size: [10.000000, 26.000000]
+            classes: "header5 text-color-white"
+            components:
+                UITextComponent:
+                    text: "("
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                    align: ["RIGHT", "VCENTER"]
+                Anchor:
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    verticalPolicy: "PercentOfContent"
+        -   class: "UIStaticText"
+            name: "Value"
+            position: [10.000000, 26.000000]
+            size: [0.000000, 0.000000]
+            input: false
+            classes: "header5 text-color-white"
+            components:
+                Background:
+                    align: ["LEFT", "VCENTER"]
+                UITextComponent:
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                    align: ["LEFT", "VCENTER"]
+                    useRtlAlign: "DONT_USE"
+                Anchor:
+                    bottomAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+        -   class: "UIStaticText"
+            name: "CloseBrace"
+            size: [10.000000, 26.000000]
+            classes: "header5 text-color-white"
+            components:
+                UITextComponent:
+                    text: ")"
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                    align: ["LEFT", "VCENTER"]
+                Anchor:
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+-   class: "UIControl"
+    name: "Box"
+    input: false
+    components:
+        Anchor:
+            leftAnchorEnabled: true
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            horizontalMax: 574.000000
+            verticalPolicy: "PercentOfMaxChild"
+        FlowLayout:
+            hSpacing: 3.000000
+            useRtl: true
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Lobby/News/NewsNotificationCell.yaml"
+    children:
+    -   class: "UIControl"
+        name: "Text"
+        position: [0.000000, 11.000000]
+        size: [77.000000, 21.000000]
+        input: false
+        classes: "text2-small text-color-blue"
+        components:
+            Background:
+                align: ["LEFT", "VCENTER"]
+            UITextComponent:
+                text: "NEWS_NOTIFICATION_INVOICE_ACCRUED"
+                align: ["LEFT", "VCENTER"]
+            Anchor:
+                leftAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+    -   prototype: "ItemWithIcon"
+        name: "Credits"
+        position: [83.000000, -11.000000]
+        children:
+        -   path: "Container/Icon"
+            components:
+                Background:
+                    frame: 1
+    -   prototype: "ItemWithIcon"
+        name: "Gold"
+        children:
+        -   path: "Container/Icon"
+            classes: "gold"
+    -   prototype: "ItemWithIcon"
+        name: "XP"
+        children:
+        -   path: "Container/Icon"
+            components:
+                Background:
+                    frame: 2
+    -   prototype: "ItemWithIcon"
+        name: "EliteXP"
+        children:
+        -   path: "Container/Icon"
+            components:
+                Background:
+                    frame: 7
+    -   prototype: "ItemWithBraces"
+        name: "Premium"
+        children:
+        -   path: "Label"
+            components:
+                UITextComponent:
+                    text: "NEWS_NOTIFICATION_INVOICE_PREMIUM_STORAGE"
+    -   prototype: "ItemWithBraces"
+        name: "Slots"
+        children:
+        -   path: "Label"
+            components:
+                UITextComponent:
+                    text: "NEWS_NOTIFICATION_INVOICE_SLOTS"
+    -   class: "UIControl"
+        name: "Tank"
+        size: [0.000000, 0.000000]
+        input: false
+        components:
+            Anchor:
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                spacing: 3.000000
+                useRtl: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   class: "UIControl"
+            name: "Container"
+            size: [0.000000, 0.000000]
+            input: false
+            components:
+                LinearLayout:
+                    orientation: "LeftToRight"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfMaxChild"
+    -   prototype: "ItemWithBraces"
+        name: "Stuff"
+    -   class: "UIControl"
+        name: "Camouflage"
+        size: [0.000000, 0.000000]
+        input: false
+        components:
+            Anchor:
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                spacing: 3.000000
+                useRtl: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   class: "UIStaticText"
+            name: "Label"
+            position: [0.000000, 0.000000]
+            input: false
+            classes: "text2"
+            components:
+                Background:
+                    align: ["LEFT", "VCENTER"]
+                UITextComponent:
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                    align: ["LEFT", "VCENTER"]
+                    useRtlAlign: "USE_BY_SYSTEM"
+                Anchor:
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+-   prototype: "NotificationCell"
+    customClass: "NewsNotificationBattleCell"
+    name: "Battle"
+    classes: "cell touchable battle-result"
+    components:
+        Background: {}
+        LinearLayout:
+            padding: "16.000000"
+            spacing: 16.000000
+            useRtl: false
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Lobby/News/NewsNotificationCell.yaml"
+    children:
+    -   path: "Image"
+        components:
+            Background:
+                sprite: "~res:/Gfx/UI/NewsScreen/IconsNotifications.psd"
+    -   class: "UIControl"
+        name: "Details"
+        input: false
+        components:
+            LinearLayout:
+                spacing: 5.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "Block1"
+            input: false
+            components:
+                LinearLayout:
+                    orientation: "TopDown"
+                    dynamicPadding: true
+                    useRtl: true
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "parent*0.65"
+                    verticalPolicy: "PercentOfParent"
+            children:
+            -   class: "UIControl"
+                name: "TextContainer"
+                input: false
+                components:
+                    LinearLayout:
+                        spacing: 10.000000
+                        useRtl: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfMaxChild"
+                children:
+                -   class: "UIStaticText"
+                    name: "TextResult"
+                    input: false
+                    classes: "text-color-white header3"
+                    components:
+                        UITextComponent:
+                            text: "NEWS_NOTIFICATION_BATTLE_WIN"
+                            colorInheritType: "COLOR_IGNORE_PARENT"
+                            align: ["LEFT", "VCENTER"]
+                            useRtlAlign: "USE_BY_SYSTEM"
+                        Anchor:
+                            leftAnchorEnabled: true
+                            useRtl: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 26.000000
+                -   class: "UIStaticText"
+                    name: "Training"
+                    input: false
+                    classes: "text-color-blue text1"
+                    components:
+                        UITextComponent:
+                            text: "NEWS_NOTIFICATION_TRAINING_BATTLE"
+                            colorInheritType: "COLOR_IGNORE_PARENT"
+                            align: ["LEFT", "VCENTER"]
+                            useRtlAlign: "USE_BY_CONTENT"
+                        Anchor:
+                            leftAnchorEnabled: true
+                            useRtl: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 26.000000
+            -   class: "UIControl"
+                name: "DescriptionBattleInfo"
+                input: false
+                components:
+                    Anchor:
+                        leftAnchorEnabled: true
+                        useRtl: true
+                    LinearLayout:
+                        useRtl: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfMaxChild"
+                children:
+                -   class: "UIStaticText"
+                    name: "DescriptionLabel"
+                    input: false
+                    classes: "text-color-blue text1"
+                    components:
+                        UITextComponent:
+                            text: "NEWS_NOTIFICATION_BATTLE_PLACE"
+                            colorInheritType: "COLOR_IGNORE_PARENT"
+                            align: ["LEFT"]
+                            useRtlAlign: "USE_BY_CONTENT"
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfContent"
+                -   class: "UIStaticText"
+                    name: "Description"
+                    input: false
+                    classes: "text-color-white text1"
+                    components:
+                        UITextComponent:
+                            text: "Балтийский Шит"
+                            colorInheritType: "COLOR_IGNORE_PARENT"
+                            fitting: "FITTING_REDUCE"
+                            align: ["LEFT", "VCENTER"]
+                            useRtlAlign: "USE_BY_SYSTEM"
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfContent"
+            -   class: "UIControl"
+                name: "IncomeInfo"
+                input: false
+                components:
+                    Anchor:
+                        leftAnchorEnabled: true
+                        useRtl: true
+                    LinearLayout:
+                        useRtl: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        verticalPolicy: "PercentOfMaxChild"
+                children:
+                -   class: "UIStaticText"
+                    name: "Income"
+                    input: false
+                    classes: "text-color-blue text1"
+                    components:
+                        UITextComponent:
+                            text: "NEWS_NOTIFICATION_BATTLE_INCOME"
+                            colorInheritType: "COLOR_IGNORE_PARENT"
+                            align: ["LEFT", "VCENTER"]
+                            useRtlAlign: "USE_BY_CONTENT"
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfContent"
+                -   class: "UIControl"
+                    name: "IncomeContainer"
+                    components:
+                        LinearLayout: {}
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfChildrenSum"
+                            verticalPolicy: "PercentOfMaxChild"
+                    children:
+                    -   class: "UIStaticText"
+                        name: "IncomeCredits"
+                        input: false
+                        classes: "text-color-white header3"
+                        components:
+                            Background:
+                                align: ["LEFT", "VCENTER"]
+                            UITextComponent:
+                                colorInheritType: "COLOR_IGNORE_PARENT"
+                                align: ["RIGHT", "VCENTER"]
+                            Anchor:
+                                vCenterAnchorEnabled: true
+                                useRtl: true
+                            SizePolicy:
+                                horizontalPolicy: "Formula"
+                                horizontalFormula: "max(70, content)"
+                                verticalPolicy: "PercentOfContent"
+                    -   class: "UIControl"
+                        name: "CreditIcon"
+                        position: [70.000000, 1.000000]
+                        size: [20.000000, 25.000000]
+                        input: false
+                        components:
+                            Background:
+                                sprite: "~res:/Gfx/UI/LobbyCommon/CurrencyIconsSmall"
+                                frame: 1
+                            Anchor:
+                                leftAnchorEnabled: true
+                                leftAnchor: 171.000000
+                                topAnchorEnabled: true
+                                topAnchor: 1.000000
+                                bottomAnchorEnabled: true
+                                useRtl: true
+                    -   class: "UIStaticText"
+                        name: "CreditsX2"
+                        input: false
+                        classes: "text-color-blue text1"
+                        components:
+                            Background:
+                                align: ["LEFT", "TOP"]
+                            UITextComponent:
+                                text: "NEWS_NOTIFICATION_BATTLE_DOUBLE_XP"
+                                colorInheritType: "COLOR_IGNORE_PARENT"
+                                align: ["LEFT", "VCENTER"]
+                            Anchor:
+                                topAnchorEnabled: true
+                                bottomAnchorEnabled: true
+                                useRtl: true
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfContent"
+                                verticalPolicy: "PercentOfContent"
+                    -   class: "UIStaticText"
+                        name: "IncomeXp"
+                        input: false
+                        classes: "text-color-white header3"
+                        components:
+                            Background:
+                                align: ["LEFT", "VCENTER"]
+                            UITextComponent:
+                                colorInheritType: "COLOR_IGNORE_PARENT"
+                                align: ["RIGHT", "VCENTER"]
+                            Anchor:
+                                vCenterAnchorEnabled: true
+                                useRtl: true
+                            SizePolicy:
+                                horizontalPolicy: "Formula"
+                                horizontalFormula: "max(70, content)"
+                                verticalPolicy: "PercentOfContent"
+                    -   class: "UIControl"
+                        name: "ExpIcon"
+                        size: [20.000000, 22.000000]
+                        input: false
+                        components:
+                            Background:
+                                sprite: "~res:/Gfx/UI/LobbyCommon/CurrencyIconsSmall"
+                                frame: 3
+                            Anchor:
+                                leftAnchorEnabled: true
+                                leftAnchor: 273.000000
+                                topAnchorEnabled: true
+                                topAnchor: 3.000000
+                                bottomAnchorEnabled: true
+                                bottomAnchor: 1.000000
+                                useRtl: true
+                    -   class: "UIStaticText"
+                        name: "XpX2"
+                        input: false
+                        classes: "text-color-blue text1"
+                        components:
+                            Background:
+                                align: ["LEFT", "TOP"]
+                            UITextComponent:
+                                text: "NEWS_NOTIFICATION_BATTLE_DOUBLE_XP"
+                                colorInheritType: "COLOR_IGNORE_PARENT"
+                                align: ["LEFT", "VCENTER"]
+                            Anchor:
+                                leftAnchorEnabled: true
+                                leftAnchor: 294.000000
+                                vCenterAnchorEnabled: true
+                                useRtl: true
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfContent"
+                                verticalPolicy: "PercentOfContent"
+        -   class: "UIControl"
+            name: "Block2"
+            input: false
+            components:
+                LinearLayout:
+                    orientation: "TopDown"
+                    dynamicPadding: true
+                    skipInvisible: false
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "parent*0.35"
+                    verticalPolicy: "PercentOfParent"
+            children:
+            -   class: "UIControl"
+                name: "Spacer"
+                size: [100.000000, 26.000000]
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 26.000000
+            -   class: "UIControl"
+                name: "DescriptionTankInfo"
+                input: false
+                components:
+                    Background:
+                        colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                        align: ["LEFT", "VCENTER"]
+                    Anchor:
+                        leftAnchorEnabled: true
+                        useRtl: true
+                    LinearLayout:
+                        useRtl: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfMaxChild"
+                children:
+                -   class: "UIStaticText"
+                    name: "TankLabel"
+                    input: false
+                    classes: "text-color-blue text1"
+                    components:
+                        UITextComponent:
+                            text: "NEWS_NOTIFICATION_BATTLE_TANK"
+                            colorInheritType: "COLOR_IGNORE_PARENT"
+                            align: ["LEFT", "VCENTER"]
+                            useRtlAlign: "USE_BY_CONTENT"
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfContent"
+                -   class: "UIStaticText"
+                    name: "Tank"
+                    input: false
+                    classes: "text-color-white text1"
+                    components:
+                        UITextComponent:
+                            text: "T-34"
+                            colorInheritType: "COLOR_IGNORE_PARENT"
+                            fitting: "FITTING_REDUCE"
+                            align: ["LEFT", "VCENTER"]
+                            useRtlAlign: "USE_BY_SYSTEM"
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfContent"
+            -   class: "UIControl"
+                name: "RatingIncomeInfo"
+                input: false
+                components:
+                    Anchor:
+                        leftAnchorEnabled: true
+                        useRtl: true
+                    LinearLayout:
+                        spacing: 5.000000
+                        useRtl: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        verticalPolicy: "PercentOfMaxChild"
+                children:
+                -   class: "UIStaticText"
+                    name: "Income"
+                    input: false
+                    classes: "text-color-blue text1"
+                    components:
+                        UITextComponent:
+                            text: "NEWS_NOTIFICATION_BATTLE_RATING"
+                            multiline: "MULTILINE_DISABLED"
+                            align: ["LEFT", "VCENTER"]
+                            useRtlAlign: "USE_BY_CONTENT"
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                            useRtl: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfContent"
+                -   prototype: "BattleRating/Rating"
+                    name: "Rating"
+                    components:
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 26.000000
+    -   class: "UIControl"
+        name: "Spacer"
+        size: [10.000000, 32.000000]
+        input: false
+    -   class: "UIStaticText"
+        name: "ShowDetails"
+        input: false
+        classes: "text-color-white text1"
+        components:
+            UITextComponent:
+                text: "NEWS_NOTIFICATION_BATTLE_MORE_INFO"
+                colorInheritType: "COLOR_IGNORE_PARENT"
+                align: ["RIGHT", "VCENTER"]
+                useRtlAlign: "DONT_USE"
+            Anchor:
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+-   prototype: "NotificationCell"
+    customClass: "NewsNotificationInvoiceCell"
+    name: "Invoice"
+    classes: "invoice-mode=invoice"
+    components:
+        SizePolicy:
+            verticalPolicy: "PercentOfMaxChild"
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Lobby/News/NewsNotificationCell.yaml"
+    children:
+    -   path: "Image"
+        components:
+            Background:
+                drawType: "DRAW_SCALE_PROPORTIONAL"
+    -   class: "UIControl"
+        name: "Holder"
+        position: [0.000000, 13.000000]
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Anchor:
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                orientation: "TopDown"
+                spacing: 4.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfChildrenSum"
+        children:
+        -   class: "UIStaticText"
+            name: "Description"
+            position: [140.000000, 0.000000]
+            size: [858.000000, 30.000000]
+            visible: false
+            input: false
+            classes: "text1 text-color-blue"
+            components:
+                Background:
+                    align: ["LEFT", "VCENTER"]
+                UITextComponent:
+                    text: "NEWS_NOTIFICATION_INVOICE"
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                    multiline: "MULTILINE_ENABLED"
+                    align: ["LEFT", "VCENTER"]
+                    useRtlAlign: "DONT_USE"
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 140.000000
+                    rightAnchor: 26.000000
+                    topAnchorEnabled: true
+                    topAnchor: 8.000000
+            children:
+            -   class: "UIStaticText"
+                name: "Date"
+                position: [558.000000, 0.000000]
+                size: [300.000000, 30.000000]
+                input: false
+                classes: "text1 text-color-blue"
+                components:
+                    Background:
+                        align: ["LEFT", "VCENTER"]
+                    UITextComponent:
+                        text: "28.02.2014 14:01"
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                        align: ["RIGHT", "VCENTER"]
+                        useRtlAlign: "DONT_USE"
+                    Anchor:
+                        rightAnchorEnabled: true
+                        rightAnchor: 0.000000
+                        topAnchorEnabled: true
+                        topAnchor: 0.000000
+                        bottomAnchorEnabled: true
+                        bottomAnchor: 0.000000
+        -   class: "UIControl"
+            name: "Accrued"
+            position: [140.000000, 0.000000]
+            input: false
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 140.000000
+                    rightAnchorEnabled: true
+                    rightAnchor: 200.000000
+                LinearLayout:
+                    spacing: 3.000000
+                    useRtl: true
+                SizePolicy:
+                    horizontalPolicy: "Ignore"
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   prototype: "Box"
+                name: "Box"
+                components:
+                    SizePolicy:
+                        horizontalMax: 700.000000
+                        verticalPolicy: "PercentOfChildrenSum"
+                children:
+                -   path: "Stuff/Label"
+                    components:
+                        UITextComponent:
+                            text: ""
+                            multiline: "MULTILINE_ENABLED"
+                        SizePolicy:
+                            horizontalMax: 574.000000
+                -   prototype: "ItemWithBraces"
+                    name: "Compensation"
+                    children:
+                    -   path: "Label"
+                        components:
+                            UITextComponent:
+                                text: "NEWS_NOTIFICATION_COMPENSATION"
+                    -   path: "Container/OpenBrace"
+                        visible: true
+                    -   path: "Container/CloseBrace"
+                        visible: true
+                -   class: "UIStaticText"
+                    name: "Comma"
+                    size: [10.000000, 26.000000]
+                    classes: "header3 text-color-blue"
+                    components:
+                        UITextComponent:
+                            text: ","
+                            colorInheritType: "COLOR_IGNORE_PARENT"
+                            align: ["LEFT", "VCENTER"]
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            verticalPolicy: "PercentOfContent"
+        -   class: "UIControl"
+            name: "Debited"
+            position: [140.000000, 52.000000]
+            size: [684.000000, 22.000000]
+            input: false
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 140.000000
+                    rightAnchorEnabled: true
+                    rightAnchor: 200.000000
+                LinearLayout:
+                    spacing: 3.000000
+                    useRtl: true
+                SizePolicy:
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   prototype: "Box"
+                name: "Box"
+                components:
+                    SizePolicy:
+                        horizontalMax: 700.000000
+                        verticalPolicy: "PercentOfChildrenSum"
+                children:
+                -   path: "Text"
+                    components:
+                        UITextComponent:
+                            text: "NEWS_NOTIFICATION_INVOICE_DEBITED"
+                -   path: "Slots"
+                    position: [324.000000, 0.000000]
+                    children: []
+    -   class: "UIStaticText"
+        name: "ShowStorage"
+        position: [808.000000, 22.500000]
+        size: [200.000000, 55.000000]
+        visible: false
+        input: false
+        classes: "header3 text-color-white"
+        components:
+            Background:
+                align: ["RIGHT", "VCENTER"]
+            UITextComponent:
+                text: "NEWS_NOTIFICATION_STORAGE_MORE_INFO"
+                colorInheritType: "COLOR_IGNORE_PARENT"
+                align: ["RIGHT", "VCENTER"]
+                useRtlAlign: "DONT_USE"
+            Anchor:
+                rightAnchorEnabled: true
+                rightAnchor: 16.000000
+                vCenterAnchorEnabled: true
+                vCenterAnchor: 0.000000
+-   prototype: "NotificationCell"
+    name: "System"
+    classes: "cell"
+    components:
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Lobby/News/NewsNotificationCell.yaml"
+    children:
+    -   class: "UIStaticText"
+        name: "Description"
+        position: [140.000000, 3.000000]
+        size: [718.000000, 94.000000]
+        input: false
+        classes: "text1 text-color-blue"
+        components:
+            Background:
+                align: ["LEFT", "VCENTER"]
+            UITextComponent:
+                text: "Очень важное системное сообщение - например у вас угнали аккаунт или на Землю летит гигантский метеорит"
+                colorInheritType: "COLOR_IGNORE_PARENT"
+                multiline: "MULTILINE_ENABLED"
+                align: ["LEFT", "VCENTER"]
+                useRtlAlign: "DONT_USE"
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 140.000000
+                rightAnchorEnabled: true
+                rightAnchor: 166.000000
+                topAnchorEnabled: true
+                topAnchor: 3.000000
+                bottomAnchorEnabled: true
+                bottomAnchor: 3.000000
+-   prototype: "NotificationCell"
+    customClass: "ShareRewardCell"
+    name: "ShareReward"
+    classes: "cell"
+    components:
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Lobby/News/NewsNotificationCell.yaml"
+    children:
+    -   class: "UIControl"
+        name: "Layout"
+        position: [140.000000, 37.000000]
+        size: [90.000000, 27.000000]
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 140.000000
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                spacing: 3.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   class: "UIStaticText"
+            name: "Description"
+            input: false
+            classes: "text1 text-color-blue"
+            components:
+                Background:
+                    align: ["LEFT", "VCENTER"]
+                UITextComponent:
+                    text: "text"
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                    multiline: "MULTILINE_ENABLED"
+                    align: ["LEFT", "VCENTER"]
+                    useRtlAlign: "DONT_USE"
+                Anchor:
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+        -   prototype: "ItemWithIcon"
+            name: "ItemWithIcon"
+            components:
+                Anchor:
+                    enabled: true
+-   prototype: "NotificationCell"
+    name: "TankBought"
+    classes: "bought touchable"
+    components:
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Lobby/News/NewsNotificationCell.yaml"
+    children:
+    -   class: "UIStaticText"
+        name: "ShowDetails"
+        position: [808.000000, 22.500000]
+        size: [200.000000, 55.000000]
+        input: false
+        classes: "header3 text-color-white"
+        components:
+            Background:
+                align: ["RIGHT", "VCENTER"]
+            UITextComponent:
+                text: "NEWS_NOTIFICATION_TANK_BOUGHT_BUTTON"
+                colorInheritType: "COLOR_IGNORE_PARENT"
+                align: ["RIGHT", "VCENTER"]
+                useRtlAlign: "DONT_USE"
+            Anchor:
+                rightAnchorEnabled: true
+                rightAnchor: 16.000000
+                vCenterAnchorEnabled: true
+                vCenterAnchor: 0.000000
+    -   class: "UIStaticText"
+        name: "Description"
+        position: [140.000000, 33.000000]
+        size: [718.000000, 30.000000]
+        input: false
+        classes: "header3 text-color-white"
+        components:
+            Background:
+                align: ["LEFT", "VCENTER"]
+            UITextComponent:
+                text: "T-100500"
+                colorInheritType: "COLOR_IGNORE_PARENT"
+                multiline: "MULTILINE_ENABLED"
+                align: ["LEFT", "VCENTER"]
+                useRtlAlign: "DONT_USE"
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 140.000000
+                rightAnchorEnabled: true
+                rightAnchor: 166.000000
+                topAnchorEnabled: true
+                topAnchor: 33.000000
+    -   class: "UIStaticText"
+        name: "DescriptionLabel"
+        position: [140.000000, 3.000000]
+        size: [718.000000, 30.000000]
+        input: false
+        classes: "text1 text-color-blue"
+        components:
+            Background:
+                align: ["LEFT", "VCENTER"]
+            UITextComponent:
+                text: "NEWS_NOTIFICATION_TANK_BOUGHT"
+                colorInheritType: "COLOR_IGNORE_PARENT"
+                align: ["LEFT", "VCENTER"]
+                useRtlAlign: "DONT_USE"
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 140.000000
+                rightAnchorEnabled: true
+                rightAnchor: 166.000000
+                topAnchorEnabled: true
+                topAnchor: 3.000000
+    -   class: "UIControl"
+        name: "TankImage"
+        position: [16.000000, 0.000000]
+        size: [108.000000, 100.000000]
+        input: false
+        components:
+            Background:
+                drawType: "DRAW_SCALE_PROPORTIONAL"
+                sprite: "~res:/Gfx/UI/BigTankIcons/germany-Ferdinand"
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 16.000000
+                topAnchorEnabled: true
+                topAnchor: 0.000000
+                bottomAnchorEnabled: true
+                bottomAnchor: 0.000000
+-   prototype: "NotificationCell"
+    customClass: "NewsNotificationSurveyCell"
+    name: "Survey"
+    classes: "cell survey touchable"
+    components:
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Lobby/News/NewsNotificationCell.yaml"
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 140.000000
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+        children:
+        -   class: "UIStaticText"
+            name: "Title"
+            input: false
+            classes: "header3 text-color-white"
+            components:
+                Background:
+                    align: ["LEFT", "VCENTER"]
+                UITextComponent:
+                    text: "Title"
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                    multiline: "MULTILINE_ENABLED"
+                    align: ["LEFT", "VCENTER"]
+                    useRtlAlign: "DONT_USE"
+                Anchor:
+                    leftAnchorEnabled: true
+                    rightAnchorEnabled: true
+                    rightAnchor: 200.000000
+                    topAnchorEnabled: true
+                    topAnchor: 8.000000
+                    bottomAnchorEnabled: true
+                    bottomAnchor: 62.000000
+        -   class: "UIStaticText"
+            name: "Description"
+            input: false
+            classes: "text2 text-color-blue"
+            components:
+                Background:
+                    align: ["LEFT", "VCENTER"]
+                UITextComponent:
+                    text: "Descr"
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                    multiline: "MULTILINE_ENABLED"
+                    align: ["LEFT", "VCENTER"]
+                    useRtlAlign: "DONT_USE"
+                Anchor:
+                    leftAnchorEnabled: true
+                    rightAnchorEnabled: true
+                    rightAnchor: 200.000000
+                    topAnchorEnabled: true
+                    topAnchor: 36.000000
+                    bottomAnchorEnabled: true
+                    bottomAnchor: 5.000000
+        -   class: "UIStaticText"
+            name: "ShowDetails"
+            position: [688.000000, 20.000000]
+            size: [180.000000, 60.000000]
+            input: false
+            classes: "header3 text-color-white"
+            components:
+                Background:
+                    align: ["RIGHT", "VCENTER"]
+                UITextComponent:
+                    text: "Details"
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                    multiline: "MULTILINE_ENABLED"
+                    align: ["RIGHT", "VCENTER"]
+                    useRtlAlign: "DONT_USE"
+                Anchor:
+                    rightAnchorEnabled: true
+                    rightAnchor: 16.000000
+                    topAnchorEnabled: true
+                    topAnchor: 20.000000
+                    bottomAnchorEnabled: true
+                    bottomAnchor: 20.000000
+    -   class: "UIControl"
+        name: "Unread"
+        position: [4.000000, 42.000000]
+        size: [16.000000, 16.000000]
+        scale: [0.750000, 0.750000]
+        input: false
+        components:
+            Background:
+                sprite: "~res:/Gfx/UI/NewsScreen/IconAlert"
+                color: [1.000000, 0.180400, 0.192200, 1.000000]
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 4.000000
+                vCenterAnchorEnabled: true
+                vCenterAnchor: 0.000000
+-   prototype: "NotificationCell"
+    name: "TeamInvite"
+    classes: "bought"
+    components:
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Lobby/News/NewsNotificationCell.yaml"
+    children:
+    -   path: "Image"
+        visible: true
+    -   class: "UIControl"
+        name: "InvitationBox"
+        size: [414.000000, 80.000000]
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 130.000000
+                rightAnchorEnabled: true
+                rightAnchor: 480.000000
+                topAnchorEnabled: true
+                topAnchor: 10.000000
+                bottomAnchorEnabled: true
+                bottomAnchor: 10.000000
+            FlowLayout:
+                hSpacing: 10.000000
+                useRtl: true
+        children:
+        -   class: "UIControl"
+            name: "InviterContent"
+            input: false
+            components:
+                LinearLayout:
+                    spacing: 5.000000
+                    useRtl: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   class: "UIStaticText"
+                name: "FromLabel"
+                input: false
+                classes: "header3 text-color-blue"
+                components:
+                    Background:
+                        align: ["LEFT", "VCENTER"]
+                    UITextComponent:
+                        text: "NEWS_NOTIFICATION_TEAM_INVITE_AUTHOR"
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                        multiline: "MULTILINE_ENABLED"
+                        align: ["LEFT", "VCENTER"]
+                        useRtlAlign: "DONT_USE"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+            -   prototype: "PlayerNameWithTag/PlayerNameWithTag"
+                name: "FromPlayerNameWithTag"
+                components:
+                    LinearLayout:
+                        useRtl: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+        -   class: "UIControl"
+            name: "TeamContent"
+            input: false
+            components:
+                LinearLayout:
+                    spacing: 5.000000
+                    useRtl: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   class: "UIStaticText"
+                name: "TeamLabel"
+                input: false
+                classes: "header3 text-color-blue"
+                components:
+                    Background:
+                        align: ["LEFT", "VCENTER"]
+                    UITextComponent:
+                        text: "NEWS_NOTIFICATION_TEAM_INVITE_TEAM"
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                        multiline: "MULTILINE_ENABLED"
+                        align: ["LEFT", "VCENTER"]
+                        useRtlAlign: "DONT_USE"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+            -   class: "UIStaticText"
+                name: "TeamName"
+                input: false
+                classes: "header3 text-color-white"
+                components:
+                    UITextComponent:
+                        text: "Team"
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                        fitting: "FITTING_POINTS"
+                        align: ["LEFT", "VCENTER"]
+                        useRtlAlign: "USE_BY_SYSTEM"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfContent"
+        -   class: "UIControl"
+            name: "TournamentContent"
+            input: false
+            components:
+                LinearLayout:
+                    spacing: 5.000000
+                    useRtl: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   class: "UIStaticText"
+                name: "TournamentLabel"
+                input: false
+                classes: "header3 text-color-blue"
+                components:
+                    Background:
+                        align: ["LEFT", "VCENTER"]
+                    UITextComponent:
+                        text: "NEWS_NOTIFICATION_TEAM_INVITE_TOURNAMENT"
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                        multiline: "MULTILINE_ENABLED"
+                        align: ["LEFT", "VCENTER"]
+                        useRtlAlign: "DONT_USE"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+            -   class: "UIStaticText"
+                name: "TournamentName"
+                input: false
+                classes: "header3 text-color-white"
+                components:
+                    UITextComponent:
+                        text: "Tournament"
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                        fitting: "FITTING_POINTS"
+                        align: ["LEFT", "VCENTER"]
+                        useRtlAlign: "USE_BY_SYSTEM"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfContent"
+    -   prototype: "StyledButton/StyledButton"
+        name: "DeclineButton"
+        position: [562.000000, 18.000000]
+        components:
+            Anchor:
+                rightAnchorEnabled: true
+                rightAnchor: 240.000000
+                vCenterAnchorEnabled: true
+            Sound:
+                touchUpInside: "GUI/buttons/cancel"
+        children:
+        -   path: "Caption"
+            components:
+                UITextComponent:
+                    text: "tournaments/Button/Decline"
+    -   prototype: "StyledButton/StyledButton"
+        name: "AcceptButton"
+        position: [792.000000, 18.000000]
+        classes: "button button-color-green"
+        components:
+            Anchor:
+                rightAnchorEnabled: true
+                rightAnchor: 10.000000
+                vCenterAnchorEnabled: true
+            Sound:
+                touchUpInside: "GUI/buttons/ok"
+        children:
+        -   path: "Caption"
+            components:
+                UITextComponent:
+                    text: "tournaments/Button/ToTeam"
+-   prototype: "NotificationCell"
+    name: "TournamentInvite"
+    classes: "bought"
+    components:
+        LinearLayout:
+            padding: "10.000000"
+            spacing: 10.000000
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Lobby/News/NewsNotificationCell.yaml"
+    children:
+    -   path: "Image"
+        visible: true
+    -   class: "UIStaticText"
+        name: "InvitationText"
+        input: false
+        classes: "header3 text-color-white"
+        components:
+            Background:
+                align: ["LEFT", "VCENTER"]
+            UITextComponent:
+                colorInheritType: "COLOR_IGNORE_PARENT"
+                multiline: "MULTILINE_ENABLED"
+                align: ["LEFT", "VCENTER"]
+                useRtlAlign: "DONT_USE"
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 130.000000
+                rightAnchorEnabled: true
+                rightAnchor: 480.000000
+                topAnchorEnabled: true
+                topAnchor: 10.000000
+                bottomAnchorEnabled: true
+                bottomAnchor: 10.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+    -   prototype: "StyledButton/StyledButton"
+        name: "AcceptButton"
+        position: [792.000000, 18.000000]
+        classes: "button button-color-green"
+        components:
+            Anchor:
+                rightAnchorEnabled: true
+                rightAnchor: 10.000000
+                vCenterAnchorEnabled: true
+            Sound:
+                touchUpInside: "GUI/buttons/ok"
+        children:
+        -   path: "Caption"
+            components:
+                UITextComponent:
+                    text: "tournaments/Button/Accept"
+-   prototype: "NotificationCell"
+    customClass: "NewsNotificationKarmaCell"
+    name: "Karma"
+    classes: "karma touchable"
+    components:
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Lobby/News/NewsNotificationCell.yaml"
+    children:
+    -   path: "Image"
+        components:
+            Background:
+                sprite: "~res:/Gfx/UI/LobbyCommon/IconsSmall"
+                frame: 26
+    -   class: "UIControl"
+        name: "Content"
+        position: [140.000000, 26.500000]
+        input: false
+        components:
+            Anchor:
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                orientation: "TopDown"
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 680.000000
+                verticalPolicy: "PercentOfChildrenSum"
+        children:
+        -   class: "UIStaticText"
+            name: "Title"
+            classes: "header4 text-color-white"
+            components:
+                UITextComponent:
+                    text: "Title"
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                    align: ["LEFT", "VCENTER"]
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+        -   class: "UIStaticText"
+            name: "Description"
+            size: [680.000000, 23.000000]
+            classes: "text2 text-color-blue"
+            components:
+                UITextComponent:
+                    text: "Description"
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                    multiline: "MULTILINE_ENABLED"
+                    align: ["LEFT", "VCENTER"]
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfContent"
+    -   class: "UIStaticText"
+        name: "ShowKarma"
+        position: [877.000000, 37.000000]
+        input: false
+        classes: "header3 text-color-white"
+        components:
+            Background:
+                align: ["RIGHT", "VCENTER"]
+            UITextComponent:
+                text: "NEWS_NOTIFICATION_KARMA_MORE_INFO"
+                colorInheritType: "COLOR_IGNORE_PARENT"
+                align: ["RIGHT", "VCENTER"]
+                useRtlAlign: "DONT_USE"
+            Anchor:
+                rightAnchorEnabled: true
+                rightAnchor: 16.000000
+                vCenterAnchorEnabled: true
+                vCenterAnchor: 0.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+-   prototype: "NotificationCell"
+    customClass: "NewsNotificationKarmaRichCell"
+    name: "KarmaRich"
+    classes: "karma touchable"
+    components:
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Lobby/News/NewsNotificationCell.yaml"
+    children:
+    -   path: "Image"
+        components:
+            Background:
+                sprite: "~res:/Gfx/UI/LobbyCommon/IconsSmall"
+                frame: 26
+    -   prototype: "RichText/RichText"
+        name: "Description"
+        components:
+            RichContent:
+                text: "<text_green_bold>Green</text_green_bold><text_red_bold>Red</text_red_bold><text_orange_bold>Orange</text_orange_bold>"
+                baseClasses: "text-color-blue text1"
+            RichContentAliases0:
+                aliases:
+                - ["text_blue", "<span class=\"text-color-blue text1\" />"]
+                - ["text_white_bold", "<span class=\"text-color-white header3\" />"]
+                - ["text_mono", "<span class=\"text-mono\" />"]
+                - ["timer", "<object name=\"Timer\" path=\"~res:/UI/Screens/Lobby/Common/Timer.yaml\" prototype=\"Timer\" />"]
+                - ["price", "<object class=\"gold\" name=\"Price\" path=\"~res:/UI/Screens/Lobby/Common/Price.yaml\" prototype=\"Price\" />"]
+                - ["player_name_with_tag", "<object path=\"~res:/UI/Screens/Common/PlayerNameWithTag.yaml\" prototype=\"PlayerNameWithTag\" />"]
+                - ["player_teams_header_text", "<span class=\"header1\" />"]
+                - ["clan_name_with_tag", "<object path=\"~res:/UI/Screens/Common/PlayerNameWithTag.yaml\" prototype=\"PlayerNameWithTag\" />"]
+                - ["player_name_with_tag_header1", "<object path=\"~res:/UI/Screens/Common/PlayerNameWithTag.yaml\" prototype=\"PlayerNameWithTagHeader1\" />"]
+                - ["clan_name_with_tag_header1", "<object path=\"~res:/UI/Screens/Common/PlayerNameWithTag.yaml\" prototype=\"PlayerNameWithTagHeader1\" />"]
+                - ["text_red_bold", "<span class=\"text-color-red header3\" />"]
+                - ["text_green_bold", "<span class=\"text-color-green header3\" />"]
+                - ["text_orange_bold", "<span class=\"text-color-orange header3\" />"]
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 140.000000
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 680.000000
+                verticalPolicy: "PercentOfChildrenSum"
+    -   class: "UIStaticText"
+        name: "ActionDescr"
+        input: false
+        classes: "header3 text-color-white"
+        components:
+            UITextComponent:
+                text: "NEWS_NOTIFICATION_KARMA_MORE_INFO"
+                colorInheritType: "COLOR_IGNORE_PARENT"
+                align: ["RIGHT", "VCENTER"]
+                useRtlAlign: "DONT_USE"
+            Anchor:
+                rightAnchorEnabled: true
+                rightAnchor: 16.000000
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+-   prototype: "NotificationCell"
+    customClass: "NewsNotificationLeasedTankCell"
+    name: "TankLeased"
+    classes: "bought touchable"
+    components:
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Lobby/News/NewsNotificationCell.yaml"
+    children:
+    -   class: "UIStaticText"
+        name: "ShowDetails"
+        size: [200.000000, 55.000000]
+        input: false
+        classes: "header3 text-color-white"
+        components:
+            Background:
+                align: ["RIGHT", "VCENTER"]
+            UITextComponent:
+                text: "NEWS_NOTIFICATION_TANK_BOUGHT_BUTTON"
+                colorInheritType: "COLOR_IGNORE_PARENT"
+                align: ["RIGHT", "VCENTER"]
+                useRtlAlign: "DONT_USE"
+            Anchor:
+                rightAnchorEnabled: true
+                rightAnchor: 16.000000
+                vCenterAnchorEnabled: true
+                vCenterAnchor: 0.000000
+    -   class: "UIControl"
+        name: "TankImage"
+        size: [108.000000, 100.000000]
+        input: false
+        components:
+            Background:
+                drawType: "DRAW_SCALE_PROPORTIONAL"
+                sprite: "~res:/Gfx/UI/BigTankIcons/germany-Ferdinand"
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 16.000000
+                topAnchorEnabled: true
+                topAnchor: 0.000000
+                bottomAnchorEnabled: true
+                bottomAnchor: 0.000000
+    -   class: "UIControl"
+        name: "RichTextControl"
+        size: [684.000000, 80.000000]
+        components:
+            RichContent:
+                text: "<text_blue>You have received <tank/> which is temporary and will be available for use for <timer/> </text_blue>"
+            RichContentAliases0:
+                aliases:
+                - ["text_blue", "<span class=\"text-color-blue text1\" />"]
+                - ["timer", "<object path=\"~res:/UI/Screens/Lobby/Common/Timer.yaml\" prototype=\"Timer\" />"]
+                - ["tank", "<object control=\"TankCaption\" name=\"tank\" path=\"~res:/UI/Screens/Lobby/Hangar/LeasedTankPopup.yaml\" />"]
+                - ["text_white_bold", "<span class=\"text-color-white header3\" />"]
+                - ["price", "<object control=\"PriceContainer\" name=\"price\" path=\"~res:/UI/Screens/Lobby/Inventory/InterruptPopup.yaml\" />"]
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 140.000000
+                rightAnchorEnabled: true
+                rightAnchor: 200.000000
+                vCenterAnchorEnabled: true
+            FlowLayout:
+                hSpacing: 5.000000
+                vDynamicPadding: true
+                useRtl: true
+-   prototype: "NotificationCell"
+    customClass: "UIGenericNewsNotificationCell"
+    name: "VideoAdReward"
+    components:
+        UIDataParamsComponent:
+            params:
+            - ["vector<ResourceModel>", "data", "null", "[ { \"type\" = ResourceType.premium; }; { \"type\" = ResourceType.credits; }; ]"]
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Lobby/News/NewsNotificationCell.yaml"
+    children:
+    -   path: "Image"
+        pivot: [0.500000, 0.500000]
+        components:
+            Background:
+                drawType: "DRAW_SCALE_PROPORTIONAL"
+                sprite: "~res:/Gfx/UI/Hangar/ads/ads_icon_new_big.psd"
+            Anchor:
+                leftAnchor: 12.000000
+                topAnchor: 4.000000
+                bottomAnchorEnabled: false
+    -   class: "UIControl"
+        name: "Control"
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 140.000000
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                orientation: "TopDown"
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfChildrenSum"
+        children:
+        -   class: "UIControl"
+            name: "Label"
+            input: false
+            classes: "header4 text-color-white"
+            components:
+                UITextComponent:
+                    text: "#hangar:notification/RewardForVideo"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens/Fonts.yaml"
+        -   class: "UIControl"
+            name: "RewardContainer"
+            input: false
+            components:
+                LinearLayout:
+                    orientation: "LeftToRight"
+                    spacing: 20.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIRepeatComponent:
+                    control: "~res:/UI/Screens/Lobby/News/NewsRewardResource.yaml"
+                    dataContainer: "data"
+                    args:
+                        "resource": "_item"
+-   prototype: "NotificationCell"
+    customClass: "UIGenericNewsNotificationCell"
+    name: "SubscriptionReward"
+    components:
+        UIDataParamsComponent:
+            params:
+            - ["SubscriptionRewardNotification", "data", "null", "{ }"]
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Lobby/News/NewsNotificationCell.yaml"
+    children:
+    -   path: "Image"
+        components:
+            Background:
+                drawType: "DRAW_SCALE_PROPORTIONAL"
+        bindings:
+        - ["visible", "empty(data.subscriptionItem.iconUrl)"]
+        - ["Background.sprite", "data.subscriptionItem.icon"]
+    -   class: "UIControl"
+        name: "UrlImage"
+        input: false
+        components:
+            Background: {}
+            UIUrlImageComponent: {}
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 16.000000
+                topAnchorEnabled: true
+                topAnchor: 0.000000
+                bottomAnchorEnabled: true
+                bottomAnchor: 0.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+        bindings:
+        - ["visible", "not empty(data.subscriptionItem.iconUrl)"]
+        - ["UIUrlImageComponent.imageUrl", "data.subscriptionItem.iconUrl"]
+    -   class: "UIControl"
+        name: "MessageContainer"
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 140.000000
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                orientation: "TopDown"
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfChildrenSum"
+        children:
+        -   class: "UIControl"
+            name: "Label"
+            input: false
+            classes: "header4 text-color-white"
+            components:
+                UITextComponent:
+                    text: "HANGAR_NOTIFICATION_SUBSCRIPTION_REWARD"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens/Fonts.yaml"
+        -   class: "UIControl"
+            name: "RewardContainer"
+            input: false
+            components:
+                LinearLayout:
+                    orientation: "LeftToRight"
+                    spacing: 20.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIRepeatComponent:
+                    control: "~res:/UI/Screens/Lobby/News/NewsRewardResource.yaml"
+                    dataContainer: "data.reward"
+                    args:
+                        "resource": "_item"
+-   prototype: "NotificationCell"
+    customClass: "UIGenericNewsNotificationCell"
+    name: "SubscriptionExpired"
+    components:
+        UIDataParamsComponent:
+            params:
+            - ["SubscriptionExpiredNotification", "data", "null", "{ }"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["ArtefactGrade", "grade", "data.subscriptionItem.grade"]
+            - ["string", "gradeTextColor", "when grade == ArtefactGrade.rare -> \"text-color-rare\", grade == ArtefactGrade.unique -> \"text-color-unique\", grade == ArtefactGrade.legendary -> \"text-color-legendary\", \"text-color-common\""]
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Lobby/News/NewsNotificationCell.yaml"
+    children:
+    -   path: "Image"
+        components:
+            Background: {}
+        bindings:
+        - ["visible", "empty(data.subscriptionItem.iconUrl)"]
+        - ["Background.sprite", "data.subscriptionItem.icon"]
+    -   class: "UIControl"
+        name: "UrlImage"
+        size: [108.000000, 100.000000]
+        input: false
+        components:
+            Background: {}
+            UIUrlImageComponent: {}
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 16.000000
+                topAnchorEnabled: true
+                topAnchor: 0.000000
+                bottomAnchorEnabled: true
+                bottomAnchor: 0.000000
+        bindings:
+        - ["visible", "not empty(data.subscriptionItem.iconUrl)"]
+        - ["UIUrlImageComponent.imageUrl", "data.subscriptionItem.iconUrl"]
+    -   class: "UIControl"
+        name: "Control"
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 140.000000
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                orientation: "TopDown"
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfChildrenSum"
+            StyleSheet:
+                styles: "~res:/UI/Screens/Fonts.yaml"
+        children:
+        -   class: "UIControl"
+            name: "Description"
+            input: false
+            classes: "text1 text-color-blue"
+            components:
+                Background:
+                    align: ["LEFT", "VCENTER"]
+                UITextComponent:
+                    text: "NEWS_NOTIFICATION_SUBSCRIPTION_EXPIRED"
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                    multiline: "MULTILINE_ENABLED"
+                    align: ["LEFT", "VCENTER"]
+                    useRtlAlign: "DONT_USE"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+        -   class: "UIControl"
+            name: "Debited"
+            input: false
+            components:
+                LinearLayout:
+                    spacing: 3.000000
+                    useRtl: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   class: "UIControl"
+                name: "Text"
+                input: false
+                classes: "text1 text-color-blue"
+                components:
+                    UITextComponent:
+                        text: "NEWS_NOTIFICATION_INVOICE_DEBITED"
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                        useRtlAlign: "DONT_USE"
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+            -   class: "UIControl"
+                name: "Label"
+                input: false
+                components:
+                    UITextComponent:
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                        useRtlAlign: "USE_BY_SYSTEM"
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+                bindings:
+                - ["classes", "\"text2 \" + gradeTextColor"]
+                - ["UITextComponent.text", "data.localizedTitle"]
+            -   class: "UIControl"
+                name: "Value"
+                input: false
+                classes: "header3 text-color-white"
+                components:
+                    UITextComponent:
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                        useRtlAlign: "DONT_USE"
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+                bindings:
+                - ["UITextComponent.text", "\"(\" + localize(\"#common:Value\", { \"value\" = -1; }) + \")\""]
+-   prototype: "NotificationCell"
+    customClass: "UIGenericNewsNotificationCell"
+    name: "OpenPiggyBank"
+    classes: "cell"
+    components:
+        UIDataParamsComponent:
+            params:
+            - ["PiggyBankOpenedViewModel", "data", "null", "{ }"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["string", "highlightStartRichAlias", "\"<highlighted>\""]
+            - ["string", "highlightEndRichAlias", "\"</highlighted>\""]
+            - ["string", "resource1RichAlias", "when isNull(data.resource) or data.resource.quantity == 0 -> \"\", \"<resource1/>\""]
+            - ["string", "bpCreditsTitleKey", "\"BattlePass/SafeDeposit/Credits/Title\""]
+            - ["string", "bpGoldTitleKey", "\"BattlePass/SafeDeposit/Gold/Title\""]
+            - ["string", "bpFreeXpTitleKey", "\"BattlePass/SafeDeposit/FreeXP/Title\""]
+            - ["string", "bpTitleKey", "when data.resource.type == ResourceType.free_xp -> bpFreeXpTitleKey, when data.resource.type == ResourceType.gold -> bpGoldTitleKey, when data.resource.type == ResourceType.credits -> bpCreditsTitleKey, \"\""]
+            - ["string", "titleKey", "when not empty(data.piggyBankTitleKey) -> data.piggyBankTitleKey, bpTitleKey"]
+            - ["string", "key", "\"HANGAR_NEWS_NOTIFICATION_PIGGY_BANK_OPENED\""]
+            - ["string", "string", "localize(key, { \"title\" = localize(titleKey); })"]
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Lobby/News/NewsNotificationCell.yaml"
+    children:
+    -   path: "Image"
+        components:
+            Background:
+                drawType: "DRAW_SCALE_PROPORTIONAL"
+                sprite: "~res:/Gfx/UI/NewsScreen/IconsNotifications"
+                frame: 4
+    -   class: "UIControl"
+        name: "Control"
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 140.000000
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                orientation: "TopDown"
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfChildrenSum"
+            StyleSheet:
+                styles: "~res:/UI/Screens/Fonts.yaml"
+        children:
+        -   class: "UIControl"
+            name: "RichText"
+            size: [278.000000, 72.000000]
+            input: false
+            components:
+                RichContent:
+                    baseClasses: "text1 text-color-blue"
+                RichContentAliases0:
+                    aliases:
+                    - ["highlighted", "<span class=\"text-color-white header3\" />"]
+                    - ["resource1", "<control control=\"~res:/UI/Screens/Lobby/News/NewsRewardResource.yaml\" args1=\"resource=data.resource\"/>\t"]
+                Anchor:
+                    leftAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfChildrenSum"
+                FlowLayout:
+                    hSpacing: 5.000000
+                    useRtl: true
+                StyleSheet:
+                    styles: "~res:/UI/Screens/Fonts.yaml"
+            bindings:
+            - ["RichContent.text", "localize(string, { \"resource1\" = resource1RichAlias; \"highlight_start\" = highlightStartRichAlias; \"highlight_end\" = highlightEndRichAlias; })"]
+-   prototype: "NotificationCell"
+    customClass: "UIGenericNewsNotificationCell"
+    name: "GiftStatus"
+    input: false
+    exclusiveInput: false
+    components:
+        UIDataParamsComponent:
+            params:
+            - ["GiftStatusNotificationViewModel", "data", "null", "{ }"]
+            events:
+            - "ON_TO_CHAT"
+        UIDataLocalBindingsComponent:
+            data:
+            - ["Gift", "gift", "data.gift"]
+            - ["string", "playerName", "when isNull(gift) or isNull(gift.receiver) -> \"\", gift.receiver.name"]
+            - ["string", "playerClanTag", "when isNull(gift) -> \"\", gift.receiverClanTag"]
+            - ["string", "productName", "when isNull(gift) -> \"\", gift.title"]
+            - ["string", "keyReceived", "\"Gifts/Notifications/GiftAcknowledged\""]
+            - ["string", "keySent", "\"Gifts/Notifications/GiftSent\""]
+            - ["string", "key", "when isNull(gift) -> \"\", gift.receivedAt > 0L -> keyReceived, keySent"]
+            - ["string", "playerAlias", "when playerName.empty() -> \"\", \"<player/>\""]
+            - ["string", "finalString", "localize(key, { \"highlight_start\" = \"<highlighted>\"; \"highlight_end\" = \"</highlighted>\"; \"player\" = playerAlias; \"product\" = productName; })"]
+            - ["string", "playerNameStyle", "\"text1 text-color-white\""]
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Lobby/News/NewsNotificationCell.yaml"
+    children:
+    -   path: "Image"
+        pivot: [0.500000, 0.500000]
+        components:
+            Background:
+                drawType: "DRAW_SCALE_PROPORTIONAL"
+                sprite: "~res:/Gfx/Lobby/backgrounds/present/certificate_gift"
+            Anchor:
+                leftAnchor: 12.000000
+                topAnchor: 4.000000
+                bottomAnchorEnabled: false
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 140.000000
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                orientation: "LeftToRight"
+                spacing: 16.000000
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "parent - 160"
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   class: "UIControl"
+            name: "RichText"
+            input: false
+            components:
+                RichContent:
+                    baseClasses: "text1 text-color-blue"
+                RichContentAliases0:
+                    aliases:
+                    - ["highlighted", "<span class=\"header3 text-color-white\" />"]
+                    - ["player", "<control control=\"~res:/UI/Screens/Lobby/Common/PlayerNameDeprecated.yaml\" args1=\"clanTag=playerClanTag\" args2=\"playerName=playerName\"  />"]
+                Anchor:
+                    leftAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfChildrenSum"
+                FlowLayout:
+                    hSpacing: 5.000000
+                    useRtl: true
+                StyleSheet:
+                    styles: "~res:/UI/Screens/Fonts.yaml"
+            bindings:
+            - ["RichContent.text", "finalString"]
+        -   prototype: "Button/Button"
+            name: "Button"
+            components:
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 218.000000
+                UIDataParamsComponent:
+                    args:
+                        "caption": "capitalize(localize(\"Gifts/Notifications/SendMessage\"))"
+                        "type": "eButtonType.OPTIONAL_LIGHT"
+                    eventActions:
+                    - ["ON_CLICK_BUTTON", "ON_TO_CHAT", ""]

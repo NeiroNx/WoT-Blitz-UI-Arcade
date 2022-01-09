@@ -1,0 +1,381 @@
+Header:
+    version: 128
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/LobbyCommon.yaml"
+- "~res:/UI/Screens/Common/Settings/Settings.yaml"
+- "~res:/UI/Screens/Common.yaml"
+- "~res:/UI/Screens/Common/Settings/SettingsCommon.yaml"
+- "~res:/UI/Styles/SafeAreaStyles.yaml"
+- "~res:/UI/Screens/Common/Settings/SwitchWithCaptionAndDescription.yaml"
+- "~res:/UI/Screens/Common/Settings/InputKeyBindingsHolder.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "GamepadControlOptionsPage"
+    size: [1025.000000, 688.000000]
+    input: false
+    components:
+        Anchor:
+            leftAnchorEnabled: true
+            rightAnchorEnabled: true
+            topAnchorEnabled: true
+            bottomAnchorEnabled: true
+        StyleSheet:
+            styles: "~res:/UI/Screens/Common/Settings/TouchControlOptionsPage.yaml"
+    children:
+    -   class: "UIScrollView"
+        name: "ScrollView"
+        position: [0.000000, 0.000000]
+        size: [1025.000000, 688.000000]
+        input: false
+        autoUpdate: true
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+        children:
+        -   class: "UIScrollViewContainer"
+            name: "scrollContainerControl"
+            components:
+                LinearLayout:
+                    orientation: "TopDown"
+                    safeAreaPaddingInset: true
+                    spacing: 1.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfChildrenSum"
+            children:
+            -   prototype: "SettingsCommon/Button"
+                name: "BattleControlsLayoutButton"
+                size: [1015.000000, 80.000000]
+                components:
+                    Anchor:
+                        leftAnchorEnabled: true
+                        leftAnchor: 5.000000
+                        rightAnchorEnabled: true
+                        rightAnchor: 5.000000
+                    UIInputEventComponent:
+                        onTouchUpInside: "SHOW_GAMEPAD_KEY_BINDINGS"
+                children:
+                -   path: "TextContainer"
+                    children:
+                    -   class: "UIStaticText"
+                        name: "Comment2"
+                        classes: "header3 text-color-white"
+                        components:
+                            UITextComponent:
+                                text: "#settings:Controls/JoypadSettings/TuneButton"
+                                align: ["RIGHT", "VCENTER"]
+                            Anchor:
+                                leftAnchorEnabled: true
+                                leftAnchor: 10.000000
+                                rightAnchorEnabled: true
+                                rightAnchor: 50.000000
+                                topAnchorEnabled: true
+                                vCenterAnchorEnabled: true
+                                bottomAnchorEnabled: true
+                    -   class: "UIControl"
+                        name: "Arrow"
+                        components:
+                            Background:
+                                sprite: "~res:/Gfx/UI/SettingsScreen/arrow_settings"
+                                colorInherit: "COLOR_REPLACE_ALPHA_ONLY"
+                            Anchor:
+                                rightAnchorEnabled: true
+                                rightAnchor: 20.000000
+                                vCenterAnchorEnabled: true
+                -   path: "TextContainer/Text"
+                    components:
+                        UITextComponent:
+                            text: "#settings:Controls/JoypadSettings/Title"
+                        Anchor:
+                            leftAnchorEnabled: true
+            -   prototype: "SettingsCommon/Row"
+                name: "Row1"
+                components:
+                    Anchor:
+                        leftAnchor: 5.000000
+                        rightAnchor: 5.000000
+                children:
+                -   prototype: "SettingsCommon/SelectorWithCaptionAndDescription"
+                    name: "FollowAimMode2"
+            -   prototype: "SettingsCommon/Row"
+                name: "Row2"
+                position: [5.000000, 162.000000]
+                components:
+                    Anchor:
+                        leftAnchor: 5.000000
+                        rightAnchor: 5.000000
+                        topAnchorEnabled: true
+                children:
+                -   prototype: "SettingsCommon/SliderWithCaption"
+                    name: "GamepadSensitivity"
+                    components:
+                        Anchor:
+                            leftAnchorEnabled: true
+                            rightAnchorEnabled: true
+                        LinearLayout:
+                            spacing: 15.000000
+                            dynamicSpacing: false
+                    children:
+                    -   path: "ValueAndCaption"
+                        components:
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                        children: []
+                    -   path: "ValueAndCaption/GroupCaption"
+                        components:
+                            UITextComponent:
+                                text: "SETTINGS_GROUP_CAPTION_SENSITIVITY"
+            -   prototype: "SettingsCommon/Row"
+                name: "Row3"
+                components:
+                    Anchor:
+                        leftAnchor: 5.000000
+                        rightAnchor: 5.000000
+                        topAnchorEnabled: true
+                children:
+                -   prototype: "SettingsCommon/SliderWithCaption"
+                    name: "GamepadSensitivityInSniperMode"
+                    components:
+                        Anchor:
+                            leftAnchorEnabled: true
+                            rightAnchorEnabled: true
+                        LinearLayout:
+                            spacing: 15.000000
+                            dynamicSpacing: false
+                    children:
+                    -   path: "ValueAndCaption"
+                        components:
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                        children: []
+                    -   path: "ValueAndCaption/GroupCaption"
+                        components:
+                            UITextComponent:
+                                text: "SETTINGS_GROUP_CAPTION_GAMEPAD_SNIPER_SENSITIVITY"
+            -   prototype: "SettingsCommon/Row"
+                name: "Row4"
+                components:
+                    Anchor:
+                        leftAnchor: 5.000000
+                        rightAnchor: 5.000000
+                        topAnchorEnabled: true
+                    LinearLayout: {}
+                    SizePolicy:
+                        verticalPolicy: "PercentOfMaxChild"
+                children:
+                -   prototype: "SwitchWithCaptionAndDescription/SwitchWithCaptionAndDescription"
+                    name: "Accelerometer"
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            horizontalValue: 50.000000
+                    children:
+                    -   path: "ContentLinearLayout/TextVerticalLayout/GroupCaption"
+                        components:
+                            UITextComponent:
+                                text: "#settings:Controls/Accelerometer/Title"
+                    -   path: "ContentLinearLayout/TextVerticalLayout/Description"
+                        components:
+                            UITextComponent:
+                                text: ""
+                -   prototype: "SwitchWithCaptionAndDescription/SwitchWithCaptionAndDescription"
+                    name: "ArcadeAccelerometer"
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            horizontalValue: 50.000000
+                    children:
+                    -   path: "ContentLinearLayout/TextVerticalLayout/GroupCaption"
+                        components:
+                            UITextComponent:
+                                text: "#settings:Controls/ArcadeAccelerometer/Title"
+                    -   path: "ContentLinearLayout/TextVerticalLayout/Description"
+                        components:
+                            UITextComponent:
+                                text: ""
+            -   prototype: "SettingsCommon/Row"
+                name: "Row5"
+                position: [5.000000, 162.000000]
+                components:
+                    Anchor:
+                        leftAnchor: 5.000000
+                        rightAnchor: 5.000000
+                        topAnchorEnabled: true
+                    LinearLayout: {}
+                    SizePolicy:
+                        verticalPolicy: "PercentOfMaxChild"
+                children:
+                -   prototype: "SettingsCommon/SliderWithCaption"
+                    name: "AccelerometerSensitivity"
+                    components:
+                        LinearLayout:
+                            spacing: 15.000000
+                            dynamicSpacing: false
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                    children:
+                    -   path: "ValueAndCaption"
+                        components:
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                        children: []
+                    -   path: "ValueAndCaption/GroupCaption"
+                        components:
+                            UITextComponent:
+                                text: "#settings:Controls/AccelerometerSensitivity/Title"
+            -   prototype: "SettingsCommon/Row"
+                name: "Row6"
+                components:
+                    Anchor:
+                        leftAnchor: 5.000000
+                        rightAnchor: 5.000000
+                        topAnchorEnabled: true
+                    LinearLayout: {}
+                    SizePolicy:
+                        verticalPolicy: "PercentOfMaxChild"
+                children:
+                -   prototype: "SettingsCommon/SliderWithCaption"
+                    name: "AccelerometerSniperSensitivity"
+                    components:
+                        LinearLayout:
+                            spacing: 15.000000
+                            dynamicSpacing: false
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                    children:
+                    -   path: "ValueAndCaption"
+                        components:
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                        children: []
+                    -   path: "ValueAndCaption/GroupCaption"
+                        components:
+                            UITextComponent:
+                                text: "#settings:Controls/AccelerometerSniperSensitivity/Title"
+            -   prototype: "SettingsCommon/Row"
+                name: "Row7"
+                components:
+                    Anchor:
+                        leftAnchor: 5.000000
+                        rightAnchor: 5.000000
+                        topAnchorEnabled: true
+                    LinearLayout: {}
+                children:
+                -   prototype: "SwitchWithCaptionAndDescription/SwitchWithCaptionAndDescription"
+                    name: "CameraInversionHorizontal"
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            horizontalValue: 50.000000
+                            verticalPolicy: "PercentOfParent"
+                    children:
+                    -   path: "ContentLinearLayout/TextVerticalLayout/GroupCaption"
+                        components:
+                            UITextComponent:
+                                text: "#settings:Controls/CameraInversionHorizontal/Title"
+                    -   path: "ContentLinearLayout/TextVerticalLayout/Description"
+                        components:
+                            UITextComponent:
+                                text: ""
+                -   prototype: "SwitchWithCaptionAndDescription/SwitchWithCaptionAndDescription"
+                    name: "CameraInversionVertical"
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            horizontalValue: 50.000000
+                            verticalPolicy: "PercentOfParent"
+                    children:
+                    -   path: "ContentLinearLayout/TextVerticalLayout/GroupCaption"
+                        components:
+                            UITextComponent:
+                                text: "#settings:Controls/CameraInversionVertical/Title"
+                    -   path: "ContentLinearLayout/TextVerticalLayout/Description"
+                        components:
+                            UITextComponent:
+                                text: ""
+            -   prototype: "SettingsCommon/Row"
+                name: "Row8"
+                components:
+                    Anchor:
+                        leftAnchor: 5.000000
+                        rightAnchor: 5.000000
+                        topAnchorEnabled: true
+                    LinearLayout: {}
+                    SizePolicy:
+                        verticalPolicy: "PercentOfMaxChild"
+                children:
+                -   prototype: "SwitchWithCaptionAndDescription/SwitchWithCaptionAndDescription"
+                    name: "AccelerometerInversionHorizontal"
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            horizontalValue: 50.000000
+                    children:
+                    -   path: "ContentLinearLayout/TextVerticalLayout/GroupCaption"
+                        components:
+                            UITextComponent:
+                                text: "#settings:Controls/AccelerometerInversionHorizontal/Title"
+                    -   path: "ContentLinearLayout/TextVerticalLayout/Description"
+                        components:
+                            UITextComponent:
+                                text: ""
+                -   prototype: "SwitchWithCaptionAndDescription/SwitchWithCaptionAndDescription"
+                    name: "AccelerometerInversionVertical"
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            horizontalValue: 50.000000
+                    children:
+                    -   path: "ContentLinearLayout/TextVerticalLayout/GroupCaption"
+                        components:
+                            UITextComponent:
+                                text: "#settings:Controls/AccelerometerInversionVertical/Title"
+                    -   path: "ContentLinearLayout/TextVerticalLayout/Description"
+                        components:
+                            UITextComponent:
+                                text: ""
+            -   prototype: "SettingsCommon/Row"
+                name: "Row9"
+                components:
+                    Anchor:
+                        leftAnchor: 5.000000
+                        rightAnchor: 5.000000
+                        topAnchorEnabled: true
+                children:
+                -   prototype: "SwitchWithCaptionAndDescription/SwitchWithCaptionAndDescription"
+                    name: "InverseReverseMovement"
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            horizontalValue: 50.000000
+                            verticalPolicy: "PercentOfParent"
+                    children:
+                    -   path: "ContentLinearLayout/TextVerticalLayout/GroupCaption"
+                        components:
+                            UITextComponent:
+                                text: "#settings:Controls/InverseReverseMovement/Title"
+                    -   path: "ContentLinearLayout/TextVerticalLayout/Description"
+                        components:
+                            UITextComponent:
+                                text: ""
+            -   prototype: "InputKeyBindingsHolder/ButtonBindings"
+                name: "ButtonBindings"
+                position: [0.000000, 324.000000]
+                components:
+                    UIDataParamsComponent:
+                        args:
+                            "inputBindingsInfo": "{ }"
+        -   prototype: "Common/VerticalScrollBar"
+            name: "VerticalScrollBar"
+            classes: "notch-tightly-right-inset"
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+                    topAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                UIAnchorSafeAreaComponent: {}
+                ScrollBarDelegate:
+                    delegate: ".."

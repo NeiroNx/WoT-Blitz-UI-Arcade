@@ -1,0 +1,104 @@
+Header:
+    version: 130
+ImportedPackages:
+- "~res:/UI/Screens3/Battle/ModernTutorialHints/Common/HintWithFrames.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "ShellSelectHint"
+    position: [-500.000000, 0.000000]
+    size: [1200.000000, 720.000000]
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens3/Battle/ModernTutorialHints/ShellSelectHint/ShellSelectHintInit.animation;Disappear,~res:/UI/Screens3/Battle/ModernTutorialHints/ShellSelectHint/ShellSelectHintHide.animation"
+        Anchor:
+            hCenterAnchorEnabled: true
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["string", "targetId", "\"shellIcon\"", "\"shellIcon\""]
+            - ["bool", "isLeftHanded", "false", "false"]
+    children:
+    -   class: "UIControl"
+        name: "AmmuntionButtonPlaceholder"
+        position: [568.000000, 360.000000]
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            UIAttachLayoutMasterComponent:
+                attachId: "button_attach_placeholder"
+            UIAttachLayoutSlaveComponent:
+                slaveSizePolicy: "MasterSize"
+        bindings:
+        - ["UIAttachLayoutSlaveComponent.attachId", "targetId"]
+    -   class: "UIControl"
+        name: "Hint"
+        visible: true
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                orientation: "BottomUp"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                horizontalMax: 1200.000000
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "BottomSpacer"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "Formula"
+                    verticalFormula: "when (parent > 640 and parent < 900) -> 500, screenHeight*0.7"
+        -   class: "UIControl"
+            name: "Top"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                LinearLayout:
+                    orientation: "RightToLeft"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            children:
+            -   class: "UIControl"
+                name: "RightSpacer"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 120.000000
+                        verticalPolicy: "PercentOfParent"
+            -   class: "UIControl"
+                name: "Content"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    Anchor:
+                        bottomAnchorEnabled: true
+                    LinearLayout:
+                        orientation: "TopDown"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfMaxChild"
+                        verticalPolicy: "PercentOfMaxChild"
+                children:
+                -   prototype: "HintWithFrames/HintHolder"
+                    name: "HintHolder"
+                    components:
+                        UIDataParamsComponent:
+                            args:
+                                "masterY": "48.000000"
+                                "masterX": "48.000000"
+                                "transitionType": "eTransition.PointTo"
+                                "icon": "\"~res:/Gfx/Battle/tips/notifications/ammo-change\""
+                                "text": "\"#battle_hints:shell_select/hint\""
+                                "frameTargetId": "\"button_attach_placeholder\""

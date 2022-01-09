@@ -1,0 +1,194 @@
+Header:
+    version: 127
+ImportedPackages:
+- "~res:/UI/Screens/Common/StyledButton.yaml"
+- "~res:/UI/Screens/Lobby/Common/ButtonInfoFlat.yaml"
+- "~res:/UI/Screens/Common/LoadingSpinner.yaml"
+- "~res:/UI/Screens3/Lobby/Common/Blur.yaml"
+Controls:
+-   class: "UIControl"
+    name: "BanMain"
+    size: [960.000000, 640.000000]
+    components:
+        Anchor:
+            leftAnchorEnabled: true
+            rightAnchorEnabled: true
+            topAnchorEnabled: true
+            bottomAnchorEnabled: true
+        UIDataSourceComponent0:
+            source: "~res:/UI/Examples/Model/Lobby/BanForRefund/BanForRefund.model"
+    children:
+    -   prototype: "Blur/Blur"
+        name: "BlurBG"
+        components:
+            UIPostProcessTextureComponent0:
+                scale: 0.200000
+            UIPostProcessTextureComponent1:
+                scale: 0.200000
+            UIPostProcessTextureComponent2:
+                scale: 0.200000
+        children:
+        -   class: "UIControl"
+            name: "Background"
+            classes: "screen-background"
+            components:
+                Background: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                StyleSheet:
+                    styles: "~res:/UI/Styles/BackgroundStyles.yaml"
+    -   prototype: "ButtonInfoFlat/ButtonInfo"
+        name: "ButtonInfo"
+        classes: "button button-ok-sound"
+        components:
+            Anchor:
+                rightAnchorEnabled: true
+                rightAnchor: 30.000000
+                topAnchorEnabled: true
+                topAnchor: 30.000000
+            UIInputEventComponent:
+                onTouchDown: "ON_INFO_BUTTON_PRESSED"
+            Sound: {}
+            StyleSheet:
+                styles: "~res:/UI/Styles/ButtonStyle.yaml;~res:/UI/Styles/ButtonSoundStyles.yaml"
+    -   class: "UIControl"
+        name: "Content"
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                orientation: "TopDown"
+                spacing: 20.000000
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 580.000000
+                verticalPolicy: "PercentOfChildrenSum"
+        children:
+        -   class: "UIControl"
+            name: "Title"
+            input: false
+            classes: "header1 color=text-color-white"
+            components:
+                UITextComponent:
+                    text: "refund_ban/MainScreen/Title"
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                    multiline: "MULTILINE_ENABLED"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    topAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens/Fonts.yaml"
+        -   class: "UIControl"
+            name: "Description"
+            position: [0.000000, 82.000000]
+            input: false
+            classes: "text1 color=text-color-white"
+            components:
+                UITextComponent:
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                    multiline: "MULTILINE_ENABLED"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens/Fonts.yaml"
+            bindings:
+            - ["UITextComponent.text", "when (unbanPermitted) -> localize(\"refund_ban/MainScreen/RefundDescription\", { \"service_name\" = serviceName; \"amount\" = amount; }), localize(\"refund_ban/MainScreen/ContactDescription\", { \"service_name\" = serviceName; \"amount\" = amount; })"]
+        -   class: "UIControl"
+            name: "Buttons"
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                LinearLayout:
+                    dynamicPadding: true
+                    spacing: 20.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "FixedSize"
+            children:
+            -   prototype: "StyledButton/StyledButton"
+                name: "LogoutButton"
+                size: [280.000000, 64.000000]
+                classes: "button button-color-gray button-ok-sound"
+                components:
+                    Anchor:
+                        bottomAnchorEnabled: true
+                    UIInputEventComponent:
+                        onTouchDown: "ON_DISCONNECT_BUTTON_PRESSED"
+                    StyleSheet:
+                        inheritsStylesFromParent: false
+                        styles: "~res:/UI/Screens/Common/StyledButton.yaml;~res:/UI/Styles/ButtonSoundStyles.yaml"
+                children:
+                -   path: "Caption"
+                    components:
+                        UITextComponent:
+                            text: "refund_ban/MainScreen/LogoutButton"
+                        StyleSheet:
+                            inheritsStylesFromParent: false
+                            styles: "~res:/UI/Screens/Fonts.yaml"
+            -   prototype: "StyledButton/StyledButton"
+                name: "ContinueButton"
+                size: [280.000000, 64.000000]
+                classes: "button button-color-green button-ok-sound"
+                components:
+                    Anchor:
+                        bottomAnchorEnabled: true
+                    UIInputEventComponent:
+                        onTouchDown: "ON_CONTINUE_BUTTON_PRESSED"
+                    StyleSheet:
+                        inheritsStylesFromParent: false
+                        styles: "~res:/UI/Screens/Common/StyledButton.yaml;~res:/UI/Styles/ButtonSoundStyles.yaml"
+                bindings:
+                - ["visible", "when (unbanPermitted) -> true, false"]
+                children:
+                -   path: "Caption"
+                    components:
+                        UITextComponent:
+                            text: "refund_ban/MainScreen/ContinueButton"
+                        StyleSheet:
+                            inheritsStylesFromParent: false
+                            styles: "~res:/UI/Screens/Fonts.yaml"
+    -   class: "UIControl"
+        name: "LoadingControl"
+        size: [1024.000000, 768.000000]
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            StyleSheet:
+                inheritsStylesFromParent: true
+                styles: "~res:/UI/Screens/Common/LoadingControl.yaml"
+        bindings:
+        - ["visible", "not isIndulgenceRequestCompleted"]
+        children:
+        -   class: "UIControl"
+            name: "FadeBackground"
+            size: [1024.000000, 768.000000]
+            components:
+                Background:
+                    drawType: "DRAW_FILL"
+                    color: [0.000000, 0.000000, 0.000000, 0.498000]
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+        -   class: "UIControl"
+            name: "SpinnerPlaceholder"
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+            children:
+            -   prototype: "LoadingSpinner/LoadingSpinner"
+                name: "ProgressControl"
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true

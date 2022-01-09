@@ -1,0 +1,19 @@
+Header:
+    version: 128
+StyleSheets:
+-   selectors:
+    - ".chest-type-0"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/TaskJournal/Extended/Chests_1.psd"
+-   selectors:
+    - ".chest-type-1"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/TaskJournal/Extended/Chests_2.psd"
+-   selectors:
+    - ".chest-type-2"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/TaskJournal/Extended/Chests_3.psd"
+-   selectors:
+    - ".chest-type-3"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/TaskJournal/Extended/Chests_4.psd"

@@ -1,0 +1,15 @@
+animation ANIMATE_PROGRESS
+{
+	if (not hidden)
+	{
+		ChangeData(needAnimation, false);
+		BroadcastEvent("AnimateNumber");
+		ChangeData(progressPercent, lastProgressPercent);
+		ChangeData(progressPercent, currentProgressPercent, resultAnimationTime);
+		Event("ON_PROGRESS_ANIMATED", ".", index);
+	}
+	else
+	{
+		ChangeData(needAnimation, true);
+	}
+}

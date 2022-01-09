@@ -1,0 +1,4 @@
+animation ScrollToStart
+{
+    Scroll("**/VehicleListContainer/UIScrollView", 0, 0, 0.3);
+}

@@ -1,0 +1,83 @@
+Header:
+    version: "93"
+StyleSheets:
+-   selectors:
+    - ".crew_skills.lucky_shot * .skill-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/CrewSkillIcons/lucky_shot.txt"
+-   selectors:
+    - ".crew_skills.surrounded_by_enemy * .skill-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/CrewSkillIcons/surrounded_by_enemy.txt"
+-   selectors:
+    - ".crew_skills.soft_recoil * .skill-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/CrewSkillIcons/soft_recoil.txt"
+-   selectors:
+    - ".crew_skills.skilled_ranging * .skill-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/CrewSkillIcons/skilled_ranging_1.txt"
+-   selectors:
+    - ".crew_skills.fast_capture * .skill-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/CrewSkillIcons/fast_capture_0.txt"
+-   selectors:
+    - ".crew_skills.battle_rage * .skill-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/CrewSkillIcons/battle_rage.txt"
+-   selectors:
+    - ".crew_skills.armour_piercing * .skill-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/CrewSkillIcons/armour_piercing.txt"
+-   selectors:
+    - ".crew_skills.tutor * .skill-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/CrewSkillIcons/tutor.txt"
+-   selectors:
+    - ".crew_skills.smooth_driving * .skill-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/CrewSkillIcons/smooth_driving.txt"
+-   selectors:
+    - ".crew_skills.smooth_turret * .skill-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/CrewSkillIcons/smooth_turret.txt"
+-   selectors:
+    - ".crew_skills.skilled_repairer * .skill-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/CrewSkillIcons/skilled_repairer.txt"
+-   selectors:
+    - ".crew_skills.close_combat_master * .skill-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/CrewSkillIcons/close_combat_master.txt"
+-   selectors:
+    - ".crew_skills.fire_fighting * .skill-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/CrewSkillIcons/fire_fighting.txt"
+-   selectors:
+    - ".crew_skills.desperado * .skill-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/CrewSkillIcons/desperado.txt"
+-   selectors:
+    - ".crew_skills.repair * .skill-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/CrewSkillIcons/repair.txt"
+-   selectors:
+    - ".crew_skills.sniper * .skill-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/CrewSkillIcons/sniper.txt"
+-   selectors:
+    - ".crew_skills.deadly_accuracy * .skill-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/CrewSkillIcons/deadly_accuracy.txt"
+-   selectors:
+    - ".crew_skills.camouflage * .skill-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/CrewSkillIcons/camouflage.txt"
+-   selectors:
+    - ".crew_skills.virtuoso * .skill-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/CrewSkillIcons/virtuoso.txt"
+-   selectors:
+    - ".crew_skills.smooth_turn * .skill-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/CrewSkillIcons/smooth_turn.txt"

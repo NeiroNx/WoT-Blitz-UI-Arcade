@@ -1,0 +1,134 @@
+Header:
+    version: "80"
+ImportedPackages:
+- "~res:/UI/Screens/Fonts.yaml"
+StyleSheets:
+-   selectors:
+    - ".shell.lock-enabled.locked"
+    properties:
+        bg-color: [1.000000, 1.000000, 1.000000, 0.690196]
+-   selectors:
+    - ".shell.locked #Reload"
+    properties:
+        visible: false
+-   selectors:
+    - ".shell.loading"
+    properties:
+        bg-color: [1.000000, 1.000000, 1.000000, 0.000000]
+-   selectors:
+    - ".shell.loading #Reload"
+    properties:
+        visible: true
+-   selectors:
+    - ".shell.loaded #Reload"
+    properties:
+        visible: false
+-   selectors:
+    - ".shell.loaded"
+    properties:
+        bg-color: [1.000000, 1.000000, 1.000000, 1.000000]
+-   selectors:
+    - ".shell.used #Reload"
+    properties:
+        visible: false
+-   selectors:
+    - ".shell.used"
+    properties:
+        bg-color: [1.000000, 1.000000, 1.000000, 0.250980]
+-   selectors:
+    - ".spectator-style ? ? #Reload"
+    properties:
+        bg-drawType: "DRAW_TILED"
+        bg-sprite: "~res:/Gfx/UI/BattleScreenHUD/tournament_hud/tile_reload.psd"
+-   selectors:
+    - ".spectator-style"
+    - ".spectator-style ? #ShellItem"
+    properties:
+        bg-drawType: "DRAW_FILL"
+-   selectors:
+    - ".spectator-style #ShellBack"
+    properties:
+        linearLayout-spacing: 2.000000
+-   selectors:
+    - ".teampanel-style ? ? #Reload"
+    properties:
+        bg-drawType: "DRAW_TILED"
+        bg-sprite: "~res:/Gfx/UI/BattleScreenHUD/reload_progress.psd"
+        bg-color: [1.000000, 1.000000, 1.000000, 0.815686]
+        bg-leftRightStretchCap: 4.000000
+-   selectors:
+    - ".teampanel-style"
+    - ".teampanel-style ? #ShellItem"
+    properties:
+        bg-drawType: "DRAW_TILED"
+        bg-sprite: "~res:/Gfx/UI/BattleScreenHUD/reload_progress.psd"
+        bg-leftRightStretchCap: 4.000000
+-   selectors:
+    - ".teampanel-style #ShellBack"
+    properties:
+        linearLayout-spacing: -1.000000
+-   selectors:
+    - ".regular-style ? #Reload"
+    - ".regular-style ? ? #Reload"
+    properties:
+        bg-drawType: "DRAW_FILL"
+        bg-color: [1.000000, 1.000000, 1.000000, 0.815686]
+-   selectors:
+    - ".regular-style"
+    - ".regular-style ? #ShellItem"
+    properties:
+        bg-drawType: "DRAW_FILL"
+-   selectors:
+    - ".regular-style #ShellBack"
+    properties:
+        linearLayout-spacing: 2.000000
+-   selectors:
+    - ".animated-reload"
+    properties: {}
+-   selectors:
+    - ".spectator-style ? ? #Reload"
+    properties:
+        bg-drawType: "DRAW_TILED"
+        bg-sprite: "~res:/Gfx/UI/BattleScreenHUD/tournament_hud/tile_reload.psd"
+Prototypes:
+-   class: "UIControl"
+    name: "GunStatus"
+    size: [66.000000, 4.000000]
+    input: false
+    components:
+        Background:
+            color: [0.000000, 0.000000, 0.000000, 0.564706]
+            perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+        StyleSheet:
+            inheritsStylesFromParent: false
+            styles: "~res:/UI/Screens/Battle/GunStatus.yaml"
+    children:
+    -   class: "UIControl"
+        name: "ShellBack"
+        input: false
+        components:
+            LinearLayout:
+                skipInvisible: false
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "ShellItem"
+            input: false
+            classes: "shell"
+            components:
+                Background:
+                    perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            children:
+            -   class: "UIControl"
+                name: "Reload"
+                input: false
+                components:
+                    Background:
+                        perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                    SizePolicy:
+                        verticalPolicy: "PercentOfParent"

@@ -1,0 +1,29 @@
+Header:
+    version: 134
+ImportedPackages:
+- "~res:/UI/Screens3/Battle/HUD/GameModes/HpLossCounter.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "VampiricHpLossCounterHolder"
+    size: [352.000000, 0.000000]
+    input: false
+    components:
+        Anchor:
+            hCenterAnchorEnabled: true
+        LinearLayout:
+            dynamicSpacing: true
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 352.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 0.000000
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/Battle/HUD/GameModes/HpLossCounterInit.actions"
+    children:
+    -   prototype: "HpLossCounter/HpLossCounter"
+        name: "AllyHpLossCounter"
+        components:
+            LinearLayout:
+                orientation: "RightToLeft"
+    -   prototype: "HpLossCounter/HpLossCounter"
+        name: "EnemyHpLossCounter"

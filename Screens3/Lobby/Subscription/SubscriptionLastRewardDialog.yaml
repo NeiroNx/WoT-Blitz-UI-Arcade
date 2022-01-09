@@ -1,0 +1,34 @@
+Header:
+    version: "83"
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/Dialog/TextDialog.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "SubscriptionLastRewardDialog"
+    size: [900.000000, 600.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["ResourceModel", "subscriptionItem", "null", "{ icon = \"~res:/Gfx/UI/StorageItemIcons/Subscription_30\"; }"]
+            events:
+            - "CANCEL"
+    children:
+    -   prototype: "TextDialog/TextDialog"
+        name: "TextDialog"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "accentButtonType": "eButtonType.POSITIVE"
+                    "type": "eDialogType.INFO"
+                    "header": "localize(\"subscription/rewardScreen/SubscriptionLastRewardHeader\")"
+                    "headerImage": "subscriptionItem.icon"
+                    "accentButton": "\"#common:DialogButton/OK\""
+                    "optionalButton": "\"#Cancel\""
+                    "contentControl": "control(\"~res:/UI/Screens3/Lobby/Common/Dialog/TextContent.yaml\", { contentText = localize(\"subscription/rewardScreen/SubscriptionLastRewardDescription\"); }, [ ])"
+                eventActions:
+                - ["ACCENT_CLICKED", "CANCEL", ""]
+                - ["OPTIONAL_CLICKED", "", ""]

@@ -1,0 +1,87 @@
+Header:
+    version: "106"
+Controls:
+-   class: "UIControl"
+    customClass: "UIQuestCompletedNotificationControl"
+    name: "QuestCompletedNotification"
+    size: [420.000000, 78.000000]
+    components:
+        Background:
+            drawType: "DRAW_STRETCH_BOTH"
+            sprite: "~res:/Gfx/UI/BattleScreenHUD/back_quest"
+            leftRightStretchCap: 5.000000
+            topBottomStretchCap: 5.000000
+        Anchor:
+            hCenterAnchorEnabled: true
+        LinearLayout:
+            padding: "8"
+            spacing: 16.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Battle/QuestCompletedNotification.yaml"
+    children:
+    -   class: "UIControl"
+        name: "TaskIcon"
+        size: [60.000000, 60.000000]
+        components:
+            Background:
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+            Anchor:
+                leftAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            StyleSheet:
+                styles: "~res:/UI/Screens/Battle/Styles/QuestCompletedNotificationStyles.yaml"
+    -   class: "UIControl"
+        name: "TextHolder"
+        components:
+            Background:
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIStaticText"
+            name: "Title"
+            size: [290.000000, 39.000000]
+            components:
+                UITextComponent:
+                    text: "#quests:BattleScreen/completeNotification/Title"
+                    fontName: "WarHeliosCondC_Bold_25"
+                    align: ["LEFT", "VCENTER"]
+                    useRtlAlign: "USE_BY_CONTENT"
+                Anchor:
+                    leftAnchorEnabled: true
+                    rightAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfParent"
+        -   class: "UIStaticText"
+            name: "Name"
+            components:
+                UITextComponent:
+                    fontName: "WarHeliosCondC_21"
+                    color: [0.627451, 0.725490, 0.800000, 1.000000]
+                    fitting: "FITTING_POINTS"
+                    align: ["LEFT", "TOP"]
+                    useRtlAlign: "USE_BY_CONTENT"
+                Anchor:
+                    leftAnchorEnabled: true
+                    rightAnchorEnabled: true
+                    topAnchorEnabled: true
+                    topAnchor: 39.000000
+                    bottomAnchorEnabled: true
+    -   class: "UIControl"
+        name: "Mark"
+        size: [70.000000, 70.000000]
+        components:
+            Background:
+                sprite: "~res:/Gfx/UI/BattleScreenHUD/icon_complete"
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+            Anchor:
+                rightAnchorEnabled: true
+                vCenterAnchorEnabled: true

@@ -1,0 +1,11 @@
+animation Initialize
+{
+    Opacity("./Image", 0.0);
+    Opacity("./Content", 0.0);
+
+    if (firstShow)
+    {
+        Opacity("./Placeholder", 0.0);
+        ChangeProperty("./Placeholder", "Anchor", "topAnchor", moveOutTopAnchor);
+    }
+}

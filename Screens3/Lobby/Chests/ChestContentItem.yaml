@@ -1,0 +1,128 @@
+Header:
+    version: 135
+Prototypes:
+-   class: "UIControl"
+    name: "ChestContentItem"
+    input: true
+    classes: "battlepass-reward button-open-sound"
+    components:
+        Anchor:
+            hCenterAnchorEnabled: true
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfMaxChild"
+        UIAttachLayoutMasterComponent: {}
+        UIInputEventComponent:
+            onTouchUpInside: "ON_REWARD_CLICKED"
+            onTouchUpInsideData: "resource"
+        UIDataParamsComponent:
+            params:
+            - ["int", "min", "0", "0"]
+            - ["int", "max", "0", "5"]
+            - ["ResourceDetailed", "resource", "null", "{ }"]
+            - ["string", "attachId", "\"\"", "\"\""]
+            events:
+            - "ON_REWARD_CLICKED"
+        UIDataLocalBindingsComponent:
+            data:
+            - ["bool", "isBasicResource", "resource.type == ResourceType.gold or resource.type == ResourceType.free_xp or resource.type == ResourceType.elite_xp or resource.type == ResourceType.premium or resource.type == ResourceType.xp or resource.type == ResourceType.tankmenXP or resource.type == ResourceType.credits or resource.type == ResourceType.slots"]
+        Sound: {}
+        StyleSheet:
+            styles: "~res:/UI/Screens3/ButtonSound.style.yaml"
+    bindings:
+    - ["visible", "not (resource.type == ResourceType.stuff and not isNull(resource.stuff)) or resource.stuff.visibleInShop"]
+    - ["UIAttachLayoutMasterComponent.attachId", "attachId"]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        pivot: [0.500000, 0.500000]
+        input: false
+        classes: "content-area"
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "when resource.type == ResourceType.vehicle -> maxChild, 86"
+                verticalPolicy: "Formula"
+                verticalFormula: "when resource.type == ResourceType.vehicle -> maxChild, 104"
+            UIChildComponent0:
+                condition: "resource.type == ResourceType.vehicle"
+                prototypePath: "~res:/UI/Screens3/Lobby/Chests/ChestVehicleItem.yaml"
+                args:
+                    "vehicle": "resource.vehicle"
+            UIChildComponent1:
+                condition: "resource.type == ResourceType.stuff and not isNull(resource.stuff) and resource.stuff.type == ArtefactType.player_avatar and not isNull(resource.stuff.avatar) and resource.stuff.visibleInShop"
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/Detailed/AvatarMedium.yaml"
+                args:
+                    "textStyle": "\"t-body\""
+                    "maxQuantity": "max"
+                    "minQuantity": "min"
+                    "stuff": "resource.stuff"
+            UIChildComponent2:
+                condition: "resource.type == ResourceType.stuff and not isNull(resource.stuff)"
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/Detailed/StuffMedium.yaml"
+                args:
+                    "textStyle": "\"t-body\""
+                    "maxQuantity": "max"
+                    "minQuantity": "min"
+                    "stuff": "resource.stuff"
+            UIChildComponent3:
+                condition: "isBasicResource and not isNull(resource.basic)"
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/Detailed/BasicMedium.yaml"
+                args:
+                    "textStyle": "\"t-body\""
+                    "maxQuantity": "max"
+                    "minQuantity": "min"
+                    "type": "resource.type"
+                    "basic": "resource.basic"
+            UIChildComponent4:
+                condition: "resource.type == ResourceType.unlocks"
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/Detailed/UnlockMedium.yaml"
+                args:
+                    "unlock": "resource.unlock"
+            UIChildComponent5:
+                condition: "resource.type == ResourceType.equipment_slots and not isNull(resource.devices)"
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/Detailed/DevicesMedium.yaml"
+                args:
+                    "devices": "resource.devices"
+            UIChildComponent6:
+                childType: "kControl"
+                control: "NotSupported"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Common/Touch.style.yaml"
+Slots:
+-   class: "UIControl"
+    name: "NotSupported"
+    input: false
+    components:
+        Background:
+            drawType: "DRAW_FILL"
+            color: [0.227451, 0.227451, 0.227451, 1.000000]
+        BorderComponent:
+            border-color: [0.666667, 0.000000, 0.000000, 1.000000]
+            border-thickness: 2
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 86.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 104.000000
+    children:
+    -   class: "UIControl"
+        name: "Text"
+        input: false
+        classes: "t-subtitle bold white-wild-sand-text"
+        components:
+            UITextComponent: {}
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml"
+        bindings:
+        - ["UITextComponent.text", "str(resource.type)"]

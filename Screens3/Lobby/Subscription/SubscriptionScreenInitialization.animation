@@ -1,0 +1,4 @@
+animation Scrolling
+{
+    Scroll("**/HorizontalScrollView/StagesScrollView", (stageControlWidth + stagesSpacing) * lobby.subscription.currentStageIndex, 0);
+}

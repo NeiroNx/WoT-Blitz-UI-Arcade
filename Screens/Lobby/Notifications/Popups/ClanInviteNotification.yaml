@@ -1,0 +1,75 @@
+Header:
+    version: 121
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/Notifications/Popups/Notification.yaml"
+- "~res:/UI/Screens3/Lobby/Common/NotificationButtonWithText.yaml"
+- "~res:/UI/Screens/Lobby/Notifications/Popups/OldStyleRichText.yaml"
+Controls:
+-   class: "UIControl"
+    customClass: "UIClanInviteNotification"
+    name: "ClanInviteNotification"
+    size: [32.000000, 32.000000]
+    input: true
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+            padding: "8;0"
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfMaxChild"
+    children:
+    -   prototype: "Notification/Notification"
+        name: "ClanInviteNotificationItem"
+        input: false
+        components:
+            LinearLayout: {}
+            StyleSheet:
+                inheritsStylesFromParent: true
+        children:
+        -   prototype: "Notification/icon"
+            name: "icon"
+            classes: "notification-icon-clan"
+        -   prototype: "Notification/Content"
+            name: "Content"
+            components:
+                Anchor:
+                    vCenterAnchorEnabled: true
+                LinearLayout:
+                    orientation: "LeftToRight"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfChildrenSum"
+            children:
+            -   prototype: "OldStyleRichText/RichText"
+                name: "Description"
+                position: [0.000000, 10.000000]
+                components:
+                    RichContent:
+                        text: "Default <t-caption_highlighted>bold </t-caption_highlighted> default "
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfChildrenSum"
+                    UIAnchorSafeAreaComponent:
+                        leftSafeInset: "INSET"
+                        rightSafeInset: "INSET"
+                    FlowLayout:
+                        useRtl: true
+            -   class: "UIControl"
+                name: "Spacer"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 16.000000
+                        verticalPolicy: "PercentOfParent"
+        -   prototype: "NotificationButtonWithText/NotificationButtonWithText"
+            name: "ToClanButton"
+            components:
+                UIDataParamsComponent:
+                    args:
+                        "text": "localize(\"#clans:HomeScreen/Invite/Button\")"

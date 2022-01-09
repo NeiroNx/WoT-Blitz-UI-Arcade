@@ -1,0 +1,37 @@
+action HANDLE_EVENT(string eventName)
+{
+	if (eventName ==  "SCROLL_TO_BONUS_QUEST")
+	{
+		ScrollToEnsureControlOnScreen("**/PremiumQuestAnchor", 2, yPolicy=eScrollToControlPolicy.kFarthest);
+	}
+	if (eventName ==  "SCROLL_TO_DAILY_QUESTS")
+	{
+		ScrollToEnsureControlOnScreen("**/DailyTasks", 1, yPolicy=eScrollToControlPolicy.kFarthest);
+	}
+	if (eventName ==  "SCROLL_TO_WEEK_QUESTS")
+	{
+		ScrollToEnsureControlOnScreen("**/WeeklyTasks", 1, yPolicy=eScrollToControlPolicy.kCenter);
+	}
+}
+
+action HIGHLIGHT_TASK_IN_SLOT(int slotIndex)
+{
+	ScrollToEnsureControlOnScreen("**/task_slot_" + str(slotIndex), 0, yPolicy=eScrollToControlPolicy.kFarthest);
+	Wait(0.5);
+	DirectEvent("HIGHLIGHT_TASK", "**/task_slot_" + str(slotIndex));
+}
+
+action SCROLL_TO_CHAIN_QUESTS()
+{
+	ScrollToEnsureControlOnScreen("**/ChainTasksList", 2, yPolicy=eScrollToControlPolicy.kCenter);
+}
+
+action BACK_SHORTCUT
+{
+	if (account.tutorialData.currentHint != eTutorialHint.kClanTasks and account.tutorialData.currentHint != eTutorialHint.kBattlePass and account.tutorialData.currentHint != eTutorialHint.NewbieTaskJournal and
+account.tutorialData.currentHint != eTutorialHint.MainTaskJournal)
+	{
+		PlaySound(sound="GUI/buttons/close");
+    	Event("BACK_EVENT");
+	}
+}

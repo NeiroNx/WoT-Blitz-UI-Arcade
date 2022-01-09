@@ -1,0 +1,32 @@
+Header:
+    version: "111"
+Prototypes:
+-   class: "UIControl"
+    name: "NewsFeedEmpty"
+    size: [960.000000, 640.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["string", "text", "\"\"", "\"#news:emptyNewsList\""]
+    children:
+    -   class: "UIControl"
+        name: "Text"
+        size: [32.000000, 32.000000]
+        input: false
+        classes: "t-headline bold align-center white-wild-sand-text"
+        components:
+            UITextComponent: {}
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml"
+        bindings:
+        - ["UITextComponent.text", "localize(text)"]

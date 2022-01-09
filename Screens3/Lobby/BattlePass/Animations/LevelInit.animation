@@ -1,0 +1,4 @@
+animation LEVEL_INIT
+{
+	ChangeData(level.showEffects, false);
+}

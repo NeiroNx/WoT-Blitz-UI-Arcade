@@ -1,0 +1,7 @@
+action InitScrollToSelectedAvatar()
+{	
+	if (not selectedTabEmpty)
+    {
+        ScrollToEnsureControlOnScreen("**/avatar_item_" + str(selectedCategory.selectedIndex), 2, eScrollToControlPolicy.kCenter);
+    }
+}

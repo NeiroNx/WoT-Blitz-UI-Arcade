@@ -1,0 +1,19 @@
+Header:
+    version: "84"
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/Story/Legacy/Utils/Resource/Detailed/ResourcePrototype.yaml"
+Controls:
+-   prototype: "ResourcePrototype/Content"
+    name: "Content"
+    components:
+        UIDataLocalsComponent:
+            locals:
+            - ["string", "title", "when data.type == ResourceType.premium -> str(toDays(data.basic.quantity)) + \" \" + localize(\"#common:Time/Days\"), str1000Separated(data.basic.quantity)"]
+            - ["string", "description", "when data.type == ResourceType.credits -> \"shop/Credits\", data.type == ResourceType.free_xp -> \"#battle_results:DetailsPage/ExperiencePage/FreeXp\", data.type == ResourceType.gold -> \"shop/Gold\", data.type == ResourceType.premium -> \"storage/Items/PremiumAccount/Title\", data.type == ResourceType.tankmenXP -> \"#battle_results:DetailsPage/ExperiencePage/CrewXp\", data.type == ResourceType.xp -> \"#battle_results:DetailsPage/ExperiencePage/Xp\", data.type == ResourceType.unlocks -> \"#hangar_showcase:Camouflage\", \"\""]
+            - ["string", "icon", "when data.type == ResourceType.credits -> \"~res:/Gfx/Lobby/currency/currency_silver_xl\", data.type == ResourceType.free_xp -> \"~res:/Gfx/Lobby/currency/currency_free-xp_xl\", data.type == ResourceType.gold -> \"~res:/Gfx/Lobby/currency/currency_gold_xl\", data.type == ResourceType.premium -> \"~res:/Gfx/Lobby/currency/currency_premium_xl\", \"\""]
+    children:
+    -   path: "Layout/Image/IconContainer/Icon"
+        components:
+            UITextureComponent: {}
+        bindings:
+        - ["UITextureComponent.spritePath", "icon"]

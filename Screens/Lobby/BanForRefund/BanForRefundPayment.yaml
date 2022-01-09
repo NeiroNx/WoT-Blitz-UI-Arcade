@@ -1,0 +1,279 @@
+Header:
+    version: 127
+ImportedPackages:
+- "~res:/UI/Screens/Common/StyledBackButton.yaml"
+- "~res:/UI/Screens/Common/StyledButton.yaml"
+- "~res:/UI/Screens/Common/LoadingSpinner.yaml"
+- "~res:/UI/Screens3/Lobby/Common/Blur.yaml"
+Controls:
+-   class: "UIControl"
+    name: "BanPay"
+    size: [960.000000, 640.000000]
+    components:
+        Anchor:
+            leftAnchorEnabled: true
+            rightAnchorEnabled: true
+            topAnchorEnabled: true
+            bottomAnchorEnabled: true
+        UIDataSourceComponent0:
+            source: "~res:/UI/Examples/Model/Lobby/BanForRefund/BanForRefund.model"
+    children:
+    -   prototype: "Blur/Blur"
+        name: "BlurBG"
+        components:
+            Background:
+                usePostProcessedSprite: false
+            UIPostProcessTextureComponent0:
+                scale: 0.200000
+            UIPostProcessTextureComponent1:
+                scale: 0.200000
+            UIPostProcessTextureComponent2:
+                scale: 0.200000
+        children:
+        -   class: "UIControl"
+            name: "Background"
+            classes: "screen-background"
+            components:
+                Background:
+                    color: [0.058824, 0.109804, 0.141176, 1.000000]
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                StyleSheet:
+                    styles: "~res:/UI/Styles/BackgroundStyles.yaml"
+    -   prototype: "StyledBackButton/StyledBackButton"
+        name: "BackButton"
+        classes: "button button-color-gray button-close-sound"
+        components:
+            StyleSheet:
+                inheritsStylesFromParent: false
+                styles: "~res:/UI/Screens/Common/StyledButton.yaml;~res:/UI/Styles/ButtonSoundStyles.yaml"
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            ClipContent: {}
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                dynamicPadding: true
+                spacing: 30.000000
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 860.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 480.000000
+        children:
+        -   class: "UIControl"
+            name: "List"
+            input: false
+            components:
+                Anchor:
+                    topAnchorEnabled: true
+                LinearLayout:
+                    orientation: "TopDown"
+                    spacing: 1.000000
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 440.000000
+                    verticalPolicy: "PercentOfChildrenSum"
+                UIDataListComponent:
+                    cellPackage: "~res:/UI/Screens/Lobby/BanForRefund/BanForRefundPaymentItem.yaml"
+                    cellControl: "RefundItem"
+                    dataContainer: "refundsList"
+            bindings:
+            - ["visible", "refundsDisplayableCount > 1"]
+            children:
+            -   class: "UIControl"
+                name: "Title"
+                input: false
+                classes: "header3 color=text-color-white"
+                components:
+                    UITextComponent:
+                        text: "refund_ban/PaymentScreen/Title"
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                        multiline: "MULTILINE_DISABLED"
+                        align: ["HCENTER", "TOP"]
+                    Anchor:
+                        leftAnchorEnabled: true
+                        rightAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 50.000000
+                    StyleSheet:
+                        styles: "~res:/UI/Screens/Fonts.yaml"
+        -   class: "UIControl"
+            name: "Pay"
+            position: [470.000000, 0.000000]
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_STRETCH_BOTH"
+                    sprite: "~res:/Gfx/UI/CommonUIElements/TabSelectorBorder.psd"
+                    color: [1.000000, 1.000000, 1.000000, 0.317647]
+                    leftRightStretchCap: 6.000000
+                    topBottomStretchCap: 6.000000
+                Anchor:
+                    topAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 390.000000
+                    verticalPolicy: "PercentOfParent"
+            children:
+            -   class: "UIControl"
+                name: "Image"
+                input: false
+                components:
+                    Background:
+                        sprite: "~res:/Gfx/UI/StorageItemIcons/Indulgence.psd"
+                        frame: 19
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                        vCenterAnchor: -20.000000
+            -   class: "UIControl"
+                name: "Title"
+                input: false
+                components:
+                    Anchor:
+                        rightAnchorEnabled: true
+                        topAnchorEnabled: true
+                        topAnchor: 20.000000
+                    LinearLayout:
+                        orientation: "TopDown"
+                        spacing: 6.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfChildrenSum"
+                children:
+                -   class: "UIControl"
+                    name: "Text"
+                    input: false
+                    classes: "header1 color=text-color-white"
+                    components:
+                        UITextComponent:
+                            colorInheritType: "COLOR_IGNORE_PARENT"
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfContent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens/Fonts.yaml"
+                    bindings:
+                    - ["UITextComponent.text", "when (refundsDisplayableCount > 1) -> localize(\"refund_ban/PaymentScreen/WithdrawnPaymentWithCounter\", {current=currentRefundDisplayableNumber; all=refundsDisplayableCount}), localize(\"refund_ban/PaymentScreen/WithdrawnPayment\");"]
+                -   class: "UIControl"
+                    name: "Date"
+                    input: false
+                    classes: "header1 color=text-color-white"
+                    components:
+                        UITextComponent:
+                            colorInheritType: "COLOR_IGNORE_PARENT"
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfContent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens/Fonts.yaml"
+                    bindings:
+                    - ["UITextComponent.text", "selectedRefund.date"]
+            -   class: "UIControl"
+                name: "Cost"
+                input: false
+                classes: "header1 color=text-color-white"
+                components:
+                    UITextComponent:
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                    Anchor:
+                        leftAnchorEnabled: true
+                        rightAnchorEnabled: true
+                        bottomAnchorEnabled: true
+                        bottomAnchor: 100.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens/Fonts.yaml"
+                bindings:
+                - ["UITextComponent.text", "selectedRefund.price"]
+            -   prototype: "StyledButton/StyledButton"
+                name: "ButtonGreen"
+                classes: "button button-color-green button-ok-sound"
+                components:
+                    Anchor:
+                        leftAnchorEnabled: true
+                        leftAnchor: 20.000000
+                        rightAnchorEnabled: true
+                        rightAnchor: 20.000000
+                        bottomAnchorEnabled: true
+                        bottomAnchor: 20.000000
+                    UIInputEventComponent:
+                        onTouchDown: "ON_BUY_BUTTON_PRESSED"
+                    StyleSheet:
+                        inheritsStylesFromParent: false
+                        styles: "~res:/UI/Screens/Common/StyledButton.yaml;~res:/UI/Styles/ButtonSoundStyles.yaml"
+                children:
+                -   path: "Caption"
+                    components:
+                        UITextComponent:
+                            text: "refund_ban/PaymentScreen/RepayButton"
+                        StyleSheet:
+                            inheritsStylesFromParent: false
+                            styles: "~res:/UI/Screens/Fonts.yaml"
+            -   class: "UIControl"
+                name: "Remark"
+                visible: false
+                input: false
+                classes: "text2 color=text-color-blue"
+                components:
+                    UITextComponent:
+                        text: "refund_ban/PaymentScreen/PriceWithoutTaxes"
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                        multiline: "MULTILINE_ENABLED"
+                        align: ["HCENTER", "TOP"]
+                    Anchor:
+                        leftAnchorEnabled: true
+                        rightAnchorEnabled: true
+                        bottomAnchorEnabled: true
+                        bottomAnchor: -36.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 24.000000
+                    StyleSheet:
+                        styles: "~res:/UI/Screens/Fonts.yaml"
+            -   class: "UIControl"
+                name: "LoadingControl"
+                size: [1024.000000, 768.000000]
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                    StyleSheet:
+                        inheritsStylesFromParent: true
+                        styles: "~res:/UI/Screens/Common/LoadingControl.yaml"
+                bindings:
+                - ["visible", "isIndulgenceInProgress"]
+                children:
+                -   class: "UIControl"
+                    name: "FadeBackground"
+                    size: [1024.000000, 768.000000]
+                    components:
+                        Background:
+                            drawType: "DRAW_FILL"
+                            color: [0.000000, 0.000000, 0.000000, 0.498000]
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfParent"
+                -   class: "UIControl"
+                    name: "SpinnerPlaceholder"
+                    components:
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                            vCenterAnchorEnabled: true
+                    children:
+                    -   prototype: "LoadingSpinner/LoadingSpinner"
+                        name: "ProgressControl"
+                        components:
+                            Anchor:
+                                hCenterAnchorEnabled: true
+                                vCenterAnchorEnabled: true

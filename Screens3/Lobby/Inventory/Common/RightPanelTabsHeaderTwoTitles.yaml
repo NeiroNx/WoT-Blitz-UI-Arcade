@@ -1,0 +1,34 @@
+Header:
+    version: "84"
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Inventory/Common/RightPanelTabsHeader.yaml"
+- "~res:/UI/Screens3/Lobby/Inventory/Common/HeaderContent/RightPanelHeaderContentTwoTitles.yaml"
+Prototypes:
+-   prototype: "RightPanelTabsHeader/TabsHeader"
+    name: "RightPanelTabsHeaderTwoTitles"
+    components:
+        UIDataParamsComponent:
+            params:
+            - ["int", "activeTab", "0", "0"]
+            - ["string", "title", "\"\"", "\"Header\""]
+            - ["string", "subTitle", "\"\"", "\"Sub header\""]
+            - ["vector<TabIconInfo>", "info", "null", "[ { sprite = \"~res:/Gfx/UI/LobbyCommon/IconTabs\"; badge = { value = \"\"; }; }; { sprite = \"~res:/Gfx/UI/LobbyCommon/IconTabs\"; badge = { value = \"\"; }; }; ]"]
+    children:
+    -   path: "ContentArea"
+        position: [0.000000, 16.000000]
+        children: []
+    -   path: "ContentArea/Control"
+        children:
+        -   prototype: "RightPanelHeaderContentTwoTitles/RightPanelHeaderContentTwoTitles"
+            name: "RightPanelHeaderContentTwoTitles"
+            components:
+                UIDataParamsComponent:
+                    args:
+                        "title": "title"
+                        "subTitle": "subTitle"
+    -   path: "ContentArea/IconTabsBar"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "activeTab": "activeTab"
+                    "info": "info"

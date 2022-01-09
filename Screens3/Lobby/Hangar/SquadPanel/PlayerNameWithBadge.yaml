@@ -1,0 +1,46 @@
+Header:
+    version: "85"
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/PlayerName.yaml"
+- "~res:/UI/Screens3/Lobby/Common/Badge.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "PlayerNameWithBadge"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        LinearLayout:
+            spacing: 4.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfFirstChild"
+        UIDataParamsComponent:
+            params:
+            - ["string", "playerName", "\"\"", "\"\""]
+            - ["string", "clanTag", "\"\"", "\"\""]
+            - ["ePlayerSize", "playerNameSize", "ePlayerSize.kNormal", "ePlayerSize.kNormal"]
+            - ["SquadViewModel", "player", "{ }", "{ onlineStatus = true; inviteSend = true; }"]
+    children:
+    -   prototype: "PlayerName/PlayerName"
+        name: "PlayerName"
+        components:
+            Anchor:
+                vCenterAnchorEnabled: true
+            UIDataParamsComponent:
+                args:
+                    "playerNameSize": "ePlayerSize.kNormal"
+                    "clanTag": "\"\""
+                    "playerName": "\"\""
+    -   class: "UIControl"
+        name: "Badge"
+        size: [10.000000, 10.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfMaxChild"
+            UIChildComponent:
+                control: "when player.inviteReceive -> \"~res:/UI/Screens3/Lobby/Common/Badge.yaml\", \"\""
+                args:
+                    "value": "\" \""
+                    "type": "eBadgeType.EMPTY"

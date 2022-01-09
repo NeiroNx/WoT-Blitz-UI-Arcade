@@ -1,0 +1,40 @@
+action ON_TOUCH_DOWN(float time)
+{
+    Event("PUSH", arg1 = pushScale, arg2 = pushOpacity, arg3 = time);
+}
+
+action ON_TOUCH_UP_INSIDE(float time)
+{
+    parallel
+    {
+        Event("PULL", arg1 = time);
+
+        PlaySound(str(sound, eButtonSound, "path"));
+        Event("ON_TOUCH");
+    }
+}
+
+action ON_TOUCH_ENTERED(float time)
+{
+    Event("PUSH", arg1 = pushScale, arg2 = pushOpacity, arg3 = time);
+}
+
+action ON_TOUCH_EXITED(float time)
+{
+    Event("PULL", arg1 = time);
+}
+
+action ON_TOUCH_CANCEL(float time)
+{
+    Event("PULL", arg1 = time);
+}
+
+action ON_HOVER_START(float time)
+{
+    Event("HOVER", arg1 = hoverBrightness, arg2 = time);
+}
+
+action ON_HOVER_END(float time)
+{
+    Event("CANCEL_HOVER", arg1 = time);
+}

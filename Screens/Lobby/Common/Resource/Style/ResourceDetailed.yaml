@@ -1,0 +1,67 @@
+Header:
+    version: "25"
+StyleSheets:
+-   selector: ".resource.completed-off #CompletedIcon"
+    properties:
+        visible: false
+-   selector: ".resource.completed-on #CompletedIcon"
+    properties:
+        visible: true
+-   selector: ".resource.eye-off #EyeIcon"
+    properties:
+        visible: false
+-   selector: ".resource.eye-on #EyeIcon"
+    properties:
+        visible: true
+-   selector: ".resource.completed-on.eye-on"
+    properties:
+        input: false
+-   selector: ".resource.completed-on.eye-on #EyeIcon"
+    properties:
+        visible: false
+-   selector: ".resource.rare #BonusIcon #Grade"
+    properties:
+        bg-color: [0.141176, 0.349020, 0.941176, 1.000000]
+        visible: true
+-   selector: ".resource.unique #BonusIcon #Grade"
+    properties:
+        bg-color: [0.549020, 0.023529, 0.803922, 1.000000]
+        visible: true
+-   selector: ".resource.legendary #BonusIcon #Grade"
+    properties:
+        bg-color: [1.000000, 0.752941, 0.000000, 1.000000]
+        visible: true
+-   selector: ".resource.common #BonusIcon #Grade"
+    properties:
+        visible: true
+        bg-color: [0.517647, 0.521569, 0.525490, 1.000000]
+-   selector: ".resource #BonusIcon #Grade, .resource #TankDescription"
+    properties:
+        visible: false
+-   selector: ".resource.resource-vehicle #TankDescription"
+    properties:
+        visible: true
+-   selector: ".resource.quantity-on #ItemCount"
+    properties:
+        visible: true
+-   selector: ".resource.quantity-off #ItemCount"
+    properties:
+        visible: false
+-   selector: ".resource.notification-on #InfoNotification"
+    properties:
+        visible: true
+-   selector: ".resource.notification-off #InfoNotification"
+    properties:
+        visible: false
+-   selector: ".resource"
+    properties:
+        input: false
+-   selector: ".resource.button"
+    properties:
+        input: true
+-   selector: ".resource.item-is-temp #DescriptionWrap #resource-timer"
+    properties:
+        visible: true
+-   selector: ".resource.item-not-temp #DescriptionWrap #resource-timer"
+    properties:
+        visible: false

@@ -1,0 +1,78 @@
+Header:
+    version: 134
+Prototypes:
+-   class: "UIControl"
+    name: "DisableOffersWarningDialog"
+    size: [720.000000, 600.000000]
+    input: false
+    classes: ""
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        ModalInput: {}
+        UIVirtualActionEventComponent0:
+            virtualKeyAction: "Escape"
+            keyDownEvent: "PROXY_CANCEL"
+        UIShortcutEventComponent:
+            shortcuts: "PROXY_CANCEL,Back;PROXY_CANCEL,Escape;PROXY_WATCH_AD,Enter"
+        UIDataParamsComponent:
+            params: []
+            events:
+            - "DISABLE"
+            - "KEEP_ENABLED"
+        UIChildComponent0:
+            prototypePath: "~res:/UI/Screens3/Lobby/Common/Dialog/TextDialog.yaml"
+            args:
+                "type": "eDialogType.CHOOSE"
+                "accentButtonType": "eButtonType.NEGATIVE"
+                "header": "\"\""
+                "headerImage": "\"\""
+                "accentButton": "\"PrmpOffer/DisableOffersWarningDialog/DisableButton\""
+                "optionalButton": "\"PrmpOffer/DisableOffersWarningDialog/KeepEnabledButton\""
+                "contentControl": "Content"
+            eventActions:
+            - ["ACCENT_CLICKED", "DISABLE", ""]
+            - ["OPTIONAL_CLICKED", "KEEP_ENABLED", ""]
+Slots:
+-   class: "UIControl"
+    name: "Content"
+    size: [300.000000, 64.000000]
+    input: false
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+            spacing: 24.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfChildrenSum"
+    children:
+    -   class: "UIControl"
+        name: "Header"
+        input: false
+        classes: "t-subtitle bold white-wild-sand-text"
+        components:
+            UITextComponent:
+                text: "PrmpOffer/DisableOffersWarningDialog/Header"
+            Anchor:
+                hCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml"
+    -   class: "UIControl"
+        name: "Description"
+        input: false
+        classes: "t-body regular white-wild-sand-70-text"
+        components:
+            UITextComponent:
+                text: "PrmpOffer/DisableOffersWarningDialog/Description"
+                multiline: "MULTILINE_ENABLED"
+            Anchor:
+                hCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml"

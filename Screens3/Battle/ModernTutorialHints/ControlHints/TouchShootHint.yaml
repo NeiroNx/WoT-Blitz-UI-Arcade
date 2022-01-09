@@ -1,0 +1,42 @@
+Header:
+    version: 127
+ImportedPackages:
+- "~res:/UI/Screens3/Battle/ModernTutorialHints/TutorialHintBasic.yaml"
+- "~res:/UI/Screens3/Battle/ModernTutorialHints/Common/Glow.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "TouchMovementHint"
+    size: [48.000000, 48.000000]
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens3/Battle/ModernTutorialHints/FadeIn.animation;Disappear,~res:/UI/Screens3/Battle/ModernTutorialHints/FadeOut.animation"
+        UIOpacityComponent: {}
+    children:
+    -   prototype: "TutorialHintBasic/HintContainer"
+        name: "HintContainer"
+        classes: "ArrowRight"
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            UIDataParamsComponent:
+                args:
+                    "text": "\"ModernTutorial/TouchShootHint\""
+    -   prototype: "Glow/Glow"
+        name: "Glow"
+    -   class: "UIControl"
+        name: "JoypadFinger"
+        position: [0.000000, 0.000000]
+        size: [200.000000, 352.000000]
+        pivot: [0.500000, 0.000000]
+        input: false
+        components:
+            Background:
+                drawType: "DRAW_ALIGNED"
+                sprite: "~res:/Gfx/Battle/BattleHints/hand/HandSlaid"
+            UIOpacityComponent: {}
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+                vCenterAnchor: 175.000000

@@ -1,0 +1,185 @@
+Header:
+    version: 115
+StyleSheets:
+-   selectors:
+    - "#JoypadFinger"
+    properties:
+        visible: false
+        opacity-opacity: 0.000000
+-   selectors:
+    - "#JoypadMovementHint"
+    properties:
+        visible: false
+        opacity-opacity: 0.000000
+-   selectors:
+    - "#MenuButton"
+    properties:
+        visible: false
+        opacity-opacity: 0.000000
+-   selectors:
+    - "#MouseShootButton"
+    properties:
+        visible: false
+        opacity-opacity: 0.000000
+-   selectors:
+    - "#KeyboardJoypad"
+    properties:
+        visible: false
+        opacity-opacity: 0.000000
+-   selectors:
+    - "#TouchCameraHint"
+    properties:
+        visible: false
+        opacity-opacity: 0.000000
+-   selectors:
+    - "#TouchShootHint"
+    properties:
+        visible: false
+        opacity-opacity: 0.000000
+-   selectors:
+    - "#KeyboardMovement"
+    properties:
+        visible: false
+        opacity-opacity: 0.000000
+-   selectors:
+    - "#MouseCamera"
+    properties:
+        visible: false
+        opacity-opacity: 0.000000
+-   selectors:
+    - "#MouseShoot"
+    properties:
+        visible: false
+        opacity-opacity: 0.000000
+-   selectors:
+    - ".joypad-movement #JoypadFinger"
+    - ".touch-shoot #JoypadFinger"
+    - ".touch-camera #JoypadFinger"
+    properties:
+        visible: true
+-   selectors:
+    - ".joypad-movement #JoypadMovementHint"
+    properties:
+        visible: true
+-   selectors:
+    - ".touch-camera #TouchCameraHint"
+    properties:
+        visible: true
+-   selectors:
+    - ".touch-shoot #TouchShootHint"
+    properties:
+        visible: true
+-   selectors:
+    - ".keyboard-movement #KeyboardMovement"
+    properties:
+        visible: true
+-   selectors:
+    - ".mouse-camera #MouseCamera"
+    properties:
+        visible: true
+-   selectors:
+    - ".mouse-shoot #MouseShoot"
+    properties:
+        visible: true
+-   selectors:
+    - ".joypad-movement.hide #JoypadFinger"
+    - ".touch-shoot.hide #JoypadFinger"
+    - ".touch-camera.hide #JoypadFinger"
+    properties:
+        opacity-opacity:
+            value: 0.000000
+            transitionTime: 0.300000
+            transitionFunction: "EASE_OUT"
+-   selectors:
+    - ".joypad-movement.hide #JoypadMovementHint"
+    properties:
+        opacity-opacity:
+            value: 0.000000
+            transitionTime: 0.300000
+            transitionFunction: "EASE_OUT"
+-   selectors:
+    - ".touch-camera.hide #TouchCameraHint"
+    properties:
+        opacity-opacity:
+            value: 0.000000
+            transitionTime: 0.300000
+            transitionFunction: "EASE_OUT"
+-   selectors:
+    - ".touch-shoot.hide #TouchShootHint"
+    properties:
+        opacity-opacity:
+            value: 0.000000
+            transitionTime: 0.300000
+            transitionFunction: "EASE_OUT"
+-   selectors:
+    - ".keyboard-movement.hide #KeyboardMovement"
+    properties:
+        opacity-opacity:
+            value: 0.000000
+            transitionTime: 0.300000
+            transitionFunction: "EASE_OUT"
+-   selectors:
+    - ".mouse-camera.hide #MouseCamera"
+    properties:
+        opacity-opacity:
+            value: 0.000000
+            transitionTime: 0.300000
+            transitionFunction: "EASE_OUT"
+-   selectors:
+    - ".mouse-shoot.hide #MouseShoot"
+    properties:
+        opacity-opacity:
+            value: 0.000000
+            transitionTime: 0.300000
+            transitionFunction: "EASE_OUT"
+-   selectors:
+    - ".joypad-movement.show #JoypadFinger"
+    - ".touch-shoot.show #JoypadFinger"
+    - ".touch-camera.show #JoypadFinger"
+    properties:
+        opacity-opacity:
+            value: 1.000000
+            transitionTime: 0.300000
+            transitionFunction: "EASE_OUT"
+-   selectors:
+    - ".joypad-movement.show #JoypadMovementHint"
+    properties:
+        opacity-opacity:
+            value: 1.000000
+            transitionTime: 0.300000
+            transitionFunction: "EASE_OUT"
+-   selectors:
+    - ".touch-camera.show #TouchCameraHint"
+    properties:
+        opacity-opacity:
+            value: 1.000000
+            transitionTime: 0.300000
+            transitionFunction: "EASE_OUT"
+-   selectors:
+    - ".touch-shoot.show #TouchShootHint"
+    properties:
+        opacity-opacity:
+            value: 1.000000
+            transitionTime: 0.300000
+            transitionFunction: "EASE_OUT"
+-   selectors:
+    - ".keyboard-movement.show #KeyboardMovement"
+    properties:
+        opacity-opacity:
+            value: 1.000000
+            transitionTime: 0.300000
+            transitionFunction: "EASE_OUT"
+-   selectors:
+    - ".mouse-camera.show #MouseCamera"
+    properties:
+        opacity-opacity:
+            value: 1.000000
+            transitionTime: 0.300000
+            transitionFunction: "EASE_OUT"
+-   selectors:
+    - ".mouse-shoot.show #MouseShoot"
+    properties:
+        opacity-opacity:
+            value: 1.000000
+            transitionTime: 0.300000
+            transitionFunction: "EASE_OUT"

@@ -1,0 +1,17 @@
+Header:
+    version: "70"
+Prototypes:
+-   class: "UIControl"
+    name: "CurseIcon"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens/Battle/OptionalHUDControls/IconPulsationAnimation.animation"
+        Background:
+            drawType: "DRAW_SCALE_PROPORTIONAL_ONE"
+            sprite: "~res:/Gfx/Shared/tank-supply/consumables/2019_Halloween/consumable_curse_s"
+        UIOpacityComponent: {}
+        SizePolicy:
+            horizontalPolicy: "PercentOfContent"
+            verticalPolicy: "PercentOfContent"

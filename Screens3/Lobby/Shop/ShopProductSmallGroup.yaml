@@ -1,0 +1,65 @@
+Header:
+    version: 140
+Prototypes:
+-   class: "UIControl"
+    name: "ShopProductSmallGroup"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 240.000000
+            verticalPolicy: "Formula"
+            verticalFormula: "firstChild + 32"
+        UIDataParamsComponent:
+            params:
+            - ["ShopProductSmallGroup", "group", "null", "{ }"]
+            - ["ShopBadgesSection", "badges", "null", "{ }"]
+            - ["bool", "initializationEnded", "false", "true"]
+            - ["float", "shopScrollBottomOffset", "0.000000", "40.000000"]
+            - ["float", "shopScrollTopOffset", "0.000000", "48.000000"]
+            - ["bool", "debugMode", "false", "false"]
+            - ["bool", "selected", "false", "true"]
+            - ["int", "selectedSubItemIndex", "0", "1"]
+            - ["bool", "blurEnabled", "false", "true"]
+            - ["bool", "arabicLocalization", "false", "false"]
+            - ["bool", "firstShowAnimationAllowed", "false", "true"]
+            events:
+            - "ON_PRODUCT_CLICKED(int id)"
+            - "DEV_BUY_PRODUCT(int id)"
+            - "GO_TO_PRODUCT(int id)"
+            - "ON_PRODUCT_SHOWN(int id)"
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            Anchor:
+                topAnchorEnabled: true
+                topAnchor: 32.000000
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 240.000000
+                verticalPolicy: "PercentOfChildrenSum"
+            FlowLayout:
+                hSpacing: 16.000000
+                vSpacing: 16.000000
+            UIRepeatComponent:
+                control: "~res:/UI/Screens3/Lobby/Shop/ShopProductSmall.yaml"
+                dataContainer: "group.items"
+                args:
+                    "product": "_item.product"
+                    "badge": "when not isNull(badges) and not isNull(_item.product) and badges.products.Contains(_item.product.id) -> badges.products[_item.product.id], null"
+                    "initializationEnded": "initializationEnded"
+                    "debugMode": "debugMode"
+                    "shopScrollTopOffset": "shopScrollTopOffset"
+                    "shopScrollBottomOffset": "shopScrollBottomOffset"
+                    "blurEnabled": "blurEnabled"
+                    "selected": "selected and selectedSubItemIndex == _index"
+                    "valid": "_index < group.itemsCount"
+                    "arabicLocalization": "arabicLocalization"
+                    "firstShowAnimationAllowed": "firstShowAnimationAllowed"
+                eventActions:
+                - ["ON_PRODUCT_CLICKED", "ON_PRODUCT_CLICKED", "_event.id"]
+                - ["DEV_BUY_PRODUCT", "DEV_BUY_PRODUCT", "_event.id"]
+                - ["GO_TO_PRODUCT", "GO_TO_PRODUCT", "_event.id"]
+                - ["ON_PRODUCT_SHOWN", "ON_PRODUCT_SHOWN", "_event.id"]

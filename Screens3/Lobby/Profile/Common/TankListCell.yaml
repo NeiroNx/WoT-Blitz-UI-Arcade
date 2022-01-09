@@ -1,0 +1,233 @@
+Header:
+    version: 135
+Prototypes:
+-   class: "UIControl"
+    name: "TankListCell"
+    size: [700.000000, 80.000000]
+    classes: "long-element tank-list-cell button-choose-sound"
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "FixedSize"
+            verticalValue: 80.000000
+        UIInputEventComponent:
+            onTouchUpInside: "ON_TANK_CLICKED"
+            onTouchUpInsideData: "itemCompDescr"
+        UIDataParamsComponent:
+            params:
+            - ["TankStats", "tankStatsModel", "null", "{ }"]
+            - ["VehicleDataModel", "vehicleDataModel", "null", "{ }"]
+            - ["int", "selectedTankCompDescr", "0", "1"]
+            - ["int", "itemCompDescr", "0", "1"]
+            - ["int", "battles", "0", "0"]
+            - ["int", "winsPercent", "0", "0"]
+            - ["int", "avgExperience", "0", "0"]
+            - ["int", "avgDamage", "0", "0"]
+            events:
+            - "ON_TANK_CLICKED"
+        UIDataLocalBindingsComponent:
+            data:
+            - ["bool", "selected", "selectedTankCompDescr == itemCompDescr"]
+            - ["string", "winRate", "percent(winsPercent, 0)"]
+        Sound: {}
+        StyleSheet:
+            styles: "~res:/UI/Screens3/ButtonSound.style.yaml;~res:/UI/Screens3/Common/Touch.style.yaml"
+    bindings:
+    - ["selected", "selected"]
+    - ["input", "not selected"]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        pivot: [0.500000, 0.500000]
+        input: false
+        classes: "content-area"
+        components:
+            UIOpacityComponent: {}
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+            LinearLayout:
+                padding: "8;16"
+                spacing: 24.000000
+                dynamicSpacing: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Common/Touch.style.yaml"
+        children:
+        -   class: "UIControl"
+            name: "Selector"
+            input: false
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+                    rightAnchor: 4.000000
+                IgnoreLayout: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    horizontalValue: 40.000000
+                    verticalPolicy: "PercentOfParent"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens3/Lobby/Profile/Common/TankListCellSelector.yaml"
+                    args:
+                        "addDeltaPercents": "25"
+                        "selected": "selected"
+        -   class: "UIControl"
+            name: "Bg"
+            input: false
+            classes: "white-wild-sand-15-bg"
+            components:
+                Background:
+                    drawType: "DRAW_STRETCH_BOTH"
+                    sprite: "~res:/Gfx/Lobby/backgrounds/bg_r1"
+                    leftRightStretchCap: 1.000000
+                    topBottomStretchCap: 1.000000
+                IgnoreLayout: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "Hover"
+            input: false
+            classes: "hover white-wild-sand-10-bg"
+            components:
+                Background:
+                    drawType: "DRAW_STRETCH_BOTH"
+                    sprite: "~res:/Gfx/Lobby/backgrounds/bg_r1"
+                    leftRightStretchCap: 1.000000
+                    topBottomStretchCap: 1.000000
+                UIOpacityComponent: {}
+                IgnoreLayout: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/Common/Hover.style.yaml"
+        -   class: "UIControl"
+            name: "Selection"
+            input: false
+            classes: "orange-orange-peel-bg"
+            components:
+                Background: {}
+                Anchor:
+                    rightAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                IgnoreLayout: {}
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 4.000000
+                    verticalPolicy: "PercentOfParent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+            bindings:
+            - ["visible", "selected"]
+        -   class: "UIControl"
+            name: "Vehicle"
+            position: [0.000000, 8.000000]
+            input: false
+            components:
+                Anchor:
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 176.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 64.000000
+                UIChildComponent0:
+                    childType: "kOldExpression"
+                    control: "when not isNull(tankStatsModel) and not isNull(vehicleDataModel) -> \"~res:/UI/Screens3/Lobby/Common/Vehicle/Vehicle.yaml\", \"\""
+                    args:
+                        "clickable": "false"
+                        "tankStatsModel": "tankStatsModel"
+                        "vehicleDataModel": "vehicleDataModel"
+                        "id": "0"
+        -   class: "UIControl"
+            name: "Stat"
+            position: [176.000000, 0.000000]
+            size: [283.000000, 80.000000]
+            input: false
+            components:
+                Anchor:
+                    vCenterAnchorEnabled: true
+                LinearLayout:
+                    spacing: 8.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   class: "UIControl"
+                name: "Spacer"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+            -   class: "UIControl"
+                name: "Battles"
+                position: [0.000000, 0.000000]
+                input: false
+                classes: "t-body bold color=white-wild-sand-text not-localize"
+                components:
+                    UITextComponent: {}
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        horizontalMin: 64.000000
+                        horizontalMax: 128.000000
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml"
+                bindings:
+                - ["UITextComponent.text", "battles"]
+            -   class: "UIControl"
+                name: "Victories"
+                position: [70.750000, 0.000000]
+                input: false
+                classes: "t-body bold color=white-wild-sand-text not-localize"
+                components:
+                    UITextComponent: {}
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        horizontalMin: 64.000000
+                        horizontalMax: 128.000000
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml"
+                bindings:
+                - ["UITextComponent.text", "winRate"]
+            -   class: "UIControl"
+                name: "Experience"
+                position: [141.500000, 0.000000]
+                input: false
+                classes: "t-body bold color=white-wild-sand-text not-localize"
+                components:
+                    UITextComponent: {}
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        horizontalMin: 64.000000
+                        horizontalMax: 128.000000
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml"
+                bindings:
+                - ["UITextComponent.text", "avgExperience"]
+            -   class: "UIControl"
+                name: "Damage"
+                input: false
+                classes: "t-body bold color=white-wild-sand-text not-localize"
+                components:
+                    UITextComponent: {}
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        horizontalMin: 64.000000
+                        horizontalMax: 128.000000
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml"
+                bindings:
+                - ["UITextComponent.text", "avgDamage"]

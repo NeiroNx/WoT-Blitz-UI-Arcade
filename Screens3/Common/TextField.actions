@@ -1,0 +1,38 @@
+action TEXT_CHANGED(string text)
+{
+    ChangeData(fieldText, text);
+}
+
+action EDIT_ENDED(string text)
+{
+    ChangeData(fieldText, text);
+}
+
+action CLEAR_FIELD
+{
+    ChangeData(fieldText, "");
+    Event("TEXT_CHANGED",  arg1 = "");    
+    Event("EDIT_ENDED",  arg1 = "");
+}
+
+action KEYBOARD_SHOWN
+{
+    ScrollToEnsureControlOnScreen(".", 0);
+}
+
+action KEYBOARD_RETURN(bool isLastEdit)
+{
+    if(isLastEdit)
+    {
+        StopEdit("**/UITextField");
+    }
+    else
+    {
+        MoveFocusForward();
+    }
+}
+
+action KEYBOARD_CANCEL()
+{
+    StopEdit("**/UITextField");
+}

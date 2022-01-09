@@ -1,0 +1,17 @@
+animation Init()
+{
+	if (withAnimation)
+	{
+		Wait(0.8);
+		ChangeProperty("**/imageContent", "Anchor", "topAnchor", 23, 0);
+		parallel
+		{
+			ChangeProperty("**/imageContent", "Anchor", "topAnchor", 103, 0.6, EASE_OUT);
+			ChangeProperty("**/imageContent", "UIOpacityComponent", "opacity", 1.0, 0.6, EASE_OUT);
+		}
+	}
+	else
+	{
+		ChangeProperty("**/imageContent", "UIOpacityComponent", "opacity", 1.0);
+	}
+}

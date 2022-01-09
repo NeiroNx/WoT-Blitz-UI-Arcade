@@ -1,0 +1,284 @@
+Header:
+    version: 123
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/Common/AchievementItem.yaml"
+- "~res:/UI/Styles/DesktopStyles.yaml"
+- "~res:/UI/Screens/Common/StyledBackButton.yaml"
+- "~res:/UI/Screens/Fonts.yaml"
+- "~res:/UI/Screens/Lobby/Common/RichText.yaml"
+- "~res:/UI/Screens/Common/ScrollBar.yaml"
+- "~res:/UI/Screens/Lobby/Common/RibbonPrototype.yaml"
+Controls:
+-   class: "UIControl"
+    name: "MedalInfoDialog"
+    size: [960.000000, 640.000000]
+    input: false
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIEventBindingComponent: {}
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Lobby/Common/MedalInfoDialog.yaml;~res:/UI/Screens/Lobby/Common/Styles/MedalInfoDialogStyles.yaml"
+    children:
+    -   class: "UIControl"
+        name: "MainContent"
+        size: [32.000000, 32.000000]
+        input: false
+        classes: "ribbon"
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "background"
+            size: [1024.000000, 768.000000]
+            components:
+                Background:
+                    drawType: "DRAW_FILL"
+                    color: [0.070600, 0.125500, 0.160800, 0.898000]
+                Anchor:
+                    leftAnchorEnabled: true
+                    rightAnchorEnabled: true
+                    topAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                UIInputEventComponent:
+                    onTouchUpInside: "BACK_PRESSED"
+            children:
+            -   class: "UIScrollView"
+                name: "ScrollArea"
+                autoUpdate: true
+                components:
+                    Anchor:
+                        leftAnchorEnabled: true
+                        rightAnchorEnabled: true
+                        rightAnchor: 10.000000
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        verticalPolicy: "Formula"
+                        verticalFormula: "min(parent, childrenSum)"
+                children:
+                -   class: "UIScrollViewContainer"
+                    name: "scrollContainerControl"
+                    components:
+                        LinearLayout:
+                            enabled: true
+                            orientation: "TopDown"
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfChildrenSum"
+                    children:
+                    -   class: "UIControl"
+                        name: "Spacer-1"
+                        components:
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                horizontalValue: 100.000000
+                                verticalPolicy: "FixedSize"
+                                verticalValue: 80.000000
+                            UIInputEventComponent:
+                                onTouchUpInside: "BACK_PRESSED"
+                    -   class: "UIControl"
+                        name: "ContentWrapper"
+                        components:
+                            LinearLayout:
+                                orientation: "TopDown"
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                verticalPolicy: "PercentOfChildrenSum"
+                            UIInputEventComponent:
+                                onTouchUpInside: "BACK_PRESSED"
+                        children:
+                        -   class: "UIControl"
+                            name: "Content"
+                            input: false
+                            classes: "limited-width"
+                            components:
+                                Anchor:
+                                    hCenterAnchorEnabled: true
+                                    vCenterAnchorEnabled: true
+                                LinearLayout:
+                                    enabled: true
+                                    dynamicPadding: true
+                                    spacing: 10.000000
+                                SizePolicy:
+                                    horizontalPolicy: "PercentOfParent"
+                                    verticalPolicy: "PercentOfMaxChild"
+                            children:
+                            -   class: "UIControl"
+                                name: "leftContent"
+                                input: false
+                                components:
+                                    LinearLayout:
+                                        orientation: "TopDown"
+                                        dynamicPadding: true
+                                    SizePolicy:
+                                        horizontalPolicy: "PercentOfMaxChild"
+                                        verticalPolicy: "PercentOfChildrenSum"
+                                children:
+                                -   prototype: "AchievementItem/AchievementItem"
+                                    name: "AchievementItem"
+                                    position: [75.000000, 0.000000]
+                                    size: [118.000000, 129.000000]
+                                    input: false
+                                    classes: "achiev-item item-style=flexible"
+                                    components:
+                                        Anchor:
+                                            rightAnchorEnabled: true
+                                    children:
+                                    -   path: "background/icon/image"
+                                        components:
+                                            Background:
+                                                drawType: "DRAW_SCALE_TO_RECT"
+                                -   prototype: "RibbonPrototype/Ribbon"
+                                    name: "Ribbon"
+                                    components:
+                                        Anchor:
+                                            rightAnchorEnabled: true
+                                            rightAnchor: 10.000000
+                                -   class: "UIStaticText"
+                                    name: "historicInfoLabel"
+                                    position: [0.000000, 129.000000]
+                                    size: [193.000000, 43.000000]
+                                    visible: true
+                                    input: false
+                                    classes: "header3"
+                                    components:
+                                        UITextComponent:
+                                            text: "HISTORIC_INFO"
+                                            colorInheritType: "COLOR_IGNORE_PARENT"
+                                            align: ["RIGHT", "BOTTOM"]
+                                            useRtlAlign: "DONT_USE"
+                                        Anchor:
+                                            rightAnchorEnabled: true
+                                        SizePolicy:
+                                            horizontalPolicy: "PercentOfContent"
+                                -   class: "UIStaticText"
+                                    name: "historicInfo"
+                                    position: [162.000000, 172.000000]
+                                    size: [31.000000, 26.000000]
+                                    input: false
+                                    classes: "text1 text-color-blue"
+                                    components:
+                                        UITextComponent:
+                                            text: "info"
+                                            colorInheritType: "COLOR_IGNORE_PARENT"
+                                            shadowColor: [0.000000, 0.000000, 0.000000, 0.745100]
+                                            multiline: "MULTILINE_ENABLED"
+                                            align: ["RIGHT", "TOP"]
+                                            useRtlAlign: "DONT_USE"
+                                        Anchor:
+                                            rightAnchorEnabled: true
+                                            rightAnchor: 0.000000
+                                        SizePolicy:
+                                            horizontalPolicy: "PercentOfContent"
+                                            horizontalMax: 300.000000
+                                            verticalPolicy: "PercentOfContent"
+                            -   class: "UIControl"
+                                name: "rightContent"
+                                input: false
+                                components:
+                                    LinearLayout:
+                                        orientation: "TopDown"
+                                        dynamicPadding: true
+                                    SizePolicy:
+                                        horizontalPolicy: "PercentOfMaxChild"
+                                        verticalPolicy: "PercentOfChildrenSum"
+                                children:
+                                -   class: "UIStaticText"
+                                    name: "name"
+                                    input: false
+                                    classes: "header1"
+                                    components:
+                                        UITextComponent:
+                                            text: "NAME"
+                                            colorInheritType: "COLOR_IGNORE_PARENT"
+                                            align: ["LEFT", "VCENTER"]
+                                            useRtlAlign: "DONT_USE"
+                                        Anchor:
+                                            leftAnchorEnabled: true
+                                            leftAnchor: 0.000000
+                                        SizePolicy:
+                                            horizontalPolicy: "PercentOfContent"
+                                            verticalPolicy: "FixedSize"
+                                            verticalValue: 46.000000
+                                -   class: "UIStaticText"
+                                    name: "description"
+                                    input: false
+                                    classes: "text1 text-color-blue"
+                                    components:
+                                        UITextComponent:
+                                            text: "description"
+                                            colorInheritType: "COLOR_IGNORE_PARENT"
+                                            multiline: "MULTILINE_ENABLED"
+                                            align: ["LEFT", "TOP"]
+                                            useRtlAlign: "USE_BY_CONTENT"
+                                        Anchor:
+                                            leftAnchorEnabled: true
+                                        SizePolicy:
+                                            horizontalPolicy: "PercentOfContent"
+                                            horizontalMax: 600.000000
+                                            verticalPolicy: "PercentOfContent"
+                                -   class: "UIControl"
+                                    name: "dummy"
+                                    input: false
+                                    components:
+                                        SizePolicy:
+                                            verticalPolicy: "FixedSize"
+                                            verticalValue: 21.000000
+                                -   prototype: "RichText/RichText"
+                                    name: "conditions"
+                                    components:
+                                        RichContent:
+                                            text: "conditions"
+                                            baseClasses: "text1"
+                                        Anchor:
+                                            leftAnchorEnabled: true
+                                        SizePolicy:
+                                            horizontalPolicy: "PercentOfChildrenSum"
+                                            horizontalMax: 500.000000
+                                            verticalPolicy: "PercentOfChildrenSum"
+                                        FlowLayout:
+                                            hPadding: "0.000000"
+                                            useRtl: true
+                    -   class: "UIControl"
+                        name: "Spacer"
+                        components:
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                horizontalValue: 100.000000
+                                verticalPolicy: "FixedSize"
+                                verticalValue: 80.000000
+                            UIInputEventComponent:
+                                onTouchUpInside: "BACK_PRESSED"
+            -   prototype: "StyledBackButton/StyledBackButton"
+                name: "backButton"
+                components:
+                    UIInputEventComponent:
+                        onTouchUpInside: "BACK_PRESSED"
+        -   prototype: "ScrollBar/VerticalScrollBar"
+            name: "VerticalScrollBar"
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+                    topAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                ScrollBarDelegate:
+                    delegate: "../background/ScrollArea"
+    -   class: "UIControl"
+        name: "NavigationPanel"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                condition: "isGamepad"
+                prototypePath: "~res:/UI/Screens3/Common/NintendoSwitch/NavigationPanel/LobbyNavigationPanel.yaml"
+                args:
+                    "labels": "{ eNintendoSwitchControls.B = \"Switch/HubridPanel/Lobby/Back\"; }"

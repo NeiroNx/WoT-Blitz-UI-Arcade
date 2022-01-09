@@ -1,0 +1,326 @@
+Header:
+    version: 115
+ImportedPackages:
+- "~res:/UI/Screens/Common.yaml"
+- "~res:/UI/Styles/DesktopStyles.yaml"
+- "~res:/UI/Screens/Lobby/BattleResults/BattleResultsCommon.yaml"
+- "~res:/UI/Screens/Lobby/BattleResults/BattleResultsContainers.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "Page"
+    size: [1024.000000, 618.000000]
+    classes: "limited-width"
+    components:
+        Anchor:
+            hCenterAnchorEnabled: true
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["BattleResultsViewModel", "results", "null", "{ }"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["string", "piercingHitsWithTotalHits", "str1000Separated(results.battleStats.hits) + \"/\" + str1000Separated(results.battleStats.piercingHits)"]
+            - ["string", "damagedAndDestroyed", "str1000Separated(results.battleStats.vehiclesDamaged) + \"/\" + str1000Separated(results.battleStats.vehiclesDestroyed)"]
+            - ["string", "formattedMileage", "str(results.battleStats.mileage / 1000.000000, 2)"]
+            - ["bool", "survived", "results.battleStats.deathReason == ATTACK_REASONS.NOT_KILLED"]
+    children:
+    -   class: "UIControl"
+        name: "bg"
+        visible: false
+        components:
+            Background:
+                drawType: "DRAW_FILL"
+                color: [0.333333, 0.333333, 0.000000, 1.000000]
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+    -   class: "UIControl"
+        name: "Panels"
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                padding: "30.000000"
+                spacing: 30.000000
+            SizePolicy:
+                verticalPolicy: "PercentOfMaxChild"
+            UIAnchorSafeAreaComponent:
+                leftSafeInset: "INSET"
+                rightSafeInset: "INSET"
+        children:
+        -   prototype: "BattleResultsContainers/Container"
+            name: "LeftPanel"
+            children:
+            -   path: "Header"
+                classes: "header3 text-color-white"
+                components:
+                    UITextComponent:
+                        text: "#battle_results:DetailsPage/StatisticPage/Damage"
+            -   path: "Table"
+                children:
+                -   prototype: "BattleResultsContainers/TableRow"
+                    name: "Shots"
+                    children:
+                    -   path: "Content/Text"
+                        components:
+                            UITextComponent:
+                                text: "#battle_results:DetailsPage/StatisticPage/Shots"
+                    -   path: "Content/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "str1000Separated(results.battleStats.shotsFired)"]
+                -   prototype: "BattleResultsContainers/TableSubRow"
+                    name: "HitsAndPierced"
+                    children:
+                    -   path: "Content/Text"
+                        components:
+                            UITextComponent:
+                                text: "#battle_results:DetailsPage/StatisticPage/HitsAndPierced"
+                    -   path: "Content/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "piercingHitsWithTotalHits"]
+                -   prototype: "BattleResultsContainers/TableSubRow"
+                    name: "HeHits"
+                    children:
+                    -   path: "Content/Text"
+                        components:
+                            UITextComponent:
+                                text: "#battle_results:DetailsPage/StatisticPage/HeHits"
+                    -   path: "Content/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "str1000Separated(results.battleStats.explosionHits)"]
+                -   prototype: "BattleResultsContainers/TableSubRow"
+                    name: "DamagedAndKills"
+                    children:
+                    -   path: "Content/Text"
+                        components:
+                            UITextComponent:
+                                text: "#battle_results:DetailsPage/StatisticPage/DamagedAndKills"
+                    -   path: "Content/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "damagedAndDestroyed"]
+                -   prototype: "BattleResultsContainers/TableRow"
+                    name: "DamageDealt"
+                    children:
+                    -   path: "Content/Text"
+                        components:
+                            UITextComponent:
+                                text: "#battle_results:DetailsPage/StatisticPage/DamageDealt"
+                    -   path: "Content/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "str1000Separated(results.battleStats.damageDealt)"]
+                -   prototype: "BattleResultsContainers/TableRow"
+                    name: "HealedHP"
+                    bindings:
+                    - ["visible", "results.isHealingAvailable"]
+                    children:
+                    -   path: "Content/Text"
+                        components:
+                            UITextComponent:
+                                text: "#battle_results:DetailsPage/StatisticPage/HealedHP"
+                    -   path: "Content/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "str1000Separated(results.battleStats.healedHp)"]
+                -   prototype: "BattleResultsContainers/TableRow"
+                    name: "Spotted"
+                    children:
+                    -   path: "Content/Text"
+                        components:
+                            UITextComponent:
+                                text: "#battle_results:DetailsPage/StatisticPage/Spotted"
+                    -   path: "Content/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "str1000Separated(results.battleStats.enemiesSpotted)"]
+                -   prototype: "BattleResultsContainers/TableRow"
+                    name: "DamageAssisted"
+                    children:
+                    -   path: "Content/Text"
+                        components:
+                            UITextComponent:
+                                text: "#battle_results:DetailsPage/StatisticPage/DamageAssisted"
+                    -   path: "Content/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "str1000Separated(results.battleStats.assistDamage)"]
+                -   prototype: "BattleResultsContainers/TableRow"
+                    name: "ShotsReceived"
+                    children:
+                    -   path: "Content/Text"
+                        components:
+                            UITextComponent:
+                                text: "#battle_results:DetailsPage/StatisticPage/ShotsReceived"
+                    -   path: "Content/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "str1000Separated(results.battleStats.receivedHits)"]
+                -   prototype: "BattleResultsContainers/TableSubRow"
+                    name: "PiercedReceived"
+                    children:
+                    -   path: "Content/Text"
+                        components:
+                            UITextComponent:
+                                text: "#battle_results:DetailsPage/StatisticPage/PiercedReceived"
+                    -   path: "Content/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "str1000Separated(results.battleStats.receivedPiercingHits)"]
+                -   prototype: "BattleResultsContainers/TableSubRow"
+                    name: "NoDamageShotsReceived"
+                    children:
+                    -   path: "Content/Text"
+                        components:
+                            UITextComponent:
+                                text: "#battle_results:DetailsPage/StatisticPage/NoDamageShotsReceived"
+                    -   path: "Content/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "str1000Separated(results.battleStats.receivedNoDmgHits)"]
+        -   prototype: "BattleResultsContainers/Container"
+            name: "RightPanel"
+            components:
+                LinearLayout:
+                    orientation: "TopDown"
+            children:
+            -   path: "Header"
+                classes: "header3 text-color-white"
+                components:
+                    UITextComponent:
+                        text: "#battle_results:DetailsPage/StatisticPage/Misc"
+            -   path: "Table"
+                classes: "gameplay=domination"
+                components:
+                    LinearLayout:
+                        orientation: "TopDown"
+                    SizePolicy:
+                        verticalPolicy: "PercentOfChildrenSum"
+                children:
+                -   prototype: "BattleResultsContainers/TableRow"
+                    name: "WinPoints"
+                    bindings:
+                    - ["visible", "results.gameType == eArenaGameplayType.supremacy"]
+                    children:
+                    -   path: "Content/Text"
+                        components:
+                            UITextComponent:
+                                text: "#battle_results:DetailsPage/StatisticPage/ScoreEarned"
+                    -   path: "Content/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "str1000Separated(results.battleStats.supremacyPointsEarned)"]
+                -   prototype: "BattleResultsContainers/TableRow"
+                    name: "WinPointsStolen"
+                    bindings:
+                    - ["visible", "results.gameType == eArenaGameplayType.supremacy"]
+                    children:
+                    -   path: "Content/Text"
+                        components:
+                            UITextComponent:
+                                text: "#battle_results:DetailsPage/StatisticPage/ScoreDetracted"
+                    -   path: "Content/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "str1000Separated(results.battleStats.supremacyPointsStolen)"]
+                -   prototype: "BattleResultsContainers/TableRow"
+                    name: "CapturePoints"
+                    bindings:
+                    - ["visible", "results.gameType == eArenaGameplayType.domination"]
+                    children:
+                    -   path: "Content/Text"
+                        components:
+                            UITextComponent:
+                                text: "#battle_results:DetailsPage/StatisticPage/CapturePoints"
+                    -   path: "Content/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "str1000Separated(results.battleStats.capturePoints)"]
+                -   prototype: "BattleResultsContainers/TableRow"
+                    name: "DroppedCapturePoints"
+                    bindings:
+                    - ["visible", "results.gameType == eArenaGameplayType.domination"]
+                    children:
+                    -   path: "Content/Text"
+                        components:
+                            UITextComponent:
+                                text: "#battle_results:DetailsPage/StatisticPage/DroppedCapturePoints"
+                    -   path: "Content/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "str1000Separated(results.battleStats.defendingPoints)"]
+                -   prototype: "BattleResultsContainers/TableRow"
+                    name: "Mileage"
+                    children:
+                    -   path: "Content/Text"
+                        components:
+                            UITextComponent:
+                                text: "#battle_results:DetailsPage/StatisticPage/Mileage"
+                    -   path: "Content/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "formattedMileage"]
+                -   prototype: "BattleResultsContainers/TableRow"
+                    name: "ArenaCreationTime"
+                    children:
+                    -   path: "Content/Text"
+                        components:
+                            UITextComponent:
+                                text: "#battle_results:DetailsPage/StatisticPage/ArenaCreationTime"
+                    -   path: "Content/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "results.battleStartTimeShort"]
+                -   prototype: "BattleResultsContainers/TableSubRow"
+                    name: "ArenaDuration"
+                    children:
+                    -   path: "Content/Text"
+                        components:
+                            UITextComponent:
+                                text: "#battle_results:DetailsPage/StatisticPage/ArenaDuration"
+                    -   path: "Content/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "timeDiff(results.battleStats.battleDuration)"]
+                -   prototype: "BattleResultsContainers/TableSubRow"
+                    name: "LifeTime"
+                    bindings:
+                    - ["visible", "not survived"]
+                    children:
+                    -   path: "Content/Text"
+                        components:
+                            UITextComponent:
+                                text: "#battle_results:DetailsPage/StatisticPage/LifeTime"
+                    -   path: "Content/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "timeDiff(results.battleStats.aliveDuration)"]

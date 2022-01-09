@@ -1,0 +1,87 @@
+animation _INIT(bool arg)
+{
+	if (isTutorial)
+	{
+		Scale("**/Label", 8, 8);
+		parallel
+		{
+			Scale("**/Label", 1.0, 1.0, 0.3, SINE_IN_SINE_OUT);
+			StartParticles(path="**/Glow");
+			StartParticles(path="**/1stPhase");
+			PlaySound("play_tut_2021_ui_battle_win_whoosh_on");
+		}
+	}
+	else
+	{
+		Opacity("**/HangarBlur", 0);
+		Opacity("**/Label", 0);
+		Opacity("**/Desc", 0);
+		Opacity("**/SceneBlur", 1, 0.5, SINE_OUT);
+
+		if (battleResult == BattleResult.WIN)
+		{
+			Scale("**/Label", 50, 50);
+			Scale("**/Desc", 0.5, 0.5);
+			StartParticles(path="**/1stPhase");
+			StartParticles(path="**/2ndPhase");
+			Wait(0.5);
+			parallel
+			{
+				Opacity("**/Label", 1, 0.4, SINE_OUT);
+				sequence
+				{
+					Scale("**/Label", 0.85, 0.85, 0.4, SINE_OUT);
+					Scale("**/Label", 1.0, 1.0, 0.1, SINE_IN);
+				}
+				sequence
+				{
+					Wait(0.3);
+					parallel
+					{
+						Opacity("**/Desc", 1, 0.3, SINE_OUT);
+						sequence
+						{
+							Scale("**/Desc", 1.2, 1.2, 0.3, SINE_OUT);
+							Scale("**/Desc", 1.0, 1.0, 0.1, SINE_IN);
+						}
+					}
+				}
+				sequence
+				{
+					ChangeData(enableBlur, true);
+					parallel
+					{
+						StartParticles(path="**/Glow");	
+						Opacity("**/SceneBlur", 0, 0.5, SINE_OUT);
+						Opacity("**/HangarBlur", 1, 0.3, SINE_OUT);
+					}
+				}
+			}
+		}
+		if (battleResult == BattleResult.LOSE or battleResult == BattleResult.TIE)
+		{
+			MoveRel("**/Desc", 0, -24);
+			Scale("**/Label", 0.7, 0.7);
+			Scale("**/TieLooseBg", 0.7, 0.7);
+			Opacity("**/TieLooseBg", 0);
+			parallel
+			{
+				Opacity("**/Label", 1, 1, SINE_OUT);
+				Scale("**/Label", 1.0, 1.0, 1, SINE_OUT);
+				Opacity("**/TieLooseBg", 0.7, 1, SINE_OUT);
+				Scale("**/TieLooseBg", 1, 1, 1, SINE_OUT);
+				Opacity("**/Desc", 1, 1, SINE_OUT);
+				MoveRel("**/Desc", 0, 24, 1, SINE_OUT);
+				sequence
+				{
+					ChangeData(enableBlur, true);
+					parallel
+					{
+						Opacity("**/SceneBlur", 0, 0.5, SINE_OUT);
+						Opacity("**/HangarBlur", 1, 0.3, SINE_OUT);
+					}
+				}
+			}
+		}
+	}
+}

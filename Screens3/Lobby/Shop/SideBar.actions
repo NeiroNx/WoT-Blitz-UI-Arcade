@@ -1,0 +1,19 @@
+action AnimateCurrentAnchor()
+{
+	parallel
+	{
+		ScrollToEnsureControlOnScreen("**/SideBarItem" + str(currentSection), 0.2);
+		ChangeData(currentAnchor, tempAnchor, 0.3, EASE_OUT);
+	}
+}
+
+action SelectSection(int section, float time)
+{
+	ChangeData(currentAnchor, section * itemH, time, EASE_OUT);
+	ChangeData(currentSection, section);
+}
+
+action UpdateFadeVisibility(float value)
+{
+    Opacity("**/BottomFade", value);
+}

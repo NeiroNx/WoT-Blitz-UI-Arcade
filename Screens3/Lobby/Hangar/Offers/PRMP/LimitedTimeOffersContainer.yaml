@@ -1,0 +1,83 @@
+Header:
+    version: 138
+Prototypes:
+-   class: "UIControl"
+    name: "LimitedTimeOffersContainer"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfMaxChild"
+        UIDataParamsComponent:
+            params:
+            - ["vector<PrmpOffer>", "ltos", "null", "[ { }; { \"shortTitle\" = \"Another cool offer\"; \"lifeTime\" = 100L; }; { }; ]"]
+            - ["int64", "serverTime", "0L", "0L"]
+            - ["bool", "debugMode", "false", "true"]
+            events:
+            - "PIGGY_BANK_STAGE_PROGRESS(int stuffDescr)"
+            - "PIGGY_BANK_SAVE_PROGRESS(int stuffDescr)"
+            - "ON_OFFER_CLICKED"
+        UIDataLocalVarsComponent:
+            data:
+            - ["int", "currentOfferIndex", "0"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["int", "nextOfferIndex", "when (currentOfferIndex + 1) < ltos.Size() -> (currentOfferIndex + 1), 0"]
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/Lobby/Hangar/Offers/PRMP/LimitedTimeOffersContainer.actions"
+        UIDataOnEventComponent0:
+            eventName: "ROTATION_FINISHED"
+            modelFieldExpression: "currentOfferIndex"
+            dataExpression: "when (currentOfferIndex + 1) < ltos.Size() -> (currentOfferIndex + 1), 0"
+        UIDataOnEventComponent1:
+            eventName: "FORCE_UPDATE"
+            modelFieldExpression: "currentOfferIndex"
+            dataExpression: "0"
+        UIEventOnDataComponent0:
+            watchedDataExpression: "ltos.Size()"
+            eventName: "FORCE_UPDATE"
+            broadcast: true
+    children:
+    -   class: "UIParticles"
+        name: "FullPiggy_Rays"
+        position: [110.000000, -8.000000]
+        scale: [1.300000, 1.250000]
+        input: false
+        effectPath: "~res:/3d/FX/UI/MoneyBoxRays.sc2"
+    -   class: "UIControl"
+        name: "Slider"
+        input: false
+        components:
+            ClipContent: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfMaxChild"
+            UIRepeatComponent:
+                control: "~res:/UI/Screens3/Lobby/Hangar/Offers/PRMP/LimitedTimeOffer.yaml"
+                dataContainer: "ltos"
+                args:
+                    "offer": "_item"
+                    "serverTime": "serverTime"
+                    "index": "_index"
+                    "currentOfferIndex": "currentOfferIndex"
+                    "nextOfferIndex": "nextOfferIndex"
+                    "debugMode": "debugMode"
+                eventActions:
+                - ["START_FULL_PIGGY_EFFECTS", "StartFullPiggyEffects", ""]
+                - ["STOP_FULL_PIGGY_EFFECTS", "StopFullPiggyEffects", ""]
+                - ["SHOW_PIGGY_FILL_EFFECT", "ShowPiggyFillEffect", "_event.type"]
+                - ["ROTATION_FINISHED", "ROTATION_FINISHED", ""]
+                - ["ON_OFFER_CLICK", "ON_OFFER_CLICKED", "_item.id"]
+                - ["PIGGY_BANK_STAGE_PROGRESS", "PIGGY_BANK_STAGE_PROGRESS", "_event.stuffDescr"]
+                - ["PIGGY_BANK_SAVE_PROGRESS", "PIGGY_BANK_SAVE_PROGRESS", "_event.stuffDescr"]
+    -   class: "UIParticles"
+        name: "FullPiggy_Glow"
+        position: [106.000000, 36.000000]
+        scale: [1.350000, 1.310000]
+        input: false
+        effectPath: "~res:/3d/FX/UI/MoneyBoxGlow.sc2"
+    -   class: "UIParticles"
+        name: "PiggyFill_Gold"
+        position: [110.000000, -145.000000]
+        input: false
+        effectPath: "~res:/3d/FX/UI/GoldCoins.sc2"

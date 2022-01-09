@@ -1,0 +1,48 @@
+Header:
+    version: 121
+ImportedPackages:
+- "~res:/UI/Screens/Common/Selection.yaml"
+Controls:
+-   class: "UIControl"
+    name: "VehicleCell"
+    size: [458.000000, 40.000000]
+    input: true
+    classes: "button cell"
+    components:
+        Background: {}
+        UIInputEventComponent:
+            onTouchUpInside: "ON_SELECT"
+            onTouchUpInsideData: "index"
+        UIDataParamsComponent:
+            params:
+            - ["string", "vehicleStr", "\"\"", "\"test\""]
+            - ["bool", "selected", "false", "true"]
+            - ["int", "index", "0", "0"]
+            events:
+            - "ON_SELECT(int index)"
+        StyleSheet:
+            inheritsStylesFromParent: false
+            styles: "~res:/UI/Screens3/Common/Button.style.yaml;~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens/Battle/SelectVehicleBotCell.style.yaml"
+    bindings:
+    - ["selected", "selected"]
+    children:
+    -   class: "UIControl"
+        name: "VehicleName"
+        input: false
+        classes: "t-title bold white-wild-sand-text"
+        components:
+            UITextComponent: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+        bindings:
+        - ["UITextComponent.text", "vehicleStr"]
+    -   prototype: "Selection/Selection"
+        name: "Selection"
+        classes: "selection-color-orange"
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true

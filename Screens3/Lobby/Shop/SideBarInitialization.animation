@@ -1,0 +1,6 @@
+animation Initialize
+{
+    Opacity("**/BottomFade", 0.0);
+    Opacity("**/LayoutOptimization/indicator", 0.0);
+    Opacity("**/LayoutOptimization/indicator", 1.0, 0.5, SINE_IN);
+}

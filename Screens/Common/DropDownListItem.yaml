@@ -1,0 +1,29 @@
+Header:
+    version: "106"
+ImportedPackages:
+- "~res:/UI/Screens/Common/PopupMenu.yaml"
+- "~res:/UI/Styles/ButtonStyle.yaml"
+- "~res:/UI/Screens/Fonts.yaml"
+Prototypes:
+-   prototype: "PopupMenu/ActionsPopupButton"
+    name: "DropDownListItem"
+    position: [15.000000, 94.000000]
+    components:
+        UIInputEventComponent:
+            onTouchUpInside: "CHANGE_SPAWNS"
+        UISwitchBarElementComponent: {}
+        UIDataParamsComponent:
+            params:
+            - ["int", "itemId", "0", "0"]
+            - ["string", "text", "\"\"", "\"Test\""]
+    bindings:
+    - ["UISwitchBarElementComponent.id", "itemId"]
+    children:
+    -   path: "Text"
+        components:
+            UITextComponent: {}
+        bindings:
+        - ["UITextComponent.text", "localize(text)"]
+    -   prototype: "PopupMenu/SeparateLine"
+        name: "SeparateLine"
+        position: [30.000000, 31.000000]

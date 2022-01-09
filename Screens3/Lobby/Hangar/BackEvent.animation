@@ -1,0 +1,21 @@
+animation Back
+{
+    if(communitySubMenuShow)
+    {
+    	 BroadcastEvent("HIDE_COMMUNITY_PANEL");
+    	 PlaySound(sound="GUI/buttons/cancel");
+    }
+    else
+    {
+    	if(squadSubMenuShow)
+    	{
+    		BroadcastEvent("HIDE_SQUAD_PANEL");
+    		PlaySound(sound="GUI/buttons/cancel");
+    	}
+    	else
+    	{
+    		Event("HANGAR_BACK_EVENT");
+    	}
+    	
+    }
+}

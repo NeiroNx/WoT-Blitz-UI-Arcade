@@ -1,0 +1,184 @@
+Header:
+    version: 135
+Prototypes:
+-   class: "UIControl"
+    name: "Item"
+    size: [282.000000, 49.000000]
+    input: false
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfChildrenSum"
+        UIDataParamsComponent:
+            params:
+            - ["bool", "hasLine", "true", "true"]
+            - ["ResourceDetailed", "resource", "null", "{ }"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["ArtefactGrade", "grade", "when not isNull(resource.stuff) -> resource.stuff.grade, ArtefactGrade.unknown"]
+            - ["string", "textStyle", "when grade == ArtefactGrade.unknown -> \"white-wild-sand-text\", str(grade, ArtefactGrade, \"color\") + \"-text\""]
+            - ["VehicleResource", "vehicle", "resource.vehicle"]
+            - ["string", "basicName", "when resource.type == ResourceType.gold -> \"shop/Gold\", resource.type == ResourceType.credits -> \"shop/Credits\", resource.type == ResourceType.free_xp -> \"hangar/freeXP\", resource.type == ResourceType.stuff -> resource.stuff.title, resource.type == ResourceType.unlocks -> resource.unlock.title, resource.type == ResourceType.vehicle -> resource.vehicle.info.name, resource.type == ResourceType.premium -> \"storage/Items/PremiumAccount/Title\", \"#Resource Name\""]
+    bindings:
+    - ["visible", "not isNull(resource.compensation) and (not (resource.type == ResourceType.stuff and not isNull(resource.stuff)) or resource.stuff.visibleInShop)"]
+    children:
+    -   class: "UIControl"
+        name: "Resource"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "Formula"
+                verticalFormula: "max(48, maxChild)"
+            UIChildComponent0:
+                childType: "kControl"
+                condition: "not isNull(resource.compensation)"
+                control: "Resource"
+    -   class: "UIControl"
+        name: "Line"
+        input: false
+        classes: "white-wild-sand-15-bg"
+        components:
+            Background:
+                drawType: "DRAW_FILL"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "FixedSize"
+                verticalValue: 1.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+        bindings:
+        - ["visible", "hasLine"]
+Slots:
+-   class: "UIControl"
+    name: "Resource"
+    size: [300.000000, 48.000000]
+    input: false
+    components:
+        LinearLayout:
+            spacing: 16.000000
+            useRtl: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "Formula"
+            verticalFormula: "max(48, maxChild)"
+    children:
+    -   class: "UIControl"
+        name: "Name"
+        input: false
+        components:
+            Anchor:
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfMaxChild"
+            UIChildComponent0:
+                childType: "kControl"
+                condition: "resource.type == ResourceType.vehicle"
+                control: "TankName"
+            UIChildComponent1:
+                childType: "kControl"
+                control: "StuffName"
+    -   class: "UIControl"
+        name: "spacer"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "FixedSize"
+                verticalValue: 0.000000
+    -   class: "UIControl"
+        name: "compensation"
+        input: false
+        components:
+            Anchor:
+                rightAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfMaxChild"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/Currencies.yaml"
+                args:
+                    "price": "resource.compensation"
+                    "forceFullValue": "true"
+-   class: "UIControl"
+    name: "StuffName"
+    input: false
+    components:
+        UITextComponent:
+            colorInheritType: "COLOR_IGNORE_PARENT"
+            multiline: "MULTILINE_ENABLED"
+            align: ["LEFT", "VCENTER"]
+            useRtlAlign: "USE_BY_SYSTEM"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfContent"
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+    bindings:
+    - ["classes", "\"t-body regular color=\" + textStyle"]
+    - ["UITextComponent.text", "when resource.type == ResourceType.stuff -> localize(resource.stuff.title), localize(basicName)"]
+-   class: "UIControl"
+    name: "TankName"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfChildrenSum"
+        FlowLayout:
+            alignment: "Left"
+            hSpacing: 6.000000
+            useRtl: true
+    children:
+    -   class: "UIControl"
+        name: "Flag"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Anchor:
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfMaxChild"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/TankInfo/NationFlag.yaml"
+                args:
+                    "subnation": "vehicle.info.subnation"
+                    "nation": "vehicle.info.nation"
+    -   class: "UIControl"
+        name: "Tier"
+        input: false
+        components:
+            Anchor:
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfMaxChild"
+            UIChildComponent0:
+                childType: "kPrototype"
+                condition: "not isNull(vehicle)"
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Vehicle/VehicleInfo.yaml"
+                args:
+                    "class": "vehicle.info.tankClass"
+                    "level": "vehicle.info.level"
+                    "type": "when vehicle.info.isPremium -> eVehicleDescriptionType.PREMIUM, vehicle.info.isCollectible -> eVehicleDescriptionType.COLLECTIBLE, vehicle.stats.isPremiumized -> eVehicleDescriptionType.PREMIUMISED, eVehicleDescriptionType.NORMAL"
+                    "elite": "vehicle.stats.isElite"
+    -   class: "UIControl"
+        name: "Name"
+        input: false
+        components:
+            Anchor:
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfMaxChild"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Vehicle/VehicleName.yaml"
+                args:
+                    "textStyle": "\"t-caption bold\""
+                    "isShortName": "true"
+                    "vehicle": "vehicle.info"
+                    "tankStats": "vehicle.stats"

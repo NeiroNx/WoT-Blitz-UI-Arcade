@@ -1,0 +1,77 @@
+action PUSH(vector2 scale, float opacity, float time)
+{
+    parallel
+    {
+        {
+            parallel
+            {
+                Opacity("**/Content", opacity, time);
+                Scale("**/Content", scale.X, scale.Y, time);
+            }
+            Stop();
+        }
+        {
+            WaitEvent("PULL");
+            Stop();
+        }
+    }
+}
+
+action PULL(float time)
+{
+    parallel
+    {
+        Opacity("**/Content", 1.0, time);
+        Scale("**/Content", 1.0, 1.0, time);
+    }
+}
+
+action HOVER(float brightness, float time)
+{
+    parallel
+    {
+        {
+             Opacity("**/Brightness", 1.0, time);
+            Stop();
+        }
+        {
+            WaitEvent("CANCEL_HOVER");
+            Stop();
+        }
+    }
+}
+
+action CANCEL_HOVER(float time)
+{
+    Opacity("**/Brightness", 0.0, time);
+}
+
+action SELECT(float time)
+{
+    parallel
+    {
+        {
+            ChangeData(selectionOpacity, 1.0, time);
+            Stop();
+        }
+        {
+            WaitEvent("CANCEL_SELECT");
+            Stop();
+        }
+    }
+}
+
+action CANCEL_SELECT(float time)
+{
+    ChangeData(selectionOpacity, 0.0, time);
+}
+
+action ENABLE_INDICATOR(float time)
+{
+    ChangeData(indicatorOpacity, 1.0, time, EASE_IN);
+}
+
+action DISABLE_INDICATOR(float time)
+{
+    ChangeData(indicatorOpacity, 0.0, time, EASE_OUT);
+}

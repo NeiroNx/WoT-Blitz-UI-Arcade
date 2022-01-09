@@ -1,0 +1,8 @@
+action AnimateScreenShot(float animTime)
+{
+	RenderPostProcess("**/ScreenShot", true);
+	ChangeProperty("**/ScreenShotContainer", "", "visible", true);
+	Opacity("**/ScreenShot", opacity=1.0);
+	Opacity("**/ScreenShot", opacity=0.0, time=animTime);
+	ChangeProperty("**/ScreenShotContainer", "", "visible", false);
+}

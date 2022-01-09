@@ -1,0 +1,68 @@
+animation FramesInit
+{
+    // Frame starting position setup
+    parallel
+    {
+        ChangeProperty("**/Frames", "UIOpacityComponent", "opacity", 0, 0);
+
+        MoveToMaster("**/LT", "HintIcon", 16, 16, 0);
+        MoveToMaster("**/LB", "HintIcon", 16, 48, 0);
+        MoveToMaster("**/RT", "HintIcon", 48, 16, 0);
+        MoveToMaster("**/RB", "HintIcon", 48, 48, 0);
+    }
+	
+    // Transition to square shape
+    parallel
+    {
+        ChangeProperty("**/Frames", "UIOpacityComponent", "opacity", 1, 0.25, SINE_OUT);
+
+        MoveRel("**/LT", -32, -32, 0.25, SINE_OUT);
+        MoveRel("**/LB", -32, 32, 0.25, SINE_OUT);
+        MoveRel("**/RT", 32, -32, 0.25, SINE_OUT);
+        MoveRel("**/RB", 32, 32, 0.25, SINE_OUT);
+    }
+
+    // Widen to frame the hint
+    Wait(0.25);
+    parallel
+    {
+        MoveToControl("**/LT", "**/LTFake", -16, 0, 0.5, SINE_OUT);
+        MoveToControl("**/LB", "**/LBFake", -16, 0, 0.5, SINE_OUT);
+        MoveToControl("**/RT", "**/RTFake", 0, 0, 0.5, SINE_OUT);
+        MoveToControl("**/RB", "**/RBFake", 0, 0, 0.5, SINE_OUT);
+    }
+	
+	if (transitionType == eTransition.None)
+	{
+		WaitEvent("Disappear");
+		
+		// Move to icon 
+		parallel
+		{
+			MoveToMaster("**/LT", "HintIcon", -16, -16, 0.5, SINE_OUT);
+			MoveToMaster("**/LB", "HintIcon", -16, 80, 0.5, SINE_OUT);
+			MoveToMaster("**/RT", "HintIcon", 80, -16, 0.5, SINE_OUT);
+			MoveToMaster("**/RB", "HintIcon", 80, 80, 0.5, SINE_OUT);
+		}
+		
+		// Fade out and collapse
+		parallel
+		{
+			ChangeProperty("**/Frames", "UIOpacityComponent", "opacity", 0, 0.25, SINE_OUT);
+			MoveRel("**/LT", 32, 32, 0.25, SINE_OUT);
+			MoveRel("**/LB", 32, -32, 0.25, SINE_OUT);
+			MoveRel("**/RT", -32, 32, 0.25, SINE_OUT);
+			MoveRel("**/RB", -32, -32, 0.25, SINE_OUT);
+		}
+	}
+	
+    Wait(0.5);
+	if (transitionType == eTransition.Surround)
+	{
+        Event("SurroundControl");
+	}
+	if (transitionType == eTransition.PointTo)
+	{
+        Event("PointToControl");
+	}
+}

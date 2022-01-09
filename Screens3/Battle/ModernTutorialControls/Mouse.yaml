@@ -1,0 +1,39 @@
+Header:
+    version: 128
+Prototypes:
+-   class: "UIControl"
+    name: "Mouse"
+    size: [88.000000, 164.000000]
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Battle/ModernTutorialControls/Mouse.style.yaml;"
+    children:
+    -   class: "UIControl"
+        name: "Button"
+        components:
+            Background:
+                drawType: "DRAW_STRETCH_BOTH"
+                sprite: "~res:/Gfx/UI/Tutorial/KeyboardMouse/mouse"
+                frame: 0
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+    -   class: "UIControl"
+        name: "MouseBorder"
+        size: [88.000000, 164.000000]
+        components:
+            Background:
+                drawType: "DRAW_STRETCH_BOTH"
+                sprite: "~res:/Gfx/UI/Tutorial/KeyboardMouse/mouse"
+                frame: 1
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Battle/ModernTutorialControls/Mouse.style.yaml;"

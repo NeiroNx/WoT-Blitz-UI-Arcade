@@ -1,0 +1,57 @@
+Header:
+    version: "100"
+Prototypes:
+-   class: "UIControl"
+    customClass: "UIHotKey"
+    name: "HotKey"
+    size: [15.000000, 18.700001]
+    pivot: [0.500000, 0.500000]
+    input: false
+    classes: "hotkey"
+    components:
+        Background:
+            drawType: "DRAW_STRETCH_BOTH"
+            sprite: "~res:/Gfx/UI/BattleScreenHUD/HotKeyShadow"
+            colorInherit: "COLOR_MULTIPLY_ON_PARENT"
+            leftRightStretchCap: 7.000000
+            topBottomStretchCap: 10.000000
+        LinearLayout:
+            padding: "4"
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfMaxChild"
+            verticalValue: 110.000000
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Battle/HotKey.yaml"
+    children:
+    -   class: "UIStaticText"
+        name: "text"
+        input: false
+        components:
+            UITextComponent:
+                text: "1"
+                fontName: "WarHeliosCondC_Bold_13"
+                color: [1.000000, 0.870588, 0.592157, 1.000000]
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+                verticalValue: 120.000000
+    -   class: "UIControl"
+        name: "img"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Background: {}
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+                verticalValue: 150.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens/Battle/Styles/HotKey.style.yaml"

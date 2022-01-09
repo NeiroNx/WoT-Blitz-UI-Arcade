@@ -1,0 +1,358 @@
+Header:
+    version: 133
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/LobbyCommon.yaml"
+- "~res:/UI/Screens/Common/Settings/Settings.yaml"
+- "~res:/UI/Screens/Common.yaml"
+- "~res:/UI/Screens/Common/Settings/SettingsCommon.yaml"
+- "~res:/UI/Styles/SafeAreaStyles.yaml"
+- "~res:/UI/Screens/Common/Settings/SwitchWithCaptionAndDescription.yaml"
+Controls:
+-   class: "UIControl"
+    name: "TouchControlOptionsPage"
+    size: [1025.000000, 688.000000]
+    input: false
+    components:
+        Anchor:
+            leftAnchorEnabled: true
+            leftAnchor: 0.000000
+            rightAnchorEnabled: true
+            rightAnchor: 0.000000
+            topAnchorEnabled: true
+            topAnchor: 0.000000
+            bottomAnchorEnabled: true
+            bottomAnchor: 0.000000
+        StyleSheet:
+            styles: "~res:/UI/Screens/Common/Settings/TouchControlOptionsPage.yaml"
+    children:
+    -   class: "UIScrollView"
+        name: "ScrollView"
+        position: [0.000000, 0.000000]
+        size: [1025.000000, 688.000000]
+        input: false
+        autoUpdate: true
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+        children:
+        -   class: "UIScrollViewContainer"
+            name: "scrollContainerControl"
+            components:
+                LinearLayout:
+                    orientation: "TopDown"
+                    safeAreaPaddingInset: true
+                    spacing: 1.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfChildrenSum"
+            children:
+            -   prototype: "SettingsCommon/Button"
+                name: "BattleControlsLayoutButton"
+                size: [1015.000000, 80.000000]
+                components:
+                    Anchor:
+                        leftAnchorEnabled: true
+                        leftAnchor: 5.000000
+                        rightAnchorEnabled: true
+                        rightAnchor: 5.000000
+                children:
+                -   path: "TextContainer"
+                    children:
+                    -   class: "UIStaticText"
+                        name: "Comment"
+                        classes: "text2-small text-color-blue"
+                        components:
+                            UITextComponent:
+                                text: "#settings:Controls/TouchSettings/Comment"
+                                align: ["LEFT", "TOP"]
+                            Anchor:
+                                leftAnchorEnabled: true
+                                leftAnchor: 10.000000
+                                rightAnchorEnabled: true
+                                rightAnchor: 10.000000
+                                vCenterAnchorEnabled: true
+                                bottomAnchorEnabled: true
+                    -   class: "UIStaticText"
+                        name: "Comment2"
+                        classes: "header3 text-color-white"
+                        components:
+                            UITextComponent:
+                                text: "#settings:Controls/TouchSettings/TuneButton"
+                                align: ["RIGHT", "VCENTER"]
+                            Anchor:
+                                leftAnchorEnabled: true
+                                leftAnchor: 10.000000
+                                rightAnchorEnabled: true
+                                rightAnchor: 50.000000
+                                topAnchorEnabled: true
+                                vCenterAnchorEnabled: true
+                                bottomAnchorEnabled: true
+                    -   class: "UIControl"
+                        name: "Arrow"
+                        components:
+                            Background:
+                                sprite: "~res:/Gfx/UI/SettingsScreen/arrow_settings"
+                                colorInherit: "COLOR_REPLACE_ALPHA_ONLY"
+                            Anchor:
+                                rightAnchorEnabled: true
+                                rightAnchor: 20.000000
+                                vCenterAnchorEnabled: true
+                -   path: "TextContainer/Text"
+                    components:
+                        UITextComponent:
+                            text: "#settings:Controls/TouchSettings/Title"
+                            align: ["LEFT", "BOTTOM"]
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                            bottomAnchorEnabled: false
+            -   prototype: "SettingsCommon/Row"
+                name: "Row1"
+                components:
+                    Anchor:
+                        leftAnchor: 5.000000
+                        rightAnchor: 5.000000
+                children:
+                -   prototype: "SettingsCommon/SelectorWithCaptionAndDescription"
+                    name: "FollowAimMode2"
+            -   prototype: "SettingsCommon/Row"
+                name: "RowJoypadType"
+                components:
+                    Anchor:
+                        leftAnchor: 5.000000
+                        rightAnchor: 5.000000
+                children:
+                -   prototype: "SettingsCommon/SelectorWithCaptionAndDescription"
+                    name: "JoypadType"
+            -   prototype: "SettingsCommon/Row"
+                name: "Row2"
+                components:
+                    Anchor:
+                        leftAnchor: 5.000000
+                        rightAnchor: 5.000000
+                children:
+                -   prototype: "SettingsCommon/SelectorWithCaptionAndDescription"
+                    name: "FollowAimModeVersion"
+            -   prototype: "SettingsCommon/Row"
+                name: "Row3"
+                components:
+                    Anchor:
+                        leftAnchor: 5.000000
+                        rightAnchor: 5.000000
+                        topAnchorEnabled: true
+                    LinearLayout:
+                        spacing: 1.000000
+                children:
+                -   prototype: "SwitchWithCaptionAndDescription/SwitchWithCaptionAndDescription"
+                    name: "InverseLayout"
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            horizontalValue: 50.000000
+                            verticalPolicy: "PercentOfParent"
+                    children:
+                    -   path: "ContentLinearLayout/TextVerticalLayout/GroupCaption"
+                        components:
+                            UITextComponent:
+                                text: "SETTINGS_GROUP_CAPTION_LAYOUT"
+                    -   path: "ContentLinearLayout/TextVerticalLayout/Description"
+                        components:
+                            UITextComponent:
+                                text: ""
+                -   prototype: "SwitchWithCaptionAndDescription/SwitchWithCaptionAndDescription"
+                    name: "LeftShootButton"
+                    classes: "row"
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            horizontalValue: 50.000000
+                            verticalPolicy: "PercentOfParent"
+                    children:
+                    -   path: "ContentLinearLayout/TextVerticalLayout/GroupCaption"
+                        components:
+                            UITextComponent:
+                                text: "SETTINGS_GROUP_CAPTION_SECONDARY_SHOOT_BUTTON"
+                                colorInheritType: "COLOR_MULTIPLY_ALPHA_ONLY"
+                    -   path: "ContentLinearLayout/TextVerticalLayout/Description"
+                        components:
+                            UITextComponent:
+                                text: "SETTINGS_DESCRIPTION_SECONDARY_SHOOT_BUTTON"
+                                colorInheritType: "COLOR_MULTIPLY_ALPHA_ONLY"
+            -   prototype: "SettingsCommon/Row"
+                name: "Row4"
+                components:
+                    Anchor:
+                        leftAnchor: 5.000000
+                        rightAnchor: 5.000000
+                        topAnchorEnabled: true
+                    LinearLayout:
+                        spacing: 1.000000
+                children:
+                -   prototype: "SwitchWithCaptionAndDescription/SwitchWithCaptionAndDescription"
+                    name: "InverseControlAlignment"
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            horizontalValue: 50.000000
+                            verticalPolicy: "PercentOfParent"
+                    children:
+                    -   path: "ContentLinearLayout/TextVerticalLayout/GroupCaption"
+                        components:
+                            UITextComponent:
+                                text: "SETTINGS_LABEL_CONTROLS_ALIGNMENT"
+                    -   path: "ContentLinearLayout/TextVerticalLayout/Description"
+                        components:
+                            UITextComponent:
+                                text: ""
+                -   prototype: "SwitchWithCaptionAndDescription/SwitchWithCaptionAndDescription"
+                    name: "LookBack"
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            horizontalValue: 50.000000
+                            verticalPolicy: "PercentOfParent"
+                    children:
+                    -   path: "ContentLinearLayout/TextVerticalLayout/GroupCaption"
+                        components:
+                            UITextComponent:
+                                text: "SETTINGS_GROUP_CAPTION_LOOKBACK"
+                    -   path: "ContentLinearLayout/TextVerticalLayout/Description"
+                        components:
+                            UITextComponent:
+                                text: ""
+            -   prototype: "SettingsCommon/Row"
+                name: "Row5"
+                components:
+                    Anchor:
+                        leftAnchor: 5.000000
+                        rightAnchor: 5.000000
+                        topAnchorEnabled: true
+                children:
+                -   prototype: "SettingsCommon/SliderWithCaption"
+                    name: "Sensitivity"
+                    components:
+                        Anchor:
+                            leftAnchorEnabled: true
+                            rightAnchorEnabled: true
+                        LinearLayout:
+                            spacing: 15.000000
+                            dynamicSpacing: false
+                    children:
+                    -   path: "ValueAndCaption"
+                        components:
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                        children: []
+                    -   path: "ValueAndCaption/GroupCaption"
+                        components:
+                            UITextComponent:
+                                text: "SETTINGS_GROUP_CAPTION_SENSITIVITY"
+            -   prototype: "SettingsCommon/Row"
+                name: "Row6"
+                components:
+                    Anchor:
+                        leftAnchor: 5.000000
+                        rightAnchor: 5.000000
+                        topAnchorEnabled: true
+                children:
+                -   prototype: "SettingsCommon/SliderWithCaption"
+                    name: "JoypadSensitivity"
+                    components:
+                        Anchor:
+                            leftAnchorEnabled: true
+                            rightAnchorEnabled: true
+                        LinearLayout:
+                            spacing: 15.000000
+                            dynamicSpacing: false
+                    children:
+                    -   path: "ValueAndCaption"
+                        components:
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                        children: []
+                    -   path: "ValueAndCaption/GroupCaption"
+                        components:
+                            UITextComponent:
+                                text: "SETTINGS_GROUP_CAPTION_JOYPAD_SENSITIVITY"
+            -   prototype: "SettingsCommon/Row"
+                name: "Row7"
+                components:
+                    Anchor:
+                        leftAnchor: 5.000000
+                        rightAnchor: 5.000000
+                        topAnchorEnabled: true
+                    LinearLayout:
+                        spacing: 1.000000
+                children:
+                -   prototype: "SwitchWithCaptionAndDescription/SwitchWithCaptionAndDescription"
+                    name: "JoypadCameraMode"
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            horizontalValue: 50.000000
+                            verticalPolicy: "PercentOfParent"
+                    children:
+                    -   path: "ContentLinearLayout/TextVerticalLayout/GroupCaption"
+                        components:
+                            UITextComponent:
+                                text: "SETTINGS_LABEL_JOYPAD_CAMERA_MODE"
+                    -   path: "ContentLinearLayout/TextVerticalLayout/Description"
+                        components:
+                            UITextComponent:
+                                text: "SETTINGS_DESCRIPTION_JOYPAD_CAMERA_MODE"
+                -   prototype: "SwitchWithCaptionAndDescription/SwitchWithCaptionAndDescription"
+                    name: "InverseReverseMovement"
+                    visible: true
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            horizontalValue: 50.000000
+                            verticalPolicy: "PercentOfParent"
+                    children:
+                    -   path: "ContentLinearLayout/TextVerticalLayout/GroupCaption"
+                        components:
+                            UITextComponent:
+                                text: "#settings:Controls/InverseReverseMovement/Title"
+                    -   path: "ContentLinearLayout/TextVerticalLayout/Description"
+                        components:
+                            UITextComponent:
+                                text: ""
+            -   prototype: "SettingsCommon/Row"
+                name: "Row8"
+                components:
+                    Anchor:
+                        leftAnchor: 5.000000
+                        rightAnchor: 5.000000
+                        topAnchorEnabled: true
+                    LinearLayout:
+                        spacing: 1.000000
+                children:
+                -   prototype: "SwitchWithCaptionAndDescription/SwitchWithCaptionAndDescription"
+                    name: "KeepAmmoBar"
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            horizontalValue: 50.000000
+                            verticalPolicy: "PercentOfParent"
+                    children:
+                    -   path: "ContentLinearLayout/TextVerticalLayout/GroupCaption"
+                        components:
+                            UITextComponent:
+                                text: "SETTINGS_LABEL_KEEP_AMMO_BAR"
+                    -   path: "ContentLinearLayout/TextVerticalLayout/Description"
+                        components:
+                            UITextComponent:
+                                text: "SETTINGS_DESCRIPTION_KEEP_AMMO_BAR"
+        -   prototype: "Common/VerticalScrollBar"
+            name: "VerticalScrollBar"
+            classes: "notch-tightly-right-inset"
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+                    topAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                UIAnchorSafeAreaComponent: {}
+                ScrollBarDelegate:
+                    delegate: ".."

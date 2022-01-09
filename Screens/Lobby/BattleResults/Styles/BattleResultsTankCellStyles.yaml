@@ -1,0 +1,128 @@
+Header:
+    version: "58"
+StyleSheets:
+-   selector: ".japan #bg"
+    properties:
+        bg-frame: 4
+-   selector: ".germany #bg"
+    properties:
+        bg-frame: 1
+-   selector: ".ussr #bg"
+    properties:
+        bg-frame: 2
+-   selector: ".china #bg"
+    properties:
+        bg-frame: 5
+-   selector: ".uk #bg"
+    properties:
+        bg-frame: 3
+-   selector: ".usa #bg"
+    properties:
+        bg-frame: 0
+-   selector: ".france #bg"
+    properties:
+        bg-frame: 6
+-   selector: ".other #bg"
+    properties:
+        bg-frame: 7
+-   selector: ".european #bg"
+    properties:
+        bg-frame: 10
+-   selector: ".offer #bg"
+    properties:
+        bg-frame: 8
+-   selector: ".bg-flag #bg"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/LobbyCommon/TankSlotFlags"
+-   selector: ".blocked-other"
+    properties:
+        bg-color: [1.000000, 1.000000, 1.000000, 0.200000]
+-   selector: ".blocked-other #blocked"
+    properties:
+        text-color: [0.600000, 0.600000, 0.600000, 1.000000]
+-   selector: ".blocked-broken"
+    properties:
+        bg-color: [0.470588, 0.000000, 0.000000, 1.000000]
+-   selector: ".blocked-broken #blocked"
+    properties:
+        text-color: [1.000000, 0.309804, 0.000000, 1.000000]
+-   selector: ".blocked-training"
+    properties:
+        bg-color: [0.000000, 0.470588, 0.000000, 1.000000]
+-   selector: ".blocked-training #blocked"
+    properties:
+        text-color: [0.309804, 1.000000, 0.000000, 1.000000]
+-   selector: ".blocked-rating #blocked"
+    properties:
+        text-color: [1.000000, 0.000000, 0.000000, 1.000000]
+-   selector: ".x2"
+    properties:
+        anchor-rightAnchor: 5.000000
+        anchor-topAnchor: 5.000000
+-   selector: ".x2 #BirthdayBackground"
+    properties:
+        visible: false
+-   selector: ".x2 #Money"
+    properties:
+        visible: false
+-   selector: ".x2 #UsualBackground"
+    properties:
+        visible: true
+-   selector: ".x2 #MultipleExp"
+    properties:
+        visible: false
+-   selector: ".x2 #Exp"
+    properties:
+        visible: true
+-   selector: ".x2.is-birthday #BirthdayBackground"
+    properties:
+        visible: true
+-   selector: ".x2.is-birthday #Money"
+    properties:
+        visible: true
+-   selector: ".x2.is-birthday #UsualBackground"
+    properties:
+        visible: false
+-   selector: ".x2.is-birthday #MultipleExp"
+    properties:
+        visible: false
+-   selector: ".x2.is-birthday #Exp"
+    properties:
+        visible: true
+-   selector: ".x2.is-birthday"
+    properties:
+        anchor-rightAnchor: -6.000000
+        anchor-topAnchor: 5.000000
+-   selector: ".color-match"
+    properties:
+        text-color: [0.600000, 0.800000, 0.200000, 1.000000]
+-   selector: ".color-one-level-mismatch"
+    properties:
+        text-color: [1.000000, 0.820000, 0.000000, 1.000000]
+-   selector: ".color-tank-level-mismatch"
+    properties:
+        text-color: [0.764000, 0.086000, 0.098000, 1.000000]
+-   selector: "#LeaseLayer, #PremiumizationLayer"
+    properties:
+        visible: false
+-   selector: ".leased #LeaseLayer, .premiumized #PremiumizationLayer"
+    properties:
+        visible: true
+-   selector: ".blocked-tournament-prebattle #blocked"
+    properties:
+        text-color: [1.000000, 0.000000, 0.000000, 1.000000]
+-   selector: ".offer #favorite, .offer #x2"
+    properties:
+        visible: false
+-   selector: ".x2.is-multiple-x2 #MultipleExp"
+    properties:
+        visible: true
+-   selector: ".x2.is-multiple-x2 #BirthdayBackground"
+    properties:
+        visible: false
+-   selector: ".x2.is-multiple-x2 #Money"
+    properties:
+        visible: false
+-   selector: ".x2.is-multiple-x2 #Exp"
+    properties:
+        visible: false

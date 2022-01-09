@@ -1,0 +1,40 @@
+Header:
+    version: 133
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/Dialog/TextDialog.yaml"
+Controls:
+-   class: "UIControl"
+    name: "ErrorDialog"
+    size: [640.000000, 480.000000]
+    input: false
+    components:
+        Anchor:
+            leftAnchorEnabled: true
+            rightAnchorEnabled: true
+            topAnchorEnabled: true
+            bottomAnchorEnabled: true
+        ModalInput: {}
+        UIDataParamsComponent:
+            params:
+            - ["string", "errorText", "\"error text\"", "\"error text\""]
+            - ["string", "customButtonText", "\"\"", "\"\""]
+    children:
+    -   prototype: "TextDialog/TextDialog"
+        name: "InfoTextDialog"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "type": "eDialogType.INFO"
+                    "header": "\"\""
+                    "headerImage": "\"\""
+                    "accentButton": "when empty(customButtonText) -> \"#common:DialogButton/OK\", customButtonText"
+                    "optionalButton": "\"\""
+                    "contentControl": "control(\"~res:/UI/Screens3/Lobby/Common/Dialog/TextContent.yaml\", { \"contentText\" = errorText; }, [ ])"
+                eventActions:
+                - ["ACCENT_CLICKED", "CONFIRMATION", ""]
+        children:
+        -   path: "DialogContent"
+            components:
+                UIIdentifierComponent:
+                    id: "error_dialog"
+            children: []

@@ -1,0 +1,39 @@
+animation WaitIcon
+{
+    parallel
+    {
+        repeat
+        {
+            parallel
+            {
+                //Circle2
+                {
+                    Rotate("Circle2", 0, 0);
+                    Rotate("Circle2", -360, 4.1);
+                }
+                //CircleTanks
+                {
+                    Rotate("CircleTanks", 0, 0);
+                    Rotate("CircleTanks", -360, 4.1);
+                }
+                //Circle3
+                {
+                    Rotate("Circle3", 0, 0);
+                    Rotate("Circle3", 360, 4.1);
+                }
+            }
+        }
+        repeat
+        {
+            //Base
+            Rotate("Base", -80, 0);
+            Rotate("Base", -120, 1.476);
+            Rotate("Base", -180, 0.902);
+            Rotate("Base", -260, 1.804);
+            Rotate("Base", -300, 1.476);
+            Rotate("Base", -360, 0.902);
+            Rotate("Base", -440, 1.804);
+        }
+    }
+    
+}

@@ -1,0 +1,56 @@
+Header:
+    version: 123
+Prototypes:
+-   class: "UIControl"
+    name: "PlaybackSpeedItem"
+    size: [42.000000, 40.000000]
+    input: false
+    components:
+        Anchor:
+            hCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "FixedSize"
+            verticalValue: 32.000000
+        UIDataParamsComponent:
+            params:
+            - ["int", "index", "0", "0"]
+            - ["string", "text", "\"\"", "\"1/16x\""]
+            events:
+            - "ON_ITEM_PRESSED(int index)"
+    children:
+    -   class: "UIControl"
+        name: "Bg"
+        size: [32.000000, 32.000000]
+        input: false
+        classes: "grey-shark-bg"
+        components:
+            Background: {}
+            UIRoundedCornersComponent:
+                radius: "4"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+    -   class: "UIControl"
+        name: "Text"
+        size: [71.000000, 40.000000]
+        input: true
+        classes: "t-caption bold white-wild-sand-70-text"
+        components:
+            UITextComponent: {}
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            UIInputEventComponent:
+                onTouchUpInside: "ON_ITEM_PRESSED"
+                onTouchUpInsideData: "index"
+                blockDuplicatedEvents: true
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+        bindings:
+        - ["UITextComponent.text", "text"]

@@ -1,0 +1,265 @@
+Header:
+    version: 133
+Prototypes:
+-   class: "UIControl"
+    name: "TournamentButton"
+    size: [212.000000, 64.000000]
+    input: true
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfMaxChild"
+        UIInputEventComponent:
+            onTouchUpInside: "ON_TOURN_BTN_CLICKED"
+        UIDataParamsComponent:
+            params:
+            - ["bool", "squadFormed", "false", "false"]
+            - ["TournamentButtonViewModel", "model", "null", "{ \"titleText\" = \"Турнир Восхождения Twister #1 (билетный)\"; \"stageTitle\" = \"Отборочные\"; \"round\" = 6; \"roundDenominator\" = 64; \"battlesStartTime\" = 3L; \"system\" = eTournamentSystem.kDoubleElimination; \"isQuick\" = false; }"]
+            - ["bool", "visible", "true", "true"]
+            - ["PrebattleSettingsDataModel", "prebattleSettings", "null", "{ \"prebattleType\" = PrebattleType.QUICK_TOURNAMENT; }"]
+            - ["int64", "serverTime", "0L", "0L"]
+            events:
+            - "ON_TOURN_BTN_CLICKED"
+        UIDataLocalBindingsComponent:
+            data:
+            - ["bool", "isSettingsReady", "not isNull(prebattleSettings)"]
+            - ["PrebattleType", "prebattleType", "when isSettingsReady -> prebattleSettings.prebattleType, PrebattleType.UNDEFINED"]
+            - ["bool", "isTournamentPrebattle", "prebattleType == PrebattleType.QUICK_TOURNAMENT or prebattleType == PrebattleType.TOURNAMENT"]
+            - ["int64", "pauseEndTime", "when isSettingsReady -> prebattleSettings.extraDataQuick.pauseStartTime + prebattleSettings.extraData.pauseDuration, 0L"]
+            - ["eQuickPrebattleState", "prebattleQuickState", "when isSettingsReady -> prebattleSettings.extraDataQuick.state, eQuickPrebattleState.WAITING_FOR_TEAM"]
+            - ["string", "quickTitle", "when isSettingsReady -> when prebattleQuickState == eQuickPrebattleState.WAITING_FOR_TEAM -> localize(\"tournaments/TournamentButton/Status/GatherTeam\"), when prebattleQuickState == eQuickPrebattleState.MATCHING -> localize(\"tournaments/TournamentButton/Status/AwaitingEnemy\"), when prebattleQuickState == eQuickPrebattleState.MATCHED -> localize(\"tournaments/TournamentButton/Status/BattleStartsIn\"), when prebattleQuickState == eQuickPrebattleState.PAUSED -> localize(\"tournaments/TournamentButton/Status/SearchPause\"), \"\", \"\""]
+            - ["bool", "isQuick", "when isSettingsReady -> prebattleType == PrebattleType.QUICK_TOURNAMENT, model.isQuick"]
+            - ["int64", "quickTimeOfEvent", "when (isQuick == true) and not isNull(prebattleSettings) -> when prebattleSettings.extraDataQuick.state == eQuickPrebattleState.MATCHED -> prebattleSettings.startTime, when prebattleSettings.extraDataQuick.state == eQuickPrebattleState.PAUSED -> pauseEndTime, 0L, 0L"]
+            - ["int64", "timeOfEvent", "when isTournamentPrebattle -> when isQuick == true -> quickTimeOfEvent, prebattleSettings.startTime, model.battlesStartTime"]
+            - ["bool", "isTimerVisible", "(timeOfEvent - serverTime) >= 1L"]
+            - ["bool", "isTimerCaptionVisible", "isTimerVisible or isTournamentPrebattle"]
+            - ["bool", "isJoined", "when isSettingsReady -> prebattleSettings.prebattleType != PrebattleType.UNDEFINED, false"]
+            - ["bool", "isSquadInvitation", "when isJoined -> not squadFormed and prebattleSettings.prebattleType == PrebattleType.SQUAD, false"]
+            - ["string", "timerCaptionText", "when isQuick == true and isJoined and not isSquadInvitation -> quickTitle, \"\""]
+            - ["string", "stageText", "localize(\"%(stage)\", { \"stage\" = model.stageTitle; })"]
+            - ["string", "groupText", "localize(\"tournaments/TournamentButton/StageTour/Group\", { \"name\" = model.group; })"]
+            - ["map<int,string>", "seRoundNames", "{ 1 = localize(\"tournaments/TournamentButton/StageTour/Final\"); 2 = localize(\"tournaments/TournamentButton/StageTour/Semifinal\"); 3 = localize(\"tournaments/TournamentButton/StageTour/Quarterfinal\"); 4 = localize(\"tournaments/TournamentButton/StageTour/LastSixteen\"); 5 = localize(\"tournaments/TournamentButton/StageTour/Last32\"); -1 = localize(\"tournaments/TournamentButton/StageTour/ThirdPlace\"); }"]
+            - ["map<int,string>", "deRoundNames", "{ 0 = localize(\"tournaments/TournamentButton/StageTour/GrandFinal\"); 1 = localize(\"tournaments/TournamentButton/StageTour/Final\"); 2 = localize(\"tournaments/TournamentButton/StageTour/Semifinal\"); 3 = localize(\"tournaments/TournamentButton/StageTour/Quarterfinal\"); 4 = localize(\"tournaments/TournamentButton/StageTour/LastSixteen\"); 5 = localize(\"tournaments/TournamentButton/StageTour/Last32\"); }"]
+            - ["string", "seRoundKey", "when seRoundNames.Contains(model.round) -> seRoundNames[model.round], format(\"1/%(denominator)\", { \"denominator\" = model.roundDenominator; })"]
+            - ["string", "deRoundKey", "when deRoundNames.Contains(abs(model.round)) -> deRoundNames[abs(model.round)], format(\"1/%(denominator)\", { \"denominator\" = model.roundDenominator; })"]
+            - ["string", "roundTitleText", "when model.system == eTournamentSystem.kSingleElimination -> localize(seRoundKey), when model.system == eTournamentSystem.kDoubleElimination -> localize(deRoundKey), when model.system == eTournamentSystem.kRoundRobin -> localize(\"#%(round)\", { \"round\" = model.round; }), \"\""]
+            - ["string", "roundText", "localize(\"%(round)\", { \"round\" = roundTitleText; })"]
+            - ["string", "bracketText", "when model.system == eTournamentSystem.kDoubleElimination -> when model.round < 0 -> localize(\"%(round)\", { \"round\" = localize(\"tournaments/DoubleElimination/LowerBracket\"); }), localize(\"%(round)\", { \"round\" = localize(\"tournaments/DoubleElimination/UpperBracket\"); }), \"\""]
+            - ["bool", "stageGroupRoundVisible", "isTournamentPrebattle and not isQuick"]
+            - ["bool", "isBracketVisible", "stageGroupRoundVisible and model.system == eTournamentSystem.kDoubleElimination"]
+            - ["string", "linkText", "when isTournamentPrebattle -> localize(when isQuick -> \"tournaments/Button/GoToQuickRoom\", \"tournaments/Button/ToTournamentRoom\"), localize(\"tournaments/Button/ToTeam\")"]
+            - ["bool", "isTournamentStarted", "(model.battlesStartTime - serverTime) <= 0L"]
+            - ["string", "buttonStyle", "\"tournament-button button-open-sound \" + (when isTournamentStarted -> \"\", \"before-tournament-start-stage\")"]
+            - ["string", "statusBgStyle", "when isSettingsReady -> when prebattleQuickState == eQuickPrebattleState.WAITING_FOR_TEAM -> \"blue-murzillah-bg\", when prebattleQuickState == eQuickPrebattleState.MATCHING -> \"green-la-palma-bg\", when prebattleQuickState == eQuickPrebattleState.MATCHED -> \"red-tamarillo-bg\", when prebattleQuickState == eQuickPrebattleState.PAUSED -> \"gray-cape-cod-bg\", \"\", \"\""]
+            - ["string", "commaString", "\", \""]
+            - ["string", "resultBracketText", "when isBracketVisible -> bracketText + commaString, \"\""]
+            - ["string", "resultStageText", "when stageGroupRoundVisible -> stageText + commaString, \"\""]
+            - ["string", "resultGroupText", "when stageGroupRoundVisible -> groupText + commaString, \"\""]
+            - ["string", "resultRoundText", "when stageGroupRoundVisible -> roundText, \"\""]
+            - ["string", "resultDescriptionString", "resultBracketText + resultStageText + resultGroupText + resultRoundText"]
+            - ["string", "tickerText", "when not empty(resultDescriptionString) -> (model.titleText + \". \" + resultDescriptionString), model.titleText"]
+        Sound: {}
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Background.style.yaml;~res:/UI/Screens3/ButtonSound.style.yaml"
+    bindings:
+    - ["visible", "visible"]
+    - ["classes", "buttonStyle"]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        position: [106.000000, 86.000000]
+        size: [208.000000, 72.000000]
+        pivot: [0.500000, 0.500000]
+        input: false
+        classes: "content-area"
+        components:
+            UIOpacityComponent: {}
+            Anchor:
+                leftAnchorEnabled: true
+                topAnchorEnabled: true
+            LinearLayout:
+                orientation: "LeftToRight"
+                padding: "12"
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 212.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 64.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Lobby/Hangar/TournamentButton.style.yaml"
+        children:
+        -   class: "UIControl"
+            name: "Bg"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                ClipContent: {}
+                IgnoreLayout: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            children:
+            -   class: "UIControl"
+                name: "Image"
+                position: [0.000000, -62.000000]
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    Background:
+                        sprite: "~res:/Gfx/Lobby/controls/buttons/button_hangar-tournament/button_hangar-tournament_bg"
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfContent"
+            -   class: "UIControl"
+                name: "Bg"
+                input: false
+                classes: "black-15-bg"
+                components:
+                    Background: {}
+                    UIRoundedCornersComponent:
+                        radius: "2"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+            -   class: "UIControl"
+                name: "Hover"
+                size: [32.000000, 32.000000]
+                visible: true
+                input: false
+                classes: "hover white-wild-sand-5-bg"
+                components:
+                    Background: {}
+                    UIOpacityComponent: {}
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/Lobby/Hangar/TournamentButton.style.yaml"
+        -   class: "UIControl"
+            name: "ContentWrapper"
+            size: [228.000000, 116.000000]
+            input: false
+            components:
+                Anchor:
+                    topAnchorEnabled: true
+                LinearLayout:
+                    orientation: "TopDown"
+                    padding: "10"
+                    dynamicPadding: true
+                    spacing: 4.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            children:
+            -   class: "UIControl"
+                name: "Status"
+                position: [0.000000, 24.000000]
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "Formula"
+                        horizontalFormula: "min(parent, lastChild + 8) "
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 20.000000
+                bindings:
+                - ["visible", "isTournamentPrebattle and isQuick"]
+                children:
+                -   class: "UIControl"
+                    name: "Bg"
+                    size: [32.000000, 32.000000]
+                    input: false
+                    components:
+                        Background:
+                            drawType: "DRAW_STRETCH_BOTH"
+                            sprite: "~res:/Gfx/Lobby/backgrounds/bg_r1"
+                            leftRightStretchCap: 1.000000
+                            topBottomStretchCap: 1.000000
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfParent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Color.style.yaml"
+                    bindings:
+                    - ["classes", "statusBgStyle"]
+                -   class: "UIControl"
+                    name: "Label"
+                    size: [32.000000, 32.000000]
+                    input: false
+                    classes: "t-caps bold white-wild-sand-text"
+                    components:
+                        UITextComponent:
+                            fitting: "FITTING_POINTS"
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                            vCenterAnchorEnabled: true
+                            vCenterAnchor: 1.000000
+                        SizePolicy:
+                            horizontalPolicy: "Formula"
+                            horizontalFormula: "when parent == 0 -> content, min(parent - 8, content)"
+                            verticalPolicy: "PercentOfContent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Font.style.yaml"
+                    bindings:
+                    - ["UITextComponent.text", "timerCaptionText"]
+            -   class: "UIControl"
+                name: "TicketLabel"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfChildrenSum"
+                    UIChildComponent0:
+                        prototypePath: "~res:/UI/Screens3/Lobby/Common/TicketLabel.yaml"
+                        args:
+                            "labelText": "tickerText"
+                            "width": "188"
+        -   class: "UIControl"
+            name: "TimerWrapper"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+                    rightAnchor: -8.000000
+                    topAnchorEnabled: true
+                    topAnchor: -8.000000
+                IgnoreLayout: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfChildrenSum"
+            bindings:
+            - ["visible", "isTimerVisible"]
+            children:
+            -   class: "UIControl"
+                name: "Bg"
+                input: false
+                classes: "grey-shark-bg"
+                components:
+                    Background: {}
+                    UIRoundedCornersComponent:
+                        radius: "2"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+            -   class: "UIControl"
+                name: "Timer"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        verticalPolicy: "PercentOfChildrenSum"
+                    UIChildComponent0:
+                        prototypePath: "~res:/UI/Screens3/Lobby/Common/Timer.yaml"
+                        args:
+                            "enableAlert": "isQuick and prebattleQuickState == eQuickPrebattleState.MATCHED"
+                            "time": "timeOfEvent"
+                            "serverTime": "serverTime"

@@ -1,0 +1,119 @@
+Header:
+    version: "106"
+ImportedPackages:
+- "~res:/UI/Screens3/Common/OverlayBlur.yaml"
+- "~res:/UI/Screens3/Lobby/Common/IconButton.yaml"
+- "~res:/UI/Screens3/Lobby/Inventory/Ammo/InventoryAmmoInfoBody.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "Screen"
+    size: [1024.000000, 768.000000]
+    input: true
+    components:
+        UIAnimationComponent:
+            animations: "ON_ESCAPE,~res:/UI/Screens3/Lobby/Inventory/Ammo/Escape.animation"
+        LinearLayout:
+            orientation: "TopDown"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        ModalInput: {}
+        UIInputEventComponent:
+            onTouchUpInside: "ON_ESCAPE"
+        UIShortcutEventComponent:
+            shortcuts: "ON_ESCAPE, Escape; ON_ESCAPE, Back"
+            escape: "ON_ESCAPE"
+        UIDataParamsComponent:
+            params:
+            - ["InventoryAmmoSlot", "slot", "null", "{ \"shellTitle\" = \"Осколочно-фугасный снаряд\"; \"shellDesc\" = \"УОФ — 365БМ100\"; \"shellHint\" = \"Осколочно-фугасный снаряд (ОФ) — обладает низкой бронепробиваемостью. Если снаряд всё же пробивает броню, он низкий высокий урон. При столкновении с препятствием снаряд взрывается и может нанести небольшой урон от разлёта осколков. Наиболее эффективен при использовании в орудиях с калибром 152мм. Не рекошетит.\"; \"isExplosive\" = true; }"]
+            events:
+            - "ON_CLOSE"
+            - "ON_ESCAPE"
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "Bg"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "Formula"
+                    verticalFormula: "parent + 2"
+            children:
+            -   prototype: "OverlayBlur/BlurAndFade"
+                name: "BlurAndFade"
+                children:
+                -   path: "Fade"
+                    components:
+                        UIOpacityComponent:
+                            opacity: 0.350000
+        -   prototype: "IconButton/IconButton"
+            name: "IconButtonLight"
+            position: [16.000000, 16.000000]
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 16.000000
+                    topAnchorEnabled: true
+                    topAnchor: 16.000000
+                UIDataParamsComponent:
+                    args:
+                        "visible": "true"
+                        "isBgVisible": "false"
+                        "image": "\"~res:/Gfx/Shared/icons/icon_close_n\""
+                        "type": "eButtonType.OPTIONAL_LIGHT"
+                        "sound": "eButtonSound.UNKNOWN"
+                        "enabled": "true"
+                    eventActions:
+                    - ["ON_CLICK_BUTTON", "ON_CLOSE", ""]
+        -   class: "UIControl"
+            name: "InfoContainer"
+            position: [64.000000, 64.000000]
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 64.000000
+                    rightAnchorEnabled: true
+                    rightAnchor: 64.000000
+                    topAnchorEnabled: true
+                    topAnchor: 64.000000
+                    bottomAnchorEnabled: true
+                    bottomAnchor: 64.000000
+            children:
+            -   prototype: "InventoryAmmoInfoBody/InventoryAmmoInfoBody"
+                name: "InventoryAmmoInfoBody"
+                components:
+                    UIDataParamsComponent:
+                        args:
+                            "slot": "slot"
+                children:
+                -   path: "InfoContainer"
+                    position: [198.000000, 170.000000]
+                    children: []
+                -   path: "InfoContainer/HeaderGroup/TitleGroup"
+                    position: [170.000000, 21.000000]
+                    children: []
+    -   class: "UIControl"
+        name: "NavigationPanel"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                condition: "isGamepad"
+                prototypePath: "~res:/UI/Screens3/Common/NintendoSwitch/NavigationPanel/LobbyNavigationPanel.yaml"
+                args:
+                    "labels": "{ eNintendoSwitchControls.B = \"Switch/HubridPanel/Lobby/Close\"; }"

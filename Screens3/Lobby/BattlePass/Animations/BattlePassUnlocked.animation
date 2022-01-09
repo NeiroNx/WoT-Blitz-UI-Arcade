@@ -1,0 +1,22 @@
+animation BATTLE_PASS_UNLOCKED
+{
+	parallel
+	{
+		sequence
+		{
+			StartParticles(path="**/MainLight");
+			Wait(2);
+			StopParticles(path="**/MainLight");
+		}
+		
+		if (not isNull(battlePass.chest) and isCompleted and isPaidOpened)
+		{
+			sequence
+			{
+			StartParticles("**/Chest/Content/Left/LockDisintegration");
+			Wait(2.0);
+			StopParticles("**/Chest/Content/Left/LockDisintegration");
+			}
+		}
+	}
+}

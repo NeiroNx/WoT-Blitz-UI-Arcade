@@ -1,0 +1,50 @@
+Header:
+    version: "48"
+StyleSheets:
+-   selector: ".step-linear"
+    properties:
+        anchor-vCenterAnchor:
+            value: 0.000000
+            transitionTime: 0.200000
+            transitionFunction: "EASE_OUT"
+-   selector: ".step-linear #bg"
+    properties:
+        texture-materialParams: "saturation, -80"
+-   selector: ".step-linear #Dark"
+    properties:
+        visible: true
+        bg-drawType: "DRAW_FILL"
+        bg-color: [0.058824, 0.098039, 0.141176, 0.901961]
+-   selector: ".step-linear #Info"
+    properties:
+        visible: false
+-   selector: ".step-linear.selected"
+    properties:
+        anchor-vCenterAnchor:
+            value: -16.000000
+            transitionTime: 0.200000
+            transitionFunction: "EASE_OUT"
+-   selector: ".step-linear.selected #ResourceHolder"
+    properties:
+        anchor-bottomAnchor:
+            value: 16.000000
+            transitionTime: 0.200000
+            transitionFunction: "EASE_OUT"
+-   selector: ".step-linear.selected #Info, .step-linear.selected #Dark"
+    properties:
+        visible: true
+-   selector: ".step-linear.completed #bg"
+    properties:
+        texture-materialParams: "saturation, 0"
+-   selector: ".step-linear.completed #Dark, .step-linear.completed #ResourceHolder"
+    properties:
+        visible: false
+-   selector: ".step-linear.current #Dark"
+    properties:
+        visible: false
+-   selector: ".step-linear.readyToComplete #Dark"
+    properties:
+        visible: false
+-   selector: ".step-linear:pressed_inside #bg"
+    properties:
+        texture-color: [1.000000, 1.000000, 1.000000, 0.501961]

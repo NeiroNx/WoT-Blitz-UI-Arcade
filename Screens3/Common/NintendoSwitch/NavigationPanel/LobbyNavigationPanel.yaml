@@ -1,0 +1,53 @@
+Header:
+    version: "105"
+Prototypes:
+-   class: "UIControl"
+    name: "NavigationPanel"
+    size: [1280.000000, 40.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "FixedSize"
+            verticalValue: 40.000000
+        UIDataParamsComponent:
+            params:
+            - ["string", "bgColor", "\"black-bg\"", "\"black-bg\""]
+            - ["bool", "bgIsVisible", "true", "true"]
+            - ["map<eNintendoSwitchControls,string>", "labels", "{ }", "{ eNintendoSwitchControls.A = \"КНОПКА\"; eNintendoSwitchControls.B = \"НЕСКРОМНО ДЛИННОЕ НАЗВАНИЕ ДЛЯ КНОПКИ\"; eNintendoSwitchControls.X = \"ОБЫЧНАЯ СРЕДНЯЯ КНОПКА\"; eNintendoSwitchControls.Y = \"ДОВОЛЬНО БОЛЬШАЯ КНОПКА ПОБОЛЬШЕ\"; eNintendoSwitchControls.Left = \"КНОПКА ШРЕДИНГЕРА\"; eNintendoSwitchControls.Right = \"ОПЯТЬ КАКАЯ-ТО КНОПКА\"; }"]
+        UIDataLocalsComponent: {}
+    children:
+    -   class: "UIControl"
+        name: "Bg"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Background: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+        bindings:
+        - ["visible", "bgIsVisible"]
+        - ["classes", "bgColor"]
+    -   class: "UIControl"
+        name: "Container"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Anchor:
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                orientation: "LeftToRight"
+                padding: "16"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfMaxChild"
+            UIRepeatComponent:
+                control: "~res:/UI/Screens3/Common/NintendoSwitch/NavigationPanel/IconWithLabel.yaml"
+                dataContainer: "labels"
+                args:
+                    "icon": "_key"
+                    "text": "_item"
+            UIChildAnimatedSwitchingComponent: {}

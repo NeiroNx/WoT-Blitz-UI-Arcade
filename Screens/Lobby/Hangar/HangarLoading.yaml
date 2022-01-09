@@ -1,0 +1,45 @@
+Header:
+    version: 120
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/Hangar/ShadowControl.yaml"
+Controls:
+-   class: "UIControl"
+    name: "Screen"
+    size: [960.000000, 640.000000]
+    input: false
+    components:
+        Anchor:
+            leftAnchorEnabled: true
+            rightAnchorEnabled: true
+            topAnchorEnabled: true
+            bottomAnchorEnabled: true
+        UIInputEventComponent: {}
+    children:
+    -   class: "UI3DView"
+        customClass: "UIHangar3dView"
+        name: "HangarScene"
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+    -   prototype: "ShadowControl/Shadow"
+        name: "ShadowRight"
+        components:
+            Anchor:
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+    -   prototype: "ShadowControl/Shadow"
+        name: "ShadowLeft"
+        components:
+            Background:
+                spriteModification: ["FLIP_HORIZONTAL"]
+            Anchor:
+                leftAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+        children:
+        -   path: "ShadowAdditional"
+            components:
+                Background:
+                    spriteModification: ["FLIP_HORIZONTAL"]

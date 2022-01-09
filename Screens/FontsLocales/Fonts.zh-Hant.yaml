@@ -1,0 +1,6 @@
+Header:
+    version: "24"
+StyleSheets:
+-   selector: ".zh-Hant.bold, .zh-Hant.regular"
+    properties:
+        text-fontPath: "~res:/Fonts/cfg/XinGothicTCW6.fntconf"

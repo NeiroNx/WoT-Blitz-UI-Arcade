@@ -1,0 +1,93 @@
+Header:
+    version: 117
+StyleSheets:
+-   selectors:
+    - ".modules"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/BattleScreenHUD/icon_shooting-fb_all-modules_m"
+-   selectors:
+    - ".not-pierced"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/BattleScreenHUD/icon_shooting-fb_shield_m"
+-   selectors:
+    - ".track"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/BattleScreenHUD/icon_shooting-fb_tracks_m"
+-   selectors:
+    - ".engine"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/BattleScreenHUD/icon_shooting-fb_engine_m"
+-   selectors:
+    - ".ammo-bay"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/BattleScreenHUD/icon_shooting-fb_ammo-rack_m"
+-   selectors:
+    - ".fuel-tank"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/BattleScreenHUD/icon_shooting-fb_fuel_m"
+-   selectors:
+    - ".gun"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/BattleScreenHUD/icon_shooting-fb_gun_m"
+-   selectors:
+    - ".turret-rotator"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/BattleScreenHUD/icon_shooting-fb_tower_m"
+-   selectors:
+    - ".surveying-device"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/BattleScreenHUD/icon_shooting-fb_triplex_m"
+-   selectors:
+    - ".crew"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/BattleScreenHUD/icon_shooting-fb_crew_m"
+-   selectors:
+    - ".gunner"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/BattleScreenHUD/icon_shooting-fb_crew_m"
+-   selectors:
+    - ".loader"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/BattleScreenHUD/icon_shooting-fb_crew_m"
+-   selectors:
+    - ".critical-damage #IconWrapper #IconBg"
+    properties:
+        bg-color: [1.000000, 0.666667, 0.000000, 0.750000]
+-   selectors:
+    - ".critical-damage #TextWrapper #TextBg"
+    properties:
+        bg-color: [1.000000, 0.666667, 0.000000, 1.000000]
+-   selectors:
+    - ".critical-damage #TextWrapper #TextWithModifier #Modifier"
+    - ".critical-damage #TextWrapper #TextWithModifier #Text"
+    properties:
+        text-shadowOffset: [0.000000, 1.000000]
+        text-shadowColor: [1.000000, 0.415686, 0.000000, 1.000000]
+-   selectors:
+    - ".destroyed #IconWrapper #IconBg"
+    properties:
+        bg-color: [1.000000, 0.235294, 0.149020, 1.000000]
+-   selectors:
+    - ".destroyed #TextWrapper #TextBg"
+    properties:
+        bg-color: [1.000000, 0.235294, 0.149020, 1.000000]
+-   selectors:
+    - ".destroyed #TextWrapper #TextWithModifier #Modifier"
+    - ".destroyed #TextWrapper #TextWithModifier #Text"
+    properties:
+        text-shadowOffset: [0.000000, 1.000000]
+        text-shadowColor: [1.000000, 0.235294, 0.149020, 1.000000]
+-   selectors:
+    - ".default #IconWrapper #IconBg"
+    properties:
+        bg-color: [0.000000, 0.000000, 0.000000, 0.600000]
+-   selectors:
+    - ".default #TextWrapper #TextBg"
+    properties:
+        bg-color: [0.000000, 0.000000, 0.000000, 0.750000]
+-   selectors:
+    - ".default #TextWrapper #TextWithModifier #Modifier"
+    - ".default #TextWrapper #TextWithModifier #Text"
+    properties:
+        text-shadowOffset: [0.000000, 1.000000]
+        text-shadowColor: [0.000000, 0.000000, 0.000000, 0.750000]

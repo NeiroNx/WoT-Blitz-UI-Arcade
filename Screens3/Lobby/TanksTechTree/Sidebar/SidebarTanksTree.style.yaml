@@ -1,0 +1,11 @@
+Header:
+    version: "108"
+StyleSheets:
+-   selectors:
+    - ".switch-mode.none"
+    properties:
+        switchBar-moveSelectionMode: "None"
+-   selectors:
+    - ".switch-mode.verticalDpad"
+    properties:
+        switchBar-moveSelectionMode: "VerticalDpad"

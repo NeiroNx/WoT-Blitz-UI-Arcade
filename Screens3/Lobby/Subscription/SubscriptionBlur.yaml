@@ -1,0 +1,16 @@
+Header:
+    version: 127
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/Blur.yaml"
+Prototypes:
+-   prototype: "Blur/Blur"
+    name: "SubscriptionBlur"
+    size: [200.000000, 100.000000]
+    components:
+        UIPostProcessTextureComponent0:
+            renderRequestingType: "ON_SIZE_CHANGED"
+        UIPostProcessTextureComponent1:
+            renderRequestingType: "ON_SIZE_CHANGED"
+        UIPostProcessTextureComponent2:
+            materialPath: "~res:/Materials/2d.Textured.material"
+            renderRequestingType: "ON_SIZE_CHANGED"

@@ -1,0 +1,58 @@
+Header:
+    version: "106"
+ImportedPackages:
+- "~res:/UI/Screens/Common/Settings/SettingsCommon.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "Control"
+    size: [500.000000, 80.000000]
+    components:
+        Anchor:
+            leftAnchorEnabled: true
+            rightAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            horizontalValue: 500.000000
+            verticalPolicy: "PercentOfParent"
+            verticalValue: 80.000000
+        UIDataParamsComponent:
+            params:
+            - ["bool", "isSelected", "false", "false"]
+            - ["bool", "animOn", "false", "false"]
+            - ["string", "value", "\"\"", "\"ENTER\""]
+            - ["string", "caption", "\"\"", "\"Caption\""]
+            - ["string", "description", "\"\"", "\"Description\""]
+            - ["int", "action", "0", "0"]
+            events: []
+        UIDataLocalsComponent:
+            locals:
+            - ["bool", "isEnabled", "when action >= 0 -> true, false"]
+        UIEventOnDataComponent0:
+            watchedDataExpression: "animOn"
+            ifExpression: "animOn"
+            eventName: "BLINK"
+            broadcast: true
+        UIEventOnDataComponent1:
+            watchedDataExpression: "animOn"
+            ifExpression: "not animOn"
+            eventName: "STOP_BLINKING"
+            broadcast: true
+    children:
+    -   prototype: "SettingsCommon/InputKeyWithCaptionAndDescription"
+        name: "InputKeyWithCaptionAndDescription"
+        components:
+            UIInputEventComponent:
+                onTouchUpInside: "TAP_ACTION"
+                onTouchUpInsideData: "action"
+            UIDataParamsComponent:
+                args:
+                    "isSelected": "isSelected"
+                    "isEnabled": "isEnabled"
+                    "caption": "caption"
+                    "value": "value"
+                    "description": "description"
+                    "action": "action"
+                eventActions: []
+        bindings:
+        - ["visible", "isEnabled"]
+        - ["input", "isEnabled"]

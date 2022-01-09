@@ -1,0 +1,43 @@
+Header:
+    version: "84"
+Controls:
+-   class: "UIControl"
+    name: "ResourceDetailedIcon"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 32.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 32.000000
+        UIDataParamsComponent:
+            params:
+            - ["ResourceType", "type", "ResourceType.undefined", "ResourceType.premium"]
+        UIDataLocalsComponent:
+            locals:
+            - ["string", "icon", "when type == ResourceType.credits -> \"~res:/Gfx/UI/LobbyCommon/CurrencyIconsHuge.psd\", type == ResourceType.free_xp -> \"~res:/Gfx/UI/LobbyCommon/CurrencyIconsHuge.psd\", type == ResourceType.gold -> \"~res:/Gfx/UI/LobbyCommon/CurrencyIconsHuge\", type == ResourceType.premium -> \"~res:/Gfx/UI/Quests/AddCurrencyIconsHuge.psd\", \"\""]
+            - ["int", "frame", "when type == ResourceType.credits -> 1, type == ResourceType.free_xp -> 2, type == ResourceType.gold -> 0, type == ResourceType.premium -> 2, 0"]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "Icon"
+            input: false
+            components:
+                UITextureComponent:
+                    drawType: "DRAW_SCALE_PROPORTIONAL"
+                    perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    horizontalMax: 96.000000
+                    verticalPolicy: "PercentOfParent"
+                    verticalMax: 96.000000
+            bindings:
+            - ["UITextureComponent.spritePath", "icon"]
+            - ["UITextureComponent.frame", "frame"]

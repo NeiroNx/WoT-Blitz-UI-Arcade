@@ -1,0 +1,14 @@
+action UPDATE_FLOW_LAYOUT()
+{
+    if (showDefaultDescription and not empty(descriptionHint))
+    {
+        if (alignLeft)
+        {
+            ChangeProperty("**/DescriptionHint", "FlowLayout", "alignment", eFlowLayoutAlignment.Left);
+        }
+        else
+        {
+            ChangeProperty("**/DescriptionHint", "FlowLayout", "alignment", eFlowLayoutAlignment.Center);
+        }
+    }
+}

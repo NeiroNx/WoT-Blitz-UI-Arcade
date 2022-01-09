@@ -1,0 +1,237 @@
+Header:
+    version: 120
+ImportedPackages:
+- "~res:/UI/Screens/Common/StyledButton.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "PlayerDataItem"
+    size: [600.000000, 80.000000]
+    input: false
+    components:
+        LinearLayout:
+            padding: "20"
+            dynamicSpacing: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "FixedSize"
+            verticalValue: 80.000000
+    children:
+    -   class: "UIControl"
+        name: "Bg"
+        size: [32.000000, 32.000000]
+        input: false
+        classes: "pane-bg"
+        components:
+            Background:
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+            IgnoreLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            StyleSheet:
+                styles: "~res:/UI/Styles/BackgroundStyles.yaml"
+    -   class: "UIControl"
+        name: "PlayerInfo"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Anchor:
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                orientation: "TopDown"
+                spacing: 4.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfChildrenSum"
+        children:
+        -   class: "UIControl"
+            name: "Label"
+            input: false
+            classes: "text2-small text-color-blue"
+            components:
+                UITextComponent: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens/Fonts.yaml"
+        -   class: "UIControl"
+            name: "Value"
+            input: false
+            classes: "header3 text-color-white"
+            components:
+                UITextComponent: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens/Fonts.yaml"
+    -   prototype: "StyledButton/StyledButton"
+        name: "Button"
+        classes: "button button-color-gray button-ok-sound"
+        components:
+            Background:
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+            Anchor:
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 192.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 50.000000
+            StyleSheet:
+                inheritsStylesFromParent: true
+                styles: "~res:/UI/Screens/Common/StyledButton.yaml;~res:/UI/Styles/ButtonSoundStyles.yaml"
+        children:
+        -   path: "Caption"
+            classes: "header5 text-color-white"
+            components:
+                UITextComponent:
+                    text: "Button"
+                StyleSheet:
+                    inheritsStylesFromParent: false
+                    styles: "~res:/UI/Screens/Fonts.yaml"
+-   class: "UIControl"
+    name: "CurrencyRow"
+    size: [600.000000, 48.000000]
+    input: false
+    components:
+        LinearLayout:
+            padding: "20"
+            spacing: 16.000000
+            useRtl: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "FixedSize"
+            verticalValue: 48.000000
+    children:
+    -   class: "UIControl"
+        name: "Bg"
+        size: [32.000000, 32.000000]
+        input: false
+        classes: "pane-bg"
+        components:
+            Background:
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+            IgnoreLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            StyleSheet:
+                styles: "~res:/UI/Styles/BackgroundStyles.yaml"
+    -   class: "UIControl"
+        name: "Label"
+        size: [32.000000, 32.000000]
+        input: false
+        classes: "text2 text-color-blue"
+        components:
+            UITextComponent:
+                text: "#account:CurrencyInfo/Purchased"
+                colorInheritType: "COLOR_MULTIPLY_ALPHA_ONLY"
+                align: ["LEFT", "VCENTER"]
+            Anchor:
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens/Fonts.yaml"
+    -   class: "UIControl"
+        name: "Gold"
+        input: false
+        components:
+            Anchor:
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                spacing: 3.000000
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 164.000000
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   class: "UIControl"
+            name: "Spacer"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+        -   class: "UIControl"
+            name: "Value"
+            input: false
+            classes: "header3 text-color-white"
+            components:
+                UITextComponent:
+                    text: "100 000 000"
+                    colorInheritType: "COLOR_MULTIPLY_ALPHA_ONLY"
+                    align: ["LEFT", "VCENTER"]
+                Anchor:
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens/Fonts.yaml"
+        -   class: "UIControl"
+            name: "Icon"
+            position: [78.666664, 0.000000]
+            size: [30.000000, 40.000000]
+            components:
+                Background:
+                    sprite: "~res:/Gfx/UI/LobbyCommon/CurrencyIconsBig"
+                    colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                Anchor:
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+    -   class: "UIControl"
+        name: "Silver"
+        input: false
+        components:
+            Anchor:
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                spacing: 3.000000
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 164.000000
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   class: "UIControl"
+            name: "Spacer"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+        -   class: "UIControl"
+            name: "Value"
+            input: false
+            classes: "header3 text-color-white"
+            components:
+                UITextComponent:
+                    text: "100 000 000"
+                    colorInheritType: "COLOR_MULTIPLY_ALPHA_ONLY"
+                    align: ["LEFT", "VCENTER"]
+                Anchor:
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens/Fonts.yaml"
+        -   class: "UIControl"
+            name: "Icon"
+            position: [78.666664, 0.000000]
+            size: [30.000000, 40.000000]
+            components:
+                Background:
+                    sprite: "~res:/Gfx/UI/LobbyCommon/CurrencyIconsBig"
+                    frame: 1
+                    colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                Anchor:
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"

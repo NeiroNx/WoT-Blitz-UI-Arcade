@@ -1,0 +1,68 @@
+Header:
+    version: "77"
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/Selection.yaml"
+- "~res:/UI/Screens3/Lobby/Common/InventorySlot.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "Slot"
+    size: [64.000000, 64.000000]
+    exclusiveInput: true
+    components:
+        UIAnchorSafeAreaComponent:
+            leftSafeInset: "INSET"
+        UISwitchBarElementComponent: {}
+        UIDataParamsComponent:
+            params:
+            - ["bool", "isSelected", "false", "true"]
+            - ["int", "index", "0", "0"]
+            - ["InventorySlotView", "slot", "null", "{ }"]
+        UIDataLocalsComponent:
+            locals:
+            - ["string", "styles", "when not isNull(slot.item) -> slot.item.itemTypeClass + \" \" + slot.item.itemTypeName, \"\""]
+        Sound: {}
+        StyleSheet:
+            styles: "~res:/UI/Screens3/SafeArea.style.yaml;~res:/UI/Screens3/ButtonSound.style.yaml;~res:/UI/Screens3/Lobby/Inventory/InventoryEquipmentInfo.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+    bindings:
+    - ["enabled", "slot.available"]
+    - ["classes", "\"inventory-item-slot button-choose-sound \" + (when slot.available -> styles, \"locked\")"]
+    - ["UISwitchBarElementComponent.id", "index"]
+    children:
+    -   class: "UIControl"
+        name: "Background"
+        size: [32.000000, 32.000000]
+        input: false
+        classes: "black-25-bg"
+        components:
+            Background:
+                drawType: "DRAW_FILL"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+    -   class: "UIControl"
+        name: "IconGlow"
+        size: [98.000000, 98.000000]
+        input: false
+        components:
+            Background:
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+    -   class: "UIControl"
+        name: "icon"
+        size: [98.000000, 98.000000]
+        input: false
+        components:
+            Background:
+                drawType: "DRAW_SCALE_TO_RECT"
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+    -   prototype: "Selection/Selection"
+        name: "Selection"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "isVisible": "isSelected"

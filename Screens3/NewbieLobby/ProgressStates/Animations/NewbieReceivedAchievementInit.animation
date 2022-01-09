@@ -1,0 +1,26 @@
+animation _INIT(bool arg)
+{
+	ChangeData(inputDisabled, true);
+	Opacity(".", opacity=0.0, time=0.0);
+	Scale("**/AchievementEffect", 0, 0, time=0.0);
+	ChangeData(positionShift, -400);
+	Opacity("**/Button", 0, 0);
+	ChangeProperty("**/Button", "Anchor", "vCenterAnchor", 50);
+
+	PlaySound("play_tut_2021_ui_hang_achiev_new");
+
+	parallel
+	{
+		Scale(path="**/AchievementEffect", x=3.5, y=3.5, time=0.6, interpolation=EASE_OUT);
+		Opacity(".", opacity=1.0, time=0.6, interpolation=EASE_OUT);
+		ChangeData(positionShift, 0, 0.6, EASE_OUT);
+	}
+	
+	parallel
+	{
+		Opacity("**/Button", 1.0, 0.4, EASE_OUT);
+		ChangeProperty("**/Button", "Anchor", "vCenterAnchor", 0, time = 0.4, interpolation=EASE_OUT);
+	}
+	
+	ChangeData(inputDisabled, false);
+}

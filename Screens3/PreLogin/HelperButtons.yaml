@@ -1,0 +1,179 @@
+Header:
+    version: 130
+Prototypes:
+-   class: "UIControl"
+    name: "ButtonsContainer"
+    size: [242.000000, 263.000000]
+    input: false
+    components:
+        Anchor:
+            rightAnchorEnabled: true
+            topAnchorEnabled: true
+        LinearLayout:
+            orientation: "TopDown"
+            spacing: 1.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfChildrenSum"
+        UIDataParamsComponent:
+            params:
+            - ["DevButtonsData", "devButtonsData", "null", "{ }"]
+            events:
+            - "SVN_SCREEN_BUTTON"
+            - "DEV_OPTIONS"
+            - "CHOOSE_CLUSTER"
+            - "TUTORIAL_OPTIONS"
+            - "CONVERT_REPLAY"
+            - "START_REPLAY"
+            - "MY_REPLAYS"
+            - "GRAPHIC_OPTIONS"
+    children:
+    -   class: "UIControl"
+        name: "GraphicsOptionsButton"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Button.yaml"
+                args:
+                    "type": "eButtonType.OPTIONAL_LIGHT"
+                    "caption": "\"Graphics Options\""
+                eventActions:
+                - ["ON_CLICK_BUTTON", "GRAPHIC_OPTIONS", ""]
+    -   class: "UIControl"
+        name: "MyReplaysButton"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Button.yaml"
+                args:
+                    "type": "eButtonType.OPTIONAL_LIGHT"
+                    "caption": "\"My Replays\""
+                eventActions:
+                - ["ON_CLICK_BUTTON", "MY_REPLAYS", ""]
+            UIIdentifierComponent:
+                id: "my_replays_button"
+    -   class: "UIControl"
+        name: "StartReplayButton"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Button.yaml"
+                args:
+                    "type": "eButtonType.OPTIONAL_LIGHT"
+                    "caption": "\"Start Replay\""
+                eventActions:
+                - ["ON_CLICK_BUTTON", "START_REPLAY", ""]
+            UIIdentifierComponent:
+                id: "replay_button"
+    -   class: "UIControl"
+        name: "ConvertReplayButton"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Button.yaml"
+                args:
+                    "type": "eButtonType.OPTIONAL_LIGHT"
+                    "caption": "\"Convert Replay\""
+                eventActions:
+                - ["ON_CLICK_BUTTON", "CONVERT_REPLAY", ""]
+    -   class: "UIControl"
+        name: "SkipTutorialButton"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Button.yaml"
+                args:
+                    "type": "eButtonType.OPTIONAL_LIGHT"
+                    "caption": "\"Tutorial Options\""
+                eventActions:
+                - ["ON_CLICK_BUTTON", "TUTORIAL_OPTIONS", ""]
+            UIIdentifierComponent:
+                id: "skip_tutorial_button"
+    -   class: "UIControl"
+        name: "ChooseClusterButton"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Button.yaml"
+                args:
+                    "type": "eButtonType.OPTIONAL_LIGHT"
+                    "caption": "\"Choose Cluster\""
+                eventActions:
+                - ["ON_CLICK_BUTTON", "CHOOSE_CLUSTER", ""]
+            UIIdentifierComponent:
+                id: "choose_cluster_button"
+        bindings:
+        - ["visible", "devButtonsData.isChooseClusterAvailable"]
+    -   class: "UIControl"
+        name: "DevOptionsButton"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Button.yaml"
+                args:
+                    "type": "eButtonType.OPTIONAL_LIGHT"
+                    "caption": "\"Dev Options\""
+                eventActions:
+                - ["ON_CLICK_BUTTON", "DEV_OPTIONS", ""]
+            UIIdentifierComponent:
+                id: "dev_options_button"
+    -   class: "UIControl"
+        name: "ShowSVNScreenButton"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Button.yaml"
+                args:
+                    "type": "eButtonType.OPTIONAL_LIGHT"
+                    "caption": "\"Show SVN screen on next start\""
+                eventActions:
+                - ["ON_CLICK_BUTTON", "SVN_SCREEN_BUTTON", ""]
+        bindings:
+        - ["visible", "devButtonsData.isSvnButtonAvalable"]
+    -   class: "UIControl"
+        name: "HugeFileIoButton"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Button.yaml"
+                args:
+                    "type": "eButtonType.OPTIONAL_LIGHT"
+                    "caption": "\"Perform huge file I/O\""
+                eventActions:
+                - ["ON_CLICK_BUTTON", "HUGE_FILE_IO", ""]

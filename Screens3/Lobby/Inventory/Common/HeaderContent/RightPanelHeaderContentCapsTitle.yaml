@@ -1,0 +1,25 @@
+Header:
+    version: "73"
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/Tabs/IconTabsBar.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "RightPanelHeaderContentCapsTitle"
+    size: [200.000000, 32.000000]
+    input: false
+    classes: "t-caps bold color=white-wild-sand-text"
+    components:
+        UITextComponent:
+            fitting: "FITTING_POINTS"
+            align: ["LEFT", "VCENTER"]
+        Anchor: {}
+        SizePolicy:
+            horizontalPolicy: "PercentOfContent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["string", "title", "\"\"", "\"HEADER\""]
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+    bindings:
+    - ["UITextComponent.text", "title", "Read"]

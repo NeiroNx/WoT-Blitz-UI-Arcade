@@ -1,0 +1,10 @@
+action BackEvent()
+{
+	PlaySound("GUI/buttons/close");
+	Event("ON_POSTPONE_CLICKED");
+}
+
+action HideContent()
+{
+	Opacity("**/ContentWrapper", 0.0, 0.3);
+}

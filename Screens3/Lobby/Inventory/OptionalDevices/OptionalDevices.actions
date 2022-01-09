@@ -1,0 +1,7 @@
+action UNLOCK_SLOT_BY_SHORTCUT()
+{
+	if(devices.unlockStatus == eOptionalDeviceUnlockStatus.READY_TO_UNLOCK)
+	{
+		Event("UNLOCK_SLOT");
+	}
+}

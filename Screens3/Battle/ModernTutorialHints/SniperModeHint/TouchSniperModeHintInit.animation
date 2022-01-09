@@ -1,0 +1,30 @@
+animation TouchSniperModeHintInit
+{
+    parallel
+    {
+        Opacity(path="./SniperModeButton", opacity=0.0, time=0.0, interpolation=EASE_IN_EASE_OUT);
+        ChangeProperty("./SniperModeButton", "UIAttachLayoutSlaveComponent", "attachId", "");
+        ChangeProperty("./SniperModeButton/Icon", "", "visible", true);
+
+        ChangeProperty("./Hint", "", "visible", false);
+    }
+
+	PlaySound(sound="play_tut_2021_ui_battle_hints_on");
+    Opacity(path="./SniperModeButton", opacity=1.0, time=0.5, interpolation=EASE_IN_EASE_OUT);
+
+    Wait(1);
+    
+    MoveToMaster("./SniperModeButton", "button_attach_placeholder", 0, 0, 1.2, EASE_OUT);
+    ChangeProperty("./SniperModeButton", "UIAttachLayoutSlaveComponent", "attachId", "button_attach_placeholder");
+
+    Event("SHOW_SNIPER_BUTTON");
+	
+    Wait(0.2);
+    
+	DirectEvent("ShowHint", "./Hint/Top/Content/HintHolder/HintBlurred");
+    DirectEvent("ShowFrames", "./Hint/Top/Content/HintHolder/HintFramesPrototype");
+	
+    ChangeProperty("./SniperModeButton/Icon", "", "visible", false);
+    ChangeProperty("./Hint", "", "visible", true);
+	
+}

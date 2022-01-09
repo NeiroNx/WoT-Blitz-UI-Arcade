@@ -1,0 +1,32 @@
+Header:
+    version: "104"
+Prototypes:
+-   class: "UIControl"
+    name: "UgnUvn"
+    position: [294.000000, 251.000000]
+    size: [248.000000, 32.000000]
+    visible: false
+    input: false
+    components:
+        Background:
+            sprite: "~res:/Gfx/UI/BattleScreenHUD/UgnUvn"
+            frame: 1
+            perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+        Anchor: {}
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Battle/BattleUILayer.yaml"
+    children:
+    -   class: "UIControl"
+        name: "Glow"
+        position: [0.000000, 0.000000]
+        size: [248.000000, 32.000000]
+        visible: true
+        input: false
+        components:
+            Background:
+                sprite: "~res:/Gfx/UI/BattleScreenHUD/UgnUvn"
+                perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"

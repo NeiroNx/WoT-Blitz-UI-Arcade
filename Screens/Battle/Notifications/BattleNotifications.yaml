@@ -1,0 +1,18 @@
+Header:
+    version: 133
+Prototypes:
+-   class: "UIControl"
+    customClass: "UIBattleNotifications"
+    name: "BattleNotifications"
+    size: [600.000000, 20.000000]
+    input: false
+    components:
+        Anchor:
+            hCenterAnchorEnabled: true
+        LinearLayout:
+            orientation: "TopDown"
+            spacing: 8.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            horizontalFormula: "parent - 176"
+            verticalPolicy: "PercentOfChildrenSum"

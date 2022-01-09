@@ -1,0 +1,9 @@
+action AvatarImageLoaded
+{
+    Event("AVATAR_IMAGE_LOADED");
+
+    if (animated)
+    {
+        PlayFrameAnimation("**/Avatar", -1, 12);
+    }
+}

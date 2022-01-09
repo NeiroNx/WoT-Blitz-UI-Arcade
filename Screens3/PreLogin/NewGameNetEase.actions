@@ -1,0 +1,5 @@
+action EXIT_SHORTCUT
+{
+    PlaySound(sound="GUI/buttons/cancel");
+    Event("EXIT_PRESSED");
+}

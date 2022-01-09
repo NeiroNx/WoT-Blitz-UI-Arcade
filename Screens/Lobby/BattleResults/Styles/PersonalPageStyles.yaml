@@ -1,0 +1,24 @@
+Header:
+    version: "31"
+StyleSheets:
+-   selector: ".vehicle-info"
+    properties:
+        linearLayout-padding: 0.000000
+-   selector: ".vehicle-info.ar, .vehicle-info.tr"
+    properties:
+        linearLayout-padding: -100.000000
+-   selector: ".vehicle-info.ja, .vehicle-info.zh-Hant, .vehicle-info.zh-Hans, .vehicle-info.ko"
+    properties:
+        linearLayout-padding: -30.000000
+-   selector: ".title-spacing"
+    properties:
+        linearLayout-spacing: -8.000000
+-   selector: ".title-spacing.ko, .title-spacing.ar, .title-spacing.vi"
+    properties:
+        linearLayout-spacing: -2.000000
+-   selector: ".title-spacing.th"
+    properties:
+        linearLayout-spacing: -10.000000
+-   selector: ".title-spacing.pl, .title-spacing.es"
+    properties:
+        linearLayout-spacing: -4.000000

@@ -1,0 +1,51 @@
+Header:
+    version: "93"
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/TreeArrows/ArrowLine.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "Content"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            verticalPolicy: "FixedSize"
+        UIDataParamsComponent:
+            params:
+            - ["float", "width", "0.000000", "55.000000"]
+            - ["float", "height", "0.000000", "82.000000"]
+    bindings:
+    - ["SizePolicy.horizontalValue", "width"]
+    - ["SizePolicy.verticalValue", "height"]
+    children:
+    -   prototype: "ArrowLine/Line"
+        name: "Left"
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                topAnchorEnabled: true
+            SizePolicy: {}
+        bindings:
+        - ["SizePolicy.horizontalValue", "width / 2.000000 + 0.500000"]
+    -   prototype: "ArrowLine/Line"
+        name: "Down"
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+            SizePolicy: {}
+        bindings:
+        - ["SizePolicy.verticalValue", "height"]
+    -   class: "UIControl"
+        name: "Right"
+        input: false
+        components:
+            Anchor:
+                rightAnchorEnabled: true
+                bottomAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Story/Steps/Arrows/LeftRight.yaml"
+                args:
+                    "width": "width / 2 + 0.500000"

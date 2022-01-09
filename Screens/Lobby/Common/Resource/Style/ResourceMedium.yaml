@@ -1,0 +1,73 @@
+Header:
+    version: "23"
+StyleSheets:
+-   selector: ".resource.resource-rare-achievement #Back #Icon"
+    properties:
+        visible: true
+-   selector: ".resource.resource-rare-achievement #Back"
+    properties:
+        bg-sprite: ""
+-   selector: ".resource #Back"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/Quests/items_reward_back"
+-   selector: ".resource #Back #Icon"
+    properties:
+        sizePolicy-horizontalValue: 66.000000
+        sizePolicy-verticalValue: 66.000000
+-   selector: ".resource.resource-rare-achievement #Back #Icon"
+    properties:
+        sizePolicy-horizontalValue: 130.000000
+        sizePolicy-verticalValue: 130.000000
+-   selector: ".resource-vehicle #Back #Icon"
+    properties:
+        bg-drawType: "DRAW_SCALE_PROPORTIONAL_ONE"
+-   selector: ".resource-gold #Back #Icon"
+    properties:
+        bg-frame: 0
+        bg-sprite: "~res:/Gfx/UI/LobbyCommon/CurrencyIconsHuge"
+-   selector: ".resource-unlock #Back #Icon"
+    properties:
+        bg-frame: 2
+        bg-sprite: "~res:/Gfx/UI/Quests/AddCurrencyIconsHuge_cam.txt"
+-   selector: ".resource-free-xp #Back #Icon"
+    properties:
+        bg-frame: 2
+        bg-sprite: "~res:/Gfx/UI/LobbyCommon/CurrencyIconsHuge"
+-   selector: ".resource-premium #Back #Icon"
+    properties:
+        bg-frame: 2
+        bg-sprite: "~res:/Gfx/UI/Quests/AddCurrencyIconsHuge.psd"
+-   selector: ".resource-xp #Back #Icon"
+    properties:
+        bg-frame: 3
+        bg-sprite: "~res:/Gfx/UI/LobbyCommon/CurrencyIconsHuge"
+-   selector: ".resource-crew-xp #Back #Icon"
+    properties:
+        bg-frame: 4
+        bg-sprite: "~res:/Gfx/UI/LobbyCommon/CurrencyIconsHuge"
+-   selector: ".resource-credit #Back #Icon"
+    properties:
+        bg-frame: 1
+        bg-sprite: "~res:/Gfx/UI/LobbyCommon/CurrencyIconsHuge"
+-   selector: ".resource-stuff #Back #Icon"
+    properties: {}
+-   selector: ".resource-slot #Back #Icon"
+    properties: {}
+-   selector: ".common #Back"
+    properties:
+        bg-frame: 0
+-   selector: ".rare #Back"
+    properties:
+        bg-frame: 3
+-   selector: ".unique #Back"
+    properties:
+        bg-frame: 1
+-   selector: ".legendary #Back"
+    properties:
+        bg-frame: 2
+-   selector: ".resource.quantity-on #Value"
+    properties:
+        visible: true
+-   selector: ".resource.quantity-off #Value"
+    properties:
+        visible: false

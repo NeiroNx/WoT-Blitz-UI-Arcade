@@ -1,0 +1,5 @@
+animation EscapeAnimation
+{
+    PlaySound(sound="GUI/buttons/cancel");
+    Event("ON_CLOSE");
+}

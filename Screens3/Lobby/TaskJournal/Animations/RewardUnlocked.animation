@@ -1,0 +1,10 @@
+animation ChestUnlocked
+{
+    Wait(0.1);
+    if (isReadyToOpen)
+    {
+		Scale(path="**/Glow", time = 0.0, x = 0.0,y = 0.0);
+        StartParticles("**/Glow");
+		Scale(path="**/Glow", time = 1.0, x = 1.5,y = 1.5);
+    }
+}

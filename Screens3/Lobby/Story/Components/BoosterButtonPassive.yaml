@@ -1,0 +1,51 @@
+Header:
+    version: 138
+Prototypes:
+-   class: "UIControl"
+    name: "BoosterButtonPassive"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfFirstChild"
+            verticalPolicy: "PercentOfFirstChild"
+        UIDataParamsComponent:
+            params:
+            - ["ResourceDetailed", "proxyIcon", "null", "{ \"type\" = ResourceType.stuff; }"]
+            - ["string", "image", "\"\"", "\"~res:/Gfx/Lobby/events/2021-halloween/event-2021-halloween_booster_3\""]
+        UIDataLocalVarsComponent:
+            data:
+            - ["string", "description", "\"HW21/BoosterButton/Passive/Description\""]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Story/Components/BoosterButton.yaml"
+                args:
+                    "reward": "Image"
+                    "description": "description"
+                    "label": "null"
+                    "proxyIcon": "proxyIcon"
+                    "bgColor": "\"green-green-bg\""
+                    "hasInput": "false"
+                    "isSelected": "false"
+                    "showIndicator": "true"
+Slots:
+-   class: "UIControl"
+    name: "Image"
+    pivot: [0.500000, 0.500000]
+    input: false
+    components:
+        Background: {}
+        Anchor:
+            hCenterAnchorEnabled: true
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfContent"
+            verticalPolicy: "PercentOfContent"
+    bindings:
+    - ["Background.sprite", "image"]

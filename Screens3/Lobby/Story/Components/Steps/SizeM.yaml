@@ -1,0 +1,62 @@
+Header:
+    version: 120
+Prototypes:
+-   class: "UIControl"
+    name: "SizeM"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 112.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 112.000000
+        UIDataParamsComponent:
+            params:
+            - ["ResourceDetailed", "reward", "null", "{ \"type\" = ResourceType.gold; }"]
+            - ["control", "overlay", "null", "null"]
+            - ["control", "fx", "null", "null"]
+    children:
+    -   class: "UIControl"
+        name: "ContentHolder"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                childType: "kControl"
+                condition: "not isNull(reward)"
+                control: "RewardContent"
+    -   class: "UIControl"
+        name: "OverlayHolder"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                childType: "kControl"
+                condition: "not isNull(overlay)"
+                control: "overlay"
+Slots:
+-   class: "UIControl"
+    name: "RewardContent"
+    size: [112.000000, 112.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+    children:
+    -   class: "UIControl"
+        name: "RewardHolder"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Story/Components/Steps/SizeMReward.yaml"
+                args:
+                    "reward": "reward"
+                    "fx": "fx"

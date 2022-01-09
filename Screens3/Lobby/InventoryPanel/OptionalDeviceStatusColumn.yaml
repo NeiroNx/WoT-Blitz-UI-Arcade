@@ -1,0 +1,41 @@
+Header:
+    version: "79"
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/InventoryPanel/OptionalDeviceStatus.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "OptionalDeviceStatusColumn"
+    input: false
+    components:
+        Anchor:
+            vCenterAnchorEnabled: true
+        LinearLayout:
+            orientation: "TopDown"
+            spacing: 2.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfChildrenSum"
+        UIDataParamsComponent:
+            params:
+            - ["eOptionalDeviceStatus", "status2", "eOptionalDeviceStatus.EMPTY", "eOptionalDeviceStatus.EMPTY"]
+            - ["eOptionalDeviceStatus", "status1", "eOptionalDeviceStatus.EMPTY", "eOptionalDeviceStatus.READY_TO_INSTALL"]
+            - ["eOptionalDeviceStatus", "status0", "eOptionalDeviceStatus.EMPTY", "eOptionalDeviceStatus.INSTALLED"]
+    children:
+    -   prototype: "OptionalDeviceStatus/OptionalDeviceStatus"
+        name: "State0"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "status": "status0"
+    -   prototype: "OptionalDeviceStatus/OptionalDeviceStatus"
+        name: "State1"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "status": "status1"
+    -   prototype: "OptionalDeviceStatus/OptionalDeviceStatus"
+        name: "State2"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "status": "status2"

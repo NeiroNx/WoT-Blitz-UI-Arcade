@@ -1,0 +1,31 @@
+Header:
+    version: "79"
+Prototypes:
+-   class: "UIControl"
+    name: "Selector"
+    size: [32.000000, 32.000000]
+    input: false
+    classes: "green-la-palma-bg"
+    components:
+        Background:
+            drawType: "DRAW_STRETCH_BOTH"
+            sprite: "~res:/Gfx/Lobby/controls/selector/selector_2px_r1"
+            perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+            leftRightStretchCap: 4.000000
+            topBottomStretchCap: 4.000000
+        Anchor:
+            leftAnchorEnabled: true
+            leftAnchor: -2.000000
+            rightAnchorEnabled: true
+            rightAnchor: -2.000000
+            topAnchorEnabled: true
+            topAnchor: -2.000000
+            bottomAnchorEnabled: true
+            bottomAnchor: -2.000000
+        UIDataParamsComponent:
+            params:
+            - ["bool", "visible", "true", "true"]
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Color.style.yaml"
+    bindings:
+    - ["visible", "visible"]

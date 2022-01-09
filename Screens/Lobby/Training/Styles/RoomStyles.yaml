@@ -1,0 +1,12 @@
+Header:
+    version: "23"
+StyleSheets:
+-   selector: ".queue-invite .hide-on-invite"
+    properties:
+        visible: false
+-   selector: ".queue .hide-without-invite"
+    properties:
+        visible: false
+-   selector: ".preview"
+    properties:
+        visible: false

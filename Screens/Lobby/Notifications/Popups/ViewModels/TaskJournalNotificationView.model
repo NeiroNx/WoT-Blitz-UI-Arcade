@@ -1,0 +1,16 @@
+completedQuestAmountString = format(localize("NOTIFICATION_MISSIONS_COMPLETED"), { number = completedQuestAmount });
+
+questProgress = when (totalProgress != 0) == true -> float(currentProgress) / float(totalProgress) * 100, 0;
+
+progressPercent = min(100, (when hasChestProgress -> chestPercents, questProgress));
+
+chestStyleName = format("chest-type-%(value)", { value = chestSlot });
+
+canOpenChest = notificationType == eNotificationType.QUEST_COMPLETED and chestPercents >= 100;
+
+buttonCaptionString = when canOpenChest -> localize("missionJournal/getReward/button"),
+    localize("HANGAR_NOTIFICATIONS_DETAILS");
+	
+captionClass = when canOpenChest -> "t-caption bold color=green-la-palma-text", "t-caption bold color=white-wild-sand-text";
+
+showHint = when canOpenChest and completedQuestAmount > 1 -> true, false;

@@ -1,0 +1,162 @@
+Header:
+    version: "70"
+Prototypes:
+-   class: "UIControl"
+    name: "AchievementItem"
+    pivot: [0.500000, 0.500000]
+    input: false
+    components:
+        Background: {}
+        Anchor:
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            verticalPolicy: "FixedSize"
+        UIDataParamsComponent:
+            params:
+            - ["BattleAchievementViewModel", "achievement", "null", "{ }"]
+            - ["bool", "firstShowMedalAnimation", "false", "false"]
+            - ["int", "firstAnimationIndex", "0", "0"]
+            - ["int", "lastAnimationIndex", "0", "10"]
+            - ["float", "time", "0.000000", "3.000000"]
+            events:
+            - "OnMedalTap"
+        UIDataLocalsComponent:
+            locals:
+            - ["float", "deltaTime", "0.280000"]
+            - ["float", "var", "(achievement.index - firstAnimationIndex) * deltaTime"]
+            - ["string", "classForAnimate", "when (not firstShowMedalAnimation) -> \"\", (achievement.index < firstAnimationIndex or achievement.index >= lastAnimationIndex) -> \"no-animation\", (time < (achievement.index - firstAnimationIndex) * deltaTime + 0.700000) -> \"no-animation\", (time < (achievement.index - firstAnimationIndex) * deltaTime + 0.930000) -> \"animation-1\", (time < (achievement.index - firstAnimationIndex) * deltaTime + 1.100000) -> \"animation-2\", (time < (achievement.index - firstAnimationIndex) * deltaTime + 1.300000) -> \"animation-3\", \"no-animation\""]
+    bindings:
+    - ["classes", "classForAnimate", "Read"]
+    children:
+    -   class: "UIControl"
+        name: "Background"
+        position: [0.000000, 0.000000]
+        classes: "button button-open-sound"
+        components:
+            Background:
+                colorInherit: "COLOR_MULTIPLY_ON_PARENT"
+            Anchor:
+                hCenterAnchorEnabled: true
+                topAnchorEnabled: true
+            LinearLayout:
+                orientation: "TopDown"
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIInputEventComponent:
+                onTouchUpInside: "OnMedalTap"
+            Sound: {}
+            StyleSheet:
+                styles: "~res:/UI/Styles/ButtonStyle.yaml;~res:/UI/Styles/ButtonSoundStyles.yaml"
+        children:
+        -   class: "UIControl"
+            name: "Icon"
+            pivot: [0.500000, 0.500000]
+            input: false
+            components:
+                Background:
+                    colorInherit: "COLOR_MULTIPLY_ON_PARENT"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfFirstChild"
+                    verticalPolicy: "PercentOfFirstChild"
+                StyleSheet:
+                    styles: "~res:/UI/Screens/Lobby/Common/Styles/AchievementStyles.yaml"
+            children:
+            -   class: "UIControl"
+                name: "Image"
+                position: [50.000000, 47.500000]
+                pivot: [0.500000, 0.500000]
+                input: false
+                components:
+                    Background:
+                        colorInherit: "COLOR_MULTIPLY_ON_PARENT"
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+                bindings:
+                - ["Background.sprite", "achievement.iconPath", "Read"]
+            -   class: "UIControl"
+                name: "Count"
+                position: [65.000000, 66.500000]
+                size: [30.000000, 22.000000]
+                input: false
+                components:
+                    Background:
+                        drawType: "DRAW_STRETCH_BOTH"
+                        sprite: "~res:/Gfx/UI/ProfileScreen/Number"
+                        colorInherit: "COLOR_MULTIPLY_ON_PARENT"
+                        leftRightStretchCap: 4.000000
+                        topBottomStretchCap: 4.000000
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        hCenterAnchor: 30.000000
+                        vCenterAnchorEnabled: true
+                        vCenterAnchor: 30.000000
+                    LinearLayout:
+                        padding: "5.000000"
+                        dynamicPadding: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfMaxChild"
+                        horizontalMin: 30.000000
+                bindings:
+                - ["visible", "achievement.count > 0", "Read"]
+                children:
+                -   class: "UIControl"
+                    name: "Text"
+                    input: false
+                    classes: "header5 color=text-color-white"
+                    components:
+                        UITextComponent:
+                            colorInheritType: "COLOR_MULTIPLY_ALPHA_ONLY"
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfContent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens/Fonts.yaml"
+                    bindings:
+                    - ["UITextComponent.text", "achievement.count", "Read"]
+            -   class: "UIControl"
+                name: "Series"
+                position: [65.000000, 66.500000]
+                size: [30.000000, 22.000000]
+                input: false
+                components:
+                    Background:
+                        sprite: "~res:/Gfx/UI/ProfileScreen/SeriesCounter"
+                        colorInherit: "COLOR_MULTIPLY_ON_PARENT"
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        hCenterAnchor: 30.000000
+                        vCenterAnchorEnabled: true
+                        vCenterAnchor: 30.000000
+                bindings:
+                - ["visible", "achievement.valueSeries > 0", "Read"]
+                children:
+                -   class: "UIControl"
+                    name: "Text"
+                    input: false
+                    classes: "header5 color=text-color-white"
+                    components:
+                        UITextComponent:
+                            colorInheritType: "COLOR_MULTIPLY_ALPHA_ONLY"
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                            hCenterAnchor: -1.000000
+                            vCenterAnchorEnabled: true
+                            vCenterAnchor: -2.000000
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfContent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens/Fonts.yaml"
+                    bindings:
+                    - ["UITextComponent.text", "achievement.valueSeries", "Read"]

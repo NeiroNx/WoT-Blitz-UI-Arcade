@@ -1,0 +1,77 @@
+Header:
+    version: "85"
+Controls:
+-   class: "UIControl"
+    name: "Content"
+    size: [960.000000, 640.000000]
+    input: false
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+            spacing: 10.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfChildrenSum"
+        UIDataParamsComponent:
+            params:
+            - ["Story", "story", "{ }", "{ currencyTitles = { prx_victory2019 = \"\"; }; currencyDescriptions = { prx_victory2019 = \"victory_day_event/currency/terms\"; }; }"]
+            - ["ResourceDetailed", "proxy", "{ }", "{ type = ResourceType.stuff; stuff = { name = \"prx_victory2019\"; title = \"storage/Items/spring_event_2019/Title\"; description = \"storage/Items/spring_event_2019/Description\"; icon = \"~res:/Gfx/UI/StorageItemIcons/prx_spr19.psd\"; iconUrl = \"\"; quantity = 50; grade = ArtefactGrade.common; }; }"]
+        UIDataLocalsComponent:
+            locals:
+            - ["string", "proxyName", "when proxy.type == ResourceType.gold -> \"gold\", proxy.type == ResourceType.credits -> \"credits\", proxy.type == ResourceType.free_xp -> \"freeXp\", proxy.type == ResourceType.stuff -> proxy.stuff.name, \"\""]
+            - ["string", "title", "when empty(proxyName) -> \"\", story.currencyTitles.Contains(proxyName) and not empty(story.currencyTitles[proxyName]) -> story.currencyTitles[proxyName], proxy.stuff.title"]
+            - ["string", "description", "when empty(proxyName) -> \"\", story.currencyDescriptions.Contains(proxyName) and not empty(story.currencyDescriptions[proxyName]) -> story.currencyDescriptions[proxyName], proxy.stuff.description"]
+    children:
+    -   class: "UIControl"
+        name: "Resource"
+        input: false
+        components:
+            LinearLayout:
+                spacing: 10.000000
+                useRtl: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   class: "UIControl"
+            name: "ResourceIcon"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfChildrenSum"
+                UIChildComponent:
+                    control: "\"~res:/UI/Screens/Lobby/Story/Legacy/Utils/Resource/Small/StuffResourceIcon.yaml\""
+                    args:
+                        "stuff": "proxy.stuff"
+        -   class: "UIControl"
+            name: "ResourceName"
+            input: false
+            classes: "text1 text-color-white"
+            components:
+                UITextComponent:
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens/Fonts.yaml;~res:/UI/Screens/FontsColors.yaml"
+            bindings:
+            - ["UITextComponent.text", "localize(title)"]
+    -   class: "UIControl"
+        name: "Description"
+        input: false
+        classes: "text2 text-color-blue"
+        components:
+            UITextComponent:
+                colorInheritType: "COLOR_IGNORE_PARENT"
+                multiline: "MULTILINE_ENABLED"
+                align: ["LEFT", "TOP"]
+                useRtlAlign: "USE_BY_SYSTEM"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens/Fonts.yaml;~res:/UI/Screens/FontsColors.yaml"
+        bindings:
+        - ["UITextComponent.text", "localize(description)"]

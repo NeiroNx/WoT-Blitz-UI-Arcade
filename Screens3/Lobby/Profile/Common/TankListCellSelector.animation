@@ -1,0 +1,26 @@
+animation BrightAnimated
+{
+	if (selected)
+	{
+		parallel 
+		{
+			sequence
+			{
+				ChangeProperty("**/Bright", "UIOpacityComponent", "opacity", 1, 0, SINE_OUT);
+				ChangeProperty("**/Bright", "SizePolicy", "horizontalValue", 100 + addDeltaPercents, 0.3, SINE_IN_SINE_OUT);
+				ChangeProperty("**/Bright", "SizePolicy", "horizontalValue", 100, 0.15, SINE_IN_SINE_OUT);
+			}
+		}
+	}
+		else
+	{
+		parallel 
+		{
+			sequence
+			{
+				ChangeProperty("**/Bright", "UIOpacityComponent", "opacity", 0, 0.3, SINE_OUT);
+				ChangeProperty("**/Bright", "SizePolicy", "horizontalValue", 0, 0, SINE_OUT);
+			}
+		}
+	}
+}

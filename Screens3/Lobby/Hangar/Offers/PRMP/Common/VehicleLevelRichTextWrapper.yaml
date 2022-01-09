@@ -1,0 +1,26 @@
+Header:
+    version: "96"
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/Vehicle/VehicleLevel.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "VehicleLevelRichTextWrapper"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfFirstChild"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["int", "level", "1", "1"]
+            - ["eVehicleDescriptionType", "type", "eVehicleDescriptionType.NORMAL", "eVehicleDescriptionType.PREMIUMISED"]
+    children:
+    -   prototype: "VehicleLevel/VehicleLevel"
+        name: "VehicleLevel"
+        components:
+            Anchor:
+                vCenterAnchorEnabled: true
+            UIDataParamsComponent:
+                args:
+                    "type": "type"
+                    "level": "level"

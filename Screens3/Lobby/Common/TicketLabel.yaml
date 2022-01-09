@@ -1,0 +1,151 @@
+Header:
+    version: 135
+Prototypes:
+-   class: "UIControl"
+    name: "TicketLabel"
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens3/Lobby/Common/TicketLabel.animation"
+        ClipContent: {}
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            verticalPolicy: "PercentOfChildrenSum"
+        UIDataParamsComponent:
+            params:
+            - ["int", "width", "90", "188"]
+            - ["string", "colorStyle", "\"\"", "\"\""]
+            - ["string", "labelText", "\"\"", "\"kekw\""]
+            - ["bool", "reversedAnimation", "false", "false"]
+            - ["bool", "centerTitle", "true", "true"]
+        UIDataLocalVarsComponent:
+            data:
+            - ["string", "animationProperty", "when reversedAnimation -> \"rightAnchor\", \"leftAnchor\""]
+            - ["int", "textWidth", "0"]
+            - ["int", "spacing", "16"]
+            - ["int", "moveOffset", "textWidth + spacing"]
+            - ["bool", "animating", "false"]
+            - ["string", "currentControl", "\"./TextHolder/Text\""]
+            - ["string", "nextControl", "\"./TextHolder/NextText\""]
+            - ["float", "baseTime", "3.000000"]
+            - ["float", "pauseTime", "3.000000"]
+            - ["float", "fadeInTime", "0.250000"]
+            - ["bool", "centerText", "false"]
+            - ["string", "text", "\"\""]
+            - ["bool", "updateSize", "true"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["float", "scrollTime", "(float(textWidth) / float(width)) * baseTime"]
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/Lobby/Common/TicketLabel.actions"
+        UIEventOnDataComponent0:
+            watchedDataExpression: "labelText"
+            eventName: "TEXT_CHANGED"
+            eventData: "true"
+        UIEventOnDataComponent1:
+            watchedDataExpression: "text"
+            ifExpression: "text != labelText"
+            eventName: "TEXT_CHANGED"
+            eventData: "true"
+    bindings:
+    - ["SizePolicy.horizontalValue", "width"]
+    children:
+    -   class: "UIControl"
+        name: "Bg"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                childType: "kControl"
+                condition: "not colorStyle.empty()"
+                control: "ColorStyleBg"
+    -   class: "UIControl"
+        name: "ResizeEventBarrier"
+        input: false
+        children:
+        -   class: "UIControl"
+            name: "TextWidthReporter"
+            input: false
+            classes: "t-subtitle regular white-wild-sand-text"
+            components:
+                UITextComponent: {}
+                Anchor:
+                    bottomAnchorEnabled: true
+                    bottomAnchor: -100.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                UILayoutEventComponent:
+                    sizeChangedEvent: "OnTextSizeChanged"
+                    sizeChangedEventData: "int(_size.X)"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml"
+            bindings:
+            - ["UITextComponent.text", "text"]
+    -   class: "UIControl"
+        name: "TextHolder"
+        input: false
+        components:
+            UIOpacityComponent:
+                opacity: 0.000000
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+            SizePolicy:
+                verticalPolicy: "FixedSize"
+                verticalValue: 20.000000
+        children:
+        -   class: "UIControl"
+            name: "Text"
+            input: false
+            classes: "t-body regular white-wild-sand-text"
+            components:
+                UITextComponent: {}
+                Anchor:
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml"
+            bindings:
+            - ["UITextComponent.text", "text"]
+            - ["Anchor.leftAnchorEnabled", "not reversedAnimation and not centerText"]
+            - ["Anchor.hCenterAnchorEnabled", "centerText"]
+            - ["Anchor.rightAnchorEnabled", "reversedAnimation and not centerText"]
+        -   class: "UIControl"
+            name: "NextText"
+            input: false
+            classes: "t-body regular white-wild-sand-text"
+            components:
+                UITextComponent: {}
+                Anchor:
+                    leftAnchor: 1000.000000
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml"
+            bindings:
+            - ["visible", "animating"]
+            - ["UITextComponent.text", "text"]
+            - ["Anchor.leftAnchorEnabled", "not reversedAnimation"]
+            - ["Anchor.rightAnchorEnabled", "reversedAnimation"]
+Slots:
+-   class: "UIControl"
+    name: "ColorStyleBg"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        Background:
+            drawType: "DRAW_FILL"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Color.style.yaml"
+    bindings:
+    - ["classes", "colorStyle"]

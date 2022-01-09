@@ -1,0 +1,16 @@
+animation EULAConfirmationShake
+{
+    ChangeProperty("**/TapArea","","input",false);
+    ChangeProperty("**/MiddleContent", "Anchor", "hCenterAnchor", 12, 0.05, SINE_OUT);
+    ChangeProperty("**/MiddleContent", "Anchor", "hCenterAnchor", -24, 0.05, SINE_IN);
+    ChangeProperty("**/MiddleContent", "Anchor", "hCenterAnchor", 8, 0.05, SINE_IN);
+    ChangeProperty("**/MiddleContent", "Anchor", "hCenterAnchor", -16, 0.05, SINE_IN);
+    ChangeProperty("**/MiddleContent", "Anchor", "hCenterAnchor", 6, 0.05, SINE_IN);
+    ChangeProperty("**/MiddleContent", "Anchor", "hCenterAnchor", -12, 0.05, SINE_IN);
+    ChangeProperty("**/MiddleContent", "Anchor", "hCenterAnchor", 4, 0.05, SINE_IN);
+    ChangeProperty("**/MiddleContent", "Anchor", "hCenterAnchor", -8, 0.05, SINE_IN);
+    ChangeProperty("**/MiddleContent", "Anchor", "hCenterAnchor", 2, 0.05, SINE_IN);
+    ChangeProperty("**/MiddleContent", "Anchor", "hCenterAnchor", -4, 0.05, SINE_IN);
+    ChangeProperty("**/MiddleContent", "Anchor", "hCenterAnchor", 0, 0.05, SINE_OUT);
+    ChangeProperty("**/TapArea","","input",true);
+  }

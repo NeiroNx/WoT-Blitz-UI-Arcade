@@ -1,0 +1,64 @@
+Header:
+    version: "23"
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/Common/Hint.yaml"
+- "~res:/UI/Screens/Fonts.yaml"
+Prototypes:
+-   prototype: "Hint/HintDialog"
+    name: "HintLift"
+    classes: "hint-type=hint-with-title hint-bg=hint-with-bg direct=dialog-direct-right button-ok-sound"
+    components:
+        SizePolicy:
+            horizontalPolicy: "Formula"
+            horizontalFormula: "lastChild+40"
+        UIInputEventComponent:
+            onTouchUpInside: "TEAM_LIFT_PRESSED"
+        Sound: {}
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Lobby/Common/Hint.yaml;~res:/UI/Screens/Fonts.yaml;~res:/UI/Screens/Lobby/Common/CommonHint.yaml;~res:/UI/Styles/ButtonSoundStyles.yaml"
+    children:
+    -   path: "InsideContainer"
+        components:
+            SizePolicy:
+                horizontalFormula: "lastChild+20"
+                verticalPolicy: "FixedSize"
+                verticalValue: 64.000000
+        children:
+        -   prototype: "Hint/InfoControl"
+            name: "InfoControl"
+            components:
+                IgnoreLayout: {}
+                Anchor:
+                    rightAnchorEnabled: true
+                    rightAnchor: 3.000000
+                    topAnchor: 3.000000
+        -   prototype: "Hint/TextContainer"
+            name: "TextContainer"
+            position: [15.000000, 0.000000]
+            components:
+                LinearLayout:
+                    padding: 0.000000
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 68.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 64.000000
+                Anchor:
+                    leftAnchor: 0.000000
+            children:
+            -   path: "Title"
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                    UITextComponent:
+                        text: ""
+                        multiline: "MULTILINE_ENABLED"
+                        fitting: "FITTING_REDUCE"
+                        align: ["HCENTER", "VCENTER"]
+            -   path: "Description"
+                visible: false
+    -   path: "InsideContainer/Bg"
+        components:
+            IgnoreLayout: {}

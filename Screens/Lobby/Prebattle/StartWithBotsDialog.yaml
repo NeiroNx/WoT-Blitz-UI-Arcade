@@ -1,0 +1,311 @@
+Header:
+    version: "24"
+ImportedPackages:
+- "~res:/UI/Screens/Common/StyledButton.yaml"
+- "~res:/UI/Screens/Common/Settings/SettingsCommon.yaml"
+Controls:
+-   class: "UIControl"
+    name: "StartWithBotsDialog"
+    size: [1024.000000, 768.000000]
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Lobby/Prebattle/StartWithBotsDialog.yaml;~res:/UI/Screens/Fonts.yaml"
+    children:
+    -   class: "UIControl"
+        customClass: "DraggableDialog"
+        name: "DialogControl"
+        position: [287.000000, 174.000000]
+        size: [450.000000, 420.000000]
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                hCenterAnchor: 0.000000
+                vCenterAnchorEnabled: true
+                vCenterAnchor: 0.000000
+            Background:
+                drawType: "DRAW_STRETCH_BOTH"
+                sprite: "~res:/Gfx/UI/CommonUIElements/PopupBackMiddle"
+                leftRightStretchCap: 10.000000
+                topBottomStretchCap: 10.000000
+        children:
+        -   prototype: "StyledButton/StyledButton"
+            name: "CancelButton"
+            size: [192.000000, 49.000000]
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 15.000000
+                    bottomAnchorEnabled: true
+                    bottomAnchor: 15.000000
+            children:
+            -   path: "Caption"
+                components:
+                    UITextComponent:
+                        text: "Cancel"
+        -   prototype: "StyledButton/StyledButton"
+            name: "OkButton"
+            size: [192.000000, 49.000000]
+            classes: "button button-color-green"
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+                    rightAnchor: 15.000000
+                    bottomAnchorEnabled: true
+                    bottomAnchor: 15.000000
+            children:
+            -   path: "Caption"
+                components:
+                    UITextComponent:
+                        text: "OK"
+        -   class: "UIControl"
+            name: "AllyBots"
+            position: [15.000000, 140.000000]
+            size: [420.000000, 100.000000]
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 15.000000
+                    rightAnchorEnabled: true
+                    rightAnchor: 15.000000
+                    topAnchorEnabled: true
+                    topAnchor: 140.000000
+                Background:
+                    leftRightStretchCap: 5.000000
+                    topBottomStretchCap: 5.000000
+            children:
+            -   class: "UIStaticText"
+                name: "GroupCaption"
+                position: [10.000000, 0.000000]
+                size: [200.000000, 30.000000]
+                noInput: true
+                classes: "header4 text-color-white"
+                components:
+                    Anchor:
+                        leftAnchorEnabled: true
+                        leftAnchor: 10.000000
+                        topAnchorEnabled: true
+                        topAnchor: 0.000000
+                    Background:
+                        align: ["LEFT", "VCENTER"]
+                    UITextComponent:
+                        text: "Allies"
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                        shadowColor: [0.000000, 0.000000, 0.000000, 0.000000]
+                        align: ["LEFT", "VCENTER"]
+                        useRtlAlign: "DONT_USE"
+            -   prototype: "SettingsCommon/Slider"
+                name: "Slider"
+                position: [47.000000, 31.000000]
+                value: 45.890400
+                components:
+                    Anchor:
+                        leftAnchorEnabled: true
+                        leftAnchor: 47.000000
+                        rightAnchorEnabled: true
+                        rightAnchor: 47.000000
+                        bottomAnchorEnabled: true
+                        bottomAnchor: -9.000000
+                    StyleSheet:
+                        inheritsStylesFromParent: false
+                children:
+                -   path: "thumbSpriteControl"
+                    children:
+                    -   class: "UIControl"
+                        name: "CurrValue"
+                        position: [180.000000, -30.000000]
+                        size: [60.000000, 30.000000]
+                        noInput: true
+                        classes: "header4 color=text-color-white"
+                        components:
+                            Anchor:
+                                hCenterAnchorEnabled: true
+                                topAnchorEnabled: true
+                                topAnchor: -27.000000
+                            Background:
+                                align: ["LEFT", "TOP"]
+                            UITextComponent:
+                                text: "curr"
+                                colorInheritType: "COLOR_IGNORE_PARENT"
+                            StyleSheet:
+                                styles: "~res:/UI/Screens/Fonts.yaml"
+            -   class: "UIControl"
+                name: "MaxValue"
+                position: [0.000000, 55.000000]
+                size: [55.000000, 30.000000]
+                noInput: true
+                classes: "header4 color=text-color-white"
+                components:
+                    Anchor:
+                        rightAnchorEnabled: true
+                        bottomAnchorEnabled: true
+                        bottomAnchor: 15.000000
+                    UITextComponent:
+                        text: "Max"
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens/Fonts.yaml"
+            -   class: "UIControl"
+                name: "MinValue"
+                position: [0.000000, 55.000000]
+                size: [55.000000, 30.000000]
+                noInput: true
+                classes: "header4 color=text-color-white"
+                components:
+                    Anchor:
+                        leftAnchorEnabled: true
+                        bottomAnchorEnabled: true
+                        bottomAnchor: 15.000000
+                    UITextComponent:
+                        text: "Min"
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens/Fonts.yaml"
+        -   class: "UIControl"
+            name: "EnemyBots"
+            position: [15.000000, 250.000000]
+            size: [420.000000, 100.000000]
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 15.000000
+                    rightAnchorEnabled: true
+                    rightAnchor: 15.000000
+                    topAnchorEnabled: true
+                    topAnchor: 250.000000
+                Background:
+                    leftRightStretchCap: 5.000000
+                    topBottomStretchCap: 5.000000
+            children:
+            -   class: "UIStaticText"
+                name: "GroupCaption"
+                position: [10.000000, 0.000000]
+                size: [200.000000, 30.000000]
+                noInput: true
+                classes: "header4 text-color-white"
+                components:
+                    Anchor:
+                        leftAnchorEnabled: true
+                        leftAnchor: 10.000000
+                        topAnchorEnabled: true
+                        topAnchor: 0.000000
+                    Background:
+                        align: ["LEFT", "VCENTER"]
+                    UITextComponent:
+                        text: "Enemies"
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                        shadowColor: [0.000000, 0.000000, 0.000000, 0.000000]
+                        align: ["LEFT", "VCENTER"]
+                        useRtlAlign: "DONT_USE"
+            -   prototype: "SettingsCommon/Slider"
+                name: "Slider"
+                position: [16.000000, 2.000000]
+                value: 50.000000
+                components:
+                    Anchor:
+                        leftAnchorEnabled: true
+                        leftAnchor: 47.000000
+                        hCenterAnchorEnabled: true
+                        rightAnchorEnabled: true
+                        rightAnchor: 47.000000
+                        bottomAnchorEnabled: true
+                        bottomAnchor: -8.000000
+                    StyleSheet:
+                        inheritsStylesFromParent: false
+                children:
+                -   path: "thumbSpriteControl"
+                    children:
+                    -   class: "UIControl"
+                        name: "CurrValue"
+                        position: [180.000000, -30.000000]
+                        size: [60.000000, 30.000000]
+                        noInput: true
+                        classes: "header4 color=text-color-white"
+                        components:
+                            Anchor:
+                                hCenterAnchorEnabled: true
+                                topAnchorEnabled: true
+                                topAnchor: -27.000000
+                            Background:
+                                align: ["LEFT", "TOP"]
+                            UITextComponent:
+                                text: "curr"
+                                colorInheritType: "COLOR_IGNORE_PARENT"
+                            StyleSheet:
+                                styles: "~res:/UI/Screens/Fonts.yaml"
+            -   class: "UIControl"
+                name: "MinValue"
+                position: [0.000000, 55.000000]
+                size: [55.000000, 30.000000]
+                noInput: true
+                classes: "header4 color=text-color-white"
+                components:
+                    Anchor:
+                        leftAnchorEnabled: true
+                        bottomAnchorEnabled: true
+                        bottomAnchor: 15.000000
+                    UITextComponent:
+                        text: "Min"
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens/Fonts.yaml"
+            -   class: "UIControl"
+                name: "MaxValue"
+                position: [0.000000, 55.000000]
+                size: [55.000000, 30.000000]
+                noInput: true
+                classes: "header4 color=text-color-white"
+                components:
+                    Anchor:
+                        rightAnchorEnabled: true
+                        bottomAnchorEnabled: true
+                        bottomAnchor: 15.000000
+                    UITextComponent:
+                        text: "Max"
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens/Fonts.yaml"
+        -   class: "UIStaticText"
+            name: "TitleText"
+            size: [450.000000, 40.000000]
+            noInput: true
+            classes: "header1 text-color-white"
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 0.000000
+                    rightAnchorEnabled: true
+                    rightAnchor: 0.000000
+                    topAnchorEnabled: true
+                    topAnchor: 0.000000
+                Background:
+                    align: ["LEFT", "TOP"]
+                UITextComponent:
+                    text: "Start with bots"
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                    shadowOffset: [0.000000, 1.000000]
+                    shadowColor: [0.000000, 0.000000, 0.000000, 0.752900]
+        -   class: "UIStaticText"
+            name: "DialogText"
+            position: [0.000000, 40.000000]
+            size: [450.000000, 100.000000]
+            noInput: true
+            classes: "header1 text-color-white"
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 0.000000
+                    rightAnchorEnabled: true
+                    rightAnchor: 0.000000
+                    topAnchorEnabled: true
+                    topAnchor: 40.000000
+                Background:
+                    align: ["LEFT", "TOP"]
+                UITextComponent:
+                    text: "Select bots to play with"
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                    shadowOffset: [0.000000, 1.000000]
+                    shadowColor: [0.000000, 0.000000, 0.000000, 0.752900]

@@ -1,0 +1,38 @@
+Header:
+    version: 140
+Prototypes:
+-   class: "UIControl"
+    customClass: "UIStuffInstalledNotification"
+    name: "StuffInstalledNotification"
+    size: [608.000000, 72.000000]
+    input: true
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+            padding: "8; 0"
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfMaxChild"
+    children:
+    -   class: "UIControl"
+        name: "NotificationBase"
+        position: [0.000000, 8.000000]
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfChildrenSum"
+            UIDataParamsComponent:
+                params:
+                - ["StuffInstalledViewModel", "model", "null", "{ }"]
+                args:
+                    "model": "{ }"
+                events:
+                - "GO_TO_INSTALLED_STUFF"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens/Lobby/Notifications/Popups/StuffInstalledNotificationContent.yaml"
+                args:
+                    "model": "model"
+                eventActions:
+                - ["GO_TO_INSTALLED_STUFF", "GO_TO_INSTALLED_STUFF", ""]

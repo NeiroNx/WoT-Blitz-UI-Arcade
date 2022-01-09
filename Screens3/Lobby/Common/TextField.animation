@@ -1,0 +1,11 @@
+animation CursorAnimation
+{
+	repeat(99999)
+	{
+		ChangeProperty("**/Cursor", "UIOpacityComponent", "opacity", 0, 0.15, SINE_OUT);
+		ChangeProperty("**/Cursor", "UIOpacityComponent", "opacity", 0, 0.3);
+
+		ChangeProperty("**/Cursor", "UIOpacityComponent", "opacity", 1, 0.15, SINE_OUT);
+		ChangeProperty("**/Cursor", "UIOpacityComponent", "opacity", 1, 0.6);
+	}
+}

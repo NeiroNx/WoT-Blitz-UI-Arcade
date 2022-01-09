@@ -1,0 +1,99 @@
+Header:
+    version: 128
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/Button.yaml"
+- "~res:/UI/Screens3/Lobby/Common/Resource/Price.yaml"
+- "~res:/UI/Screens3/Lobby/Common/ToggleWithLabel.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "PriceFooter"
+    size: [809.000000, 48.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["ArtefactProviderModel", "artefacts", "null", "{ }"]
+            - ["StatsDataModel", "stats", "null", "{ }"]
+            - ["bool", "autoressuplyVisible", "true", "true"]
+            - ["eCamoInShopState", "state", "eCamoInShopState.INSTALL", "eCamoInShopState.INSTALL"]
+            - ["Price", "priceGet", "null", "{ }"]
+            - ["Price", "pricePay", "null", "{ }"]
+            - ["bool", "autoResupply", "false", "false"]
+            events:
+            - "ON_CLICK_ACTION"
+            - "ON_AUTO_RESUPPLY_CHANGED(bool isResupplyOn)"
+        UIDataLocalBindingsComponent:
+            data:
+            - ["eButtonType", "buttonType", "when state == eCamoInShopState.UNINSTALL -> eButtonType.NEGATIVE, when state == eCamoInShopState.RETURN -> eButtonType.NEGATIVE, when state == eCamoInShopState.LOCKED_UNINSTALL -> eButtonType.NEGATIVE, eButtonType.POSITIVE"]
+            - ["string", "buttonName", "when state == eCamoInShopState.INSTALL and pricePay.resources.Empty() -> \"#common:DialogButton/SetUp\", state == eCamoInShopState.INSTALL and not pricePay.resources.Empty() -> \"Purchase\", state == eCamoInShopState.BUY_DISABLED -> \"Purchase\", state == eCamoInShopState.UNINSTALL and priceGet.resources.Empty() -> \"#common:DialogButton/Remove\", state == eCamoInShopState.UNINSTALL and not priceGet.resources.Empty() -> \"Sell\", state == eCamoInShopState.LOCKED_UNINSTALL and priceGet.resources.Empty() -> \"#common:DialogButton/Remove\", state == eCamoInShopState.LOCKED_UNINSTALL and not priceGet.resources.Empty() -> \"Sell\", state == eCamoInShopState.RETURN -> \"Sell\", state == eCamoInShopState.UNLOCK_BUY -> \"#common:DialogButton/Unlock\", state == eCamoInShopState.UNLOCK_ITEM -> \"#common:DialogButton/Unlock\", state == eCamoInShopState.REPLACE -> \"#camouflages:Shop/BuyCamouflage/Change\", \"#common:DialogButton/Go\""]
+    children:
+    -   class: "UIControl"
+        name: "LeftPart"
+        position: [0.000000, -8.000000]
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Anchor:
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+        bindings:
+        - ["visible", "autoressuplyVisible"]
+        children:
+        -   prototype: "ToggleWithLabel/ToggleWithLabel"
+            name: "ToggleWithLabel"
+            components:
+                UIDataParamsComponent:
+                    args:
+                        "text": "\"InventoryPanel/Footer/AutoRecharge\""
+                        "isDarkMode": "false"
+                        "turnedOn": "autoResupply"
+                    eventActions:
+                    - ["ON_TOGGLE_CHANGED", "ON_AUTO_RESUPPLY_CHANGED", "_event.isTurnedOn"]
+    -   class: "UIControl"
+        name: "RightPart"
+        input: false
+        components:
+            Anchor:
+                rightAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                spacing: 32.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   prototype: "Price/Price"
+            name: "Price"
+            position: [395.000000, 46.000000]
+            size: [51.000000, 24.000000]
+            components:
+                Anchor:
+                    vCenterAnchorEnabled: true
+                UIDataParamsComponent:
+                    args:
+                        "artefacts": "artefacts"
+                        "stats": "stats"
+                        "priceGet": "priceGet"
+                        "pricePay": "pricePay"
+        -   prototype: "Button/Button"
+            name: "ButtonPositive"
+            position: [131.000000, 30.000000]
+            components:
+                Anchor:
+                    vCenterAnchorEnabled: true
+                UIAttachLayoutMasterComponent:
+                    attachId: "NEWBIE_CAMO_INSTALL"
+                UIDataParamsComponent:
+                    args:
+                        "caption": "buttonName"
+                        "type": "buttonType"
+                        "size": "eButtonSize.NORMAL"
+                        "sound": "eButtonSound.OK"
+                        "enabled": "true"
+                    eventActions:
+                    - ["ON_CLICK_BUTTON", "ON_CLICK_ACTION", ""]

@@ -1,0 +1,31 @@
+Header:
+    version: "28"
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/Common/Resource/ResourceSmall.yaml"
+Prototypes:
+-   prototype: "ResourceSmall/ResourceSmall"
+    name: "ResourceSmall"
+    components:
+        LinearLayout:
+            spacing: 3.000000
+        SizePolicy:
+            verticalPolicy: "PercentOfFirstChild"
+    bindings:
+    - ["classes", "\"resource resource-type=\" + resourceModel.typeStyle + \" discount=discount-off\"", "Read"]
+    children:
+    -   path: "Value"
+        components:
+            UITextComponent: {}
+        bindings:
+        - ["UITextComponent.text", "str1000Separated(resourceReflection.quantity)", "Read"]
+    -   path: "Back"
+        size: [24.000000, 24.000000]
+        components:
+            Anchor:
+                vCenterAnchorEnabled: true
+        children: []
+    -   path: "Back/Grade"
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                rightAnchorEnabled: false

@@ -1,0 +1,369 @@
+Header:
+    version: 121
+Prototypes:
+-   class: "UIControl"
+    name: "CHINA3YEARSTree"
+    size: [960.000000, 512.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UILayoutEventComponent:
+            sizeChangedEvent: "SCREEN_SIZE_CHANGED"
+            sizeChangedEventData: "_size"
+        UIDataParamsComponent:
+            params:
+            - ["eBlitzDevice", "deviceType", "eBlitzDevice.DEVICE_PHONE", "eBlitzDevice.DEVICE_PHONE"]
+            - ["StoryView", "storyView", "null", "{ }"]
+            - ["int64", "serverTime", "0L", "1556668800L"]
+            - ["bool", "isGfx2", "false", "false"]
+            events:
+            - "DESELECT"
+            - "SHOW_STEP_INFO(int id)"
+            - "SHOW_CHEST_INFO(int id)"
+            - "SELECT_STEP(int id)"
+            - "SELECT_COMPOSITE_STEP(string name)"
+        UIDataLocalVarsComponent:
+            data:
+            - ["vector2", "screenSize", "vec2(0.000000, 0.000000)"]
+            - ["vector2", "scrollSize", "vec2(0.000000, 0.000000)"]
+            - ["int", "gfx", "when isGfx2 -> 2, 1"]
+        UIDataLocalBindingsComponent: {}
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/Lobby/Story/CHINA3YEARS/CHINA3YEARSTree.actions"
+        UIEventOnDataComponent0:
+            watchedDataExpression: "screenSize"
+            ifExpression: "not floatEqual(scrollSize.X, 0.000000)"
+            eventName: "ON_SCREEN_SIZE_CHANGED"
+        UIEventOnDataComponent1:
+            watchedDataExpression: "scrollSize"
+            ifExpression: "not floatEqual(screenSize.X, 0.000000)"
+            eventName: "ON_SCREEN_SIZE_CHANGED"
+    children:
+    -   class: "UIControl"
+        name: "SafeArea"
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                bottomAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "Formula"
+                verticalFormula: "max(parent - 48, 480)"
+        children:
+        -   class: "UIControl"
+            name: "Content"
+            input: false
+            components:
+                LinearLayout:
+                    orientation: "TopDown"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            children:
+            -   class: "UIControl"
+                name: "TopArea"
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                children:
+                -   class: "UIControl"
+                    name: "StepsHolder"
+                    input: false
+                    components:
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfFirstChild"
+                        UIChildComponent0:
+                            childType: "kControl"
+                            control: "SpecilalWrapper"
+            -   class: "UIControl"
+                name: "BottomArea"
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "Formula"
+                        verticalFormula: "max(0.28*parent, 128)"
+                children:
+                -   class: "UIControl"
+                    name: "StepsHolder"
+                    input: false
+                    components:
+                        Anchor:
+                            topAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfFirstChild"
+                        UIChildComponent0:
+                            prototypePath: "~res:/UI/Screens3/Common/HorizontalScrollView.yaml"
+                            args:
+                                "content": "CommonWrapper"
+                                "centerContent": "true"
+                                "verticalPolicy": "eSizePolicy.PercentOfFirstChild"
+                                "bottomDistance": "4"
+                            eventActions:
+                            - ["ON_SCROLL_VIEW_TOUCH", "DESELECT", ""]
+Slots:
+-   class: "UIControl"
+    name: "SpecilalWrapper"
+    size: [960.000000, 352.000000]
+    input: false
+    components:
+        Anchor:
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfFirstChild"
+    children:
+    -   class: "UIControl"
+        name: "SafeArea"
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "parent - safeAreaInsets.left - safeAreaInsets.right"
+                verticalPolicy: "PercentOfLastChild"
+        children:
+        -   class: "UIControl"
+            name: "TapArea"
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                UIInputEventComponent:
+                    onTouchUpInside: "DESELECT"
+        -   class: "UIControl"
+            name: "Content"
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfLastChild"
+                    verticalPolicy: "PercentOfLastChild"
+            children:
+            -   class: "UIControl"
+                name: "Arrows"
+                input: false
+                components:
+                    Anchor:
+                        leftAnchorEnabled: true
+                        leftAnchor: 168.000000
+                        vCenterAnchorEnabled: true
+                    LinearLayout:
+                        spacing: 163.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        verticalPolicy: "PercentOfFirstChild"
+                children:
+                -   class: "UIControl"
+                    name: "CommonArrows"
+                    input: false
+                    components:
+                        LinearLayout:
+                            spacing: 160.000000
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfChildrenSum"
+                            verticalPolicy: "PercentOfMaxChild"
+                        UIRepeatComponent:
+                            control: "~res:/UI/Screens3/Lobby/Story/Steps/Arrows/LeftRight.yaml"
+                            dataContainer: "storyView.tree.groups.specialRewards.steps"
+                            args:
+                                "isVisible": "_index != storyView.tree.groups.specialRewards.steps.Size() - 1"
+                                "width": "26.000000"
+                -   class: "UIControl"
+                    name: "Branching"
+                    input: false
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfMaxChild"
+                            verticalPolicy: "PercentOfParent"
+                    children:
+                    -   class: "UIControl"
+                        name: "TopArrow"
+                        angle: -45.000000
+                        input: false
+                        components:
+                            Anchor:
+                                vCenterAnchorEnabled: true
+                                vCenterAnchor: -83.000000
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfFirstChild"
+                                verticalPolicy: "PercentOfFirstChild"
+                            UIChildComponent0:
+                                prototypePath: "~res:/UI/Screens3/Lobby/Story/Steps/Arrows/LeftRight.yaml"
+                                args:
+                                    "width": "26.000000"
+                    -   class: "UIControl"
+                        name: "BottomArrow"
+                        angle: 45.000000
+                        input: false
+                        components:
+                            Anchor:
+                                vCenterAnchorEnabled: true
+                                vCenterAnchor: 83.000000
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfFirstChild"
+                                verticalPolicy: "PercentOfFirstChild"
+                            UIChildComponent0:
+                                prototypePath: "~res:/UI/Screens3/Lobby/Story/Steps/Arrows/LeftRight.yaml"
+                                args:
+                                    "width": "26.000000"
+            -   class: "UIControl"
+                name: "Steps"
+                input: false
+                components:
+                    LinearLayout:
+                        spacing: 10.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        verticalPolicy: "PercentOfMaxChild"
+                children:
+                -   class: "UIControl"
+                    name: "SpecialSteps"
+                    input: false
+                    components:
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        LinearLayout:
+                            spacing: 10.000000
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfChildrenSum"
+                            verticalPolicy: "PercentOfMaxChild"
+                        UIRepeatComponent:
+                            control: "~res:/UI/Screens3/Lobby/Story/Components/Steps/Progression.yaml"
+                            dataContainer: "storyView.tree.groups.specialRewards.steps"
+                            args:
+                                "model": "_item"
+                                "index": "_index + 1"
+                                "topProgressColor": "rgb(11885311)"
+                                "bottomProgressColor": "rgb(12988415)"
+                                "stepSize": "eStepSize.L"
+                            eventActions:
+                            - ["DESELECT", "DESELECT", ""]
+                            - ["SELECT_STEP", "SELECT_STEP", "_event.id"]
+                            - ["SHOW_STEP_INFO", "SHOW_STEP_INFO", "_event.id"]
+                -   class: "UIControl"
+                    name: "MainRewards"
+                    input: false
+                    components:
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        LinearLayout:
+                            orientation: "TopDown"
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfMaxChild"
+                            verticalPolicy: "PercentOfChildrenSum"
+                        UIRepeatComponent:
+                            control: "~res:/UI/Screens3/Lobby/Story/Components/Steps/Progression.yaml"
+                            dataContainer: "storyView.tree.groups.mainRewards.steps"
+                            args:
+                                "model": "_item"
+                                "topProgressColor": "rgb(11885311)"
+                                "bottomProgressColor": "rgb(12988415)"
+                                "stepSize": "eStepSize.XL"
+                            eventActions:
+                            - ["DESELECT", "DESELECT", ""]
+                            - ["SELECT_STEP", "SELECT_STEP", "_event.id"]
+                            - ["SHOW_STEP_INFO", "SHOW_STEP_INFO", "_event.id"]
+-   class: "UIControl"
+    name: "CommonWrapper"
+    input: false
+    components:
+        Anchor:
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfFirstChild"
+            verticalPolicy: "PercentOfFirstChild"
+        UILayoutEventComponent:
+            sizeChangedEvent: "SCROLL_SIZE_CHANGED"
+            sizeChangedEventData: "_size"
+    children:
+    -   class: "UIControl"
+        name: "SafeArea"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "firstChild + safeAreaInsets.left + safeAreaInsets.right + 48"
+                verticalPolicy: "PercentOfFirstChild"
+        children:
+        -   class: "UIControl"
+            name: "Content"
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfLastChild"
+                    verticalPolicy: "PercentOfLastChild"
+            children:
+            -   class: "UIControl"
+                name: "Arrows"
+                input: false
+                components:
+                    Anchor:
+                        leftAnchorEnabled: true
+                        leftAnchor: 120.000000
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfFirstChild"
+                        verticalPolicy: "PercentOfFirstChild"
+                children:
+                -   class: "UIControl"
+                    name: "CommonArrows"
+                    input: false
+                    components:
+                        LinearLayout:
+                            spacing: 112.000000
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfChildrenSum"
+                            verticalPolicy: "PercentOfMaxChild"
+                        UIRepeatComponent:
+                            control: "~res:/UI/Screens3/Lobby/Story/Steps/Arrows/LeftRight.yaml"
+                            dataContainer: "storyView.tree.groups.common.steps"
+                            args:
+                                "isVisible": "_index != storyView.tree.groups.common.steps.Size() - 1"
+                                "width": "26.000000"
+            -   class: "UIControl"
+                name: "Steps"
+                input: false
+                components:
+                    LinearLayout:
+                        spacing: 10.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        verticalPolicy: "PercentOfMaxChild"
+                children:
+                -   class: "UIControl"
+                    name: "CommonSteps"
+                    input: false
+                    components:
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        LinearLayout:
+                            spacing: 10.000000
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfChildrenSum"
+                            verticalPolicy: "PercentOfMaxChild"
+                        UIRepeatComponent:
+                            control: "~res:/UI/Screens3/Lobby/Story/Components/Steps/Progression.yaml"
+                            dataContainer: "storyView.tree.groups.common.steps"
+                            args:
+                                "model": "_item"
+                                "index": "_index + 1"
+                                "stepSize": "eStepSize.M"
+                            eventActions:
+                            - ["DESELECT", "DESELECT", ""]
+                            - ["SELECT_STEP", "SCROLL_TO_STEP", "_event.id, \"**/Step\" + str(_event.id)"]
+                            - ["SHOW_STEP_INFO", "SHOW_STEP_INFO", "_event.id"]
+                            elementNameExpression: "\"Step\" + str(_item.step.id)"

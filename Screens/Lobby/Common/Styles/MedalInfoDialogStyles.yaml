@@ -1,0 +1,29 @@
+Header:
+    version: "106"
+StyleSheets:
+-   selectors:
+    - ".ribbon #MainContent #background #ScrollArea #scrollContainerControl #ContentWrapper #Content #leftContent #AchievementItem"
+    - ".ribbon #MainContent #background #ScrollArea #scrollContainerControl #ContentWrapper #Content #leftContent #historicInfo"
+    properties:
+        visible: false
+-   selectors:
+    - ".ribbon #MainContent #background #ScrollArea #scrollContainerControl #ContentWrapper #Content #leftContent #Ribbon"
+    properties:
+        visible: true
+-   selectors:
+    - ".ribbon #MainContent #background #ScrollArea #scrollContainerControl #ContentWrapper #Content #rightContent #conditions"
+    properties:
+        anchor-leftAnchor: 0.000000
+-   selectors:
+    - ".medal #MainContent #background #ScrollArea #scrollContainerControl #ContentWrapper #Content #leftContent #AchievementItem"
+    - ".medal #MainContent #background #ScrollArea #scrollContainerControl #ContentWrapper #Content #leftContent #historicInfo"
+    properties:
+        visible: true
+-   selectors:
+    - ".medal #MainContent #background #ScrollArea #scrollContainerControl #ContentWrapper #Content #leftContent #Ribbon"
+    properties:
+        visible: false
+-   selectors:
+    - ".medal #background #ScrollArea #scrollContainerControl #MainContent #ContentWrapper #Content #rightContent #conditions"
+    properties:
+        anchor-leftAnchor: 15.000000

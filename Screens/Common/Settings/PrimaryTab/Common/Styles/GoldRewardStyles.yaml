@@ -1,0 +1,12 @@
+Header:
+    version: "23"
+StyleSheets:
+-   selector: ".align.vi"
+    properties:
+        anchor-vCenterAnchor: -4.000000
+-   selector: ".align"
+    properties:
+        anchor-vCenterAnchor: -2.000000
+-   selector: ".align.th"
+    properties:
+        anchor-vCenterAnchor: -1.000000

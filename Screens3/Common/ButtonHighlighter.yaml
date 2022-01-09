@@ -1,0 +1,33 @@
+Header:
+    version: 127
+Prototypes:
+-   class: "UIControl"
+    name: "HighlightHolder"
+    size: [80.000000, 88.000000]
+    pivot: [0.500000, 0.500000]
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens3/Common/ButtonHighlighterPulsation.animation"
+        UIOpacityComponent: {}
+        UIAttachLayoutSlaveComponent:
+            slaveSizePolicy: "MasterSize"
+    children:
+    -   class: "UIControl"
+        name: "Highlight"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Background:
+                drawType: "DRAW_STRETCH_BOTH"
+                sprite: "~res:/Gfx/UI/Tutorial/glow_equipmentKeys"
+                leftRightStretchCap: 9.000000
+                topBottomStretchCap: 9.000000
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "parent + 7 * 2"
+                verticalPolicy: "Formula"
+                verticalFormula: "parent + 14"

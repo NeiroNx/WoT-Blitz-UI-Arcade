@@ -1,0 +1,85 @@
+Header:
+    version: 140
+Prototypes:
+-   class: "UIControl"
+    name: "StuffIcon"
+    size: [96.000000, 116.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            horizontalMin: 0.001000
+            verticalPolicy: "PercentOfParent"
+            verticalMin: 0.001000
+        UIDataParamsComponent:
+            params:
+            - ["StuffResource", "stuff", "null", "{ }"]
+            events:
+            - "STUFF_ICON_LOADED"
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/Lobby/Common/Resource/Detailed/StuffIcon.actions"
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        pivot: [0.500000, 0.500000]
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 96.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 116.000000
+            ScalePolicy:
+                horizontalFormula: "min(1.0, min(parentSize.X / size.X, parentSize.Y / size.Y))"
+                verticalFormula: "min(1.0, min(parentSize.X / size.X, parentSize.Y / size.Y))"
+        children:
+        -   class: "UIControl"
+            name: "Grade"
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_PROPORTIONAL"
+                    sprite: "~res:/Gfx/UI/Storage/Items_back"
+                    perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                UIOpacityComponent: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+            bindings:
+            - ["classes", "str(stuff.grade, ArtefactGrade, \"color\") + \"-bg\""]
+            - ["UIOpacityComponent.opacity", "when stuff.grade == ArtefactGrade.unknown -> 0.000000, 1.000000"]
+        -   class: "UIControl"
+            name: "Icon"
+            input: false
+            components:
+                UITextureComponent:
+                    drawType: "DRAW_SCALE_PROPORTIONAL"
+                    perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            bindings:
+            - ["visible", "empty(stuff.iconUrl)"]
+            - ["UITextureComponent.spritePath", "stuff.icon"]
+        -   class: "UIControl"
+            name: "IconUrl"
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_PROPORTIONAL"
+                    perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                UIUrlImageComponent:
+                    placeholderScenePath: "~res:/UI/Screens3/Common/LoadingOverlay.yaml"
+                    placeholderControlName: "LoadingOverlay"
+                    imageLoadedEvent: "StuffIconLoaded"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            bindings:
+            - ["visible", "not empty(stuff.iconUrl)"]
+            - ["UIUrlImageComponent.imageUrl", "stuff.iconUrl"]

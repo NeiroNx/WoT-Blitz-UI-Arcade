@@ -1,0 +1,25 @@
+Header:
+    version: "47"
+ImportedPackages:
+- "~res:/UI/Screens/Dialogs.yaml"
+Controls:
+-   prototype: "Dialogs/WarningDialog"
+    name: "DialogBackground"
+    components:
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Common/Settings/PrimaryTab/Common/DemoCompletionProposeDialog.yaml"
+    children:
+    -   path: "Dialog/Middle/DialogText"
+        size: [460.000000, 150.000000]
+        components:
+            UITextComponent:
+                text: "#demo_restriction:Profile_Update_Dialog/Description"
+                color: [1.000000, 1.000000, 1.000000, 1.000000]
+            Anchor:
+                topAnchor: 60.000000
+                bottomAnchor: 90.000000
+    -   path: "Dialog/Top/TitleText"
+        components:
+            UITextComponent:
+                text: "#demo_restriction:Profile_Update_Dialog/Title"

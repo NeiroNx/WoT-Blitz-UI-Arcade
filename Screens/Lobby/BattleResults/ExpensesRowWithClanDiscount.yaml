@@ -1,0 +1,146 @@
+Header:
+    version: "70"
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/BattleResults/DetailsRewardSubpage.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "ExpensesRowWithClanDiscount"
+    size: [740.000000, 32.000000]
+    input: false
+    components:
+        UIDataParamsComponent:
+            params:
+            - ["string", "label", "\"\"", "localize(\"#battle_results:DetailsPage/CreditsExperiencePage/Repair_Tank\")"]
+            - ["bool", "showDiscountValue", "true", "true"]
+            - ["bool", "withPremium", "false", "true"]
+            - ["ClanDiscountedValue", "value", "null", "{ }"]
+        UIDataLocalsComponent:
+            locals:
+            - ["string", "clanDiscountValue", "percent(-float(value.discount), 0)"]
+            - ["string", "colorClass", "when value.value > 0 -> \"text-color-red\", \"text-color-white\""]
+            - ["string", "costStr", "str1000Separated(-value.value)"]
+    children:
+    -   class: "UIControl"
+        name: "LabelContainer"
+        size: [251.000000, 32.000000]
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                topAnchorEnabled: true
+            LinearLayout:
+                spacing: 5.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+        children:
+        -   class: "UIControl"
+            name: "Label"
+            size: [134.000000, 32.000000]
+            input: false
+            classes: "text1"
+            components:
+                UITextComponent:
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 0.000000
+                    hCenterAnchorEnabled: true
+                    hCenterAnchor: 0.000000
+                    topAnchorEnabled: true
+                    topAnchor: 0.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens/Fonts.yaml"
+            bindings:
+            - ["UITextComponent.text", "label", "Read"]
+        -   class: "UIControl"
+            name: "ClanSupplyDiscount"
+            size: [112.000000, 35.000000]
+            input: false
+            components:
+                LinearLayout:
+                    spacing: 4.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+            bindings:
+            - ["visible", "value.discount > 0", "Read"]
+            children:
+            -   class: "UIControl"
+                name: "Value"
+                size: [58.000000, 33.000000]
+                input: false
+                classes: "header3"
+                components:
+                    UITextComponent:
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens/Fonts.yaml"
+                bindings:
+                - ["visible", "showDiscountValue", "Read"]
+                - ["UITextComponent.text", "clanDiscountValue", "Read"]
+            -   class: "UIControl"
+                name: "Icon"
+                size: [50.000000, 30.000000]
+                input: false
+                components:
+                    Background:
+                        sprite: "~res:/Gfx/UI/LobbyCommon/DiscountClanSmall"
+    -   class: "UIControl"
+        name: "VerticalBox"
+        position: [555.000000, 0.000000]
+        size: [370.000000, 0.000000]
+        pivot: [0.500000, 0.000000]
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                rightAnchorEnabled: true
+                rightAnchor: 0.000000
+                topAnchorEnabled: true
+                topAnchor: 0.000000
+            LinearLayout:
+                orientation: "TopDown"
+            SizePolicy:
+                verticalPolicy: "PercentOfChildrenSum"
+        children:
+        -   prototype: "DetailsRewardSubpage/RewardCell"
+            name: "RewardCell"
+            position: [157.000000, -15.000000]
+            children:
+            -   path: "WithPrem"
+                bindings:
+                - ["classes", "when withPremium -> \"color-white\",\n                                                      \"color-white-25\"", "Read"]
+                children: []
+            -   path: "WithPrem/Value"
+                components:
+                    UITextComponent: {}
+                bindings:
+                - ["classes", "\"header4 \" + colorClass", "Read"]
+                - ["UITextComponent.text", "costStr", "Read"]
+            -   path: "WithoutPrem"
+                bindings:
+                - ["classes", "when withPremium -> \"color-white-25\", \"color-white\"", "Read"]
+                children: []
+            -   path: "WithoutPrem/Value"
+                components:
+                    UITextComponent: {}
+                bindings:
+                - ["classes", "\"header4 \" + colorClass", "Read"]
+                - ["UITextComponent.text", "costStr", "Read"]
+    -   class: "UIControl"
+        name: "Splitter"
+        position: [0.000000, 31.000000]
+        size: [740.000000, 1.000000]
+        input: false
+        components:
+            Background:
+                drawType: "DRAW_SCALE_TO_RECT"
+                sprite: "~res:/Gfx/UI/BattleResultsScreen/TableLine"
+                perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                bottomAnchorEnabled: true

@@ -1,0 +1,99 @@
+Header:
+    version: 140
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/RichText.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "ResearchSelectionDialog"
+    size: [640.000000, 480.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["TankModulesTreeModel", "modules", "null", "{ }"]
+        UIDataLocalVarsComponent:
+            data:
+            - ["int", "selectedDescr", "modules.prevNodes[0].compactDescr"]
+        UIChildComponent0:
+            prototypePath: "~res:/UI/Screens3/Lobby/Common/Dialog/TextDialog.yaml"
+            args:
+                "accentButtonType": "eButtonType.POSITIVE"
+                "type": "eDialogType.FILL"
+                "header": "localize(\"dialog/XPConvert/ChooseTank/Title\")"
+                "headerImage": "\"\""
+                "accentButton": "\"RESEARCH\""
+                "optionalButton": "\"#common:DialogButton/Cancel\""
+                "contentControl": "Content"
+            eventActions:
+            - ["ACCENT_CLICKED", "ACCENT_CLICKED", "selectedDescr"]
+            - ["OPTIONAL_CLICKED", "OPTIONAL_CLICKED", "_event"]
+        UIDataOnEventComponent0:
+            eventName: "ITEM_SELECTED"
+            modelFieldExpression: "selectedDescr"
+            dataExpression: "_event"
+Slots:
+-   class: "UIControl"
+    name: "Content"
+    size: [400.000000, 156.000000]
+    input: false
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+            spacing: 24.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfChildrenSum"
+    children:
+    -   class: "UIControl"
+        name: "Text"
+        input: false
+        components:
+            LinearLayout:
+                orientation: "TopDown"
+                spacing: 16.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfChildrenSum"
+        children:
+        -   prototype: "RichText/RichText"
+            name: "ContentText"
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                FlowLayout:
+                    hDynamicPadding: true
+                    alignment: "Center"
+                UIDataParamsComponent:
+                    args:
+                        "baseFontSize": "\"t-body\""
+                        "baseFontStyle": "\"regular\""
+                        "baseFontColor": "\"white-wild-sand-50-text\""
+                        "key": "localize(\"dialog/XPConvert/ChooseTank/Description\")"
+                        "resource1Model": "null"
+                        "resource2Model": "null"
+                        "resource3Model": "null"
+                        "resource4Model": "null"
+    -   class: "UIControl"
+        name: "TanksList"
+        input: false
+        components:
+            LinearLayout:
+                orientation: "TopDown"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfChildrenSum"
+            UISwitchBarComponent:
+                onSelectElement: "ITEM_SELECTED"
+                onSelectElementData: "_selectedElement"
+                selectionEventType: "TOUCH_UP"
+            UIRepeatComponent:
+                control: "~res:/UI/Screens3/Lobby/ModulesTree/ResearchSelectionVehicleCell.yaml"
+                dataContainer: "modules.prevNodes"
+                args:
+                    "isSelected": "selectedDescr == _item.compactDescr"
+                    "tank": "_item"
+        bindings:
+        - ["UISwitchBarComponent.selectedElement", "selectedDescr"]

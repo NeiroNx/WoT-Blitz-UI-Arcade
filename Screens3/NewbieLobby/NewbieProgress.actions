@@ -1,0 +1,23 @@
+action GoToNextStep()
+{
+	ChangeData(progressState, nextState);
+}
+
+action DisableBlurAndFade(float time)
+{
+	ChangeData(hangarProgressOpacity, 0.0);
+	ChangeData(blurAndFadeOpacity, 1.0);
+	ChangeData(blurAndFadeOpacity, 0.0, time);
+}
+
+action ShowHangarProgress(float time)
+{
+	ChangeData(hangarProgressOpacity, 0.0);
+	ChangeData(hangarProgressOpacity, 1.0, time);
+}
+
+action AnimateAvatarAnchoring()
+{
+	Scale("**/NewbieAvatarWrapper", 0.5, 0.5, 0.25, EASE_IN);
+	Scale("**/NewbieAvatarWrapper", 0.38, 0.38, 0.25, EASE_OUT);
+} 

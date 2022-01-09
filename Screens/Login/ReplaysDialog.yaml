@@ -1,0 +1,168 @@
+Header:
+    version: 130
+ImportedPackages:
+- "~res:/UI/Screens/Fonts.yaml"
+- "~res:/UI/Screens/Common/StyledButton.yaml"
+- "~res:/UI/Screens/Lobby/Common/CheckBox.yaml"
+StyleSheets:
+-   selectors:
+    - ".cell:selected"
+    properties:
+        bg-color: [0.400000, 0.800000, 0.400000, 1.000000]
+-   selectors:
+    - ".cell"
+    properties:
+        bg-color: [0.400000, 0.400000, 0.400000, 0.329412]
+Prototypes:
+-   class: "UIListCell"
+    name: "ReplayCellItem"
+    position: [0.000000, 1.000000]
+    size: [480.000000, 49.000000]
+    selected: false
+    classes: "cell"
+    components:
+        Background:
+            drawType: "DRAW_FILL"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+        StyleSheet:
+            inheritsStylesFromParent: false
+            styles: "~res:/UI/Screens/Login/ReplaysDialog.yaml"
+    children:
+    -   class: "UIControl"
+        customClass: "ListItemsDivider"
+        name: "Divider"
+        position: [0.000000, 47.000000]
+        size: [480.000000, 2.000000]
+        input: false
+        components:
+            Background:
+                drawType: "DRAW_SCALE_TO_RECT"
+                sprite: "~res:/Gfx/UI/LobbyCommon/GradientDivider"
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                bottomAnchorEnabled: true
+    -   class: "UIStaticText"
+        name: "Title"
+        position: [10.000000, 5.000000]
+        size: [460.000000, 39.000000]
+        classes: "header4"
+        components:
+            Background:
+                align: ["HCENTER", "VCENTER"]
+            UITextComponent:
+                text: "Title Title Title Title TitleTitle Title Title Title TitleTitle Title Title Title TitleTitle Title Title Title TitleTitle Title Title Title Title"
+                colorInheritType: "COLOR_IGNORE_PARENT"
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 10.000000
+                rightAnchorEnabled: true
+                rightAnchor: 10.000000
+                topAnchorEnabled: true
+                topAnchor: 5.000000
+                bottomAnchorEnabled: true
+                bottomAnchor: 5.000000
+-   prototype: "CheckBox/CheckBox"
+    name: "CheckBox"
+    classes: "checkbox button-color-gray"
+    components:
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Login/ReplaysDialog.yaml"
+Controls:
+-   class: "UIControl"
+    customClass: "DraggableDialog"
+    name: "ReplaysDialog"
+    position: [-310.000000, -250.000000]
+    size: [620.000000, 530.000000]
+    components:
+        Background:
+            drawType: "DRAW_STRETCH_BOTH"
+            sprite: "~res:/Gfx/UI/CommonUIElements/PopupBackMiddle"
+            leftRightStretchCap: 5.000000
+            topBottomStretchCap: 5.000000
+        Anchor:
+            hCenterAnchorEnabled: true
+            vCenterAnchorEnabled: true
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Login/ReplaysDialog.yaml"
+    children:
+    -   class: "UIList"
+        name: "replaysList"
+        position: [15.000000, 40.000000]
+        size: [590.000000, 390.000000]
+        orientation: "ORIENTATION_VERTICAL"
+        components:
+            Background:
+                drawType: "DRAW_SCALE_TO_RECT"
+            UIIdentifierComponent:
+                id: "replay_list"
+    -   class: "UIStaticText"
+        name: "titleText"
+        size: [620.000000, 40.000000]
+        input: false
+        classes: "header4"
+        components:
+            Background:
+                align: ["LEFT", "TOP"]
+            UITextComponent:
+                text: "Open Replay"
+                colorInheritType: "COLOR_IGNORE_PARENT"
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+            StyleSheet:
+                styles: "~res:/UI/Screens/Fonts.yaml"
+    -   prototype: "StyledButton/StyledButton"
+        name: "cancelButton"
+        size: [192.000000, 64.000000]
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 15.000000
+                bottomAnchorEnabled: true
+                bottomAnchor: 15.000000
+        children:
+        -   path: "Caption"
+            components:
+                UITextComponent:
+                    text: "Cancel"
+    -   prototype: "StyledButton/StyledButton"
+        name: "selectAllButton"
+        size: [192.000000, 64.000000]
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 214.000000
+                bottomAnchorEnabled: true
+                bottomAnchor: 15.000000
+        children:
+        -   path: "Caption"
+            components:
+                UITextComponent:
+                    text: "Select All"
+    -   prototype: "StyledButton/StyledButton"
+        name: "okButton"
+        size: [192.000000, 64.000000]
+        components:
+            Anchor:
+                rightAnchorEnabled: true
+                rightAnchor: 15.000000
+                bottomAnchorEnabled: true
+                bottomAnchor: 15.000000
+            UIIdentifierComponent:
+                id: "replay_ok_button"
+        children:
+        -   path: "Caption"
+            components:
+                UITextComponent:
+                    text: "OK"
+-   prototype: "ReplayCellItem"
+    name: "MyReplayCellItem"
+    components:
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Login/ReplaysDialog.yaml"

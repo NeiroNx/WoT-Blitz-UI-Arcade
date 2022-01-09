@@ -1,0 +1,23 @@
+Header:
+    version: "79"
+StyleSheets:
+-   selectors:
+    - ".padding"
+    properties:
+        sizePolicy-horizontalPolicy: "PercentOfMaxChild"
+-   selectors:
+    - ".padding.desktop-unvisible.Desktop"
+    properties:
+        sizePolicy-horizontalPolicy: "Formula"
+-   selectors:
+    - ".fixed"
+    - ".only-notch"
+    - ".fixed-plus-notch"
+    properties:
+        visible: false
+-   selectors:
+    - ".fixed-padding * .fixed"
+    - ".only-notch-padding * .only-notch"
+    - ".fixed-plus-notch-padding * .fixed-plus-notch"
+    properties:
+        visible: true

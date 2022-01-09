@@ -1,0 +1,24 @@
+Header:
+    version: 138
+ImportedPackages:
+- "~res:/UI/Screens3/Common/PopupMenuWithRichText.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "MissingTankPopup"
+    input: false
+    components:
+        Anchor:
+            leftAnchorEnabled: true
+            rightAnchorEnabled: true
+            topAnchorEnabled: true
+            bottomAnchorEnabled: true
+    children:
+    -   prototype: "PopupMenuWithRichText/Slave"
+        name: "Slave"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "title": "\"\""
+                    "text": "localize(\"#hangar_showcase:MissingTank\")"
+                    "slaveAlign": "ePositionAlign.Top"
+                    "masterId": "\"BUY\""

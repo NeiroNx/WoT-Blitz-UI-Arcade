@@ -1,0 +1,56 @@
+Header:
+    version: 128
+ImportedPackages:
+- "~res:/UI/Screens3/Battle/ModernTutorialHints/TutorialHintBasic.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "NSSniperModeHint"
+    size: [1280.000000, 720.000000]
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens3/Battle/ModernTutorialHints/FadeIn.animation;Disappear,~res:/UI/Screens3/Battle/ModernTutorialHints/FadeOut.animation"
+        UIOpacityComponent: {}
+        Anchor:
+            hCenterAnchorEnabled: true
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+    children:
+    -   class: "UIControl"
+        name: "Scheme"
+        position: [0.000000, 0.000000]
+        input: false
+        components:
+            UIOpacityComponent: {}
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Common/NintendoSwitch/Scheme/NintendoSwitchScheme.yaml"
+                args:
+                    "focused": "[ eNintendoSwitchControls.LeftTrigger; ]"
+                    "enabled": "[ eNintendoSwitchControls.A; eNintendoSwitchControls.B; eNintendoSwitchControls.X; eNintendoSwitchControls.Y; eNintendoSwitchControls.Left; eNintendoSwitchControls.Right; eNintendoSwitchControls.Up; eNintendoSwitchControls.Down; eNintendoSwitchControls.LeftThumbstick; eNintendoSwitchControls.LeftThumbstickAxis; eNintendoSwitchControls.LeftShoulder; eNintendoSwitchControls.LeftTrigger; eNintendoSwitchControls.RightThumbstick; eNintendoSwitchControls.RightThumbstickAxis; eNintendoSwitchControls.RightShoulder; eNintendoSwitchControls.RightTrigger; ]"
+                    "arrowSides": "[ eSideType.Bottom; ]"
+    -   class: "UIControl"
+        name: "Hint"
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                hCenterAnchor: -190.000000
+                vCenterAnchorEnabled: true
+                vCenterAnchor: -150.000000
+        children:
+        -   prototype: "TutorialHintBasic/HintContainer"
+            name: "HintContainer"
+            classes: "ArrowRight"
+            components:
+                UIDataParamsComponent:
+                    args:
+                        "title": "\"#battle_hints:sniper_mode/title\""
+                        "text": "localize(\"#battle_hints:sniper_mode/hint2\", { \"control_name\" = \"<switchButtonZL/>\"; })"

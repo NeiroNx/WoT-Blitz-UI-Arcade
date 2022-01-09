@@ -1,0 +1,235 @@
+Header:
+    version: "24"
+ImportedPackages:
+- "~res:/UI/Screens/Fonts.yaml"
+- "~res:/UI/Styles/ColorStyles.yaml"
+StyleSheets:
+-   selector: ".dialog-direct-left ? #bottomTail, .dialog-direct-left ? #topTail, .dialog-direct-left ? #leftTail, .dialog-direct-right ? #rightTail, .dialog-direct-right ? #topTail, .dialog-direct-right ? #bottomTail, .dialog-direct-top ? #rightTail, .dialog-direct-top ? #topTail, .dialog-direct-top ? #leftTail, .dialog-direct-bottom ? #bottomTail, .dialog-direct-bottom ? #leftTail, .dialog-direct-bottom ? #rightTail"
+    properties:
+        visible: false
+-   selector: ".dialog-direct-left ? #rightTail, .dialog-direct-right ? #leftTail, .dialog-direct-top ? #bottomTail, .dialog-direct-bottom ? #topTail"
+    properties:
+        visible: true
+Prototypes:
+-   class: "UIControl"
+    name: "Tail"
+    size: [26.000000, 16.000000]
+    pivot: [0.500000, 0.500000]
+    noInput: true
+    classes: "color-yellow"
+    components:
+        Anchor: {}
+        Background:
+            sprite: "~res:/Gfx/UI/CommonUIElements/Selection_back_0.psd"
+            align: ["HCENTER", "BOTTOM"]
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Lobby/Common/Hint.yaml"
+-   class: "UIControl"
+    name: "HintDialog"
+    size: [454.000000, 32.000000]
+    noInput: false
+    components:
+        SizePolicy:
+            verticalPolicy: "Formula"
+            verticalFormula: "lastChild+32"
+        Background: {}
+        UIInputEventComponent:
+            onTouchUpInside: "POPUP_ON_CLOSE_ACTION"
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Lobby/Common/Hint.yaml"
+    children:
+    -   class: "UIControl"
+        name: "TailLayer"
+        size: [454.000000, 32.000000]
+        noInput: true
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+        children:
+        -   prototype: "Tail"
+            name: "bottomTail"
+            components:
+                Anchor:
+                    bottomAnchorEnabled: true
+                Background:
+                    spriteModification: ["FLIP_VERTICAL"]
+                    colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+        -   prototype: "Tail"
+            name: "topTail"
+            components:
+                Anchor:
+                    topAnchorEnabled: true
+                Background:
+                    colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+        -   prototype: "Tail"
+            name: "leftTail"
+            angle: 90.000000
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                Background:
+                    spriteModification: ["FLIP_VERTICAL"]
+                    colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+        -   prototype: "Tail"
+            name: "rightTail"
+            angle: -90.000000
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                Background:
+                    spriteModification: ["FLIP_VERTICAL"]
+                    colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+    -   class: "UIControl"
+        name: "InsideContainer"
+        size: [414.000000, 0.000000]
+        noInput: true
+        components:
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "parent-40"
+                verticalPolicy: "PercentOfLastChild"
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+        children:
+        -   class: "UIControl"
+            name: "Bg"
+            noInput: true
+            classes: "color-yellow"
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    rightAnchorEnabled: true
+                    topAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                Background:
+                    drawType: "DRAW_STRETCH_BOTH"
+                    sprite: "~res:/Gfx/UI/CommonUIElements/square_BigAngle.psd"
+                    colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                    leftRightStretchCap: 7.000000
+                    topBottomStretchCap: 7.000000
+-   class: "UIControl"
+    name: "InfoControl"
+    size: [20.000000, 20.000000]
+    noInput: true
+    classes: "color-black"
+    components:
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 20.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 20.000000
+        Anchor:
+            topAnchorEnabled: true
+        Background:
+            sprite: "~res:/Gfx/UI/LobbyCommon/info_button.psd"
+            colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Lobby/Common/Hint.yaml"
+-   class: "UIControl"
+    name: "TextContainer"
+    size: [68.000000, 69.000000]
+    noInput: true
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+            padding: 10.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfChildrenSum"
+            verticalMin: 34.000000
+        Anchor:
+            leftAnchorEnabled: true
+            leftAnchor: 15.000000
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Lobby/Common/Hint.yaml"
+    children:
+    -   class: "UIStaticText"
+        name: "Title"
+        size: [68.000000, 26.000000]
+        classes: "header3 text-color-black"
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            Anchor:
+                leftAnchorEnabled: true
+                useRtl: true
+            UITextComponent:
+                text: "Header3"
+                colorInheritType: "COLOR_MULTIPLY_ALPHA_ONLY"
+                align: ["LEFT", "VCENTER"]
+                useRtlAlign: "USE_BY_SYSTEM"
+    -   class: "UIStaticText"
+        name: "Description"
+        size: [40.000000, 23.000000]
+        classes: "text2 text-color-black"
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                horizontalMax: 500.000000
+                verticalPolicy: "PercentOfContent"
+            Anchor:
+                leftAnchorEnabled: true
+                useRtl: true
+            UITextComponent:
+                text: "Text2"
+                colorInheritType: "COLOR_MULTIPLY_ALPHA_ONLY"
+                multiline: "MULTILINE_ENABLED"
+                align: ["LEFT", "VCENTER"]
+                useRtlAlign: "USE_BY_SYSTEM"
+-   class: "UIControl"
+    name: "TailLayer"
+    size: [454.000000, 32.000000]
+    noInput: true
+    components:
+        Anchor:
+            leftAnchorEnabled: true
+            rightAnchorEnabled: true
+            topAnchorEnabled: true
+            bottomAnchorEnabled: true
+    children:
+    -   prototype: "Tail"
+        name: "bottomTail"
+        components:
+            Anchor:
+                bottomAnchorEnabled: true
+            Background:
+                spriteModification: ["FLIP_VERTICAL"]
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+    -   prototype: "Tail"
+        name: "topTail"
+        components:
+            Anchor:
+                topAnchorEnabled: true
+            Background:
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+    -   prototype: "Tail"
+        name: "leftTail"
+        angle: 90.000000
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            Background:
+                spriteModification: ["FLIP_VERTICAL"]
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+    -   prototype: "Tail"
+        name: "rightTail"
+        angle: -90.000000
+        components:
+            Anchor:
+                rightAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            Background:
+                spriteModification: ["FLIP_VERTICAL"]
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"

@@ -1,0 +1,66 @@
+Header:
+    version: 123
+ImportedPackages:
+- "~res:/UI/Screens3/Common/DoubleButtonPopupMenu.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "RewardInfoPopup"
+    size: [960.000000, 640.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["string", "playerName", "\"\"", "\"\""]
+            - ["string", "masterId", "\"\"", "\"position_0\""]
+            events:
+            - "FINISH_HIDE_POPUP_ANIMATION"
+            - "POPUP_ON_CLOSE_ACTION"
+            - "ON_SHOW_PROFILE_BUTTON_CLICKED"
+            - "ON_CHAT_BUTTON_CLICKED"
+    children:
+    -   prototype: "DoubleButtonPopupMenu/Slave"
+        name: "Slave"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "slaveAlign": "ePositionAlign.Right"
+                    "secondButtonCaption": "when playerName == \"\" -> \"\", \"clanMissions/tooltips/chat/button\""
+                    "firstButtonCaption": "when playerName == \"\" -> \"\", \"clanMissions/tooltips/profile/button\""
+                    "text": "when playerName == \"\" -> localize(\"Loading...\"), \"\""
+                    "isAlignLeft": "false"
+                    "masterId": "masterId"
+                    "title": "playerName"
+                eventActions:
+                - ["ON_CLICK_SECOND_BUTTON", "ON_CHAT_BUTTON_CLICKED", ""]
+                - ["FINISH_HIDE_POPUP_ANIMATION", "FINISH_HIDE_POPUP_ANIMATION", ""]
+                - ["POPUP_ON_CLOSE_ACTION", "POPUP_ON_CLOSE_ACTION", ""]
+                - ["ON_CLICK_FIRST_BUTTON", "ON_SHOW_PROFILE_BUTTON_CLICKED", ""]
+        children:
+        -   path: "Content/Text"
+            bindings:
+            - ["visible", "not empty(text)"]
+        -   path: "Content/ButtonsHolder"
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                LinearLayout:
+                    spacing: 16.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    horizontalFormula: ""
+            children: []
+        -   path: "Content/ButtonsHolder/FirstButton"
+            components:
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 140.000000
+            children: []
+        -   path: "Content/ButtonsHolder/SecondButton"
+            components:
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 140.000000
+            children: []

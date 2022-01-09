@@ -1,0 +1,8 @@
+animation ON_FINISH()
+{
+	if (inputDisabled == false)
+	{
+		PlaySound("GUI/buttons/ok");
+		Event("FINISH");
+	}
+}

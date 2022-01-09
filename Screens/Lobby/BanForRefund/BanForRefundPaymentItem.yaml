@@ -1,0 +1,88 @@
+Header:
+    version: "28"
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/BanForRefund/BanForRefundPayment.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "RefundItem"
+    size: [440.000000, 42.000000]
+    input: false
+    classes: "pane-bg"
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "FixedSize"
+            verticalValue: 42.000000
+        Anchor:
+            leftAnchorEnabled: true
+        Background: {}
+        UIDataSourceComponent0:
+            source: "~res:/UI/Examples/Model/Lobby/BanForRefund/BanForRefundListItem.model"
+        UIDataSourceComponent1:
+            sourceType: "File"
+            source: "~res:/UI/Screens/Lobby/BanForRefund/ViewModels/BanForRefundListItemView.model"
+        StyleSheet:
+            styles: "~res:/UI/Styles/BackgroundStyles.yaml"
+    bindings:
+    - ["selected", "isSelected", "Read"]
+    children:
+    -   class: "UIControl"
+        name: "Date"
+        input: false
+        classes: "text2 color=text-color-blue"
+        components:
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "min(parent / 3, content)"
+                verticalPolicy: "PercentOfContent"
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 16.000000
+                vCenterAnchorEnabled: true
+                vCenterAnchor: -1.000000
+            UITextComponent:
+                colorInheritType: "COLOR_IGNORE_PARENT"
+                fitting: "FITTING_REDUCE"
+                align: ["LEFT", "VCENTER"]
+            StyleSheet:
+                styles: "~res:/UI/Screens/Fonts.yaml"
+        bindings:
+        - ["UITextComponent.text", "date", "Read"]
+    -   class: "UIControl"
+        name: "Cost"
+        input: false
+        classes: "text2 color=text-color-white"
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+                vCenterAnchor: -1.000000
+            UITextComponent:
+                colorInheritType: "COLOR_IGNORE_PARENT"
+            StyleSheet:
+                styles: "~res:/UI/Screens/Fonts.yaml"
+        bindings:
+        - ["UITextComponent.text", "price", "Read"]
+    -   class: "UIControl"
+        name: "StatusPay"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            Anchor:
+                rightAnchorEnabled: true
+                rightAnchor: 16.000000
+                vCenterAnchorEnabled: true
+                vCenterAnchor: -1.000000
+            UITextComponent:
+                colorInheritType: "COLOR_IGNORE_PARENT"
+                align: ["RIGHT", "VCENTER"]
+            StyleSheet:
+                styles: "~res:/UI/Screens/Fonts.yaml"
+        bindings:
+        - ["classes", "statusClass+\" text2\"", "Read"]
+        - ["UITextComponent.text", "statusString", "Read"]

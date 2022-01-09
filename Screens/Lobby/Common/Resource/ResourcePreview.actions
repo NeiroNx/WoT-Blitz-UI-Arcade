@@ -1,0 +1,4 @@
+action URL_IMAGE_LOADED
+{
+    PlayFrameAnimation("**/Icon", -1, 12);
+}

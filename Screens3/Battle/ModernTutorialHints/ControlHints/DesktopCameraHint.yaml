@@ -1,0 +1,129 @@
+Header:
+    version: 123
+ImportedPackages:
+- "~res:/UI/Screens3/Battle/ModernTutorialControls/Mouse.yaml"
+- "~res:/UI/Screens3/Battle/ModernTutorialHints/TutorialHintBasic.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "DesktopCameraHint"
+    size: [1024.000000, 768.000000]
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens3/Battle/ModernTutorialHints/FadeIn.animation;Disappear,~res:/UI/Screens3/Battle/ModernTutorialHints/FadeOut.animation"
+        UIOpacityComponent: {}
+        Anchor:
+            hCenterAnchorEnabled: true
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            horizontalMax: 1200.000000
+            verticalPolicy: "PercentOfParent"
+    children:
+    -   prototype: "TutorialHintBasic/HintContainer"
+        name: "HintContainer"
+        classes: "ArrowBottom"
+        components:
+            Anchor:
+                rightAnchorEnabled: true
+                rightAnchor: 210.000000
+                vCenterAnchorEnabled: true
+                vCenterAnchor: -100.000000
+            UIDataParamsComponent:
+                args:
+                    "text": "\"ModernTutorial/MouseCameraHint\""
+    -   class: "UIControl"
+        name: "MouseAndArrows"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Anchor:
+                rightAnchorEnabled: true
+                rightAnchor: 168.000000
+                vCenterAnchorEnabled: true
+                vCenterAnchor: 40.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfChildrenSum"
+        children:
+        -   class: "UIControl"
+            name: "MouseWrapper"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 260.000000
+            children:
+            -   prototype: "Mouse/Mouse"
+                name: "Mouse"
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 88.000000
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 164.000000
+            -   class: "UIControl"
+                name: "PointingArrowRight"
+                position: [88.000000, 106.000000]
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfMaxChild"
+                        verticalPolicy: "PercentOfMaxChild"
+                    UIChildComponent0:
+                        prototypePath: "~res:/UI/Screens3/Common/PointingArrow/PointingArrow.yaml"
+                        args:
+                            "arrowsCount": "2"
+            -   class: "UIControl"
+                name: "PointingArrowLeft"
+                position: [0.000000, 154.000000]
+                size: [32.000000, 32.000000]
+                angle: 180.000000
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfMaxChild"
+                        verticalPolicy: "PercentOfMaxChild"
+                    UIChildComponent0:
+                        prototypePath: "~res:/UI/Screens3/Common/PointingArrow/PointingArrow.yaml"
+                        args:
+                            "arrowsCount": "2"
+            -   class: "UIControl"
+                name: "PointingArrowBottom"
+                position: [68.000000, 212.000000]
+                size: [32.000000, 32.000000]
+                angle: 90.000000
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfMaxChild"
+                        verticalPolicy: "PercentOfMaxChild"
+                    UIChildComponent0:
+                        prototypePath: "~res:/UI/Screens3/Common/PointingArrow/PointingArrow.yaml"
+                        args:
+                            "arrowsCount": "2"
+            -   class: "UIControl"
+                name: "PointingArrowTop"
+                position: [20.000000, 48.000000]
+                size: [32.000000, 32.000000]
+                angle: -90.000000
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfMaxChild"
+                        verticalPolicy: "PercentOfMaxChild"
+                    UIChildComponent0:
+                        prototypePath: "~res:/UI/Screens3/Common/PointingArrow/PointingArrow.yaml"
+                        args:
+                            "arrowsCount": "2"
+CustomData:
+    Guides:
+        DesktopCameraHint:
+            Vertical:
+            - 948.000000

@@ -1,0 +1,24 @@
+animation Indicator
+{
+	if (isInstalled)
+	{
+		parallel
+		{
+			ChangeProperty("**/Indicator","UIOpacityComponent", "opacity", 1, 0.2, SINE_IN);
+			ChangeProperty("**/Indicator","SizePolicy", "horizontalValue", 20, 0.2, SINE_IN);
+			ChangeProperty("**/Installed", "UIOpacityComponent", "opacity", 0.7, 0.3, SINE_IN_SINE_OUT);
+			ChangeProperty("**/Installed","SizePolicy", "verticalValue", 100, 0.3, SINE_IN_SINE_OUT);
+		}
+	}
+	else
+	{
+		parallel
+		{
+			ChangeProperty("**/Indicator","UIOpacityComponent", "opacity", 0, 0.2, SINE_OUT);
+			ChangeProperty("**/Indicator","SizePolicy", "horizontalValue", 0, 0.2, SINE_OUT);
+			ChangeProperty("**/Installed","UIOpacityComponent", "opacity", 0, 0.2, SINE_IN_SINE_OUT);
+			ChangeProperty("**/Installed","SizePolicy", "verticalValue", 0, 0.2, SINE_IN_SINE_OUT);
+
+		}
+	}
+}

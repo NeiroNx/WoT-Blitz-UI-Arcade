@@ -1,0 +1,84 @@
+Header:
+    version: 130
+Prototypes:
+-   class: "UIControl"
+    name: "DevicesMedium"
+    size: [86.000000, 104.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            horizontalMin: 64.000000
+            verticalPolicy: "PercentOfParent"
+            verticalMin: 88.000000
+        UIDataParamsComponent:
+            params:
+            - ["string", "textStyle", "\"t-subtitle\"", "\"t-subtitle\""]
+            - ["OptionalDevicesResource", "devices", "null", "{ }"]
+            - ["control", "fx", "null", "null"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["string", "style", "textStyle + \" bold white-wild-sand-text\""]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            Anchor:
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                orientation: "TopDown"
+                skipInvisible: false
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfChildrenSum"
+        children:
+        -   class: "UIControl"
+            name: "IconWrapper"
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfLastChild"
+                    verticalPolicy: "PercentOfLastChild"
+            children:
+            -   class: "UIControl"
+                name: "FxHolder"
+                input: false
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                    UIChildComponent0:
+                        childType: "kControl"
+                        condition: "not isNull(fx)"
+                        control: "fx"
+            -   class: "UIControl"
+                name: "Icon"
+                input: false
+                components:
+                    UITextureComponent:
+                        spritePath: "~res:/Gfx/UI/Hangar/EquipmentCommon"
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 64.000000
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 64.000000
+        -   class: "UIControl"
+            name: "Text"
+            input: false
+            components:
+                UITextComponent: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "Formula"
+                    verticalFormula: "max(maxChild, 24)"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml"
+            bindings:
+            - ["classes", "style"]
+            - ["UITextComponent.text", "\"×\" + str1000Separated(devices.amount)"]

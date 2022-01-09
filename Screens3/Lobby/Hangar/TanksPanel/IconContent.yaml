@@ -1,0 +1,17 @@
+Header:
+    version: "92"
+Prototypes:
+-   class: "UIControl"
+    name: "IconContent"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        UITextureComponent: {}
+        SizePolicy:
+            horizontalPolicy: "PercentOfContent"
+            verticalPolicy: "PercentOfContent"
+        UIDataParamsComponent:
+            params:
+            - ["string", "iconPath", "\"~res:/Gfx/Lobby/icons/icon_pin_m.psd\"", "\"~res:/Gfx/Lobby/icons/icon_pin_m.psd\""]
+    bindings:
+    - ["UITextureComponent.spritePath", "iconPath"]

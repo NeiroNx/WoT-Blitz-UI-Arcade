@@ -1,0 +1,121 @@
+Header:
+    version: "85"
+ImportedPackages:
+- "~res:/UI/Screens/Common/Selection.yaml"
+StyleSheets:
+-   selectors:
+    - ".japan #Content"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/flags/flag_filter_japan"
+-   selectors:
+    - ".germany #Content"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/flags/flag_filter_germany"
+-   selectors:
+    - ".ussr #Content"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/flags/flag_filter_ussr"
+-   selectors:
+    - ".china #Content"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/flags/flag_filter_china"
+-   selectors:
+    - ".uk #Content"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/flags/flag_filter_uk"
+-   selectors:
+    - ".usa #Content"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/flags/flag_filter_usa"
+-   selectors:
+    - ".france #Content"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/flags/flag_filter_france"
+-   selectors:
+    - ".other #Content"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/flags/flag_filter_other"
+-   selectors:
+    - ".european #Content"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/flags/flag_filter_european"
+-   selectors:
+    - ".flag-button:selected #Selection"
+    properties:
+        visible: true
+-   selectors:
+    - ".flag-button #Selection"
+    properties:
+        visible: false
+-   selectors:
+    - ".flag-button #Disabled"
+    - ".flag-button:disabled #Selected"
+    properties:
+        visible: false
+-   selectors:
+    - ".flag-button:disabled #Disabled"
+    properties:
+        visible: true
+Prototypes:
+-   class: "UIControl"
+    name: "FlagButton"
+    size: [74.000000, 62.000000]
+    components:
+        Background:
+            drawType: "DRAW_ALIGNED"
+            leftRightStretchCap: 5.000000
+            topBottomStretchCap: 5.000000
+        Anchor:
+            vCenterAnchorEnabled: true
+        UISwitchBarElementComponent: {}
+        UIDataParamsComponent:
+            params:
+            - ["eNation", "nation", "eNation.USA", "eNation.USA"]
+            - ["bool", "disabled", "false", "true"]
+        UIDataLocalsComponent:
+            locals:
+            - ["string", "nationString", "str(nation, eNation, \"autotests\")"]
+        Sound:
+            touchDown: "GUI/buttons/choose"
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Lobby/Common/FlagButton.yaml"
+    bindings:
+    - ["enabled", "not disabled"]
+    - ["classes", "\"flag-button \" + nationString"]
+    - ["UISwitchBarElementComponent.id", "nationString"]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            Background: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+    -   prototype: "Selection/Selection"
+        name: "Selection"
+        classes: "selection-color-orange"
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+    -   class: "UIControl"
+        name: "Disabled"
+        size: [32.000000, 32.000000]
+        input: false
+        classes: "black-50-bg"
+        components:
+            Background:
+                drawType: "DRAW_FILL"
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+        bindings:
+        - ["visible", "disabled"]

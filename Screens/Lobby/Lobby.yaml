@@ -1,0 +1,43 @@
+Header:
+    version: 140
+ImportedPackages:
+- "~res:/UI/Screens3/BaseLobby.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "Lobby"
+    size: [1024.000000, 768.000000]
+    input: false
+    classes: "back-shortcut"
+    components:
+        Anchor:
+            leftAnchorEnabled: true
+            rightAnchorEnabled: true
+            topAnchorEnabled: true
+            bottomAnchorEnabled: true
+        ModalInput: {}
+        UIVirtualActionEventComponent0:
+            virtualKeyAction: "Escape"
+            keyDownEvent: "BACK_EVENT"
+        UIShortcutEventComponent: {}
+        UIDataParamsComponent:
+            params:
+            - ["AppDataModel", "app", "null", "{ }"]
+            - ["SessionDataModel", "session", "null", "{ }"]
+            - ["AccountDataModel", "account", "null", "{ }"]
+            - ["LobbyDataModel", "lobby", "null", "{ \"labelType\" = eBackLabel.Close; }"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["string", "backText", "when lobby.labelType == eBackLabel.Back -> \"Switch/HubridPanel/Lobby/Back\", lobby.labelType == eBackLabel.Close -> \"Switch/HubridPanel/Lobby/Close\", lobby.labelType == eBackLabel.Hangar -> \"Switch/HubridPanel/Lobby/Hangar\", \"\""]
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens/Lobby/Lobby.actions"
+        StyleSheet:
+            styles: "~res:/UI/Styles/BackgroundStyles.yaml;~res:/UI/Screens3/BackShortcut.style.yaml"
+    children:
+    -   prototype: "BaseLobby/BaseLobby"
+        name: "BaseLobby"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "tutorialData": "account.tutorialData"
+                    "backText": "backText"
+                    "showDefaultNavigationPanel": "not lobby.hasOwnedNavigationPanel"

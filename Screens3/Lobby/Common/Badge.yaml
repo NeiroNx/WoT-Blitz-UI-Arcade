@@ -1,0 +1,173 @@
+Header:
+    version: 134
+Prototypes:
+-   class: "UIControl"
+    name: "Badge"
+    input: false
+    components:
+        LinearLayout: {}
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfMaxChild"
+        UIDataParamsComponent:
+            params:
+            - ["eBadgeType", "type", "eBadgeType.EMPTY", "eBadgeType.DIGIT"]
+            - ["string", "value", "\"\"", "\"15\""]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["string", "badgeTextStyle", "when type == eBadgeType.DIGIT -> \"t-overline bold white-wild-sand-text not-localize\", type == eBadgeType.SHOP -> \"t-caps bold white-wild-sand-text\", \"t-caps bold white-wild-sand-text\""]
+        UIChildComponent0:
+            childType: "kControl"
+            condition: "type == eBadgeType.EMPTY or type == eBadgeType.RESOURCE_STORAGE"
+            control: "EmptyBadge"
+        UIChildComponent1:
+            childType: "kControl"
+            condition: "value != \" \" and type != eBadgeType.EMPTY and type != eBadgeType.RESOURCE_STORAGE"
+            control: "BadgeWithValue"
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Font.style.yaml"
+Slots:
+-   class: "UIControl"
+    name: "EmptyBadge"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            verticalPolicy: "FixedSize"
+    bindings:
+    - ["visible", "type == eBadgeType.EMPTY or type == eBadgeType.RESOURCE_STORAGE"]
+    - ["SizePolicy.horizontalValue", "when type == eBadgeType.RESOURCE_STORAGE -> 16, 8"]
+    - ["SizePolicy.verticalValue", "when type == eBadgeType.RESOURCE_STORAGE -> 16, 8"]
+    children:
+    -   class: "UIControl"
+        name: "Bg"
+        input: false
+        classes: "red-red-bg"
+        components:
+            Background:
+                drawType: "DRAW_SCALE_PROPORTIONAL"
+                sprite: "~res:/Gfx/Lobby/backgrounds/bg_oval_8.psd"
+                perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+-   class: "UIControl"
+    name: "BadgeWithValue"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "Formula"
+            horizontalFormula: "max(lastChild + 16, 24)"
+            verticalPolicy: "FixedSize"
+    bindings:
+    - ["visible", "value != \" \" and type != eBadgeType.EMPTY and type != eBadgeType.RESOURCE_STORAGE"]
+    - ["SizePolicy.verticalValue", "when type == eBadgeType.SHOP -> 16, 24"]
+    children:
+    -   class: "UIControl"
+        name: "Bg"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            LinearLayout:
+                spacing: -2.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "Left"
+            input: false
+            classes: "red-red-bg"
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_PROPORTIONAL"
+                    sprite: "~res:/Gfx/Lobby/backgrounds/bg_half-oval_24"
+                    perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 12.000000
+                    verticalPolicy: "PercentOfParent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "Center"
+            input: false
+            classes: "red-red-bg"
+            components:
+                Background:
+                    drawType: "DRAW_FILL"
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "parent-20"
+                    verticalPolicy: "PercentOfParent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "Right"
+            input: false
+            classes: "red-red-bg"
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_PROPORTIONAL"
+                    sprite: "~res:/Gfx/Lobby/backgrounds/bg_half-oval_24"
+                    spriteModification: ["FLIP_HORIZONTAL"]
+                    perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 12.000000
+                    verticalPolicy: "PercentOfParent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+    -   class: "UIControl"
+        name: "BadgeGift"
+        input: false
+        classes: "white-wild-sand-bg"
+        components:
+            Background:
+                drawType: "DRAW_SCALE_PROPORTIONAL"
+                sprite: "~res:/Gfx/Lobby/icons/icon_gift"
+                perPixelAccuracy: "PER_PIXEL_ACCURACY_DISABLED"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+        bindings:
+        - ["visible", "type == eBadgeType.GIFT"]
+    -   class: "UIControl"
+        name: "Bullet"
+        input: false
+        components:
+            Background:
+                drawType: "DRAW_STRETCH_BOTH"
+                sprite: "~res:/Gfx/Lobby/backgrounds/bg_oval_8"
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 4.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 4.000000
+        bindings:
+        - ["visible", "type == eBadgeType.CAMOUFLAGE"]
+    -   class: "UIControl"
+        name: "Value"
+        input: false
+        components:
+            UITextComponent:
+                colorInheritType: "COLOR_IGNORE_PARENT"
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfParent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml"
+        bindings:
+        - ["visible", "type != eBadgeType.GIFT"]
+        - ["classes", "badgeTextStyle"]
+        - ["UITextComponent.text", "value"]

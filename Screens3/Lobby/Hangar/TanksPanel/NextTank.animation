@@ -1,0 +1,4 @@
+animation NextTank
+{
+	Event("SELECT_NEXT_TANK");
+}

@@ -1,0 +1,4 @@
+animation OnAction
+{
+	Event("BUTTON_STATE_CHANGED", arg1=buttonName);
+}

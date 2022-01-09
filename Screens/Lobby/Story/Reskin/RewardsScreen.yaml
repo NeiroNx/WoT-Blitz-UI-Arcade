@@ -1,0 +1,304 @@
+Header:
+    version: 138
+Prototypes:
+-   class: "UIControl"
+    name: "RewardScreen"
+    size: [960.000000, 640.000000]
+    input: false
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        ModalInput: {}
+        UIVirtualActionEventComponent0:
+            virtualKeyAction: "Options"
+            keyDownEvent: "GO_TO_SHOP"
+        UIVirtualActionEventComponent1:
+            virtualKeyAction: "Escape"
+            keyDownEvent: "BACK_SHORTCUT"
+        UIShortcutEventComponent:
+            shortcuts: "BACK_SHORTCUT,Back;BACK_SHORTCUT,Escape"
+        UIDataParamsComponent:
+            params:
+            - ["StoryView", "storyView", "null", "{ }"]
+            - ["StatsDataModel", "statsData", "null", "{ }"]
+            - ["LobbyDataModel", "lobby", "null", "{ }"]
+            - ["int64", "serverTime", "0L", "1554299463L"]
+            events:
+            - "BUY_QUEST_BOOSTER"
+            - "ON_ITEM_PRESSED(ResourceDetailed reward)"
+            - "COMPLETE_STEP(bool isChest)"
+            - "SHOW_STORY_INFO"
+            - "BACK_EVENT"
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/Lobby/Story/Story.actions"
+    children:
+    -   class: "UIControl"
+        name: "Bg"
+        input: false
+        classes: "grey-shark-90-bg"
+        components:
+            Background: {}
+            IgnoreLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+    -   class: "UIControl"
+        name: "Layout"
+        components:
+            LinearLayout:
+                orientation: "BottomUp"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "ScrollView"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens3/Common/VerticalScrollView.yaml"
+                    args:
+                        "content": "Content"
+        -   class: "UIControl"
+            name: "Header"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfFirstChild"
+                UIChildComponent0:
+                    childType: "kPrototype"
+                    prototypePath: "~res:/UI/Screens3/Lobby/Common/Headers/StoryHeader.yaml"
+                    args:
+                        "story": "storyView.story"
+                        "statsData": "statsData"
+                        "lobby": "lobby"
+                        "serverTime": "serverTime"
+                        "currentScreen": "eCurrentScreen.kStoryRewards"
+                    eventActions:
+                    - ["GO_TO_SHOP", "GO_TO_SHOP", ""]
+                    - ["BACK_EVENT", "BACK_EVENT", "_event"]
+                    - ["SHOP_BUTTON", "SHOP_BUTTON", "_event.requiredResource"]
+    -   class: "UIControl"
+        name: "Footer"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                childType: "kPrototype"
+                prototypePath: "~res:/UI/Screens3/Lobby/Story/Footer.yaml"
+                args:
+                    "story": "storyView.story"
+                    "statsData": "statsData"
+                    "battlePass": "storyView.battlePass"
+                    "selectedStep": "storyView.selectedStep"
+                eventActions:
+                - ["BUY_QUEST_BOOSTER", "BUY_QUEST_BOOSTER", ""]
+                - ["BUY_GOLD_STEP", "BUY_GOLD_STEP", ""]
+                - ["FOOTER_COMPLETE_BUTTON_PRESSED", "COMPLETE_STEP", "_event.isChest"]
+                - ["FOOTER_INFO_BUTTON_PRESSED", "SHOW_STORY_INFO", ""]
+Slots:
+-   class: "UIControl"
+    name: "Content"
+    size: [960.000000, 640.000000]
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfChildrenSum"
+    children:
+    -   class: "UIControl"
+        name: "Header"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "FixedSize"
+                verticalValue: 70.000000
+        children:
+        -   class: "UIControl"
+            name: "Bg"
+            components:
+                LinearLayout: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            children:
+            -   class: "UIControl"
+                name: "Left"
+                input: false
+                components:
+                    UITextureComponent:
+                        spritePath: "~res:/Gfx/UI/LobbyCommon/bgMedalsLeft"
+                        drawType: "DRAW_SCALE_TO_RECT"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+            -   class: "UIControl"
+                name: "Right"
+                input: false
+                components:
+                    UITextureComponent:
+                        spritePath: "~res:/Gfx/UI/LobbyCommon/bgMedalsRight"
+                        drawType: "DRAW_SCALE_TO_RECT"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+        -   class: "UIControl"
+            name: "Title"
+            input: false
+            classes: "t-content-h4 bold white-wild-sand-text"
+            components:
+                UITextComponent:
+                    text: "template_event/CompleteStep/StepScreen/Reward"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml"
+    -   class: "UIControl"
+        name: "RewardsWrapper"
+        size: [960.000000, 5364.000000]
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Common/HorizontalSafeArea.yaml"
+                args:
+                    "content": "Rewards"
+                    "padding": "16"
+    -   class: "UIControl"
+        name: "CurrencyDescriptions"
+        input: false
+        components:
+            LinearLayout:
+                orientation: "TopDown"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfChildrenSum"
+        bindings:
+        - ["visible", "not storyView.selectedStep.isFinished"]
+        children:
+        -   class: "UIControl"
+            name: "ConditionsHeader"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfFirstChild"
+            children:
+            -   class: "UIControl"
+                name: "Bg"
+                components:
+                    LinearLayout: {}
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 40.000000
+                children:
+                -   class: "UIControl"
+                    name: "Left"
+                    position: [0.000000, 0.000000]
+                    size: [480.000000, 70.000000]
+                    input: false
+                    components:
+                        UITextureComponent:
+                            spritePath: "~res:/Gfx/UI/LobbyCommon/back_title"
+                            drawType: "DRAW_SCALE_TO_RECT"
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfParent"
+                -   class: "UIControl"
+                    name: "Right"
+                    input: false
+                    components:
+                        UITextureComponent:
+                            spritePath: "~res:/Gfx/UI/LobbyCommon/back_title"
+                            drawType: "DRAW_SCALE_TO_RECT"
+                            spriteModification: ["FLIP_HORIZONTAL"]
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfParent"
+            -   class: "UIControl"
+                name: "Title"
+                input: false
+                classes: "t-headline bold white-wild-sand-text"
+                components:
+                    UITextComponent:
+                        text: "template_event/CompleteStep/StepScreen/Currencies"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml"
+        -   class: "UIControl"
+            name: "DescriptionsWrapper"
+            size: [960.000000, 5364.000000]
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfFirstChild"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens3/Common/HorizontalSafeArea.yaml"
+                    args:
+                        "content": "Descriptions"
+                        "padding": "16"
+-   class: "UIControl"
+    name: "Rewards"
+    size: [960.000000, 216.000000]
+    components:
+        Anchor:
+            hCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            horizontalMax: 900.000000
+            verticalPolicy: "PercentOfChildrenSum"
+        FlowLayout:
+            alignment: "Center"
+            hSpacing: 20.000000
+            vPadding: "20.000000"
+            vSpacing: 20.000000
+        UIRepeatComponent:
+            control: "~res:/UI/Screens3/Lobby/Story/Steps/StepReward.yaml"
+            dataContainer: "storyView.selectedStep.rewards"
+            args:
+                "reward": "_item"
+                "isReceived": "storyView.selectedStep.isFinished"
+            eventActions:
+            - ["ON_REWARD_PRESSED", "ON_ITEM_PRESSED", "_event.reward"]
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Lobby/Story/StoryRewardPrototypes.yaml"
+-   class: "UIControl"
+    name: "Descriptions"
+    size: [900.000000, 6624.000000]
+    input: false
+    components:
+        Anchor:
+            hCenterAnchorEnabled: true
+        LinearLayout:
+            orientation: "TopDown"
+            padding: "10"
+            spacing: 20.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            horizontalMax: 900.000000
+            verticalPolicy: "PercentOfChildrenSum"
+        UIRepeatComponent:
+            control: "~res:/UI/Screens3/Lobby/Story/CurrencyDescription.yaml"
+            dataContainer: "storyView.selectedStep.price"
+            args:
+                "story": "storyView.story"
+                "currency": "_item"

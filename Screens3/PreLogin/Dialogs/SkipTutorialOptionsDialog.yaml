@@ -1,0 +1,156 @@
+Header:
+    version: 133
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/Dialog/TextDialog.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "SkipTutorialOptionsDialog"
+    size: [640.000000, 480.000000]
+    input: false
+    components:
+        Anchor:
+            leftAnchorEnabled: true
+            rightAnchorEnabled: true
+            topAnchorEnabled: true
+            bottomAnchorEnabled: true
+        ModalInput: {}
+        UIVirtualActionEventComponent0:
+            virtualKeyAction: "Escape"
+            keyDownEvent: "OPTIONAL_CLICKED"
+        UIShortcutEventComponent:
+            shortcuts: "OPTIONAL_CLICKED,Escape;OPTIONAL_CLICKED,Back"
+        UIDataParamsComponent:
+            params:
+            - ["SkipTutorialViewModel", "tutorialOptions", "null", "{ }"]
+            events:
+            - "CONFIRMATION"
+        UIIdentifierComponent:
+            id: "skip_tutorial_dialog"
+    children:
+    -   prototype: "TextDialog/TextDialog"
+        name: "InfoTextDialog"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "type": "eDialogType.PUSH"
+                    "header": "\"LOGIN_SKIP_TUTORIAL\""
+                    "accentButton": "\"OK\""
+                    "contentControl": "Content"
+                eventActions:
+                - ["ACCENT_CLICKED", "CONFIRMATION", ""]
+                - ["OPTIONAL_CLICKED", "", ""]
+        children:
+        -   path: "DialogContent/Footer/OptionalButtonContainer"
+            position: [25.000000, 24.000000]
+            children: []
+Slots:
+-   class: "UIControl"
+    name: "Content"
+    size: [471.000000, 150.000000]
+    input: false
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 400.000000
+            verticalPolicy: "FixedSize"
+    children:
+    -   class: "UIControl"
+        name: "SkipBattle"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "CheckBox"
+            input: true
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 48.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 48.000000
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens3/Common/CheckBox.yaml"
+                    args:
+                        "validatedWithError": "false"
+                        "showValidate": "true"
+                        "isEnabled": "true"
+                        "isActive": "tutorialOptions.skipBattle"
+                        "bgStyle": "\"white-wild-sand-15-bg\""
+                        "size": "eCheckBoxSize.BIG"
+                    eventActions:
+                    - ["CHECK_PRESSED", "SKIP_BATTLE_CHECKED", ""]
+                UIIdentifierComponent:
+                    id: "skip_battle_checkbox"
+        -   class: "UIControl"
+            name: "Label"
+            input: false
+            classes: "t-body regular white-wild-sand-text"
+            components:
+                UITextComponent:
+                    text: "LOGIN_SKIP_BATTLE_TUTORIAL"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml"
+    -   class: "UIControl"
+        name: "SkipHangar"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "CheckBox"
+            input: true
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 48.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 48.000000
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens3/Common/CheckBox.yaml"
+                    args:
+                        "validatedWithError": "false"
+                        "showValidate": "true"
+                        "isEnabled": "true"
+                        "isActive": "tutorialOptions.skipHangar"
+                        "bgStyle": "\"white-wild-sand-15-bg\""
+                        "size": "eCheckBoxSize.BIG"
+                    eventActions:
+                    - ["CHECK_PRESSED", "SKIP_HANGAR_CHECKED", ""]
+                UIIdentifierComponent:
+                    id: "skip_hangar_checkbox"
+        -   class: "UIControl"
+            name: "Label"
+            input: false
+            classes: "t-body regular white-wild-sand-text"
+            components:
+                UITextComponent:
+                    text: "LOGIN_SKIP_HANGAR_TUTORIAL"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml"

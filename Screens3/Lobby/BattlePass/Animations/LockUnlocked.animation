@@ -1,0 +1,9 @@
+animation LOCK_UNLOCKED
+{
+    if (path == eBattlePassPath.Paid)
+    { 
+        StartParticles(path="./Content/LockContainer/LockDisintegration");
+        Wait(2);
+        StopParticles(path="./Content/LockContainer/LockDisintegration");
+    }
+}

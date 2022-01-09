@@ -1,0 +1,138 @@
+Header:
+    version: 115
+Prototypes:
+-   class: "UIScrollView"
+    name: "TreeScrollView"
+    size: [960.000000, 200.000000]
+    input: false
+    autoUpdate: true
+    centerContent: true
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens3/Lobby/Story/BTH2020/TreeScrollViewOnInit.animation"
+        ClipContent: {}
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["TreeView", "tree", "null", "{ \"steps\" = { 1 = { }; 2 = { }; 3 = { }; 4 = { }; 5 = { }; 6 = { }; 7 = { }; 8 = { }; 9 = { }; 10 = { }; 11 = { }; 12 = { }; 13 = { }; 14 = { }; }; }"]
+            - ["StoryStepModel", "inProgressStep", "null", "{ }"]
+            - ["StoryStepModel", "selectedStep", "null", "{ \"id\" = 5; }"]
+            - ["bool", "isClipEnabled", "true", "true"]
+            - ["int", "bottomDistance", "2", "2"]
+            - ["control", "content", "null", "Content"]
+            events:
+            - "DESELECT"
+            - "SELECT_STEP(int id)"
+            - "SHOW_STEP_INFO(int id)"
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/Lobby/Story/BTH2020/TreeScrollView.actions"
+    bindings:
+    - ["ClipContent.enabled", "isClipEnabled"]
+    children:
+    -   class: "UIControl"
+        name: "ContentHolder"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Common/HorizontalScrollView.yaml"
+                args:
+                    "content": "when not isNull(content) -> content, Content"
+                    "isClipEnabled": "isClipEnabled"
+                    "bottomDistance": "bottomDistance"
+                    "centerContent": "true"
+                eventActions:
+                - ["ON_SCROLL_VIEW_TOUCH", "DESELECT", ""]
+Slots:
+-   class: "UIControl"
+    name: "Content"
+    input: false
+    components:
+        Anchor:
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "Formula"
+            horizontalFormula: "firstChild + 64"
+            verticalPolicy: "PercentOfFirstChild"
+    children:
+    -   class: "UIControl"
+        name: "SafeArea"
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+            LinearLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   class: "UIControl"
+            name: "LeftSpacer"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "safeAreaInsets.left"
+                    verticalPolicy: "PercentOfParent"
+        -   class: "UIControl"
+            name: "StepsWrapper"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   class: "UIControl"
+                name: "Arrows"
+                position: [1076.000000, 80.000000]
+                input: false
+                components:
+                    Anchor:
+                        leftAnchorEnabled: true
+                        leftAnchor: 132.000000
+                        vCenterAnchorEnabled: true
+                    LinearLayout:
+                        spacing: 80.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        verticalPolicy: "PercentOfMaxChild"
+                    UIRepeatComponent:
+                        control: "~res:/UI/Screens3/Lobby/Story/Steps/Arrows/LeftRight.yaml"
+                        dataContainer: "tree.steps"
+                        args:
+                            "width": "56.000000"
+                            "isVisible": "_item.step.id != tree.steps[tree.steps.Size() - 1].step.id"
+            -   class: "UIControl"
+                name: "Steps"
+                input: false
+                components:
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    LinearLayout:
+                        spacing: 16.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        verticalPolicy: "PercentOfMaxChild"
+                    UIRepeatComponent:
+                        control: "~res:/UI/Screens3/Lobby/Story/Steps/DefaultStep.yaml"
+                        dataContainer: "tree.steps"
+                        args:
+                            "model": "_item"
+                            "showLabel": "true"
+                            "inProgressStep": "inProgressStep"
+                        eventActions:
+                        - ["SHOW_STEP_INFO", "SHOW_STEP_INFO", "_event.id"]
+                        - ["SELECT_STEP", "SCROLL_TO_STEP", "_event.id"]
+                        elementNameExpression: "\"Step\" + str(_item.step.id)"
+        -   class: "UIControl"
+            name: "RightSpacer"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "safeAreaInsets.right"
+                    verticalPolicy: "PercentOfParent"

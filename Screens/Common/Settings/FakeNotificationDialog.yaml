@@ -1,0 +1,1293 @@
+Header:
+    version: "108"
+ImportedPackages:
+- "~res:/UI/Screens/Common/StyledButton.yaml"
+- "~res:/UI/Screens/Common/DebugUIOptionsDialogSection.yaml"
+- "~res:/UI/Screens/Common/ScrollBar.yaml"
+- "~res:/UI/Screens/Common/Settings/FakeNotificationDialogContent/FinanceCell.yaml"
+- "~res:/UI/Screens/Common/Settings/FakeNotificationDialogContent/Spiner.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "Background"
+    size: [900.000000, 726.000000]
+    input: true
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIInputEventComponent:
+            onTouchUpInside: "CANCEL"
+        UIDataLocalsComponent:
+            locals:
+            - ["int", "league", "0"]
+        UIDataOnEventComponent0:
+            eventName: "VALUE_CHANGED"
+            modelFieldExpression: "league"
+            dataExpression: "_event"
+    children:
+    -   class: "UIControl"
+        name: "FakeNotificationDialog"
+        position: [140.000000, 98.000000]
+        size: [620.000000, 530.000000]
+        input: true
+        components:
+            Background:
+                drawType: "DRAW_STRETCH_BOTH"
+                sprite: "~res:/Gfx/UI/CommonUIElements/PopupBackMiddle"
+                leftRightStretchCap: 5.000000
+                topBottomStretchCap: 5.000000
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+        children:
+        -   class: "UIControl"
+            name: "Header"
+            input: false
+            classes: "t-headline regular white-wild-sand-text"
+            components:
+                UITextComponent:
+                    text: "Select notification type"
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 620.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 40.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens/Styles/FontStyles.yaml"
+        -   class: "UIControl"
+            name: "Content"
+            position: [0.000000, 40.000000]
+            input: false
+            components:
+                Anchor:
+                    topAnchorEnabled: true
+                    topAnchor: 40.000000
+                    bottomAnchorEnabled: true
+                    bottomAnchor: 75.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+            children:
+            -   class: "UIControl"
+                name: "VerticalScrollView"
+                position: [10.000000, 0.000000]
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    Anchor:
+                        leftAnchorEnabled: true
+                        leftAnchor: 10.000000
+                        rightAnchorEnabled: true
+                        rightAnchor: 10.000000
+                        topAnchorEnabled: true
+                        bottomAnchorEnabled: true
+                children:
+                -   class: "UIScrollView"
+                    name: "ScrollArea"
+                    position: [0.000000, 0.000000]
+                    size: [32.000000, 32.000000]
+                    autoUpdate: true
+                    components:
+                        Anchor:
+                            leftAnchorEnabled: true
+                            rightAnchorEnabled: true
+                            rightAnchor: 10.000000
+                            topAnchorEnabled: true
+                            bottomAnchorEnabled: true
+                    children:
+                    -   class: "UIScrollViewContainer"
+                        name: "scrollContainerControl"
+                        position: [7.000000, 0.000000]
+                        components:
+                            LinearLayout:
+                                orientation: "TopDown"
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                verticalPolicy: "PercentOfChildrenSum"
+                        children:
+                        -   prototype: "DebugUIOptionsDialogSection/Section"
+                            name: "Other"
+                            components:
+                                SizePolicy:
+                                    horizontalPolicy: "PercentOfParent"
+                                    verticalPolicy: "PercentOfChildrenSum"
+                            children:
+                            -   path: "Header/Header"
+                                components:
+                                    UITextComponent:
+                                        text: "Other"
+                            -   path: "Content"
+                                position: [0.000000, 40.000000]
+                                components:
+                                    LinearLayout:
+                                        orientation: "TopDown"
+                                    SizePolicy:
+                                        verticalPolicy: "PercentOfChildrenSum"
+                                children:
+                                -   prototype: "FinanceCell/FinanceCell"
+                                    name: "ParentalControl"
+                                    children:
+                                    -   path: "CaptionRegular"
+                                        components:
+                                            UITextComponent:
+                                                text: "Parental Control"
+                                    -   path: "Actions"
+                                        position: [362.000000, 5.000000]
+                                        children: []
+                                    -   path: "Actions/Action0"
+                                        components:
+                                            SizePolicy:
+                                                horizontalValue: 220.000000
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "PARENTAL_CONTROL_SHOW"
+                                        children: []
+                                    -   path: "Actions/Action0/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "Parental Control"
+                                    -   path: "Actions/Action1"
+                                        position: [75.000000, 0.000000]
+                                        visible: false
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "SHARE_REWARD_1"
+                                        children: []
+                                    -   path: "Actions/Action1/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "10k"
+                                    -   path: "Actions/Action2"
+                                        visible: false
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "SHARE_REWARD_2"
+                                        children: []
+                                    -   path: "Actions/Action2/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "10M"
+                                -   prototype: "FinanceCell/FinanceCell"
+                                    name: "MaxMasteryCell"
+                                    children:
+                                    -   path: "CaptionRegular"
+                                        components:
+                                            UITextComponent:
+                                                text: "Max mastery"
+                                    -   path: "Actions"
+                                        position: [362.000000, 5.000000]
+                                        children: []
+                                    -   path: "Actions/Action0"
+                                        components:
+                                            SizePolicy:
+                                                horizontalValue: 220.000000
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "MAX_MASTERY_SHOW"
+                                        children: []
+                                    -   path: "Actions/Action0/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "Max mastery"
+                                    -   path: "Actions/Action1"
+                                        position: [75.000000, 0.000000]
+                                        visible: false
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "SHARE_REWARD_1"
+                                        children: []
+                                    -   path: "Actions/Action1/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "10k"
+                                    -   path: "Actions/Action2"
+                                        visible: false
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "SHARE_REWARD_2"
+                                        children: []
+                                    -   path: "Actions/Action2/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "10M"
+                                -   prototype: "FinanceCell/FinanceCell"
+                                    name: "NewSkiilLevelCell"
+                                    children:
+                                    -   path: "CaptionRegular"
+                                        components:
+                                            UITextComponent:
+                                                text: "New skills"
+                                    -   path: "Actions"
+                                        position: [362.000000, 5.000000]
+                                        children: []
+                                    -   path: "Actions/Action0"
+                                        components:
+                                            SizePolicy:
+                                                horizontalValue: 220.000000
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "NEW_SKILL_LEVEL_SHOW"
+                                        children: []
+                                    -   path: "Actions/Action0/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "New skills"
+                                    -   path: "Actions/Action1"
+                                        position: [75.000000, 0.000000]
+                                        visible: false
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "SHARE_REWARD_1"
+                                        children: []
+                                    -   path: "Actions/Action1/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "10k"
+                                    -   path: "Actions/Action2"
+                                        visible: false
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "SHARE_REWARD_2"
+                                        children: []
+                                    -   path: "Actions/Action2/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "10M"
+                                -   prototype: "FinanceCell/FinanceCell"
+                                    name: "TaskJournalCell"
+                                    children:
+                                    -   path: "CaptionRegular"
+                                        components:
+                                            UITextComponent:
+                                                text: "Task journal"
+                                    -   path: "Actions"
+                                        position: [362.000000, 5.000000]
+                                        children: []
+                                    -   path: "Actions/Action0"
+                                        components:
+                                            SizePolicy:
+                                                horizontalValue: 220.000000
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "TASK_JOURNAL"
+                                        children: []
+                                    -   path: "Actions/Action0/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "Task journal"
+                                    -   path: "Actions/Action1"
+                                        position: [75.000000, 0.000000]
+                                        visible: false
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "SHARE_REWARD_1"
+                                        children: []
+                                    -   path: "Actions/Action1/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "10k"
+                                    -   path: "Actions/Action2"
+                                        visible: false
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "SHARE_REWARD_2"
+                                        children: []
+                                    -   path: "Actions/Action2/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "10M"
+                                -   prototype: "FinanceCell/FinanceCell"
+                                    name: "TankBirthdayCell"
+                                    children:
+                                    -   path: "CaptionRegular"
+                                        components:
+                                            UITextComponent:
+                                                text: "Tank Birthday"
+                                    -   path: "Actions"
+                                        position: [362.000000, 5.000000]
+                                        children: []
+                                    -   path: "Actions/Action0"
+                                        components:
+                                            SizePolicy:
+                                                horizontalValue: 220.000000
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "TANK_BIRTHDAY_READY_FOR_SHOW"
+                                        children: []
+                                    -   path: "Actions/Action0/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "Tank birthday"
+                                    -   path: "Actions/Action1"
+                                        position: [75.000000, 0.000000]
+                                        visible: false
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "SHARE_REWARD_1"
+                                        children: []
+                                    -   path: "Actions/Action1/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "10k"
+                                    -   path: "Actions/Action2"
+                                        visible: false
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "SHARE_REWARD_2"
+                                        children: []
+                                    -   path: "Actions/Action2/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "10M"
+                                -   class: "UIControl"
+                                    name: "LeagueChanged"
+                                    size: [590.000000, 130.000000]
+                                    input: false
+                                    components:
+                                        SizePolicy:
+                                            horizontalPolicy: "PercentOfParent"
+                                            verticalPolicy: "FixedSize"
+                                            verticalValue: 130.000000
+                                    children:
+                                    -   class: "UIControl"
+                                        name: "CaptionRegular"
+                                        input: false
+                                        classes: "t-caption regular color=white-wild-sand-text"
+                                        components:
+                                            UITextComponent:
+                                                text: "League Changed"
+                                                colorInheritType: "COLOR_IGNORE_PARENT"
+                                                align: ["LEFT", "VCENTER"]
+                                            Anchor:
+                                                leftAnchorEnabled: true
+                                                leftAnchor: 10.000000
+                                                topAnchorEnabled: true
+                                                topAnchor: 5.000000
+                                            SizePolicy:
+                                                horizontalPolicy: "PercentOfContent"
+                                                verticalPolicy: "PercentOfContent"
+                                            StyleSheet:
+                                                styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+                                    -   class: "UIControl"
+                                        name: "Actions"
+                                        position: [362.000000, 5.000000]
+                                        size: [32.000000, 32.000000]
+                                        input: false
+                                        components:
+                                            Anchor:
+                                                rightAnchorEnabled: true
+                                                rightAnchor: 10.000000
+                                                topAnchorEnabled: true
+                                                topAnchor: 5.000000
+                                            LinearLayout:
+                                                spacing: 4.000000
+                                            SizePolicy:
+                                                horizontalPolicy: "PercentOfChildrenSum"
+                                                verticalPolicy: "PercentOfMaxChild"
+                                        children:
+                                        -   prototype: "StyledButton/StyledButton"
+                                            name: "Action0"
+                                            size: [192.000000, 64.000000]
+                                            components:
+                                                SizePolicy:
+                                                    horizontalPolicy: "FixedSize"
+                                                    horizontalValue: 70.000000
+                                                    verticalPolicy: "FixedSize"
+                                                    verticalValue: 30.000000
+                                                UIInputEventComponent:
+                                                    onTouchUpInside: "LEAGUE_CHANGED"
+                                                    onTouchUpInsideData: "league"
+                                            children:
+                                            -   path: "Caption"
+                                                components:
+                                                    UITextComponent:
+                                                        text: "Changed"
+                                        -   prototype: "StyledButton/StyledButton"
+                                            name: "Action1"
+                                            size: [192.000000, 64.000000]
+                                            components:
+                                                SizePolicy:
+                                                    horizontalPolicy: "FixedSize"
+                                                    horizontalValue: 70.000000
+                                                    verticalPolicy: "FixedSize"
+                                                    verticalValue: 30.000000
+                                                UIInputEventComponent:
+                                                    onTouchUpInside: "CALIBRATION_START"
+                                                    onTouchUpInsideData: "league"
+                                            children:
+                                            -   path: "Caption"
+                                                components:
+                                                    UITextComponent:
+                                                        text: "C Start"
+                                        -   prototype: "StyledButton/StyledButton"
+                                            name: "Action2"
+                                            size: [192.000000, 64.000000]
+                                            components:
+                                                SizePolicy:
+                                                    horizontalPolicy: "FixedSize"
+                                                    horizontalValue: 70.000000
+                                                    verticalPolicy: "FixedSize"
+                                                    verticalValue: 30.000000
+                                                UIInputEventComponent:
+                                                    onTouchUpInside: "CALIBRATION_END"
+                                                    onTouchUpInsideData: "league"
+                                            children:
+                                            -   path: "Caption"
+                                                components:
+                                                    UITextComponent:
+                                                        text: "C end"
+                                    -   class: "UIControl"
+                                        name: "Actions_1"
+                                        size: [32.000000, 32.000000]
+                                        input: false
+                                        components:
+                                            Anchor:
+                                                rightAnchorEnabled: true
+                                                rightAnchor: 10.000000
+                                                topAnchorEnabled: true
+                                                topAnchor: 45.000000
+                                            LinearLayout:
+                                                spacing: 4.000000
+                                            SizePolicy:
+                                                horizontalPolicy: "PercentOfChildrenSum"
+                                                verticalPolicy: "PercentOfMaxChild"
+                                        children:
+                                        -   prototype: "StyledButton/StyledButton"
+                                            name: "Action3"
+                                            size: [192.000000, 64.000000]
+                                            components:
+                                                SizePolicy:
+                                                    horizontalPolicy: "FixedSize"
+                                                    horizontalValue: 70.000000
+                                                    verticalPolicy: "FixedSize"
+                                                    verticalValue: 30.000000
+                                                UIInputEventComponent:
+                                                    onTouchUpInside: "RESET_RATING"
+                                                    onTouchUpInsideData: "league"
+                                            children:
+                                            -   path: "Caption"
+                                                components:
+                                                    UITextComponent:
+                                                        text: "Reset"
+                                        -   prototype: "StyledButton/StyledButton"
+                                            name: "Action4"
+                                            size: [192.000000, 64.000000]
+                                            components:
+                                                SizePolicy:
+                                                    horizontalPolicy: "FixedSize"
+                                                    horizontalValue: 70.000000
+                                                    verticalPolicy: "FixedSize"
+                                                    verticalValue: 30.000000
+                                                UIInputEventComponent:
+                                                    onTouchUpInside: "RECALIBRATION"
+                                                    onTouchUpInsideData: "league"
+                                            children:
+                                            -   path: "Caption"
+                                                components:
+                                                    UITextComponent:
+                                                        text: "Recalib"
+                                    -   prototype: "Spiner/Spiner"
+                                        name: "Spiner"
+                                        components:
+                                            Anchor:
+                                                rightAnchorEnabled: true
+                                                rightAnchor: 10.000000
+                                                topAnchorEnabled: true
+                                                topAnchor: 80.000000
+                                -   prototype: "FinanceCell/FinanceCell"
+                                    name: "StorageStuffCell"
+                                    children:
+                                    -   path: "CaptionRegular"
+                                        components:
+                                            UITextComponent:
+                                                text: "Storage stuff"
+                                    -   path: "Actions"
+                                        position: [362.000000, 5.000000]
+                                        children: []
+                                    -   path: "Actions/Action0"
+                                        components:
+                                            SizePolicy:
+                                                horizontalValue: 108.000000
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "STORAGE_STUFF_RECEIVED"
+                                        children: []
+                                    -   path: "Actions/Action0/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "Received"
+                                    -   path: "Actions/Action1"
+                                        position: [75.000000, 0.000000]
+                                        visible: true
+                                        components:
+                                            SizePolicy:
+                                                horizontalValue: 108.000000
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "STORAGE_STUFF_DEDUCTED"
+                                        children: []
+                                    -   path: "Actions/Action1/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "Deducted"
+                                    -   path: "Actions/Action2"
+                                        visible: false
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "SHARE_REWARD_2"
+                                        children: []
+                                    -   path: "Actions/Action2/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "10M"
+                                -   prototype: "FinanceCell/FinanceCell"
+                                    name: "XpBonusFactorCell"
+                                    children:
+                                    -   path: "CaptionRegular"
+                                        components:
+                                            UITextComponent:
+                                                text: "XP bonus factor has changed"
+                                    -   path: "Actions"
+                                        position: [436.000000, 5.000000]
+                                        children: []
+                                    -   path: "Actions/Action0"
+                                        components:
+                                            SizePolicy:
+                                                horizontalValue: 70.000000
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "XP_BONUS_FACTOR_CHANGED_QUEST"
+                                        children: []
+                                    -   path: "Actions/Action0/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "Quest"
+                                    -   path: "Actions/Action1"
+                                        position: [75.000000, 0.000000]
+                                        visible: true
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "XP_BONUS_FACTOR_CHANGED_NO_QUEST"
+                                        children: []
+                                    -   path: "Actions/Action1/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "No quest"
+                                    -   path: "Actions/Action2"
+                                        visible: false
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "SHARE_REWARD_2"
+                                        children: []
+                                    -   path: "Actions/Action2/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "10M"
+                                -   prototype: "FinanceCell/FinanceCell"
+                                    name: "VideoAdRewardCell"
+                                    children:
+                                    -   path: "CaptionRegular"
+                                        components:
+                                            UITextComponent:
+                                                text: "Video ad reward"
+                                    -   path: "Actions"
+                                        position: [362.000000, 5.000000]
+                                        children: []
+                                    -   path: "Actions/Action0"
+                                        components:
+                                            SizePolicy:
+                                                horizontalValue: 220.000000
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "VIDEO_REWARD"
+                                        children: []
+                                    -   path: "Actions/Action0/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "Video ad reward"
+                                    -   path: "Actions/Action1"
+                                        position: [75.000000, 0.000000]
+                                        visible: false
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "SHARE_REWARD_1"
+                                        children: []
+                                    -   path: "Actions/Action1/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "10k"
+                                    -   path: "Actions/Action2"
+                                        visible: false
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "SHARE_REWARD_2"
+                                        children: []
+                                    -   path: "Actions/Action2/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "10M"
+                                -   prototype: "FinanceCell/FinanceCell"
+                                    name: "TankReceivedCell"
+                                    children:
+                                    -   path: "CaptionRegular"
+                                        components:
+                                            UITextComponent:
+                                                text: "Tank received"
+                                    -   path: "Actions"
+                                        position: [362.000000, 5.000000]
+                                        children: []
+                                    -   path: "Actions/Action0"
+                                        components:
+                                            SizePolicy:
+                                                horizontalValue: 220.000000
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "TANK_RECEIVED"
+                                        children: []
+                                    -   path: "Actions/Action0/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "Tank received"
+                                    -   path: "Actions/Action1"
+                                        position: [75.000000, 0.000000]
+                                        visible: false
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "SHARE_REWARD_1"
+                                        children: []
+                                    -   path: "Actions/Action1/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "10k"
+                                    -   path: "Actions/Action2"
+                                        visible: false
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "SHARE_REWARD_2"
+                                        children: []
+                                    -   path: "Actions/Action2/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "10M"
+                                -   prototype: "FinanceCell/FinanceCell"
+                                    name: "ClanCell"
+                                    children:
+                                    -   path: "CaptionRegular"
+                                        components:
+                                            UITextComponent:
+                                                text: "Clan"
+                                    -   path: "Actions"
+                                        position: [362.000000, 5.000000]
+                                        children: []
+                                    -   path: "Actions/Action0"
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "CLAN_INVITE"
+                                        children: []
+                                    -   path: "Actions/Action0/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "Invite"
+                                    -   path: "Actions/Action1"
+                                        position: [75.000000, 0.000000]
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "CLAN_APPLY"
+                                        children: []
+                                    -   path: "Actions/Action1/Caption"
+                                        components:
+                                            UITextComponent: {}
+                                        bindings:
+                                        - ["UITextComponent.text", "\"Apply\""]
+                                    -   path: "Actions/Action2"
+                                        visible: false
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "SHARE_REWARD_2"
+                                        children: []
+                                    -   path: "Actions/Action2/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "10M"
+                                -   prototype: "FinanceCell/FinanceCell"
+                                    name: "BattleResultsCell"
+                                    children:
+                                    -   path: "CaptionRegular"
+                                        components:
+                                            UITextComponent:
+                                                text: "Battle results"
+                                    -   path: "Actions"
+                                        position: [362.000000, 5.000000]
+                                        children: []
+                                    -   path: "Actions/Action0"
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "BATTLE_RESULTS_VICTORY"
+                                        children: []
+                                    -   path: "Actions/Action0/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "Victory"
+                                    -   path: "Actions/Action1"
+                                        position: [75.000000, 0.000000]
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "BATTLE_RESULTS_DRAW"
+                                        children: []
+                                    -   path: "Actions/Action1/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "Draw"
+                                    -   path: "Actions/Action2"
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "BATTLE_RESULTS_DEFEAT"
+                                        children: []
+                                    -   path: "Actions/Action2/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "Defeat"
+                                -   prototype: "FinanceCell/FinanceCell"
+                                    name: "System1Cell"
+                                    children:
+                                    -   path: "CaptionRegular"
+                                        components:
+                                            UITextComponent:
+                                                text: "System 1"
+                                    -   path: "Actions"
+                                        position: [362.000000, 5.000000]
+                                        children: []
+                                    -   path: "Actions/Action0"
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "AUTOMAINTENANCE"
+                                        children: []
+                                    -   path: "Actions/Action0/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "Mainten"
+                                    -   path: "Actions/Action1"
+                                        position: [75.000000, 0.000000]
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "SUBSCRIPTION_EXPIRED"
+                                        children: []
+                                    -   path: "Actions/Action1/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "Subscr"
+                                    -   path: "Actions/Action2"
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "DEVICE_CONNECTED"
+                                        children: []
+                                    -   path: "Actions/Action2/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "Device"
+                                -   prototype: "FinanceCell/FinanceCell"
+                                    name: "PremCell"
+                                    children:
+                                    -   path: "CaptionRegular"
+                                        components:
+                                            UITextComponent:
+                                                text: "Premium"
+                                    -   path: "Actions"
+                                        position: [362.000000, 5.000000]
+                                        children: []
+                                    -   path: "Actions/Action0"
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "PREMIUM_OVER"
+                                        children: []
+                                    -   path: "Actions/Action0/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "Over"
+                                    -   path: "Actions/Action1"
+                                        position: [75.000000, 0.000000]
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "PREMIUM_ALMOST_OVER"
+                                        children: []
+                                    -   path: "Actions/Action1/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "Almost"
+                                    -   path: "Actions/Action2"
+                                        visible: false
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "DEVICE_CONNECTED"
+                                        children: []
+                                    -   path: "Actions/Action2/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "Device"
+                        -   prototype: "DebugUIOptionsDialogSection/Section"
+                            name: "Karma"
+                            components:
+                                SizePolicy:
+                                    horizontalPolicy: "PercentOfParent"
+                                    verticalPolicy: "PercentOfChildrenSum"
+                            children:
+                            -   path: "Header/Header"
+                                components:
+                                    UITextComponent:
+                                        text: "Karma"
+                            -   path: "Content"
+                                components:
+                                    LinearLayout:
+                                        orientation: "TopDown"
+                                    SizePolicy:
+                                        verticalPolicy: "PercentOfChildrenSum"
+                                children:
+                                -   prototype: "FinanceCell/FinanceCell"
+                                    name: "InfoCell"
+                                    children:
+                                    -   path: "CaptionRegular"
+                                        components:
+                                            UITextComponent:
+                                                text: "Info"
+                                    -   path: "Actions/Action0"
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "KARMA_INFO_PUNISH"
+                                        children: []
+                                    -   path: "Actions/Action0/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "Punish"
+                                    -   path: "Actions/Action1"
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "KARMA_INFO_WARN"
+                                        children: []
+                                    -   path: "Actions/Action1/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "Warned"
+                                    -   path: "Actions/Action2"
+                                        visible: false
+                                        children: []
+                                -   prototype: "FinanceCell/FinanceCell"
+                                    name: "PunishmentInsultsCell"
+                                    children:
+                                    -   path: "CaptionRegular"
+                                        components:
+                                            UITextComponent:
+                                                text: "Punishment insults"
+                                    -   path: "Actions/Action0"
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "KARMA_PUNISH_INSULTS_PUNISH"
+                                        children: []
+                                    -   path: "Actions/Action0/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "Punish"
+                                    -   path: "Actions/Action1"
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "KARMA_PUNISH_INSULTS_WARN"
+                                        children: []
+                                    -   path: "Actions/Action1/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "Warned"
+                                    -   path: "Actions/Action2"
+                                        visible: false
+                                        children: []
+                                -   prototype: "FinanceCell/FinanceCell"
+                                    name: "PunishmentTounamentCell"
+                                    children:
+                                    -   path: "CaptionRegular"
+                                        components:
+                                            UITextComponent:
+                                                text: "Punishment tournament"
+                                    -   path: "Actions/Action0"
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "KARMA_PUNISH_TOURN_PUNISH"
+                                        children: []
+                                    -   path: "Actions/Action0/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "Punish"
+                                    -   path: "Actions/Action1"
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "KARMA_PUNISH_TOURN_WARN"
+                                        children: []
+                                    -   path: "Actions/Action1/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "Warned"
+                                    -   path: "Actions/Action2"
+                                        visible: false
+                                        children: []
+                                -   prototype: "FinanceCell/FinanceCell"
+                                    name: "PunishmentUnsportCell"
+                                    children:
+                                    -   path: "CaptionRegular"
+                                        components:
+                                            UITextComponent:
+                                                text: "Punishment unsportsman"
+                                    -   path: "Actions/Action0"
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "KARMA_PUNISH_UNSPORT_PUNISH"
+                                        children: []
+                                    -   path: "Actions/Action0/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "Punish"
+                                    -   path: "Actions/Action1"
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "KARMA_PUNISH_UNSPORT_WARN"
+                                        children: []
+                                    -   path: "Actions/Action1/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "Warned"
+                                    -   path: "Actions/Action2"
+                                        visible: false
+                                        children: []
+                                -   prototype: "FinanceCell/FinanceCell"
+                                    name: "OtherKarma"
+                                    children:
+                                    -   path: "CaptionRegular"
+                                        components:
+                                            UITextComponent:
+                                                text: "Other karma"
+                                    -   path: "Actions/Action0"
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "KARMA_INC"
+                                        children: []
+                                    -   path: "Actions/Action0/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "Inc"
+                                    -   path: "Actions/Action1"
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "KARMA_DEC"
+                                        children: []
+                                    -   path: "Actions/Action1/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "Dec"
+                                    -   path: "Actions/Action2"
+                                        visible: false
+                                        children: []
+                        -   prototype: "DebugUIOptionsDialogSection/Section"
+                            name: "Finance"
+                            components:
+                                SizePolicy:
+                                    horizontalPolicy: "PercentOfParent"
+                                    verticalPolicy: "PercentOfChildrenSum"
+                            children:
+                            -   path: "Header/Header"
+                                components:
+                                    UITextComponent:
+                                        text: "Finance operations"
+                            -   path: "Content"
+                                position: [0.000000, 40.000000]
+                                components:
+                                    LinearLayout:
+                                        orientation: "TopDown"
+                                    SizePolicy:
+                                        verticalPolicy: "PercentOfChildrenSum"
+                                children:
+                                -   prototype: "FinanceCell/FinanceCell"
+                                    name: "GoldCell"
+                                    children:
+                                    -   path: "CaptionRegular"
+                                        components:
+                                            UITextComponent:
+                                                text: "Gold"
+                                    -   path: "Actions"
+                                        position: [362.000000, 5.000000]
+                                        children: []
+                                    -   path: "Actions/Action0"
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "GOLD_0"
+                                        children: []
+                                    -   path: "Actions/Action1"
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "GOLD_1"
+                                        children: []
+                                    -   path: "Actions/Action1/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "10k"
+                                    -   path: "Actions/Action2"
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "GOLD_2"
+                                        children: []
+                                    -   path: "Actions/Action2/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "1M"
+                                -   prototype: "FinanceCell/FinanceCell"
+                                    name: "CreditsCell"
+                                    children:
+                                    -   path: "CaptionRegular"
+                                        components:
+                                            UITextComponent:
+                                                text: "Credits"
+                                    -   path: "Actions"
+                                        position: [362.000000, 5.000000]
+                                        children: []
+                                    -   path: "Actions/Action0"
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "CREDITS_0"
+                                        children: []
+                                    -   path: "Actions/Action1"
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "CREDITS_1"
+                                        children: []
+                                    -   path: "Actions/Action1/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "10k"
+                                    -   path: "Actions/Action2"
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "CREDITS_2"
+                                        children: []
+                                    -   path: "Actions/Action2/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "1M"
+                                -   prototype: "FinanceCell/FinanceCell"
+                                    name: "PremiumCell"
+                                    children:
+                                    -   path: "CaptionRegular"
+                                        components:
+                                            UITextComponent:
+                                                text: "Premium"
+                                    -   path: "Actions"
+                                        position: [362.000000, 5.000000]
+                                        children: []
+                                    -   path: "Actions/Action0"
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "PREMIUM_0"
+                                        children: []
+                                    -   path: "Actions/Action0/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "1 day"
+                                    -   path: "Actions/Action1"
+                                        position: [75.000000, 0.000000]
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "PREMIUM_1"
+                                        children: []
+                                    -   path: "Actions/Action1/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "1 month"
+                                    -   path: "Actions/Action2"
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "PREMIUM_2"
+                                        children: []
+                                    -   path: "Actions/Action2/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "1 year"
+                                -   prototype: "FinanceCell/FinanceCell"
+                                    name: "FreeXpCell"
+                                    children:
+                                    -   path: "CaptionRegular"
+                                        components:
+                                            UITextComponent:
+                                                text: "Free XP"
+                                    -   path: "Actions"
+                                        position: [362.000000, 5.000000]
+                                        children: []
+                                    -   path: "Actions/Action0"
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "FREE_XP_0"
+                                        children: []
+                                    -   path: "Actions/Action0/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "100"
+                                    -   path: "Actions/Action1"
+                                        position: [75.000000, 0.000000]
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "FREE_XP_1"
+                                        children: []
+                                    -   path: "Actions/Action1/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "10k"
+                                    -   path: "Actions/Action2"
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "FREE_XP_2"
+                                        children: []
+                                    -   path: "Actions/Action2/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "1M"
+                                -   prototype: "FinanceCell/FinanceCell"
+                                    name: "SlotsCell"
+                                    children:
+                                    -   path: "CaptionRegular"
+                                        components:
+                                            UITextComponent:
+                                                text: "Slots"
+                                    -   path: "Actions"
+                                        position: [362.000000, 5.000000]
+                                        children: []
+                                    -   path: "Actions/Action0"
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "SLOTS_0"
+                                        children: []
+                                    -   path: "Actions/Action0/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "1"
+                                    -   path: "Actions/Action1"
+                                        position: [75.000000, 0.000000]
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "SLOTS_1"
+                                        children: []
+                                    -   path: "Actions/Action1/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "5"
+                                    -   path: "Actions/Action2"
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "SLOTS_2"
+                                        children: []
+                                    -   path: "Actions/Action2/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "20"
+                                -   prototype: "FinanceCell/FinanceCell"
+                                    name: "CamoCell"
+                                    children:
+                                    -   path: "CaptionRegular"
+                                        components:
+                                            UITextComponent:
+                                                text: "Camo"
+                                    -   path: "Actions"
+                                        position: [362.000000, 5.000000]
+                                        children: []
+                                    -   path: "Actions/Action0"
+                                        components:
+                                            SizePolicy:
+                                                horizontalValue: 220.000000
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "RANDOM_CAMO"
+                                        children: []
+                                    -   path: "Actions/Action0/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "Random camo"
+                                    -   path: "Actions/Action1"
+                                        position: [75.000000, 0.000000]
+                                        visible: false
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "SLOTS_1"
+                                        children: []
+                                    -   path: "Actions/Action1/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "5"
+                                    -   path: "Actions/Action2"
+                                        visible: false
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "SLOTS_2"
+                                        children: []
+                                    -   path: "Actions/Action2/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "20"
+                                -   prototype: "FinanceCell/FinanceCell"
+                                    name: "ShareRewardCell"
+                                    children:
+                                    -   path: "CaptionRegular"
+                                        components:
+                                            UITextComponent:
+                                                text: "ShareReward"
+                                    -   path: "Actions"
+                                        position: [362.000000, 5.000000]
+                                        children: []
+                                    -   path: "Actions/Action0"
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "SHARE_REWARD_0"
+                                        children: []
+                                    -   path: "Actions/Action0/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "100"
+                                    -   path: "Actions/Action1"
+                                        position: [75.000000, 0.000000]
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "SHARE_REWARD_1"
+                                        children: []
+                                    -   path: "Actions/Action1/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "10k"
+                                    -   path: "Actions/Action2"
+                                        components:
+                                            UIInputEventComponent:
+                                                onTouchUpInside: "SHARE_REWARD_2"
+                                        children: []
+                                    -   path: "Actions/Action2/Caption"
+                                        components:
+                                            UITextComponent:
+                                                text: "1M"
+                -   prototype: "ScrollBar/VerticalScrollBar"
+                    name: "VerticalScrollBar"
+                    position: [590.000000, 0.000000]
+                    components:
+                        Anchor:
+                            rightAnchorEnabled: true
+                            topAnchorEnabled: true
+                            bottomAnchorEnabled: true
+                        ScrollBarDelegate:
+                            delegate: "../ScrollArea"
+        -   class: "UIControl"
+            name: "Footer"
+            input: false
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    rightAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                    bottomAnchor: 15.000000
+                LinearLayout:
+                    dynamicPadding: true
+                    spacing: 10.000000
+                SizePolicy:
+                    verticalPolicy: "PercentOfFirstChild"
+            children:
+            -   prototype: "StyledButton/StyledButton"
+                name: "cancelButton"
+                size: [192.000000, 64.000000]
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 150.000000
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 60.000000
+                    UIInputEventComponent:
+                        onTouchUpInside: "CANCEL"
+                children:
+                -   path: "Caption"
+                    components:
+                        UITextComponent:
+                            text: "Close"

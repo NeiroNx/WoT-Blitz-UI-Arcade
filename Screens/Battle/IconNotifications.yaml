@@ -1,0 +1,35 @@
+Header:
+    version: "20"
+Prototypes:
+-   class: "UIControl"
+    name: "IconNotificationPrototype"
+    size: [45.000000, 56.000000]
+    pivot: [0.000000, 0.500000]
+    noInput: true
+    components:
+        Background:
+            sprite: "~res:/Gfx/UI/BattleScreenHUD/skills_bg"
+            colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+    children:
+    -   class: "UIControl"
+        name: "icon"
+        pivot: [0.500000, 0.500000]
+        noInput: true
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            Background:
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+-   prototype: "IconNotificationPrototype"
+    name: "SkilledRangingNotificationPrototype"
+    children:
+    -   path: "icon"
+        children:
+        -   class: "UIParticles"
+            name: "skilled_ranging"
+            size: [32.000000, 32.000000]
+            pivot: [0.500000, 0.500000]
+            noInput: true
+            effectPath: "~res:/3d/FX/UI/skilled_ranging.sc2"
+            autoStart: true

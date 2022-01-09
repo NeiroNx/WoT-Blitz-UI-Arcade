@@ -1,0 +1,29 @@
+Header:
+    version: "110"
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/FullScreenPopup/FullscreenPopupWithContentSlot.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "SpecialStuffNotification"
+    size: [900.000000, 600.000000]
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["StuffResource", "stuff", "null", "{ }"]
+            events:
+            - "PREVIEW_STUFF"
+            - "CLOSE_NOTIFICATION"
+    children:
+    -   prototype: "FullscreenPopupWithContentSlot/FullscreenPopupWithContentSlot"
+        name: "FullscreenPopupWithContentSlot"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "isButtonVisible": "true"
+                    "contentControl": "control(\"~res:/UI/Screens3/Lobby/Common/FullScreenPopup/SpecialStuffNotificationContent.yaml\", { \"stuff\" = stuff; }, [ { \"event\" = \"ACCENT_CLICKED\"; \"action\" = \"PREVIEW_STUFF\"; }; ])"
+                eventActions:
+                - ["CLOSE_NOTIFICATION", "CLOSE_NOTIFICATION", ""]
+                - ["ACCENT_CLICKED", "PREVIEW_STUFF", ""]

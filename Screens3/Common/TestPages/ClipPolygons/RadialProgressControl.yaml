@@ -1,0 +1,87 @@
+Header:
+    version: "103"
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/Button.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "RadialProgressControl"
+    size: [320.000000, 300.000000]
+    input: false
+    components:
+        Background:
+            drawType: "DRAW_SCALE_PROPORTIONAL_ONE"
+        ClipContent: {}
+        UIUrlImageComponent: {}
+        UIClipPolygon: {}
+        RadialProgressComponent: {}
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "FixedSize"
+            verticalValue: 600.000000
+        UIDataParamsComponent:
+            params:
+            - ["string", "url", "\"\"", "\"https://stufficons.wotblitz.com/Gfx/profile_skin_bp_1/200319_125926_072427.png\""]
+            events: []
+        UIDataLocalsComponent:
+            locals:
+            - ["float", "start", "0.000000"]
+            - ["float", "step", "0.100000"]
+            - ["float", "progress", "0.000000"]
+        UIDataOnEventComponent0:
+            eventName: "CLICK_BUTTON"
+            modelFieldExpression: "progress"
+            dataExpression: "when progress < 1 -> progress + step, 1"
+    bindings:
+    - ["UIUrlImageComponent.imageUrl", "url"]
+    - ["RadialProgressComponent.progress", "progress"]
+    - ["RadialProgressComponent.startAngle", "start"]
+    children:
+    -   class: "UIControl"
+        name: "Label"
+        size: [32.000000, 32.000000]
+        input: false
+        classes: "grey-shark-50-bg"
+        components:
+            Background: {}
+            Anchor:
+                bottomAnchorEnabled: true
+            LinearLayout:
+                padding: "20"
+                dynamicPadding: true
+                spacing: 20.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "Formula"
+                verticalFormula: "maxChild +20"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+        children:
+        -   class: "UIControl"
+            name: "CAPS_BOLD"
+            input: false
+            classes: "t-caps bold color=white-wild-sand-text"
+            components:
+                UITextComponent:
+                    text: "Control with radial progress"
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+        -   prototype: "Button/Button"
+            name: "ButtonPositive"
+            components:
+                Anchor:
+                    vCenterAnchorEnabled: true
+                UIDataParamsComponent:
+                    args:
+                        "size": "eButtonSize.NORMAL"
+                        "type": "eButtonType.POSITIVE"
+                        "enabled": "true"
+                        "caption": "\"progress\""
+                    eventActions:
+                    - ["ON_CLICK_BUTTON", "CLICK_BUTTON", ""]

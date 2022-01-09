@@ -1,0 +1,29 @@
+Header:
+    version: "76"
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/Notifications/SystemNotificationPrototype.yaml"
+- "~res:/UI/Screens3/Lobby/Common/NotificationBigButton.yaml"
+Controls:
+-   prototype: "SystemNotificationPrototype/Notification"
+    customClass: "UIPremiumAccountExpiryNotification"
+    name: "PremiumAccountExpiry"
+    children:
+    -   path: "NotificationItem/Content"
+        children:
+        -   prototype: "NotificationBigButton/NotificationButton"
+            name: "NotificationButton"
+            children:
+            -   path: "BUTTON"
+                position: [64.000000, 32.000000]
+                size: [84.000000, 20.000000]
+                components:
+                    UITextComponent:
+                        text: "NOTIFICATIONS_PREMIUM_PROLONG"
+    -   path: "NotificationItem/Content/Status/Icon"
+        components:
+            Background:
+                sprite: "~res:/Gfx/Lobby/icons/icon_expiry_s"
+    -   path: "NotificationItem/Content/Status/Result"
+        components:
+            UITextComponent:
+                text: "HANGAR_NOTIFICATION_PREMIUM_EXPIRIED"

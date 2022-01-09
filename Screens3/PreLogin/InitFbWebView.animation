@@ -1,0 +1,4 @@
+animation InitFbWebView
+{
+    Event("INIT_FB_WEB_VIEW");
+}

@@ -1,0 +1,458 @@
+Header:
+    version: 128
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Profile/Common/PlayerInfo/PlayerInfo.yaml"
+- "~res:/UI/Screens3/Lobby/Profile/Common/StatCell.yaml"
+- "~res:/UI/Screens3/Lobby/Common/List/ListCell.yaml"
+- "~res:/UI/Screens3/Lobby/Profile/Common/KarmaButton.yaml"
+- "~res:/UI/Screens3/Lobby/BattleResults/ScrollableMedalContainer.yaml"
+- "~res:/UI/Screens3/Lobby/Common/Vehicle/Vehicle.yaml"
+- "~res:/UI/Screens3/Lobby/Common/PlayerName.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "ShortProfile"
+    size: [1353.000000, 1203.000000]
+    input: true
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["string", "profileBackground", "\"\"", "\"\""]
+            - ["ProfileViewModel", "profile", "null", "{ }"]
+            - ["ShortProfileViewModel", "shortProfile", "null", "{ }"]
+            events:
+            - "BACK_EVENT"
+            - "OVERLAY_OPEN_FINISH"
+        UIDataLocalBindingsComponent:
+            data:
+            - ["float", "winrate", "when isNull(profile.dossier) -> 0.000000, round(profile.dossier.winsRate * 100.000000) * 0.010000"]
+            - ["string", "winrateColor", "when winrate >= 70.000000 -> \"purple-zhuk-text\", winrate >= 60.000000 -> \"blue-rimmi-text\", winrate >= 50.000000 -> \"green-zmilly-text\", \"white-wild-sand-text\""]
+            - ["BattleResult", "battleResult", "shortProfile.battleResult"]
+            - ["eArenaGameplayType", "gameType", "shortProfile.arenaGameplayType"]
+            - ["vector<AchievementViewModel>", "achievements", "shortProfile.achievements"]
+            - ["vector<RibbonViewModel>", "ribbons", "shortProfile.ribbons"]
+            - ["VehicleDataModel", "tankModel", "shortProfile.tankModel"]
+            - ["TankStats", "tankStats", "shortProfile.tankStats"]
+            - ["BattleStatistics", "stats", "shortProfile.battleResultsStatistics"]
+            - ["int", "totalBattlesCount", "when isNull(profile.dossier) -> 0, profile.dossier.battlesCount + profile.dossier.tournamentBattlesCount + profile.dossier.ratingBattlesCount"]
+            - ["float", "winRate", "when isNull(profile.dossier) -> 0.000000, profile.dossier.winsRate"]
+            - ["float", "avgDamage", "when isNull(profile.dossier) -> 0.000000, profile.dossier.avgDamage"]
+            - ["int", "karmaLevel", "when isNull(profile.dossier) -> 3, profile.dossier.karmaLevel"]
+            - ["int", "maxKarmaLevel", "when isNull(profile.dossier) -> 5, profile.dossier.maxKarmaLevel"]
+        UIChildComponent0:
+            prototypePath: "~res:/UI/Screens3/Lobby/Common/Overlay/Overlay.yaml"
+            args:
+                "content": "SliderContent"
+                "footerContent": "FooterContent"
+                "wasPushed": "true"
+                "isFooterVisible": "shortProfile.battleResultsStatistics.killedBy.playerName != \"\""
+                "customBgURL": "profileBackground"
+                "hasCustomBg": "not profileBackground.empty()"
+                "scaleBg": "true"
+            eventActions:
+            - ["OVERLAY_OPEN_FINISH", "OVERLAY_OPEN_FINISH", ""]
+            - ["BACK_EVENT", "BACK_EVENT", ""]
+Slots:
+-   class: "UIControl"
+    name: "SliderContent"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        Anchor:
+            hCenterAnchorEnabled: true
+            vCenterAnchorEnabled: true
+        LinearLayout:
+            orientation: "TopDown"
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "PercentOfChildrenSum"
+    children:
+    -   class: "UIControl"
+        name: "Spacer"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "FixedSize"
+                verticalValue: 48.000000
+    -   prototype: "PlayerInfo/PlayerInfo"
+        name: "PlayerInfo"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "playerProfileType": "profile.profileType"
+                    "showChangeAvatarButton": "false"
+                    "showChangeNameButton": "false"
+                    "showSendMessageButton": "false"
+                    "showAddFriendButton": "false"
+                    "showRemoveFriendButton": "false"
+                    "showShowProfileButton": "shortProfile.isFullProfileCanBeOpened"
+                    "avatar": "profile.playerAvatar"
+                    "playerName": "profile.playerNameData.name"
+                    "clanTag": "when isNull(profile.clanData.clan) -> \"\", profile.clanData.clan.tag"
+                    "rating": "profile.rating"
+                eventActions:
+                - ["OPEN_PROFILE", "SHOW_PROFILE", "_event"]
+                - ["CHANGE_AVATAR", "", ""]
+                - ["CHANGE_NAME", "", ""]
+                - ["SEND_MESSAGE", "", ""]
+                - ["ADD_FRIEND", "", ""]
+                - ["REMOVE_FRIEND", "", ""]
+                - ["SHOW_RATING", "SHOW_RATING", "_event"]
+                - ["SHOW_AVATAR_INFO", "SHOW_AVATAR_INFO", "_event"]
+    -   class: "UIControl"
+        name: "Spacer_1"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "FixedSize"
+                verticalValue: 48.000000
+    -   prototype: "ScrollableMedalContainer/MedalContainer"
+        name: "MedalContainer"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "isBattleResults": "true"
+                    "visible": "achievements.Size() > 0 or ribbons.Size() > 0"
+                    "battleResult": "battleResult"
+                    "achievements": "achievements"
+                    "ribbons": "ribbons"
+                eventActions:
+                - ["ON_RIBBON_PRESSED", "SHOW_RIBBON_INFO", "_event"]
+                - ["ON_ACHIEVEMENT_PRESSED", "SHOW_ACHIEVEMENT_INFO", "_event"]
+    -   class: "UIControl"
+        name: "Spacer_2"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "FixedSize"
+                verticalValue: 48.000000
+    -   class: "UIControl"
+        name: "BaseStats"
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+            LinearLayout:
+                spacing: 16.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   prototype: "StatCell/StatCell"
+            name: "Stat1"
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                UIDataParamsComponent:
+                    args:
+                        "header": "localize(\"profile/Brief/TotalBattles\")"
+                        "value": "str1000Separated(totalBattlesCount)"
+                        "valueColor": "\"white-wild-sand-text\""
+        -   prototype: "StatCell/StatCell"
+            name: "Stat2"
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                UIDataParamsComponent:
+                    args:
+                        "header": "localize(\"profile/Brief/TotalVictories\")"
+                        "value": "percent(winRate, 2)"
+                        "valueColor": "winrateColor"
+        -   prototype: "StatCell/StatCell"
+            name: "Stat3"
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                UIDataParamsComponent:
+                    args:
+                        "header": "localize(\"profile/Brief/AverageDamagePerBattle\")"
+                        "value": "str1000Separated(int(round(avgDamage)))"
+                        "valueColor": "\"white-wild-sand-text\""
+        -   prototype: "KarmaButton/KarmaButton"
+            name: "KarmaButton"
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                UIDataParamsComponent:
+                    args:
+                        "karmaLevel": "karmaLevel"
+                        "maxKarmaLevel": "maxKarmaLevel"
+                    eventActions:
+                    - ["ON_PRESSED", "SHOW_KARMA", ""]
+    -   class: "UIControl"
+        name: "Spacer_3"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "FixedSize"
+                verticalValue: 32.000000
+    -   class: "UIControl"
+        name: "StatsWrapper"
+        components:
+            LinearLayout:
+                orientation: "TopDown"
+                padding: "0;24"
+                spacing: 8.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfChildrenSum"
+        children:
+        -   class: "UIControl"
+            name: "Tank"
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                LinearLayout:
+                    spacing: 16.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   class: "UIControl"
+                name: "LeftLine"
+                input: false
+                classes: "white-wild-sand-15-bg"
+                components:
+                    Background: {}
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 1.000000
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+            -   prototype: "Vehicle/Vehicle"
+                name: "Vehicle"
+                components:
+                    UIDataParamsComponent:
+                        args:
+                            "clickable": "false"
+                            "vehicleDataModel": "tankModel"
+                            "tankStatsModel": "tankStats"
+                            "id": "0"
+                            "isSelected": "false"
+                            "bgColorStyle": "\"\""
+            -   class: "UIControl"
+                name: "RightLine"
+                input: false
+                classes: "white-wild-sand-15-bg"
+                components:
+                    Background: {}
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 1.000000
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "Stats"
+            input: false
+            components:
+                LinearLayout:
+                    padding: "16"
+                    spacing: 48.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   class: "UIControl"
+                name: "LeftColumn"
+                input: false
+                components:
+                    LinearLayout:
+                        orientation: "TopDown"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        horizontalValue: 100.000000
+                        verticalPolicy: "Formula"
+                        verticalFormula: "max(parent, childrenSum)"
+                children:
+                -   prototype: "ListCell/ListCell"
+                    name: "Shots"
+                    components:
+                        UIDataParamsComponent:
+                            args:
+                                "visible": "true"
+                                "name": "localize(\"#battle_results:DetailsPage/StatisticPage/Shots\")"
+                                "value": "str1000Separated(stats.shotsFired)"
+                                "showBottomSeparator": "true"
+                -   prototype: "ListCell/ListCell"
+                    name: "DamageDealt"
+                    components:
+                        UIDataParamsComponent:
+                            args:
+                                "visible": "true"
+                                "name": "localize(\"#battle_results:DetailsPage/StatisticPage/DamageDealt\")"
+                                "value": "str1000Separated(stats.damageDealt)"
+                                "showBottomSeparator": "false"
+                -   prototype: "ListCell/ListCell"
+                    name: "Hits"
+                    components:
+                        UIDataParamsComponent:
+                            args:
+                                "visible": "true"
+                                "name": "localize(\"#battle_results:DetailsPage/StatisticPage/HitsAndPierced\")"
+                                "value": "str1000Separated(stats.hits) + \" / \" + str1000Separated(stats.piercingHits)"
+                                "showBottomSeparator": "true"
+                -   prototype: "ListCell/ListCell"
+                    name: "VehiclesCount"
+                    components:
+                        UIDataParamsComponent:
+                            args:
+                                "visible": "true"
+                                "name": "localize(\"#battle_results:DetailsPage/StatisticPage/DamagedAndKills\")"
+                                "value": "str1000Separated(stats.vehiclesDamaged) + \" / \" + str1000Separated(stats.vehiclesDestroyed)"
+                                "showBottomSeparator": "true"
+                -   prototype: "ListCell/ListCell"
+                    name: "AssistDamage"
+                    components:
+                        UIDataParamsComponent:
+                            args:
+                                "visible": "true"
+                                "name": "localize(\"#battle_results:DetailsPage/StatisticPage/DamageAssisted\")"
+                                "value": "str1000Separated(stats.assistDamage)"
+                                "showBottomSeparator": "false"
+            -   class: "UIControl"
+                name: "RightColumn"
+                input: false
+                components:
+                    LinearLayout:
+                        orientation: "TopDown"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        horizontalValue: 100.000000
+                        verticalPolicy: "Formula"
+                        verticalFormula: "max(parent, childrenSum)"
+                children:
+                -   prototype: "ListCell/ListCell"
+                    name: "ReceivedHits"
+                    components:
+                        UIDataParamsComponent:
+                            args:
+                                "visible": "true"
+                                "name": "localize(\"#battle_results:DetailsPage/StatisticPage/ShotsReceived\")"
+                                "value": "str1000Separated(stats.receivedHits)"
+                                "showBottomSeparator": "true"
+                -   prototype: "ListCell/ListCell"
+                    name: "ReceivedPiercingHits"
+                    components:
+                        UIDataParamsComponent:
+                            args:
+                                "visible": "true"
+                                "name": "localize(\"#battle_results:DetailsPage/StatisticPage/PiercedReceived\")"
+                                "value": "str1000Separated(stats.receivedPiercingHits)"
+                                "showBottomSeparator": "true"
+                -   prototype: "ListCell/ListCell"
+                    name: "ReceivedHitsNoDmg"
+                    components:
+                        UIDataParamsComponent:
+                            args:
+                                "visible": "true"
+                                "name": "localize(\"#battle_results:DetailsPage/StatisticPage/NoDamageShotsReceived\")"
+                                "value": "str1000Separated(stats.receivedNoDmgHits)"
+                                "showBottomSeparator": "false"
+                -   class: "UIControl"
+                    name: "Spacer"
+                    size: [32.000000, 32.000000]
+                    input: false
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfParent"
+                -   prototype: "ListCell/ListCell"
+                    name: "CapturePoints"
+                    components:
+                        UIDataParamsComponent:
+                            args:
+                                "visible": "gameType == eArenaGameplayType.domination"
+                                "name": "localize(\"#battle_results:DetailsPage/StatisticPage/ScoreEarned\")"
+                                "value": "str1000Separated(stats.capturePoints)"
+                                "showBottomSeparator": "true"
+                -   prototype: "ListCell/ListCell"
+                    name: "DroppedCapturePoints"
+                    components:
+                        UIDataParamsComponent:
+                            args:
+                                "visible": "gameType == eArenaGameplayType.domination"
+                                "name": "localize(\"#battle_results:DetailsPage/StatisticPage/ScoreDetracted\")"
+                                "value": "str1000Separated(stats.defendingPoints)"
+                                "showBottomSeparator": "false"
+                -   prototype: "ListCell/ListCell"
+                    name: "SupremacyPointsEarned"
+                    components:
+                        UIDataParamsComponent:
+                            args:
+                                "visible": "gameType == eArenaGameplayType.supremacy"
+                                "name": "localize(\"#battle_results:DetailsPage/StatisticPage/ScoreEarned\")"
+                                "value": "str1000Separated(stats.supremacyPointsEarned)"
+                                "showBottomSeparator": "true"
+                -   prototype: "ListCell/ListCell"
+                    name: "SupremacyPointsStolen"
+                    components:
+                        UIDataParamsComponent:
+                            args:
+                                "visible": "gameType == eArenaGameplayType.supremacy"
+                                "name": "localize(\"#battle_results:DetailsPage/StatisticPage/ScoreDetracted\")"
+                                "value": "str1000Separated(stats.supremacyPointsStolen)"
+                                "showBottomSeparator": "false"
+-   class: "UIControl"
+    name: "FooterContent"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        Anchor:
+            hCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "Formula"
+            horizontalFormula: "when parent < 1200 -> 800, 1040"
+            verticalPolicy: "FixedSize"
+            verticalValue: 48.000000
+    children:
+    -   class: "UIControl"
+        name: "Info"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                spacing: 5.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   class: "UIControl"
+            name: "Caption"
+            input: false
+            classes: "t-body regular color=white-wild-sand-50-text"
+            components:
+                UITextComponent:
+                    text: "shortProfile/Footer/DestroyedBy"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml"
+        -   prototype: "PlayerName/PlayerName"
+            name: "PlayerName"
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                LinearLayout:
+                    orientation: "RightToLeft"
+                UIDataParamsComponent:
+                    args:
+                        "playerNameSize": "ePlayerSize.kNormal"
+                        "clanTag": "stats.killedBy.playerClan"
+                        "playerName": "stats.killedBy.playerName"

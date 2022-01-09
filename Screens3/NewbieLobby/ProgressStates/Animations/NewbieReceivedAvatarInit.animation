@@ -1,0 +1,40 @@
+animation _INIT(bool arg)
+{
+	ChangeData(inputDisabled, true);
+    	Opacity("**/Additional", opacity=0.0, time=0.0);
+	Scale(path="**/NewAvatar", x=0.0,y=0.0);
+	Scale(path="**/AvatarEffect", x=0,y=0, time=0.0);
+	Scale(path="**/OldAvatar", x=1,y=1, time=0.0);
+	Opacity("**/Button", 0, 0);
+	ChangeProperty("**/Button", "Anchor", "vCenterAnchor", 50);
+	
+	if (not isNull(oldAvatar))
+	{
+		PlaySound("play_tut_2021_ui_hang_achiev_change_rank");
+		Scale(path="**/OldAvatar", x=0,y=0, time=0.6, interpolation= EASE_IN);
+	}
+
+	PlaySound("play_tut_2021_ui_hang_achiev_rank_up");
+
+	parallel
+	{
+		Scale(path="**/NewAvatar", x=1.0, y=1.0, time=0.6, interpolation= EASE_OUT);
+		sequence
+                {
+			Wait(0.2);
+			StartParticles(path="**/AvatarEffect");
+			Scale(path="**/AvatarEffect", x=3.1, y=3.1, time=0.4, interpolation= EASE_OUT);
+			Wait(0.5);
+			PlaySound("play_tut_2021_ui_hang_achiev_green_arrows");
+		}
+	}
+
+	Opacity("**/Additional", opacity=1.0, time=0.4, interpolation=EASE_IN);
+	
+	parallel
+	{
+		Opacity("**/Button", 1.0, 0.4, EASE_OUT);
+		ChangeProperty("**/Button", "Anchor", "vCenterAnchor", 0, time = 0.4, interpolation=EASE_OUT);
+	}
+	ChangeData(inputDisabled, false);
+}

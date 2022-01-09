@@ -1,0 +1,43 @@
+Header:
+    version: "80"
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/Common/SectionHeader3.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "Section"
+    size: [400.000000, 250.000000]
+    input: false
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+    children:
+    -   prototype: "SectionHeader3/SectionHeader3"
+        name: "Header"
+        input: false
+        components:
+            Background: {}
+            StyleSheet:
+                styles: "~res:/UI/Screens/Fonts.yaml"
+        children:
+        -   path: "Left"
+            input: false
+        -   path: "Right"
+            input: false
+        -   class: "UIStaticText"
+            name: "Header"
+            classes: "header3 text-color-white"
+            components:
+                UITextComponent:
+                    text: "Layout System"
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    topAnchorEnabled: true
+                    bottomAnchorEnabled: true
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"

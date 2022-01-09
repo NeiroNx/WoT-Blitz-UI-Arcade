@@ -1,0 +1,67 @@
+action REWARD_RECEIVED()
+{	
+	Wait(0.1);
+	if (displayingTask.status == eTaskJournalTaskStatus.RewardReceived and isGeneralPackLoaded)
+	{
+		StartParticles(path="**/BgParticle");
+		Wait(2);
+		StopParticles(path="**/BgParticle");
+	}	
+}
+
+action HIGHLIGHT_TASK()
+{
+	Scale(".", 1.1, 1.1, 0.5, EASE_IN);
+	Scale(".", 1.0, 1.0, 0.5, EASE_OUT);
+}
+
+action CHANGE_TASK()
+{
+	Wait(0.5); // delay after closing popup with rewards for chain
+
+	if (displayOldTask)
+	{
+		ChangeData(isChangingAnimationInProgress, true);
+		
+		// hide main content
+		parallel
+		{
+			ChangeProperty("**/Info","Anchor","vCenterAnchor",12, 0.3); 
+			Opacity("**/Info", 0.0, time=0.3, interpolation=EASE_IN_EASE_OUT);
+			ChangeProperty("**/ProgressStatus","Anchor","vCenterAnchor",12, 0.3); 
+			Opacity("**/ProgressStatus", 0.0, time=0.3, interpolation=EASE_IN_EASE_OUT);
+		}
+		ChangeProperty("**/Bg", "SizePolicy", "horizontalValue", 10, 0.5, EASE_IN_EASE_OUT);
+		
+		// instant switch some states
+		ChangeProperty("**/Info","Anchor","vCenterAnchor",-12); 
+		ChangeProperty("**/ProgressStatus","Anchor","vCenterAnchor",-12); 
+		ChangeProperty("**/Icon2", "Anchor", "vCenterAnchor", -80);
+		Opacity("**/Icon2", 0.0);
+		
+		// animate icon changing
+		ChangeProperty("**/Icon", "Anchor", "vCenterAnchor", -8, 0.1);
+		parallel
+		{
+			ChangeProperty("**/Icon", "Anchor", "vCenterAnchor", 80, 0.5, EASE_IN_EASE_OUT);
+			ChangeProperty("**/Icon2", "Anchor", "vCenterAnchor", 0, 0.5, EASE_IN_EASE_OUT);
+			Opacity("**/Icon", 0.0, time=0.5, interpolation=EASE_IN_EASE_OUT);
+			Opacity("**/Icon2", 1.0, time=0.5, interpolation=EASE_IN_EASE_OUT);
+		}
+		ChangeProperty("**/Icon", "Anchor", "vCenterAnchor", 0);
+		
+		Event("REMOVE_OLD_CHAIN_TASK", ".", task.slotIndex);
+		
+		// show main content
+		ChangeProperty("**/Bg", "SizePolicy", "horizontalValue", 100, 0.5, EASE_IN_EASE_OUT);
+		parallel
+		{
+			ChangeProperty("**/Info","Anchor","vCenterAnchor",0, 0.3); 
+			Opacity("**/Info", 1.0, time=0.3, interpolation=EASE_IN_EASE_OUT);
+			ChangeProperty("**/ProgressStatus","Anchor","vCenterAnchor",0, 0.3); 
+			Opacity("**/ProgressStatus", 1.0, time=0.3, interpolation=EASE_IN_EASE_OUT);
+		}
+
+		ChangeData(isChangingAnimationInProgress, false);
+	}
+}

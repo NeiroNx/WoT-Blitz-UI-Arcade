@@ -1,0 +1,107 @@
+Header:
+    version: "24"
+StyleSheets:
+-   selector: ".compliment #RateButton"
+    properties:
+        bg-color: [0.494118, 0.827451, 0.129412, 1.000000]
+-   selector: ".complaint #RateButton"
+    properties:
+        bg-spriteModification: ["FLIP_HORIZONTAL", "FLIP_VERTICAL"]
+        bg-color: [0.815686, 0.007843, 0.105882, 1.000000]
+-   selector: ".available #RateButton"
+    properties:
+        bg-color: [1.000000, 1.000000, 1.000000, 1.000000]
+-   selector: ".unavailable #RateButton"
+    properties:
+        bg-color: [1.000000, 1.000000, 1.000000, 0.501961]
+-   selector: ".self #RateButton, .no-karma #RateButton"
+    properties:
+        visible: false
+-   selector: "#CellRelations.self, #CellRelations.no-karma"
+    properties:
+        noInput: true
+-   selector: "#RateButton"
+    properties:
+        bg-spriteModification: []
+        bg-color: [1.000000, 1.000000, 1.000000, 0.501961]
+-   selector: "#Animation"
+    properties:
+        visible: false
+-   selector: ".animated.available #RateButton"
+    properties:
+        visible: false
+-   selector: ".animated.available #Animation"
+    properties:
+        visible: true
+-   selector: ".rating #RatingLabel, .rating #RatingIcon"
+    properties:
+        visible: true
+-   selector: ".regular #RatingLabel, .regular #RatingIcon"
+    properties:
+        visible: false
+-   selector: ".rating #Value"
+    properties:
+        sizePolicy-horizontalValue: 240.000000
+-   selector: ".regular #Value"
+    properties:
+        sizePolicy-horizontalValue: 200.000000
+-   selector: "UIStaticText.results-cell.player-cell"
+    properties:
+        text-color: [1.000000, 0.650980, 0.145098, 1.000000]
+-   selector: "#PlayerNameWithTag.name-with-tag.player-cell #name"
+    properties:
+        text-color: [1.000000, 0.650980, 0.145098, 1.000000]
+-   selector: "UIStaticText.results-cell.teammate-cell"
+    properties:
+        text-color: [0.933333, 0.776471, 0.462745, 1.000000]
+-   selector: "#PlayerNameWithTag.name-with-tag.teammate-cell #name"
+    properties:
+        text-color: [0.933333, 0.776471, 0.462745, 1.000000]
+-   selector: ".results-cell.player-cell #Squad"
+    properties:
+        bg-color: [1.000000, 0.650980, 0.145098, 1.000000]
+-   selector: ".results-cell.player-cell #NameContainer #TankName"
+    properties:
+        text-color: [1.000000, 0.650980, 0.145098, 1.000000]
+-   selector: ".results-cell.player-cell #NameContainer #PlayerNameWithTag #name"
+    properties:
+        text-color: [1.000000, 0.650980, 0.145098, 1.000000]
+-   selector: ".results-cell.player-cell #NameContainer #PlayerNameWithTag #tag"
+    properties:
+        text-color: [1.000000, 0.650980, 0.145098, 1.000000]
+-   selector: ".results-cell.player-cell #CurrentRating"
+    properties:
+        text-color: [1.000000, 0.650980, 0.145098, 1.000000]
+-   selector: ".results-cell.player-cell #Rating"
+    properties:
+        text-color: [1.000000, 0.650980, 0.145098, 1.000000]
+-   selector: ".results-cell.teammate-cell #Squad"
+    properties:
+        bg-color: [0.933333, 0.776471, 0.462745, 1.000000]
+-   selector: ".results-cell.teammate-cell #Rating"
+    properties:
+        text-color: [0.933333, 0.776471, 0.462745, 1.000000]
+-   selector: ".results-cell.teammate-cell #NameContainer #TankName"
+    properties:
+        text-color: [0.933333, 0.776471, 0.462745, 1.000000]
+-   selector: ".results-cell.teammate-cell #NameContainer #PlayerNameWithTag #name"
+    properties:
+        text-color: [0.933333, 0.776471, 0.462745, 1.000000]
+-   selector: ".results-cell.teammate-cell #NameContainer #PlayerNameWithTag #tag"
+    properties:
+        text-color: [0.933333, 0.776471, 0.462745, 1.000000]
+-   selector: ".results-cell.teammate-cell #CurrentRating"
+    properties:
+        text-color: [0.933333, 0.776471, 0.462745, 1.000000]
+-   selector: ".battle-rating.calibration #CalibrationIcon"
+    properties:
+        visible: true
+-   selector: ".battle-rating #CalibrationIcon"
+    properties:
+        visible: false
+-   selector: ".results-cell #NameContainer #PlayerNameWithTag #name"
+    properties:
+        text-color: [0.772549, 0.772549, 0.772549, 1.000000]
+-   selector: ".results-cell #NameContainer #PlayerNameWithTag #tag"
+    properties:
+        text-color: [0.772549, 0.772549, 0.772549, 1.000000]

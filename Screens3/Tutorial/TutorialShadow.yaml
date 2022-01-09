@@ -1,0 +1,11 @@
+Header:
+    version: "108"
+Controls:
+-   class: "UIControl"
+    name: "TutorialShadow"
+    size: [137.000000, 103.000000]
+    input: false
+    components:
+        Background:
+            drawType: "DRAW_FILL"
+            color: [0.000000, 0.000000, 0.000000, 0.501961]

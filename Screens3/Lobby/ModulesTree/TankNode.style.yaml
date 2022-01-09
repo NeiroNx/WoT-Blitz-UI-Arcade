@@ -1,0 +1,36 @@
+Header:
+    version: "108"
+ImportedPackages:
+- "~res:/UI/Screens3/Common/Touch.style.yaml"
+- "~res:/UI/Screens3/Common/Hover.style.yaml"
+StyleSheets:
+-   selectors:
+    - ".tank-node:selected:hover * .hover"
+    - ".tank-node:pressed_inside * .hover"
+    - ".tank-node:selected * .hover"
+    - ".tank-node:pressed_inside:hover * .hover"
+    properties:
+        visible: false
+-   selectors:
+    - ".tank-node * .content-area"
+    - ".tank-node:pressed_inside:selected * .content-area"
+    properties:
+        opacity-opacity:
+            value: 1.000000
+            transitionTime: 0.080000
+            transitionFunction: "EASE_IN_EASY_OUT"
+-   selectors:
+    - ".tank-node:pressed_inside * .content-area"
+    properties:
+        opacity-opacity:
+            value: 0.700000
+            transitionTime: 0.080000
+            transitionFunction: "EASE_IN_EASY_OUT"
+-   selectors:
+    - ".tank-node:focused ? .focus"
+    properties:
+        visible: true
+-   selectors:
+    - ".tank-node ? .focus"
+    properties:
+        visible: false

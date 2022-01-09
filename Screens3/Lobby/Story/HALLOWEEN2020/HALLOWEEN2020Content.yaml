@@ -1,0 +1,332 @@
+Header:
+    version: 115
+Prototypes:
+-   class: "UIControl"
+    name: "HALLOWEEN2020Content"
+    size: [960.000000, 448.000000]
+    input: false
+    components:
+        LinearLayout:
+            orientation: "BottomUp"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UILayoutEventComponent:
+            sizeChangedEvent: "SCREEN_SIZE_CHANGED"
+            sizeChangedEventData: "_size"
+        UIDataParamsComponent:
+            params:
+            - ["eBlitzDevice", "deviceType", "eBlitzDevice.DEVICE_PHONE", "eBlitzDevice.DEVICE_PHONE"]
+            - ["StoryView", "storyView", "null", "{ }"]
+            - ["bool", "isGfx2", "false", "false"]
+            - ["ResourceModel", "gold", "null", "{ }"]
+            events:
+            - "DESELECT"
+            - "SHOW_STEP_INFO(int id)"
+            - "SELECT_STEP(int id)"
+        UIDataLocalVarsComponent:
+            data:
+            - ["vector2", "screenSize", "vec2(0.000000, 0.000000)"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["int", "level", "when not isNull(storyView.story.inProgressStep) -> storyView.story.inProgressStep.id, storyView.tree.steps.Size()"]
+            - ["int", "gfx", "when isGfx2 -> 2, 1"]
+            - ["ResourceDetailed", "shieldPrice", "when not isNull(storyView.story.inProgressStep) and not storyView.story.inProgressStep.price.Empty() -> storyView.story.inProgressStep.price[0], null"]
+            - ["int", "shieldMaximum", "when not isNull(shieldPrice) and not isNull(shieldPrice.stuff) -> shieldPrice.stuff.quantity, 0"]
+            - ["int", "shieldValue", "when not isNull(shieldPrice) and not isNull(shieldPrice.stuff) and storyView.story.inProgressStep.net.price.Contains(shieldPrice.stuff.name) -> storyView.story.inProgressStep.net.price[shieldPrice.stuff.name].stuff.quantity, 0"]
+            - ["string", "shieldIcon", "when level < 10 -> \"~res:/Gfx/Lobby/events/event_2020-halloween_button_grade1\", level < 46 -> \"~res:/Gfx/Lobby/events/event_2020-halloween_button_grade2\", \"~res:/Gfx/Lobby/events/event_2020-halloween_button_grade3\""]
+            - ["StoryStepView", "levelFirst", "when storyView.tree.firstLine.Contains(100 + storyView.tree.firstLine.Size() - 2) -> storyView.tree.firstLine[100 + storyView.tree.firstLine.Size() - 2], null"]
+            - ["ResourceDetailed", "levelFirstPrice", "when not isNull(levelFirst) and not isNull(levelFirst.step) and not levelFirst.step.price.Empty() -> levelFirst.step.price[0], null"]
+            - ["StoryStepView", "levelSecond", "when storyView.tree.firstLine.Contains(100 + storyView.tree.firstLine.Size() - 2) -> storyView.tree.firstLine[100 + storyView.tree.firstLine.Size() - 1], null"]
+            - ["ResourceDetailed", "levelSecondPrice", "when not isNull(levelSecond) and not isNull(levelSecond.step) and not levelSecond.step.price.Empty() -> levelSecond.step.price[0], null"]
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/Lobby/Story/BTH2020/TreeScrollView.actions"
+    children:
+    -   class: "UIControl"
+        name: "FxWrapper"
+        input: false
+        components:
+            Anchor:
+                topAnchorEnabled: true
+            IgnoreLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "Formula"
+                verticalFormula: "parent - 177 - safeAreaInsets.bottom"
+        children:
+        -   class: "UIParticles"
+            name: "Fx"
+            pivot: [0.500000, 0.500000]
+            input: false
+            effectPath: "~res:/3d/FX/UI/Halloween2020/EnvFx.sc2"
+            autoStart: true
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                    vCenterAnchor: 120.000000
+                IgnoreLayout: {}
+    -   class: "UIControl"
+        name: "Bottom"
+        input: false
+        components:
+            Anchor:
+                bottomAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfFirstChild"
+        children:
+        -   class: "UIControl"
+            name: "Tree"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 265.000000
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens3/Lobby/Story/BTH2020/TreeScrollView.yaml"
+                    args:
+                        "tree": "storyView.tree"
+                        "inProgressStep": "storyView.story.inProgressStep"
+                        "selectedStep": "storyView.selectedStep"
+                        "isClipEnabled": "false"
+                        "bottomDistance": "4"
+                        "content": "TreeWrapper"
+                    eventActions:
+                    - ["SHOW_STEP_INFO", "SHOW_STEP_INFO", "_event.id"]
+                    - ["SELECT_STEP", "SELECT_STEP", "_event.id"]
+                    - ["DESELECT", "DESELECT", ""]
+    -   class: "UIControl"
+        name: "Top"
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIInputEventComponent:
+                onTouchUpInside: "DESELECT"
+                blockDuplicatedEvents: true
+        children:
+        -   class: "UIControl"
+            name: "ContentWrapper"
+            input: false
+            components:
+                Anchor:
+                    topAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "Formula"
+                    verticalFormula: "parent + 72"
+            children:
+            -   class: "UIControl"
+                name: "Content"
+                input: false
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                    LinearLayout:
+                        spacing: 56.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        verticalPolicy: "PercentOfFirstChild"
+                children:
+                -   class: "UIControl"
+                    name: "ShieldHolder"
+                    input: false
+                    components:
+                        Anchor:
+                            bottomAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfFirstChild"
+                            verticalPolicy: "PercentOfFirstChild"
+                        UIChildComponent0:
+                            prototypePath: "~res:/UI/Screens3/Lobby/Story/Components/StoryShield.yaml"
+                            args:
+                                "maximum": "shieldMaximum"
+                                "value": "shieldMaximum - shieldValue"
+                                "level": "level"
+                                "price": "shieldPrice"
+                                "imagePath": "shieldIcon"
+                -   class: "UIControl"
+                    name: "Buttons"
+                    input: false
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfMaxChild"
+                            verticalPolicy: "PercentOfParent"
+                    children:
+                    -   class: "UIControl"
+                        name: "LevelButtons"
+                        input: false
+                        components:
+                            Anchor:
+                                hCenterAnchorEnabled: true
+                                bottomAnchorEnabled: true
+                                bottomAnchor: -8.000000
+                            LinearLayout:
+                                spacing: 16.000000
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfChildrenSum"
+                                verticalPolicy: "PercentOfMaxChild"
+                        bindings:
+                        - ["visible", "storyView.battlePass.isObtained"]
+                        children:
+                        -   class: "UIControl"
+                            name: "First"
+                            input: false
+                            components:
+                                SizePolicy:
+                                    horizontalPolicy: "Formula"
+                                    horizontalFormula: "max(firstChild, 186)"
+                                    verticalPolicy: "PercentOfFirstChild"
+                                UIChildComponent0:
+                                    condition: "not isNull(shieldPrice)"
+                                    prototypePath: "~res:/UI/Screens3/Lobby/Story/Components/LevelButton.yaml"
+                                    args:
+                                        "isSelected": "levelFirst.isSelected"
+                                        "levelValue": "when not isNull(levelFirst) and not levelFirst.step.rewards.Empty() and not isNull(levelFirst.step.rewards[0].stuff) and not isNull(shieldPrice) and not isNull(shieldPrice.stuff) -> levelFirst.step.rewards[0].stuff.quantity / shieldPrice.stuff.quantity, 0"
+                                        "levelDescription": "\"HALLOWEEN2020/LevelButton/First/Level/Description\""
+                                        "imagePath": "\"~res:/Gfx/Lobby/events/event_2020-halloween_button_3\""
+                                        "price": "levelFirstPrice"
+                                        "canAfford": "when not isNull(gold) and not isNull(levelFirstPrice) and not isNull(levelFirstPrice.basic) and levelFirstPrice.type == ResourceType.gold -> levelFirstPrice.basic.quantity <= gold.quantity, false"
+                                        "deviceType": "deviceType"
+                                    eventActions:
+                                    - ["ON_TOUCH", "SELECT_STEP", "levelFirst.step.id"]
+                        -   class: "UIControl"
+                            name: "Second"
+                            input: false
+                            components:
+                                SizePolicy:
+                                    horizontalPolicy: "Formula"
+                                    horizontalFormula: "max(firstChild, 186)"
+                                    verticalPolicy: "PercentOfFirstChild"
+                                UIChildComponent0:
+                                    condition: "not isNull(shieldPrice)"
+                                    prototypePath: "~res:/UI/Screens3/Lobby/Story/Components/LevelButton.yaml"
+                                    args:
+                                        "isSelected": "levelSecond.isSelected"
+                                        "levelValue": "when not isNull(levelSecond) and not levelSecond.step.rewards.Empty() and not isNull(levelSecond.step.rewards[0].stuff) and not isNull(shieldPrice) and not isNull(shieldPrice.stuff) -> levelSecond.step.rewards[0].stuff.quantity / shieldPrice.stuff.quantity, 0"
+                                        "levelDescription": "\"HALLOWEEN2020/LevelButton/Second/Level/Description\""
+                                        "imagePath": "\"~res:/Gfx/Lobby/events/event_2020-halloween_button_2\""
+                                        "price": "levelSecondPrice"
+                                        "canAfford": "when not isNull(gold) and not isNull(levelSecondPrice) and not isNull(levelSecondPrice.basic) and levelSecondPrice.type == ResourceType.gold -> levelSecondPrice.basic.quantity <= gold.quantity, false"
+                                        "deviceType": "deviceType"
+                                    eventActions:
+                                    - ["ON_TOUCH", "SELECT_STEP", "levelSecond.step.id"]
+                    -   class: "UIControl"
+                        name: "PassButton"
+                        input: false
+                        components:
+                            Anchor:
+                                bottomAnchorEnabled: true
+                                bottomAnchor: 16.000000
+                            SizePolicy:
+                                horizontalPolicy: "Formula"
+                                horizontalFormula: "max(firstChild, 526)"
+                                verticalPolicy: "PercentOfFirstChild"
+                            UIChildComponent0:
+                                condition: "not storyView.battlePass.isObtained"
+                                prototypePath: "~res:/UI/Screens3/Lobby/Story/Components/PassButton.yaml"
+                                args:
+                                    "deviceType": "deviceType"
+                                    "price": "storyView.battlePass.price"
+                                    "isSelected": "storyView.battlePass.isSelected"
+                                eventActions:
+                                - ["ON_TOUCH", "SELECT_STEP", "0"]
+Slots:
+-   class: "UIControl"
+    name: "TreeWrapper"
+    input: false
+    components:
+        Anchor:
+            bottomAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "Formula"
+            horizontalFormula: "lastChild + 30"
+            verticalPolicy: "PercentOfFirstChild"
+    children:
+    -   class: "UIControl"
+        name: "BgWrapper"
+        pivot: [0.500000, 0.000000]
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                bottomAnchorEnabled: true
+                bottomAnchor: -80.000000
+            LinearLayout:
+                orientation: "TopDown"
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "parent + screenSize.X * 2"
+                verticalPolicy: "PercentOfLastChild"
+        children:
+        -   class: "UIControl"
+            name: "Spacer"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "Formula"
+                    verticalFormula: "safeAreaInsets.bottom"
+        -   class: "UIControl"
+            name: "Bg"
+            input: false
+            components:
+                UITextureComponent:
+                    spritePath: "~res:/Gfx/Lobby/events/event_2020-halloween_bg_2"
+                    drawType: "DRAW_TILED"
+                    perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfContent"
+    -   class: "UIControl"
+        name: "TreeHolder"
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                bottomAnchorEnabled: true
+                bottomAnchor: 12.000000
+            LinearLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   class: "UIControl"
+            name: "LeftSpacer"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "safeAreaInsets.left"
+                    verticalPolicy: "PercentOfParent"
+        -   class: "UIControl"
+            name: "Content"
+            input: false
+            components:
+                LinearLayout:
+                    dynamicPadding: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIRepeatComponent:
+                    control: "~res:/UI/Screens3/Lobby/Story/Components/LinearShort.yaml"
+                    dataContainer: "storyView.tree.steps"
+                    args:
+                        "model": "_item"
+                        "inProgressStep": "storyView.story.inProgressStep"
+                        "maximumProgress": "1.000000"
+                    eventActions:
+                    - ["SELECT_STEP", "SCROLL_TO_STEP", "_event.id"]
+                    - ["SHOW_STEP_INFO", "SHOW_STEP_INFO", "_event.id"]
+                    elementNameExpression: "\"Step\" + str(_item.step.id)"
+        -   class: "UIControl"
+            name: "RightSpacer"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "safeAreaInsets.right"
+                    verticalPolicy: "PercentOfParent"

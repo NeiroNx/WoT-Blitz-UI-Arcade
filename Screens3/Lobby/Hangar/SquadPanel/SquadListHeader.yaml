@@ -1,0 +1,226 @@
+Header:
+    version: "79"
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/IconButton.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "SquadListHeader"
+    size: [348.000000, 48.000000]
+    components:
+        UIAnimationComponent:
+            animations: "ANIM_EXPAND,~res:/UI/Screens3/Lobby/Hangar/SquadPanel/ExpandAnimation.animation;_INIT,~res:/UI/Screens3/Lobby/Hangar/SquadPanel/ExpandAnimationInit.animation"
+        LinearLayout:
+            padding: "16"
+            spacing: 8.000000
+            dynamicSpacing: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "FixedSize"
+            verticalValue: 48.000000
+        UIDataParamsComponent:
+            params:
+            - ["bool", "counterVisible", "false", "false"]
+            - ["bool", "emptySection", "false", "true"]
+            - ["int", "size", "0", "23"]
+            - ["bool", "expanded", "true", "false"]
+            - ["bool", "visible", "true", "true"]
+            events:
+            - "ON_EXPAND_PRESSED"
+        UIEventOnDataComponent0:
+            watchedDataExpression: "expanded"
+            eventName: "ANIM_EXPAND"
+    bindings:
+    - ["visible", "visible"]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            LinearLayout:
+                orientation: "TopDown"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfChildrenSum"
+        children:
+        -   class: "UIControl"
+            name: "TitleWrapper"
+            input: false
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                LinearLayout:
+                    spacing: 8.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 24.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+            children:
+            -   class: "UIControl"
+                name: "Title"
+                size: [32.000000, 32.000000]
+                input: false
+                classes: "t-caps bold white-wild-sand-text"
+                components:
+                    UITextComponent:
+                        text: "ДРУЗЬЯ В СЕТИ"
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml"
+            -   class: "UIControl"
+                name: "Counter"
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "Formula"
+                        horizontalFormula: "lastChild + 16"
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 24.000000
+                bindings:
+                - ["visible", "counterVisible"]
+                children:
+                -   class: "UIControl"
+                    name: "Bg"
+                    input: false
+                    classes: "gray-cape-cod-bg"
+                    components:
+                        Background:
+                            drawType: "DRAW_STRETCH_BOTH"
+                            sprite: "~res:/Gfx/Lobby/backgrounds/bg_r2"
+                            perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                            leftRightStretchCap: 2.000000
+                            topBottomStretchCap: 2.000000
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfParent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Color.style.yaml"
+                -   class: "UIControl"
+                    name: "Value"
+                    input: false
+                    classes: "t-overline bold white-wild-sand-text"
+                    components:
+                        UITextComponent: {}
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfContent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Font.style.yaml"
+                    bindings:
+                    - ["UITextComponent.text", "size"]
+        -   class: "UIControl"
+            name: "Subtitle"
+            position: [310.000000, 11.000000]
+            input: false
+            classes: "t-caption regular white-wild-sand-50-text"
+            components:
+                UITextComponent:
+                    text: "Нажмите, чтобы пригласить во взвод"
+                    fitting: "FITTING_POINTS"
+                    align: ["LEFT", "VCENTER"]
+                Anchor:
+                    leftAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "min(parentRest, content)"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+            bindings:
+            - ["visible", "emptySection"]
+    -   class: "UIControl"
+        name: "ExpandButton"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 48.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 48.000000
+        bindings:
+        - ["visible", "emptySection"]
+        children:
+        -   class: "UIControl"
+            name: "TapArea"
+            input: true
+            exclusiveInput: true
+            components:
+                Background:
+                    color: [0.666667, 0.333333, 1.000000, 0.196078]
+                UIOpacityComponent: {}
+                Anchor:
+                    leftAnchorEnabled: true
+                    rightAnchorEnabled: true
+                    topAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                UIInputEventComponent:
+                    onTouchUpInside: "ON_EXPAND_PRESSED"
+                Sound: {}
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/Lobby/Common/Button.style.yaml;~res:/UI/Screens3/ButtonSound.style.yaml"
+            bindings:
+            - ["classes", "\"button button-tap-area \" + str(eButtonType.OPTIONAL_LIGHT, eButtonType) + \" button-choose-sound\""]
+            children:
+            -   class: "UIControl"
+                name: "Content"
+                pivot: [0.500000, 0.500000]
+                input: false
+                classes: "scalable"
+                components:
+                    Background: {}
+                    Anchor:
+                        leftAnchorEnabled: true
+                        rightAnchorEnabled: true
+                        topAnchorEnabled: true
+                        bottomAnchorEnabled: true
+                children:
+                -   class: "UIControl"
+                    name: "Background"
+                    input: false
+                    classes: "white-wild-sand-15-bg"
+                    components:
+                        Background:
+                            drawType: "DRAW_FILL"
+                        IgnoreLayout: {}
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfParent"
+                -   class: "UIControl"
+                    name: "Fade"
+                    input: false
+                    classes: "button-fade white-wild-sand-10-bg"
+                    components:
+                        Background: {}
+                        IgnoreLayout: {}
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfParent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/Lobby/Common/Button.style.yaml"
+                -   class: "UIControl"
+                    name: "Icon"
+                    position: [30.000000, 1.500000]
+                    pivot: [0.500000, 0.500000]
+                    input: false
+                    components:
+                        Background:
+                            drawType: "DRAW_SCALE_PROPORTIONAL"
+                            sprite: "~res:/Gfx/Lobby/icons/icon_chevron_n"
+                        UIOpacityComponent: {}
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "FixedSize"
+                            horizontalValue: 24.000000
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 24.000000

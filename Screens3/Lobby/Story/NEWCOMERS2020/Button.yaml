@@ -1,0 +1,72 @@
+Header:
+    version: 125
+Prototypes:
+-   class: "UIControl"
+    name: "Button"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfFirstChild"
+            verticalPolicy: "PercentOfFirstChild"
+        UIDataParamsComponent:
+            params:
+            - ["int64", "serverTime", "1561565973L", "1561565973L"]
+            - ["Story", "story", "null", "{ }"]
+            - ["int", "progressValue", "0", "50"]
+            - ["int", "progressMax", "0", "100"]
+            - ["bool", "isReady", "false", "false"]
+            - ["eTutorialHighlights", "highlightControl", "eTutorialHighlights.kUnknown", "eTutorialHighlights.kUnknown"]
+            events:
+            - "STORY_BUTTON_PRESSED(string storyName)"
+        UIDataLocalVarsComponent:
+            data:
+            - ["string", "icon", "\"~res:/Gfx/Lobby/events/okr_new-comers/okr_na_button\""]
+        UILayerComponent: {}
+    bindings:
+    - ["UILayerComponent.layer", "highlightControl == eTutorialHighlights.kNewcomers2020ButtonBlocking"]
+    children:
+    -   class: "UIControl"
+        name: "ContentHolder"
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                childType: "kPrototype"
+                prototypePath: "~res:/UI/Screens3/Lobby/Hangar/Story/StoryButtonWidget.yaml"
+                args:
+                    "serverTime": "serverTime"
+                    "story": "story"
+                    "progressValue": "progressValue"
+                    "progressMax": "progressMax"
+                    "imagePath": "icon"
+                    "showFx": "isReady"
+                    "isReady": "isReady"
+                    "showLevel": "false"
+                    "masterId": "\"NEWCOMERS2020_BUTTON\""
+                    "imageUnderlay": "FxWrapper"
+                eventActions:
+                - ["ON_TOUCH", "STORY_BUTTON_PRESSED", "story.name"]
+Slots:
+-   class: "UIControl"
+    name: "FxWrapper"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+    children:
+    -   class: "UIParticles"
+        name: "Fx"
+        pivot: [0.500000, 0.500000]
+        input: false
+        effectPath: "~res:/3d/FX/UI/ClaimFx/ClaimFx.sc2"
+        autoStart: true
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true

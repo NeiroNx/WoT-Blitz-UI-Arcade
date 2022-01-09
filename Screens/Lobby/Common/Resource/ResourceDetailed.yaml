@@ -1,0 +1,244 @@
+Header:
+    version: "37"
+ImportedPackages:
+- "~res:/UI/Screens/Fonts.yaml"
+- "~res:/UI/Screens/Lobby/Common/VehicleInfo.yaml"
+- "~res:/UI/Styles/ButtonStyle.yaml"
+- "~res:/UI/Screens/Lobby/Common/Resource/ResourceStyle.yaml"
+- "~res:/UI/Screens/Lobby/Common/Resource/ResourceTimer.yaml"
+Prototypes:
+-   class: "UIControl"
+    customClass: "UIResourceDetailedControl"
+    name: "ResourceDetailed"
+    classes: "resource resource-type=resource-stuff completed=completed-off eye=eye-off quantity=quantity-off notification=notification-off item-temp=item-not-temp"
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+            spacing: 2.000000
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 200.000000
+            verticalPolicy: "PercentOfChildrenSum"
+        Background:
+            drawType: "DRAW_STRETCH_BOTH"
+            sprite: "~res:/Gfx/UI/LobbyCommon/info_background.psd"
+            leftRightStretchCap: 7.000000
+            topBottomStretchCap: 7.000000
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Lobby/Common/Resource/Style/ResourceDetailed.yaml;~res:/UI/Screens/Lobby/Common/Resource/ResourceDetailed.yaml"
+    children:
+    -   class: "UIControl"
+        name: "Gap"
+        size: [0.000000, 18.000000]
+        input: false
+    -   class: "UIControl"
+        name: "InfoNotification"
+        size: [19.000000, 19.000000]
+        input: false
+        components:
+            IgnoreLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            Anchor:
+                rightAnchorEnabled: true
+                rightAnchor: 5.000000
+                topAnchorEnabled: true
+                topAnchor: 5.000000
+            Background:
+                sprite: "~res:/Gfx/UI/Story/info_icon"
+                color: [0.450980, 0.462745, 0.486275, 1.000000]
+    -   class: "UIControl"
+        name: "BonusIcon"
+        size: [98.000000, 98.000000]
+        pivot: [0.500000, 0.500000]
+        input: false
+        components:
+            SizePolicy: {}
+            Anchor:
+                hCenterAnchorEnabled: true
+                topAnchorEnabled: true
+                topAnchor: 20.000000
+            Background:
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+        children:
+        -   class: "UIControl"
+            name: "Grade"
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                Background:
+                    sprite: "~res:/Gfx/UI/Storage/Items_back"
+        -   class: "UIControl"
+            name: "IconContainer"
+            size: [98.000000, 98.000000]
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                Background:
+                    colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+    -   class: "UIStaticText"
+        name: "Title"
+        size: [190.000000, 0.000000]
+        classes: "header1"
+        components:
+            SizePolicy:
+                verticalPolicy: "PercentOfContent"
+                verticalMax: 62.000000
+            Anchor:
+                hCenterAnchorEnabled: true
+                topAnchorEnabled: true
+                topAnchor: 92.000000
+            UITextComponent:
+                multiline: "MULTILINE_ENABLED"
+                fitting: "FITTING_POINTS"
+    -   class: "UIControl"
+        name: "DescriptionWrap"
+        position: [0.000000, 122.000000]
+        size: [200.000000, 50.000000]
+        input: false
+        components:
+            LinearLayout:
+                orientation: "TopDown"
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfChildrenSum"
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+                topAnchor: 130.000000
+                bottomAnchorEnabled: true
+        children:
+        -   class: "UIStaticText"
+            name: "Description"
+            position: [5.000000, 0.000000]
+            size: [190.000000, 50.000000]
+            classes: "text2 text-color-blue"
+            components:
+                SizePolicy:
+                    verticalPolicy: "PercentOfContent"
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 5.000000
+                    rightAnchorEnabled: true
+                    rightAnchor: 5.000000
+                ClipContent: {}
+                UITextComponent:
+                    multiline: "MULTILINE_ENABLED"
+                    align: ["HCENTER", "TOP"]
+        -   class: "UIStaticText"
+            name: "SlotUsage"
+            classes: "text2"
+            components:
+                SizePolicy:
+                    verticalPolicy: "PercentOfContent"
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 5.000000
+                    rightAnchorEnabled: true
+                    rightAnchor: 5.000000
+                UITextComponent:
+                    color: [0.811765, 0.760784, 0.686275, 1.000000]
+        -   class: "UIControl"
+            name: "spacer"
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 8.000000
+        -   prototype: "ResourceTimer/resource-timer"
+            name: "resource-timer"
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+    -   class: "UIControl"
+        name: "spacer"
+        size: [32.000000, 32.000000]
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "FixedSize"
+                verticalValue: 18.000000
+    -   class: "UIControl"
+        name: "CompletedIcon"
+        position: [175.000000, 25.000000]
+        size: [0.000000, 0.000000]
+        scale: [0.700000, 0.700000]
+        input: false
+        components:
+            IgnoreLayout: {}
+            Anchor:
+                enabled: true
+                rightAnchorEnabled: true
+                rightAnchor: 25.000000
+                topAnchorEnabled: true
+                topAnchor: 25.000000
+            Background:
+                sprite: "~res:/Gfx/UI/Quests/stamp"
+                frame: 2
+    -   class: "UIControl"
+        name: "EyeIcon"
+        size: [64.000000, 32.000000]
+        input: false
+        components:
+            IgnoreLayout:
+                enabled: true
+            Anchor:
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+                topAnchor: 0.000000
+                bottomAnchorEnabled: false
+            Background:
+                sprite: "~res:/Gfx/UI/LobbyCommon/eyeIcon"
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+    -   prototype: "VehicleInfo/VehicleInfo"
+        name: "TankDescription"
+        position: [10.000000, 9.000000]
+        components:
+            IgnoreLayout: {}
+        children:
+        -   path: "LevelIcon"
+            components:
+                Background:
+                    frame: 6
+    -   class: "UIControl"
+        name: "ItemCount"
+        position: [5.000000, 5.000000]
+        size: [17.000000, 21.000000]
+        input: false
+        classes: "resource-count"
+        components:
+            LinearLayout:
+                padding: 4.000000
+            IgnoreLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                horizontalValue: 100.000000
+                verticalPolicy: "PercentOfMaxChild"
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 5.000000
+                topAnchorEnabled: true
+                topAnchor: 5.000000
+            Background: {}
+        children:
+        -   class: "UIStaticText"
+            name: "Value"
+            size: [9.000000, 21.000000]
+            classes: "text2-small text-color-white"
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                UITextComponent:
+                    text: "0"
+                    colorInheritType: "COLOR_IGNORE_PARENT"

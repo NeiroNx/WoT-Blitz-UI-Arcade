@@ -1,0 +1,38 @@
+action ENTER_SHORTCUT
+{
+    PlaySound(sound="GUI/buttons/open");
+    Event("CREATE_PRESSED");
+}
+
+action BACK_SHORTCUT
+{
+    PlaySound(sound="GUI/buttons/cancel");
+    Event("BACK_PRESSED");   
+}
+
+action HIDE_CAPTCHA
+{
+	parallel 
+	{
+		ChangeProperty("**/CaptchaContainer","SizePolicy","verticalValue", 0, 0); 
+		ChangeProperty("**/CaptchaContainer","","visible", false);
+		Opacity("**/CaptchaImage", 0, 0);
+		Opacity("**/CaptchaText", 0, 0);
+	}
+}
+
+action SHOW_CAPTCHA 
+{
+	ChangeProperty("**/CaptchaContainer","","visible", true);
+	ChangeProperty("**/CaptchaContainer","SizePolicy","verticalValue", 100, 0.2, SINE_OUT); 
+	parallel 
+	{
+		Opacity("**/CaptchaImage", 1.0, 0.2, SINE_OUT);
+		Opacity("**/CaptchaText", 1.0, 0.2, SINE_OUT);
+	}
+}
+
+action KEYBOARD_EVENT(float height)
+{
+    ChangeData(keyboardHeight, height, time = 0.3, interpolation = EASE_OUT);
+}

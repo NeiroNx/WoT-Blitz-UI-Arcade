@@ -1,0 +1,9 @@
+animation TANK_PRESSED
+{
+	parallel
+	{
+		Event("INIT_STARTED_INDEX", arg1=-1);
+		Event("ON_TANK_PRESS");
+		ScrollToEnsureControlOnScreen("**/Content", 0.3);
+	}
+}

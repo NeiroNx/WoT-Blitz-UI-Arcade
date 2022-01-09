@@ -1,0 +1,72 @@
+Header:
+    version: 127
+Prototypes:
+-   class: "UIControl"
+    name: "FullscreenHintProto"
+    size: [1200.000000, 720.000000]
+    input: false
+    components:
+        Anchor:
+            hCenterAnchorEnabled: true
+            vCenterAnchorEnabled: true
+        LinearLayout:
+            orientation: "BottomUp"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            horizontalMax: 1200.000000
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["eInputMode", "inputMode", "eInputMode.MODE_UNKNOWN", "eInputMode.MODE_UNKNOWN"]
+            - ["control", "content", "null", "null"]
+        UIDataLocalVarsComponent:
+            data:
+            - ["int", "fixedOffset", "when inputMode == eInputMode.MODE_KEYBOARD_MOUSE -> 570, 500"]
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Battle/ModernTutorialHints/TutorialHints.style.yaml"
+    children:
+    -   class: "UIControl"
+        name: "BottomSpacer"
+        size: [1200.000000, 124.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "Formula"
+                verticalFormula: "when (parent > 640 and parent < 900) -> fixedOffset, screenHeight*0.7"
+    -   class: "UIControl"
+        name: "Top"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            LinearLayout:
+                orientation: "RightToLeft"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "RightSpacer"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 120.000000
+                    verticalPolicy: "PercentOfParent"
+        -   class: "UIControl"
+            name: "Content"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Anchor:
+                    bottomAnchorEnabled: true
+                LinearLayout:
+                    orientation: "TopDown"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIChildComponent0:
+                    childType: "kControl"
+                    condition: "not isNull(content)"
+                    control: "content"

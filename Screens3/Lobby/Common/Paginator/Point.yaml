@@ -1,0 +1,106 @@
+Header:
+    version: 134
+Prototypes:
+-   class: "UIControl"
+    name: "PointCell"
+    size: [32.000000, 32.000000]
+    classes: "point button-choose-sound"
+    components:
+        UIAnimationComponent:
+            animations: "PRESSED,~res:/UI/Screens3/Lobby/Common/Paginator/PointSelection.animation"
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            verticalPolicy: "FixedSize"
+        UIInputEventComponent:
+            onTouchDown: "PRESSED"
+        UISwitchBarElementComponent: {}
+        UIDataParamsComponent:
+            params:
+            - ["bool", "isSelected", "true", "true"]
+            - ["string", "pointColor", "\"white-wild-sand-bg\"", "\"white-wild-sand-bg\""]
+            - ["int", "pointSize", "8", "8"]
+            - ["int", "PointCellWidth", "20", "20"]
+            - ["int", "number", "0", "0"]
+            - ["int", "PointCellHeight", "32", "32"]
+            - ["bool", "progressVisible", "false", "true"]
+            - ["float", "progress", "0.000000", "0.650000"]
+            - ["bool", "invert", "false", "true"]
+        UIEventOnDataComponent0:
+            watchedDataExpression: "isSelected"
+            ifExpression: "true"
+            eventName: "SELECTED"
+        Sound: {}
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Lobby/Common/Paginator/PointItem.style.yaml;~res:/UI/Screens3/ButtonSound.style.yaml"
+    bindings:
+    - ["enabled", "not isSelected"]
+    - ["SizePolicy.horizontalValue", "PointCellWidth"]
+    - ["SizePolicy.verticalValue", "PointCellHeight"]
+    - ["UISwitchBarElementComponent.id", "number"]
+    children:
+    -   class: "UIControl"
+        name: "PressedFade"
+        pivot: [0.500000, 0.500000]
+        input: false
+        classes: "white-wild-sand-50-bg"
+        components:
+            Background:
+                drawType: "DRAW_STRETCH_BOTH"
+                sprite: "~res:/Gfx/Lobby/backgrounds/bg_oval_40"
+                perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+            UIOpacityComponent:
+                opacity: 0.000000
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 40.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 40.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+    -   class: "UIControl"
+        name: "RadialProgress"
+        size: [32.000000, 32.000000]
+        pivot: [0.500000, 0.500000]
+        input: false
+        classes: "white-wild-sand-bg"
+        components:
+            Background:
+                drawType: "DRAW_SCALE_TO_RECT"
+                sprite: "~res:/Gfx/Lobby/backgrounds/radial-progress-small"
+            UIClipPolygon: {}
+            RadialProgressComponent: {}
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+        bindings:
+        - ["visible", "progressVisible and isSelected"]
+        - ["RadialProgressComponent.progress", "progress"]
+        - ["RadialProgressComponent.endAngle", "when invert -> -360, 360"]
+    -   class: "UIControl"
+        name: "Point"
+        input: false
+        components:
+            Background:
+                drawType: "DRAW_SCALE_PROPORTIONAL"
+                sprite: "~res:/Gfx/Lobby/backgrounds/bg_oval_8"
+            UIOpacityComponent: {}
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                verticalPolicy: "FixedSize"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/Lobby/Common/Paginator/PointItem.style.yaml"
+        bindings:
+        - ["classes", "pointColor + \" \" + \"content-area\""]
+        - ["SizePolicy.horizontalValue", "pointSize"]
+        - ["SizePolicy.verticalValue", "pointSize"]

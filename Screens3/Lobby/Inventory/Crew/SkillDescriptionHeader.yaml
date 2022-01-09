@@ -1,0 +1,154 @@
+Header:
+    version: "102"
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Inventory/Crew/SkillLevelProgress.yaml"
+- "~res:/UI/Screens3/Lobby/Common/RichText.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "Header"
+    position: [0.000000, 16.000000]
+    size: [308.000000, 116.000000]
+    input: false
+    components:
+        Anchor:
+            topAnchorEnabled: true
+            vCenterAnchorEnabled: true
+        LinearLayout:
+            orientation: "TopDown"
+            padding: "8"
+            spacing: 16.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfChildrenSum"
+        UIDataParamsComponent:
+            params:
+            - ["vector<string>", "activeSkills", "[ ]", "[ \"lucky_shot\"; ]"]
+            - ["string", "userString", "\"\"", "\"#crew_skills:lucky_shot/name\""]
+            - ["Skill", "skill", "null", "{ }"]
+        UIDataLocalsComponent:
+            locals:
+            - ["bool", "progressVisible", "when not isNull(skill) -> skill.level < skill.maxLevel and activeSkills.Contains(skill.skillName), false"]
+            - ["string", "style", "when not isNull(skill) -> \"crew_skills \" + skill.skillName, \"\""]
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Lobby/Inventory/Crew/SkillImage.style.yaml"
+    children:
+    -   class: "UIControl"
+        name: "Skill"
+        position: [0.000000, 16.000000]
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                topAnchorEnabled: true
+            LinearLayout:
+                orientation: "LeftToRight"
+                useRtl: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   class: "UIControl"
+            name: "ImageWrapper"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 80.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 80.000000
+            bindings:
+            - ["classes", "style"]
+            children:
+            -   class: "UIControl"
+                name: "Img"
+                input: false
+                classes: "skill-img"
+                components:
+                    Background:
+                        drawType: "DRAW_SCALE_PROPORTIONAL"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+        -   class: "UIControl"
+            name: "TitleAndLevel"
+            position: [96.000000, 0.000000]
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Anchor:
+                    topAnchorEnabled: true
+                    topAnchor: 8.000000
+                LinearLayout:
+                    orientation: "TopDown"
+                    spacing: 4.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfChildrenSum"
+            children:
+            -   class: "UIControl"
+                name: "SubTitle"
+                input: false
+                classes: "t-subtitle regular white-wild-sand-text"
+                components:
+                    UITextComponent:
+                        multiline: "MULTILINE_ENABLED"
+                        align: ["LEFT", "VCENTER"]
+                        useRtlAlign: "USE_BY_SYSTEM"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml"
+                bindings:
+                - ["UITextComponent.text", "localize(userString)"]
+            -   class: "UIControl"
+                name: "Level"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    LinearLayout:
+                        spacing: 4.000000
+                        useRtl: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfMaxChild"
+                children:
+                -   prototype: "RichText/RichText"
+                    name: "RichText"
+                    components:
+                        Anchor:
+                            useRtl: true
+                        SizePolicy:
+                            horizontalPolicy: "Formula"
+                            horizontalFormula: "min(parentRest, childrenSum)"
+                        UIDataParamsComponent:
+                            args:
+                                "baseFontSize": "\"t-caption\""
+                                "baseFontStyle": "\"regular\""
+                                "baseFontColor": "\"white-wild-sand-50-text\""
+                                "key": "when not isNull(skill) and skill.level > 0 -> localize(\"#crew:skills/skillDescription/trainedSkill\", skill), localize(\"#crew:skills/skillDescription/notAcquired\")"
+                                "resource1Model": "null"
+                                "resource2Model": "null"
+                                "resource3Model": "null"
+                                "resource4Model": "null"
+    -   class: "UIControl"
+        name: "Progress"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            LinearLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfMaxChild"
+        bindings:
+        - ["visible", "progressVisible"]
+        children:
+        -   prototype: "SkillLevelProgress/LevelProgress"
+            name: "LevelProgress"
+            components:
+                UIDataParamsComponent:
+                    args:
+                        "currentLevel": "when not isNull(skill) -> skill.level, 0"
+                        "nextLevel": "when not isNull(skill) -> skill.level + 1, 0"
+                        "progress": "when not isNull(skill) -> int(skill.progress * 100), 0"

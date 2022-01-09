@@ -1,0 +1,95 @@
+Header:
+    version: 135
+Prototypes:
+-   class: "UIControl"
+    name: "ShopProductVehicleTitle"
+    size: [240.000000, 24.000000]
+    input: false
+    components:
+        LinearLayout:
+            spacing: 8.000000
+            useRtl: true
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 240.000000
+            verticalPolicy: "PercentOfMaxChild"
+        UIDataParamsComponent:
+            params:
+            - ["bool", "hasBadge", "false", "true"]
+            - ["VehicleResource", "vehicle", "null", "{ }"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["string", "textColor", "when vehicle.info.isPremium -> \"yellow-lightning-text\", vehicle.info.isCollectible -> \"blue-rimmi-text\", vehicle.stats.isPremiumized -> \"yellow-chalky-text\", \"white-wild-sand-text\""]
+    children:
+    -   class: "UIControl"
+        name: "Flag"
+        input: false
+        components:
+            Anchor:
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/TankInfo/NationFlag.yaml"
+                args:
+                    "nation": "vehicle.info.nation"
+                    "subnation": "vehicle.info.subnation"
+    -   class: "UIControl"
+        name: "Class"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Vehicle/VehicleClass.yaml"
+                args:
+                    "class": "vehicle.info.tankClass"
+                    "type": "when vehicle.info.isPremium -> eVehicleDescriptionType.PREMIUM, vehicle.info.isCollectible -> eVehicleDescriptionType.COLLECTIBLE, vehicle.stats.isPremiumized -> eVehicleDescriptionType.PREMIUMISED, eVehicleDescriptionType.NORMAL"
+                    "elite": "vehicle.stats.isElite"
+    -   class: "UIControl"
+        name: "Level"
+        input: false
+        components:
+            UITextComponent: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml"
+        bindings:
+        - ["classes", "\"t-subtitle regular \" + textColor"]
+        - ["UITextComponent.text", "roman(vehicle.info.level)"]
+    -   class: "UIControl"
+        name: "Name"
+        input: false
+        components:
+            UITextComponent:
+                fitting: "FITTING_POINTS"
+                align: ["LEFT", "VCENTER"]
+                useRtlAlign: "USE_BY_SYSTEM"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml"
+        bindings:
+        - ["classes", "\"t-subtitle regular \" + textColor"]
+        - ["UITextComponent.text", "localize(vehicle.info.name)"]
+    -   class: "UIControl"
+        name: "badge"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Anchor:
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfMaxChild"
+            UIChildComponent0:
+                condition: "hasBadge"
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Badge.yaml"
+                args:
+                    "value": "localize(\"#common:Badge/New\")"
+                    "type": "eBadgeType.SHOP"

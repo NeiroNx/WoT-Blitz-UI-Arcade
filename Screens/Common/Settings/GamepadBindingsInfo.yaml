@@ -1,0 +1,60 @@
+Header:
+    version: 128
+Prototypes:
+-   class: "UIControl"
+    name: "GamepadBindingsInfo"
+    size: [1280.000000, 640.000000]
+    input: false
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        ModalInput: {}
+        UIShortcutEventComponent:
+            shortcuts: "CLOSE_OVERLAY,Escape;CLOSE_OVERLAY,Back"
+        UIDataParamsComponent: {}
+    children:
+    -   class: "UIControl"
+        name: "Overlay"
+        size: [1280.000000, 640.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Overlay/Overlay.yaml"
+                args:
+                    "content": "GamepadBindingsInfoContent"
+                    "title": "localize(\"Switch/GamepadScreen/Header\")"
+                eventActions:
+                - ["OVERLAY_OPEN_FINISH", "OVERLAY_OPEN_FINISH", ""]
+                - ["BACK_EVENT", "BACK_EVENT", ""]
+    -   class: "UIControl"
+        name: "NavigationPanel"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                condition: "isGamepad"
+                prototypePath: "~res:/UI/Screens3/Common/NintendoSwitch/NavigationPanel/LobbyNavigationPanel.yaml"
+                args:
+                    "labels": "{ eNintendoSwitchControls.B = \"Switch/HubridPanel/Lobby/Close\"; }"
+Slots:
+-   class: "UIControl"
+    name: "GamepadBindingsInfoContent"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        Anchor:
+            hCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfFirstChild"
+            verticalPolicy: "PercentOfFirstChild"
+        UIChildComponent0:
+            prototypePath: "~res:/UI/Screens/Common/Settings/GamepadBindingsInfoContent.yaml"

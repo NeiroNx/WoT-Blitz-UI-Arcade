@@ -1,0 +1,7 @@
+action TANK_TRADEMARK_INIT()
+{
+    if (visible)
+    {
+        Event("SHOW_POPOVER", arg1=0);
+    }
+}

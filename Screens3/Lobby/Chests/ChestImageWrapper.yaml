@@ -1,0 +1,67 @@
+Header:
+    version: 128
+Prototypes:
+-   class: "UIControl"
+    name: "ImageWrapper"
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens3/Lobby/Chests/ChestImageWrapper.animation"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["bool", "withAnimation", "true", "true"]
+            - ["string", "imageUrl", "\"\"", "\"\""]
+            - ["string", "image", "\"\"", "\"\""]
+    children:
+    -   class: "UIControl"
+        name: "imageContent"
+        input: false
+        components:
+            UIOpacityComponent:
+                opacity: 0.000000
+            Anchor:
+                hCenterAnchorEnabled: true
+                topAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfMaxChild"
+            UIChildComponent0:
+                childType: "kControl"
+                condition: "not empty(imageUrl)"
+                control: "ImageUrl"
+            UIChildComponent1:
+                childType: "kControl"
+                condition: "not empty(image)"
+                control: "Image"
+        bindings:
+        - ["Anchor.topAnchor", "103"]
+Slots:
+-   class: "UIControl"
+    name: "ImageUrl"
+    input: false
+    components:
+        Background:
+            drawType: "DRAW_SCALE_PROPORTIONAL"
+        UIUrlImageComponent: {}
+        SizePolicy:
+            horizontalPolicy: "Formula"
+            horizontalFormula: "320"
+            verticalPolicy: "PercentOfContent"
+    bindings:
+    - ["UIUrlImageComponent.imageUrl", "imageUrl"]
+-   class: "UIControl"
+    name: "Image"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        UITextureComponent:
+            drawType: "DRAW_SCALE_PROPORTIONAL"
+        SizePolicy:
+            horizontalPolicy: "Formula"
+            horizontalFormula: "320"
+            verticalPolicy: "PercentOfContent"
+    bindings:
+    - ["UITextureComponent.spritePath", "image"]

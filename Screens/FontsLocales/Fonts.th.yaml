@@ -1,0 +1,27 @@
+Header:
+    version: "24"
+StyleSheets:
+-   selector: ".th.bold"
+    properties:
+        text-fontPath: "~res:/Fonts/cfg/SirichanaLTBold.fntconf"
+-   selector: ".th.bold.fs-13"
+    properties:
+        text-fontSize: 15.000000
+-   selector: ".th.bold.fs-15"
+    properties:
+        text-fontSize: 19.000000
+-   selector: ".th.bold.fs-16"
+    properties:
+        text-fontSize: 20.000000
+-   selector: ".th.regular"
+    properties:
+        text-fontPath: "~res:/Fonts/cfg/SirichanaLTRegular.fntconf"
+-   selector: ".th.regular.fs-13"
+    properties:
+        text-fontSize: 15.000000
+-   selector: ".th.regular.fs-15"
+    properties:
+        text-fontSize: 19.000000
+-   selector: ".th.regular.fs-16"
+    properties:
+        text-fontSize: 20.000000

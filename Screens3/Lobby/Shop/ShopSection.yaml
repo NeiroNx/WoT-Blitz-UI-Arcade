@@ -1,0 +1,164 @@
+Header:
+    version: 140
+Prototypes:
+-   class: "UIControl"
+    name: "ShopSection"
+    input: false
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+            spacing: 8.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfLastChild"
+            verticalPolicy: "PercentOfChildrenSum"
+        UILayoutEventComponent:
+            positionChangedEvent: "SECTION_POSITION_CHANGED"
+            positionChangedEventData: "int(_position.Y)"
+        UIDataParamsComponent:
+            params:
+            - ["bool", "initializationEnded", "false", "true"]
+            - ["bool", "blurEnabled", "false", "true"]
+            - ["float", "shopScrollBottomOffset", "0.000000", "40.000000"]
+            - ["float", "shopScrollTopOffset", "0.000000", "48.000000"]
+            - ["DailyChestsCommonData", "chestsData", "null", "{ }"]
+            - ["ShopSection", "section", "null", "{ }"]
+            - ["ShopBadgesSection", "badges", "null", "{ }"]
+            - ["int64", "serverTime", "0L", "0L"]
+            - ["bool", "arabicLocalization", "false", "false"]
+            - ["bool", "debugMode", "false", "false"]
+            - ["bool", "smallScreen", "false", "true"]
+            - ["bool", "selected", "false", "true"]
+            - ["int", "selectedItemIndex", "0", "1"]
+            - ["int", "selectedSubItemIndex", "0", "1"]
+            - ["bool", "firstShowAnimationAllowed", "false", "true"]
+            - ["set<int>", "newSliders", "null", "[ 0; ]"]
+            events:
+            - "GO_TO_SECTION(int id)"
+            - "DEV_BUY_PRODUCT(int id)"
+            - "GO_TO_GROUP(int id)"
+            - "ON_PRODUCT_CLICKED(int id)"
+            - "GO_TO_PRODUCT(int id)"
+            - "ON_CHEST_CLICKED(int id)"
+            - "ON_SELECT_PRODUCT(int itemIndex)"
+            - "SECTION_POSITION_CHANGED"
+            - "ON_PRODUCT_SHOWN(int id)"
+            - "ON_SLIDER_SHOWN(int id)"
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/Lobby/Shop/ShopSection.actions"
+    children:
+    -   class: "UIControl"
+        name: "Title"
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "FixedSize"
+                verticalValue: 48.000000
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Shop/ShopSectionTitle.yaml"
+                args:
+                    "iconUrl": "section.data.iconUrl"
+                    "name": "section.data.name"
+                    "slug": "section.data.slug"
+                    "debugMode": "debugMode"
+                eventActions:
+                - ["GO_TO_SECTION", "GO_TO_SECTION", "section.id"]
+    -   class: "UIControl"
+        name: "Children"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                childType: "kControl"
+                condition: "smallScreen"
+                control: "SmallScreenChildren"
+            UIChildComponent1:
+                childType: "kControl"
+                control: "DefaultChildren"
+Slots:
+-   class: "UIControl"
+    name: "SmallScreenChildren"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 792.000000
+            verticalPolicy: "PercentOfChildrenSum"
+        FlowLayout:
+            hSpacing: 36.000000
+            vSpacing: 16.000000
+        UIRepeatComponent:
+            control: "~res:/UI/Screens3/Lobby/Shop/ShopSectionItem.yaml"
+            dataContainer: "section.children"
+            args:
+                "badges": "badges"
+                "initializationEnded": "initializationEnded"
+                "blurEnabled": "blurEnabled"
+                "shopScrollBottomOffset": "shopScrollBottomOffset"
+                "shopScrollTopOffset": "shopScrollTopOffset"
+                "dailyChestsCommon": "chestsData"
+                "item": "_item"
+                "serverTime": "serverTime"
+                "arabicLocalization": "arabicLocalization"
+                "smallScreen": "smallScreen"
+                "debugMode": "debugMode"
+                "selected": "selected and selectedItemIndex == _index"
+                "selectedSubItemIndex": "selectedSubItemIndex"
+                "validItem": "_index < section.validItemsCount"
+                "firstShowAnimationAllowed": "firstShowAnimationAllowed"
+                "newSliders": "newSliders"
+            eventActions:
+            - ["ON_CHEST_CLICKED", "ON_SELECT_PRODUCT", "_index"]
+            - ["ON_CHEST_CLICKED", "ON_CHEST_CLICKED", "_event.id"]
+            - ["ON_PRODUCT_CLICKED", "ON_SELECT_PRODUCT", "_index"]
+            - ["ON_PRODUCT_CLICKED", "ON_PRODUCT_CLICKED", "_event.id"]
+            - ["DEV_BUY_PRODUCT", "DEV_BUY_PRODUCT", "_event.id"]
+            - ["GO_TO_GROUP", "GO_TO_GROUP", "_event.id"]
+            - ["GO_TO_PRODUCT", "GO_TO_PRODUCT", "_event.id"]
+            - ["ON_PRODUCT_SHOWN", "ON_PRODUCT_SHOWN", "_event.id"]
+            - ["ON_SLIDER_SHOWN", "ON_SLIDER_SHOWN", "_event.id"]
+-   class: "UIControl"
+    name: "DefaultChildren"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 1104.000000
+            verticalPolicy: "PercentOfChildrenSum"
+        FlowLayout:
+            hSpacing: 48.000000
+            vSpacing: 16.000000
+        UIRepeatComponent:
+            control: "~res:/UI/Screens3/Lobby/Shop/ShopSectionItem.yaml"
+            dataContainer: "section.children"
+            args:
+                "badges": "badges"
+                "initializationEnded": "initializationEnded"
+                "blurEnabled": "blurEnabled"
+                "shopScrollBottomOffset": "shopScrollBottomOffset"
+                "shopScrollTopOffset": "shopScrollTopOffset"
+                "dailyChestsCommon": "chestsData"
+                "item": "_item"
+                "serverTime": "serverTime"
+                "arabicLocalization": "arabicLocalization"
+                "smallScreen": "smallScreen"
+                "debugMode": "debugMode"
+                "selected": "selected and selectedItemIndex == _index"
+                "selectedSubItemIndex": "selectedSubItemIndex"
+                "validItem": "_index < section.validItemsCount"
+                "firstShowAnimationAllowed": "firstShowAnimationAllowed"
+                "newSliders": "newSliders"
+            eventActions:
+            - ["ON_CHEST_CLICKED", "ON_SELECT_PRODUCT", "_index"]
+            - ["ON_CHEST_CLICKED", "ON_CHEST_CLICKED", "_event.id"]
+            - ["ON_PRODUCT_CLICKED", "ON_SELECT_PRODUCT", "_index"]
+            - ["ON_PRODUCT_CLICKED", "ON_PRODUCT_CLICKED", "_event.id"]
+            - ["DEV_BUY_PRODUCT", "DEV_BUY_PRODUCT", "_event.id"]
+            - ["GO_TO_GROUP", "GO_TO_GROUP", "_event.id"]
+            - ["GO_TO_PRODUCT", "GO_TO_PRODUCT", "_event.id"]
+            - ["ON_PRODUCT_SHOWN", "ON_PRODUCT_SHOWN", "_event.id"]
+            - ["ON_SLIDER_SHOWN", "ON_SLIDER_SHOWN", "_event.id"]

@@ -1,0 +1,57 @@
+Header:
+    version: 125
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/FullScreenPopup/FullscreenPopupWithContentSlot.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "Root"
+    size: [960.000000, 640.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["string", "url", "\"\"", "\"\""]
+            events:
+            - "URL_CHANGED"
+            - "CLOSE_NOTIFICATION"
+    children:
+    -   prototype: "FullscreenPopupWithContentSlot/FullscreenPopupWithContentSlot"
+        name: "FullscreenPopupWithContentSlot"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "padding": "64"
+                    "contentControl": "FbWebView"
+                eventActions:
+                - ["CLOSE_NOTIFICATION", "CLOSE_NOTIFICATION", ""]
+                - ["ACCENT_CLICKED", "", ""]
+                - ["URL_CHANGED", "URL_CHANGED", ""]
+Slots:
+-   class: "UIWebView"
+    name: "FbWebView"
+    size: [32.000000, 32.000000]
+    contentSourceType: "Url"
+    urlChangedEventName: "URL_CHANGED"
+    urlChangedEventData: "_newURL"
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        Focus:
+            state: "Enabled"
+    bindings:
+    - ["url", "url"]
+    children:
+    -   class: "UIControl"
+        name: "ButtonPositive"
+        size: [32.000000, 32.000000]
+        visible: false
+        input: false
+CustomData:
+    Guides:
+        Root:
+            Vertical:
+            - 166.000000

@@ -1,0 +1,109 @@
+Header:
+    version: "82"
+Controls:
+-   class: "UIControl"
+    name: "StepStepWithBack"
+    size: [300.000000, 562.500000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            horizontalMax: 153.600006
+            verticalPolicy: "PercentOfFirstChild"
+        UIDataParamsComponent:
+            params:
+            - ["StoryStepView", "stepView", "null", "{ isSelected = true; isHighlighted = false; }"]
+            - ["string", "stepBackgroundSprite", "\"\"", "\"~res:/Gfx/UI/Story/VICTORY2019/Steps.psd\""]
+            events:
+            - "STEP_INFO_PRESSED(int id)"
+            - "STEP_PRESSED(int id)"
+        UIDataLocalsComponent:
+            locals:
+            - ["string", "selectedClass", "when stepView.isSelected -> \" selected\", \"\""]
+            - ["string", "highlightedClass", "when stepView.isHighlighted -> \" highlighted\", \"\""]
+            - ["string", "completedClass", "when stepView.step.isFinished -> \" completed\", \"\""]
+            - ["string", "readyToCompleteClass", "when stepView.step.netPrice.mainProxies.Empty() -> \" readyToComplete\", \"\""]
+            - ["string", "buttonSoundClass", "when stepView.isSelected -> \" button button-open-sound\", \" button button-choose-sound\""]
+            - ["string", "styleClasses", "\"step-with-back\" + selectedClass + highlightedClass + completedClass + readyToCompleteClass + buttonSoundClass"]
+        Sound: {}
+        StyleSheet:
+            styles: "~res:/UI/Screens/Lobby/Story/Styles/StoryStepLinearStyles.yaml;~res:/UI/Styles/ButtonSoundStyles.yaml;~res:/UI/Styles/ButtonStyle.yaml"
+    bindings:
+    - ["classes", "styleClasses"]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        components:
+            ClipContent: {}
+            Anchor:
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfFirstChild"
+            UIInputEventComponent:
+                onTouchUpInside: "STEP_PRESSED"
+                onTouchUpInsideData: "storyView.step.id"
+                onDoubleTouch: "STEP_INFO_PRESSED"
+                onDoubleTouchData: "storyView.step.id"
+            Sound: {}
+            StyleSheet:
+                styles: "~res:/UI/Screens/Lobby/Story/Legacy/StoryStepWithBack.style.yaml;~res:/UI/Styles/ButtonSoundStyles.yaml;~res:/UI/Styles/ButtonStyle.yaml"
+        bindings:
+        - ["classes", "styleClasses"]
+        children:
+        -   class: "UIControl"
+            name: "bg"
+            pivot: [0.500000, 0.500000]
+            input: false
+            components:
+                UITextureComponent:
+                    materialPath: "~res:/Materials.custom/2d.Textured.Saturation.material"
+                    drawType: "DRAW_SCALE_PROPORTIONAL_ONE"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfContent"
+            bindings:
+            - ["UITextureComponent.spritePath", "stepBackgroundSprite"]
+            - ["UITextureComponent.frame", "stepView.step.id - 1"]
+        -   class: "UIControl"
+            name: "Dark"
+            input: false
+            components:
+                Background:
+                    colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+        -   class: "UIControl"
+            name: "ResourceHolder"
+            input: false
+            components:
+                Background:
+                    colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 140.000000
+                UIChildComponent:
+                    control: "\"~res:/UI/Screens/Lobby/Story/Legacy/StoryStepWithBackRewards/RewardHolder.yaml\""
+                    args:
+                        "resource": "stepView.step.rewards[0]"
+                        "isReadyToComplete": "stepView.step.netPrice.mainProxies.Empty()"
+        -   class: "UIControl"
+            name: "Info"
+            input: false
+            components:
+                Background:
+                    sprite: "~res:/Gfx/UI/LobbyCommon/info_button.psd"
+                    colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                Anchor:
+                    rightAnchorEnabled: true
+                    rightAnchor: 15.000000
+                    topAnchorEnabled: true
+                    topAnchor: 15.000000

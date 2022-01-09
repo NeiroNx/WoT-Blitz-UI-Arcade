@@ -1,0 +1,51 @@
+Header:
+    version: "85"
+StyleSheets:
+-   selectors:
+    - ".camouflage-item.filled * .slot-img"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/icons/icon_view_camouflage"
+-   selectors:
+    - ".attachment-item.filled * .slot-img"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/icons/icon_view_attachment"
+-   selectors:
+    - ".ammo-slot.ap * .slot-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Ammunition/ammo"
+        bg-frame: 0
+-   selectors:
+    - ".ammo-slot.ap_premium * .slot-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Ammunition/ammo"
+        bg-frame: 1
+-   selectors:
+    - ".ammo-slot.ap_cr * .slot-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Ammunition/ammo"
+        bg-frame: 2
+-   selectors:
+    - ".ammo-slot.he * .slot-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Ammunition/ammo"
+        bg-frame: 3
+-   selectors:
+    - ".ammo-slot.he_premium * .slot-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Ammunition/ammo"
+        bg-frame: 4
+-   selectors:
+    - ".ammo-slot.hc * .slot-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Ammunition/ammo"
+        bg-frame: 5
+-   selectors:
+    - ".ammo-slot.atgm_heat * .slot-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Ammunition/ammo"
+        bg-frame: 6
+-   selectors:
+    - ".ammo-slot.atgm_he * .slot-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Ammunition/ammo"
+        bg-frame: 7

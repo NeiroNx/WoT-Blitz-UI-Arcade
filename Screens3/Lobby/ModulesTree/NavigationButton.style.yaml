@@ -1,0 +1,43 @@
+Header:
+    version: "79"
+ImportedPackages:
+- "~res:/UI/Screens3/Common/Touch.style.yaml"
+- "~res:/UI/Screens3/Common/Hover.style.yaml"
+StyleSheets:
+-   selectors:
+    - ".modules-navigation-button:pressed_inside * .hover"
+    properties:
+        visible: false
+-   selectors:
+    - ".left-node * #LineInside"
+    properties:
+        anchor-leftAnchorEnabled: true
+        anchor-leftAnchor: -8.000000
+        anchor-rightAnchorEnabled: false
+-   selectors:
+    - ".left-node * #LineOutside"
+    properties:
+        bg-spriteModification: ["FLIP_HORIZONTAL"]
+        anchor-leftAnchorEnabled: false
+        anchor-rightAnchorEnabled: true
+        anchor-rightAnchor: -20.000000
+-   selectors:
+    - ".left-node * .arrow-icon"
+    properties:
+        bg-spriteModification: ["FLIP_HORIZONTAL"]
+-   selectors:
+    - ".right-node * #LineInside"
+    properties:
+        anchor-leftAnchorEnabled: false
+        anchor-rightAnchorEnabled: true
+        anchor-rightAnchor: -8.000000
+-   selectors:
+    - ".right-node * #LineOutside"
+    properties:
+        anchor-leftAnchorEnabled: true
+        anchor-leftAnchor: -20.000000
+        anchor-rightAnchorEnabled: false
+-   selectors:
+    - ".right-node * .arrow-icon"
+    properties:
+        bg-spriteModification: []

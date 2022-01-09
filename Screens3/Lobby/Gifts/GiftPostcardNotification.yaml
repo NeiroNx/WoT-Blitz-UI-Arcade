@@ -1,0 +1,228 @@
+Header:
+    version: 141
+Prototypes:
+-   class: "UIControl"
+    name: "GiftPostcardNotification"
+    size: [960.000000, 800.000000]
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens3/Lobby/Gifts/GiftPostcardNotification.animation"
+        ClipContent: {}
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        ModalInput: {}
+        UIVirtualActionEventComponent0:
+            virtualKeyAction: "Escape"
+            keyDownEvent: "BackEvent"
+        UIShortcutEventComponent:
+            shortcuts: "BackEvent,Escape;BackEvent,Back"
+        UIDataParamsComponent:
+            params:
+            - ["bool", "forceGfx2", "false", "false"]
+            - ["bool", "inProgress", "false", "false"]
+            - ["Gift", "gift", "null", "{ }"]
+            events:
+            - "BACK_EVENT"
+            - "ON_OPEN_CLICKED"
+            - "ON_POSTPONE_CLICKED"
+        UIDataLocalBindingsComponent:
+            data:
+            - ["eResourceLoadingStrategy", "resolution", "when forceGfx2 -> eResourceLoadingStrategy.PreferMaxResolution, eResourceLoadingStrategy.PreferDesired"]
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/Lobby/Gifts/GiftPostcardNotification.actions"
+    children:
+    -   class: "UIControl"
+        name: "Background"
+        pivot: [0.500000, 0.500000]
+        input: false
+        components:
+            Background:
+                drawType: "DRAW_SCALE_TO_RECT"
+                sprite: "~res:/Gfx/Lobby/backgrounds/present/bg_gift"
+            UIOpacityComponent:
+                opacity: 0.000000
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            ScalePolicy:
+                horizontalFormula: "max(parentSize.X / size.X, parentSize.Y / size.Y)"
+                verticalFormula: "max(parentSize.X / size.X, parentSize.Y / size.Y)"
+        bindings:
+        - ["Background.spriteResource", "resolution"]
+        children:
+        -   class: "UIParticles"
+            name: "boke"
+            position: [472.000000, 95.000000]
+            size: [32.000000, 32.000000]
+            scale: [0.500000, 0.500000]
+            effectPath: "~res:/3d/FX/UI/Gift/boke.sc2"
+            autoStart: true
+        -   class: "UIParticles"
+            name: "confetti_2"
+            position: [488.000000, 358.000000]
+            size: [32.000000, 32.000000]
+            scale: [0.500000, 0.500000]
+            angle: -20.000000
+            effectPath: "~res:/3d/FX/UI/Gift/Confetti_2.sc2"
+            autoStart: true
+            startDelay: 0.700000
+        -   class: "UIParticles"
+            name: "confetti_3"
+            position: [551.000000, 352.000000]
+            size: [32.000000, 32.000000]
+            scale: [0.500000, 0.500000]
+            angle: 70.000000
+            effectPath: "~res:/3d/FX/UI/Gift/Confetti_2.sc2"
+            autoStart: true
+            startDelay: 0.700000
+        -   class: "UIParticles"
+            name: "confetti_4"
+            position: [504.000000, 207.000000]
+            size: [32.000000, 32.000000]
+            scale: [0.500000, 0.500000]
+            angle: 170.000000
+            effectPath: "~res:/3d/FX/UI/Gift/Confetti_3.sc2"
+            autoStart: true
+            startDelay: 0.700000
+    -   class: "UIControl"
+        name: "ContentWrapper"
+        input: false
+        components:
+            UIOpacityComponent: {}
+            LinearLayout:
+                orientation: "TopDown"
+                padding: "48"
+                dynamicPadding: true
+                spacing: 28.000000
+                dynamicSpacing: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "Header"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   class: "UIControl"
+                name: "Title"
+                input: false
+                classes: "t-title light color=white-wild-sand-text"
+                components:
+                    UITextComponent:
+                        text: "Gifts/PostcardNotification/Title"
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "Content"
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   class: "UIControl"
+                name: "CardHolder"
+                pivot: [0.500000, 0.500000]
+                input: false
+                components:
+                    UIOpacityComponent: {}
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfMaxChild"
+                        verticalPolicy: "PercentOfMaxChild"
+                    UIChildComponent0:
+                        prototypePath: "~res:/UI/Screens3/Lobby/Gifts/GiftPostcard.yaml"
+                        args:
+                            "showSender": "true"
+                            "editable": "false"
+                            "gift": "gift"
+                        eventActions:
+                        - ["ON_RECIEVER_CLICKED", "OnRecieverClicked", ""]
+                        - ["ON_RECIEVER_REMOVED", "OnRemoveReciever", ""]
+        -   class: "UIControl"
+            name: "Footer"
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                LinearLayout:
+                    orientation: "LeftToRight"
+                    spacing: 10.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   class: "UIControl"
+                name: "PostponeButtonHolder"
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfMaxChild"
+                        verticalPolicy: "PercentOfMaxChild"
+                    UIChildComponent0:
+                        prototypePath: "~res:/UI/Screens3/Lobby/Common/Button.yaml"
+                        args:
+                            "enabled": "not inProgress"
+                            "size": "eButtonSize.NORMAL"
+                            "type": "eButtonType.OPTIONAL_LIGHT"
+                            "caption": "capitalize(localize(\"Gifts/PostponeGift\"))"
+                        eventActions:
+                        - ["ON_CLICK_BUTTON", "ON_POSTPONE_CLICKED", ""]
+            -   class: "UIControl"
+                name: "OpenButtonHolder"
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfMaxChild"
+                        verticalPolicy: "PercentOfMaxChild"
+                    UIChildComponent0:
+                        prototypePath: "~res:/UI/Screens3/Lobby/Common/Button.yaml"
+                        args:
+                            "enabled": "not inProgress"
+                            "type": "eButtonType.POSITIVE"
+                            "caption": "capitalize(localize(\"Gifts/OpenGift\"))"
+                        eventActions:
+                        - ["ON_CLICK_BUTTON", "ON_OPEN_CLICKED", ""]
+    -   class: "UIControl"
+        name: "Loading"
+        input: false
+        components:
+            IgnoreLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                condition: "inProgress"
+                prototypePath: "~res:/UI/Screens3/Common/LoadingOverlay.yaml"
+                args:
+                    "description": "\"Gifts/OperationInProgress\""
+                    "modalInput": "true"
+                eventActions:
+                - ["ON_OVERLAY_CLICKED", "BACK_EVENT", ""]
+    -   class: "UIParticles"
+        name: "Confetti_1"
+        position: [500.000000, -121.000000]
+        size: [32.000000, 32.000000]
+        effectPath: "~res:/3d/FX/UI/Gift/Confetti_1.sc2"
+        autoStart: true
+        startDelay: 1.000000

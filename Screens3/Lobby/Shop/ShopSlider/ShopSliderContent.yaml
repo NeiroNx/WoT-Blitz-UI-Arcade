@@ -1,0 +1,474 @@
+Header:
+    version: 141
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/Blur.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "ShopSliderContent"
+    input: true
+    classes: "shop-product button-open-sound"
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens3/Lobby/Shop/ShopSlider/ShopSliderContent.animation"
+        UIOpacityComponent: {}
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 240.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 400.000000
+        UIInputEventComponent:
+            onTouchUpInside: "ON_PRODUCT_CLICKED"
+            onTouchUpInsideData: "when not isNull(product) -> product.id, -1"
+        UIDataParamsComponent:
+            params:
+            - ["bool", "initializationEnded", "false", "true"]
+            - ["ShopBadgesSection", "badges", "null", "{ \"products\" = { 1 = { }; }; }"]
+            - ["ShopSlider", "slider", "null", "{ }"]
+            - ["int64", "serverTime", "0L", "100L"]
+            - ["bool", "arabicLocalization", "false", "false"]
+            - ["bool", "debugMode", "false", "true"]
+            - ["float", "shopScrollBottomOffset", "0.000000", "40.000000"]
+            - ["float", "shopScrollTopOffset", "0.000000", "48.000000"]
+            - ["bool", "blurEnabled", "false", "true"]
+            - ["bool", "selected", "false", "true"]
+            - ["bool", "firstShow", "false", "true"]
+            - ["bool", "readyToShow", "false", "true"]
+            events:
+            - "SHOWN"
+            - "ON_PRODUCT_CLICKED(int id)"
+            - "DEV_BUY_PRODUCT(int id)"
+            - "GO_TO_PRODUCT(int id)"
+        UIDataLocalVarsComponent:
+            data:
+            - ["float", "cycleTime", "4.000000"]
+            - ["bool", "evenCycle", "true"]
+            - ["int", "nextIndex", "0"]
+            - ["int", "currentIndex", "0"]
+            - ["float", "fadeInTime", "0.250000"]
+            - ["bool", "show", "false"]
+            - ["bool", "cycleInProgress", "false"]
+            - ["bool", "loadFX", "firstShow"]
+            - ["float", "firstShowDropTime", "1.000000"]
+            - ["float", "firstShowOpacityTime", "0.100000"]
+            - ["float", "firstShowFoldTime", "0.400000"]
+            - ["bool", "imageLoaded", "false"]
+            - ["bool", "animating", "false"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["string", "content", "when evenCycle -> \"**/ProductContent\", \"**/ProductContentNext\""]
+            - ["string", "nextContent", "when evenCycle -> \"**/ProductContentNext\", \"**/ProductContent\""]
+            - ["ShopProduct", "nextProduct", "when slider.products.Size() > nextIndex -> slider.products[nextIndex], slider.products.Empty() -> null, slider.products[0]"]
+            - ["ShopProduct", "product", "when slider.products.Size() > currentIndex -> slider.products[currentIndex], slider.products.Empty() -> null, slider.products[0]"]
+            - ["bool", "available", "not product.xTimed or product.availableTimes > 0 or (product.giftable and product.giftAvailableTimes > 0)"]
+            - ["int", "productCount", "when not isNull(slider) -> slider.products.Size(), 0"]
+            - ["bool", "blurVisible", "blurEnabled and initializationEnded"]
+            - ["ShopProduct", "firstProduct", "when evenCycle -> product, nextProduct"]
+            - ["ShopProduct", "secondProduct", "when evenCycle -> nextProduct, product"]
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/Lobby/Shop/ShopSlider/ShopSliderContent.actions"
+        UIDataOnEventComponent0:
+            eventName: "UpdateModelCurrentIndex"
+            modelFieldExpression: "slider.currentIndex"
+            dataExpression: "when slider.products.Size() > _event -> _event, 0"
+        UIEventOnDataComponent0:
+            watchedDataExpression: "readyToShow"
+            ifExpression: "readyToShow and firstShow and imageLoaded"
+            eventName: "OnReadyForFirstShow"
+        UIEventOnDataComponent1:
+            watchedDataExpression: "productCount"
+            ifExpression: "productCount <= 1 or not cycleInProgress"
+            eventName: "ReinitSlider"
+        Sound: {}
+        StyleSheet:
+            styles: "~res:/UI/Screens3/ButtonSound.style.yaml;~res:/UI/Screens3/Common/Touch.style.yaml;~res:/UI/Screens3/Common/Hover.style.yaml"
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        pivot: [0.500000, 0.500000]
+        input: false
+        classes: "content-area"
+        components:
+            UIOpacityComponent: {}
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/ButtonSound.style.yaml;~res:/UI/Screens3/Common/Touch.style.yaml;~res:/UI/Screens3/Common/Hover.style.yaml"
+        children:
+        -   class: "UIControl"
+            name: "Placeholder"
+            pivot: [0.500000, 0.000000]
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_TO_RECT"
+                    sprite: "~res:/Gfx/Lobby/backgrounds/bg_card_shop"
+                    perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                UIOpacityComponent: {}
+                UIRoundedCornersComponent:
+                    radius: "2"
+                Anchor:
+                    topAnchorEnabled: true
+                    topAnchor: 32.000000
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 240.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 336.000000
+        -   class: "UIControl"
+            name: "ImagesWrapper"
+            pivot: [0.500000, 0.000000]
+            input: false
+            components:
+                ClipContent: {}
+                Anchor:
+                    topAnchorEnabled: true
+                    topAnchor: 32.000000
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 240.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 336.000000
+            children:
+            -   class: "UIControl"
+                name: "Image"
+                input: false
+                components:
+                    Background:
+                        drawType: "DRAW_SCALE_TO_RECT"
+                        perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                    UIOpacityComponent: {}
+                    UIUrlImageComponent:
+                        imageLoadedEvent: "ImageLoaded"
+                    UIRoundedCornersComponent:
+                        radius: "2"
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 240.000000
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 336.000000
+                bindings:
+                - ["UIUrlImageComponent.imageUrl", "product.imageUrl"]
+            -   class: "UIControl"
+                name: "ImageNext"
+                input: false
+                components:
+                    UIOpacityComponent:
+                        opacity: 0.000000
+                    Anchor:
+                        topAnchorEnabled: true
+                        topAnchor: -337.000000
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 240.000000
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 336.000000
+                    UIChildComponent0:
+                        childType: "kControl"
+                        condition: "show and not isNull(nextProduct)"
+                        control: "ImageNext"
+        -   class: "UIControl"
+            name: "Hover"
+            input: false
+            classes: "white-wild-sand-10-bg hover"
+            components:
+                Background: {}
+                UIOpacityComponent: {}
+                Anchor:
+                    topAnchorEnabled: true
+                    topAnchor: 32.000000
+                IgnoreLayout: {}
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 240.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 336.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/Common/Hover.style.yaml"
+        -   class: "UIControl"
+            name: "Fade"
+            input: false
+            classes: "black-35-bg"
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_TO_RECT"
+                    sprite: "~res:/Gfx/Lobby/backgrounds/bg_shop_product_panel"
+                UIRoundedCornersComponent:
+                    radius: "2"
+                Anchor:
+                    topAnchorEnabled: true
+                    topAnchor: 32.000000
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 240.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 336.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+            bindings:
+            - ["visible", "not available and not product.pendingPurchase"]
+        -   class: "UIControl"
+            name: "ProductContent"
+            input: false
+            components:
+                UIOpacityComponent: {}
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 240.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 400.000000
+                UIChildComponent0:
+                    condition: "show and not isNull(firstProduct)"
+                    prototypePath: "~res:/UI/Screens3/Lobby/Shop/ShopProduct/Content.yaml"
+                    args:
+                        "hasBadgeLabel": "not isNull(badges) and badges.products.Contains(firstProduct.id) and badges.products[firstProduct.id].hasLabel"
+                        "initializationEnded": "initializationEnded"
+                        "blurEnabled": "blurEnabled"
+                        "arabicLocalization": "arabicLocalization"
+                        "debugMode": "debugMode"
+                        "product": "firstProduct"
+                        "serverTime": "serverTime"
+                        "shopScrollBottomOffset": "shopScrollBottomOffset"
+                        "shopScrollTopOffset": "shopScrollTopOffset"
+                        "selected": "selected"
+                        "available": "available"
+                    eventActions:
+                    - ["LOADED", "FIRST_LOADED", ""]
+                    - ["DEV_BUY_PRODUCT", "DEV_BUY_PRODUCT", "_event.id"]
+                    - ["GO_TO_PRODUCT", "GO_TO_PRODUCT", "_event.id"]
+            bindings:
+            - ["visible", "when evenCycle -> show, show and not isNull(nextProduct)"]
+        -   class: "UIControl"
+            name: "ProductContentNext"
+            input: false
+            components:
+                UIOpacityComponent: {}
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 240.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 400.000000
+                UIChildComponent0:
+                    condition: "show and not isNull(secondProduct)"
+                    prototypePath: "~res:/UI/Screens3/Lobby/Shop/ShopProduct/Content.yaml"
+                    args:
+                        "hasBadgeLabel": "not isNull(badges) and badges.products.Contains(secondProduct.id) and badges.products[secondProduct.id].hasLabel"
+                        "initializationEnded": "initializationEnded"
+                        "blurEnabled": "blurEnabled"
+                        "arabicLocalization": "arabicLocalization"
+                        "debugMode": "debugMode"
+                        "product": "secondProduct"
+                        "serverTime": "serverTime"
+                        "shopScrollBottomOffset": "shopScrollBottomOffset"
+                        "shopScrollTopOffset": "shopScrollTopOffset"
+                        "selected": "selected"
+                        "available": "available"
+                    eventActions:
+                    - ["DEV_BUY_PRODUCT", "DEV_BUY_PRODUCT", "_event.id"]
+                    - ["GO_TO_PRODUCT", "GO_TO_PRODUCT", "_event.id"]
+        -   class: "UIControl"
+            name: "Counter"
+            input: false
+            refreshStylesOnInteract: false
+            components:
+                UIOpacityComponent:
+                    opacity: 0.000000
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: -4.000000
+                    topAnchorEnabled: true
+                    topAnchor: 28.000000
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 32.000000
+                UIChildComponent0:
+                    childType: "kControl"
+                    condition: "productCount > 1"
+                    control: "CounterWrapper"
+            bindings:
+            - ["visible", "show"]
+        -   class: "UIControl"
+            name: "FX"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 240.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 400.000000
+                UIChildComponent0:
+                    childType: "kControl"
+                    condition: "loadFX"
+                    control: "BlinkFx"
+Slots:
+-   class: "UIControl"
+    name: "ImageNext"
+    input: false
+    components:
+        Background:
+            drawType: "DRAW_SCALE_TO_RECT"
+            perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+        UIOpacityComponent: {}
+        UIUrlImageComponent: {}
+        UIRoundedCornersComponent:
+            radius: "2"
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 240.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 336.000000
+    bindings:
+    - ["UIUrlImageComponent.imageUrl", "nextProduct.imageUrl"]
+-   class: "UIControl"
+    name: "CounterWrapper"
+    input: false
+    refreshStylesOnInteract: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "Formula"
+            horizontalFormula: "lastChild + 12"
+            verticalPolicy: "FixedSize"
+            verticalValue: 32.000000
+    children:
+    -   class: "UIControl"
+        name: "BlurWrapper"
+        input: false
+        refreshStylesOnInteract: false
+        components:
+            UIOpacityComponent:
+                opacity: 0.000000
+            IgnoreLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        bindings:
+        - ["visible", "blurVisible"]
+        children:
+        -   prototype: "Blur/Blur"
+            name: "Blur"
+            components:
+                UIPostProcessTextureComponent0:
+                    renderRequestingType: "ON_SIZE_CHANGED"
+                    renderControlOnlyOnScreen: true
+                UIPostProcessTextureComponent1:
+                    renderRequestingType: "ON_SIZE_CHANGED"
+                    renderControlOnlyOnScreen: true
+                UIPostProcessTextureComponent2:
+                    renderRequestingType: "ON_SIZE_CHANGED"
+                    renderControlOnlyOnScreen: true
+                UIPostProcessPolicyComponent:
+                    canBeDelayed: true
+            bindings:
+            - ["UIPostProcessTextureComponent0.topOffset", "shopScrollTopOffset"]
+            - ["UIPostProcessTextureComponent0.bottomOffset", "shopScrollBottomOffset"]
+            - ["UIPostProcessTextureComponent1.topOffset", "shopScrollTopOffset"]
+            - ["UIPostProcessTextureComponent1.bottomOffset", "shopScrollBottomOffset"]
+            - ["UIPostProcessTextureComponent2.topOffset", "shopScrollTopOffset"]
+            - ["UIPostProcessTextureComponent2.bottomOffset", "shopScrollBottomOffset"]
+    -   class: "UIControl"
+        name: "Fade"
+        input: false
+        classes: "black-15-bg"
+        components:
+            Background: {}
+            UIOpacityComponent: {}
+            IgnoreLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+    -   class: "UIControl"
+        name: "bg"
+        input: false
+        classes: "blue-elm-bg"
+        refreshStylesOnInteract: false
+        components:
+            Background:
+                drawType: "DRAW_FILL"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                horizontalValue: 0.000000
+                verticalPolicy: "PercentOfParent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+    -   class: "UIControl"
+        name: "label"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                useRtl: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   class: "UIControl"
+            name: "value"
+            input: false
+            classes: "t-subtitle bold color=white-wild-sand-text"
+            refreshStylesOnInteract: false
+            components:
+                UITextComponent:
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+            bindings:
+            - ["UITextComponent.text", "str(currentIndex + 1)"]
+        -   class: "UIControl"
+            name: "separator"
+            input: false
+            classes: "t-subtitle bold color=white-wild-sand-text"
+            refreshStylesOnInteract: false
+            components:
+                UITextComponent:
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+            bindings:
+            - ["UITextComponent.text", "\" / \""]
+        -   class: "UIControl"
+            name: "count"
+            input: false
+            classes: "t-subtitle bold color=white-wild-sand-text"
+            refreshStylesOnInteract: false
+            components:
+                UITextComponent:
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+            bindings:
+            - ["UITextComponent.text", "str(slider.products.Size())"]
+-   class: "UIParticles"
+    name: "BlinkFx"
+    scale: [1.300000, 1.300000]
+    effectPath: "~res:/3d/FX/UI/Shop/card_fx/card_1.sc2"
+    components:
+        Anchor:
+            hCenterAnchorEnabled: true
+            vCenterAnchorEnabled: true

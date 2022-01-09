@@ -1,0 +1,36 @@
+Header:
+    version: 138
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/CongratulationsDialog.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "StoryCongratulationsDialog"
+    size: [960.000000, 640.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["string", "background", "\"\"", "\"\""]
+            - ["vector<ResourceDetailed>", "rewards", "[ ]", "[ { \"type\" = ResourceType.premium; }; { \"type\" = ResourceType.gold; }; { \"type\" = ResourceType.credits; }; { \"type\" = ResourceType.stuff; }; { \"type\" = ResourceType.unlocks; }; { \"type\" = ResourceType.vehicle; }; ]"]
+            - ["int", "steps", "0", "1"]
+            - ["eBlitzDevice", "deviceType", "eBlitzDevice.DEVICE_DESKTOP", "eBlitzDevice.DEVICE_DESKTOP"]
+            events:
+            - "BACK_EVENT"
+            - "ON_REWARD_CLICKED(int index)"
+    children:
+    -   prototype: "CongratulationsDialog/CongratulationsDialog"
+        name: "CongratulationsDialog"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "background": "background"
+                    "header": "\"template_event/CompleteStep/Congratulation/Header\""
+                    "description": "when steps > 1 -> localize(\"template_event/CompleteSteps/Congratulation/Descr\", { \"number\" = steps; }), localize(\"template_event/CompleteStep/Congratulation/Descr\")"
+                    "rewards": "rewards"
+                    "deviceType": "deviceType"
+                eventActions:
+                - ["BACK_EVENT", "BACK_EVENT", ""]
+                - ["ON_REWARD_CLICKED", "ON_REWARD_CLICKED", "_event.index"]

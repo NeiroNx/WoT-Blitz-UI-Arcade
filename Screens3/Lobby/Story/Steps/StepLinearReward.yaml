@@ -1,0 +1,32 @@
+Header:
+    version: "101"
+Prototypes:
+-   class: "UIControl"
+    name: "StepLinearReward"
+    input: false
+    components:
+        Anchor:
+            rightAnchorEnabled: true
+            useRtl: true
+        SizePolicy:
+            horizontalPolicy: "Formula"
+            horizontalFormula: "min(parent, firstChild)"
+            verticalPolicy: "PercentOfFirstChild"
+        UIDataParamsComponent:
+            params:
+            - ["ResourceDetailed", "reward", "null", "{ type = ResourceType.premium; }"]
+            - ["eCurrencySize", "currencySize", "eCurrencySize.BIG", "eCurrencySize.BODY"]
+    children:
+    -   class: "UIControl"
+        name: "RewardHolder"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                condition: "not isNull(reward)"
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/CurrencyAdapter.yaml"
+                args:
+                    "resource": "reward"
+                    "currencySize": "currencySize"

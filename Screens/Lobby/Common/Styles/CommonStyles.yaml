@@ -1,0 +1,9 @@
+Header:
+    version: "27"
+StyleSheets:
+-   selector: ".visible"
+    properties:
+        visible: true
+-   selector: ".invisible"
+    properties:
+        visible: false

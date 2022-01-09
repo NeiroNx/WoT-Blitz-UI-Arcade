@@ -1,0 +1,214 @@
+Header:
+    version: 140
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/RichText.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "PremiumizeSelectionDialog"
+    size: [640.000000, 480.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["TankModulesTreeModel", "modules", "null", "{ }"]
+            - ["SessionDataModel", "session", "null", "{ }"]
+            - ["int64", "temporaryDuration", "0L", "1209600L"]
+            - ["float", "profitIncrease", "0.000000", "27.000000"]
+            events:
+            - "ACCENT_CLICKED(int option)"
+            - "CANCEL"
+        UIDataLocalVarsComponent:
+            data:
+            - ["bool", "expandVisible", "false"]
+            - ["int", "selectedOption", "0"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["bool", "isPermanentAvailable", "modules.permPremiumizationPrice.quantity > 0"]
+            - ["int", "profitIncPercents", "int(profitIncrease * 100) / 100"]
+            - ["string", "profitIncPercentsString", "str(profitIncPercents) + \"%\""]
+            - ["string", "contentText", "when isPermanentAvailable -> \"premialization/Notification/TemporaryOrPermanent/ShortDescription\", \"premialization/Notification/Temporary/ShortDescription\""]
+            - ["string", "additionalText", "when isPermanentAvailable -> \"premialization/Notification/TemporaryOrPermanent/DetailedDescription\", \"premialization/Notification/Temporary/DetailedDescription\""]
+        UIChildComponent0:
+            prototypePath: "~res:/UI/Screens3/Lobby/Common/Dialog/TextDialog.yaml"
+            args:
+                "accentButtonType": "eButtonType.POSITIVE"
+                "type": "eDialogType.FILL"
+                "header": "when isPermanentAvailable -> \"premialization/Notification/TemporaryOrPermanent/Title\", \"premialization/Notification/Temporary/Title\""
+                "headerImage": "\"\""
+                "accentButton": "\"#hangar_showcase:PremializationButton\""
+                "optionalButton": "\"#common:DialogButton/Cancel\""
+                "contentControl": "Content"
+            eventActions:
+            - ["ACCENT_CLICKED", "ACCENT_CLICKED", "selectedOption"]
+            - ["OPTIONAL_CLICKED", "CANCEL", ""]
+        UIDataOnEventComponent0:
+            eventName: "EXPAND_PRESSED"
+            modelFieldExpression: "expandVisible"
+            dataExpression: "true"
+        UIDataOnEventComponent1:
+            eventName: "ITEM_SELECTED"
+            modelFieldExpression: "selectedOption"
+            dataExpression: "_event"
+Slots:
+-   class: "UIControl"
+    name: "Content"
+    size: [400.000000, 232.000000]
+    input: false
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+            spacing: 24.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfChildrenSum"
+    children:
+    -   class: "UIControl"
+        name: "Text"
+        input: false
+        components:
+            LinearLayout:
+                orientation: "TopDown"
+                spacing: 16.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfChildrenSum"
+        children:
+        -   prototype: "RichText/RichText"
+            name: "ContentText"
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                FlowLayout:
+                    hDynamicPadding: true
+                    alignment: "Center"
+                UIDataParamsComponent:
+                    args:
+                        "baseFontSize": "\"t-body\""
+                        "baseFontStyle": "\"regular\""
+                        "baseFontColor": "\"white-wild-sand-50-text\""
+                        "key": "localize(contentText, { \"premializationPercent\" = profitIncPercentsString; \"days\" = str(toDays(temporaryDuration)); })"
+                        "linkKey": "\"\""
+                        "resource1Model": "modules.tempPremiumizationPrice"
+                        "resource2Model": "null"
+                        "resource3Model": "null"
+                        "resource4Model": "null"
+                        "customKeyProperty": "\"\""
+        -   class: "UIControl"
+            name: "AdditionalText"
+            input: false
+            components:
+                LinearLayout:
+                    orientation: "TopDown"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfChildrenSum"
+            children:
+            -   class: "UIControl"
+                name: "ExpandButton"
+                input: false
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfMaxChild"
+                        verticalPolicy: "PercentOfMaxChild"
+                    UIChildComponent0:
+                        prototypePath: "~res:/UI/Screens3/Lobby/Common/Button/TextIconButton.yaml"
+                        args:
+                            "icon": "\"~res:/Gfx/Lobby/icons/icon_chevron_n\""
+                            "iconColorStyle": "\"orange-meteor-bg\""
+                            "iconIsLeft": "false"
+                            "caption": "\"#common:DialogButton/ReadMore\""
+                            "type": "eButtonType.NO_BG"
+                            "size": "eButtonSize.SMALL"
+                            "sound": "eButtonSound.UNKNOWN"
+                            "enabled": "true"
+                            "locked": "false"
+                            "iconFlip": "FLIP_VERTICAL"
+                        eventActions:
+                        - ["ON_CLICK_BUTTON", "EXPAND_PRESSED", ""]
+                bindings:
+                - ["visible", "not expandVisible"]
+            -   class: "UIControl"
+                name: "AdditionalTextWrapper"
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfMaxChild"
+                bindings:
+                - ["visible", "expandVisible"]
+                children:
+                -   prototype: "RichText/RichText"
+                    name: "AdditionalText"
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                        FlowLayout:
+                            hDynamicPadding: true
+                            alignment: "Center"
+                        UIDataParamsComponent:
+                            args:
+                                "baseFontSize": "\"t-body\""
+                                "baseFontStyle": "\"regular\""
+                                "baseFontColor": "\"white-wild-sand-50-text\""
+                                "key": "additionalText"
+                                "resource1Model": "null"
+                                "resource2Model": "null"
+                                "resource3Model": "null"
+                                "resource4Model": "null"
+    -   class: "UIControl"
+        name: "PremiumizeTypeSelection"
+        input: false
+        components:
+            LinearLayout:
+                orientation: "TopDown"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfChildrenSum"
+            UISwitchBarComponent:
+                onSelectElement: "ITEM_SELECTED"
+                onSelectElementData: "_selectedElement"
+                selectionEventType: "TOUCH_UP"
+        bindings:
+        - ["visible", "isPermanentAvailable"]
+        - ["UISwitchBarComponent.selectedElement", "selectedOption"]
+        children:
+        -   class: "UIControl"
+            name: "Temporary"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfFirstChild"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens3/Lobby/ModulesTree/PremiumizeTypeCell.yaml"
+                    args:
+                        "typeName": "\"premialization/Duration/Temporary\""
+                        "temporaryDuration": "temporaryDuration"
+                        "resourceCanAfford": "true"
+                        "showDiscount": "false"
+                        "isTemporary": "true"
+                        "elementID": "0"
+                        "isSelected": "selectedOption == 0"
+                        "resource": "modules.tempPremiumizationPrice"
+        -   class: "UIControl"
+            name: "Permanent"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfFirstChild"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens3/Lobby/ModulesTree/PremiumizeTypeCell.yaml"
+                    args:
+                        "typeName": "\"premialization/Duration/Permanent\""
+                        "resourceCanAfford": "true"
+                        "showDiscount": "false"
+                        "isTemporary": "false"
+                        "elementID": "1"
+                        "isSelected": "selectedOption == 1"
+                        "resource": "modules.permPremiumizationPrice"

@@ -1,0 +1,83 @@
+Header:
+    version: "85"
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/Story/Legacy/Utils/Resource/Detailed/ResourcePrototype.yaml"
+Controls:
+-   prototype: "ResourcePrototype/Content"
+    name: "Content"
+    components:
+        UIDataParamsComponent:
+            params:
+            - ["ResourceDetailed", "data", "null", "{ type = ResourceType.stuff; stuff = { title = \"storage/Items/FreeXPBooster/Regular/Title\"; description = \"storage/Items/FreeXPBooster/Rare/Description\"; icon = \"~res:/Gfx/Shared/boosters/booster_free-xp\"; iconUrl = \"\"; quantity = 20; lifetime = 604800L; grade = ArtefactGrade.rare; type = ArtefactType.booster; itemCompactDescr = 0; }; }"]
+            - ["bool", "showEye", "false", "true"]
+        UIDataLocalsComponent:
+            locals:
+            - ["string", "title", "\"x\" + str(data.stuff.quantity)"]
+            - ["string", "description", "localize(data.stuff.title)"]
+    children:
+    -   path: "Layout"
+        position: [0.000000, 14.000000]
+        children: []
+    -   path: "Layout/Image/Grade"
+        components:
+            UITextureComponent: {}
+        bindings:
+        - ["UITextureComponent.color", "when data.stuff.grade == ArtefactGrade.common -> rgba(4214879, 1.000000), data.stuff.grade == ArtefactGrade.rare -> rgba(408010, 1.000000), data.stuff.grade == ArtefactGrade.unique -> rgba(6948762, 1.000000), data.stuff.grade == ArtefactGrade.legendary -> rgba(14588165, 1.000000), rgba(16777215, 0.000000)"]
+    -   path: "Layout/Image/IconContainer"
+        children:
+        -   class: "UIControl"
+            name: "IconUrl"
+            input: false
+            components:
+                Background: {}
+                UIUrlImageComponent:
+                    placeholderScenePath: "~res:/UI/Screens/Common/LoadingControlNoFade.yaml"
+                    placeholderControlName: "LoadingControlNoFade"
+                    downscaleEnabled: false
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+            bindings:
+            - ["visible", "not empty(data.stuff.iconUrl)"]
+            - ["UIUrlImageComponent.imageUrl", "data.stuff.iconUrl"]
+    -   path: "Layout/Image/IconContainer/Icon"
+        components:
+            UITextureComponent: {}
+        bindings:
+        - ["visible", "empty(data.stuff.iconUrl)"]
+        - ["UITextureComponent.spritePath", "data.stuff.icon"]
+    -   path: "Layout/DescriptionContainer"
+        children:
+        -   class: "UIControl"
+            name: "Lifetime"
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIChildComponent:
+                    control: "\"~res:/UI/Screens/Lobby/Story/Legacy/Utils/Timer.yaml\""
+                    args:
+                        "time": "data.stuff.lifetime"
+                        "textClass": "\"text2-small\""
+            bindings:
+            - ["visible", "data.stuff.lifetime > 0L"]
+    -   class: "UIControl"
+        name: "InfoIcon"
+        input: false
+        components:
+            UITextureComponent:
+                spritePath: "~res:/Gfx/UI/Story/info_icon"
+                color: [0.450980, 0.462745, 0.486275, 1.000000]
+            Anchor:
+                rightAnchorEnabled: true
+                rightAnchor: 5.000000
+                topAnchorEnabled: true
+                topAnchor: 5.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+        bindings:
+        - ["visible", "showEye"]

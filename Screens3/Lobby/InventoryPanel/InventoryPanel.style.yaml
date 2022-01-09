@@ -1,0 +1,7 @@
+Header:
+    version: "105"
+StyleSheets:
+-   selectors:
+    - ".switch-bar-mode-prev-next"
+    properties:
+        switchBar-moveSelectionMode: "PreviousNext"

@@ -1,0 +1,84 @@
+Header:
+    version: 127
+Prototypes:
+-   class: "UIControl"
+    name: "Captcha"
+    input: false
+    components:
+        LinearLayout: {}
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "PercentOfMaxChild"
+        UIDataParamsComponent:
+            params:
+            - ["string", "captchaSpriteName", "\"\"", "\"\""]
+            - ["bool", "loading", "false", "true"]
+            events:
+            - "RELOAD_CAPTCHA"
+    children:
+    -   class: "UIControl"
+        name: "ReloadButton"
+        input: false
+        components:
+            Anchor:
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfMaxChild"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/IconButton.yaml"
+                args:
+                    "type": "eButtonType.OPTIONAL_DARK"
+                    "isBgVisible": "true"
+                    "enabled": "not loading"
+                    "image": "\"~res:/Gfx/Lobby/icons/icon_angled-arrow\""
+                eventActions:
+                - ["ON_CLICK_BUTTON", "RELOAD_CAPTCHA", ""]
+    -   class: "UIControl"
+        name: "CaptchaHolder"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 136.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 48.000000
+        children:
+        -   class: "UIControl"
+            name: "LoaderHolder"
+            input: false
+            classes: "white-wild-sand-70-bg"
+            components:
+                Background: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+            bindings:
+            - ["visible", "loading"]
+            children:
+            -   class: "UIControl"
+                name: "Loader"
+                input: false
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfFirstChild"
+                        verticalPolicy: "PercentOfFirstChild"
+                    UIChildComponent0:
+                        prototypePath: "~res:/UI/Screens3/Common/Loaders/LoaderCircle.yaml"
+        -   class: "UIControl"
+            name: "Image"
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_TO_RECT"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            bindings:
+            - ["visible", "not loading"]
+            - ["Background.sprite", "captchaSpriteName"]

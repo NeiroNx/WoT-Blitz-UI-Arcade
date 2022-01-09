@@ -1,0 +1,115 @@
+Header:
+    version: 135
+Prototypes:
+-   class: "UIControl"
+    name: "ToStoreDialog"
+    size: [640.000000, 480.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["map<string,ResourceDetailed>", "currencies", "null", "{ \"prx\" = { \"type\" = ResourceType.stuff; \"stuff\" = { \"name\" = \"prx\"; }; }; }"]
+            - ["ResourceDetailed", "buyoutPrice", "null", "{ \"type\" = ResourceType.gold; }"]
+            - ["vector<string>", "currencyNames", "null", "[ \"prx\"; ]"]
+            events:
+            - "CANCEL"
+            - "CONFIRM"
+        UIDataLocalVarsComponent:
+            data:
+            - ["string", "problemText", "\"Story/BuyoutDialog/Problem/Description\""]
+            - ["string", "solutionText", "\"Story/BuyoutDialog/Solution\""]
+    children:
+    -   class: "UIControl"
+        name: "ContentHolder"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Dialog/TextDialog.yaml"
+                args:
+                    "type": "eDialogType.CHOOSE"
+                    "header": "\"\""
+                    "accentButton": "\"#common:DialogButton/Buy\""
+                    "optionalButton": "\"#common:DialogButton/Cancel\""
+                    "contentControl": "Content"
+                eventActions:
+                - ["OPTIONAL_CLICKED", "CANCEL", ""]
+                - ["ACCENT_CLICKED", "CONFIRM", ""]
+Slots:
+-   class: "UIControl"
+    name: "Content"
+    size: [400.000000, 120.000000]
+    input: false
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+            spacing: 19.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfChildrenSum"
+    children:
+    -   class: "UIControl"
+        name: "Problem"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfChildrenSum"
+            FlowLayout:
+                alignment: "Center"
+                hSpacing: 6.000000
+                useRtl: true
+        children:
+        -   class: "UIControl"
+            name: "Description"
+            input: false
+            classes: "t-body regular white-wild-sand-70-text"
+            components:
+                UITextComponent: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml"
+            bindings:
+            - ["UITextComponent.text", "localize(problemText)"]
+        -   class: "UIControl"
+            name: "NotEnough"
+            input: false
+            components:
+                LinearLayout:
+                    spacing: 4.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIRepeatComponent:
+                    control: "~res:/UI/Screens3/Lobby/Common/Resource/CurrencyAdapter.yaml"
+                    dataContainer: "currencies"
+                    args:
+                        "currencySize": "eCurrencySize.BODY"
+                        "canAfford": "true"
+                        "resource": "_item"
+    -   class: "UIControl"
+        name: "Solution"
+        input: false
+        components:
+            RichContent:
+                baseClasses: "t-body regular white-wild-sand-70-text"
+            RichContentAliases0:
+                aliases:
+                - ["buyoutPrice", " <control class=\"\" control=\"~res:/UI/Screens3/Lobby/Common/Resource/CurrencyAdapter.yaml\" args1=\"resource=buyoutPrice\" args2=\"currencySize=eCurrencySize.BODY\" />"]
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfChildrenSum"
+            FlowLayout:
+                alignment: "Center"
+                hSpacing: 4.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml"
+        bindings:
+        - ["RichContent.text", "localize(solutionText)"]

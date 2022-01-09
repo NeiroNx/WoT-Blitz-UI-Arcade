@@ -1,0 +1,4 @@
+animation INIT
+{
+  Opacity("**/ContentLayer/Content", opacity=1.0, time=0.3);
+}

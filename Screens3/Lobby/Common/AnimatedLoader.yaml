@@ -1,0 +1,93 @@
+Header:
+    version: 138
+Prototypes:
+-   class: "UIControl"
+    name: "AnimatedLoader"
+    size: [80.000000, 120.000000]
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens3/Lobby/Common/AnimatedLoaderInit.animation"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["control", "imageControl", "null", "null"]
+            - ["control", "contentControl", "null", "null"]
+            - ["control", "placeholderControl", "null", "null"]
+        UIDataLocalVarsComponent:
+            data:
+            - ["float", "fadeInTime", "0.250000"]
+            - ["float", "loadDelay", "0.250000"]
+            - ["bool", "show", "false"]
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/Lobby/Common/AnimatedLoader.actions"
+        UIEventOnDataComponent0:
+            watchedDataExpression: "show"
+            ifExpression: "show == false"
+            eventName: "PostInit"
+    children:
+    -   class: "UIControl"
+        name: "Placeholder"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            UIOpacityComponent: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                childType: "kControl"
+                condition: "not isNull(placeholderControl)"
+                control: "placeholderControl"
+            UIChildComponent1:
+                childType: "kControl"
+                condition: "isNull(placeholderControl)"
+                control: "DefaultPlaceholder"
+    -   class: "UIControl"
+        name: "Image"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            UIOpacityComponent:
+                opacity: 0.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                childType: "kControl"
+                condition: "not isNull(imageControl)"
+                control: "imageControl"
+        bindings:
+        - ["visible", "show"]
+    -   class: "UIControl"
+        name: "Content"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            UIOpacityComponent:
+                opacity: 0.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                childType: "kControl"
+                condition: "not isNull(contentControl)"
+                control: "contentControl"
+        bindings:
+        - ["visible", "show"]
+Slots:
+-   class: "UIControl"
+    name: "DefaultPlaceholder"
+    size: [60.000000, 80.000000]
+    input: false
+    components:
+        IgnoreLayout: {}
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIChildComponent0:
+            prototypePath: "~res:/UI/Screens3/Common/Loaders/LoaderCircle.yaml"
+            args:
+                "bgIsVisible": "false"

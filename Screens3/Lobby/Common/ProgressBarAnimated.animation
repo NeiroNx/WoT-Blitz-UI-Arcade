@@ -1,0 +1,7 @@
+animation Init
+{
+    if (animateOnInit)
+    {
+        Event("PlayAnimation");
+    }
+}

@@ -1,0 +1,34 @@
+Header:
+    version: 124
+Prototypes:
+-   class: "UIControl"
+    name: "LinearFinished"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfFirstChild"
+            verticalPolicy: "PercentOfFirstChild"
+        UIDataParamsComponent:
+            params:
+            - ["string", "bgImage", "\"\"", "\"~res:/Gfx/Lobby/events/2021-china-lunar/2021-china-lunar-steps_1\""]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+        children:
+        -   class: "UIControl"
+            name: "Bg"
+            input: false
+            components:
+                UITextureComponent:
+                    materialPath: "~res:/Materials.custom/2d.Textured.HSV.material"
+                    perPixelAccuracy: "PER_PIXEL_ACCURACY_FORCED"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+            bindings:
+            - ["UITextureComponent.spritePath", "bgImage"]

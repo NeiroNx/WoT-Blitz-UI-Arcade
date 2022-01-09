@@ -1,0 +1,49 @@
+Header:
+    version: 120
+StyleSheets:
+-   selectors:
+    - ".slot.empty #FilledSlot"
+    properties:
+        visible: false
+-   selectors:
+    - ".slot.empty.add #EmptySlot #EmptySlotContent #AddButton"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/Booster/add_btn.psd"
+-   selectors:
+    - ".slot.empty.buy #EmptySlot #EmptySlotContent #AddButton"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/Booster/shop_btn.psd"
+-   selectors:
+    - ".slot.installed #EmptySlot #EmptySlotContent"
+    properties:
+        visible: false
+-   selectors:
+    - ".empty-slot ? #Image"
+    properties:
+        bg-color: [1.000000, 1.000000, 1.000000, 0.500000]
+-   selectors:
+    - ".empty-slot.premium ? #Image"
+    properties:
+        bg-color: [1.000000, 1.000000, 1.000000, 1.000000]
+-   selectors:
+    - ".boosters-group.collapsed #Header #Icon"
+    properties:
+        bg-spriteModification: ["FLIP_VERTICAL"]
+-   selectors:
+    - ".boosters-group.collapsed #Contents"
+    properties:
+        visible: false
+-   selectors:
+    - ".empty-slot #EmptySlotContent"
+    properties:
+        bg-color: [1.000000, 1.000000, 1.000000, 0.501961]
+-   selectors:
+    - ".empty-slot:disabled"
+    properties:
+        bg-color: [1.000000, 1.000000, 1.000000, 1.000000]
+-   selectors:
+    - ".empty-slot:pressed_inside ? #AddButton"
+    - ".empty-slot:pressed_inside ? #Image"
+    - ".empty-slot:pressed_inside ? #ItemCount"
+    properties:
+        bg-colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"

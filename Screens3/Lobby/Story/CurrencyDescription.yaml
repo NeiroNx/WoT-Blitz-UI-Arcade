@@ -1,0 +1,87 @@
+Header:
+    version: 134
+Controls:
+-   class: "UIControl"
+    name: "Content"
+    size: [960.000000, 640.000000]
+    input: false
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+            spacing: 8.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfChildrenSum"
+        UIDataParamsComponent:
+            params:
+            - ["Story", "story", "null", "{ }"]
+            - ["ResourceDetailed", "currency", "null", "{ \"type\" = ResourceType.stuff; \"stuff\" = { \"name\" = \"prx_victory2019\"; \"title\" = \"storage/Items/spring_event_2019/Title\"; \"description\" = \"storage/Items/spring_event_2019/Description\"; }; }"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["string", "proxyName", "when currency.type == ResourceType.stuff and not isNull(currency.stuff) -> currency.stuff.name, \"\""]
+            - ["string", "title", "when currency.type == ResourceType.gold -> \"shop/Gold\", currency.type == ResourceType.credits -> \"shop/Credits\", currency.type == ResourceType.free_xp -> \"hangar/freeXP\", currency.type == ResourceType.stuff -> (when not empty(proxyName) and story.currencyTitles.Contains(proxyName) and not empty(story.currencyTitles[proxyName]) -> currency.currencyTitles[proxyName], currency.stuff.title), currency.type == ResourceType.unlocks -> currency.unlock.title, currency.type == ResourceType.vehicle -> currency.vehicle.info.name, currency.type == ResourceType.premium -> \"storage/Items/PremiumAccount/Title\", \"#currency wrong type\""]
+            - ["string", "description", "when currency.type == ResourceType.gold -> \"BattlePass/Tooltip/Gold\", currency.type == ResourceType.credits -> \"BattlePass/Tooltip/Silver\", currency.type == ResourceType.free_xp -> \"BattlePass/Tooltip/FreeXP\", currency.type == ResourceType.stuff -> (when not empty(proxyName) and story.currencyDescriptions.Contains(proxyName) and not empty(story.currencyDescriptions[proxyName]) -> story.currencyDescriptions[proxyName], currency.stuff.description), currency.type == ResourceType.unlocks -> currency.unlock.description, currency.type == ResourceType.vehicle -> \"\", currency.type == ResourceType.premium -> \"BattlePass/Tooltip/Premium\", \"#currency wrong type\""]
+    children:
+    -   class: "UIControl"
+        name: "Header"
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                useRtl: true
+            LinearLayout:
+                spacing: 8.000000
+                useRtl: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   class: "UIControl"
+            name: "Icon"
+            input: false
+            components:
+                Anchor:
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfFirstChild"
+                    verticalPolicy: "PercentOfFirstChild"
+                UIChildComponent0:
+                    childType: "kPrototype"
+                    condition: "not isNull(currency)"
+                    prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/Detailed/IconDeprecated.yaml"
+                    args:
+                        "resource": "currency"
+                        "size": "eCurrencySize.BODY"
+        -   class: "UIControl"
+            name: "Name"
+            input: false
+            classes: "t-body bold white-wild-sand-text"
+            components:
+                UITextComponent: {}
+                Anchor:
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml"
+            bindings:
+            - ["UITextComponent.text", "localize(title)"]
+    -   class: "UIControl"
+        name: "Description"
+        input: false
+        classes: "t-body regular white-wild-sand-text"
+        components:
+            UIOpacityComponent:
+                opacity: 0.650000
+            UITextComponent:
+                multiline: "MULTILINE_ENABLED"
+                align: ["LEFT", "TOP"]
+                useRtlAlign: "USE_BY_SYSTEM"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml"
+        bindings:
+        - ["UITextComponent.text", "localize(description)"]

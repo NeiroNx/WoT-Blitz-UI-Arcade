@@ -1,0 +1,50 @@
+Header:
+    version: 127
+Prototypes:
+-   class: "UIControl"
+    name: "RepeatableBlurMask"
+    input: false
+    components:
+        GridCellComponent: {}
+        SizePolicy:
+            horizontalPolicy: "PercentOfLastChild"
+            verticalPolicy: "PercentOfLastChild"
+        UIDataParamsComponent:
+            params:
+            - ["eStepSize", "stepSize", "eStepSize.L", "eStepSize.L"]
+            - ["int", "gridColumn", "0", "0"]
+            - ["int", "gridRow", "0", "0"]
+        UIDataLocalVarsComponent:
+            data:
+            - ["map<eStepSize,vector2>", "stepSizes", "{ eStepSize.S = vec2(80.000000, 80.000000); eStepSize.M = vec2(112.000000, 112.000000); eStepSize.ML = vec2(240.000000, 112.000000); eStepSize.L = vec2(160.000000, 160.000000); eStepSize.XL = vec2(336.000000, 160.000000); }"]
+    bindings:
+    - ["GridCellComponent.column", "gridColumn"]
+    - ["GridCellComponent.row", "gridRow"]
+    children:
+    -   class: "UIControl"
+        name: "ContentHolder"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/ButtonDecorator.yaml"
+                args:
+                    "content": "BlurMask"
+                    "ltrbSafeZone": "vec4(8.000000, 16.000000, 8.000000, 38.000000)"
+                    "hasInput": "false"
+Slots:
+-   class: "UIControl"
+    name: "BlurMask"
+    size: [160.000000, 160.000000]
+    input: false
+    components:
+        Background:
+            drawType: "DRAW_FILL"
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            verticalPolicy: "FixedSize"
+    bindings:
+    - ["SizePolicy.horizontalValue", "stepSizes[stepSize].X"]
+    - ["SizePolicy.verticalValue", "stepSizes[stepSize].Y"]

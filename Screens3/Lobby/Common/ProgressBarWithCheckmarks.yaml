@@ -1,0 +1,65 @@
+Header:
+    version: 127
+Prototypes:
+-   class: "UIControl"
+    name: "Progressbar"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfLastChild"
+            verticalPolicy: "PercentOfLastChild"
+        UIDataParamsComponent:
+            params:
+            - ["eStepSize", "stepSize", "eStepSize.S", "eStepSize.XS"]
+            - ["int", "progressWidth", "202", "46"]
+            - ["int", "progressHeight", "8", "4"]
+            - ["bool", "lockType", "false", "true"]
+            - ["vector<int>", "pointIndexes", "null", "[ 0; 1; 2; 3; ]"]
+            - ["vector<int>", "progressIndexes", "null", "[ 0; 1; 2; ]"]
+            - ["int", "currentStep", "0", "0"]
+            - ["float", "currentProgress", "0.000000", "9.000000"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["map<eStepSize,vector2>", "stepSizes", "{ eStepSize.XS = vec2(44.000000, 44.000000); eStepSize.S = vec2(80.000000, 80.000000); eStepSize.M = vec2(112.000000, 112.000000); eStepSize.L = vec2(160.000000, 160.000000); eStepSize.XL = vec2(336.000000, 160.000000); }"]
+            - ["float", "stepWidth", "stepSizes[stepSize].X"]
+            - ["int", "pointOffset", "when stepSize == eStepSize.XS -> 13, stepSize == eStepSize.S -> 23, \"\""]
+    children:
+    -   class: "UIControl"
+        name: "ProgressContainer"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            LinearLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfParent"
+            UIRepeatComponent:
+                control: "~res:/UI/Screens3/Lobby/Common/ProgressBarForCheckmarks.yaml"
+                dataContainer: "progressIndexes"
+                args:
+                    "partOfLineWidth": "when stepSize == eStepSize.S -> 6, stepSize == eStepSize.XS -> 2, 6"
+                    "progressWidth": "progressWidth"
+                    "progressHeight": "progressHeight"
+                    "progress": "when _index < currentStep -> 100.000000, _index == currentStep -> currentProgress, 0.000000"
+        bindings:
+        - ["LinearLayout.padding", "stepWidth - pointOffset"]
+        - ["LinearLayout.spacing", "stepWidth - 2 * pointOffset"]
+    -   class: "UIControl"
+        name: "PointsContainer"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            LinearLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfMaxChild"
+            UIRepeatComponent:
+                control: "~res:/UI/Screens3/Lobby/Common/RepeatableSML.yaml"
+                dataContainer: "pointIndexes"
+                args:
+                    "isStepDone": "when _index <= currentStep -> true, _index == currentStep + 1 and currentProgress >= 100.000000 -> true, false"
+                    "lockType": "lockType"
+                    "stepSizes": "stepSizes"
+                    "stepSize": "stepSize"
+        bindings:
+        - ["LinearLayout.spacing", "progressWidth - 2 * pointOffset"]

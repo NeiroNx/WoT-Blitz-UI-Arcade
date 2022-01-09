@@ -1,0 +1,22 @@
+Header:
+    version: "82"
+ImportedPackages:
+- "~res:/UI/Screens/Dialogs.yaml"
+Controls:
+-   prototype: "Dialogs/ErrorDialog"
+    name: "ErrorDialog"
+    components:
+        UILayerComponent:
+            layer: 2
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Lobby/SmartDLC/UnavailableActionDialog.yaml"
+    children:
+    -   path: "Dialog/Middle/DialogText"
+        components:
+            UITextComponent:
+                text: "dlc/Notification/ActionUnavailable/Comment"
+    -   path: "Dialog/Top/TitleText"
+        components:
+            UITextComponent:
+                text: "dlc/Notification/ActionUnavailable/Title"

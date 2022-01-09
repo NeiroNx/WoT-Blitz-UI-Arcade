@@ -1,0 +1,185 @@
+Header:
+    version: 117
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/LobbyCommon.yaml"
+- "~res:/UI/Screens/Common/Settings/Settings.yaml"
+- "~res:/UI/Screens/Common.yaml"
+- "~res:/UI/Screens/Common/Settings/SettingsCommon.yaml"
+- "~res:/UI/Styles/SafeAreaStyles.yaml"
+- "~res:/UI/Screens/Common/Settings/SwitchWithCaptionAndDescription.yaml"
+- "~res:/UI/Screens/Common/Settings/InputKeyBindingsHolder.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "KeyboardMouseControlOptionsPage"
+    size: [1024.000000, 768.000000]
+    input: false
+    components:
+        Anchor:
+            leftAnchorEnabled: true
+            rightAnchorEnabled: true
+            topAnchorEnabled: true
+            bottomAnchorEnabled: true
+        StyleSheet:
+            styles: "~res:/UI/Screens/Common/Settings/KeyboardMouseControlOptionsPage.yaml"
+    children:
+    -   class: "UIScrollView"
+        name: "ScrollView"
+        position: [0.000000, 0.000000]
+        input: false
+        autoUpdate: true
+        components:
+            Background:
+                color: [0.192200, 0.192200, 0.192200, 1.000000]
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 0.000000
+                rightAnchorEnabled: true
+                rightAnchor: 0.000000
+                topAnchorEnabled: true
+                topAnchor: 0.000000
+                bottomAnchorEnabled: true
+                bottomAnchor: 0.000000
+        children:
+        -   class: "UIScrollViewContainer"
+            name: "scrollContainerControl"
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    rightAnchorEnabled: true
+                LinearLayout:
+                    orientation: "TopDown"
+                    safeAreaPaddingInset: true
+                    spacing: 1.000000
+                SizePolicy:
+                    verticalPolicy: "PercentOfChildrenSum"
+            children:
+            -   prototype: "SettingsCommon/SliderWithCaption"
+                name: "MouseSensitivity"
+                position: [5.000000, 0.000000]
+                components:
+                    Anchor:
+                        leftAnchorEnabled: true
+                        leftAnchor: 5.000000
+                        rightAnchorEnabled: true
+                        rightAnchor: 5.000000
+                    LinearLayout:
+                        spacing: 15.000000
+                        dynamicSpacing: false
+                children:
+                -   path: "ValueAndCaption"
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                    children: []
+                -   path: "ValueAndCaption/GroupCaption"
+                    position: [0.000000, 0.000000]
+                    components:
+                        UITextComponent:
+                            text: "#settings:Controls/MouseSensitivity/Title"
+            -   prototype: "SettingsCommon/SliderWithCaption"
+                name: "MouseSensitivityInSnipperMode"
+                components:
+                    Anchor:
+                        leftAnchorEnabled: true
+                        leftAnchor: 5.000000
+                        rightAnchorEnabled: true
+                        rightAnchor: 5.000000
+                    LinearLayout:
+                        spacing: 15.000000
+                        dynamicSpacing: false
+                children:
+                -   path: "ValueAndCaption"
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                    children: []
+                -   path: "ValueAndCaption/GroupCaption"
+                    position: [0.000000, 0.000000]
+                    components:
+                        UITextComponent:
+                            text: "#settings:Controls/MouseSensitivityInSnipperMode/Title"
+            -   class: "UIControl"
+                name: "InvertedGroup"
+                size: [1024.000000, 80.000000]
+                components:
+                    Anchor:
+                        leftAnchorEnabled: true
+                        rightAnchorEnabled: true
+                    LinearLayout:
+                        spacing: 1.000000
+                children:
+                -   prototype: "SwitchWithCaptionAndDescription/SwitchWithCaptionAndDescription"
+                    name: "InvertedZoom"
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            horizontalValue: 50.000000
+                            verticalPolicy: "PercentOfParent"
+                    children:
+                    -   path: "ContentLinearLayout/TextVerticalLayout/GroupCaption"
+                        components:
+                            UITextComponent:
+                                text: "#settings:Other/InvertedZoom/Title"
+                    -   path: "ContentLinearLayout/TextVerticalLayout/Description"
+                        components:
+                            UITextComponent:
+                                text: ""
+                -   prototype: "SwitchWithCaptionAndDescription/SwitchWithCaptionAndDescription"
+                    name: "InvertedMouse"
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            horizontalValue: 50.000000
+                            verticalPolicy: "PercentOfParent"
+                    children:
+                    -   path: "ContentLinearLayout/TextVerticalLayout/GroupCaption"
+                        components:
+                            UITextComponent:
+                                text: "#settings:Controls/InvertedMouse/Title"
+                    -   path: "ContentLinearLayout/TextVerticalLayout/Description"
+                        components:
+                            UITextComponent:
+                                text: ""
+            -   class: "UIControl"
+                name: "Row"
+                size: [1024.000000, 80.000000]
+                components:
+                    Anchor:
+                        leftAnchorEnabled: true
+                        rightAnchorEnabled: true
+                    LinearLayout:
+                        spacing: 1.000000
+                children:
+                -   prototype: "SwitchWithCaptionAndDescription/SwitchWithCaptionAndDescription"
+                    name: "SmartZoom"
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            horizontalValue: 50.000000
+                            verticalPolicy: "PercentOfParent"
+                    children:
+                    -   path: "ContentLinearLayout/TextVerticalLayout/GroupCaption"
+                        components:
+                            UITextComponent:
+                                text: "SmartZoom"
+                    -   path: "ContentLinearLayout/TextVerticalLayout/Description"
+                        components:
+                            UITextComponent:
+                                text: "Use smartZoom in sniper mode"
+            -   prototype: "InputKeyBindingsHolder/ButtonBindings"
+                name: "KeyBindings"
+                components:
+                    UIDataParamsComponent:
+                        args:
+                            "inputBindingsInfo": "{ }"
+        -   prototype: "Common/VerticalScrollBar"
+            name: "VerticalScrollBar"
+            classes: "notch-tightly-right-inset"
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+                    topAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                UIAnchorSafeAreaComponent: {}
+                ScrollBarDelegate:
+                    delegate: ".."

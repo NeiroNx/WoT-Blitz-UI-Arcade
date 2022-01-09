@@ -1,0 +1,4 @@
+animation ScrollToBonusQuest
+{
+	ScrollToEnsureControlOnScreen("**/PremiumQuestAnchor", 3, yPolicy=eScrollToControlPolicy.kFarthest);          
+}

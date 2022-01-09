@@ -1,0 +1,68 @@
+action ON_STEP_CLICKED(int id)
+{
+    Event("CUT", arg1 = 0.08);
+    if (not model.isSelected)
+    {
+        Event("SELECT_STEP", arg1 = id);
+    }
+    else
+    {
+        Event("SHOW_STEP_INFO", arg1 = id);
+    }
+}
+
+action HIGHLIGHT(float time)
+{
+    parallel
+    {
+        ChangeData(opacity, 1.0, time, LINEAR);
+        ChangeData(offset, 64.0, time, LINEAR);
+    }
+}
+
+action LOWLIGHT(float time)
+{
+    parallel
+    {
+        ChangeData(opacity, 0.0, time, LINEAR);
+        ChangeData(offset, 0.0, time, LINEAR);
+    }
+}
+
+action UNCUT(float time)
+{
+    parallel
+    {
+        {
+            parallel
+            {
+                ChangeProperty("**/StepLinearDecorator/TopSubstrate", "SizePolicy", "verticalValue", 11.2, time, EASE_IN_EASE_OUT);
+                ChangeProperty("**/StepLinearDecorator/BottomSubstrate", "SizePolicy", "verticalValue", 11.2, time, EASE_IN_EASE_OUT);
+            }
+            Stop();
+        }
+        {
+            WaitEvent("CUT");
+            Stop();
+        }
+    }
+}
+
+action CUT(float time)
+{
+    parallel
+    {
+        {
+            parallel
+            {
+                ChangeProperty("**/StepLinearDecorator/TopSubstrate", "SizePolicy", "verticalValue", 0.0, time, EASE_IN_EASE_OUT);
+                ChangeProperty("**/StepLinearDecorator/BottomSubstrate", "SizePolicy", "verticalValue", 0.0, time, EASE_IN_EASE_OUT);
+            }
+            Stop();
+        }
+        {
+            WaitEvent("UNCUT");
+            Stop();
+        }
+    }
+}

@@ -1,0 +1,218 @@
+Header:
+    version: 141
+Prototypes:
+-   class: "UIControl"
+    name: "StoryHeader"
+    size: [960.000000, 48.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "FixedSize"
+            verticalValue: 48.000000
+        UIDataParamsComponent:
+            params:
+            - ["Story", "story", "null", "{ }"]
+            - ["StatsDataModel", "statsData", "null", "{ }"]
+            - ["LobbyDataModel", "lobby", "null", "{ }"]
+            - ["int64", "serverTime", "0L", "0L"]
+            - ["bool", "showTimer", "true", "true"]
+            - ["eCurrentScreen", "currentScreen", "eCurrentScreen.kUnknown", "eCurrentScreen.kStory"]
+            events:
+            - "GO_TO_SHOP"
+            - "BACK_EVENT"
+            - "PREMIUM_INFO_EVENT"
+            - "SHOP_BUTTON(eRequiredResource requiredResource)"
+        UIDataLocalVarsComponent:
+            data:
+            - ["map<string,bool>", "showFreeXp", "{ \"NY2022\" = true; }"]
+            - ["map<string,bool>", "showGold", "{ \"ENIGMA2021\" = true; \"MS1_2021\" = true; \"clan_event_2021\" = true; \"HALLOWEEN2021_MAIN\" = true; \"NY2022\" = true; }"]
+            - ["map<string,bool>", "hideRightPanel", "{ \"OLIVER2021\" = true; \"NEWCOMERS7X7\" = true; \"NEWCOMERS2020\" = true; }"]
+            - ["map<string,bool>", "hideShopButton", "{ \"NEWCOMERS2020\" = true; }"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["bool", "showRightPanel", "not hideRightPanel.Contains(story.name) and story.stage.type != eStageType.INFORM and currentScreen != eCurrentScreen.kStoryInfo"]
+            - ["bool", "showStatsPanel", "showGold.Contains(story.name) or showFreeXp.Contains(story.name)"]
+            - ["bool", "showShopButton", "not isNull(lobby) and not hideShopButton.Contains(story.name)"]
+            - ["int64", "alertTime", "when story.stage.type == eStageType.PROCESS or story.stage.type == eStageType.BUY -> 3600L, 0L"]
+        UIDataLocalControlComponent0:
+            name: "statsPanel"
+            prototypePath: "~res:/UI/Screens3/Lobby/StatsInfoPanelPrototype.yaml"
+            args:
+                "statsData": "statsData"
+                "serverTime": "serverTime"
+                "isGeneralPackLoaded": "true"
+                "isTutorialActive": "false"
+                "firstLessonCompleted": "true"
+                "isVisible": "showStatsPanel"
+                "showPremium": "false"
+                "showGold": "showGold.Contains(story.name)"
+                "showCredits": "false"
+                "showFreeXp": "showFreeXp.Contains(story.name)"
+            eventActions:
+            - ["PREMIUM_INFO_EVENT", "PREMIUM_INFO_EVENT", ""]
+            - ["SHOP_BUTTON", "SHOP_BUTTON", "_event.requiredResource"]
+        UIDataLocalControlComponent1:
+            name: "shopButton"
+            prototypePath: "~res:/UI/Screens3/Lobby/Common/Button/ShopButton.yaml"
+            args:
+                "badges": "when not isNull(lobby) -> lobby.shopBadges, null"
+            eventActions:
+            - ["GO_TO_SHOP", "GO_TO_SHOP", ""]
+        UIDataLocalControlComponent2:
+            name: "backButton"
+            prototypePath: "~res:/UI/Screens3/Lobby/Common/BackButton.yaml"
+            eventActions:
+            - ["ON_CLICK_BUTTON", "BACK_EVENT", ""]
+        UIDataLocalControlComponent3:
+            name: "content"
+            prototypePath: "~res:/UI/Screens3/Lobby/Common/Headers/HeaderContent.yaml"
+            args:
+                "leftContent": "LeftContent"
+                "rightContent": "when showRightPanel -> RightContent, null"
+                "button": "when showShopButton -> shopButton, null"
+                "backButton": "backButton"
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Headers/Header.yaml"
+                args:
+                    "bgStyle": "\"black-15-bg\""
+                    "content": "content"
+                    "isFullScreen": "true"
+Slots:
+-   class: "UIControl"
+    name: "LeftContent"
+    size: [250.000000, 48.000000]
+    input: false
+    components:
+        ClipContent: {}
+        Anchor:
+            leftAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "Formula"
+            horizontalFormula: "when parent == 0 -> childrenSum, min(childrenSum, parent)"
+            verticalPolicy: "PercentOfParent"
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            Anchor:
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                spacing: 8.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   class: "UIControl"
+            name: "Name"
+            input: false
+            classes: "t-subtitle regular white-wild-sand-text"
+            components:
+                UITextComponent: {}
+                Anchor:
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml"
+            bindings:
+            - ["UITextComponent.text", "localize(story.headerName)"]
+        -   class: "UIControl"
+            name: "Delimiter"
+            input: false
+            classes: "t-subtitle regular white-wild-sand-text"
+            components:
+                UITextComponent:
+                    text: "/"
+                Anchor:
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml"
+            bindings:
+            - ["visible", "showTimer"]
+        -   class: "UIControl"
+            name: "Timer"
+            input: false
+            components:
+                Anchor:
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfFirstChild"
+                    verticalPolicy: "PercentOfFirstChild"
+                UIChildComponent0:
+                    condition: "showTimer"
+                    prototypePath: "~res:/UI/Screens3/Lobby/Common/Timer.yaml"
+                    args:
+                        "colorStyle": "\"white-wild-sand-50\""
+                        "serverTime": "serverTime"
+                        "time": "story.finishTime"
+                        "customIcon": "when story.stage.type == eStageType.PROCESS -> \"~res:/Gfx/Lobby/icons/icon_battles_xs\", story.stage.type == eStageType.BUY -> \"~res:/Gfx/Lobby/icons/icon_coin_s\", story.stage.type == eStageType.INFORM -> \"~res:/Gfx/Lobby/icons/icon_info_xs\", \"\""
+                        "alertTime": "alertTime"
+            bindings:
+            - ["visible", "showTimer"]
+-   class: "UIControl"
+    name: "RightContent"
+    size: [32.000000, 48.000000]
+    input: false
+    components:
+        LinearLayout:
+            spacing: 8.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "PercentOfParent"
+    children:
+    -   class: "UIControl"
+        name: "ProxiesPanel"
+        input: false
+        components:
+            LinearLayout:
+                spacing: 8.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "Proxies"
+            input: false
+            components:
+                Anchor:
+                    vCenterAnchorEnabled: true
+                LinearLayout:
+                    spacing: 8.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfParent"
+                UIRepeatComponent:
+                    control: "~res:/UI/Screens3/Lobby/StatsInfoPanelItem.yaml"
+                    dataContainer: "story.stage.proxies"
+                    args:
+                        "isLocked": "true"
+                        "serverTime": "serverTime"
+                        "detailedResource": "_item"
+                        "isVisible": "not isNull(_item.stuff)"
+    -   class: "UIControl"
+        name: "StatsPanel"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                childType: "kControl"
+                condition: "showStatsPanel"
+                control: "statsPanel"
+        bindings:
+        - ["visible", "showStatsPanel"]

@@ -1,0 +1,15 @@
+Header:
+    version: "68"
+StyleSheets:
+-   selector: ".inventory-item-slot #icon"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryScreen/EmptySlot.txt"
+-   selector: ".inventory-item-slot.locked #icon"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/LobbyCommon/lock_big.psd"
+-   selector: ".inventory-item-slot:pressed_inside"
+    properties:
+        bg-color: [1.000000, 1.000000, 1.000000, 0.588235]
+-   selector: ".number-param-prototype"
+    properties:
+        visible: false

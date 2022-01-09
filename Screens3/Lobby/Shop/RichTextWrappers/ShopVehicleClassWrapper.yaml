@@ -1,0 +1,28 @@
+Header:
+    version: "96"
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/Vehicle/VehicleClass.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "VehicleClassRichTextWrapper"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfFirstChild"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["eTankClass", "class", "eTankClass.TANK_CLASS_LIGHT", "eTankClass.TANK_CLASS_AT_SPG"]
+            - ["eVehicleDescriptionType", "type", "eVehicleDescriptionType.NORMAL", "eVehicleDescriptionType.PREMIUMISED"]
+            - ["bool", "elite", "false", "true"]
+    children:
+    -   prototype: "VehicleClass/VehicleClass"
+        name: "VehicleClass"
+        components:
+            Anchor:
+                vCenterAnchorEnabled: true
+            UIDataParamsComponent:
+                args:
+                    "elite": "elite"
+                    "type": "type"
+                    "class": "class"

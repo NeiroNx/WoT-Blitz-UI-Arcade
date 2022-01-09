@@ -1,0 +1,46 @@
+action PopupClose
+{
+	if (isTutorial)
+	{
+		Wait(0.2);
+		PlaySound("play_tut_2021_ui_battle_win_whoosh_off");
+		StopParticles(path="**/1stPhase");
+		StartParticles(path="**/2ndPhase");
+		parallel
+		{
+			ChangeProperty("**/Label", "Anchor", "vCenterAnchor", -128, 0.6, EASE_OUT);
+			Opacity("**/Label", opacity=0.0, time=0.6, interpolation=EASE_OUT);
+		}
+	}
+	else
+	{
+		if (battleResult == BattleResult.WIN)
+		{
+			StopParticles(path="**/1stPhase");
+			StartParticles(path="**/2ndPhase");
+			parallel
+			{
+				Scale("**/Label", 80, 80, 0.6, EASE_IN);
+				Opacity("**/Label", 0.0, 0.3, SINE_OUT);
+				Opacity("**/Desc", 0, 0.15, SINE_OUT);
+				MoveRel("**/Desc", 0, 56, 0.3, SINE_OUT);
+			}
+			Opacity("**/HangarBlur", 0, 0.3, SINE_OUT);
+		}
+		if (battleResult == BattleResult.LOSE or battleResult == BattleResult.TIE)
+		{
+			parallel
+			{
+				Opacity("**/Content", 0, 0.3, SINE_OUT);
+				Opacity("**/TieLooseBg", 0, 0.3, SINE_OUT);
+			}
+			Opacity("**/HangarBlur", 0, 0.3, SINE_OUT);
+		}
+	}
+	Event("HIDE_POPUP");
+}
+
+action EnableBlur
+{
+	ChangeData(enableBlur, true);
+}

@@ -1,0 +1,11 @@
+animation SelectedTabDidChange
+{
+	if(selectedTab == InventoryTabType.CAMOUFLAGES)
+	{
+		ChangeProperty("Fade", "UIOpacityComponent", "opacity", 1, 0.8, EASE_IN_EASE_OUT);
+	}
+	else
+	{
+		ChangeProperty("Fade", "UIOpacityComponent", "opacity", 0, 0.8, EASE_IN_EASE_OUT);
+	}
+}

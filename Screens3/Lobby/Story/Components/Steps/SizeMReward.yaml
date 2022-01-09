@@ -1,0 +1,217 @@
+Header:
+    version: 141
+Prototypes:
+-   class: "UIControl"
+    name: "SizeMReward"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 112.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 112.000000
+        UIDataParamsComponent:
+            params:
+            - ["ResourceDetailed", "reward", "null", "{ \"type\" = ResourceType.premium; }"]
+            - ["control", "fx", "null", "null"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["bool", "isBasic", "not isNull(reward) and (reward.type == ResourceType.gold or reward.type == ResourceType.free_xp or reward.type == ResourceType.elite_xp or reward.type == ResourceType.premium or reward.type == ResourceType.xp or reward.type == ResourceType.tankmenXP or reward.type == ResourceType.credits or reward.type == ResourceType.slots or reward.type == ResourceType.equipment_slots)"]
+    children:
+    -   class: "UIControl"
+        name: "ContentHolder"
+        input: false
+        components:
+            Anchor:
+                topAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                childType: "kControl"
+                condition: "reward.type == ResourceType.stuff and not isNull(reward.stuff)"
+                control: "Stuff"
+            UIChildComponent1:
+                childType: "kControl"
+                condition: "isBasic and not isNull(reward.basic)"
+                control: "Basic"
+            UIChildComponent2:
+                childType: "kControl"
+                condition: "reward.type == ResourceType.vehicle"
+                control: "Vehicle"
+Slots:
+-   class: "UIControl"
+    name: "Basic"
+    size: [112.000000, 112.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+    children:
+    -   class: "UIControl"
+        name: "IconWrapper"
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                topAnchorEnabled: true
+                topAnchor: 10.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   class: "UIControl"
+            name: "FxHolder"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                UIChildComponent0:
+                    childType: "kControl"
+                    condition: "not isNull(fx)"
+                    control: "fx"
+        -   class: "UIControl"
+            name: "Icon"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 84.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 84.000000
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/Detailed/BasicIcon.yaml"
+                    args:
+                        "type": "reward.type"
+    -   class: "UIControl"
+        name: "Quantity"
+        input: false
+        classes: "t-overline bold white-wild-sand-text"
+        components:
+            UITextComponent: {}
+            Anchor:
+                bottomAnchorEnabled: true
+                bottomAnchor: 8.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "Formula"
+                verticalFormula: "max(content, 20)"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml"
+        bindings:
+        - ["visible", "reward.basic.quantity >= 0"]
+        - ["UITextComponent.text", "when reward.type == ResourceType.premium -> timeDiffShort(reward.basic.quantity), str1000Separated(reward.basic.quantity)"]
+-   class: "UIControl"
+    name: "Stuff"
+    size: [112.000000, 112.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+    children:
+    -   class: "UIControl"
+        name: "IconWrapper"
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                topAnchorEnabled: true
+                topAnchor: -4.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   class: "UIControl"
+            name: "FxHolder"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                UIChildComponent0:
+                    childType: "kControl"
+                    condition: "not isNull(fx)"
+                    control: "fx"
+        -   class: "UIControl"
+            name: "Icon"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 84.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 101.500000
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/Detailed/StuffIcon.yaml"
+                    args:
+                        "stuff": "reward.stuff"
+    -   class: "UIControl"
+        name: "Quantity"
+        input: false
+        classes: "t-overline bold white-wild-sand-text"
+        components:
+            UITextComponent: {}
+            Anchor:
+                bottomAnchorEnabled: true
+                bottomAnchor: 8.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "Formula"
+                verticalFormula: "max(content, 20)"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml"
+        bindings:
+        - ["visible", "reward.stuff.quantity >= 0 and reward.stuff.visibleInShop"]
+        - ["UITextComponent.text", "localize(\"×%(value)\", { \"value\" = reward.stuff.quantity; })"]
+-   class: "UIControl"
+    name: "Vehicle"
+    size: [112.000000, 112.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+    children:
+    -   class: "UIControl"
+        name: "IconWrapper"
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                topAnchorEnabled: true
+                topAnchor: 10.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   class: "UIControl"
+            name: "FxHolder"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                UIChildComponent0:
+                    childType: "kControl"
+                    condition: "not isNull(fx)"
+                    control: "fx"
+        -   class: "UIControl"
+            name: "Icon"
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 87.500000
+                UILayoutEventComponent:
+                    sizeChangedEvent: "ON_SIZE_CHANGED"
+                    sizeChangedEventData: "_size"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/Detailed/VehicleIcon.yaml"
+                    args:
+                        "vehicle": "reward.vehicle"

@@ -1,0 +1,75 @@
+Header:
+    version: "82"
+Prototypes:
+-   class: "UIControl"
+    name: "Title"
+    input: false
+    components:
+        UIOpacityComponent: {}
+        UITextComponent:
+            fitting: "FITTING_POINTS"
+            align: ["HCENTER", "VCENTER"]
+        Anchor:
+            hCenterAnchorEnabled: true
+        LinearLayout:
+            dynamicPadding: true
+            spacing: 3.000000
+        SizePolicy:
+            horizontalPolicy: "Formula"
+            horizontalFormula: "when parent == 0 -> childrenSum, parent + 8"
+            verticalPolicy: "PercentOfFirstChild"
+        UIDataParamsComponent:
+            params:
+            - ["bool", "transparent", "false", "false"]
+            - ["string", "text", "\"\"", "localize(\"#customization:Shop/Title\")"]
+            - ["bool", "hasBadge", "false", "true"]
+            - ["bool", "isHovered", "false", "true"]
+            - ["eInventoryItemTitleType", "type", "eInventoryItemTitleType.kDefault", "eInventoryItemTitleType.kInactiveTab"]
+        UIDataLocalsComponent:
+            locals:
+            - ["string", "inactiveHoveredTabTitleStyle", "\"t-caps regular\""]
+            - ["string", "defaultTitleStyle", "\"t-caps bold\""]
+            - ["string", "activeTabTitleStyle", "\"t-caps bold\""]
+            - ["string", "inactiveTabTitleStyle", "\"t-caps regular\""]
+            - ["string", "titleStyle", "when type == eInventoryItemTitleType.kDefault -> defaultTitleStyle, type == eInventoryItemTitleType.kActiveTab -> activeTabTitleStyle, inactiveTabTitleStyle"]
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/Lobby/InventoryPanel/ItemTitleHover.actions"
+        UIEventOnDataComponent0:
+            watchedDataExpression: "isHovered"
+            ifExpression: "true"
+            eventName: "TitleHoverAnim"
+            eventData: "isHovered"
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Font.style.yaml"
+    bindings:
+    - ["UIOpacityComponent.opacity", "when transparent -> 0.500000, 1"]
+    children:
+    -   class: "UIControl"
+        name: "Text"
+        size: [93.000000, 16.000000]
+        input: false
+        components:
+            UITextComponent:
+                perPixelAccuracyType: "PER_PIXEL_ACCURACY_FORCED"
+                fitting: "FITTING_POINTS"
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "when parent == 0 -> content, min(parentRest, content)"
+                verticalPolicy: "PercentOfContent"
+        bindings:
+        - ["classes", "\"white-wild-sand-text \" + titleStyle"]
+        - ["UITextComponent.text", "text"]
+    -   class: "UIControl"
+        name: "BadgeHolder"
+        input: false
+        components:
+            Anchor:
+                topAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfMaxChild"
+            UIChildComponent:
+                control: "when hasBadge -> \"~res:/UI/Screens3/Lobby/Common/Badge.yaml\", \"\""
+                args:
+                    "value": "\" \""
+                    "type": "eBadgeType.EMPTY"

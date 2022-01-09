@@ -1,0 +1,143 @@
+Header:
+    version: 127
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/TreeArrows/ArrowLine.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "IconButton"
+    size: [151.000000, 48.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 64.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 64.000000
+        UIDataParamsComponent:
+            params:
+            - ["string", "bgColorStyle", "\"\"", "\"white-wild-sand-15-bg\""]
+            - ["int", "tankDescr", "0", "0"]
+            - ["bool", "isLeft", "true", "true"]
+            - ["bool", "showArrows", "false", "true"]
+            events:
+            - "SHOW_TANK_MODULES"
+        UIDataLocalBindingsComponent:
+            data:
+            - ["string", "directionStyle", "when isLeft -> \"left-node\", \"right-node\""]
+        UIIdentifierComponent:
+            id: "go_to_tank_arrow"
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Lobby/ModulesTree/NavigationButton.style.yaml"
+    bindings:
+    - ["classes", "directionStyle"]
+    children:
+    -   prototype: "ArrowLine/Line"
+        name: "LineInside"
+        components:
+            Anchor:
+                topAnchorEnabled: true
+                topAnchor: 32.000000
+            SizePolicy:
+                horizontalValue: 8.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/Lobby/ModulesTree/NavigationButton.style.yaml"
+        bindings:
+        - ["visible", "showArrows"]
+    -   class: "UIControl"
+        name: "LineOutside"
+        size: [32.000000, 32.000000]
+        input: false
+        classes: "white-wild-sand-50-bg"
+        components:
+            Background:
+                drawType: "DRAW_SCALE_TO_RECT"
+                sprite: "~res:/Gfx/Lobby/backgrounds/bg_gradient_horizontal_0-100"
+            Anchor:
+                topAnchorEnabled: true
+                topAnchor: 32.000000
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 20.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 1.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/Lobby/ModulesTree/NavigationButton.style.yaml"
+        bindings:
+        - ["visible", "showArrows"]
+    -   class: "UIControl"
+        name: "TapArea"
+        input: true
+        classes: "modules-navigation-button button-choose-sound"
+        components:
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 64.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 64.000000
+            UIInputEventComponent:
+                onTouchUpInside: "SHOW_TANK_MODULES"
+                onTouchUpInsideData: "tankDescr"
+            Sound: {}
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/ButtonSound.style.yaml"
+        children:
+        -   class: "UIControl"
+            name: "Content"
+            pivot: [0.500000, 0.500000]
+            input: false
+            classes: "content-area"
+            components:
+                Background: {}
+                UIOpacityComponent: {}
+                Anchor:
+                    leftAnchorEnabled: true
+                    rightAnchorEnabled: true
+                    topAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Lobby/ModulesTree/NavigationButton.style.yaml"
+            children:
+            -   class: "UIControl"
+                name: "Bg"
+                size: [272.000000, 48.000000]
+                input: false
+                components:
+                    Background: {}
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+                bindings:
+                - ["classes", "bgColorStyle"]
+            -   class: "UIControl"
+                name: "Hover"
+                input: false
+                classes: "hover white-wild-sand-5-bg"
+                components:
+                    Background: {}
+                    UIOpacityComponent: {}
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/Lobby/ModulesTree/NavigationButton.style.yaml"
+            -   class: "UIControl"
+                name: "Icon"
+                input: false
+                classes: "arrow-icon white-wild-sand-bg"
+                components:
+                    Background:
+                        drawType: "DRAW_ALIGNED"
+                        sprite: "~res:/Gfx/Lobby/icons/icon_arrow-rounded"
+                        perPixelAccuracy: "PER_PIXEL_ACCURACY_FORCED"
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 24.000000
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 24.000000
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/Lobby/ModulesTree/NavigationButton.style.yaml"

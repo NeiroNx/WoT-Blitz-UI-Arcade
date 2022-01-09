@@ -1,0 +1,96 @@
+Header:
+    version: 128
+Prototypes:
+-   class: "UIControl"
+    name: "StoryFragment"
+    size: [104.000000, 160.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfFirstChild"
+            verticalPolicy: "PercentOfParent"
+        UILayoutEventComponent:
+            sizeChangedEvent: "ON_SIZE_CHANGED"
+            sizeChangedEventData: "_size"
+        UIDataParamsComponent:
+            params:
+            - ["int64", "serverTime", "0L", "1554088595L"]
+            - ["StoryFragmentViewModel", "storyFragment", "null", "{ \"buttons\" = { \"HALLOWEEN2020\" = { \"story\" = { \"name\" = \"HALLOWEEN2020\"; \"isBoxStory\" = true; \"stage\" = { \"type\" = eStageType.PROCESS; }; \"tree\" = { \"steps\" = { 1 = { \"id\" = 1; }; 2 = { \"id\" = 2; }; 3 = { \"id\" = 3; }; }; }; \"stageResources\" = { \"buttonPath\" = \"~res:/UI/Screens3/Lobby/Story/HALLOWEEN2020/Button.yaml\"; }; \"progress\" = { 1 = 1; 2 = 1; }; \"finishTime\" = 1554299463L; }; \"progressValue\" = 78; \"progressMax\" = 120; \"isReady\" = false; }; }; }"]
+            - ["eBlitzDevice", "deviceType", "eBlitzDevice.DEVICE_DESKTOP", "eBlitzDevice.DEVICE_DESKTOP"]
+            - ["BattlePass", "battlePass", "null", "{ }"]
+            - ["eRealm", "realm", "eRealm.Unknown", "eRealm.Russia"]
+            - ["eTutorialHighlights", "highlightControl", "eTutorialHighlights.kUnknown", "eTutorialHighlights.kUnknown"]
+            events:
+            - "SHOW_INFO(string storyName)"
+            - "SHOW_PROGRESS(string storyName)"
+            - "STORY_BOX_PRESSED(string storyName)"
+            - "ON_BATTLEPASS_BTN_CLICKED"
+            - "STORY_BUTTON_PRESSED(string storyName)"
+        UIDataLocalVarsComponent:
+            data:
+            - ["vector2", "fragmentSize", "vec2(0.000000, 0.000000)"]
+            - ["vector2", "buttonSize", "vec2(104.000000, 136.000000)"]
+            - ["float", "opacity", "0.000000"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["bool", "isBattlePassActive", "battlePass.isVisible"]
+            - ["int", "buttonsCount", "storyFragment.buttons.Size() + (when isBattlePassActive -> 1, 0)"]
+            - ["int", "rowCount", "max(int(fragmentSize.Y / buttonSize.Y), 1)"]
+            - ["int", "columnCount", "int(ceil(float(buttonsCount) / float(rowCount)))"]
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/Lobby/Hangar/Story/StoryFragment.actions"
+    children:
+    -   class: "UIControl"
+        name: "ButtonsContainer"
+        input: false
+        components:
+            UIOpacityComponent: {}
+            Anchor:
+                topAnchorEnabled: true
+            GridLayout: {}
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "columnCount * buttonSize.X"
+                verticalPolicy: "Formula"
+                verticalFormula: "rowCount * buttonSize.Y"
+            UIRepeatComponent:
+                control: "~res:/UI/Screens3/Lobby/Hangar/Story/StoryButtonHolder.yaml"
+                dataContainer: "when rowCount > 0 -> storyFragment.buttons, null"
+                args:
+                    "serverTime": "serverTime"
+                    "storyButton": "_item"
+                    "position": "vec2(float(_index / rowCount), float(_index % rowCount))"
+                    "deviceType": "deviceType"
+                    "realm": "realm"
+                    "highlightControl": "highlightControl"
+                eventActions:
+                - ["STORY_BUTTON_PRESSED", "STORY_BUTTON_PRESSED", "_event.storyName"]
+        bindings:
+        - ["UIOpacityComponent.opacity", "opacity"]
+        - ["GridLayout.columnCount", "columnCount"]
+        - ["GridLayout.columnWidth", "buttonSize.X"]
+        - ["GridLayout.rowCount", "rowCount"]
+        - ["GridLayout.rowHeight", "buttonSize.Y"]
+        children:
+        -   class: "UIControl"
+            name: "BattlePassButton"
+            input: false
+            components:
+                GridCellComponent: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfFirstChild"
+                    verticalPolicy: "PercentOfFirstChild"
+                UIChildComponent0:
+                    childType: "kOldExpression"
+                    condition: "isBattlePassActive"
+                    control: "battlePass.widgetPath"
+                    args:
+                        "deviceType": "deviceType"
+                        "battlePass": "battlePass"
+                        "serverTime": "serverTime"
+                    eventActions:
+                    - ["ON_BATTLEPASS_BTN_CLICKED", "ON_BATTLEPASS_BTN_CLICKED", ""]
+            bindings:
+            - ["visible", "isBattlePassActive"]
+            - ["GridCellComponent.column", "when rowCount > 0 -> (buttonsCount - 1) / rowCount, 0"]
+            - ["GridCellComponent.row", "when rowCount > 0 -> (buttonsCount - 1) % rowCount, 0"]

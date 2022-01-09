@@ -1,0 +1,18 @@
+action OnSelect()
+{
+	if (isSelected)
+	{
+		ChangeData(bgWidth, 0.0);
+		ChangeData(bgWidth, 110.0, 0.6, EASE_OUT);
+		ChangeData(bgWidth, 100.0, 0.1, EASE_IN);
+	}
+	else
+	{
+		ChangeData(bgWidth, 0.0);
+	}
+}
+
+action ChainAvatarUpdate(float positionY, int index)
+{
+	Event("CHAIN_AVATAR_UPDATE", arg1 = positionY, arg2 =  index);
+}

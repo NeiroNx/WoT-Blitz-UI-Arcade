@@ -1,0 +1,88 @@
+Header:
+    version: "106"
+Prototypes:
+-   class: "UIControl"
+    name: "Field"
+    input: false
+    components:
+        LinearLayout:
+            padding: "10.000000"
+            spacing: 7.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "FixedSize"
+            verticalValue: 35.000000
+        UIDataParamsComponent:
+            params:
+            - ["string", "fieldValue", "\"\"", "\"~res:/UI/Screens/Lobby.yaml\""]
+            - ["string", "fieldName", "\"\"", "\"Control:\""]
+            events:
+            - "ON_COPY_VALUE(string value)"
+        StyleSheet:
+            styles: "~res:/UI/Screens/Fonts.yaml"
+    bindings:
+    - ["visible", "empty(fieldValue) == false"]
+    children:
+    -   class: "UIControl"
+        name: "Name"
+        size: [80.000000, 50.000000]
+        input: false
+        classes: "text-color-white text2"
+        components:
+            UITextComponent:
+                align: ["LEFT", "VCENTER"]
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfParent"
+        bindings:
+        - ["UITextComponent.text", "fieldName"]
+    -   class: "UIControl"
+        name: "Path"
+        size: [32.000000, 32.000000]
+        input: false
+        classes: "text-color-blue text2"
+        components:
+            UITextComponent:
+                fitting: "FITTING_POINTS"
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                horizontalMax: 400.000000
+                verticalPolicy: "PercentOfParent"
+        bindings:
+        - ["UITextComponent.text", "fieldValue"]
+    -   class: "UIControl"
+        name: "CopyButton"
+        position: [368.000000, 3.500000]
+        size: [45.000000, 25.000000]
+        input: true
+        classes: "copy-button"
+        components:
+            Background:
+                drawType: "DRAW_FILL"
+            Anchor:
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 45.000000
+            UIInputEventComponent:
+                onTouchUpInside: "ON_COPY_VALUE"
+                onTouchUpInsideData: "fieldValue"
+            StyleSheet:
+                styles: "~res:/UI/Screens/Common/DebugControlTree/DebugControlTreePopupMenu.style.yaml;~res:/UI/Screens/Fonts.yaml"
+        children:
+        -   class: "UIControl"
+            name: "Title"
+            size: [32.000000, 32.000000]
+            input: false
+            classes: "text-color-blue text2-small"
+            components:
+                UITextComponent:
+                    text: "Copy"
+                    colorInheritType: "COLOR_MULTIPLY_ALPHA_ONLY"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                    bottomAnchor: 3.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"

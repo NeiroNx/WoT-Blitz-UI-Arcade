@@ -1,0 +1,12 @@
+Header:
+    version: "84"
+StyleSheets:
+-   selectors:
+    - ".simple-button"
+    properties:
+        exclusiveInput: true
+        opacity-opacity: 1.000000
+-   selectors:
+    - ".simple-button:pressed_inside"
+    properties:
+        opacity-opacity: 0.650000

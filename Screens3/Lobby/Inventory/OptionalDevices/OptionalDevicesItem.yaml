@@ -1,0 +1,280 @@
+Header:
+    version: 130
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/Selection.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "OptionalDeviceItem"
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens3/Lobby/Inventory/OptionalDevices/OptionalDevicesIndicator.animation;INSTALLED,~res:/UI/Screens3/Lobby/Inventory/OptionalDevices/OptionalDevicesIndicator.animation"
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 64.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 64.000000
+        UIAttachLayoutMasterComponent: {}
+        UISwitchBarElementComponent: {}
+        UIDataParamsComponent:
+            params:
+            - ["bool", "isLocked", "false", "true"]
+            - ["bool", "isUnlocked", "false", "true"]
+            - ["bool", "isInstalled", "false", "true"]
+            - ["OptionalDeviceItem", "device", "null", "{ }"]
+            - ["bool", "isRight", "false", "true"]
+            - ["bool", "isSelected", "false", "true"]
+            events: []
+        UIDataLocalVarsComponent:
+            data:
+            - ["string", "masterId", "when isSelected -> \"NEWBIE_OPTIONAL_DEVICE_CHOOSE\", \"\""]
+        UIEventOnDataComponent0:
+            watchedDataExpression: "isInstalled"
+            eventName: "INSTALLED"
+        Sound: {}
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Lobby/Inventory/OptionalDevices/OptionalDevicesItemImage.style.yaml;~res:/UI/Screens3/ButtonSound.style.yaml;~res:/UI/Screens3/Lobby/Inventory/OptionalDevices/OptionalDevicesItem.style.yaml"
+    bindings:
+    - ["input", "not isSelected"]
+    - ["classes", "\"optional-device button-choose-sound optional_device_item \" + device.icon"]
+    - ["UIAttachLayoutMasterComponent.attachId", "masterId"]
+    - ["UISwitchBarElementComponent.id", "device.compactDescr"]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        pivot: [0.500000, 0.500000]
+        input: false
+        classes: "content-area"
+        components:
+            UIOpacityComponent: {}
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "Bg"
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_FILL"
+                UIOpacityComponent: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+            bindings:
+            - ["classes", "when isLocked -> \"black-35-bg\", \"white-wild-sand-15-bg\""]
+            - ["UIOpacityComponent.opacity", "when isInstalled -> 0, 1"]
+        -   class: "UIControl"
+            name: "Installed"
+            input: false
+            components:
+                UIOpacityComponent:
+                    opacity: 0.700000
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    topAnchorEnabled: true
+                IgnoreLayout: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                UIInputEventComponent:
+                    onTouchUpInside: "ON_PRESSED"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+            bindings:
+            - ["visible", "isInstalled"]
+            children:
+            -   class: "UIControl"
+                name: "Element_1"
+                input: false
+                classes: "green-la-palma-bg"
+                components:
+                    Background:
+                        drawType: "DRAW_SCALE_TO_RECT"
+                        sprite: "~res:/Gfx/Lobby/backgrounds/bg_gradient_vertical_0-100"
+                        spriteModification: ["FLIP_VERTICAL"]
+                    UIOpacityComponent:
+                        opacity: 0.500000
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        topAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "Formula"
+                        horizontalFormula: "parent"
+                        verticalPolicy: "Formula"
+                        verticalFormula: "parent * 0.6"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+            -   class: "UIControl"
+                name: "Element_2"
+                position: [12.000000, 0.000000]
+                input: false
+                classes: "green-la-palma-bg"
+                components:
+                    Background:
+                        drawType: "DRAW_SCALE_TO_RECT"
+                        sprite: "~res:/Gfx/Lobby/backgrounds/bg_gradient_vertical_0-100"
+                        spriteModification: ["FLIP_VERTICAL"]
+                    UIOpacityComponent:
+                        opacity: 0.500000
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        topAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "Formula"
+                        horizontalFormula: "parent * 0.8"
+                        verticalPolicy: "Formula"
+                        verticalFormula: "parent * 0.85"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+            -   class: "UIControl"
+                name: "Element_4"
+                input: false
+                classes: "green-la-palma-bg"
+                components:
+                    Background:
+                        drawType: "DRAW_SCALE_TO_RECT"
+                        sprite: "~res:/Gfx/Lobby/backgrounds/bg_gradient_vertical_0-100"
+                        spriteModification: ["FLIP_VERTICAL"]
+                    UIOpacityComponent:
+                        opacity: 0.500000
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        topAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "Formula"
+                        horizontalFormula: "parent * 0.6"
+                        verticalPolicy: "Formula"
+                        verticalFormula: "parent * 0.95"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+            -   class: "UIControl"
+                name: "Element_5"
+                input: false
+                classes: "green-la-palma-bg"
+                components:
+                    Background:
+                        drawType: "DRAW_SCALE_TO_RECT"
+                        sprite: "~res:/Gfx/Lobby/backgrounds/bg_gradient_vertical_0-100"
+                        spriteModification: ["FLIP_VERTICAL"]
+                    UIOpacityComponent:
+                        opacity: 0.500000
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        topAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "Formula"
+                        horizontalFormula: "parent * 0.2"
+                        verticalPolicy: "Formula"
+                        verticalFormula: "parent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+        -   prototype: "Selection/Selection"
+            name: "Selection"
+            components:
+                UIDataParamsComponent:
+                    args:
+                        "isVisible": "isSelected"
+        -   class: "UIControl"
+            name: "Indicator"
+            components:
+                UIOpacityComponent: {}
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    topAnchorEnabled: true
+                    topAnchor: -6.000000
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 20.000000
+                    verticalPolicy: "PercentOfLastChild"
+            bindings:
+            - ["visible", "isInstalled"]
+            children:
+            -   class: "UIControl"
+                name: "Glow"
+                size: [32.000000, 32.000000]
+                visible: true
+                input: false
+                classes: "green-la-palma-bg"
+                components:
+                    Background:
+                        drawType: "DRAW_SCALE_TO_RECT"
+                        sprite: "~res:/Gfx/Lobby/backgrounds/bg_radial-gradient_full"
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "Formula"
+                        horizontalFormula: "parent + 12"
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 12.000000
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+            -   class: "UIControl"
+                name: "Bg"
+                visible: true
+                input: false
+                components:
+                    LinearLayout: {}
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 4.000000
+                children:
+                -   class: "UIControl"
+                    name: "Left"
+                    size: [32.000000, 32.000000]
+                    input: false
+                    classes: "green-green-bg"
+                    components:
+                        Background:
+                            drawType: "DRAW_SCALE_PROPORTIONAL"
+                            sprite: "~res:/Gfx/Lobby/backgrounds/bg_half-oval_40"
+                        SizePolicy:
+                            horizontalPolicy: "FixedSize"
+                            horizontalValue: 2.000000
+                            verticalPolicy: "PercentOfParent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Color.style.yaml"
+                -   class: "UIControl"
+                    name: "Center"
+                    size: [32.000000, 32.000000]
+                    input: false
+                    classes: "green-green-bg"
+                    components:
+                        Background: {}
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfParent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Color.style.yaml"
+                -   class: "UIControl"
+                    name: "Right"
+                    size: [32.000000, 32.000000]
+                    input: false
+                    classes: "green-green-bg"
+                    components:
+                        Background:
+                            drawType: "DRAW_SCALE_PROPORTIONAL"
+                            sprite: "~res:/Gfx/Lobby/backgrounds/bg_half-oval_40"
+                            spriteModification: ["FLIP_HORIZONTAL"]
+                        SizePolicy:
+                            horizontalPolicy: "FixedSize"
+                            horizontalValue: 2.000000
+                            verticalPolicy: "PercentOfParent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "Img"
+            input: false
+            components:
+                Background: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"

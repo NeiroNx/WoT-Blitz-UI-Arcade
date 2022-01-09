@@ -1,0 +1,54 @@
+Header:
+    version: 133
+Prototypes:
+-   class: "UIControl"
+    name: "NationPage"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        Anchor:
+            leftAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            verticalPolicy: "FixedSize"
+            verticalValue: 400.000000
+        UIDataParamsComponent:
+            params:
+            - ["string", "image", "\"\"", "\"~res:/Gfx/Lobby/backgrounds/tutor-tanks/select-nations/tank_usa\""]
+            - ["bool", "hidden", "false", "false"]
+            - ["float", "point", "0.000000", "0.000000"]
+            - ["float", "pageSize", "0.000000", "1024.000000"]
+            - ["int", "effectPosX", "0", "664"]
+            - ["int", "effectPosY", "0", "133"]
+    bindings:
+    - ["visible", "not hidden"]
+    - ["Anchor.leftAnchor", "point"]
+    - ["SizePolicy.horizontalValue", "pageSize"]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        size: [1024.000000, 400.000000]
+        input: false
+        components:
+            Background:
+                drawType: "DRAW_SCALE_PROPORTIONAL_ONE"
+                perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+            Anchor:
+                hCenterAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+        bindings:
+        - ["Background.sprite", "image"]
+        children:
+        -   class: "UIParticles"
+            name: "FireTankGlow"
+            size: [32.000000, 32.000000]
+            effectPath: "~res:/3d/FX/UI/Tutorial/Tanks_select/FireTankGlow.sc2"
+            autoStart: true
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    topAnchorEnabled: true
+            bindings:
+            - ["Anchor.leftAnchor", "effectPosX"]
+            - ["Anchor.topAnchor", "effectPosY"]

@@ -1,0 +1,72 @@
+Header:
+    version: "63"
+ImportedPackages:
+- "~res:/UI/Screens/Common/StyledInfoButton.yaml"
+Controls:
+-   class: "UIControl"
+    customClass: "UIPopup"
+    name: "ShareLogPopup"
+    size: [960.000000, 640.000000]
+    visible: true
+    enabled: true
+    input: false
+    components:
+        StyleSheet:
+            inheritsStylesFromParent: false
+            styles: "~res:/UI/Screens3/Common/DebugPopup.yaml"
+    children:
+    -   class: "UIControl"
+        name: "Pane"
+        size: [210.000000, 0.000000]
+        input: false
+        classes: "pane-bg"
+        components:
+            Background: {}
+            Anchor:
+                rightAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                horizontalValue: 150.000000
+                verticalPolicy: "PercentOfParent"
+                verticalValue: 0.000000
+            StyleSheet:
+                styles: "~res:/UI/Styles/BackgroundStyles.yaml"
+        children:
+        -   prototype: "StyledInfoButton/StyledInfoButton"
+            name: "ShareLogButton"
+            position: [205.000000, 241.000000]
+            classes: "button button-color-green"
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                UIInputEventComponent:
+                    onTouchUpInside: "onShareLog"
+                StyleSheet:
+                    inheritsStylesFromParent: false
+                    styles: "~res:/UI/Screens/Common/StyledButton.yaml;"
+            children:
+            -   path: "icon"
+                components:
+                    Background:
+                        sprite: "~res:/Gfx/UI/CommonUIElements/Selection_back_0.psd"
+        -   prototype: "StyledInfoButton/StyledInfoButton"
+            name: "CancelButton"
+            position: [786.000000, 250.000000]
+            classes: "button button-color-red"
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                UIInputEventComponent:
+                    onTouchUpInside: "onCancel"
+                StyleSheet:
+                    inheritsStylesFromParent: false
+                    styles: "~res:/UI/Screens/Common/StyledButton.yaml;"
+            children:
+            -   path: "icon"
+                components:
+                    Background:
+                        sprite: "~res:/Gfx/UI/CommonUIElements/InputClear.psd"
+                    UIInputEventComponent: {}

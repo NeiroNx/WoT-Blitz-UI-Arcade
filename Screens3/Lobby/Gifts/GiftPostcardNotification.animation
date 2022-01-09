@@ -1,0 +1,24 @@
+animation Init()
+{
+	Scale("**/CardHolder", 0.1, 0.1);
+	ChangeProperty("**/CardHolder","","angle", -26);
+	Opacity("**/CardHolder", 0.0);
+	Opacity("**/Background", 1.0, 0.8, EASE_OUT);
+	PlaySound("play_ui_gift");
+	parallel
+	{
+		Scale("**/CardHolder", 1.2, 1.2, 0.6, EASE_OUT);
+		ChangeProperty("**/CardHolder","","angle", 0, 0.6, EASE_OUT);
+		Opacity("**/CardHolder", 1.0, 0.6, EASE_OUT);
+	}
+	parallel
+	{
+		{
+			Scale("**/CardHolder", 1, 1, 2.4, EASE_OUT);
+		}
+		{
+			ChangeProperty("**/CardHolder","","angle", -6, 2.4);
+		}
+	}	
+	ChangeProperty("**/CardHolder","","angle", 0, 5,EASE_OUT);
+}

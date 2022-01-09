@@ -1,0 +1,22 @@
+animation OpenOverlay
+{
+    Wait(0.2);
+    if (wasPushed)
+    {
+        parallel 
+        {
+            Opacity("**/Blur", 1, time=0.6, interpolation=EASE_OUT);
+            ChangeData(currentResultH, int(resultH * 1.02), 0.6, SINE_OUT);
+            ChangeProperty("**/Overlay", "UIOpacityComponent", "opacity", 1, 0.6, EASE_OUT);
+            ChangeProperty("**/Fade", "UIOpacityComponent", "opacity", 0.35, 0.6, EASE_OUT);
+        } 
+
+        ChangeData(currentResultH, resultH, 0.15, SINE_OUT);
+    }
+    else
+    {
+        ChangeProperty("**/Overlay", "UIOpacityComponent", "opacity", 1, 0.1, EASE_OUT);
+    }
+
+    Event ("OVERLAY_OPEN_FINISH");
+}

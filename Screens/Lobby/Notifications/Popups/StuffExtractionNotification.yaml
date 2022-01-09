@@ -1,0 +1,155 @@
+Header:
+    version: 121
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/Notifications/NotificationBase.yaml"
+- "~res:/UI/Screens3/Lobby/Common/Resource/Currency.yaml"
+Prototypes:
+-   class: "UIControl"
+    customClass: "UIGenericNotification"
+    name: "StuffExtractionNotification"
+    size: [32.000000, 32.000000]
+    input: true
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfFirstChild"
+            verticalPolicy: "PercentOfFirstChild"
+        UIDataParamsComponent:
+            params:
+            - ["StuffExtractionNotificationViewModel", "model", "{ }", "{ }"]
+    children:
+    -   prototype: "NotificationBase/NotificationBase"
+        name: "NotificationBase"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "isButtonVisible": "false"
+                    "content": "Content"
+                    "iconPath": "\"~res:/Gfx/Lobby/icons/icon_finance_s\""
+Slots:
+-   class: "UIControl"
+    name: "Content"
+    size: [379.000000, 60.000000]
+    input: false
+    components:
+        Anchor:
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "Formula"
+            verticalFormula: "when parent == 0 -> childrenSum, min(parent, childrenSum)"
+    children:
+    -   class: "UIControl"
+        name: "ContentWrapper"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            LinearLayout:
+                orientation: "TopDown"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "Formula"
+                verticalFormula: "when parent == 0 -> childrenSum, min(parent, childrenSum)"
+        children:
+        -   class: "UIControl"
+            name: "BodyBold"
+            position: [0.000000, 20.000000]
+            size: [379.000000, 0.000000]
+            input: false
+            classes: "t-body regular  white-wild-sand-70-text align-left"
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "Formula"
+                    verticalFormula: "when parent == 0 -> firstChild, min(parentRest, firstChild)"
+                FlowLayout:
+                    hSpacing: 4.000000
+                    useRtl: true
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+            children:
+            -   class: "UIControl"
+                name: "Extracted"
+                input: false
+                classes: "t-caption regular color=white-wild-sand-70-text"
+                components:
+                    UITextComponent:
+                        text: "NEWS_NOTIFICATION_INVOICE_DEBITED"
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                        align: ["LEFT", "VCENTER"]
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 20.000000
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+            -   class: "UIControl"
+                name: "ExtractedResource"
+                position: [70.000000, 0.000000]
+                size: [41.000000, 24.000000]
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfMaxChild"
+                        verticalPolicy: "PercentOfMaxChild"
+                children:
+                -   prototype: "Currency/Currency"
+                    name: "Currency"
+                    position: [0.000000, 4.000000]
+                    components:
+                        UIDataParamsComponent:
+                            args:
+                                "forceFullValue": "false"
+                                "currencySize": "eCurrencySize.SMALL"
+                                "forButton": "false"
+                                "canAfford": "true"
+                                "isPlusTopPaneVisible": "false"
+                                "serverTime": "0L"
+                                "plusVisible": "false"
+                                "resource": "model.extractedResource"
+            -   class: "UIControl"
+                name: "Spacer"
+                size: [4.000000, 20.000000]
+                input: false
+            -   class: "UIControl"
+                name: "Awarded"
+                position: [113.000000, 0.000000]
+                input: false
+                classes: "t-caption regular color=white-wild-sand-70-text"
+                components:
+                    UITextComponent:
+                        text: "NEWS_NOTIFICATION_INVOICE_ACCRUED"
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                        align: ["LEFT", "VCENTER"]
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 20.000000
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+                bindings:
+                - ["visible", "Size(model.awardedResources) > 0"]
+            -   class: "UIControl"
+                name: "AwardedContainer"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        verticalPolicy: "PercentOfMaxChild"
+                    FlowLayout:
+                        hPadding: "4"
+                    UIRepeatComponent:
+                        control: "~res:/UI/Screens3/Lobby/Common/Resource/Currency.yaml"
+                        dataContainer: "model.awardedResources"
+                        args:
+                            "forceFullValue": "false"
+                            "currencySize": "eCurrencySize.SMALL"
+                            "forButton": "false"
+                            "canAfford": "false"
+                            "isPlusTopPaneVisible": "false"
+                            "serverTime": "0L"
+                            "plusVisible": "false"
+                            "resource": "_item"

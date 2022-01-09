@@ -1,0 +1,410 @@
+Header:
+    version: 117
+Prototypes:
+-   class: "UIControl"
+    name: "CommonStep"
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens3/Lobby/Story/Steps/DefaultStepInit.animation"
+        Anchor:
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            verticalPolicy: "FixedSize"
+        UIDataParamsComponent:
+            params:
+            - ["StoryStepView", "model", "null", "{ \"step\" = { \"rewards\" = [ { \"type\" = ResourceType.stuff; }; ]; \"repeats\" = { \"quantity\" = 10; }; \"isFinished\" = false; }; \"isHighlighted\" = true; \"isSelected\" = false; }"]
+            - ["StoryStepModel", "inProgressStep", "null", "{ }"]
+            - ["bool", "showLabel", "false", "true"]
+            - ["bool", "hideProgress", "false", "false"]
+            - ["bool", "showVehicleInfo", "true", "false"]
+            - ["string", "progressColor", "\"blue-curious-blue-bg\"", "\"blue-curious-blue-bg\""]
+            - ["bool", "showEffects", "true", "true"]
+            - ["vector2", "sizeMin", "vec2(80.000000, 80.000000)", "vec2(80.000000, 80.000000)"]
+            - ["vector2", "sizeMax", "vec2(120.000000, 160.000000)", "vec2(120.000000, 160.000000)"]
+            - ["vector2", "repeatsSizeMin", "vec2(32.000000, 16.000000)", "vec2(32.000000, 16.000000)"]
+            - ["vector2", "repeatsSizeMax", "vec2(40.000000, 24.000000)", "vec2(40.000000, 24.000000)"]
+            - ["bool", "showPrice", "false", "false"]
+            - ["int", "leftAnchor", "0", "0"]
+            - ["bool", "showUnlockStub", "true", "false"]
+            - ["control", "rewardContent", "null", "null"]
+            events:
+            - "SHOW_STEP_INFO(int id)"
+            - "SELECT_STEP(int id)"
+        UIDataLocalVarsComponent:
+            data:
+            - ["float", "animationTime", "0.200000"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["bool", "isReadyToComplete", "model.step.net.price.Empty()"]
+            - ["bool", "isEffectVisible", "isReadyToComplete and not model.step.isFinished and showEffects"]
+            - ["bool", "isRepeatable", "model.step.repeats.quantity > 1 or model.step.repeats.isInfinite"]
+            - ["bool", "showRepeats", "model.step.repeats.quantity > 1  and not model.step.isFinished"]
+            - ["bool", "showProgress", "not hideProgress and (not isNull(inProgressStep) and model.step.id == inProgressStep.id) or (isNull(inProgressStep) and model.isSelected)"]
+            - ["string", "repeatsLeft", "when not model.step.repeats.isInfinite and isRepeatable -> \"x\" + str(model.step.repeats.quantity - model.step.repeats.timesCompleted), \"\""]
+            - ["string", "buttonText", "when not model.step.isFinished -> \"template_event/ProgressStage/StepTree/TermsButton\", \"template_event/ProgressStage/StepTree/RewardsButton\""]
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/Lobby/Story/Steps/DefaultStep.actions"
+        UIEventOnDataComponent0:
+            watchedDataExpression: "model.isSelected"
+            ifExpression: "model.isSelected"
+            eventName: "EXPAND"
+            eventData: "animationTime"
+        UIEventOnDataComponent1:
+            watchedDataExpression: "model.isSelected"
+            ifExpression: "not model.isSelected"
+            eventName: "SHRINK"
+            eventData: "animationTime"
+        UIEventOnDataComponent2:
+            watchedDataExpression: "model.isHighlighted"
+            ifExpression: "model.isHighlighted"
+            eventName: "HIGHLIGHT"
+            eventData: "animationTime"
+        UIEventOnDataComponent3:
+            watchedDataExpression: "model.isHighlighted"
+            ifExpression: "not model.isHighlighted"
+            eventName: "LOWLIGHT"
+            eventData: "animationTime"
+    bindings:
+    - ["SizePolicy.horizontalValue", "sizeMax.X"]
+    - ["SizePolicy.verticalValue", "sizeMax.Y"]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        bindings:
+        - ["Anchor.leftAnchor", "leftAnchor"]
+        children:
+        -   class: "UIControl"
+            name: "TapArea"
+            pivot: [0.500000, 0.500000]
+            classes: "simple-button button-choose-sound"
+            components:
+                UIOpacityComponent: {}
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfFirstChild"
+                    verticalPolicy: "PercentOfFirstChild"
+                UIInputEventComponent:
+                    onTouchUpInside: "SELECT"
+                    onTouchUpInsideData: "model.step.id"
+                Sound: {}
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/ButtonSound.style.yaml;~res:/UI/Screens3/Lobby/Hangar/DevMenu/SimpleButton.style.yaml"
+            children:
+            -   class: "UIControl"
+                name: "Step"
+                input: false
+                components:
+                    LinearLayout:
+                        orientation: "TopDown"
+                        spacing: 8.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfMaxChild"
+                        verticalPolicy: "PercentOfFirstChild"
+                children:
+                -   class: "UIControl"
+                    name: "Content"
+                    input: false
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "FixedSize"
+                            verticalPolicy: "FixedSize"
+                    bindings:
+                    - ["SizePolicy.horizontalValue", "sizeMin.X"]
+                    - ["SizePolicy.verticalValue", "sizeMin.Y"]
+                    children:
+                    -   class: "UIControl"
+                        name: "Bg"
+                        input: false
+                        components:
+                            IgnoreLayout: {}
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                verticalPolicy: "PercentOfParent"
+                        children:
+                        -   class: "UIControl"
+                            name: "BgShrink"
+                            input: false
+                            components:
+                                Background: {}
+                                UIOpacityComponent: {}
+                                UIRoundedCornersComponent:
+                                    radius: "2"
+                                SizePolicy:
+                                    horizontalPolicy: "PercentOfParent"
+                                    verticalPolicy: "PercentOfParent"
+                                StyleSheet:
+                                    styles: "~res:/UI/Screens3/Color.style.yaml"
+                            bindings:
+                            - ["classes", "when model.step.isFinished -> \"black-50-bg\", \"green-la-palma-75-bg\""]
+                        -   class: "UIControl"
+                            name: "BgExpand"
+                            input: false
+                            classes: "grey-shark-bg"
+                            components:
+                                Background: {}
+                                UIOpacityComponent:
+                                    opacity: 0.000000
+                                UIRoundedCornersComponent:
+                                    radius: "2"
+                                SizePolicy:
+                                    horizontalPolicy: "PercentOfParent"
+                                    verticalPolicy: "PercentOfParent"
+                                StyleSheet:
+                                    styles: "~res:/UI/Screens3/Color.style.yaml"
+                    -   class: "UIControl"
+                        name: "Content"
+                        input: false
+                        components:
+                            UIOpacityComponent: {}
+                            LinearLayout:
+                                orientation: "TopDown"
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                verticalPolicy: "PercentOfParent"
+                        bindings:
+                        - ["UIOpacityComponent.opacity", "when model.step.isFinished -> 0.400000, 1.000000"]
+                        children:
+                        -   class: "UIControl"
+                            name: "Top"
+                            input: false
+                            components:
+                                SizePolicy:
+                                    horizontalPolicy: "PercentOfParent"
+                                    verticalPolicy: "PercentOfParent"
+                            children:
+                            -   class: "UIParticles"
+                                name: "ToComleteUnder"
+                                input: false
+                                effectPath: "~res:/3d/FX/UI/steps_event_glow.sc2"
+                                autoStart: true
+                                components:
+                                    Anchor:
+                                        hCenterAnchorEnabled: true
+                                        vCenterAnchorEnabled: true
+                                bindings:
+                                - ["visible", "isEffectVisible"]
+                            -   class: "UIControl"
+                                name: "RewardHolder"
+                                input: false
+                                components:
+                                    SizePolicy:
+                                        horizontalPolicy: "PercentOfParent"
+                                        verticalPolicy: "PercentOfParent"
+                                    UIChildComponent0:
+                                        childType: "kControl"
+                                        condition: "not isNull(rewardContent)"
+                                        control: "rewardContent"
+                                    UIChildComponent1:
+                                        childType: "kControl"
+                                        condition: "isNull(rewardContent) and not model.step.rewards.Empty()"
+                                        control: "Reward"
+                            -   class: "UIParticles"
+                                name: "ToCompleteOver"
+                                input: false
+                                effectPath: "~res:/3d/FX/UI/steps_event_unlock.sc2"
+                                autoStart: true
+                                startDelay: 0.005000
+                                components:
+                                    Anchor:
+                                        hCenterAnchorEnabled: true
+                                        vCenterAnchorEnabled: true
+                                bindings:
+                                - ["visible", "isEffectVisible"]
+                        -   class: "UIControl"
+                            name: "DetailsButton"
+                            visible: false
+                            input: false
+                            components:
+                                UIOpacityComponent:
+                                    opacity: 0.000000
+                                Anchor:
+                                    hCenterAnchorEnabled: true
+                                SizePolicy:
+                                    horizontalPolicy: "Formula"
+                                    horizontalFormula: "parent - 1"
+                                    verticalPolicy: "PercentOfFirstChild"
+                                UIChildComponent0:
+                                    prototypePath: "~res:/UI/Screens3/Lobby/Common/Button.yaml"
+                                    args:
+                                        "caption": "buttonText"
+                                        "type": "eButtonType.OPTIONAL_LIGHT"
+                                        "sound": "eButtonSound.OPEN"
+                                        "enabled": "model.isSelected"
+                                    eventActions:
+                                    - ["ON_CLICK_BUTTON", "SHOW_STEP_INFO", "model.step.id"]
+                    -   class: "UIControl"
+                        name: "CheckMark"
+                        input: false
+                        components:
+                            Anchor:
+                                rightAnchorEnabled: true
+                                rightAnchor: -8.000000
+                                bottomAnchorEnabled: true
+                                bottomAnchor: -8.000000
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfFirstChild"
+                                verticalPolicy: "PercentOfFirstChild"
+                            UIChildComponent0:
+                                condition: "model.step.isFinished"
+                                prototypePath: "~res:/UI/Screens3/Lobby/Common/CheckMark.yaml"
+                                args:
+                                    "type": "eCheckMarkType.kLarge"
+                                    "isVisible": "true"
+                    -   class: "UIControl"
+                        name: "Highlight"
+                        input: false
+                        classes: "orange-orange-peel-bg"
+                        components:
+                            Background:
+                                drawType: "DRAW_STRETCH_BOTH"
+                                sprite: "~res:/Gfx/UI/Story/btn_glow"
+                                leftRightStretchCap: 9.000000
+                                topBottomStretchCap: 9.000000
+                            UIOpacityComponent:
+                                opacity: 0.000000
+                            Anchor:
+                                leftAnchorEnabled: true
+                                leftAnchor: -5.000000
+                                rightAnchorEnabled: true
+                                rightAnchor: -5.000000
+                                topAnchorEnabled: true
+                                topAnchor: -5.000000
+                                bottomAnchorEnabled: true
+                                bottomAnchor: -5.000000
+                            StyleSheet:
+                                styles: "~res:/UI/Screens3/Color.style.yaml"
+                    -   class: "UIControl"
+                        name: "Repeats"
+                        input: false
+                        components:
+                            UIOpacityComponent: {}
+                            Anchor:
+                                rightAnchorEnabled: true
+                                rightAnchor: -4.000000
+                                topAnchorEnabled: true
+                                topAnchor: 4.000000
+                            SizePolicy:
+                                horizontalPolicy: "FixedSize"
+                                verticalPolicy: "FixedSize"
+                        bindings:
+                        - ["visible", "not model.step.isFinished and isRepeatable"]
+                        - ["SizePolicy.horizontalValue", "repeatsSizeMin.X"]
+                        - ["SizePolicy.verticalValue", "repeatsSizeMin.Y"]
+                        children:
+                        -   class: "UIControl"
+                            name: "Bg"
+                            input: false
+                            classes: "red-red-bg"
+                            components:
+                                Background: {}
+                                SizePolicy:
+                                    horizontalPolicy: "PercentOfParent"
+                                    verticalPolicy: "PercentOfParent"
+                                StyleSheet:
+                                    styles: "~res:/UI/Screens3/Color.style.yaml"
+                        -   class: "UIControl"
+                            name: "Text"
+                            input: false
+                            classes: "t-body bold white-wild-sand-text"
+                            components:
+                                UITextComponent: {}
+                                Anchor:
+                                    hCenterAnchorEnabled: true
+                                    vCenterAnchorEnabled: true
+                                SizePolicy:
+                                    horizontalPolicy: "PercentOfContent"
+                                    verticalPolicy: "PercentOfContent"
+                                StyleSheet:
+                                    styles: "~res:/UI/Screens3/Font.style.yaml"
+                            bindings:
+                            - ["UITextComponent.text", "repeatsLeft"]
+                -   class: "UIControl"
+                    name: "Bottom"
+                    input: false
+                    components:
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfMaxChild"
+                    children:
+                    -   class: "UIControl"
+                        name: "Price"
+                        input: false
+                        components:
+                            UIOpacityComponent: {}
+                            Anchor:
+                                hCenterAnchorEnabled: true
+                                vCenterAnchorEnabled: true
+                            LinearLayout:
+                                spacing: 8.000000
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfChildrenSum"
+                                verticalPolicy: "PercentOfFirstChild"
+                            UIRepeatComponent:
+                                control: "~res:/UI/Screens3/Lobby/Common/Resource/CurrencyAdapter.yaml"
+                                dataContainer: "model.step.price"
+                                args:
+                                    "currencySize": "eCurrencySize.BIG"
+                                    "canAfford": "true"
+                                    "resource": "_item"
+                        bindings:
+                        - ["visible", "not model.step.isFinished and showPrice"]
+                    -   class: "UIControl"
+                        name: "Progress"
+                        input: false
+                        components:
+                            UIOpacityComponent:
+                                opacity: 0.000000
+                            Anchor:
+                                topAnchorEnabled: true
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                verticalPolicy: "PercentOfFirstChild"
+                        bindings:
+                        - ["visible", "showProgress and not model.step.isFinished"]
+                        children:
+                        -   class: "UIControl"
+                            name: "Value"
+                            input: false
+                            components:
+                                Anchor:
+                                    hCenterAnchorEnabled: true
+                                    bottomAnchorEnabled: true
+                                SizePolicy:
+                                    horizontalPolicy: "PercentOfParent"
+                                    verticalPolicy: "FixedSize"
+                                    verticalValue: 4.000000
+                                UIChildComponent0:
+                                    childType: "kPrototype"
+                                    condition: "showProgress and not model.step.isFinished"
+                                    prototypePath: "~res:/UI/Screens3/Lobby/Story/Steps/ProgressBar.yaml"
+                                    args:
+                                        "data": "model.step"
+                                        "priceItem": "model.step.price[0]"
+Slots:
+-   class: "UIControl"
+    name: "Reward"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIChildComponent0:
+            childType: "kPrototype"
+            condition: "not model.step.rewards.Empty()"
+            prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/Detailed/IconXLDeprecated.yaml"
+            args:
+                "resource": "model.step.rewards[0]"
+                "showUnlockStub": "showUnlockStub"

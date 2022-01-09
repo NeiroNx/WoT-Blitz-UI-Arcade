@@ -1,0 +1,97 @@
+Header:
+    version: "108"
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Hangar/TanksPanel/FilterSelector.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "NationFilterButton"
+    size: [151.000000, 48.000000]
+    input: false
+    components:
+        Anchor:
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 72.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 56.000000
+        UIDataParamsComponent:
+            params:
+            - ["eNation", "nation", "eNation.USA", "eNation.USSR"]
+            - ["bool", "active", "false", "true"]
+            - ["bool", "enabled", "true", "true"]
+            events:
+            - "ON_CLICK_BUTTON"
+        UIDataLocalsComponent:
+            locals:
+            - ["string", "flagSprite", "when eNation.USSR == nation -> \"~res:/Gfx/Lobby/flags/flag_filter_ussr\", eNation.GERMANY == nation -> \"~res:/Gfx/Lobby/flags/flag_filter_germany\", eNation.USA == nation -> \"~res:/Gfx/Lobby/flags/flag_filter_usa\", eNation.CHINA == nation -> \"~res:/Gfx/Lobby/flags/flag_filter_china\", eNation.FRANCE == nation -> \"~res:/Gfx/Lobby/flags/flag_filter_france\", eNation.UK == nation -> \"~res:/Gfx/Lobby/flags/flag_filter_uk\", eNation.JAPAN == nation -> \"~res:/Gfx/Lobby/flags/flag_filter_japan\", eNation.OTHER == nation -> \"~res:/Gfx/Lobby/flags/flag_filter_other\", eNation.EUROPEAN == nation -> \"~res:/Gfx/Lobby/flags/flag_filter_european\", \"~res:/Gfx/Lobby/flags/flag_filter_usa\""]
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/Lobby/Common/Button.style.yaml;~res:/UI/Screens3/ButtonSound.style.yaml"
+    children:
+    -   class: "UIControl"
+        name: "TapArea"
+        position: [-8.000000, -8.000000]
+        input: true
+        classes: "button button-tap-area button-choose-sound "
+        components:
+            UIOpacityComponent: {}
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+            UIInputEventComponent:
+                onTouchUpInside: "ON_CLICK_BUTTON"
+            Sound: {}
+        bindings:
+        - ["enabled", "enabled"]
+        children:
+        -   class: "UIControl"
+            name: "Content"
+            position: [65.000000, 24.000000]
+            pivot: [0.500000, 0.500000]
+            input: false
+            classes: "content-area"
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    rightAnchorEnabled: true
+                    topAnchorEnabled: true
+                    bottomAnchorEnabled: true
+            children:
+            -   class: "UIControl"
+                name: "Background"
+                input: false
+                components:
+                    Background:
+                        drawType: "DRAW_TILED_MULTILAYER"
+                        mask: "~res:/Gfx/Lobby/controls/buttons/common/button_mask_r1"
+                        detail: "~res:/Gfx/Lobby/controls/buttons/common/button_details_r1"
+                        contour: "~res:/Gfx/Lobby/controls/buttons/common/button_details_r1"
+                        leftRightStretchCap: 1.000000
+                        topBottomStretchCap: 1.000000
+                    IgnoreLayout: {}
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                bindings:
+                - ["Background.gradient", "flagSprite"]
+            -   class: "UIControl"
+                name: "Fade"
+                visible: false
+                input: false
+                classes: "button-fade black-15-bg"
+                components:
+                    Background:
+                        drawType: "DRAW_FILL"
+                    UIOpacityComponent: {}
+                    IgnoreLayout: {}
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+            -   prototype: "FilterSelector/Selector"
+                name: "Selector"
+                components:
+                    UIDataParamsComponent:
+                        args:
+                            "visible": "active"

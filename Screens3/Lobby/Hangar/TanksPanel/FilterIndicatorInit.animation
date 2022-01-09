@@ -1,0 +1,13 @@
+animation Indicator
+{
+    if (showBadge)
+    {
+        ChangeProperty("**/Indicator","UIOpacityComponent", "opacity", 1);
+        ChangeProperty("**/Indicator","SizePolicy", "horizontalValue", indicatorWidth);
+    }
+    else
+    {
+        ChangeProperty("**/Indicator","UIOpacityComponent", "opacity", 0);
+        ChangeProperty("**/Indicator","SizePolicy", "horizontalValue", 0);
+    }
+}

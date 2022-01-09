@@ -1,0 +1,87 @@
+Header:
+    version: 121
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/Notifications/Popups/KarmaBase.yaml"
+- "~res:/UI/Screens3/Lobby/Common/NotificationButton.yaml"
+Controls:
+-   prototype: "KarmaBase/KarmaBase"
+    customClass: "UIKarmaNotification"
+    name: "Karma"
+    components:
+        UIDataParamsComponent:
+            params:
+            - ["bool", "showDetailsButton", "false", "true"]
+            - ["string", "descriptionKey", "\"\"", "\"Description\""]
+            - ["string", "titleKey", "\"\"", "\"Title\""]
+            - ["string", "styleName", "\"info\"", "\"warning\""]
+            events:
+            - "SHOW_DETAILS()"
+    bindings:
+    - ["classes", "\"karma \" + styleName"]
+    children:
+    -   path: "Body"
+        components:
+            LinearLayout:
+                dynamicPadding: true
+        children:
+        -   prototype: "KarmaBase/icon"
+            name: "icon"
+            classes: ""
+            components:
+                StyleSheet:
+                    styles: "~res:/UI/Screens/Lobby/Notifications/Popups/Karma.style.yaml"
+        -   prototype: "KarmaBase/Content"
+            name: "Content"
+            components:
+                Anchor:
+                    vCenterAnchorEnabled: true
+                LinearLayout:
+                    orientation: "TopDown"
+                    dynamicPadding: true
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "parent-155"
+                    verticalPolicy: "PercentOfChildrenSum"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens/Lobby/Notifications/Popups/Karma.style.yaml;~res:/UI/Screens/Lobby/Notifications/Popups/Notification.style.yaml"
+            children:
+            -   class: "UIStaticText"
+                name: "Title"
+                size: [33.000000, 24.000000]
+                classes: "t-caption bold white-wild-sand-text"
+                components:
+                    UITextComponent:
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                        align: ["LEFT", "VCENTER"]
+                        useRtlAlign: "USE_BY_SYSTEM"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfContent"
+                bindings:
+                - ["UITextComponent.text", "localize(titleKey)"]
+            -   class: "UIStaticText"
+                name: "Description"
+                size: [843.000000, 23.000000]
+                classes: "t-caption regular white-wild-sand-70-text"
+                components:
+                    UITextComponent:
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                        multiline: "MULTILINE_ENABLED"
+                        align: ["LEFT", "TOP"]
+                        useRtlAlign: "USE_BY_SYSTEM"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfContent"
+                        verticalMax: 46.000000
+                bindings:
+                - ["UITextComponent.text", "localize(descriptionKey)"]
+        -   prototype: "NotificationButton/NotificationButton"
+            name: "GoToKarmaBtn"
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+                IgnoreLayout: {}
+                UIInputEventComponent:
+                    onTouchUpInside: "SHOW_DETAILS"
+            bindings:
+            - ["visible", "showDetailsButton"]

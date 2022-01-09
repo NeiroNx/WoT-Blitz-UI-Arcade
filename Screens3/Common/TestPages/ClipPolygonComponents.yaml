@@ -1,0 +1,78 @@
+Header:
+    version: "104"
+Prototypes:
+-   class: "UIControl"
+    name: "Page"
+    size: [680.000000, 980.000000]
+    input: false
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+            padding: "20"
+            spacing: 10.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfChildrenSum"
+        UIDataParamsComponent:
+            params:
+            - ["string", "url", "\"\"", "\"https://stufficons.wotblitz.com/Gfx/profile_skin_bp_1/200319_125926_072427.png\""]
+        UIDataLocalsComponent:
+            locals:
+            - ["int", "selectedItem", "0"]
+            - ["vector<int>", "controls", "[ 0; 1; 2; 3; 4; ]"]
+            - ["int", "radialProgress", "0"]
+        UIDataOnEventComponent0:
+            eventName: "CHANGED_SELECTED_ITEM"
+            modelFieldExpression: "selectedItem"
+            dataExpression: "_event"
+    children:
+    -   class: "UIControl"
+        name: "Paginator"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfMaxChild"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Paginator/PaginatorWithButtons.yaml"
+                args:
+                    "selectedItem": "selectedItem"
+                    "points": "controls"
+                eventActions:
+                - ["CHANGED_SELECTED_ITEM", "CHANGED_SELECTED_ITEM", "_event"]
+    -   class: "UIControl"
+        name: "Content"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfMaxChild"
+            UIChildComponent0:
+                condition: "selectedItem == 0"
+                prototypePath: "~res:/UI/Screens3/Common/TestPages/ClipPolygons/WithoutRoundedCornersControl.yaml"
+                args:
+                    "url": "url"
+            UIChildComponent1:
+                condition: "selectedItem == 1"
+                prototypePath: "~res:/UI/Screens3/Common/TestPages/ClipPolygons/RoundedCornersControl.yaml"
+                args:
+                    "url": "url"
+            UIChildComponent2:
+                condition: "selectedItem == 2"
+                prototypePath: "~res:/UI/Screens3/Common/TestPages/ClipPolygons/RadialProgressControl.yaml"
+                args:
+                    "url": "url"
+            UIChildComponent3:
+                condition: "selectedItem == 3"
+                prototypePath: "~res:/UI/Screens3/Common/TestPages/ClipPolygons/ProgressControl.yaml"
+                args:
+                    "url": "url"
+            UIChildComponent4:
+                condition: "selectedItem == 4"
+                prototypePath: "~res:/UI/Screens3/Common/TestPages/URLImageEvent.yaml"
+                args:
+                    "url": "url"

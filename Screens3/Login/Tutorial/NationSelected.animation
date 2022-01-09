@@ -1,0 +1,13 @@
+animation NationSelected
+{
+	PlaySound("GUI/buttons/ok");
+	if (nationSelected)
+	{
+		Event("START_HANGAR_CLICKED");
+	}
+	else
+	{
+		ChangeData(nationSelected, true);
+		Event("NATION_SELECTED_CLICKED");
+	}
+}

@@ -1,0 +1,93 @@
+Header:
+    version: 127
+Prototypes:
+-   class: "UIControl"
+    name: "RewardInfoPopup"
+    size: [432.000000, 132.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["vector<ChestDrop>", "resources", "null", "[ { \"resource\" = { \"type\" = ResourceType.vehicle; }; }; { \"resource\" = { \"type\" = ResourceType.gold; }; }; ]"]
+            events:
+            - "FINISH_HIDE_POPUP_ANIMATION"
+            - "POPUP_ON_CLOSE_ACTION"
+            - "ON_POPUP_BUTTON_CLICKED"
+        UIDataLocalBindingsComponent:
+            data:
+            - ["ResourceDetailed", "resource", "resources[0].resource"]
+            - ["bool", "isStuff", "resource.type == ResourceType.stuff"]
+            - ["string", "name", "when resource.type == ResourceType.gold -> \"shop/Gold\", resource.type == ResourceType.credits -> \"shop/Credits\", resource.type == ResourceType.free_xp -> \"hangar/freeXP\", resource.type == ResourceType.stuff -> resource.stuff.title, resource.type == ResourceType.unlocks -> resource.unlock.title, resource.type == ResourceType.vehicle -> resource.vehicle.info.name, resource.type == ResourceType.premium -> \"storage/Items/PremiumAccount/Title\", \"#Resource Name\""]
+            - ["string", "description", "localize(\"100% гарантия получения главной награды\") + \"\n\" + localize(name)"]
+            - ["string", "buttonCaption", "when resources.Size() == 1 and (not isNull(resource.vehicle) or (not isNull(resource.stuff) and (resource.stuff.type == ArtefactType.coupon and not isNull(resource.stuff.coupon) and not resource.stuff.coupon.appliesToUnlocks.Empty() or resource.stuff.type == ArtefactType.profile_background or resource.stuff.type == ArtefactType.chest))) -> \"BattlePass/Reward/InfoPopup/Button/Preview\", \"\""]
+    children:
+    -   class: "UIControl"
+        name: "PopupHolder"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Common/PopupMenu.yaml"
+                args:
+                    "slaveAlign": "ePositionAlign.Right"
+                    "isAlignLeft": "false"
+                    "masterId": "\"chestMainReward\""
+                    "content": "Content"
+                    "buttonCaption": "buttonCaption"
+                eventActions:
+                - ["ON_CLICK_BUTTON", "ON_POPUP_BUTTON_CLICKED", "resource"]
+                - ["POPUP_ON_CLOSE_ACTION", "POPUP_ON_CLOSE_ACTION", ""]
+                - ["FINISH_HIDE_POPUP_ANIMATION", "FINISH_HIDE_POPUP_ANIMATION", ""]
+Slots:
+-   class: "UIControl"
+    name: "Content"
+    size: [256.000000, 32.000000]
+    input: false
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+            spacing: 8.000000
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 315.000000
+            verticalPolicy: "PercentOfChildrenSum"
+    children:
+    -   class: "UIControl"
+        name: "Text"
+        input: false
+        classes: "t-subtitle regular color=white-wild-sand-text"
+        components:
+            UITextComponent:
+                colorInheritType: "COLOR_IGNORE_PARENT"
+                multiline: "MULTILINE_ENABLED"
+                align: ["HCENTER", "VCENTER"]
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+        bindings:
+        - ["UITextComponent.text", "localize(\"storage/Items/Chest/MainRewardHint\")"]
+    -   class: "UIControl"
+        name: "list"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfChildrenSum"
+            FlowLayout:
+                hDynamicInLinePadding: true
+                hSpacing: 8.000000
+            UIRepeatComponent:
+                control: "~res:/UI/Screens3/Lobby/Chests/ChestDropName.yaml"
+                dataContainer: "resources"
+                args:
+                    "value": "resources[_index].min"
+                    "spacer": "resources.Size() > 1 and not (_index == resources.Size() - 1)"
+                    "resource": "resources[_index].resource"

@@ -1,0 +1,15 @@
+Header:
+    version: "34"
+StyleSheets:
+-   selector: ".tab #Bg"
+    properties:
+        visible: false
+-   selector: ".tab:selected #Bg"
+    properties:
+        visible: true
+-   selector: ".tab #Icon"
+    properties:
+        bg-color: [1.000000, 1.000000, 1.000000, 0.500000]
+-   selector: ".tab:selected #Icon"
+    properties:
+        bg-color: [1.000000, 1.000000, 1.000000, 1.000000]

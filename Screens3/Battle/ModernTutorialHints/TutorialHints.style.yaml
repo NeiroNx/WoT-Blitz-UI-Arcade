@@ -1,0 +1,149 @@
+Header:
+    version: 127
+StyleSheets:
+-   selectors:
+    - ".MODE_KEYBOARD_MOUSE #Wrapper #CloseButton #Icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/icons/icon_desktop_esc"
+-   selectors:
+    - ".MODE_GAMEPAD #Wrapper #CloseButton #Icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/icons/nintendo-switch/icon_switch_b_m"
+-   selectors:
+    - ".MODE_TOUCHSCREEN #Wrapper #CloseButton #Icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/icons/icon_close_n"
+-   selectors:
+    - ".ArrowNone #Hint"
+    properties:
+        anchor-enabled: true
+        anchor-hCenterAnchorEnabled: true
+        anchor-vCenterAnchorEnabled: true
+-   selectors:
+    - ".ArrowNone #ArrowClip"
+    properties:
+        visible: false
+-   selectors:
+    - ".ArrowBottom #Hint"
+    properties:
+        anchor-enabled: true
+        anchor-bottomAnchorEnabled: true
+        anchor-bottomAnchor: 8.000000
+        anchor-hCenterAnchorEnabled: true
+-   selectors:
+    - ".ArrowBottom #ArrowClip"
+    properties:
+        visible: true
+        sizePolicy-horizontalPolicy: "FixedSize"
+        sizePolicy-horizontalValue: 16.000000
+        sizePolicy-verticalPolicy: "FixedSize"
+        sizePolicy-verticalValue: 8.000000
+        anchor-enabled: true
+        anchor-bottomAnchorEnabled: true
+        anchor-bottomAnchor: 0.500000
+        anchor-hCenterAnchorEnabled: true
+-   selectors:
+    - ".ArrowBottom #ArrowClip #Arrow"
+    properties:
+        visible: true
+        anchor-enabled: true
+        anchor-hCenterAnchorEnabled: true
+        anchor-hCenterAnchor: 0.000000
+        anchor-vCenterAnchorEnabled: true
+        anchor-vCenterAnchor: -4.000000
+-   selectors:
+    - ".ArrowTop #Hint"
+    properties:
+        anchor-enabled: true
+        anchor-topAnchorEnabled: true
+        anchor-topAnchor: 8.000000
+        anchor-hCenterAnchorEnabled: true
+-   selectors:
+    - ".ArrowTop #ArrowClip"
+    properties:
+        visible: true
+        sizePolicy-horizontalPolicy: "FixedSize"
+        sizePolicy-horizontalValue: 16.000000
+        sizePolicy-verticalPolicy: "FixedSize"
+        sizePolicy-verticalValue: 8.000000
+        anchor-enabled: true
+        anchor-topAnchorEnabled: true
+        anchor-topAnchor: 0.500000
+        anchor-hCenterAnchorEnabled: true
+-   selectors:
+    - ".ArrowTop #ArrowClip #Arrow"
+    properties:
+        visible: true
+        anchor-enabled: true
+        anchor-hCenterAnchorEnabled: true
+        anchor-hCenterAnchor: 0.000000
+        anchor-vCenterAnchorEnabled: true
+        anchor-vCenterAnchor: 4.000000
+-   selectors:
+    - ".ArrowRight"
+    properties:
+        anchor-enabled: true
+        anchor-leftAnchorEnabled: true
+        anchor-vCenterAnchorEnabled: true
+-   selectors:
+    - ".ArrowRight #Hint"
+    properties:
+        anchor-enabled: true
+        anchor-rightAnchorEnabled: true
+        anchor-rightAnchor: 8.000000
+        anchor-vCenterAnchorEnabled: true
+-   selectors:
+    - ".ArrowRight #ArrowClip"
+    properties:
+        visible: true
+        sizePolicy-horizontalPolicy: "FixedSize"
+        sizePolicy-horizontalValue: 8.000000
+        sizePolicy-verticalPolicy: "FixedSize"
+        sizePolicy-verticalValue: 16.000000
+        anchor-enabled: true
+        anchor-rightAnchorEnabled: true
+        anchor-rightAnchor: 0.400000
+        anchor-vCenterAnchorEnabled: true
+-   selectors:
+    - ".ArrowRight #ArrowClip #Arrow"
+    properties:
+        visible: true
+        anchor-enabled: true
+        anchor-hCenterAnchorEnabled: true
+        anchor-hCenterAnchor: -4.000000
+        anchor-vCenterAnchorEnabled: true
+        anchor-vCenterAnchor: 0.000000
+-   selectors:
+    - ".ArrowLeft"
+    properties:
+        anchor-enabled: true
+        anchor-rightAnchorEnabled: true
+        anchor-vCenterAnchorEnabled: true
+-   selectors:
+    - ".ArrowLeft #Hint"
+    properties:
+        anchor-enabled: true
+        anchor-leftAnchorEnabled: true
+        anchor-leftAnchor: 8.000000
+        anchor-vCenterAnchorEnabled: true
+-   selectors:
+    - ".ArrowLeft #ArrowClip"
+    properties:
+        visible: true
+        sizePolicy-horizontalPolicy: "FixedSize"
+        sizePolicy-horizontalValue: 8.000000
+        sizePolicy-verticalPolicy: "FixedSize"
+        sizePolicy-verticalValue: 16.000000
+        anchor-enabled: true
+        anchor-leftAnchorEnabled: true
+        anchor-leftAnchor: 0.500000
+        anchor-vCenterAnchorEnabled: true
+-   selectors:
+    - ".ArrowLeft #ArrowClip #Arrow"
+    properties:
+        visible: true
+        anchor-enabled: true
+        anchor-hCenterAnchorEnabled: true
+        anchor-hCenterAnchor: 4.000000
+        anchor-vCenterAnchorEnabled: true
+        anchor-vCenterAnchor: 0.000000

@@ -1,0 +1,97 @@
+Header:
+    version: "85"
+Controls:
+-   class: "UIControl"
+    name: "Content"
+    size: [128.000000, 128.000000]
+    input: false
+    components:
+        ClipContent: {}
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["VehicleResource", "vehicle", "null", "{ info = { shortName = \"#germany_vehicles:Lowe\"; bigIconPath = \"~res:/Gfx/UI/BigTankIcons/germany-Lowe.psd\"; level = 8; tankClass = eTankClass.TANK_CLASS_HEAVY; isCollectible = false; isPremium = true; }; stats = { isElite = true; isPremiumized = false; }; }"]
+            - ["bool", "showName", "false", "true"]
+            - ["bool", "showInfo", "false", "true"]
+        UIDataLocalsComponent:
+            locals:
+            - ["eVehicleDescriptionType", "vehicleType", "when vehicle.info.isPremium -> eVehicleDescriptionType.PREMIUM, vehicle.info.isCollectible -> eVehicleDescriptionType.COLLECTIBLE, vehicle.stats.isPremiumized -> eVehicleDescriptionType.PREMIUMISED, eVehicleDescriptionType.NORMAL"]
+    children:
+    -   class: "UIControl"
+        name: "Padding"
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 4.000000
+                rightAnchorEnabled: true
+                rightAnchor: 4.000000
+                topAnchorEnabled: true
+                topAnchor: 4.000000
+                bottomAnchorEnabled: true
+                bottomAnchor: 4.000000
+        children:
+        -   class: "UIControl"
+            name: "IconContainer"
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    horizontalMax: 96.000000
+                    verticalPolicy: "PercentOfParent"
+                    verticalMax: 96.000000
+            children:
+            -   class: "UIControl"
+                name: "Icon"
+                input: false
+                components:
+                    UITextureComponent:
+                        drawType: "DRAW_SCALE_PROPORTIONAL"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                bindings:
+                - ["UITextureComponent.spritePath", "vehicle.info.bigIconPath"]
+        -   class: "UIControl"
+            name: "Label"
+            input: false
+            classes: "header3 text-color-white"
+            components:
+                UITextComponent:
+                    fitting: "FITTING_REDUCE"
+                Anchor:
+                    leftAnchorEnabled: true
+                    rightAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens/Fonts.yaml;~res:/UI/Screens/FontsColors.yaml"
+            bindings:
+            - ["visible", "showName"]
+            - ["UITextComponent.text", "localize(vehicle.info.shortName)"]
+        -   class: "UIControl"
+            name: "VehicleInfo"
+            input: false
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    topAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfFirstChild"
+                    verticalPolicy: "PercentOfFirstChild"
+                UIChildComponent:
+                    control: "\"~res:/UI/Screens3/Lobby/Common/Vehicle/VehicleInfo.yaml\""
+                    args:
+                        "class": "vehicle.info.tankClass"
+                        "level": "vehicle.info.level"
+                        "type": "vehicleType"
+                        "elite": "vehicle.stats.isElite"
+            bindings:
+            - ["visible", "showInfo"]

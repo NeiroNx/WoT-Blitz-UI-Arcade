@@ -1,0 +1,144 @@
+Header:
+    version: "100"
+StyleSheets:
+-   selectors:
+    - ".team-panel.right #arrow"
+    properties:
+        pivot: [1.000000, 0.000000]
+        anchor-leftAnchorEnabled: true
+-   selectors:
+    - ".team-panel.left #arrow"
+    properties:
+        anchor-rightAnchorEnabled: true
+-   selectors:
+    - ".team-panel.expanded.right #arrow"
+    - ".team-panel.hidden.left #arrow"
+    properties:
+        bg-spriteModification: ["FLIP_HORIZONTAL"]
+-   selectors:
+    - ".team-panel.right .tank-panel"
+    properties:
+        linearLayout-orientation: "RightToLeft"
+        anchor-rightAnchorEnabled: true
+-   selectors:
+    - ".team-panel.left .tank-panel"
+    properties:
+        anchor-leftAnchorEnabled: true
+-   selectors:
+    - ".team-panel.right .tank-panel #back"
+    properties:
+        bg-spriteModification: ["FLIP_HORIZONTAL"]
+        anchor-rightAnchorEnabled: true
+        anchor-rightAnchor: -50.000000
+-   selectors:
+    - ".team-panel.left .tank-panel #back"
+    properties:
+        anchor-leftAnchorEnabled: true
+        anchor-leftAnchor: -50.000000
+-   selectors:
+    - ".team-panel.right .tank-panel .name-with-tag #spacer"
+    properties:
+        visible: true
+-   selectors:
+    - ".team-panel.right .tank-panel #tankName"
+    properties:
+        text-align: ["LEFT", "VCENTER"]
+-   selectors:
+    - ".team-panel.left .tank-panel #tankName"
+    properties:
+        text-align: ["RIGHT", "VCENTER"]
+-   selectors:
+    - ".team-panel.left .tank-panel #tankIcon"
+    properties:
+        bg-align: ["LEFT", "VCENTER"]
+-   selectors:
+    - ".team-panel.right .tank-panel #tankIcon"
+    properties:
+        bg-spriteModification: ["FLIP_HORIZONTAL"]
+        bg-align: ["RIGHT", "VCENTER"]
+-   selectors:
+    - ".team-panel.left .tank-panel #tankIcon #level"
+    properties:
+        bg-align: ["LEFT", "VCENTER"]
+-   selectors:
+    - ".team-panel.right .tank-panel #tankIcon #level"
+    properties:
+        pivot: [1.000000, 0.000000]
+        bg-align: ["RIGHT", "VCENTER"]
+        anchor-rightAnchorEnabled: true
+-   selectors:
+    - ".team-panel.expanded ? #GunStatusMaximized"
+    - ".team-panel.hidden ? #GunStatusMinimized"
+    properties:
+        visible: true
+-   selectors:
+    - ".team-panel.expanded ? #GunStatusMinimized"
+    - ".team-panel.hidden ? #GunStatusMaximized"
+    - ".team-panel .hide-reload.hide-reload #GunStatusMinimized"
+    - ".team-panel .hide-reload.hide-reload #GunStatusMaximized"
+    properties:
+        visible: false
+-   selectors:
+    - ".team-panel.right ? #GunStatusMaximized"
+    properties:
+        anchor-rightAnchorEnabled: true
+        anchor-rightAnchor: -6.000000
+-   selectors:
+    - ".team-panel.left ? #GunStatusMaximized"
+    properties:
+        anchor-leftAnchorEnabled: true
+        anchor-leftAnchor: -6.000000
+-   selectors:
+    - ".team-panel.right ? #GunStatusMinimized"
+    properties:
+        anchor-rightAnchorEnabled: true
+        anchor-rightAnchor: 288.000000
+-   selectors:
+    - ".team-panel.left ? #GunStatusMinimized"
+    properties:
+        anchor-leftAnchorEnabled: true
+        anchor-leftAnchor: 288.000000
+-   selectors:
+    - ".team-panel.right .tank-panel #Spacer #squadNumberBg"
+    properties:
+        anchor-hCenterAnchor: 7.000000
+-   selectors:
+    - ".team-panel.left .tank-panel #Spacer #squadNumberBg"
+    properties:
+        anchor-hCenterAnchor: -7.000000
+-   selectors:
+    - ".have-chat-command #ChatCommand"
+    properties:
+        bg-color:
+            value: [1.000000, 1.000000, 1.000000, 1.000000]
+            transitionTime: 0.200000
+            transitionFunction: "LINEAR"
+-   selectors:
+    - ".team-panel.left .tank-panel #playerName"
+    properties:
+        linearLayout-orientation: "RightToLeft"
+-   selectors:
+    - ".team-panel.right .tank-panel #PlayerAvatar #GradeTeamPanel"
+    properties:
+        anchor-leftAnchorEnabled: false
+        anchor-rightAnchorEnabled: true
+-   selectors:
+    - ".team-panel.left .tank-panel #PlayerAvatar #GradeTeamPanel"
+    properties:
+        anchor-leftAnchorEnabled: true
+        anchor-rightAnchorEnabled: false
+-   selectors:
+    - "#ChatCommand"
+    properties:
+        bg-color:
+            value: [0.000000, 0.000000, 0.000000, 0.000000]
+            transitionTime: 0.200000
+            transitionFunction: "LINEAR"
+-   selectors:
+    - ".team-panel .tank-panel * .show-story-booster"
+    properties:
+        visible: true
+-   selectors:
+    - ".team-panel .tank-panel * .hide-story-booster"
+    properties:
+        visible: false

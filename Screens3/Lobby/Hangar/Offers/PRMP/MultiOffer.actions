@@ -1,0 +1,30 @@
+action TryRunMoveIn()
+{
+    if (selected)
+    {
+        Event("DelayedOptionsMoveIn", arg1=true);
+    }
+}
+
+action DelayedOptionsMoveIn(bool run)
+{
+    if (run)
+    {
+        Wait(animationDelay);
+    }
+    ChangeData(scrollEnabled, true);
+    BroadcastEvent("DelayedMoveIn",
+        dest="./Content/OptionsScrollableArea/scrollContainerControl/OptionsContainer",
+        arg1=run,
+        arg2=animationTime,
+        arg3=optionAnimationDelay);
+}
+
+action ResetOptionAnimations()
+{
+    ChangeData(scrollEnabled, false);
+    BroadcastEvent("Animate",
+        dest="./Content/OptionsScrollableArea/scrollContainerControl/OptionsContainer",
+        arg1=false,
+        arg2=animationTime);
+}

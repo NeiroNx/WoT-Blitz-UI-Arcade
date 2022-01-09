@@ -1,0 +1,29 @@
+Header:
+    version: 128
+Prototypes:
+-   class: "UIControl"
+    name: "7x7Enabled"
+    size: [960.000000, 592.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            events:
+            - "CLOSE"
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/FullScreenPopup/Newcomers7x7EventNotificationContent.yaml"
+                args:
+                    "header": "\"7x7EnabledNotification/header\""
+                    "description": "\"7x7EnabledNotification/text\""
+                eventActions:
+                - ["CLOSE", "CLOSE", ""]

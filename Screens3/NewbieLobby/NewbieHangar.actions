@@ -1,0 +1,219 @@
+action VisibleTankInfo(bool show)
+{
+	if (not show)
+	{
+		parallel
+		{
+			{
+				ChangeProperty("**/Parameters", "Anchor", "leftAnchor", -420, animTime, EASE_IN); 
+			}
+			{
+				Opacity("**/Parameters", opacity=0.0, time=animTime, interpolation=EASE_IN);
+			}
+			{
+				ChangeProperty("**/Description", "Anchor", "rightAnchor", -420, animTime, EASE_IN); 
+			}
+			{
+				Opacity("**/Description", opacity=0.0, time=animTime, interpolation=EASE_IN);
+			}
+		}
+			ChangeData(currentTank, hangarTanks.currentTank);
+	}
+	else
+	{
+		parallel
+		{
+			{
+				ChangeProperty("**/Parameters", "Anchor", "leftAnchor", 0, animTime, EASE_OUT); 
+			}
+			{
+				Opacity("**/Parameters", opacity=1.0, time=animTime, interpolation=EASE_OUT);
+			}
+			{
+				ChangeProperty("**/Description", "Anchor", "rightAnchor", 0, animTime, EASE_OUT); 
+			}
+			{
+				Opacity("**/Description", opacity=1.0, time=animTime, interpolation=EASE_OUT);
+			}
+		}
+
+		if (not isProgressOverlayDisplaying)
+		{
+			PlaySound("play_tut_2021_ui_hang_tank_select_model");
+		}
+	}
+}
+
+action ShowTankInfo()
+{
+	Event("VisibleTankInfo", arg1 = true);
+}
+
+action HideTankInfo()
+{
+	Event("VisibleTankInfo", arg1 = false);
+	
+	Event("HIDE_ALL_TOOLTIPS");
+}
+
+action ShowButtons()
+{
+	parallel
+	{
+		{
+			ChangeProperty("**/BattleButton", "Anchor", "topAnchor", 0, animTime, EASE_OUT); 
+		}
+		{
+			ChangeProperty("**/BottomPanel", "Anchor", "leftAnchor", 0, animTime, EASE_OUT); 
+		}
+	}
+}
+
+action HideEverything()
+{
+	parallel
+	{
+		{
+			ChangeProperty("**/Parameters", "Anchor", "leftAnchor", -420, 0); 
+		}
+		{
+			ChangeProperty("**/Description", "Anchor", "rightAnchor", -420, 0); 
+		}
+		{
+			ChangeProperty("**/BattleButton", "Anchor", "topAnchor", -300, 0); 
+		}
+		{
+			ChangeProperty("**/BottomPanel", "Anchor", "leftAnchor", -420, 0); 
+		}
+	}
+	Event("SetInfoVisible");
+}
+
+action SetInfoVisible()
+{
+	ChangeProperty("**/Parameters", "", "visible", true);
+	ChangeProperty("**/Description", "", "visible", true);
+	ChangeProperty("**/BattleButton", "", "visible", true);
+	ChangeProperty("**/BottomPanel", "", "visible", true);
+}
+
+action CachePrebattleHangarBlur
+{
+	RenderPostProcess("**/Blur", true);
+	Wait(0.25);
+	CachePostProcess("**/Blur");
+	Event("ENQUEUE_TO_BATTLE");
+}
+
+action ShowProgress
+{
+	DirectEvent("ShowProgress", "**/NewbieProgress", newbieProgress.hangarLevel);
+	ChangeData(isProgressOverlayDisplaying, true);
+}
+
+action SHOW_TOOLTIP_SELECT_TANK
+{
+	Wait(2.0);
+	if (hangarTanks.currentTank == eNewbieHangarTanks.USA)
+	{
+		ChangeData(tooltipSelectTankAttachId, str(eNewbieHangarTanks.USSR, eNewbieHangarTanks));
+		ChangeData(tooltipSelectTankOffsetX, -130);
+		ChangeData(isTooltipSelectTankDisplaying, true);
+	}
+	else
+	{
+		Event("SHOW_TOOLTIP_WIN_MORE");
+	}
+}
+
+action SHOW_TOOLTIP_FIRST_BATTLE
+{
+	ChangeData(isTooltipFirstBattleDisplaying, true);
+}
+
+action SHOW_TOOLTIP_WIN_MORE
+{
+	ChangeData(isTooltipWinMoreDisplaying, true);
+}
+
+action HIDE_ALL_TOOLTIPS
+{
+	ChangeData(isTooltipFirstBattleDisplaying, false);
+	ChangeData(isTooltipSelectTankDisplaying, false);
+	ChangeData(isTooltipWinMoreDisplaying, false);
+}
+
+action SHOW_FADE
+{
+	Opacity("**/KeyArtFade", opacity=0.0, time=0.0);
+	ChangeProperty("**/KeyArtFade", "", "visible", true);
+
+	Opacity("**/KeyArtFade", opacity=1.0, time=0.6);
+	ChangeProperty("**/KeyArt", "", "visible", false);
+	Opacity("**/KeyArtFade", opacity=0.0, time=0.6);
+	ChangeProperty("**/KeyArtFade", "", "visible", false);
+	ChangeProperty("**/KeyArtAndFade", "", "visible", false);
+}
+
+action SHOW_BLUR
+{
+	ChangeProperty("**/HangarScene", "Update", "updateInvisible", true);
+	ChangeProperty("**/HangarScene", "", "visible", false);
+	ChangeProperty("**/HangarScene", "SizePolicy", "verticalValue", 70);
+	ChangeProperty("**/HangarSceneScreenshot", "", "visible", true);
+	ChangeProperty("**/Blur1", "", "visible", false);
+	ChangeProperty("**/Blur2", "", "visible", true);
+	ChangeProperty("**/Blur3", "", "visible", true);
+	ChangeProperty("**/LogoWithFade", "", "visible", true);
+	ChangeProperty("**/CinemaEffect", "", "visible", true);
+	ChangeProperty("**/TopBlackRect", "Anchor", "topAnchor", 0);
+	ChangeProperty("**/BottomBlackRect", "Anchor", "bottomAnchor", 0);
+
+	Opacity("**/Blur1", opacity=1.0, time=0.0);
+	Opacity("**/Blur2", opacity=1.0, time=0.0);
+	Opacity("**/Blur3", opacity=1.0, time=0.0);
+	Opacity("**/LogoWithFade", opacity=1.0, time=0.0);
+
+	parallel
+	{
+		sequence
+		{
+			Wait(10);
+			parallel
+			{
+				ChangeProperty("**/TopBlackRect", "Anchor", "topAnchor", -420, 0.5, EASE_IN);
+				ChangeProperty("**/BottomBlackRect", "Anchor", "bottomAnchor", -420, 0.5, EASE_IN);
+			}
+			ChangeProperty("**/CinemaEffect", "", "visible", false);
+		}
+		
+		sequence
+		{
+			Opacity("**/Blur3", opacity=0.0, time=2.85);
+			ChangeProperty("**/Blur3", "", "visible", false);
+			ChangeProperty("**/Blur1", "", "visible", true);
+
+			Opacity("**/Blur2", opacity=0.0, time=1.85);
+			ChangeProperty("**/Blur2", "", "visible", false);
+
+			Opacity("**/Blur1", opacity=0.0, time=0.3);
+			ChangeProperty("**/Blur1", "", "visible", false);
+			ChangeProperty("**/HangarSceneScreenshot", "", "visible", false);
+			ChangeProperty("**/HangarScene", "", "visible", true);
+			ChangeProperty("**/HangarScene", "Update", "updateInvisible", false);
+			ChangeProperty("**/HangarScene", "SizePolicy", "verticalValue", 100);
+		}
+
+		sequence
+		{
+			Wait(2.5);
+			Opacity("**/LogoWithFade", opacity=0.0, time=2.0);
+			ChangeProperty("**/LogoWithFade", "", "visible", false);
+		}
+	}
+}
+
+action ON_SWITCH_ACCEPT()
+{
+	BroadcastEvent("ON_SWITCH_ACCEPT", "**/NewbieProgress");
+}

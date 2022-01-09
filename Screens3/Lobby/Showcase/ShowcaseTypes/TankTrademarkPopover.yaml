@@ -1,0 +1,27 @@
+Header:
+    version: 134
+Prototypes:
+-   class: "UIControl"
+    name: "TankTrademarkPopover"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens3/Lobby/Showcase/ShowcaseTypes/TankTrademarkPopover.animation"
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfMaxChild"
+        UIDataParamsComponent:
+            params:
+            - ["bool", "visible", "false", "true"]
+            events:
+            - "ON_POPOVER_BUTTON_CLICKED"
+        UIChildComponent0:
+            prototypePath: "~res:/UI/Screens3/Lobby/Common/Popover.yaml"
+            args:
+                "buttonType": "eButtonType.NO_BG_WHITE"
+                "isShowButton": "true"
+                "popoverText": "localize(\"Trademarks/T34_text\")"
+                "buttonCaption": "localize(\"Trademarks/T34_button_caption\")"
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/Lobby/Common/Popover.actions"

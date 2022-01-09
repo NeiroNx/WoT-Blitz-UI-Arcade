@@ -1,0 +1,65 @@
+Header:
+    version: 127
+ImportedPackages:
+- "~res:/UI/Screens3/Battle/ModernTutorialHints/FullscreenHintProto.yaml"
+- "~res:/UI/Screens3/Battle/ModernTutorialHints/TutorialHintProtoTitled.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "PlayerArmorHint"
+    size: [1200.000000, 720.000000]
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens3/Battle/ModernTutorialHints/SlideIn.animation;Disappear,~res:/UI/Screens3/Battle/ModernTutorialHints/SlideOut.animation"
+        UIOpacityComponent:
+            opacity: 1.000000
+        Anchor:
+            hCenterAnchorEnabled: true
+            vCenterAnchorEnabled: true
+        LinearLayout:
+            orientation: "BottomUp"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["eInputMode", "inputMode", "eInputMode.MODE_UNKNOWN", "eInputMode.MODE_UNKNOWN"]
+    children:
+    -   prototype: "FullscreenHintProto/FullscreenHintProto"
+        name: "FullscreenHintProto"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "inputMode": "inputMode"
+                    "content": "Content"
+Slots:
+-   class: "UIControl"
+    name: "Content"
+    size: [32.000000, 32.000000]
+    input: false
+    classes: "grey-shark-70-bg"
+    components:
+        Background:
+            drawType: "DRAW_FILL"
+            colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+            leftRightStretchCap: 8.000000
+            topBottomStretchCap: 8.000000
+        UIRoundedCornersComponent:
+            radius: " 8"
+        Anchor:
+            bottomAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfMaxChild"
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Color.style.yaml"
+    children:
+    -   prototype: "TutorialHintProtoTitled/Hint"
+        name: "Hint"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "title": "\"#battle_hints:player_armor/title\""
+                    "backgroundStyle": "\"\""
+                    "icon": "\"~res:/Gfx/Battle/tips/notifications/shield\""
+                    "text": "\"#battle_hints:player_armor/hint\""

@@ -1,0 +1,27 @@
+Header:
+    version: 141
+Prototypes:
+-   class: "UIControl"
+    name: "BasicBundleItem"
+    input: false
+    components:
+        UITextureComponent:
+            drawType: "DRAW_SCALE_PROPORTIONAL"
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 40.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 40.000000
+        UIDataParamsComponent:
+            params:
+            - ["ResourceDetailed", "resource", "null", "{ \"type\" = ResourceType.equipment_slots; }"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["bool", "hasNumericValue", "not isNull(resource.basic) or not isNull(resource.devices)"]
+            - ["int", "quantity", "when not isNull(resource.basic) -> resource.basic.quantity, not isNull(resource.devices) -> resource.devices.amount, 0"]
+            - ["int", "iconFrame", "when resource.type == ResourceType.premium -> 7, 0"]
+            - ["string", "stringedValue", "when quantity < 2 -> \"\", resource.type == ResourceType.real_currency -> resource.realCurrency.localizedValue, resource.type == ResourceType.premium and toDays(resource.basic.quantity) > 0L -> str(toDays(resource.basic.quantity)) + localize(\"#common:Time/Days\"), resource.type == ResourceType.premium and toHours(resource.basic.quantity) > 0L -> str(toHours(resource.basic.quantity)) + localize(\"#common:Time/Hours\"), resource.type == ResourceType.premium -> str(resource.basic.quantity / 60) + localize(\"#common:Time/Minutes\"), resource.type == ResourceType.slots or resource.type == ResourceType.equipment_slots -> (\"x\" + shortStr(quantity, 1000)), shortStr(quantity, 1000)"]
+            - ["string", "iconPath", "when resource.type == ResourceType.gold -> \"~res:/Gfx/Lobby/currency/currency_gold_xl\", resource.type == ResourceType.free_xp -> \"~res:/Gfx/Lobby/currency/currency_free-xp_xl\", resource.type == ResourceType.tankmenXP -> \"~res:/Gfx/Lobby/currency/currency_crew-xp_xl\", resource.type == ResourceType.xp -> \"~res:/Gfx/Lobby/currency/currency_battle-xp_xl\", resource.type == ResourceType.premium -> \"~res:/Gfx/Lobby/currency/currency_premium_xl\", resource.type == ResourceType.credits -> \"~res:/Gfx/Lobby/currency/currency_silver_xl\", resource.type == ResourceType.slots -> \"~res:/Gfx/Lobby/certificates/certificate_slot_2\", resource.type == ResourceType.equipment_slots -> \"~res:/Gfx/UI/Hangar/EquipmentCommon\", resource.type == ResourceType.achievement -> resource.achievement.icon, \"\""]
+    bindings:
+    - ["UITextureComponent.spritePath", "iconPath"]
+    - ["UITextureComponent.frame", "iconFrame"]

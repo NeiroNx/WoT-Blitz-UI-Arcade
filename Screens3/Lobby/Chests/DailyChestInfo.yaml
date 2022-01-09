@@ -1,0 +1,286 @@
+Header:
+    version: 141
+Prototypes:
+-   class: "UIControl"
+    name: "DailyChestInfo"
+    size: [1589.000000, 785.000000]
+    input: false
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["int64", "dailyBonusUpdate", "0L", "0L"]
+            - ["bool", "purchaseAllowedForCountry", "true", "false"]
+            - ["DailyChest", "dailyChest", "null", "{ }"]
+            - ["SessionDataModel", "session", "null", "{ }"]
+            - ["bool", "hasOpenedOverlays", "false", "true"]
+            - ["bool", "wasPushed", "true", "true"]
+            - ["bool", "showChances", "false", "true"]
+            - ["StuffResourceWithDescription", "stuff", "null", "{ }"]
+            events:
+            - "ON_REWARD_CLICKED"
+            - "ON_INFO_CLICKED"
+            - "ON_MAIN_REWARD_CLICKED"
+            - "ON_BUY_CLICKED"
+        UIDataLocalBindingsComponent:
+            data:
+            - ["bool", "canBeOpenedForFree", "not (dailyChest.chestData.freeChestsToOpen == 0)"]
+            - ["bool", "isOnCooldown", "dailyChest.chestData.openTime > session.serverTime"]
+            - ["bool", "chestLocked", "not canBeOpenedForFree or isOnCooldown"]
+            - ["bool", "purchaseAreAllowed", "purchaseAllowedForCountry or dailyChest.price.resources.Empty() or not (dailyChest.price.resources[0].type == ResourceType.gold)"]
+            - ["bool", "canBuy", "not (dailyChest.chestData.paidChestsToOpen == 0) and purchaseAreAllowed and chestLocked"]
+            - ["string", "buttonCaption", "when canBuy -> \"#common:DialogButton/Buy\", \"#common:DialogButton/Open\""]
+            - ["int64", "openTime", "when not canBeOpenedForFree -> (when isOnCooldown -> max(dailyChest.chestData.openTime, dailyBonusUpdate), dailyBonusUpdate), dailyChest.chestData.openTime"]
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/Lobby/Chests/DailyChestInfo.actions"
+    children:
+    -   class: "UIControl"
+        name: "Overlay"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Chests/ChestInfo.yaml"
+                args:
+                    "footerHeight": "106"
+                    "additionalLeftContent": "when chestLocked -> FreeTimer, dailyChest.chestData.freeChestsToOpen > 0 -> FreeLeft, null"
+                    "footer": "Footer"
+                    "hasOpenedOverlays": "hasOpenedOverlays"
+                    "wasPushed": "wasPushed"
+                    "showChances": "showChances"
+                    "stuff": "stuff"
+                eventActions:
+                - ["ON_MAIN_REWARD_CLICKED", "ON_MAIN_REWARD_CLICKED", ""]
+                - ["ON_INFO_CLICKED", "ON_INFO_CLICKED", ""]
+                - ["ON_REWARD_CLICKED", "ON_REWARD_CLICKED", "_event.resource, _event.name"]
+                - ["EXTRA2_ACTION", "MainActionRequested", ""]
+    -   class: "UIControl"
+        name: "NavigationPanel"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                condition: "isGamepad"
+                prototypePath: "~res:/UI/Screens3/Common/NintendoSwitch/NavigationPanel/NavigationPanel.yaml"
+                args:
+                    "content": "NavigationPanel"
+Slots:
+-   class: "UIControl"
+    name: "Footer"
+    input: false
+    components:
+        Anchor:
+            hCenterAnchorEnabled: true
+        LinearLayout:
+            orientation: "TopDown"
+            padding: "24"
+        SizePolicy:
+            horizontalPolicy: "Formula"
+            horizontalFormula: "when parent < 1200 -> 832, 1072"
+            verticalPolicy: "PercentOfChildrenSum"
+    children:
+    -   class: "UIControl"
+        name: "ButtonWrapper"
+        input: false
+        components:
+            Anchor:
+                rightAnchorEnabled: true
+            LinearLayout:
+                orientation: "TopDown"
+                spacing: 10.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfLastChild"
+                verticalPolicy: "PercentOfChildrenSum"
+        children:
+        -   class: "UIControl"
+            name: "Price"
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIChildComponent0:
+                    condition: "canBuy"
+                    prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/Price.yaml"
+                    args:
+                        "stats": "session.stats"
+                        "artefacts": "session.artefacts"
+                        "priceGet": "{ }"
+                        "pricePay": "dailyChest.price"
+                UIJoypadComponent: {}
+                UIIdentifierComponent:
+                    id: "chest_price"
+                    params:
+                    - ["bool", "can_buy", "canBuy"]
+            bindings:
+            - ["visible", "canBuy"]
+        -   class: "UIControl"
+            name: "BuyButton"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens3/Lobby/Shop/ShopProductButton.yaml"
+                    args:
+                        "enabled": "canBuy or not chestLocked"
+                        "width": "274"
+                        "buttonType": "eButtonType.POSITIVE"
+                        "caption": "buttonCaption"
+                    eventActions:
+                    - ["ON_CLICK_BUTTON", "ON_BUY_CLICKED", "canBuy"]
+                UIIdentifierComponent:
+                    id: "chest_open"
+-   class: "UIControl"
+    name: "FreeTimer"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 0.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 32.000000
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        classes: "black-50-bg"
+        components:
+            Background: {}
+            LinearLayout:
+                padding: "4; 0"
+                spacing: 8.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "FixedSize"
+                verticalValue: 32.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+        children:
+        -   class: "UIControl"
+            name: "text"
+            input: false
+            classes: "t-subtitle regular color=white-wild-sand-text"
+            components:
+                UITextComponent:
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                    align: ["LEFT", "VCENTER"]
+                Anchor:
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+            bindings:
+            - ["UITextComponent.text", "localize(\"activities/BonusContainers/Timer\")"]
+        -   class: "UIControl"
+            name: "timer"
+            input: false
+            components:
+                Anchor:
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens3/Lobby/Common/Timer.yaml"
+                    args:
+                        "time": "openTime"
+                        "serverTime": "session.serverTime"
+                        "timerSize": "eTimerSize.Medium"
+-   class: "UIControl"
+    name: "FreeLeft"
+    input: false
+    classes: "black-50-bg"
+    components:
+        Background: {}
+        LinearLayout:
+            padding: "4"
+            spacing: 8.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "FixedSize"
+            verticalValue: 32.000000
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Color.style.yaml"
+    children:
+    -   class: "UIControl"
+        name: "text"
+        input: false
+        classes: "t-subtitle regular color=white-wild-sand-text"
+        components:
+            UITextComponent:
+                colorInheritType: "COLOR_IGNORE_PARENT"
+                align: ["LEFT", "VCENTER"]
+            Anchor:
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+        bindings:
+        - ["UITextComponent.text", "localize(\"activities/BonusContainers/ContainersLeft\")"]
+    -   class: "UIControl"
+        name: "count"
+        input: false
+        classes: "t-subtitle regular color=white-wild-sand-text"
+        components:
+            UITextComponent:
+                colorInheritType: "COLOR_IGNORE_PARENT"
+                align: ["LEFT", "VCENTER"]
+            Anchor:
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+        bindings:
+        - ["UITextComponent.text", "str(dailyChest.chestData.freeChestsToOpen)"]
+-   class: "UIControl"
+    name: "NavigationPanel"
+    input: false
+    components:
+        LinearLayout:
+            spacing: 24.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "PercentOfMaxChild"
+    children:
+    -   class: "UIControl"
+        name: "Back"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Common/NintendoSwitch/NavigationPanel/IconWithLabel.yaml"
+                args:
+                    "text": "\"Switch/HubridPanel/Lobby/Back\""
+                    "icon": "eNintendoSwitchControls.B"
+    -   class: "UIControl"
+        name: "Information"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Common/NintendoSwitch/NavigationPanel/IconWithLabel.yaml"
+                args:
+                    "text": "buttonCaption"
+                    "icon": "eNintendoSwitchControls.Y"

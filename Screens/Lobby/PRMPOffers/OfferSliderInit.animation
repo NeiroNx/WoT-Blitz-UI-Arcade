@@ -1,0 +1,35 @@
+animation InitAnimation(bool replacing)
+{
+  ChangeData(currentButtonVisible, actionButtonVisible);
+  ChangeData(currentButtonText, actionButtonCaption);
+  ChangeData(currentTankPreviewActive, tankPreviewActive);
+  ChangeData(currentVideoAvailable, hasVideo);
+  ChangeData(currentPreviousOfferAvailable, previousOfferAvailable);
+  ChangeData(currentNextOfferAvailable, nextOfferAvailable);
+
+  ChangeProperty("**/OfferDependentButtons", "Anchor", "topAnchor", 100, 0);
+  ChangeProperty("**/VideoButtonWrapper/WatchVideoButton", "Anchor", "topAnchor", -100, 0);
+  ChangeProperty("**/PreviousOfferButton", "Anchor", "leftAnchor", -200.0);
+  ChangeProperty("**/NextOfferButton", "Anchor", "rightAnchor", -200.0);
+
+  Opacity("./OffersContainer", 0.0);
+  parallel
+  {
+    {
+      ChangeProperty("**/PreviousOfferButton", "Anchor", "leftAnchor", 24.0, 0.5, SINE_OUT);
+    }
+    {
+      ChangeProperty("**/NextOfferButton", "Anchor", "rightAnchor", 24.0, 0.5, SINE_OUT);
+    }
+    {
+      ChangeProperty("**/OfferDependentButtons", "Anchor", "topAnchor", 0, 0.5, SINE_OUT);
+    }
+    {
+      ChangeProperty("**/VideoButtonWrapper/WatchVideoButton", "Anchor", "topAnchor", 0, 0.5, SINE_OUT);
+    }
+    {
+      ChangeProperty(currentImagePath, "UIUrlImageComponent", "imageUrl", currentUrl);
+      Opacity(currentImagePath, opacity=1.0, time=0.5, interpolation=EASE_OUT);
+    }
+  }
+}

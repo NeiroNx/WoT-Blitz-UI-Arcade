@@ -1,0 +1,71 @@
+Header:
+    version: "24"
+ImportedPackages:
+- "~res:/UI/Styles/BackgroundStyles.yaml"
+StyleSheets:
+-   selector: ".slider:disabled ? #Icon"
+    properties:
+        bg-color: [1.000000, 1.000000, 1.000000, 0.509804]
+-   selector: ".slider:disabled #Bg"
+    properties:
+        bg-color: [0.439216, 0.521569, 0.619608, 0.470588]
+-   selector: ".slider:disabled #thumbSpriteControl"
+    properties:
+        bg-color: [0.462745, 0.458824, 0.458824, 1.000000]
+Prototypes:
+-   class: "UISlider"
+    name: "Slider"
+    size: [450.000000, 78.000000]
+    classes: "slider"
+    minValue: 0.000000
+    maxValue: 100.000000
+    value: 0.000000
+    components:
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Common/Slider.yaml"
+    children:
+    -   class: "UIControl"
+        name: "Bg"
+        size: [434.000000, 7.000000]
+        noInput: true
+        classes: "slider-full-background"
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 8.000000
+                rightAnchorEnabled: true
+                rightAnchor: 8.000000
+                vCenterAnchorEnabled: true
+            Background:
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                leftRightStretchCap: 3.000000
+    -   class: "UIControl"
+        name: "thumbSpriteControl"
+        position: [25.000000, 39.000000]
+        size: [50.000000, 50.000000]
+        pivot: [0.500000, 0.500000]
+        noInput: true
+        classes: "button-color-gray"
+        components:
+            Background:
+                drawType: "DRAW_TILED_MULTILAYER"
+                sprite: "~res:/Gfx/UI/CommonUIElements/Button/gray_contour.txt"
+                mask: "~res:/Gfx/UI/CommonUIElements/Button/mask.psd"
+                detail: "~res:/Gfx/UI/CommonUIElements/Button/detail.psd"
+                gradientMode: "Overlay"
+                perPixelAccuracy: "PER_PIXEL_ACCURACY_FORCED"
+            StyleSheet:
+                inheritsStylesFromParent: false
+                styles: "~res:/UI/Styles/ButtonStyle.yaml"
+        children:
+        -   class: "UIControl"
+            name: "Icon"
+            size: [32.000000, 32.000000]
+            noInput: true
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                Background:
+                    sprite: "~res:/Gfx/UI/CommonUIElements/Icons/icon_slider.psd"

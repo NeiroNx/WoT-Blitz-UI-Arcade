@@ -1,0 +1,11 @@
+animation IndicatorOnInit
+{
+    if (isEnabled)
+    {
+        Event("Enable", arg1 = actionTime);
+    }
+    else
+    {
+        Event("Disable", arg1 = actionTime);
+    }
+}

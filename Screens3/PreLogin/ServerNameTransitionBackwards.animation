@@ -1,0 +1,15 @@
+animation FadeInFadeOut
+{
+	parallel
+	{
+		{
+			Opacity("./ServerInfo/ServerNameHolder/ServerNameFirst", opacity=0.0, time=0.2, interpolation=EASE_IN_EASE_OUT);
+			Opacity("./ServerInfo/ServerNameHolder/ServerNameSecond", opacity=1.0, time=0.2, interpolation=EASE_IN_EASE_OUT);
+			Stop();
+		}
+		{
+			WaitEvent("OnServerNameChangedForward");
+			Stop();
+		}
+	}
+}

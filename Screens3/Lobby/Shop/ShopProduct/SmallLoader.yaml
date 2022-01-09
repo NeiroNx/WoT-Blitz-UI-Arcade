@@ -1,0 +1,200 @@
+Header:
+    version: 141
+Prototypes:
+-   class: "UIControl"
+    name: "SmallLoader"
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens3/Lobby/Shop/ShopProduct/LoaderInitialiazation.animation"
+        Anchor:
+            hCenterAnchorEnabled: true
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 112.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 176.000000
+        UIDataParamsComponent:
+            params:
+            - ["bool", "firstShow", "false", "true"]
+            - ["bool", "readyToShow", "false", "true"]
+            - ["ShopProduct", "product", "null", "{ }"]
+            - ["ShopBadgeState", "badge", "null", "{ }"]
+            - ["bool", "initializationEnded", "false", "true"]
+            - ["float", "shopScrollBottomOffset", "0.000000", "40.000000"]
+            - ["float", "shopScrollTopOffset", "0.000000", "48.000000"]
+            - ["bool", "debugMode", "false", "false"]
+            - ["bool", "selected", "false", "false"]
+            - ["bool", "available", "false", "true"]
+            - ["bool", "blurEnabled", "false", "true"]
+            - ["bool", "arabicLocalization", "false", "false"]
+            events:
+            - "SHOWN"
+            - "ON_PRODUCT_CLICKED(int id)"
+            - "DEV_BUY_PRODUCT(int id)"
+            - "GO_TO_PRODUCT(int id)"
+            - "ON_PRODUCT_SHOWN(int id)"
+        UIDataLocalVarsComponent:
+            data:
+            - ["float", "moveOutTopAnchor", "-50.000000"]
+            - ["float", "moveInTopAnchor", "0.000000"]
+            - ["float", "fadeInTime", "0.250000"]
+            - ["bool", "show", "false"]
+            - ["float", "firstShowDropTime", "1.000000"]
+            - ["float", "firstShowOpacityTime", "0.100000"]
+            - ["float", "firstShowFoldTime", "0.400000"]
+            - ["bool", "imageLoaded", "false"]
+            - ["bool", "animating", "false"]
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/Lobby/Shop/ShopProduct/Loader.actions"
+        UIEventOnDataComponent0:
+            watchedDataExpression: "show"
+            ifExpression: "show == false"
+            eventName: "_INIT"
+        UIEventOnDataComponent1:
+            watchedDataExpression: "readyToShow"
+            ifExpression: "readyToShow and firstShow and imageLoaded"
+            eventName: "OnReadyForFirstShow"
+    children:
+    -   class: "UIControl"
+        name: "Placeholder"
+        pivot: [0.500000, 0.000000]
+        input: false
+        components:
+            Background:
+                drawType: "DRAW_SCALE_TO_RECT"
+                sprite: "~res:/Gfx/Lobby/backgrounds/bg_card_shop"
+                perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+            UIOpacityComponent: {}
+            UIRoundedCornersComponent:
+                radius: "2"
+            Anchor:
+                topAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 112.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 144.000000
+    -   class: "UIControl"
+        name: "Image"
+        pivot: [0.500000, 0.000000]
+        input: false
+        components:
+            Background:
+                drawType: "DRAW_SCALE_TO_RECT"
+                perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+            UIOpacityComponent: {}
+            UIUrlImageComponent:
+                imageLoadedEvent: "ImageLoaded"
+            UIRoundedCornersComponent:
+                radius: "2"
+            Anchor:
+                topAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 112.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 144.000000
+        bindings:
+        - ["UIUrlImageComponent.imageUrl", "product.imageUrl"]
+    -   class: "UIControl"
+        name: "Hover"
+        input: false
+        classes: "white-wild-sand-10-bg hover"
+        components:
+            Background: {}
+            UIOpacityComponent: {}
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 112.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 144.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/Common/Hover.style.yaml"
+    -   class: "UIControl"
+        name: "Fade"
+        input: false
+        classes: "black-35-bg"
+        components:
+            Background:
+                drawType: "DRAW_SCALE_TO_RECT"
+                sprite: "~res:/Gfx/Lobby/backgrounds/bg_shop_product_panel"
+            UIRoundedCornersComponent:
+                radius: "2"
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 112.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 144.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+        bindings:
+        - ["visible", "not available and not product.pendingPurchase"]
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            UIOpacityComponent: {}
+            LinearLayout:
+                orientation: "TopDown"
+                spacing: 8.000000
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 112.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 176.000000
+            UIChildComponent0:
+                condition: "show"
+                prototypePath: "~res:/UI/Screens3/Lobby/Shop/ShopProduct/SmallContent.yaml"
+                args:
+                    "product": "product"
+                    "initializationEnded": "initializationEnded"
+                    "debugMode": "debugMode"
+                    "shopScrollTopOffset": "shopScrollTopOffset"
+                    "shopScrollBottomOffset": "shopScrollBottomOffset"
+                    "blurEnabled": "blurEnabled"
+                    "selected": "selected"
+                    "arabicLocalization": "arabicLocalization"
+                    "available": "available"
+                eventActions:
+                - ["LOADED", "CONTENT_LOADED", ""]
+                - ["DEV_BUY_PRODUCT", "DEV_BUY_PRODUCT", "product.id"]
+                - ["GO_TO_PRODUCT", "GO_TO_PRODUCT", "product.id"]
+    -   class: "UIControl"
+        name: "Badge"
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 6.000000
+                topAnchorEnabled: true
+                topAnchor: 6.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                condition: "show and not isNull(badge) and badge.hasLabel"
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Badge.yaml"
+    -   class: "UIControl"
+        name: "FX"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 112.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 144.000000
+            UIChildComponent0:
+                childType: "kControl"
+                condition: "not isNull(badge) and badge.hasLabel"
+                control: "BlinkFx"
+Slots:
+-   class: "UIParticles"
+    name: "BlinkFx"
+    scale: [0.500000, 0.500000]
+    effectPath: "~res:/3d/FX/UI/Shop/card_fx/card_1.sc2"
+    components:
+        Anchor:
+            hCenterAnchorEnabled: true
+            vCenterAnchorEnabled: true

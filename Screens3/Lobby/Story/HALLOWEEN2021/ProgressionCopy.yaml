@@ -1,0 +1,378 @@
+Header:
+    version: 140
+Prototypes:
+-   class: "UIControl"
+    name: "Progression"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 128.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 128.000000
+        UIDataParamsComponent:
+            params:
+            - ["bool", "isPriceVisible", "false", "true"]
+            - ["StoryStepView", "model", "null", "{ \"step\" = { \"rewards\" = [ { \"type\" = ResourceType.stuff; }; ]; \"repeats\" = { \"quantity\" = 2; }; \"isFinished\" = false; \"isMain\" = false; }; \"isSelected\" = false; }"]
+            - ["int", "index", "0", "10"]
+            - ["color", "topProgressColor", "rgba(16777215, 0.000000)", "rgb(3144447)"]
+            - ["color", "bottomProgressColor", "rgb(438891)", "rgb(438891)"]
+            - ["float", "opacity", "1.000000", "1.000000"]
+            - ["int", "mainRewardIndex", "0", "0"]
+            events:
+            - "SHOW_STEP_INFO(int id)"
+            - "SELECT_STEP(int id)"
+        UIDataLocalVarsComponent:
+            data:
+            - ["float", "selectedOpacity", "when model.isSelected and not model.step.isFinished -> 1.000000, 0.000000"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["bool", "isLocked", "false"]
+            - ["bool", "isReady", "model.step.net.price.Empty()"]
+            - ["int", "stepNetPrice", "when model.step.net.price.Contains(model.step.price[0].stuff.name) -> model.step.net.price[model.step.price[0].stuff.name].stuff.quantity, 0"]
+            - ["int", "stepPrice", "when not model.step.price.Empty() -> model.step.price[0].stuff.quantity, 0"]
+            - ["float", "progressValue", "when (stepPrice - stepNetPrice) > 0 -> (float(stepPrice - stepNetPrice) / float(stepPrice)), 0.000000"]
+            - ["float", "contentOpacity", "when model.step.isFinished -> 0.100000, isLocked -> 0.500000, 1.000000"]
+            - ["string", "indexStyle", "when model.step.isMain -> \"t-body bold\", \"t-caption regular\""]
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/Lobby/Story/Components/Steps/Progression.actions"
+    children:
+    -   class: "UIControl"
+        name: "ContentHolder"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/ButtonDecorator.yaml"
+                args:
+                    "content": "Content"
+                    "sound": "when not model.isSelected -> eButtonSound.CHOOSE, eButtonSound.OPEN"
+                    "isSelected": "when not model.step.isFinished -> model.isSelected, false"
+                    "hasInput": "not model.step.isFinished"
+                    "ltrbSafeZone": "vec4(8.000000, 8.000000, 8.000000, 8.000000)"
+                eventActions:
+                - ["PUSH", "PUSH", "_event.scale, _event.opacity, _event.time"]
+                - ["PULL", "PULL", "_event.time"]
+                - ["HOVER", "HOVER", "_event.brightness, _event.time"]
+                - ["CANCEL_HOVER", "CANCEL_HOVER", "_event.time"]
+                - ["SELECT", "SELECT", "_event.time"]
+                - ["CANCEL_SELECT", "CANCEL_SELECT", "_event.time"]
+                - ["ON_TOUCH", "ON_TOUCH", "model.step.id"]
+Slots:
+-   class: "UIControl"
+    name: "FxWrapper"
+    size: [160.000000, 160.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+    children:
+    -   class: "UIParticles"
+        name: "Fx"
+        scale: [2.200000, 2.200000]
+        pivot: [0.500000, 0.500000]
+        input: false
+        effectPath: "~res:/3d/FX/UI/BattlePass/GlowReward.sc2"
+        autoStart: true
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+-   class: "UIControl"
+    name: "Overlay"
+    size: [160.000000, 160.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+    children:
+    -   class: "UIControl"
+        name: "Completed"
+        input: false
+        components:
+            UIOpacityComponent:
+                ignoreParentOpacity: true
+            UITextureComponent:
+                spritePath: "~res:/Gfx/Lobby/icons/icon_tick_xl"
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+        bindings:
+        - ["visible", "model.step.isFinished"]
+        - ["UIOpacityComponent.opacity", "opacity"]
+-   class: "UIControl"
+    name: "Content"
+    pivot: [0.500000, 0.500000]
+    input: false
+    components:
+        UIOpacityComponent: {}
+        Anchor:
+            hCenterAnchorEnabled: true
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 112.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 112.000000
+    children:
+    -   class: "UIControl"
+        name: "Body"
+        input: false
+        components:
+            UIOpacityComponent: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        bindings:
+        - ["UIOpacityComponent.opacity", "contentOpacity * opacity"]
+        children:
+        -   class: "UIControl"
+            name: "BgWrapper"
+            input: false
+            components:
+                ClipContent: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            children:
+            -   class: "UIControl"
+                name: "Default"
+                input: false
+                classes: "grey-shark-90-bg"
+                components:
+                    Background: {}
+                    UIOpacityComponent:
+                        ignoreParentOpacity: true
+                    Anchor:
+                        rightAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+                bindings:
+                - ["UIOpacityComponent.opacity", "opacity"]
+            -   class: "UIControl"
+                name: "VehicleBgHolder"
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfFirstChild"
+                    UIChildComponent0:
+                        childType: "kControl"
+                        condition: "model.step.rewards[0UL].type == ResourceType.vehicle and not isNull(model.step.rewards[0].vehicle)"
+                        control: "VehicleBg"
+            -   class: "UIControl"
+                name: "Colored"
+                input: false
+                components:
+                    UIOpacityComponent:
+                        ignoreParentOpacity: true
+                    Anchor:
+                        leftAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                bindings:
+                - ["UIOpacityComponent.opacity", "opacity"]
+                - ["SizePolicy.horizontalValue", "progressValue * 100.000000"]
+                children:
+                -   class: "UIControl"
+                    name: "TopColor"
+                    input: false
+                    components:
+                        Background:
+                            drawType: "DRAW_STRETCH_BOTH"
+                            sprite: "~res:/Gfx/Lobby/backgrounds/bg_gradient_vertical_0-100"
+                            spriteModification: ["FLIP_VERTICAL"]
+                            perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                        Anchor:
+                            bottomAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "Formula"
+                            verticalFormula: "parent / 0.15"
+                    bindings:
+                    - ["Background.color", "topProgressColor"]
+                -   class: "UIControl"
+                    name: "BottomColor"
+                    input: false
+                    components:
+                        Background:
+                            drawType: "DRAW_STRETCH_BOTH"
+                            sprite: "~res:/Gfx/Lobby/backgrounds/bg_gradient_vertical_0-100"
+                            perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "Formula"
+                            verticalFormula: "parent / 0.3"
+                    bindings:
+                    - ["Background.color", "bottomProgressColor"]
+        -   class: "UIControl"
+            name: "RewardHolder"
+            input: false
+            components:
+                ClipContent: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfFirstChild"
+                    verticalPolicy: "PercentOfFirstChild"
+                UIChildComponent0:
+                    childType: "kPrototype"
+                    prototypePath: "~res:/UI/Screens3/Lobby/Story/Components/Steps/SizeM.yaml"
+                    args:
+                        "fx": "when isReady and not model.step.isFinished and not floatEqual(opacity, 0.000000) -> FxWrapper, null"
+                        "overlay": "when model.step.isFinished or isLocked -> Overlay, null"
+                        "reward": "model.step.rewards[mainRewardIndex]"
+        -   class: "UIControl"
+            name: "Brightness"
+            input: false
+            classes: "white-wild-sand-10-bg"
+            components:
+                Background: {}
+                UIOpacityComponent:
+                    opacity: 0.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "Selected"
+            input: false
+            components:
+                UIOpacityComponent:
+                    ignoreParentOpacity: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens3/Lobby/Common/Selection.yaml"
+                    args:
+                        "selectionType": "eSelectionBorderType.kRect"
+                        "isVisible": "true"
+            bindings:
+            - ["UIOpacityComponent.opacity", "selectedOpacity * opacity"]
+        -   class: "UIControl"
+            name: "CornerIcon"
+            input: false
+            components:
+                UIOpacityComponent:
+                    ignoreParentOpacity: true
+                Anchor:
+                    rightAnchorEnabled: true
+                    rightAnchor: 4.000000
+                    topAnchorEnabled: true
+                    topAnchor: 4.000000
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 16.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 16.000000
+            bindings:
+            - ["UIOpacityComponent.opacity", "opacity"]
+            children:
+            -   class: "UIControl"
+                name: "Info"
+                pivot: [0.500000, 0.500000]
+                input: false
+                classes: "white-wild-sand-50-bg"
+                components:
+                    Background:
+                        drawType: "DRAW_ALIGNED"
+                        sprite: "~res:/Gfx/Lobby/icons/icon_info_xs"
+                    UIOpacityComponent: {}
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+                bindings:
+                - ["UIOpacityComponent.opacity", "selectedOpacity"]
+            -   class: "UIControl"
+                name: "Index"
+                input: false
+                components:
+                    UIOpacityComponent: {}
+                    UITextComponent: {}
+                    Anchor:
+                        leftAnchorEnabled: true
+                        rightAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml"
+                bindings:
+                - ["visible", "index > 0"]
+                - ["classes", "indexStyle + \" white-wild-sand-text not-localize\""]
+                - ["UIOpacityComponent.opacity", "1.000000 - selectedOpacity"]
+                - ["UITextComponent.text", "index"]
+        -   class: "UIControl"
+            name: "StarHolder"
+            input: false
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: -4.000000
+                    topAnchorEnabled: true
+                    topAnchor: -4.000000
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 24.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 24.000000
+                UIChildComponent0:
+                    childType: "kControl"
+                    condition: "model.step.isMain"
+                    control: "StarLabel"
+-   class: "UIControl"
+    name: "VehicleBg"
+    size: [200.000000, 18.727301]
+    input: false
+    components:
+        UIOpacityComponent:
+            opacity: 0.750000
+        UITextureComponent:
+            drawType: "DRAW_SCALE_PROPORTIONAL"
+            perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+        Anchor:
+            topAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfContent"
+    bindings:
+    - ["UITextureComponent.spritePath", "\"~res:/Gfx/Lobby/flags/flag_tank-node_I_\" + str(model.step.rewards[0].vehicle.info.nation, eNation, \"autotests\")"]
+-   class: "UIControl"
+    name: "StarLabel"
+    input: false
+    classes: "red-tamarillo-bg"
+    components:
+        Background: {}
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 24.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 24.000000
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Color.style.yaml"
+    children:
+    -   class: "UIControl"
+        name: "StarIcon"
+        input: false
+        components:
+            UITextureComponent:
+                spritePath: "~res:/Gfx/Lobby/icons/icon_star_s"
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"

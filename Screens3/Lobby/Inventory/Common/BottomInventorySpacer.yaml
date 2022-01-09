@@ -1,0 +1,12 @@
+Header:
+    version: "79"
+Prototypes:
+-   class: "UIControl"
+    name: "BottomSpacer"
+    size: [32.000000, 0.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "FixedSize"
+            verticalValue: 16.000000

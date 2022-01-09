@@ -1,0 +1,94 @@
+Header:
+    version: 127
+Prototypes:
+-   class: "UIControl"
+    name: "ProgressbarForCheckmarks"
+    input: false
+    components:
+        Anchor:
+            vCenterAnchorEnabled: true
+        LinearLayout: {}
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "PercentOfLastChild"
+        UIDataParamsComponent:
+            params:
+            - ["int", "partOfLineWidth", "6", "6"]
+            - ["int", "progressWidth", "100", "100"]
+            - ["int", "progressHeight", "8", "8"]
+            - ["float", "progress", "0.000000", "0.000000"]
+    children:
+    -   class: "UIControl"
+        name: "PartOfLineL"
+        input: false
+        classes: "orange-tango-30-bg"
+        components:
+            Background:
+                drawType: "DRAW_SCALE_TO_RECT"
+                sprite: "~res:/Gfx/Lobby/controls/progressbar/progressbar_part"
+                spriteModification: ["FLIP_HORIZONTAL"]
+            Anchor:
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                verticalPolicy: "FixedSize"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+        bindings:
+        - ["SizePolicy.horizontalValue", "partOfLineWidth"]
+        - ["SizePolicy.verticalValue", "progressHeight"]
+    -   class: "UIControl"
+        name: "BackgroundLine"
+        position: [6.000000, 0.000000]
+        input: false
+        classes: "orange-tango-30-bg"
+        components:
+            Background: {}
+            Anchor:
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                verticalPolicy: "FixedSize"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+        bindings:
+        - ["SizePolicy.horizontalValue", "progressWidth - 2 * partOfLineWidth"]
+        - ["SizePolicy.verticalValue", "progressHeight"]
+    -   class: "UIControl"
+        name: "PartOfLineR"
+        position: [96.000000, 0.000000]
+        input: false
+        classes: "orange-tango-30-bg"
+        components:
+            Background:
+                drawType: "DRAW_SCALE_TO_RECT"
+                sprite: "~res:/Gfx/Lobby/controls/progressbar/progressbar_part"
+            Anchor:
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                verticalPolicy: "FixedSize"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+        bindings:
+        - ["SizePolicy.horizontalValue", "partOfLineWidth"]
+        - ["SizePolicy.verticalValue", "progressHeight"]
+    -   class: "UIControl"
+        name: "Line"
+        position: [6.000000, 0.000000]
+        input: false
+        classes: "orange-orange-peel-bg"
+        components:
+            Background: {}
+            Anchor:
+                leftAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            IgnoreLayout: {}
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                verticalPolicy: "FixedSize"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+        bindings:
+        - ["SizePolicy.horizontalValue", "min(progress, 100.000000) * progressWidth / 100.000000"]
+        - ["SizePolicy.verticalValue", "progressHeight"]

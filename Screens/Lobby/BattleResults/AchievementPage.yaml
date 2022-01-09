@@ -1,0 +1,279 @@
+Header:
+    version: 120
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/Common/SectionHeader3.yaml"
+- "~res:/UI/Screens/Lobby/BattleResults/BattleResultsCommon.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "Page"
+    size: [1024.000000, 688.000000]
+    input: false
+    components:
+        Background:
+            color: [0.000000, 0.000000, 0.000000, 1.000000]
+        Anchor:
+            leftAnchorEnabled: true
+            rightAnchorEnabled: true
+            topAnchorEnabled: true
+            bottomAnchorEnabled: true
+        LinearLayout:
+            orientation: "TopDown"
+            dynamicPadding: true
+        UIEventBindingComponent: {}
+        UIDataParamsComponent:
+            params:
+            - ["BattleResultsViewModel", "results", "null", "{ }"]
+            events:
+            - "OnRibbonTap"
+            - "OnMedalTap"
+    children:
+    -   class: "UIControl"
+        name: "Body"
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            StyleSheet:
+                styles: "~res:/UI/Styles/DesktopStyles.yaml"
+        bindings:
+        - ["visible", "not results.flagTraining"]
+        children:
+        -   class: "UIScrollView"
+            name: "ScrollView"
+            input: false
+            autoUpdate: true
+            centerContent: true
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_TO_RECT"
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 10.000000
+                    rightAnchorEnabled: true
+                    rightAnchor: 10.000000
+                    topAnchorEnabled: true
+                    bottomAnchorEnabled: true
+            children:
+            -   class: "UIScrollViewContainer"
+                name: "scrollContainerControl"
+                input: true
+                components:
+                    LinearLayout:
+                        orientation: "TopDown"
+                        padding: "20.000000"
+                        spacing: 20.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        horizontalMax: 1100.000000
+                        verticalPolicy: "PercentOfChildrenSum"
+                    UIAnchorSafeAreaComponent:
+                        leftSafeInset: "INSET"
+                        rightSafeInset: "INSET"
+                children:
+                -   class: "UIControl"
+                    name: "RibbonsPanel"
+                    input: false
+                    components:
+                        LinearLayout:
+                            orientation: "TopDown"
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfChildrenSum"
+                    bindings:
+                    - ["visible", "results.ribbonsPresent"]
+                    children:
+                    -   prototype: "SectionHeader3/SectionHeader3"
+                        name: "HeaderRibbons"
+                        children:
+                        -   class: "UIControl"
+                            name: "Header3"
+                            input: false
+                            classes: "header3 color=text-color-white"
+                            components:
+                                UITextComponent:
+                                    text: "#battle_results:AchievementsPage/ReceivedRibbons"
+                                    colorInheritType: "COLOR_IGNORE_PARENT"
+                                Anchor:
+                                    hCenterAnchorEnabled: true
+                                SizePolicy:
+                                    horizontalPolicy: "PercentOfContent"
+                                    verticalPolicy: "PercentOfParent"
+                                StyleSheet:
+                                    styles: "~res:/UI/Screens/Fonts.yaml"
+                    -   class: "UIControl"
+                        name: "Content"
+                        components:
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                verticalPolicy: "PercentOfChildrenSum"
+                            FlowLayout:
+                                hDynamicInLinePadding: true
+                                hSpacing: 5.000000
+                                vPadding: "10.000000"
+                                vSpacing: 10.000000
+                            UIRepeatComponent:
+                                control: "~res:/UI/Screens/Lobby/BattleResults/AchievementPageRibbon.yaml"
+                                dataContainer: "results.ribbonsContainer"
+                                args:
+                                    "ribbon": "_item"
+                                eventActions:
+                                - ["OnRibbonTap", "OnRibbonTap", "_item.numberId"]
+                -   class: "UIControl"
+                    name: "BattleMedalsPanel"
+                    input: false
+                    components:
+                        LinearLayout:
+                            orientation: "TopDown"
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfChildrenSum"
+                    bindings:
+                    - ["visible", "not results.battleMedalsContainer.Empty()"]
+                    children:
+                    -   prototype: "SectionHeader3/SectionHeader3"
+                        name: "HeaderMedals"
+                        children:
+                        -   class: "UIControl"
+                            name: "Header3"
+                            input: false
+                            classes: "header3 color=text-color-white"
+                            components:
+                                UITextComponent:
+                                    text: "#battle_results:AchievementsPage/ReceivedAchievements"
+                                    colorInheritType: "COLOR_IGNORE_PARENT"
+                                Anchor:
+                                    hCenterAnchorEnabled: true
+                                SizePolicy:
+                                    horizontalPolicy: "PercentOfContent"
+                                    verticalPolicy: "PercentOfParent"
+                                StyleSheet:
+                                    styles: "~res:/UI/Screens/Fonts.yaml"
+                    -   class: "UIControl"
+                        name: "Content"
+                        components:
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                verticalPolicy: "PercentOfChildrenSum"
+                            FlowLayout:
+                                hDynamicInLinePadding: true
+                                hSpacing: 15.000000
+                                vPadding: "10.000000"
+                                vSpacing: 10.000000
+                            UIRepeatComponent:
+                                control: "~res:/UI/Screens/Lobby/Common/BindableAchievementItemWithProgress.yaml"
+                                dataContainer: "results.battleMedalsContainer"
+                                args:
+                                    "achievement": "_item"
+                                eventActions:
+                                - ["OnMedalTap", "OnMedalTap", "_item.tapInfo"]
+                -   class: "UIControl"
+                    name: "ComingSoonMedalsPanel"
+                    input: false
+                    components:
+                        LinearLayout:
+                            orientation: "TopDown"
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfChildrenSum"
+                    bindings:
+                    - ["visible", "not results.progressMedalsContainer.Empty()"]
+                    children:
+                    -   prototype: "SectionHeader3/SectionHeader3"
+                        name: "HeaderMedals"
+                        size: [960.000000, 36.000000]
+                        children:
+                        -   class: "UIControl"
+                            name: "Header3"
+                            input: false
+                            classes: "header3 color=text-color-white"
+                            components:
+                                UITextComponent:
+                                    text: "#battle_results:AchievementsPage/ProgressAchievements"
+                                    colorInheritType: "COLOR_IGNORE_PARENT"
+                                Anchor:
+                                    hCenterAnchorEnabled: true
+                                SizePolicy:
+                                    horizontalPolicy: "PercentOfContent"
+                                    verticalPolicy: "PercentOfParent"
+                                StyleSheet:
+                                    styles: "~res:/UI/Screens/Fonts.yaml"
+                    -   class: "UIControl"
+                        name: "Content"
+                        components:
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                verticalPolicy: "PercentOfChildrenSum"
+                            FlowLayout:
+                                hDynamicInLinePadding: true
+                                hSpacing: 15.000000
+                                vPadding: "10.000000"
+                                vSpacing: 10.000000
+                            UIRepeatComponent:
+                                control: "~res:/UI/Screens/Lobby/Common/BindableAchievementItemWithProgress.yaml"
+                                dataContainer: "results.progressMedalsContainer"
+                                args:
+                                    "achievement": "_item"
+                                eventActions:
+                                - ["OnMedalTap", "OnMedalTap", "_item.tapInfo"]
+                -   class: "UIControl"
+                    name: "NoMedalLabel"
+                    input: false
+                    classes: "header1 color=text-color-white"
+                    components:
+                        UITextComponent:
+                            text: "#battle_results:AchievementsPage/NoAchievements"
+                            colorInheritType: "COLOR_IGNORE_PARENT"
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfContent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens/Fonts.yaml"
+                    bindings:
+                    - ["visible", "results.battleMedalsContainer.Empty() and results.progressMedalsContainer.Empty()"]
+        -   class: "UIScrollBar"
+            name: "VerticalScrollbar"
+            size: [10.000000, 688.000000]
+            input: false
+            classes: "notch-tightly-right-inset"
+            orientation: "ORIENTATION_VERTICAL"
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+                    topAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                UIAnchorSafeAreaComponent: {}
+                ScrollBarDelegate:
+                    delegate: "../ScrollView"
+                StyleSheet:
+                    styles: "~res:/UI/Styles/SafeAreaStyles.yaml"
+            children:
+            -   class: "UIControl"
+                name: "slider"
+                size: [10.000000, 688.000000]
+                input: false
+                components:
+                    Background:
+                        drawType: "DRAW_STRETCH_VERTICAL"
+                        sprite: "~res:/Gfx/UI/CommonUIElements/VerticalScroll"
+                        topBottomStretchCap: 10.000000
+    -   class: "UIControl"
+        name: "TrainingNoteContainer"
+        size: [1024.000000, 50.000000]
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            IgnoreLayout: {}
+        children:
+        -   prototype: "BattleResultsCommon/TrainingNote"
+            name: "TrainingNote"
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+            bindings:
+            - ["visible", "results.flagTraining"]

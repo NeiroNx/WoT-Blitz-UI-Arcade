@@ -1,0 +1,31 @@
+animation ShowDepositsProgress
+{
+  if (showDepositsEffect)
+  {
+    ChangeData(depositEffectsInProgress, true);
+    StopParticles("**/DepositsFx");
+    StartParticles("**/DepositsFx");
+
+    if (goldDepositProgress)
+    {
+      StopParticles("**/GoldDepositFx");
+      StartParticles("**/GoldDepositFx");
+      ChangeData(serializationInfo.goldDepositStagedValue, goldDeposit.bank.current.quantity);
+    }
+    if (creditsDepositProgress)
+    {
+      StopParticles("**/CreditsDepositFx");
+      StartParticles("**/CreditsDepositFx");
+      ChangeData(serializationInfo.creditsDepositStagedValue, creditsDeposit.bank.current.quantity);
+    }
+    if (xpDepositProgress)
+    {
+      StopParticles("**/XpDepositFx");
+      StartParticles("**/XpDepositFx");
+      ChangeData(serializationInfo.xpDepositStagedValue, xpDeposit.bank.current.quantity);
+    }
+    Wait(2);
+    ChangeData(depositEffectsInProgress, false);
+  }
+  
+}

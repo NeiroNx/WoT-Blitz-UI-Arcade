@@ -1,0 +1,42 @@
+Header:
+    version: "24"
+ImportedPackages:
+- "~res:/UI/Screens/Fonts.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "VerticalLayout"
+    position: [0.000000, 0.000000]
+    size: [323.000000, 137.000000]
+    noInput: true
+    components:
+        LinearLayout: {}
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Battle/ReplayResultsFpsHistogram.yaml"
+    children:
+    -   class: "UIControl"
+        name: "StatsText"
+        size: [512.000000, 334.000000]
+        noInput: true
+        classes: "header3"
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                horizontalValue: 30.000000
+                verticalPolicy: "PercentOfParent"
+                verticalValue: 100.000000
+            UITextComponent:
+                text: "ototo"
+                color: [1.000000, 1.000000, 1.000000, 0.501961]
+                colorInheritType: "COLOR_IGNORE_PARENT"
+                multiline: "MULTILINE_ENABLED"
+    -   class: "UIControl"
+        customClass: "FpsHistogram"
+        name: "FpsHistogram"
+        noInput: true
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                horizontalValue: 70.000000
+                verticalPolicy: "PercentOfParent"
+                verticalValue: 100.000000

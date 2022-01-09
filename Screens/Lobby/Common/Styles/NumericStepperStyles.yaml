@@ -1,0 +1,9 @@
+Header:
+    version: "45"
+StyleSheets:
+-   selector: ".stepper"
+    properties:
+        bg-color: [1.000000, 1.000000, 1.000000, 1.000000]
+-   selector: ".stepper:disabled"
+    properties:
+        bg-color: [1.000000, 1.000000, 1.000000, 0.501961]

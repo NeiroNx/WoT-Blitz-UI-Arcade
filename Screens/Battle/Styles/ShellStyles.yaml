@@ -1,0 +1,9 @@
+Header:
+    version: "48"
+StyleSheets:
+-   selector: ".lowAmmo #Active, .lowAmmo #Full"
+    properties:
+        bg-color: [1.000000, 0.000000, 0.000000, 1.000000]
+-   selector: ".fullAmmo #Active, .fullAmmo #Full"
+    properties:
+        bg-color: [0.513726, 0.733333, 0.223529, 1.000000]

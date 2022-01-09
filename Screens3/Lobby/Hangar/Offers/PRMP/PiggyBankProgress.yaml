@@ -1,0 +1,64 @@
+Header:
+    version: "111"
+Prototypes:
+-   class: "UIControl"
+    name: "PiggyBankProgress"
+    size: [300.000000, 30.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIAttachLayoutMasterComponent:
+            attachId: "BATTLE_PASS_DEPOSITS_PROGRESS"
+        UIDataParamsComponent:
+            params:
+            - ["float", "animationTime", "1.000000", "1.000000"]
+            - ["bool", "animated", "false", "false"]
+            - ["bool", "changeColor", "false", "false"]
+            - ["bool", "forceFullProgress", "true", "true"]
+            - ["PiggyBankState", "state", "null", "{ }"]
+    children:
+    -   class: "UIControl"
+        name: "ProgressBarHolder"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                condition: "animated"
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/ProgressBarAnimated.yaml"
+                args:
+                    "animationTime": "animationTime"
+                    "previousValue": "state.previousQuantity"
+                    "value": "state.current.quantity"
+                    "maximum": "state.max.quantity"
+                    "minimum": "0"
+                    "changeColor": "changeColor"
+            UIChildComponent1:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/ProgressBar.yaml"
+                args:
+                    "changeColor": "changeColor"
+                    "minimum": "0"
+                    "maximum": "state.max.quantity"
+                    "value": "state.current.quantity"
+    -   class: "UIControl"
+        name: "CurrentValue"
+        input: false
+        components:
+            Anchor:
+                rightAnchorEnabled: true
+                rightAnchor: 6.000000
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIAttachLayoutMasterComponent:
+                attachId: "BATTLE_PASS_DEPOSITS_LIMIT"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/Currency.yaml"
+                args:
+                    "currencySize": "eCurrencySize.SMALL"
+                    "resource": "state.max"
+                    "forceFullValue": "forceFullProgress"

@@ -1,0 +1,47 @@
+Header:
+    version: 141
+Prototypes:
+-   class: "UIControl"
+    name: "SmartDlcInitialization"
+    size: [960.000000, 640.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["bool", "loading", "false", "true"]
+    children:
+    -   class: "UIStaticText"
+        name: "DescriptionControl"
+        position: [512.000000, 409.000000]
+        size: [1024.000000, 60.000000]
+        pivot: [0.500000, 0.000000]
+        components:
+            UITextComponent:
+                text: "Connecting..."
+                fontName: "WarHeliosCondC_17"
+                align: ["HCENTER", "TOP", "VCENTER"]
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 0.000000
+                rightAnchorEnabled: true
+                rightAnchor: 0.000000
+                vCenterAnchorEnabled: true
+                vCenterAnchor: 55.000000
+        bindings:
+        - ["visible", "loading"]
+    -   class: "UIControl"
+        name: "Spinner"
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                condition: "loading"
+                prototypePath: "~res:/UI/Screens3/Common/LoadingSpinner.yaml"

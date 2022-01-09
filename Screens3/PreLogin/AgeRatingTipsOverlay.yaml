@@ -1,0 +1,138 @@
+Header:
+    version: 134
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/Overlay/Overlay.yaml"
+- "~res:/UI/Screens3/Common/VerticalScrollBar.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "AgeRatingTipsOverlay"
+    size: [1280.000000, 640.000000]
+    input: false
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["string", "title", "\"\"", "localize(\"netease/loginScreen/ageRatingInformationTitle/NE\")"]
+            - ["string", "info", "\"\"", "localize(\"netease/loginScreen/ageRatingInformation/NE\")"]
+            events:
+            - "OVERLAY_CLOSE"
+        UIDataLocalVarsComponent:
+            data:
+            - ["string", "header", "title"]
+            - ["string", "description", "info"]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+                verticalFormula: "childrenSum"
+        children:
+        -   prototype: "Overlay/OverlayScreen"
+            name: "OverlayScreen"
+            components:
+                UIDataParamsComponent:
+                    args:
+                        "forcedFullSize": "true"
+                        "isFullSizeTabControl": "true"
+                        "tabContent": "AgeRatingTipsContent"
+                    eventActions:
+                    - ["OVERLAY_CLOSE_START", "", ""]
+                    - ["BACK_EVENT", "OVERLAY_CLOSE", ""]
+                    - ["OVERLAY_OPEN_FINISH", "", ""]
+Slots:
+-   class: "UIControl"
+    name: "AgeRatingTipsContent"
+    size: [1280.000000, 640.000000]
+    input: false
+    components:
+        Anchor:
+            enabled: true
+            leftAnchorEnabled: true
+            leftAnchor: 16.000000
+            hCenterAnchorEnabled: true
+            rightAnchorEnabled: true
+            rightAnchor: 16.000000
+            topAnchorEnabled: true
+            topAnchor: 16.000000
+            vCenterAnchorEnabled: false
+        LinearLayout:
+            orientation: "LeftToRight"
+            spacing: 4.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            LinearLayout:
+                orientation: "TopDown"
+                spacing: 8.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "Header"
+            input: false
+            classes: "t-headline bold white-wild-sand-text"
+            components:
+                UITextComponent: {}
+                Anchor:
+                    hCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+            bindings:
+            - ["UITextComponent.text", "header"]
+        -   class: "UIScrollView"
+            name: "Scroll"
+            autoUpdate: true
+            centerContent: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "Formula"
+                    verticalFormula: "max(parentRest, maxChild)"
+            children:
+            -   class: "UIScrollViewContainer"
+                name: "scrollContainerControl"
+                scrollDirection: "kVertical"
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfChildrenSum"
+                children:
+                -   class: "UIControl"
+                    name: "Description"
+                    input: false
+                    classes: "t-body regular white-wild-sand-text"
+                    components:
+                        UITextComponent:
+                            multiline: "MULTILINE_ENABLED"
+                            align: ["LEFT"]
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfContent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+                    bindings:
+                    - ["UITextComponent.text", "description"]
+            -   prototype: "VerticalScrollBar/VerticalScrollBar"
+                name: "VerticalScrollBar"
+                components:
+                    ScrollBarDelegate:
+                        delegate: ".."

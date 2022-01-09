@@ -1,0 +1,16 @@
+action SliderMinus()
+{
+    if (roundValue > minValue)
+    {
+        Event("ON_SLIDER_MINUS", ".", index);
+    }
+}
+
+action SliderPlus()
+{
+    if (roundValue < maxAllowedValue)
+    {
+        Event("ON_SLIDER_PLUS", ".", index);
+    }
+}
+

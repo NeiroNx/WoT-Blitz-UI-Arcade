@@ -1,0 +1,41 @@
+action DelayedMoveIn(bool run, float animationTime, float animationDelay)
+{
+    if (run)
+    {
+        if (option.validityIndex > 0)
+        {
+          Wait(animationDelay * option.validityIndex);
+        }
+
+        Event("Animate", arg1=true, arg2=animationTime);
+    }
+}
+
+action Animate(bool moveIn, float animationTime)
+{
+    if (moveIn)
+    {
+        parallel
+        {
+          Opacity(
+            ".",
+            opacity=1.0,
+            time=animationTime,
+            interpolation=SINE_OUT);
+          Move(
+            "./OfferedOption",
+            y=0.0,
+            time=animationTime,
+            interpolation=SINE_OUT);
+        }
+    }
+    else
+    {
+        Opacity(
+          ".",
+          opacity=0.0,
+          time=animationTime,
+          interpolation=EASE_OUT);
+        Move("./OfferedOption", y=moveOutY);
+    }
+}

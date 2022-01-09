@@ -1,0 +1,59 @@
+action CURRENCY_ARROW_ANIMATION_START()
+{
+    if (not showCountAnimation)
+    {
+        Stop();
+    }
+
+    if (isNull(resourceInitial))
+    {
+        Stop();
+    }
+    else
+    {
+        if (resourceInitial.quantity == resource.quantity)
+        {
+            Stop();
+        }
+    }
+
+    parallel
+    {
+        {
+            Opacity("./ArrowContainer/Arrow", 1, 0.2, EASE_IN);
+
+            repeat(2)
+            {
+                MoveRel("./ArrowContainer/Arrow", 0, -8, 0.2, EASE_OUT);
+                MoveRel("./ArrowContainer/Arrow", 0, 8, 0.2, EASE_IN);
+            }
+
+            Wait(0.4);
+
+            ChangeData(quantityCurrent, quantityTarget, 2);
+
+            Wait(0.4);
+
+            parallel
+            {
+                MoveRel("./ArrowContainer/Arrow", 0, 8, 0.2, EASE_OUT);
+                Opacity("./ArrowContainer/Arrow", 0, 0.2);
+            }
+
+            Event("CURRENCY_ARROW_ANIMATION_END");
+
+            Stop();
+        }
+
+        {
+            WaitEvent("CURRENCY_ARROW_ANIMATION_STOP");
+            Stop();
+        }
+    }
+}
+
+action CURRENCY_ARROW_ANIMATION_FINALIZE()
+{
+    ChangeData(quantityCurrent, quantityTarget, 0);
+    Opacity("./ArrowContainer/Arrow", 0, 0.2);
+}

@@ -1,0 +1,11 @@
+Header:
+    version: "45"
+StyleSheets:
+-   selector: ".size-hint-text"
+    properties:
+        sizePolicy-horizontalPolicy: "FixedSize"
+        sizePolicy-horizontalValue: 400.000000
+-   selector: ".size-hint-text.Desktop"
+    properties:
+        sizePolicy-horizontalPolicy: "PercentOfParent"
+        sizePolicy-horizontalValue: 90.000000

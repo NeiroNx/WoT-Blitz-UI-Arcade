@@ -1,0 +1,196 @@
+Header:
+    version: 115
+Controls:
+-   class: "UIControl"
+    name: "EnemyMarker"
+    size: [50.000000, 50.000000]
+    pivot: [0.500000, 0.500000]
+    input: false
+    components:
+        Background:
+            sprite: "~res:/Gfx/UI/BattleScreenHUD/EnemyMarker"
+            color: [1.000000, 0.000000, 0.000000, 0.600000]
+            perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+-   class: "UIControl"
+    customClass: "BattleUILayer"
+    name: "BattleUILayer"
+    size: [800.000000, 600.000000]
+    input: false
+    components:
+        Anchor:
+            leftAnchorEnabled: true
+            rightAnchorEnabled: true
+            topAnchorEnabled: true
+            bottomAnchorEnabled: true
+    children:
+    -   class: "UIControl"
+        name: "AimContainer"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+        children:
+        -   class: "UIControl"
+            name: "FakeAimControl"
+            size: [300.000000, 300.000000]
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens/Battle/Aims/Aim2.yaml"
+-   class: "UIControl"
+    name: "ActiveEquip"
+    size: [0.000000, 0.000000]
+    input: false
+    components:
+        Anchor:
+            hCenterAnchorEnabled: true
+        LinearLayout: {}
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "PercentOfMaxChild"
+-   class: "UIControl"
+    name: "EquipElement"
+    size: [24.000000, 22.000000]
+    input: false
+    classes: "equip_element"
+    components:
+        StyleSheet:
+            styles: "~res:/UI/Screens/Battle/Styles/BattleEquipmentStyles.yaml"
+    children:
+    -   class: "UIControl"
+        name: "ProvisionBackground"
+        position: [0.000000, 0.000000]
+        size: [24.000000, 22.000000]
+        input: false
+        components:
+            Background:
+                drawType: "DRAW_SCALE_TO_RECT"
+                sprite: "~res:/Gfx/UI/BattleScreenHUD/EquipSmallIcons"
+                frame: 22
+    -   class: "UIControl"
+        name: "Background"
+        position: [0.000000, 0.000000]
+        size: [24.000000, 22.000000]
+        input: false
+        components:
+            Background:
+                drawType: "DRAW_SCALE_TO_RECT"
+                sprite: "~res:/Gfx/UI/BattleScreenHUD/EquipSmallIcons"
+                frame: 23
+    -   class: "UIControl"
+        name: "Icon"
+        position: [0.000000, 0.000000]
+        size: [24.000000, 22.000000]
+        input: false
+        components:
+            Background:
+                drawType: "DRAW_SCALE_TO_RECT"
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens/Battle/Styles/BattleEquipmentStyles.yaml"
+-   class: "UIControl"
+    name: "VehicleMarker"
+    size: [0.000000, 0.000000]
+    pivot: [0.500000, 1.000000]
+    input: false
+    components:
+        LinearLayout:
+            orientation: "BottomUp"
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfChildrenSum"
+-   class: "UIControl"
+    name: "SquadMemberMarker"
+    size: [56.000000, 56.000000]
+    scale: [1.000000, 1.000000]
+    pivot: [0.500000, 0.500000]
+    input: false
+    components:
+        Background:
+            sprite: "~res:/Gfx/UI/BattleScreenHUD/markers/squad_member_marker"
+        Anchor: {}
+        SizePolicy:
+            horizontalPolicy: "PercentOfContent"
+            verticalPolicy: "PercentOfContent"
+-   class: "UIControl"
+    name: "VehicleUIObject"
+    input: false
+    classes: "vehicle-ui-object"
+    components:
+        LinearLayout:
+            orientation: "BottomUp"
+            spacing: 5.000000
+        SizePolicy:
+            verticalPolicy: "PercentOfChildrenSum"
+        StyleSheet:
+            styles: "~res:/UI/Screens/Battle/Styles/BattleUILayerStyles.yaml"
+    children:
+    -   class: "UIControl"
+        name: "ChatCommandAnimatedControl"
+        visible: false
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfMaxChild"
+    -   class: "UIControl"
+        name: "EnemyDamagedModules"
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+            LinearLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfMaxChild"
+-   class: "UIControl"
+    name: "DamageMarker"
+    pivot: [0.500000, 1.000000]
+    input: false
+    classes: "explosion-status=explosion-not-active"
+    components:
+        Background:
+            perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+        Anchor:
+            hCenterAnchorEnabled: true
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfContent"
+        StyleSheet:
+            styles: "~res:/UI/Screens/Battle/DamageMarker.styles.yaml;~res:/UI/Screens/Fonts.yaml"
+    children:
+    -   class: "UIStaticText"
+        name: "DamageValue"
+        size: [50.000000, 32.000000]
+        pivot: [0.500000, 0.500000]
+        components:
+            UITextComponent:
+                text: "355"
+                colorInheritType: "COLOR_MULTIPLY_ALPHA_ONLY"
+                fitting: "FITTING_REDUCE"
+            Anchor:
+                hCenterAnchorEnabled: true
+                bottomAnchorEnabled: true
+    -   class: "UIControl"
+        name: "Explosion"
+        size: [32.000000, 32.000000]
+        pivot: [0.500000, 0.500000]
+        input: false
+        components:
+            Background:
+                sprite: "~res:/Gfx/UI/BattleScreenHUD/markers/explosion_bk.psd"
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+            Anchor:
+                hCenterAnchorEnabled: true
+                bottomAnchorEnabled: true

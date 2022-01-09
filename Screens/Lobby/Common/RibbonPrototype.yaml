@@ -1,0 +1,49 @@
+Header:
+    version: "24"
+ImportedPackages:
+- "~res:/UI/Screens/Common/BattleRibbon.yaml"
+Prototypes:
+-   prototype: "BattleRibbon/Ribbon"
+    name: "Ribbon"
+    pivot: [0.000000, 0.000000]
+    classes: "ribbon disable-fx"
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Lobby/Common/RibbonPrototype.yaml"
+    children:
+    -   path: "RibbonBack"
+        components:
+            SizePolicy:
+                verticalPolicy: "PercentOfContent"
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            Background:
+                sprite: "~res:/Gfx/UI/BattleResultsScreen/stripe_result.psd"
+        children: []
+    -   path: "RibbonBack/Embelishment"
+        scale: [0.800000, 0.800000]
+        angle: -60.000000
+        components:
+            Anchor:
+                hCenterAnchor: -2.000000
+                vCenterAnchor: -1.000000
+    -   path: "Info"
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+            Anchor:
+                bottomAnchor: 0.000000
+        children: []
+    -   path: "Info/Name"
+        components:
+            SizePolicy:
+                horizontalMax: 120.000000
+                verticalPolicy: "PercentOfContent"
+            UITextComponent:
+                multiline: "MULTILINE_ENABLED"
+    -   path: "Info/Counter"
+        visible: false

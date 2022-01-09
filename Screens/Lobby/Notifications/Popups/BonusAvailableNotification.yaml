@@ -1,0 +1,109 @@
+Header:
+    version: 121
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/Notifications/SystemNotificationPrototype.yaml"
+Controls:
+-   class: "UIControl"
+    customClass: "UIGenericNotification"
+    name: "BonusAvailableNotification"
+    size: [616.000000, 64.000000]
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+            padding: "8;0"
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfMaxChild"
+        UIDataSourceComponent0:
+            source: "~res:/UI/Examples/Models/Notifications/BonusAvailableNotification.model"
+    children:
+    -   class: "UIControl"
+        name: "NotificationItem"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 608.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 64.000000
+        children:
+        -   class: "UIControl"
+            name: "Content"
+            pivot: [0.500000, 0.500000]
+            input: false
+            components:
+                UIOpacityComponent: {}
+                Anchor:
+                    leftAnchorEnabled: true
+                    rightAnchorEnabled: true
+                    topAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                LinearLayout: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 64.000000
+            children:
+            -   class: "UIControl"
+                name: "Bg"
+                input: false
+                components:
+                    Background:
+                        drawType: "DRAW_STRETCH_BOTH"
+                        sprite: "~res:/Gfx/Lobby/backgrounds/bg_dark_r8"
+                        leftRightStretchCap: 8.000000
+                        topBottomStretchCap: 8.000000
+                    IgnoreLayout: {}
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+            -   class: "UIControl"
+                name: "Status"
+                input: false
+                components:
+                    LinearLayout:
+                        padding: "16"
+                        spacing: 16.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                children:
+                -   class: "UIControl"
+                    name: "Icon"
+                    position: [15.000000, 8.000000]
+                    size: [24.000000, 24.000000]
+                    input: false
+                    components:
+                        Background:
+                            sprite: "~res:/Gfx/Lobby/icons/icon_info_s"
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                            vCenterAnchor: 0.000000
+                -   class: "UIControl"
+                    name: "RichText"
+                    position: [56.000000, 15.000000]
+                    size: [539.000000, 20.000000]
+                    input: false
+                    components:
+                        Background: {}
+                        RichContent:
+                            baseClasses: "t-overline regular color=white-wild-sand-70-text"
+                            classesInheritance: false
+                        RichContentAliases0:
+                            aliases:
+                            - ["price", "<control control=\"~res:/UI/Screens3/Lobby/Common/BonusFactor.yaml\" prototype=\"BonusFactor\" args1=\"factor=dailyXPFactor\" args2=\"visible=true\" args3=\"type=eBonusFactor.kXP\"/>"]
+                            - ["body_highlighted", "<span class=\"t-overline bold color=white-wild-sand-text \"/>"]
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfChildrenSum"
+                        FlowLayout:
+                            hSpacing: 5.000000
+                            useRtl: true
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Font.style.yaml"
+                    bindings:
+                    - ["RichContent.text", "localize((when (isQuestsRefreshed == true) -> \"#hangar:notification/bonusAvailable\", \"#hangar:notification/xpAvailable\"), { \"xp\" = \"<price/>\"; })"]

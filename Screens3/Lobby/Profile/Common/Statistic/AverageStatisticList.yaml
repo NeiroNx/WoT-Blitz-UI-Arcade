@@ -1,0 +1,116 @@
+Header:
+    version: "74"
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/List/ListCell.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "ContentWrapper"
+    position: [0.000000, 32.000000]
+    size: [400.000000, 1940.000000]
+    input: false
+    components:
+        LinearLayout:
+            padding: "16"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfMaxChild"
+        UIDataParamsComponent:
+            params:
+            - ["DossierDescr", "dossier", "null", "{ }"]
+        UIDataLocalsComponent:
+            locals:
+            - ["int", "battlesCount", "dossier.battlesCount"]
+            - ["int", "destroyedEnemies", "dossier.frags"]
+            - ["int", "avgXp", "dossier.avgXp"]
+            - ["int", "spotted", "dossier.spotted"]
+            - ["int", "survivedBattles", "dossier.survivedBattles"]
+            - ["int", "avgDamageReceived", "dossier.avgDamageReceived"]
+            - ["int", "avgDamageDealt", "dossier.avgDamageDealt"]
+            - ["float", "avgDestroyedVehicles", "when battlesCount > 0 -> float(destroyedEnemies) / float(battlesCount), float(destroyedEnemies)"]
+            - ["float", "avgSpotted", "when battlesCount > 0 -> float(spotted) / float(battlesCount), float(spotted)"]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            LinearLayout:
+                orientation: "TopDown"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfChildrenSum"
+        children:
+        -   prototype: "ListCell/ListCell"
+            name: "BattleExperience"
+            components:
+                UIDataParamsComponent:
+                    args:
+                        "visible": "true"
+                        "name": "localize(\"#achievementScreen:Brief/AverageExp\")"
+                        "value": "str1000Separated(avgXp)"
+                        "showBottomSeparator": "false"
+            children:
+            -   path: "MainParamWrapper/MainParam/Title"
+                components:
+                    UITextComponent: {}
+                bindings:
+                - ["UITextComponent.text", "name", "Read"]
+        -   prototype: "ListCell/ListCell"
+            name: "AvgDamageDealt"
+            components:
+                UIDataParamsComponent:
+                    args:
+                        "visible": "true"
+                        "name": "localize(\"#achievementScreen:Stats/DamageDealt\")"
+                        "value": "str1000Separated(avgDamageDealt)"
+                        "showBottomSeparator": "false"
+            children:
+            -   path: "MainParamWrapper/MainParam/Title"
+                components:
+                    UITextComponent: {}
+                bindings:
+                - ["UITextComponent.text", "name", "Read"]
+        -   prototype: "ListCell/ListCell"
+            name: "AvgDamageReceived"
+            components:
+                UIDataParamsComponent:
+                    args:
+                        "visible": "true"
+                        "name": "localize(\"#achievementScreen:Stats/DamageReceived\")"
+                        "value": "str1000Separated(avgDamageReceived)"
+                        "showBottomSeparator": "false"
+            children:
+            -   path: "MainParamWrapper/MainParam/Title"
+                components:
+                    UITextComponent: {}
+                bindings:
+                - ["UITextComponent.text", "name", "Read"]
+        -   prototype: "ListCell/ListCell"
+            name: "AvgDetected"
+            components:
+                UIDataParamsComponent:
+                    args:
+                        "visible": "true"
+                        "name": "localize(\"#achievementScreen:Tanks/AverageSpots\")"
+                        "value": "str(avgSpotted, 2)"
+                        "showBottomSeparator": "false"
+            children:
+            -   path: "MainParamWrapper/MainParam/Title"
+                components:
+                    UITextComponent: {}
+                bindings:
+                - ["UITextComponent.text", "name", "Read"]
+        -   prototype: "ListCell/ListCell"
+            name: "AvgDestroyedVehicles"
+            components:
+                UIDataParamsComponent:
+                    args:
+                        "visible": "true"
+                        "name": "localize(\"#achievementScreen:Tanks/AverageFrags\")"
+                        "value": "str(avgDestroyedVehicles, 2)"
+                        "showBottomSeparator": "false"
+            children:
+            -   path: "MainParamWrapper/MainParam/Title"
+                components:
+                    UITextComponent: {}
+                bindings:
+                - ["UITextComponent.text", "name", "Read"]

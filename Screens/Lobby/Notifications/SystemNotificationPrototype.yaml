@@ -1,0 +1,98 @@
+Header:
+    version: 121
+Prototypes:
+-   class: "UIControl"
+    name: "Notification"
+    size: [616.000000, 64.000000]
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+            padding: "8;0"
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfMaxChild"
+    children:
+    -   class: "UIControl"
+        name: "NotificationItem"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 608.000000
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   class: "UIControl"
+            name: "Content"
+            pivot: [0.500000, 0.500000]
+            input: false
+            components:
+                UIOpacityComponent: {}
+                Anchor:
+                    leftAnchorEnabled: true
+                    rightAnchorEnabled: true
+                    topAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                LinearLayout: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfLastChild"
+            children:
+            -   class: "UIControl"
+                name: "Bg"
+                input: false
+                components:
+                    Background:
+                        drawType: "DRAW_STRETCH_BOTH"
+                        sprite: "~res:/Gfx/Lobby/backgrounds/bg_dark_r8"
+                        leftRightStretchCap: 8.000000
+                        topBottomStretchCap: 8.000000
+                    IgnoreLayout: {}
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+            -   class: "UIControl"
+                name: "Status"
+                input: false
+                components:
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    LinearLayout:
+                        padding: "16"
+                        spacing: 16.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "Formula"
+                        verticalFormula: "maxChild + 16"
+                children:
+                -   class: "UIControl"
+                    name: "Icon"
+                    position: [15.000000, 8.000000]
+                    size: [24.000000, 24.000000]
+                    input: false
+                    components:
+                        Background:
+                            sprite: "~res:/Gfx/Lobby/icons/icon_info_s"
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                            vCenterAnchor: 0.000000
+                -   class: "UIControl"
+                    name: "Result"
+                    position: [56.000000, 22.000000]
+                    input: false
+                    classes: "t-overline regular color=white-wild-sand-70-text"
+                    components:
+                        UITextComponent:
+                            multiline: "MULTILINE_ENABLED"
+                            fitting: "FITTING_POINTS"
+                            align: ["LEFT", "VCENTER"]
+                            useRtlAlign: "USE_BY_SYSTEM"
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "Formula"
+                            verticalFormula: "when content > 48 -> 64, 48"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"

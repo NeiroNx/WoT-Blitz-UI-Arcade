@@ -1,0 +1,7 @@
+animation ScrollToTank
+{
+  if (not isNull(selectedVehicle))
+  {
+    ScrollToEnsureControlOnScreen("**/" + selectedCellName);
+  }
+}

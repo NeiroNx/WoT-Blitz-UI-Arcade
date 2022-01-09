@@ -1,0 +1,10 @@
+animation Arrow
+{
+	Opacity(".", opacity=0);
+	Wait (delay);
+	repeat(99999)
+  	{
+		Opacity(".", opacity=startOpacity, time=animationTime/2, interpolation=SINE_OUT);
+		Opacity(".", opacity=finishOpacity, time=animationTime/2, interpolation=SINE_IN);
+  	}
+}

@@ -1,0 +1,12 @@
+action BACK_SHORTCUT
+{
+	PlaySound(sound="GUI/buttons/close");
+  if(isPreview)
+  {
+    Event("CLOSE_PREVIEW");
+  }
+  else
+  {
+    Event("BACK_EVENT");
+  }
+}

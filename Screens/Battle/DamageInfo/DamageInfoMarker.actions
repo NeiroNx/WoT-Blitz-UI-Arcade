@@ -1,0 +1,220 @@
+action START(string animationType, bool hasText)
+{
+	ChangeProperty(".", "UIOpacityComponent", "opacity", 1.0);
+	if(hasText)
+	{
+		Event("SET_TEXT_WRAPPER_OPACITY", arg1=0);	
+	}
+
+	if (animationType == "START_ICON_UPPERSCALE_ANIMATION")
+	{
+		Event("SET_ICON_WRAPPER_OPACITY", arg1=0);
+		Event (animationType, arg1=0.95, arg2=hasText);
+	}
+	if (animationType == "START_ICON_BREAK_ANIMATION")
+	{
+		Event("SET_ICON_WRAPPER_OPACITY", arg1=0);
+		Event (animationType, arg1=0.95, arg2=false, arg3=hasText);
+	}
+	if (animationType == "START_ICON_BREAK_RED_EXPLOSION_ANIMATION")
+	{
+		Event("SET_ICON_WRAPPER_OPACITY", arg1=0);
+		Event ("START_ICON_BREAK_ANIMATION", arg1=0.95, arg2=true, arg3=hasText);
+	}
+	if (animationType == "START_ICON_SHAKE_ANIMATION")
+	{
+		Event("SET_ICON_WRAPPER_OPACITY", arg1=0);
+		Event (animationType, arg1=0.95, arg2=hasText);
+	}
+	if(animationType == "START_ICON_RICOCHET_ANIMATION")
+	{
+		Event("SET_RICOCHET_ICON_WRAPPER_OPACITY", arg1=0);
+		Event (animationType, arg1=0.95, arg2=hasText);
+	}
+}
+
+action START_ICON_UPPERSCALE_ANIMATION(float iconSpeedRatio, bool hasText)
+{	
+	parallel
+	{
+		Scale ("**/Icon", 0.5, 0.5);
+		parallel
+		{
+			Opacity ("**/Icon", 1, iconSpeedRatio*0.2, EASE_OUT);
+			Opacity ("**/IconBg", 1, iconSpeedRatio*0.2, EASE_OUT);
+			sequence
+			{
+				Scale ("**/Icon", 1.5, 1.5, iconSpeedRatio*0.1, EASE_OUT);
+				Scale ("**/Icon", 1, 1, iconSpeedRatio*0.1, EASE_OUT);
+			}
+		}
+		if(hasText)
+		{
+			Event ("START_TEXT_ANIMATION");
+		}
+	}
+}
+
+action START_ICON_RICOCHET_ANIMATION(float iconSpeedRatio, bool hasText)
+{
+	parallel
+	{
+		Move ("**/RicochetBullet", -2, 5);
+		Rotate ("**/RicochetBullet", -45);
+		parallel
+		{
+			Opacity ("**/RicochetLine", 1, iconSpeedRatio*0.2, EASE_IN);
+			Opacity ("**/RicochetIconBg", 1, iconSpeedRatio*0.2, EASE_OUT);
+			Opacity ("**/RicochetBullet", 1, iconSpeedRatio*0.12, EASE_OUT);
+			parallel
+			{
+				Move ("**/RicochetBullet", 11, 16, 0.2, EASE_IN);
+				sequence
+				{
+					Wait (0.2);
+					Rotate ("**/RicochetBullet", -135, iconSpeedRatio*0.03, LINEAR);
+					parallel
+					{
+						Move ("**/RicochetBullet", 25, 5, iconSpeedRatio*0.15, EASE_OUT);
+						Opacity ("**/RicochetPath", 0.75, iconSpeedRatio*0.15, EASE_OUT);
+					}
+				}
+			}
+		}		
+		if(hasText)
+		{
+			Event ("START_TEXT_ANIMATION");
+		}
+	}
+}
+
+action START_HIDE_ANIMATION(string animationType, int hideAnimationType)
+{	
+	if (hideAnimationType==1)
+	{
+		parallel
+		{
+			Opacity (".", 0, 1.5*0.2, EASE_IN);
+			MoveRel (".", 200, 0, 1.5*0.4, EASE_IN);
+		}
+	}
+	if (hideAnimationType==2)
+	{
+		Opacity (".", 0, 1.5*0.2, EASE_IN);
+	}
+	if (hideAnimationType==1)
+	{
+		MoveRel (".", -200, 0);
+	}
+}
+
+action START_TEXT_ANIMATION()
+{
+	MoveRel ("**/TextWithModifier", -6, 0);
+	parallel
+	{
+		MoveRel ("**/TextWithModifier", 6, 0, 0.78*0.3, EASE_OUT);
+		Opacity ("**/TextWithModifier", 1, 0.78*0.3, EASE_OUT);
+		Opacity ("**/TextBg", 1, 0.78*0.3, EASE_OUT);
+	}
+}
+
+action START_ICON_BREAK_ANIMATION(float iconSpeedRatio, bool withCircle, bool hasText)
+{
+	parallel
+	{
+		Scale ("**/Icon", 2.5, 2.5);
+		ChangeProperty ("**/BreakLine", "SizePolicy", "verticalValue", 8);
+		parallel
+		{
+			Opacity ("**/Icon", 1, iconSpeedRatio*0.1, SINE_IN);
+			Opacity ("**/IconBg", 1, iconSpeedRatio*0.1, SINE_IN);
+			Scale ("**/Icon", 0.7, 0.7, iconSpeedRatio*0.2, SINE_IN);
+			Event ("START_COMMON_EXPLOSION_ANIMATION");
+			if(withCircle)
+			{
+				Event ("START_COMMON_CIRCLE_ANIMATION", arg1=iconSpeedRatio);
+			}
+		}
+		parallel
+		{
+			Scale ("**/Icon", 1, 1, iconSpeedRatio*0.2, EASE_OUT);
+			Opacity ("**/Icon", 0.75, iconSpeedRatio*0.2, EASE_OUT);
+			ChangeProperty ("**/BreakLine", "SizePolicy", "verticalValue", 48, iconSpeedRatio*0.2, EASE_OUT);
+			Opacity ("**/BreakLine", 0.75, iconSpeedRatio*0.2, EASE_OUT);
+		}
+		parallel
+		{
+			ChangeProperty ("**/BreakLine", "SizePolicy", "verticalValue", 36, iconSpeedRatio*0.2, EASE_OUT);
+			if(hasText)
+			{
+				Event ("START_TEXT_ANIMATION");			
+			}
+		}
+	}
+}
+
+action START_COMMON_CIRCLE_ANIMATION(float iconSpeedRatio) 
+{
+	Opacity ("**/ExplosionCircle", 0);
+	parallel
+	{
+		ChangeProperty ("**/ExplosionCircle", "SizePolicy", "verticalValue", 88, iconSpeedRatio*0.4, EASE_OUT);
+		ChangeProperty ("**/ExplosionCircle", "SizePolicy", "horizontalValue", 88, iconSpeedRatio*0.4, EASE_OUT);		
+		sequence
+		{
+			Opacity ("**/ExplosionCircle", 0.15, iconSpeedRatio*0.1, EASE_OUT);
+			Opacity ("**/ExplosionCircle", 0, iconSpeedRatio*0.3, EASE_OUT);
+		}
+	}
+}
+
+action START_ICON_SHAKE_ANIMATION(float iconSpeedRatio, bool hasText)
+{
+	parallel
+	{
+		parallel
+		{
+			Opacity ("**/Icon", 1, iconSpeedRatio*0.3, EASE_OUT);
+			Opacity ("**/IconBg", 1, iconSpeedRatio*0.3, EASE_OUT);
+			sequence
+			{
+				MoveRel ("**/Icon", -3, 0, iconSpeedRatio*0.03, EASE_OUT);
+				MoveRel ("**/Icon", 6, 0, iconSpeedRatio*0.06, EASE_OUT);
+				MoveRel ("**/Icon", -6, 0, iconSpeedRatio*0.06, EASE_OUT);
+				MoveRel ("**/Icon", 3, 0, iconSpeedRatio*0.03, EASE_OUT);
+			}
+		}	
+		if(hasText)
+		{
+			Event ("START_TEXT_ANIMATION");
+		}
+	}
+}
+
+action START_COMMON_EXPLOSION_ANIMATION() 
+{
+  	StopParticles(path="**/Explosion");
+  	StartParticles(path="**/Explosion");
+}
+
+action SET_RICOCHET_ICON_WRAPPER_OPACITY(int value)
+{
+	Opacity ("**/RicochetLine", value);
+	Opacity ("**/RicochetBullet", value);
+	Opacity ("**/RicochetIconBg", value);
+	Opacity ("**/RicochetPath", value);
+}
+
+action SET_ICON_WRAPPER_OPACITY(int value)
+{
+	Opacity ("**/Icon", value);
+	Opacity ("**/IconBg", value);
+	Opacity ("**/BreakLine", value);
+}
+
+action SET_TEXT_WRAPPER_OPACITY(int value)
+{
+	Opacity ("**/TextWithModifier", value);
+	Opacity ("**/TextBg", value);
+}

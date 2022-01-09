@@ -1,0 +1,38 @@
+Header:
+    version: "108"
+Prototypes:
+-   class: "UIControl"
+    name: "InventorySlots"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "SLOT_SELECTED_ANIMATION,~res:/UI/Screens3/Lobby/Inventory/Equipment/EquipmentSlots.animation"
+        Anchor:
+            hCenterAnchorEnabled: true
+        LinearLayout:
+            orientation: "TopDown"
+            spacing: 32.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfChildrenSum"
+        UISwitchBarComponent:
+            onSelectElement: "SLOT_SELECTED_ANIMATION"
+            onSelectElementData: "_selectedElement"
+            selectionEventType: "TOUCH_UP"
+            moveSelectionMode: "VerticalDpad"
+        UIDataParamsComponent:
+            params:
+            - ["InventoryItemsView", "itemsModel", "null", "{ }"]
+            events:
+            - "SLOT_SELECTED"
+        UIRepeatComponent:
+            control: "~res:/UI/Screens3/Lobby/Inventory/Equipment/EquipmentSlot.yaml"
+            dataContainer: "itemsModel.slots"
+            args:
+                "selected": "_index == itemsModel.selectedSlotIndex"
+                "index": "_index"
+                "slot": "itemsModel.slots[_index]"
+            eventActions: []
+    bindings:
+    - ["UISwitchBarComponent.selectedElement", "itemsModel.selectedSlotIndex"]

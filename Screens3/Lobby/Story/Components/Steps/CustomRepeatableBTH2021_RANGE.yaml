@@ -1,0 +1,267 @@
+Header:
+    version: 128
+Prototypes:
+-   class: "UIControl"
+    name: "CustomRepeatable"
+    size: [192.000000, 192.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfLastChild"
+            verticalPolicy: "PercentOfLastChild"
+        UIDataParamsComponent:
+            params:
+            - ["StoryStepView", "model", "null", "{ \"step\" = { \"rewards\" = [ { \"type\" = ResourceType.vehicle; }; ]; \"repeats\" = { \"toFinish\" = 3; }; \"isFinished\" = false; \"isMain\" = true; }; \"isSelected\" = true; }"]
+            - ["string", "imagePathDefault", "\"\"", "\"~res:/Gfx/Lobby/events/2021_birthday_tir/medal_event-hb-7_2\""]
+            - ["string", "imagePathDone", "\"\"", "\"~res:/Gfx/Lobby/events/2021_birthday_tir/medal_event-hb-7_2-1\""]
+            events:
+            - "DESELECT"
+            - "SHOW_STEP_INFO(int id)"
+            - "SELECT_STEP(int id)"
+        UIDataLocalVarsComponent:
+            data:
+            - ["float", "iconBrightness", "0.000000"]
+            - ["float", "selectedOpacity", "when model.isSelected -> 1.000000, 0.000000"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["StoryStepModel", "step", "model.step"]
+            - ["string", "imagePath", "when step.isFinished -> imagePathDone, imagePathDefault"]
+            - ["bool", "isReady", "step.net.price.Empty() and not step.isFinished"]
+            - ["bool", "isRepeatable", "step.repeats.toFinish != 1"]
+            - ["int", "repeatsLeft", "when isRepeatable and step.repeats.toFinish != 0 -> step.repeats.toFinish - step.repeats.timesCompleted, 0"]
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/Lobby/Story/Components/Steps/CustomRepeatable.actions"
+    children:
+    -   class: "UIControl"
+        name: "ContentHolder"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/ButtonDecorator.yaml"
+                args:
+                    "content": "Content"
+                    "sound": "when not model.isSelected -> eButtonSound.CHOOSE, eButtonSound.OPEN"
+                    "isSelected": "when not step.isFinished -> model.isSelected, false"
+                    "hasInput": "not step.isFinished"
+                    "ltrbSafeZone": "vec4(8.000000, 8.000000, 8.000000, 8.000000)"
+                eventActions:
+                - ["PUSH", "PUSH", "_event.scale, _event.opacity, _event.time"]
+                - ["PULL", "PULL", "_event.time"]
+                - ["HOVER", "HOVER", "_event.brightness, _event.time"]
+                - ["CANCEL_HOVER", "CANCEL_HOVER", "_event.time"]
+                - ["SELECT", "SELECT", "_event.time"]
+                - ["CANCEL_SELECT", "CANCEL_SELECT", "_event.time"]
+                - ["ON_TOUCH", "ON_TOUCH", "step.id"]
+Slots:
+-   class: "UIControl"
+    name: "FxWrapper"
+    size: [160.000000, 160.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+    children:
+    -   class: "UIParticles"
+        name: "Fx"
+        scale: [4.200000, 4.200000]
+        pivot: [0.500000, 0.500000]
+        input: false
+        effectPath: "~res:/3d/FX/UI/BattlePass/GlowReward.sc2"
+        autoStart: true
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+-   class: "UIControl"
+    name: "Content"
+    pivot: [0.500000, 0.500000]
+    input: false
+    components:
+        UIOpacityComponent: {}
+        Anchor:
+            hCenterAnchorEnabled: true
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 176.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 176.000000
+    children:
+    -   class: "UIControl"
+        name: "IconWrapper"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "UnderlayFx"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                UIChildComponent0:
+                    childType: "kControl"
+                    condition: "isReady"
+                    control: "FxWrapper"
+        -   class: "UIControl"
+            name: "Icon"
+            input: false
+            components:
+                UITextureComponent:
+                    materialPath: "~res:/Materials.custom/2d.Textured.HSV.material"
+                    drawType: "DRAW_SCALE_PROPORTIONAL"
+                    perPixelAccuracy: "PER_PIXEL_ACCURACY_FORCED"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            bindings:
+            - ["UITextureComponent.spritePath", "imagePath"]
+            - ["UITextureComponent.materialParams", "\"value,\" + str(int(iconBrightness))"]
+    -   class: "UIControl"
+        name: "Selected"
+        size: [176.000000, 176.000000]
+        input: false
+        components:
+            UIOpacityComponent:
+                ignoreParentOpacity: true
+            UITextureComponent:
+                spritePath: "~res:/Gfx/Lobby/events/2021_birthday_tir/selector_circle"
+                drawType: "DRAW_SCALE_PROPORTIONAL"
+                perPixelAccuracy: "PER_PIXEL_ACCURACY_FORCED"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        bindings:
+        - ["UIOpacityComponent.opacity", "selectedOpacity"]
+    -   class: "UIControl"
+        name: "CornerIcon"
+        input: false
+        components:
+            UIOpacityComponent:
+                ignoreParentOpacity: true
+            Anchor:
+                rightAnchorEnabled: true
+                rightAnchor: 6.000000
+                topAnchorEnabled: true
+                topAnchor: 6.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+        children:
+        -   class: "UIControl"
+            name: "Info"
+            input: false
+            classes: "white-wild-sand-50-bg"
+            components:
+                Background:
+                    drawType: "DRAW_ALIGNED"
+                    sprite: "~res:/Gfx/Lobby/icons/icon_info_xs"
+                UIOpacityComponent: {}
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 16.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 16.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+            bindings:
+            - ["UIOpacityComponent.opacity", "selectedOpacity"]
+    -   class: "UIControl"
+        name: "LabelArea"
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                bottomAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfLastChild"
+                verticalPolicy: "PercentOfLastChild"
+        bindings:
+        - ["visible", "repeatsLeft > 1"]
+        children:
+        -   class: "UIControl"
+            name: "LabelWrapper"
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "lastChild + 14"
+                    verticalPolicy: "Formula"
+                    verticalFormula: "lastChild"
+            children:
+            -   class: "UIControl"
+                name: "Bg"
+                input: false
+                components:
+                    LinearLayout: {}
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                children:
+                -   class: "UIControl"
+                    name: "Left"
+                    input: false
+                    classes: "red-tamarillo-bg"
+                    components:
+                        Background:
+                            drawType: "DRAW_ALIGNED"
+                            sprite: "~res:/Gfx/Lobby/backgrounds/bg_leaf_24_r4_left"
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfParent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Color.style.yaml"
+                -   class: "UIControl"
+                    name: "Center"
+                    position: [7.000000, 0.000000]
+                    size: [90.000000, 28.000000]
+                    input: false
+                    classes: "red-tamarillo-bg"
+                    components:
+                        Background: {}
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfParent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Color.style.yaml"
+                -   class: "UIControl"
+                    name: "Right"
+                    input: false
+                    classes: "red-tamarillo-bg"
+                    components:
+                        Background:
+                            drawType: "DRAW_ALIGNED"
+                            sprite: "~res:/Gfx/Lobby/backgrounds/bg_leaf_24_r4_left"
+                            spriteModification: ["FLIP_HORIZONTAL", "FLIP_VERTICAL"]
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfParent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Color.style.yaml"
+            -   class: "UIControl"
+                name: "LabelHolder"
+                input: false
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfFirstChild"
+                        verticalPolicy: "PercentOfFirstChild"
+                    UIChildComponent0:
+                        condition: "isRepeatable and repeatsLeft > 1"
+                        prototypePath: "~res:/UI/Screens3/Common/RemainingLabel.yaml"
+                        args:
+                            "left": "repeatsLeft"
+                            "isInfinite": "false"
+                            "isShort": "false"

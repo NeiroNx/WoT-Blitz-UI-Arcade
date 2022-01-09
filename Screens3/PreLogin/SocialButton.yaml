@@ -1,0 +1,63 @@
+Header:
+    version: 133
+Prototypes:
+-   class: "UIControl"
+    name: "SocialButton"
+    size: [32.000000, 32.000000]
+    input: true
+    classes: "social-button"
+    components:
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 64.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 64.000000
+        UIInputEventComponent:
+            onTouchUpInside: "ON_CLICK_BUTTON"
+            onTouchUpInsideData: "descr.authMethod"
+            blockDuplicatedEvents: true
+        UIDataParamsComponent:
+            params:
+            - ["SocialNetworkDescription", "descr", "null", "{ \"enabled\" = true; \"authMethod\" = eAccountAuthMethods.kExternalFacebook; }"]
+            events:
+            - "ON_CLICK_BUTTON"
+        UIDataLocalBindingsComponent:
+            data:
+            - ["string", "iconLink", "when descr.authMethod == eAccountAuthMethods.kExternalGamecenter -> \"apple_game\", descr.authMethod == eAccountAuthMethods.kExternalGoogle -> \"google\", descr.authMethod == eAccountAuthMethods.kExternalFacebook -> \"facebook\", descr.authMethod == eAccountAuthMethods.kExternalLive -> \"microsoft\", descr.authMethod == eAccountAuthMethods.kExternalSteam -> \"steam\", descr.authMethod == eAccountAuthMethods.kExternalAppleLogin -> \"apple\", \"\""]
+    bindings:
+    - ["enabled", "descr.enabled"]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        size: [32.000000, 32.000000]
+        pivot: [0.500000, 0.500000]
+        input: false
+        classes: "content-area button-ok-sound"
+        components:
+            UIOpacityComponent: {}
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+            UIInputEventComponent:
+                blockDuplicatedEvents: true
+            Sound: {}
+            StyleSheet:
+                styles: "~res:/UI/Screens3/PreLogin/SocialButton.style.yaml;~res:/UI/Screens3/ButtonSound.style.yaml"
+        children:
+        -   class: "UIControl"
+            name: "Icon"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Background:
+                    perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            bindings:
+            - ["Background.sprite", "\"~res:/Gfx/Lobby/icons/icon_\" + iconLink + \"_fill_l\""]

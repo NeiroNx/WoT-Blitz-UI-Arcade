@@ -1,0 +1,21 @@
+action ShowInfo()
+{
+	if (not itemCollapsed)
+	{
+		ChangeData(itemCollapsed, not itemCollapsed);
+	    parallel 
+	    {
+	    	ChangeProperty("**/Info", "UIOpacityComponent", "opacity", 1.0, 0.6, EASE_OUT);
+	        ChangeProperty("**/Info", "SizePolicy", "verticalValue", 100, 0.6, SINE_OUT);
+	    }
+	}
+	else
+	{
+		ChangeData(itemCollapsed, not itemCollapsed);
+		parallel 
+	     {
+	     	ChangeProperty("**/Info", "UIOpacityComponent", "opacity", 0.0, 0.6, EASE_OUT);
+	        ChangeProperty("**/Info", "SizePolicy", "verticalValue", 0, 0.6, SINE_OUT);
+	     } 
+	}	
+}

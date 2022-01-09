@@ -1,0 +1,66 @@
+action CHANGED_SELECTED_ITEM_ANIMATION()
+{ 
+     BroadcastEvent("CHANGE_ITEM","**/Pages",selectedItem);
+	 if (closeButtonFadeEnabled)
+	 {
+		 Event("SET_BUTTON_OPACITY", arg1 = 0.0);
+		 Wait(0.4);
+		 Event("SET_BUTTON_OPACITY", arg1 = 1.0);
+	 }
+}
+
+action ENTER_EVENT
+{
+	if (buyButtonVisible)
+	{
+		if(buttonType == eButtonType.POSITIVE)
+		{
+			PlaySound("GUI/buttons/open");
+		}
+		else
+		{
+			if(buttonType == eButtonType.ALTERNATIVE)
+			{
+				PlaySound("GUI/buttons/ok");
+			}
+			
+		}
+		Event("ON_BUTTON_PRESSED");
+	}
+}
+
+action CLOSE_EVENT
+{
+    PlaySound("GUI/buttons/close");
+    Event("BACK_EVENT");
+}
+
+action CLOSE_EVENT_FROM_BUTTON
+{
+    Event("BACK_EVENT");
+}
+
+action ON_BUTTON_PRESSED
+{
+    Event("ON_BUY_BATTLE_PASS");
+}
+
+action GO_TO_BACK
+{
+	DirectEvent("SWITCH_BACK", ".");
+    PlaySound(sound="GUI/buttons/choose");
+}
+
+action GO_TO_NEXT
+{
+	DirectEvent("SWITCH_NEXT", ".");
+    PlaySound(sound="GUI/buttons/choose");
+}
+
+action SET_BUTTON_OPACITY(float opacity)
+{
+    parallel
+    {	
+        ChangeProperty("**/CloseButtonWrapper", "UIOpacityComponent", "opacity", opacity, 0.4);
+    }
+}

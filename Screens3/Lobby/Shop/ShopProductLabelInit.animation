@@ -1,0 +1,4 @@
+animation Init
+{
+	Event("TEXT_CHANGED", arg1=false);
+}

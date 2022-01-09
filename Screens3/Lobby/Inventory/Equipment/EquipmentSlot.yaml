@@ -1,0 +1,32 @@
+Header:
+    version: "80"
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/InventorySlot.yaml"
+Controls:
+-   class: "UIControl"
+    name: "EquipmentSlot"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfMaxChild"
+        UIDataParamsComponent:
+            params:
+            - ["bool", "selected", "false", "false"]
+            - ["int", "index", "0", "0"]
+            - ["InventorySlotView", "slot", "null", "{ \"item\" = null; \"available\" = false; }"]
+        UIDataLocalsComponent:
+            locals:
+            - ["string", "styles", "when not isNull(slot.item) -> slot.item.itemTypeClass + \" \" + slot.item.itemTypeName, \"\""]
+    children:
+    -   prototype: "InventorySlot/Slot"
+        name: "Slot"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "additionalStyles": "when isNull(slot.item) -> \"\", \"inventory-item-slot \" + styles"
+                    "slotId": "index"
+                    "disabled": "not slot.available"
+                    "texture": "\"\""
+                    "selected": "selected"

@@ -1,0 +1,32 @@
+Header:
+    version: "102"
+Prototypes:
+-   class: "UIControl"
+    name: "FlagWrapper"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "Formula"
+            horizontalFormula: "maxChild"
+            verticalPolicy: "Formula"
+            verticalFormula: "maxChild"
+        UIDataParamsComponent:
+            params:
+            - ["eNation", "nation", "eNation.UNKNOWN", "eNation.EUROPEAN"]
+            - ["string", "subnation", "\"\"", "\"\""]
+    children:
+    -   class: "UIControl"
+        name: "content"
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfMaxChild"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/TankInfo/NationFlag.yaml"
+                args:
+                    "subnation": "subnation"
+                    "nation": "nation"

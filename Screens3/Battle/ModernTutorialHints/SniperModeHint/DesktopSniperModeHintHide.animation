@@ -1,0 +1,9 @@
+animation DesktopSniperModeHintHide
+{
+	PlaySound(sound="play_tut_2021_ui_battle_hints_off");
+	
+	DirectEvent("Disappear", "./FullscreenHintProto/Top/Content/Hint/HintHolder");
+	
+	Wait(1.0);
+	Event("OnFadeOut");	
+}

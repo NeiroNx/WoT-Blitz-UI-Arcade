@@ -1,0 +1,245 @@
+Header:
+    version: 141
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Hangar/Offers/PRMP/AnimatedNumber/AnimatedNumber.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "StuffQuestWidgetPage"
+    size: [212.000000, 64.000000]
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens3/Lobby/Hangar/Quests/StuffQuestWidget/StuffQuestWidgetPageProgress.animation;ANIMATE_PROGRESS,~res:/UI/Screens3/Lobby/Hangar/Quests/StuffQuestWidget/StuffQuestWidgetPageProgress.animation"
+        Anchor:
+            leftAnchorEnabled: true
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            verticalPolicy: "FixedSize"
+            verticalValue: 64.000000
+        UIDataParamsComponent:
+            params:
+            - ["StuffQuest", "quest", "null", "{ }"]
+            - ["bool", "hidden", "false", "false"]
+            - ["float", "proportion", "0.000000", "0.800000"]
+            - ["float", "point", "0.000000", "0.000000"]
+            - ["float", "pageSize", "0.000000", "212.000000"]
+            - ["int", "index", "0", "1"]
+        UIDataLocalVarsComponent:
+            data:
+            - ["bool", "needAnimation", "false"]
+            - ["string", "defaultImage", "\"~res:/Gfx/Lobby/backgrounds/bn_task-jornal_item\""]
+            - ["int", "progressPercent", "when quest.totalProgress > 0 -> int(100.000000 * float(quest.lastProgress) / quest.totalProgress), 0"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["float", "animationTime", "0.500000 * (quest.currentProgress - quest.lastProgress)"]
+            - ["float", "resultAnimationTime", "when animationTime > 1.500000 -> 1.500000, animationTime"]
+            - ["int", "currentProgressPercent", "when quest.totalProgress > 0 -> int(100.000000 * float(quest.currentProgress) / quest.totalProgress), 0"]
+            - ["int", "lastProgressPercent", "when quest.totalProgress > 0 -> int(100.000000 * float(quest.lastProgress) / quest.totalProgress), 0"]
+        UIEventOnDataComponent0:
+            watchedDataExpression: "quest.currentProgress"
+            ifExpression: "int(currentProgressPercent * quest.totalProgress + 0.010000) != quest.currentProgress"
+            eventName: "ANIMATE_PROGRESS"
+    bindings:
+    - ["visible", "not hidden"]
+    - ["Anchor.leftAnchor", "point"]
+    - ["SizePolicy.horizontalValue", "pageSize"]
+    children:
+    -   class: "UIControl"
+        name: "DefaultBackground"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Background:
+                drawType: "DRAW_SCALE_TO_RECT"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        bindings:
+        - ["visible", "quest.urlImageWidget == \"\""]
+        - ["Background.sprite", "defaultImage"]
+    -   class: "UIControl"
+        name: "UrlBackground"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Background:
+                drawType: "DRAW_SCALE_TO_RECT"
+            UIUrlImageComponent: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        bindings:
+        - ["visible", "quest.urlImageWidget != \"\""]
+        - ["UIUrlImageComponent.imageUrl", "quest.urlImageWidget"]
+    -   class: "UIControl"
+        name: "Shadow"
+        size: [32.000000, 32.000000]
+        input: false
+        classes: "black-50-bg"
+        components:
+            Background:
+                drawType: "DRAW_SCALE_TO_RECT"
+                sprite: "~res:/Gfx/Lobby/backgrounds/bg_radial-gradient_quarter"
+                spriteModification: ["FLIP_HORIZONTAL", "FLIP_VERTICAL"]
+            Anchor:
+                rightAnchorEnabled: true
+                bottomAnchorEnabled: true
+            IgnoreLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                horizontalValue: 80.000000
+                verticalPolicy: "PercentOfParent"
+                verticalValue: 80.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+    -   class: "UIControl"
+        name: "Content"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            LinearLayout:
+                orientation: "TopDown"
+                padding: "10"
+                spacing: 9.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "TicketLabel"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 12.000000
+                    rightAnchorEnabled: true
+                    rightAnchor: 15.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfChildrenSum"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens3/Lobby/Common/TicketLabel.yaml"
+                    args:
+                        "labelText": "quest.title"
+                        "width": "185"
+                        "centerTitle": "false"
+        -   class: "UIControl"
+            name: "BottomPart"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfFirstChild"
+            children:
+            -   class: "UIControl"
+                name: "Info"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    Anchor:
+                        leftAnchorEnabled: true
+                        leftAnchor: 6.000000
+                    LinearLayout: {}
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        verticalPolicy: "PercentOfLastChild"
+                children:
+                -   class: "UIControl"
+                    name: "Icon"
+                    size: [32.000000, 32.000000]
+                    input: false
+                    components:
+                        Background:
+                            drawType: "DRAW_SCALE_PROPORTIONAL"
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "FixedSize"
+                            horizontalValue: 25.000000
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 25.000000
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Lobby/TaskJournal/TaskJournalListCell.style.yaml"
+                    bindings:
+                    - ["classes", "quest.iconType"]
+                -   class: "UIControl"
+                    name: "Progress"
+                    size: [32.000000, 32.000000]
+                    input: false
+                    components:
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        LinearLayout:
+                            spacing: 2.000000
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfChildrenSum"
+                            verticalPolicy: "PercentOfMaxChild"
+                    children:
+                    -   prototype: "AnimatedNumber/AnimatedNumber"
+                        name: "ProgressAnimatedNumber"
+                        components:
+                            Anchor:
+                                vCenterAnchorEnabled: true
+                            UIDataParamsComponent:
+                                args:
+                                    "initialNumber": "quest.lastProgress"
+                                    "targetNumber": "quest.currentProgress"
+                                    "animationTime": "resultAnimationTime"
+                                    "textStyle": "\"t-caps bold color=white-wild-sand-text\""
+                                eventActions:
+                                - ["NUMBER_ANIMATION_FINISHED", "NUMBER_ANIMATION_FINISHED", ""]
+                    -   class: "UIControl"
+                        name: "Delimiter"
+                        size: [32.000000, 32.000000]
+                        input: false
+                        classes: "t-caps bold color=white-wild-sand-text"
+                        components:
+                            UITextComponent:
+                                text: "/"
+                            Anchor:
+                                vCenterAnchorEnabled: true
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfContent"
+                                verticalPolicy: "PercentOfContent"
+                            StyleSheet:
+                                styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+                    -   class: "UIControl"
+                        name: "TotalProgress"
+                        size: [32.000000, 32.000000]
+                        input: false
+                        classes: "t-caps bold color=white-wild-sand-text"
+                        components:
+                            UITextComponent: {}
+                            Anchor:
+                                vCenterAnchorEnabled: true
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfContent"
+                                verticalPolicy: "PercentOfContent"
+                            StyleSheet:
+                                styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+                        bindings:
+                        - ["UITextComponent.text", "str1000Separated(quest.totalProgress)"]
+    -   class: "UIControl"
+        name: "ProgressBarHolder"
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                bottomAnchorEnabled: true
+            IgnoreLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "FixedSize"
+                verticalValue: 4.000000
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/ProgressBar.yaml"
+                args:
+                    "minimum": "0"
+                    "maximum": "100"
+                    "value": "progressPercent"
+                    "progressColor": "\"yellow-chalky-bg\""
+                    "roundCorners": "false"
+                    "showGradient": "false"

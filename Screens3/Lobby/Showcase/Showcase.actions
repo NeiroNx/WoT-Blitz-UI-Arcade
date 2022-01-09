@@ -1,0 +1,119 @@
+action ShowcaseFullscreen(bool fullscreen)
+{
+if (fullscreen)
+{
+	parallel
+	{
+	  	{
+	  		Move("**/HeaderWrapper", 0, -72, 0.4, EASE_IN);
+	  	}
+	  	{
+	  		Opacity("**/HeaderWrapper", opacity=0.0, time=0.4, interpolation=EASE_IN);
+	  		ChangeProperty("**/HeaderWrapper", "", "visible", false);
+	  	}
+  	}
+}
+else
+{
+	parallel
+	{
+	  	{
+	  		ChangeProperty("**/HeaderWrapper", "", "visible", true);
+	  		Opacity("**/HeaderWrapper", opacity=1.0, time=0.4, interpolation=EASE_IN);
+	  	}
+	  	{
+	  		Move("**/HeaderWrapper", 0, 0, 0.4, EASE_IN);
+	  	}
+  	}
+}
+}
+
+action CAPTURED_BACK_EVENT
+{
+  if (captureInput)
+  {
+    Event("SwitchFilterAnimation", arg1=false);
+  }
+  else
+  {
+    if (account.tutorialData.isTutorialActive == false or account.tutorialData.currentLesson == eTutorialLesson.kUnknown)
+	{
+	  Event("BACK_EVENT");
+	}
+  }
+}
+
+action HANDLE_EVENT(string eventName)
+{
+    if (eventName == "SCROLL_PANEL_TO_START")
+    {
+        DirectEvent("SCROLL_PANEL_TO_START", "**/Container/TanksPanelHolder/TanksPanel");
+    }
+}
+
+action SwitchFilterAnimation(bool showRequested)
+{
+  Event("SLIDE_PANEL_OPENED", arg1 = showRequested);
+  
+  if (showRequested)
+  {
+    Event("PAUSE_HANGAR_SCENE", arg1=true);
+    parallel
+    {
+      {
+        Event("ENABLE_BLUR", arg1=true);
+        Opacity("**/FadedBlur", 1.0, time=0.4, interpolation=EASE_OUT);
+      }
+      {
+        DirectEvent("SHOW_FILTER", "**/TanksPanelHolder/TanksPanel", true, 0.4);
+        WaitEvent("FILTER_ANIMATION_FINISHED");
+      }
+    }
+    Event("CAPTURE_INPUT", arg1=true);
+  }
+  else
+  {
+    Event("CAPTURE_INPUT", arg1=false);
+    parallel
+    {
+      {
+        DirectEvent("SHOW_FILTER", "**/TanksPanelHolder/TanksPanel", false, 0.4);
+        WaitEvent("FILTER_ANIMATION_FINISHED");
+      }
+      {
+        Opacity("**/FadedBlur", 0.0, time=0.4, interpolation=EASE_OUT);
+        Event("ENABLE_BLUR", arg1=false);
+      }
+    }
+    Event("PAUSE_HANGAR_SCENE", arg1=false);
+  }
+}
+
+action ENSURE_SELECTED_TANK_VISIBILITY
+{
+  if (isTanksPanelExists)
+  {
+    DirectEvent("EnsureSelectedCellVisibility", "**/Content/TanksPanelHolder/TanksPanel");
+  }
+}
+
+action ACTION_Y
+{
+  if(showcaseModel.state == eShowcaseState.kFanfares)
+  {
+    Event("TO_HANGAR");
+  }
+  if(showcaseModel.state == eShowcaseState.kBuy)
+  {
+    Event("PURCHASE");
+  }
+  if(showcaseModel.state == eShowcaseState.kTrain)
+  {
+    DirectEvent("TRAIN_EVENT", "**/Content/MainContent/MainControls/CrewTraining/Showcase");
+  }
+}
+
+action SERVICE_EVENT_2
+{
+  Event("ACTION_Y");
+}

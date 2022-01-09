@@ -1,0 +1,129 @@
+Header:
+    version: "100"
+ImportedPackages:
+- "~res:/UI/Screens/Common.yaml"
+- "~res:/UI/Screens/Common/ScrollBar.yaml"
+- "~res:/UI/Screens/Common/DebugControlTree/DebugControlTreeCell.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "Background"
+    size: [800.000000, 500.000000]
+    input: true
+    components:
+        Anchor:
+            leftAnchorEnabled: true
+            rightAnchorEnabled: true
+            topAnchorEnabled: true
+            bottomAnchorEnabled: true
+        ModalInput: {}
+        UIInputEventComponent:
+            onTouchUpInside: "ON_CLOSE_POPUP"
+        UIShortcutEventComponent:
+            shortcuts: "OnClosePopup, Escape"
+            escape: "OnClosePopup"
+        UIDataParamsComponent:
+            params:
+            - ["DebugUIControlTreeViewModel", "data", "null", "{ }"]
+    children:
+    -   class: "UIControl"
+        name: "DebugControlTree"
+        size: [800.000000, 500.000000]
+        input: false
+        components:
+            LinearLayout:
+                orientation: "TopDown"
+                padding: "10.000000"
+        children:
+        -   class: "UIControl"
+            name: "Bg"
+            size: [32.000000, 32.000000]
+            input: false
+            classes: "grey-shark-90-bg"
+            components:
+                Background: {}
+                IgnoreLayout: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "VerticalScrollView"
+            size: [200.000000, 200.000000]
+            input: false
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 10.000000
+                    rightAnchorEnabled: true
+                    rightAnchor: 10.000000
+                SizePolicy:
+                    verticalPolicy: "PercentOfParent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens/Common/ScrollBar.yaml"
+            children:
+            -   class: "UIScrollView"
+                name: "ScrollArea"
+                autoUpdate: true
+                components:
+                    Anchor:
+                        leftAnchorEnabled: true
+                        rightAnchorEnabled: true
+                        rightAnchor: 10.000000
+                        topAnchorEnabled: true
+                        bottomAnchorEnabled: true
+                children:
+                -   class: "UIScrollViewContainer"
+                    name: "scrollContainerControl"
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfMaxChild"
+                    children:
+                    -   class: "UIControl"
+                        name: "Nodes"
+                        size: [32.000000, 32.000000]
+                        input: false
+                        components:
+                            LinearLayout:
+                                orientation: "TopDown"
+                                spacing: 2.000000
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                verticalPolicy: "PercentOfChildrenSum"
+                            UIRepeatComponent:
+                                control: "~res:/UI/Screens/Common/DebugControlTree/DebugControlTreeCell.yaml"
+                                dataContainer: "data.nodes"
+                                args:
+                                    "index": "_index"
+                                    "data": "_item"
+                                eventActions:
+                                - ["ON_CELL_DOUBLE_CLICKED", "ON_CELL_DOUBLE_CLICKED", "_event.index"]
+                                - ["ON_CELL_SELECT", "ON_CELL_SELECT", "_event.index"]
+                                - ["ON_MORE_BUTTON_SELECT", "ON_MORE_BUTTON_SELECT", "_event.index"]
+                                lazyLoading: true
+                                loadingDistance: 50.000000
+                                unloadingDistance: 50.000000
+            -   prototype: "ScrollBar/VerticalScrollBar"
+                name: "VerticalScrollBar"
+                components:
+                    Anchor:
+                        rightAnchorEnabled: true
+                        topAnchorEnabled: true
+                        bottomAnchorEnabled: true
+                    ScrollBarDelegate:
+                        delegate: "../ScrollArea"
+        -   class: "UIControl"
+            name: "Message"
+            size: [694.000000, 25.000000]
+            input: false
+            classes: "text-color-orange text2-small"
+            components:
+                UITextComponent:
+                    text: "Enable Custom option in Debug UI dialog to see highlighted control."
+                Anchor:
+                    leftAnchorEnabled: true
+                    rightAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                StyleSheet:
+                    styles: "~res:/UI/Screens/Fonts.yaml"

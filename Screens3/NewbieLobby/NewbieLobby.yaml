@@ -1,0 +1,82 @@
+Header:
+    version: 133
+ImportedPackages:
+- "~res:/UI/Screens3/BaseLobby.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "NewbieLobby"
+    size: [1024.000000, 768.000000]
+    input: false
+    classes: "back-shortcut"
+    components:
+        Anchor:
+            leftAnchorEnabled: true
+            rightAnchorEnabled: true
+            topAnchorEnabled: true
+            bottomAnchorEnabled: true
+        ModalInput: {}
+        UIVirtualActionEventComponent0:
+            virtualKeyAction: "Escape"
+            keyDownEvent: "BACK_EVENT"
+        UIShortcutEventComponent: {}
+        UIDataParamsComponent:
+            params:
+            - ["TutorialDataModel", "tutorialData", "null", "{ }"]
+            - ["NewbieLobbyData", "newbieLobbyData", "null", "{ }"]
+            - ["DownloadModel", "downloadModel", "null", "{ }"]
+            - ["TutorialTanks", "tutorialTanks", "null", "{ }"]
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/NewbieLobby/NewbieLobby.actions"
+        StyleSheet:
+            styles: "~res:/UI/Screens3/BackShortcut.style.yaml"
+    children:
+    -   prototype: "BaseLobby/BaseLobby"
+        name: "BaseLobby"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "tutorialData": "tutorialData"
+                    "backText": "\"Switch/HubridPanel/Lobby/Back\""
+                    "showContent": "true"
+                    "contentControl": "Content"
+        children:
+        -   class: "UIControl"
+            name: "ScreenShotContainer"
+            size: [32.000000, 32.000000]
+            visible: false
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            children:
+            -   class: "UIControl"
+                name: "ScreenShot"
+                size: [32.000000, 32.000000]
+                components:
+                    Background:
+                        usePostProcessedSprite: true
+                    UIOpacityComponent: {}
+                    UIPostProcessTextureComponent0:
+                        materialPath: "~res:/Materials/2d.Textured.Alphablend.material"
+                        needClearAlphaAfterRender: true
+                        renderRequestingType: "ON_REQUEST"
+                        minFilter: "Linear"
+                        magFilter: "Linear"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+Slots:
+-   class: "UIControl"
+    name: "Content"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIChildComponent0:
+            condition: "newbieLobbyData.activeScreen == eNewbieActiveScreen.SelectNation"
+            prototypePath: "~res:/UI/Screens3/Login/Tutorial/TutorialTanksScreen.yaml"
+            args:
+                "downloadModel": "downloadModel"
+                "tutorialTanks": "tutorialTanks"

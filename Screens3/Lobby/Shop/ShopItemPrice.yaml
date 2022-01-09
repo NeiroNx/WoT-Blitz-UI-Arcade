@@ -1,0 +1,110 @@
+Header:
+    version: 134
+Prototypes:
+-   class: "UIControl"
+    name: "ShopItemPrice"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfFirstChild"
+            verticalPolicy: "PercentOfFirstChild"
+        UIDataParamsComponent:
+            params:
+            - ["ShopProduct", "product", "null", "{ }"]
+            - ["ArtefactProviderModel", "artefacts", "null", "{ }"]
+            - ["StatsDataModel", "stats", "null", "{ }"]
+            - ["bool", "allowFullPrice", "true", "true"]
+        UIDataLocalVarsComponent:
+            data:
+            - ["map<string,bool>", "emptyMap", "{ }"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["bool", "showFullPrice", "allowFullPrice and product.fullPriceValid and product.salePrice.resources.Size() < 2"]
+            - ["bool", "fullPriceValues", "product.salePrice.resources.Size() <= 1"]
+            - ["map<string,bool>", "canAfford", "when isNull(artefacts) or isNull(stats) -> emptyMap, CanAffordResources(product.salePrice, stats.resources, artefacts.artefactIds)"]
+        UIChildComponent0:
+            childType: "kControl"
+            condition: "product.xTimed and product.availableTimes == 0 and (not product.giftable or product.giftAvailableTimes == 0)"
+            control: "SoldOutLabel"
+        UIChildComponent1:
+            childType: "kControl"
+            condition: "not product.salePrice.resources.Empty()"
+            control: "Pricing"
+        UIChildComponent2:
+            childType: "kControl"
+            control: "FreeLabel"
+Slots:
+-   class: "UIControl"
+    name: "FreeLabel"
+    input: false
+    classes: "t-subtitle bold white-wild-sand-text"
+    components:
+        UITextComponent:
+            text: "shop/FreeBundle"
+        SizePolicy:
+            horizontalPolicy: "PercentOfContent"
+            verticalPolicy: "PercentOfContent"
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Font.style.yaml"
+-   class: "UIControl"
+    name: "SoldOutLabel"
+    input: false
+    classes: "t-subtitle bold white-wild-sand-text"
+    components:
+        UITextComponent: {}
+        SizePolicy:
+            horizontalPolicy: "PercentOfContent"
+            verticalPolicy: "PercentOfContent"
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Font.style.yaml"
+    bindings:
+    - ["UITextComponent.text", "localize(\"Shop/XTime/SoldOut\")"]
+-   class: "UIControl"
+    name: "Pricing"
+    input: false
+    components:
+        LinearLayout:
+            spacing: 16.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "PercentOfMaxChild"
+    children:
+    -   class: "UIControl"
+        name: "FullPrice"
+        input: false
+        components:
+            UIOpacityComponent:
+                opacity: 0.600000
+            Anchor:
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                condition: "showFullPrice"
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/Currencies.yaml"
+                args:
+                    "currencySize": "eCurrencySize.BIG_BOLD"
+                    "price": "product.fullPrice"
+                    "showDiscount": "false"
+                    "crossOut": "true"
+                    "forceFullValue": "fullPriceValues"
+        bindings:
+        - ["visible", "showFullPrice"]
+    -   class: "UIControl"
+        name: "SalePrice"
+        input: false
+        components:
+            Anchor:
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/Currencies.yaml"
+                args:
+                    "canAfford": "canAfford"
+                    "currencySize": "eCurrencySize.BIG_BOLD"
+                    "showDiscount": "false"
+                    "price": "product.salePrice"
+                    "forceFullValue": "fullPriceValues"

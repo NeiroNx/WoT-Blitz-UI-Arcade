@@ -1,0 +1,17 @@
+action SCROLL_TO(int lineIndex)
+{
+  ScrollToEnsureControlOnScreen("**/LogLines/DevConsoleLine" + str(lineIndex));
+  ChangeData(searchActive, true);
+  ChangeData(searchIndex, lineIndex);
+}
+
+action SCROLL_TO_END
+{
+  ScrollToEnsureControlOnScreen("**/BottomScrollAnchor");
+  ChangeData(searchActive, false);
+}
+
+action MOVE_CURSOR_TO_END
+{
+  MoveCursorToEnd("**/UITextField");
+}

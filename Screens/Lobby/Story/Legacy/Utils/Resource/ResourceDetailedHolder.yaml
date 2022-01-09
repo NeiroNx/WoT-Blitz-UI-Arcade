@@ -1,0 +1,64 @@
+Header:
+    version: "84"
+Prototypes:
+-   class: "UIControl"
+    name: "Content"
+    components:
+        UIOpacityComponent: {}
+        UITextureComponent:
+            spritePath: "~res:/Gfx/UI/LobbyCommon/info_background.psd"
+            drawType: "DRAW_STRETCH_BOTH"
+            leftRightStretchCap: 7.000000
+            topBottomStretchCap: 7.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfMaxChild"
+        UIInputEventComponent:
+            onTouchUpInside: "ON_ITEM_PRESSED"
+            onTouchUpInsideData: "itemCompactDescr"
+        UIDataParamsComponent:
+            params:
+            - ["ResourceDetailed", "data", "null", "{ type = ResourceType.vehicle; vehicle = { }; }"]
+            - ["bool", "isFinished", "false", "true"]
+            - ["bool", "isTouchable", "true", "true"]
+            events:
+            - "ON_ITEM_PRESSED(int itemCompactDescr)"
+        UIDataLocalsComponent:
+            locals:
+            - ["bool", "hasInput", "isTouchable and (data.type == ResourceType.stuff or data.type == ResourceType.unlocks or data.type == ResourceType.vehicle)"]
+            - ["string", "resourcePackage", "when data.type == ResourceType.credits -> \"~res:/UI/Screens/Lobby/Story/Legacy/Utils/Resource/Detailed/BasicResource.yaml\", data.type == ResourceType.free_xp -> \"~res:/UI/Screens/Lobby/Story/Legacy/Utils/Resource/Detailed/BasicResource.yaml\", data.type == ResourceType.gold -> \"~res:/UI/Screens/Lobby/Story/Legacy/Utils/Resource/Detailed/BasicResource.yaml\", data.type == ResourceType.premium -> \"~res:/UI/Screens/Lobby/Story/Legacy/Utils/Resource/Detailed/BasicResource.yaml\", data.type == ResourceType.stuff -> \"~res:/UI/Screens/Lobby/Story/Legacy/Utils/Resource/Detailed/StuffResource.yaml\", data.type == ResourceType.unlocks -> \"~res:/UI/Screens/Lobby/Story/Legacy/Utils/Resource/Detailed/UnlockResource.yaml\", data.type == ResourceType.vehicle -> \"~res:/UI/Screens/Lobby/Story/Legacy/Utils/Resource/Detailed/VehicleResource.yaml\", \"\""]
+            - ["int", "itemCompactDescr", "when data.type == ResourceType.stuff -> data.stuff.itemCompactDescr, data.type == ResourceType.unlocks -> data.unlock.itemCompactDescr, data.type == ResourceType.vehicle -> data.vehicle.info.tankDescriptor, 0"]
+        Sound: {}
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Lobby/Hangar/DevMenu/SimpleButton.style.yaml;~res:/UI/Styles/ButtonSoundStyles.yaml"
+    bindings:
+    - ["input", "hasInput"]
+    - ["classes", "when hasInput -> \"simple-button button-choose-sound\", \"\""]
+    children:
+    -   class: "UIControl"
+        name: "Reward"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent:
+                control: "resourcePackage"
+                args:
+                    "data": "data"
+                    "showEye": "not isFinished and isTouchable"
+    -   class: "UIControl"
+        name: "CompleteIcon"
+        scale: [0.700000, 0.700000]
+        input: false
+        components:
+            UITextureComponent:
+                spritePath: "~res:/Gfx/UI/Quests/stamp"
+                frame: 2
+            Anchor:
+                rightAnchorEnabled: true
+                rightAnchor: 25.000000
+                topAnchorEnabled: true
+                topAnchor: 25.000000
+        bindings:
+        - ["visible", "isFinished"]

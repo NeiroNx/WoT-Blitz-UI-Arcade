@@ -1,0 +1,53 @@
+Header:
+    version: 127
+Prototypes:
+-   class: "UIControl"
+    name: "LoaderCircle"
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "_INIT, ~res:/UI/Screens3/Common/Loaders/LoaderCircle.animation"
+        Anchor:
+            hCenterAnchorEnabled: true
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfLastChild"
+            verticalPolicy: "PercentOfLastChild"
+        UIDataParamsComponent:
+            params:
+            - ["bool", "bgIsVisible", "true", "false"]
+            - ["float", "animationTime", "1.600000", "1.600000"]
+    children:
+    -   class: "UIControl"
+        name: "Bg"
+        input: false
+        components:
+            Background:
+                sprite: "~res:/Gfx/Shared/backgrounds/bg_loader-circle_shadow"
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+        bindings:
+        - ["visible", "bgIsVisible"]
+    -   class: "UIControl"
+        name: "Loader"
+        pivot: [0.500000, 0.500000]
+        input: false
+        components:
+            Background:
+                sprite: "~res:/Gfx/Shared/backgrounds/bg_loader-circle"
+                perPixelAccuracy: "PER_PIXEL_ACCURACY_FORCED"
+            UIClipPolygon:
+                enabled: true
+            RadialProgressComponent:
+                startAngle: 90.000000
+                endAngle: 360.000000
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"

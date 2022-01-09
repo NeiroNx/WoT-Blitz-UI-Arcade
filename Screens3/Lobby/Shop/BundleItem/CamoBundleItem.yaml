@@ -1,0 +1,79 @@
+Header:
+    version: 128
+Prototypes:
+-   class: "UIControl"
+    name: "CamoBundleItem"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 40.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 40.000000
+        UIDataParamsComponent:
+            params:
+            - ["ResourceDetailed", "resource", "null", "{ \"type\" = ResourceType.unlocks; }"]
+    children:
+    -   class: "UIControl"
+        name: "CamoWrapper"
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 32.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 32.000000
+        children:
+        -   class: "UIControl"
+            name: "CamoIcon"
+            input: false
+            components:
+                UITextureComponent:
+                    drawType: "DRAW_SCALE_PROPORTIONAL"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 32.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 32.000000
+            bindings:
+            - ["UITextureComponent.spritePath", "resource.unlock.icon"]
+        -   class: "UIControl"
+            name: "CamoBorder"
+            input: false
+            classes: "orange-orange-peel-border"
+            components:
+                BorderComponent:
+                    border-thickness: 2U
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 32.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 32.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+    -   class: "UIControl"
+        name: "Value"
+        input: false
+        classes: "t-caption regular white-wild-sand-text"
+        components:
+            UITextComponent: {}
+            Anchor:
+                hCenterAnchorEnabled: true
+                bottomAnchorEnabled: true
+                bottomAnchor: -5.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml"
+        bindings:
+        - ["UITextComponent.text", "when resource.unlock.quantity < 2 -> \"\", (\"x\" + shortStr(resource.unlock.quantity, 1000))"]

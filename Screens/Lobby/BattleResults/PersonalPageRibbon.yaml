@@ -1,0 +1,74 @@
+Header:
+    version: "70"
+ImportedPackages:
+- "~res:/UI/Screens/Fonts.yaml"
+- "~res:/UI/Styles/BattleRibbons.yaml"
+- "~res:/UI/Styles/ButtonStyle.yaml"
+- "~res:/UI/Screens/Lobby/Common/RibbonPrototype.yaml"
+Controls:
+-   class: "UIControl"
+    name: "RibbonContainer"
+    input: false
+    components:
+        Background:
+            colorInherit: "COLOR_MULTIPLY_ON_PARENT"
+        Anchor:
+            hCenterAnchorEnabled: true
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfFirstChild"
+            verticalPolicy: "PercentOfFirstChild"
+        UIDataParamsComponent:
+            params:
+            - ["BattleRibbonViewModel", "ribbon", "null", "{ }"]
+            - ["bool", "firstShowMedalAnimation", "false", "true"]
+            - ["int", "firstAnimationIndex", "0", "0"]
+            - ["int", "lastAnimationIndex", "0", "10"]
+            - ["float", "time", "0.000000", "5.000000"]
+            events:
+            - "OnRibbonTap"
+        UIDataLocalsComponent:
+            locals:
+            - ["vector<string>", "gradeList", "[ \"common\"; \"rare\"; \"epic\"; \"legendary\"; ]"]
+            - ["string", "localizedTitle", "localize(ribbon.title)"]
+            - ["string", "gradeClass", "gradeList[ribbon.grade]"]
+            - ["string", "iconClass", "ribbon.id"]
+            - ["int", "idx", "ribbon.ribbonIndex + ribbon.indexOffset"]
+            - ["float", "deltaTime", "0.280000"]
+            - ["string", "classForAnimateRibbon", "when (not firstShowMedalAnimation) -> \"\", (idx < firstAnimationIndex or idx >= lastAnimationIndex) -> \"no-animation\", (time < (idx - firstAnimationIndex) * deltaTime + 0.700000) -> \"no-animation\", (time < (idx - firstAnimationIndex) * deltaTime + 0.930000) -> \"animation-1\", (time < (idx - firstAnimationIndex) * deltaTime + 1.100000) -> \"animation-2\", (time < (idx - firstAnimationIndex) * deltaTime + 1.300000) -> \"animation-3\", \"no-animation\""]
+            - ["string", "classForAnimateRibbon2", "when (not firstShowMedalAnimation) -> \"\", (idx < firstAnimationIndex or idx > lastAnimationIndex) -> \"animation-hide\", (time < (idx - firstAnimationIndex) * deltaTime + 1.200000) -> \"animation-hide\", \"animation-show\""]
+        StyleSheet:
+            styles: "~res:/UI/Screens/Lobby/Common/Styles/RibbonsAnimationStyles.yaml"
+    bindings:
+    - ["classes", "classForAnimateRibbon2", "Read"]
+    children:
+    -   prototype: "RibbonPrototype/Ribbon"
+        name: "Ribbon"
+        input: true
+        components:
+            Background:
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 90.000000
+            UIInputEventComponent:
+                onTouchUpInside: "OnRibbonTap"
+            Sound: {}
+            StyleSheet:
+                styles: "~res:/UI/Screens/Lobby/Common/RibbonPrototype.yaml;~res:/UI/Styles/ButtonSoundStyles.yaml;~res:/UI/Styles/ButtonStyle.yaml"
+        bindings:
+        - ["classes", "\"ribbon disable-fx button button-open-sound \" + iconClass + \" \" + gradeClass", "Read"]
+        children:
+        -   path: "Info"
+            components:
+                Anchor:
+                    bottomAnchor: 0.000000
+            children: []
+        -   path: "Info/Name"
+            visible: false
+            components:
+                UITextComponent: {}
+                SizePolicy:
+                    horizontalMax: 80.000000
+            bindings:
+            - ["UITextComponent.text", "localizedTitle", "Read"]

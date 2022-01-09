@@ -1,0 +1,30 @@
+animation TaskJournalWidgetAnimation()
+{
+	// init
+	ChangeData(displayingProgress, model.activeTask.oldProgress);
+	ChangeData(bgProgress, 0.0, time=0.0);
+	ChangeData(lineProgress, 0.0, time=0.0);
+	Opacity("**/Content", 0.0, time=0.0);
+	
+	Wait(1.0);
+	
+	// fade in
+	ChangeData(bgProgress, 100.0, time=0.5, interpolation=EASE_OUT);
+	parallel
+	{
+		ChangeData(lineProgress, 100.0, time=0.5, interpolation=EASE_OUT);
+		Opacity("**/Content", 1.0, time=0.5, interpolation=LINEAR);
+	}	
+	
+	Wait(0.8);
+	
+	// progress
+	ChangeData(displayingProgress, model.activeTask.currentProgress, time=0.5, interpolation=EASE_OUT);
+	
+	Wait(5.0);
+	
+	// fade out
+	Opacity("**/Content", 0.0, time=0.3, interpolation=EASE_IN_EASE_OUT);
+	ChangeData(lineProgress, 0.0, time=0.3);
+	ChangeData(bgProgress, 0.0, time=0.4, interpolation=EASE_IN_EASE_OUT);
+}

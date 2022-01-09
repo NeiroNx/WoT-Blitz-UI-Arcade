@@ -1,0 +1,18 @@
+Header:
+    version: "24"
+StyleSheets:
+-   selector: ".hunters-mark-damage ? #CritBadge"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/BattleScreenHUD/EquipSmallIcons"
+        bg-frame: 6
+        anchor-vCenterAnchor: 0.000000
+-   selector: ".critical-damage ? #CritBadge"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/BattleScreenHUD/ExclamationPoint"
+        bg-frame: 0
+        anchor-vCenterAnchor: -4.000000
+-   selector: ".shield-ability-damage ? #CritBadge"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/BattleScreenHUD/EquipSmallIcons"
+        bg-frame: 9
+        anchor-vCenterAnchor: 0.000000

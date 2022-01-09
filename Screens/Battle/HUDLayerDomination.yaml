@@ -1,0 +1,125 @@
+Header:
+    version: "70"
+StyleSheets:
+-   selector: ".enemy-progress #Progress"
+    properties:
+        bg-color:
+            value: [1.000000, 0.000000, 0.000000, 1.000000]
+            transitionTime: 0.320000
+            transitionFunction: "LINEAR"
+-   selector: ".ally-progress #Progress"
+    properties:
+        bg-color:
+            value: [0.541176, 1.000000, 0.000000, 1.000000]
+            transitionTime: 0.320000
+            transitionFunction: "LINEAR"
+-   selector: ".enemy-progress.observer #Progress"
+    properties:
+        bg-color:
+            value: [0.145098, 0.415686, 0.976471, 1.000000]
+            transitionTime: 0.320000
+            transitionFunction: "LINEAR"
+-   selector: ".ally-progress.observer #Progress"
+    properties:
+        bg-color:
+            value: [1.000000, 0.109804, 0.278431, 1.000000]
+            transitionTime: 0.320000
+            transitionFunction: "LINEAR"
+-   selector: ".ally-progress.transition #Progress"
+    properties:
+        bg-color:
+            value: [1.000000, 0.615686, 0.000000, 1.000000]
+            transitionTime: 0.480000
+            transitionFunction: "LINEAR"
+-   selector: ".enemy-progress.transition #Progress"
+    properties:
+        bg-color:
+            value: [1.000000, 0.615686, 0.000000, 1.000000]
+            transitionTime: 0.480000
+            transitionFunction: "LINEAR"
+Controls:
+-   class: "UIControl"
+    customClass: "UICaptureState"
+    name: "SceneCaptureState"
+    size: [38.000000, 38.000000]
+    pivot: [0.500000, 1.000000]
+    input: false
+    components:
+        Background: {}
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Battle/HUDLayerDomination.yaml"
+    children:
+    -   class: "UIControl"
+        name: "ProgressBackground"
+        size: [38.000000, 38.000000]
+        input: false
+        components:
+            Background:
+                sprite: "~res:/Gfx/UI/BattleScreenHUD/capturebaseicon"
+                colorInherit: "COLOR_MULTIPLY_ON_PARENT"
+            UIClipPolygon: {}
+            RadialProgressComponent:
+                startAngle: 360.000000
+                endAngle: 0.000000
+    -   class: "UIControl"
+        name: "Progress"
+        size: [38.000000, 38.000000]
+        input: false
+        components:
+            Background:
+                sprite: "~res:/Gfx/UI/BattleScreenHUD/capturebaseicon"
+            UIClipPolygon: {}
+            RadialProgressComponent: {}
+    -   class: "UIControl"
+        name: "Flag"
+        size: [38.000000, 38.000000]
+        input: false
+        components:
+            Background:
+                sprite: "~res:/Gfx/UI/BattleScreenHUD/capturebaseicon"
+                frame: 1
+-   class: "UIControl"
+    customClass: "UICaptureState"
+    name: "MinimapCaptureState"
+    size: [20.000000, 20.000000]
+    pivot: [0.500000, 0.500000]
+    input: false
+    components:
+        Background: {}
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Battle/HUDLayerDomination.yaml"
+    children:
+    -   class: "UIControl"
+        name: "ProgressBackground"
+        size: [20.000000, 20.000000]
+        input: false
+        components:
+            Background:
+                sprite: "~res:/Gfx/UI/BattleScreenHUD/capturebaseminimapicon"
+                colorInherit: "COLOR_MULTIPLY_ON_PARENT"
+                perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+            UIClipPolygon: {}
+            RadialProgressComponent:
+                startAngle: 360.000000
+                endAngle: 0.000000
+    -   class: "UIControl"
+        name: "Progress"
+        size: [20.000000, 20.000000]
+        input: false
+        components:
+            Background:
+                sprite: "~res:/Gfx/UI/BattleScreenHUD/capturebaseminimapicon"
+                perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+            UIClipPolygon: {}
+            RadialProgressComponent: {}
+    -   class: "UIControl"
+        name: "Flag"
+        size: [20.000000, 20.000000]
+        input: false
+        components:
+            Background:
+                sprite: "~res:/Gfx/UI/BattleScreenHUD/capturebaseminimapicon"
+                frame: 1
+                perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"

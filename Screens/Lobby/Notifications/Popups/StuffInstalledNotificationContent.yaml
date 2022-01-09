@@ -1,0 +1,119 @@
+Header:
+    version: 140
+Prototypes:
+-   class: "UIControl"
+    name: "NotificationBaseContent"
+    position: [0.000000, 8.000000]
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "PercentOfChildrenSum"
+        UIDataParamsComponent:
+            params:
+            - ["StuffInstalledViewModel", "model", "null", "{ }"]
+            events:
+            - "GO_TO_INSTALLED_STUFF"
+        UIDataLocalBindingsComponent:
+            data:
+            - ["string", "installKey", "when model.artefactType == ArtefactType.booster -> \"HANGAR_NOTIFICATION_BOOSTER_INSTALLED\", when model.artefactType == ArtefactType.profile_background -> \"HANGAR_NOTIFICATION_PROFILE_BACKGROUND_INSTALLED\", model.artefactType == ArtefactType.player_avatar -> \"HANGAR_NOTIFICATION_PLAYER_AVATAR_INSTALLED\", \"\""]
+            - ["string", "uninstallKey", "when model.artefactType == ArtefactType.booster -> \"HANGAR_NOTIFICATION_BOOSTER_UNINSTALLED\", when model.artefactType == ArtefactType.profile_background -> \"HANGAR_NOTIFICATION_PROFILE_BACKGROUND_UNINSTALLED\", model.artefactType == ArtefactType.player_avatar -> \"HANGAR_NOTIFICATION_PLAYER_AVATAR_UNINSTALLED\", \"\""]
+            - ["string", "key", "when model.isInstalled -> installKey, uninstallKey"]
+            - ["ResourceModel", "resource", "model.resource"]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfChildrenSum"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Notifications/NotificationBase.yaml"
+                args:
+                    "buttonText": "localize(\"#common:DialogButton/Go\")"
+                    "content": "Content"
+                    "isButtonVisible": "model.isButtonVisible"
+                eventActions:
+                - ["ON_BUTTON_CLICK", "GO_TO_INSTALLED_STUFF", ""]
+Slots:
+-   class: "UIControl"
+    name: "Content"
+    size: [608.000000, 20.000000]
+    input: false
+    components:
+        Anchor:
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "Formula"
+            verticalFormula: "when parent == 0 -> childrenSum, min(parent, childrenSum)"
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        size: [100.000000, 50.000000]
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfChildrenSum"
+            FlowLayout:
+                hSpacing: 4.000000
+                useRtl: true
+        children:
+        -   class: "UIControl"
+            name: "CurrencyHolder"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfFirstChild"
+                    verticalPolicy: "PercentOfFirstChild"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/Currency.yaml"
+                    args:
+                        "hideValue": "true"
+                        "canAfford": "true"
+                        "currencySize": "eCurrencySize.SMALL"
+                        "forButton": "false"
+                        "forceFullValue": "false"
+                        "isPlusTopPaneVisible": "false"
+                        "plusVisible": "false"
+                        "resource": "resource"
+                        "serverTime": "0L"
+            bindings:
+            - ["visible", "resource.type != ResourceType.undefined"]
+        -   class: "UIControl"
+            name: "ArtefactTitle"
+            position: [278.000000, 0.000000]
+            input: false
+            components:
+                UITextComponent:
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                    align: ["LEFT", "VCENTER"]
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+            bindings:
+            - ["visible", "resource.grade != ArtefactGrade.unknown"]
+            - ["classes", "when resource.grade == ArtefactGrade.common -> \"t-caption bold white-wild-sand-text\", \"t-caption bold grades-\" + str(resource.grade, ArtefactGrade) + \"-text\""]
+            - ["UITextComponent.text", "model.artefactTitle"]
+        -   class: "UIControl"
+            name: "BodyRegular"
+            input: false
+            classes: "t-caption regular white-wild-sand-50-text align-left"
+            components:
+                UITextComponent: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml"
+            bindings:
+            - ["UITextComponent.text", "localize(key)"]

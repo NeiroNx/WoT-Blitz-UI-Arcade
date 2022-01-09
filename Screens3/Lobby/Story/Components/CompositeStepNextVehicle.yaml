@@ -1,0 +1,63 @@
+Header:
+    version: 140
+Prototypes:
+-   class: "UIControl"
+    name: "CompositeStepNextVehicle"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "Formula"
+            horizontalFormula: "lastChild + 8"
+            verticalPolicy: "PercentOfLastChild"
+        UIDataParamsComponent:
+            params:
+            - ["VehicleResource", "vehicle", "null", "{ }"]
+            - ["int", "current", "0", "1"]
+            - ["int", "maximum", "0", "4"]
+            - ["string", "bgStyle", "\"\"", "\"red-tamarillo-bg\""]
+            - ["float", "maxHSize", "99999.000000", "99999.000000"]
+        UIDataLocalVarsComponent:
+            data:
+            - ["string", "text", "\"Story/CompositeStep/NextReward/Vehicle\""]
+            - ["string", "vehicleInfoStyle", "\"t-body\""]
+            - ["string", "nameStyle", "\"t-caption bold\""]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["eVehicleDescriptionType", "vehicleType", "when vehicle.info.isPremium -> eVehicleDescriptionType.PREMIUM, vehicle.info.isCollectible -> eVehicleDescriptionType.COLLECTIBLE, vehicle.stats.isPremiumized -> eVehicleDescriptionType.PREMIUMISED, eVehicleDescriptionType.NORMAL"]
+    children:
+    -   class: "UIControl"
+        name: "Bg"
+        input: false
+        components:
+            Background: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+        bindings:
+        - ["classes", "bgStyle"]
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            RichContent:
+                baseClasses: "t-caption bold white-wild-sand-text"
+            RichContentAliases0:
+                aliases:
+                - ["vehicleInfo", "<control class=\"\" control=\"~res:/UI/Screens3/Lobby/Common/Vehicle/VehicleInfo.yaml\" args1=\"class=vehicle.info.tankClass\" args2=\"level=vehicle.info.level\" args3=\"type=vehicleType\" args4=\"elite=vehicle.stats.isElite\" args5=\"richTextStyle=vehicleInfoStyle\"/>"]
+                - ["vehicleName", "<control class=\"\" control=\"~res:/UI/Screens3/Lobby/Common/Vehicle/VehicleName.yaml\" args1=\"vehicle=vehicle.info\" args2=\"tankStats=vehicle.stats\" args3=\"textStyle=nameStyle\" args4=\"isShortName=true\" />"]
+                - ["progress", "<span class=\"t-caption bold white-wild-sand-text align-parent-center\"/>"]
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 4.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfChildrenSum"
+            FlowLayout:
+                hSpacing: 4.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml"
+        bindings:
+        - ["RichContent.text", "localize(text, { \"value\" = current; \"maximum\" = maximum; })"]
+        - ["SizePolicy.horizontalMax", "maxHSize"]

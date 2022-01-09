@@ -1,0 +1,5 @@
+action CloseRequested()
+{
+  PlaySound("GUI/buttons/close");
+  Event("BACK_TO_HANGAR");
+}

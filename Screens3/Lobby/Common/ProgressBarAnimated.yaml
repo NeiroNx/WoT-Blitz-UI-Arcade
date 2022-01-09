@@ -1,0 +1,69 @@
+Header:
+    version: "108"
+Prototypes:
+-   class: "UIControl"
+    name: "ProgressBarAnimated"
+    size: [300.000000, 20.000000]
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens3/Lobby/Common/ProgressBarAnimated.animation"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["float", "animationTime", "10.000000", "10.000000"]
+            - ["int", "previousValue", "0", "20"]
+            - ["bool", "changeColor", "false", "false"]
+            - ["int", "maximum", "100", "100"]
+            - ["int", "minimum", "0", "0"]
+            - ["int", "value", "0", "50"]
+            - ["string", "bgStyle", "\"white-wild-sand-15-bg\"", "\"white-wild-sand-15-bg\""]
+            - ["string", "colorStyle", "\"yellow-chalky-bg\"", "\"yellow-chalky-bg\""]
+            - ["bool", "showGradient", "false", "false"]
+            - ["bool", "animateOnInit", "true", "false"]
+            - ["bool", "startAnimation", "false", "false"]
+            events:
+            - "VALUE_CHANGED(int value)"
+            - "AnimationFinished"
+        UIDataLocalsComponent:
+            locals:
+            - ["bool", "isAnimationPlaying", "false"]
+            - ["int", "currentValue", "previousValue"]
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/Lobby/Common/ProgressBarAnimated.actions"
+        UIEventOnDataComponent0:
+            watchedDataExpression: "value"
+            eventName: "Animate"
+            eventData: "true"
+        UIEventOnDataComponent1:
+            watchedDataExpression: "previousValue"
+            eventName: "Animate"
+            eventData: "true"
+        UIEventOnDataComponent2:
+            watchedDataExpression: "startAnimation"
+            ifExpression: "startAnimation"
+            eventName: "PlayAnimation"
+        UIEventOnDataComponent3:
+            watchedDataExpression: "currentValue"
+            eventName: "VALUE_CHANGED"
+            eventData: "currentValue"
+    children:
+    -   class: "UIControl"
+        name: "ProgressBarHolder"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/ProgressBar.yaml"
+                args:
+                    "value": "currentValue"
+                    "minimum": "minimum"
+                    "maximum": "maximum"
+                    "bgStyle": "bgStyle"
+                    "progressColor": "colorStyle"
+                    "showGradient": "showGradient"
+                    "changeColor": "changeColor"

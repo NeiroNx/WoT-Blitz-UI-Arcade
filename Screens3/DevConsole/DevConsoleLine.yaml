@@ -1,0 +1,37 @@
+Header:
+    version: 127
+Prototypes:
+-   class: "UIControl"
+    name: "DevConsoleLine"
+    size: [200.000000, 20.000000]
+    input: false
+    classes: "t-body regular white-wild-sand-text"
+    components:
+        UITextComponent:
+            multiline: "MULTILINE_ENABLED"
+            align: ["LEFT", "VCENTER"]
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfContent"
+        UIDataParamsComponent:
+            params:
+            - ["string", "text", "\"#Line\"", "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua\""]
+            - ["bool", "highlight", "false", "false"]
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Font.style.yaml"
+    bindings:
+    - ["UITextComponent.text", "text"]
+    children:
+    -   class: "UIControl"
+        name: "Highlight"
+        input: false
+        classes: "white-wild-sand-10-bg"
+        components:
+            Background: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+        bindings:
+        - ["visible", "highlight"]

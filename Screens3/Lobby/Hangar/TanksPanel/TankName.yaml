@@ -1,0 +1,27 @@
+Header:
+    version: "101"
+Prototypes:
+-   class: "UIControl"
+    name: "Name"
+    input: false
+    components:
+        UITextComponent:
+            perPixelAccuracyType: "PER_PIXEL_ACCURACY_FORCED"
+            fitting: "FITTING_POINTS"
+            align: ["LEFT", "VCENTER"]
+        Anchor:
+            bottomAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfContent"
+        UIDataParamsComponent:
+            params:
+            - ["string", "name", "\"\"", "\"\""]
+            - ["string", "resultStyle", "\"\"", "\"\""]
+        UIIdentifierComponent:
+            id: "garage_tank_name"
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Font.style.yaml"
+    bindings:
+    - ["classes", "resultStyle"]
+    - ["UITextComponent.text", "localize(name)"]

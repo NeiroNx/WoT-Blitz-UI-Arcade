@@ -1,0 +1,29 @@
+action DescriptionSizeChanged(int height)
+{
+	if (not (descriptionH == height))
+	{
+		ChangeData(descriptionH, height);
+	}
+}
+
+action StuffSizeChanged(int height)
+{
+	if (not (stuffH == height))
+	{
+		ChangeData(stuffH, height);
+	}
+}
+
+action CloseRequested()
+{
+	DirectEvent("CLOSE_OVERLAY", "./Overlay");
+}
+
+action MainActionRequested()
+{
+	if (not product.pendingPurchase)
+	{
+		PlaySound(sound="GUI/buttons/open");
+		Event("ON_BUY_CLICKED");
+	}
+}

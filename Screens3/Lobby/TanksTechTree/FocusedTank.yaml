@@ -1,0 +1,11 @@
+Header:
+    version: 130
+Prototypes:
+-   class: "UIControl"
+    name: "FocusedTank"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"

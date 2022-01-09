@@ -1,0 +1,79 @@
+Header:
+    version: 133
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Inventory/Abilities/GameModeAbilitiesContent.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "GameModeAbilitiesScreen"
+    size: [967.000000, 671.000000]
+    input: false
+    components:
+        LinearLayout: {}
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["SessionDataModel", "session", "null", "{ }"]
+            - ["LobbyDataModel", "lobby", "null", "{ }"]
+            - ["AbilityItemsView", "abilitiesModel", "null", "{ }"]
+            events: []
+        UIDataLocalBindingsComponent:
+            data:
+            - ["OwnedTank", "tank", "session.playerTanks.currentTank"]
+            - ["string", "screenTitle", "\"#abilitiesScreen:ScreenName\""]
+            - ["StatsDataModel", "stats", "session.stats"]
+            - ["string", "hangarTankName", "when not isNull(tank) -> localize(tank.shortNameWithCamo), \"\""]
+    children:
+    -   class: "UIControl"
+        name: "ContentAndHeader"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            LinearLayout:
+                orientation: "TopDown"
+                skipInvisible: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "Header"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfFirstChild"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens3/Lobby/Common/Headers/InventoryHeader.yaml"
+                    args:
+                        "statsData": "session.stats"
+                        "lobby": "lobby"
+                        "serverTime": "session.serverTime"
+                        "title": "hangarTankName"
+                        "subtitle": "screenTitle"
+                        "currentScreen": "eCurrentScreen.kAbilities"
+                        "showBackButton": "true"
+                        "isFullScreen": "true"
+                    eventActions:
+                    - ["GO_TO_SHOP", "GO_TO_SHOP", ""]
+                    - ["PREMIUM_INFO_EVENT", "PREMIUM_INFO_EVENT", ""]
+                    - ["BACK_EVENT", "BACK_EVENT", ""]
+                    - ["SHOP_BUTTON", "SHOP_BUTTON", "_event.requiredResource"]
+        -   class: "UIControl"
+            name: "Content"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            children:
+            -   prototype: "GameModeAbilitiesContent/AbilitiesItems"
+                name: "AbilitiesItems"
+                components:
+                    UIDataParamsComponent:
+                        args:
+                            "stats": "stats"
+                            "model": "abilitiesModel"
+                            "artefacts": "null"

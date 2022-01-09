@@ -1,0 +1,158 @@
+Header:
+    version: "23"
+ImportedPackages:
+- "~res:/UI/Styles/Battle/BattleHUD.yaml"
+StyleSheets:
+-   selector: ".red-mark"
+    properties:
+        bg-frame: 1
+-   selector: ".green-mark"
+    properties:
+        bg-frame: 0
+-   selector: ".map-specific"
+    properties:
+        bg-color: [1.000000, 1.000000, 1.000000, 1.000000]
+        bg-drawType: "DRAW_SCALE_TO_RECT"
+-   selector: ".map-random"
+    properties:
+        bg-color: [0.200000, 0.274510, 0.321569, 0.862745]
+        bg-drawType: "DRAW_FILL"
+-   selector: ".right-red-icon #icon"
+    properties:
+        bg-frame: 1
+        scale: [1.000000, 1.000000]
+-   selector: ".right-green-icon #icon"
+    properties:
+        scale: [-1.000000, 1.000000]
+        bg-frame: 0
+-   selector: ".left-green-icon #icon"
+    properties:
+        bg-frame: 0
+        scale: [1.000000, 1.000000]
+-   selector: ".left-red-icon #icon"
+    properties:
+        bg-frame: 1
+        scale: [-1.000000, 1.000000]
+-   selector: ".right-to-left"
+    properties:
+        linearLayout-orientation: "RightToLeft"
+-   selector: ".button:disabled"
+    properties:
+        bg-color: [1.000000, 1.000000, 1.000000, 0.501961]
+        bg-frame: 0
+-   selector: ".down"
+    properties:
+        scale: [1.000000, -1.000000]
+-   selector: ".map-white-back"
+    properties:
+        bg-color: [1.000000, 1.000000, 1.000000, 0.600000]
+        bg-drawType: "DRAW_FILL"
+        bg-colorInherit: "COLOR_ADD_TO_PARENT"
+-   selector: ".trainee-entry:disabled"
+    properties:
+        bg-color: [1.000000, 1.000000, 1.000000, 0.392157]
+-   selector: ".observer-none ? #ObserverMode"
+    properties:
+        visible: false
+-   selector: ".observer-team #VehicleIconWrapper, .observer-both #VehicleIconWrapper, .observer-none #ObserverModeWrapper"
+    properties:
+        visible: false
+-   selector: ".observer-team #ObserverModeWrapper, .observer-both #ObserverModeWrapper, .observer-none #VehicleIconWrapper"
+    properties:
+        visible: true
+-   selector: ".observer-team ? #ObserverMode"
+    properties:
+        bg-frame: 1
+-   selector: ".observer-both ? #ObserverMode"
+    properties:
+        bg-frame: 0
+-   selector: ".not-ready #VehicleName"
+    properties:
+        text-color: [0.627451, 0.600000, 0.800000, 0.941176]
+-   selector: ".not-ready:pressed_inside"
+    properties:
+        bg-color: [1.000000, 1.000000, 1.000000, 0.392157]
+-   selector: ".ready #back"
+    properties:
+        bg-color: [0.200000, 0.321569, 0.274510, 1.000000]
+        bg-drawType: "DRAW_FILL"
+-   selector: ".ready:pressed_inside"
+    properties:
+        bg-drawType: "DRAW_FILL"
+        bg-color: [0.200000, 0.321569, 0.274510, 0.686275]
+-   selector: ".left-to-right ? #ObserverMode"
+    properties:
+        anchor-leftAnchorEnabled: false
+        anchor-rightAnchorEnabled: true
+-   selector: ".left-to-right ? #Camera"
+    properties:
+        bg-spriteModification: ["FLIP_HORIZONTAL"]
+-   selector: ".right-to-left ? #ObserverMode"
+    properties:
+        anchor-leftAnchorEnabled: true
+        anchor-rightAnchorEnabled: false
+-   selector: ".right-to-left ? #TraineeName #spacer"
+    properties:
+        visible: true
+-   selector: ".right-to-left ? #VehicleIcon"
+    properties:
+        anchor-leftAnchor: 0.000000
+        anchor-leftAnchorEnabled: true
+        anchor-rightAnchor: 0.000000
+        anchor-rightAnchorEnabled: false
+        scale: [1.000000, 1.000000]
+-   selector: ".right-to-left ? #VehicleLevel"
+    properties:
+        text-align: ["LEFT", "TOP"]
+-   selector: ".right-to-left ? #MouseIcon"
+    properties:
+        anchor-leftAnchorEnabled: true
+        anchor-rightAnchorEnabled: false
+-   selector: ".right-to-left ? #VehicleName"
+    properties:
+        text-align: ["RIGHT", "TOP"]
+-   selector: ".right-to-left"
+    properties:
+        linearLayout-orientation: "RightToLeft"
+-   selector: "#VehicleName"
+    properties:
+        text-align: ["LEFT", "TOP"]
+-   selector: "#VehicleLevel"
+    properties:
+        anchor-leftAnchor: -20.000000
+        anchor-topAnchor: 5.000000
+        text-align: ["RIGHT", "TOP"]
+-   selector: "#VehicleIcon"
+    properties:
+        anchor-leftAnchor: 0.000000
+        anchor-leftAnchorEnabled: false
+        anchor-rightAnchor: 0.000000
+        anchor-rightAnchorEnabled: true
+        scale: [1.000000, 1.000000]
+-   selector: "#TraineeName #spacer"
+    properties:
+        visible: false
+-   selector: "#MouseIcon"
+    properties:
+        anchor-bottomAnchor: 4.000000
+        anchor-bottomAnchorEnabled: true
+        anchor-rightAnchor: -4.000000
+        anchor-rightAnchorEnabled: true
+-   selector: "#SelectionFrame"
+    properties:
+        visible: false
+-   selector: ".trainee-entry:selected #SelectionFrame"
+    properties:
+        visible: true
+-   selector: ".trainee-entry.offline ? #VehicleName"
+    properties:
+        text-color: [0.996078, 0.000000, 0.000000, 1.000000]
+-   selector: ".hidden-tank.online ? #VehicleName"
+    properties:
+        visible: false
+-   selector: ".hidden-tank ? #VehicleIcon"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/LobbyCommon/covered_tank"
+-   selector: ".not-assigned-observer ? #VehicleName"
+    properties:
+        text-color: [0.996078, 0.000000, 0.000000, 1.000000] 

@@ -1,0 +1,4 @@
+action UpdateMissionsPosition(float positionY)
+{
+	Event("UPDATE_MISSIONS_POSITIONS", arg1 = positionY);
+}

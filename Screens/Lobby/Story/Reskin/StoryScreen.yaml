@@ -1,0 +1,359 @@
+Header:
+    version: 140
+Prototypes:
+-   class: "UIControl"
+    name: "StoryScreen"
+    size: [1325.000000, 610.000000]
+    input: false
+    components:
+        ClipContent: {}
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UILayoutEventComponent:
+            sizeChangedEvent: "SCREEN_SIZE_CHANGED"
+            sizeChangedEventData: "_size"
+        ModalInput: {}
+        UIVirtualActionEventComponent0:
+            virtualKeyAction: "Options"
+            keyDownEvent: "GO_TO_SHOP"
+        UIVirtualActionEventComponent1:
+            virtualKeyAction: "Escape"
+            keyDownEvent: "BACK_SHORTCUT"
+        UIShortcutEventComponent:
+            shortcuts: "BACK_SHORTCUT,Back;BACK_SHORTCUT,Escape"
+        UIDataParamsComponent:
+            params:
+            - ["StoryView", "storyView", "null", "{ }"]
+            - ["StatsDataModel", "statsData", "null", "{ }"]
+            - ["AccountDataModel", "account", "null", "{ }"]
+            - ["LobbyDataModel", "lobby", "null", "{ }"]
+            - ["int64", "serverTime", "0L", "1554299463L"]
+            - ["bool", "neteaseAvailable", "false", "false"]
+            - ["eRealm", "realm", "eRealm.Unknown", "eRealm.Russia"]
+            - ["eBlitzDevice", "deviceType", "eBlitzDevice.DEVICE_PHONE", "eBlitzDevice.DEVICE_PHONE"]
+            - ["bool", "isGfx2", "false", "false"]
+            events:
+            - "BUY_QUEST_BOOSTER"
+            - "OPEN_LEVEL"
+            - "OPEN_BATTLEPASS"
+            - "SELECT_STEP(int id)"
+            - "SELECT_COMPOSITE_STEP(string name)"
+            - "SHOW_STEP_INFO(int id)"
+            - "SHOW_CHEST_INFO(int id)"
+            - "DESELECT"
+            - "COMPLETE_STEP(bool isChest)"
+            - "SHOW_STORY_INFO"
+            - "SHOW_STEP_INFO_FOOTER"
+            - "WEB_INTERACTION_BUTTON_PRESSED"
+            - "SHOW_DETAILED_INFO"
+            - "BACK_EVENT"
+            - "SHOW_TASK_JOURNAL"
+            - "ON_TOURNAMENTS_CLICKED"
+            - "SHOP_BUTTON(eRequiredResource requiredResource)"
+            - "STEPS_SHOWN"
+            - "PARALLAX_SHIFT(float shift)"
+            - "CLOSE_START_SCREEN"
+            - "SHOW_BOOSTERS"
+            - "NEWCOMERS2020_INITIALIZED"
+            - "NEWCOMERS7X7_INITIALIZED"
+            - "BTH2021_MIGHT_INITIALIZED"
+            - "NEWCOMERS7X7_FINISHED"
+            - "START_QUEST_BUTTON_PRESSED"
+        UIDataLocalVarsComponent:
+            data:
+            - ["vector2", "screenSize", "vec2(0.000000, 0.000000)"]
+            - ["bool", "isInitialized", "false"]
+            - ["float", "parallaxShift", "0.000000"]
+            - ["bool", "showFinalScreen", "false"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["StorySettings", "settings", "storyView.story.settings"]
+            - ["string", "desktopPrefix", "when deviceType == eBlitzDevice.DEVICE_DESKTOP -> \"Desktop-\", \"\""]
+            - ["string", "background", "when settings.art.Contains(\"background\") -> settings.art[\"background\"], \"\""]
+            - ["bool", "isNewcomers2020", "storyView.story.name == \"NEWCOMERS2020\""]
+            - ["bool", "isNewcomers7x7", "storyView.story.name == \"NEWCOMERS7X7\""]
+            - ["bool", "isOliver2021", "storyView.story.name == \"OLIVER2021\""]
+            - ["bool", "isBlack2021", "storyView.story.name == \"BLACK2021\""]
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/Lobby/Story/Story.actions"
+    children:
+    -   class: "UIControl"
+        name: "Bg"
+        input: false
+        components:
+            UIPostProcessSourceComponent0:
+                id: "StoryBackground"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "Parallax"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                UIChildComponent0:
+                    condition: "storyView.story.name == \"HALLOWEEN2021_MAIN\""
+                    prototypePath: "~res:/UI/Screens3/Common/Parallax.yaml"
+                    args:
+                        "content": "ParallaxContent"
+                        "shift": "parallaxShift"
+        -   class: "UIControl"
+            name: "Image"
+            pivot: [0.500000, 0.500000]
+            input: false
+            components:
+                UITextureComponent:
+                    drawType: "DRAW_SCALE_TO_RECT"
+                    perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "content / 0.75"
+                    verticalPolicy: "PercentOfContent"
+                ScalePolicy:
+                    horizontalFormula: "max(parentSize.X / size.X, parentSize.Y / size.Y)"
+                    verticalFormula: "max(parentSize.X / size.X, parentSize.Y / size.Y)"
+            bindings:
+            - ["visible", "not empty(background)"]
+            - ["UITextureComponent.spriteResource", "when deviceType == eBlitzDevice.DEVICE_DESKTOP -> eResourceLoadingStrategy.PreferMaxResolution, eResourceLoadingStrategy.Base"]
+            - ["UITextureComponent.spritePath", "background"]
+        -   class: "UIControl"
+            name: "Fade"
+            input: false
+            classes: "black-bg"
+            components:
+                Background: {}
+                UIOpacityComponent:
+                    opacity: 0.500000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+            bindings:
+            - ["visible", "isBlack2021"]
+    -   class: "UIControl"
+        name: "ContentHolder"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                childType: "kControl"
+                condition: "not empty(storyView.story.stageResources.onStartScreen) and storyView.isFirstOpen"
+                control: "StartScreen"
+            UIChildComponent1:
+                childType: "kControl"
+                condition: "showFinalScreen or storyView.story.isDone"
+                control: "FinishScreen"
+            UIChildComponent2:
+                childType: "kControl"
+                control: "StoryActive"
+Slots:
+-   class: "UIControl"
+    name: "ParallaxContent"
+    input: false
+    components:
+        LinearLayout: {}
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "PercentOfMaxChild"
+    children:
+    -   class: "UIControl"
+        name: "ParallaxBg1"
+        input: false
+        components:
+            UITextureComponent:
+                drawType: "DRAW_SCALE_TO_RECT"
+                perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "content / 0.75"
+                verticalPolicy: "PercentOfContent"
+        bindings:
+        - ["UITextureComponent.spritePath", "storyView.story.settings.art[desktopPrefix + \"parallaxBg1\"]"]
+    -   class: "UIControl"
+        name: "ParallaxBg2"
+        input: false
+        components:
+            UITextureComponent:
+                drawType: "DRAW_SCALE_TO_RECT"
+                perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "content / 0.75"
+                verticalPolicy: "PercentOfContent"
+        bindings:
+        - ["UITextureComponent.spritePath", "storyView.story.settings.art[desktopPrefix + \"parallaxBg2\"]"]
+    -   class: "UIControl"
+        name: "ParallaxBg3"
+        input: false
+        components:
+            UITextureComponent:
+                drawType: "DRAW_SCALE_TO_RECT"
+                perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "content / 0.75"
+                verticalPolicy: "PercentOfContent"
+        bindings:
+        - ["UITextureComponent.spritePath", "storyView.story.settings.art[desktopPrefix + \"parallaxBg3\"]"]
+-   class: "UIControl"
+    name: "StoryActive"
+    size: [960.000000, 640.000000]
+    input: false
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+    children:
+    -   class: "UIControl"
+        name: "HeaderOverContent"
+        input: false
+        components:
+            LinearLayout:
+                orientation: "BottomUp"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "ContentHolder"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                UIChildComponent0:
+                    childType: "kOldExpression"
+                    control: "storyView.story.stageResources.treePath"
+                    args:
+                        "deviceType": "deviceType"
+                        "isGfx2": "isGfx2"
+                        "serverTime": "serverTime"
+                        "screenSize": "screenSize"
+                        "highlightControl": "account.tutorialData.currentHighlightControl"
+                        "storyView": "storyView"
+                        "statsGold": "statsData.gold"
+                    eventActions:
+                    - ["DESELECT", "DESELECT", ""]
+                    - ["SHOW_STEP_INFO", "SHOW_STEP_INFO", "_event.id"]
+                    - ["SHOW_CHEST_INFO", "SHOW_CHEST_INFO", "_event.id"]
+                    - ["SELECT_STEP", "SELECT_STEP", "_event.id"]
+                    - ["PARALLAX_SHIFT", "PARALLAX_SHIFT", "_event.shift"]
+                    - ["STEPS_SHOWN", "STEPS_SHOWN", ""]
+                    - ["SELECT_COMPOSITE_STEP", "SELECT_COMPOSITE_STEP", "_event.name"]
+                    - ["NEWCOMERS2020_INITIALIZED", "NEWCOMERS2020_INITIALIZED", ""]
+                    - ["NEWCOMERS7X7_INITIALIZED", "NEWCOMERS7X7_INITIALIZED", ""]
+                    - ["BTH2021_MIGHT_INITIALIZED", "BTH2021_MIGHT_INITIALIZED", ""]
+        -   class: "UIControl"
+            name: "HeaderHolder"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfFirstChild"
+                UIChildComponent0:
+                    childType: "kPrototype"
+                    prototypePath: "~res:/UI/Screens3/Lobby/Story/Components/HeaderInfo.yaml"
+                    args:
+                        "storyView": "storyView"
+                        "statsData": "statsData"
+                        "serverTime": "serverTime"
+                        "lobby": "lobby"
+                        "vSize": "when isNewcomers2020 or isOliver2021 -> screenSize.Y / 3.000000, 208.000000"
+                        "currentScreen": "eCurrentScreen.kStory"
+                    eventActions:
+                    - ["GO_TO_SHOP", "GO_TO_SHOP", ""]
+                    - ["BACK_EVENT", "BACK_EVENT", ""]
+                    - ["SHOP_BUTTON", "SHOP_BUTTON", "_event.requiredResource"]
+                    - ["SHOW_BOOSTERS", "SHOW_BOOSTERS", ""]
+                    - ["START_QUEST_BUTTON_PRESSED", "START_QUEST_BUTTON_PRESSED", ""]
+                    - ["SHOW_TASK_JOURNAL", "SHOW_TASK_JOURNAL", ""]
+    -   class: "UIControl"
+        name: "Footer"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                childType: "kPrototype"
+                condition: "not isNewcomers2020 and not isNewcomers7x7 and not isOliver2021"
+                prototypePath: "~res:/UI/Screens3/Lobby/Story/Footer.yaml"
+                args:
+                    "story": "storyView.story"
+                    "statsData": "statsData"
+                    "battlePass": "storyView.battlePass"
+                    "selectedStep": "storyView.selectedStep"
+                eventActions:
+                - ["BUY_QUEST_BOOSTER", "BUY_QUEST_BOOSTER", ""]
+                - ["BUY_GOLD_STEP", "BUY_GOLD_STEP", ""]
+                - ["FOOTER_LOCKED_BUTTON_PRESSED", "SHOW_LOCKED_REASON", ""]
+                - ["FOOTER_COMPLETE_BUTTON_PRESSED", "COMPLETE_STEP", "_event.isChest"]
+                - ["OPEN_TASK_JOURNAL", "OPEN_TASK_JOURNAL", ""]
+                - ["OPEN_REWARD_INFO", "OPEN_REWARD_INFO", ""]
+                - ["OPEN_BATTLEPASS", "OPEN_BATTLEPASS", ""]
+                - ["FOOTER_INFO_BUTTON_PRESSED", "SHOW_STORY_INFO", ""]
+-   class: "UIControl"
+    name: "StartScreen"
+    size: [960.000000, 640.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+    children:
+    -   class: "UIControl"
+        name: "ContentHolder"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                childType: "kOldExpression"
+                condition: "not empty(storyView.story.stageResources.onStartScreen)"
+                control: "storyView.story.stageResources.onStartScreen"
+                args:
+                    "settings": "settings"
+                    "deviceType": "deviceType"
+                    "vehicle": "when storyView.story.name == \"NEWCOMERS2020\" -> storyView.tree.groups[\"common\"].steps[5].step.rewards[0].vehicle, null"
+                eventActions:
+                - ["CLOSE", "CLOSE_START_SCREEN", ""]
+-   class: "UIControl"
+    name: "FinishScreen"
+    size: [960.000000, 640.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+    children:
+    -   class: "UIControl"
+        name: "ContentHolder"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                childType: "kOldExpression"
+                condition: "not empty(storyView.story.stageResources.onFinishScreen)"
+                control: "storyView.story.stageResources.onFinishScreen"
+                args:
+                    "storyView": "storyView"
+                    "settings": "settings"
+                    "vehicle": "when storyView.story.name == \"NEWCOMERS2020\" -> storyView.tree.groups[\"common\"].steps[5].step.rewards[0].vehicle, null"
+                    "deviceType": "deviceType"
+                eventActions:
+                - ["CLOSE", "BACK_EVENT", ""]

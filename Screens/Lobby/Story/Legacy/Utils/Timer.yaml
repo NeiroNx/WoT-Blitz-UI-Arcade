@@ -1,0 +1,68 @@
+Header:
+    version: "84"
+Prototypes:
+-   class: "UIControl"
+    name: "Timer"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfFirstChild"
+            verticalPolicy: "PercentOfFirstChild"
+        UIDataParamsComponent:
+            params:
+            - ["int64", "time", "0L", "1554378824L"]
+            - ["int64", "serverTime", "0L", "1554378024L"]
+            - ["int64", "alertTime", "0L", "3600L"]
+            - ["string", "textClass", "\"text1\"", "\"text1\""]
+        UIDataLocalsComponent:
+            locals:
+            - ["bool", "isExpiring", "alertTime > 0L and (time - serverTime) < alertTime"]
+            - ["string", "bgColorClass", "when isExpiring -> \"color-red\", \"color-white\""]
+            - ["string", "bgStyle", "bgColorClass"]
+            - ["string", "textColorClass", "when isExpiring -> \"text-color-red\", \"text-color-white\""]
+            - ["string", "textStyle", "textClass + \" \" + textColorClass"]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            LinearLayout:
+                spacing: 5.000000
+                useRtl: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   class: "UIControl"
+            name: "Icon"
+            input: false
+            components:
+                Background:
+                    sprite: "~res:/Gfx/UI/LobbyCommon/timer_icon"
+                    colorInherit: "COLOR_MULTIPLY_ON_PARENT"
+                    perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                Anchor:
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Styles/ColorStyles.yaml"
+            bindings:
+            - ["classes", "bgStyle"]
+        -   class: "UIControl"
+            name: "Time"
+            input: false
+            components:
+                UITextComponent: {}
+                Anchor:
+                    vCenterAnchorEnabled: true
+                    vCenterAnchor: -1.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens/Fonts.yaml;~res:/UI/Screens/FontsColors.yaml"
+            bindings:
+            - ["classes", "textStyle"]
+            - ["UITextComponent.text", "timeDiff(time - serverTime)"]

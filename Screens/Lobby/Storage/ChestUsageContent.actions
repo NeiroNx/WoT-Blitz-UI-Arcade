@@ -1,0 +1,44 @@
+action PLAY_ANIMATION(int index, float duration)
+{
+    if (not isAnimationsFinished)
+    {
+        parallel
+        {
+            sequence
+            {
+                Move("**/Animation" + str(index), spawnPoint.X, spawnPoint.Y);
+                parallel
+                {
+                    MoveToControl("**/Animation" + str(index), "**/Reward" + str(index), 0, 0, duration, EASE_IN_EASE_OUT);
+                    Opacity("**/Animation" + str(index), 1.0, duration, EASE_IN_EASE_OUT);
+                    Scale("**/Animation" + str(index), 1.0, 1.0, duration, EASE_IN_EASE_OUT);
+                    PlaySound("GUI/buttons/whoosh_prize", "**/Animation" + str(index));
+                    ScrollToEnsureControlOnScreen("**/Reward" + str(index), duration, eScrollToControlPolicy.kCenter);
+                }
+                parallel
+                {
+                    Opacity("**/Animation" + str(index), 0.0);
+                    Opacity("**/Reward" + str(index), 1.0);
+                }
+                Event("ANIMATION_FINISHED", arg1 = index);
+                Stop();
+            }
+
+            sequence
+            {
+                WaitEvent("STOP_ANIMATION");
+                Stop();
+            }
+        }
+    }
+}
+
+action ScreenSizeChanged(vector2 size)
+{
+    ChangeData(screenSize, size);
+}
+
+action RewardsSizeChanged(vector2 size)
+{
+    ChangeData(rewardsSize, size);
+}

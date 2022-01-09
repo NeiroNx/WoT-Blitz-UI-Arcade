@@ -1,0 +1,175 @@
+action HANDLE_EVENT(string eventName)
+{
+    if (eventName == "SCROLL_TO_TRAINING" or eventName == "SCROLL_TO_CHAT" or eventName == "SCROLL_TO_TASK_JOURNAL" or eventName == "SCROLL_TO_STORAGE")
+    {
+        DirectEvent(eventName, "**/SideBar/SideBar");
+    }
+    if (eventName == "SCROLL_PANEL_TO_START")
+    {
+        DirectEvent("SCROLL_PANEL_TO_START", "**/Container/TanksPanelHolder/TanksPanel");
+    }
+}
+
+action CAPTURED_BACK_EVENT
+{
+  if (captureInput)
+  {
+    Event("SwitchFilterAnimation", arg1=false);
+  }
+  else
+  {
+    Event("HANGAR_BACK_EVENT");
+  }
+}
+
+action SHOW_TASK_JOURNAL_WIDGET()
+{
+	DirectEvent("SHOW_TASK_JOURNAL_WIDGET", "**/TaskJournalWidget/TaskJournalWidget");
+}
+
+action HIDE_COMMUNITY_PANEL()
+{
+	DirectEvent("HIDE_COMMUNITY_PANEL", "**/SideBar/SideBar");
+}
+
+action SwitchFilterAnimation(bool showRequested)
+{
+  ChangeData(isFilterNavPanel, not isFilterNavPanel);
+  Event("SLIDE_PANEL_OPENED", arg1 = showRequested);
+  
+  if (showRequested)
+  {
+    Event("PAUSE_HANGAR_SCENE", arg1=true);
+    RenderPostProcess("**/FadedBlur/BlurAndFade/Blur", force=true);
+    parallel
+    {
+      {
+        Event("ENABLE_BLUR", arg1=true);
+        Opacity("**/FadedBlur", 1.0, time=0.4, interpolation=EASE_OUT);
+      }
+      if (currentScreen == eCurrentScreen.kHangar)
+      {
+        DirectEvent("SHOW_INVENTORY_PANEL", "**/DefaultControls/Inventory", false, eInventoryPanelAnimation.kBubbleUp, 0.2);
+      }
+      {
+        DirectEvent("SHOW_FILTER", "**/TanksPanelHolder/TanksPanel", true, 0.4);
+        WaitEvent("FILTER_ANIMATION_FINISHED");
+      }
+    }
+    Event("CAPTURE_INPUT", arg1=true);
+  }
+  else
+  {
+    Event("CAPTURE_INPUT", arg1=false);
+    parallel
+    {
+      {
+        DirectEvent("SHOW_FILTER", "**/TanksPanelHolder/TanksPanel", false, 0.4);
+        WaitEvent("FILTER_ANIMATION_FINISHED");
+      }
+      {
+        Opacity("**/FadedBlur", 0.0, time=0.4, interpolation=EASE_OUT);
+        Event("ENABLE_BLUR", arg1=false);
+      }
+    }
+    Event("PAUSE_HANGAR_SCENE", arg1=false);
+    if (currentScreen == eCurrentScreen.kHangar)
+    {
+      DirectEvent("SHOW_INVENTORY_PANEL", "**/DefaultControls/Inventory", true, eInventoryPanelAnimation.kBubbleUp, 0.2);
+    }
+  }
+}
+
+action ShowCalibrationPopup
+{
+    if(session.gameModesAccountModel.mode.battleType == "7" and isNoRatingBattles and isBattleTypeChanged and notRatingSeasonMismatch and session.gameModesAccountModel.mode.availabilityStatus == eGameModeAvailability.AVAILABLE and prebattleIsAvailableForCalibration and not isHasRating)
+    {
+    	 Event("SHOW_RATING_CALIBRATION_POPUP");
+    }
+}
+
+action ENSURE_SELECTED_TANK_VISIBILITY
+{
+    if(showTanksPanel)
+    {
+        DirectEvent("EnsureSelectedCellVisibility", "**/Container/TanksPanelHolder/TanksPanel");
+    }
+}
+
+action BATTLE
+{
+  if(account.tutorialData.isTutorialActive or (not isFilterNavPanel and not offeredTankSelected))
+  {
+    DirectEvent("BATTLE", "**/Container/Content/MainContent/MainControls/TankDependentControls/DefaultControls/TopPart/TopWrapper/BattleButtonContainer/BattleButton");
+  }
+  else
+  {
+    Event("RESET_FILTER");
+  }
+}
+
+action SWITCH_FILTER
+{
+  if(not isFilterNavPanel)
+  {
+    DirectEvent("SWITCH_FILTER_NP", "**/Container/TanksPanelHolder/TanksPanel");
+  }
+}
+
+action INVENTORY
+{
+    if(account.tutorialData.isTutorialActive or (not isFilterNavPanel and not offeredTankSelected))
+    {
+      PlaySound(sound="GUI/buttons/open");
+      DirectEvent("SHOW_FIRST_INVENTORY", "**/Container/Content/MainContent/MainControls/TankDependentControls/DefaultControls/Inventory");
+
+    }
+    else
+    {
+      DirectEvent("SWITCH_FILTER_NP", "**/Container/TanksPanelHolder/TanksPanel");
+    }
+}
+
+action NEXT_TANK
+{
+  if(not isFilterNavPanel)
+  {
+    DirectEvent("NEXT_TANK", "**/Container/TanksPanelHolder/TanksPanel");
+  }
+}
+
+action PREVIOUS_TANK
+{
+  if(not isFilterNavPanel)
+  {
+    DirectEvent("PREVIOUS_TANK", "**/Container/TanksPanelHolder/TanksPanel");
+  }
+}
+
+action SHOW_TANKS_TREE_NS
+{
+  if(not isFilterNavPanel)
+  {
+    Event("SHOW_TANKS_TREE");
+  }
+}
+action SERVICE_EVENT_1
+{
+  Event("BATTLE");
+}
+
+action SERVICE_EVENT_2
+{
+  PlaySound(sound="GUI/buttons/open");
+  Event("INVENTORY");
+}
+action ACTION_DOWN()
+{
+  Event("SHOW_TANKS_TREE_NS");
+}
+
+action CachePrebattleHangarBlur
+{
+  RenderPostProcess("**/Blur", true);
+  CachePostProcess("**/Blur");
+}

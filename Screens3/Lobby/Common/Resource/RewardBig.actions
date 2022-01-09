@@ -1,0 +1,14 @@
+action POSITION_CHANGED
+{
+    ChangeProperty(".", "", "position", position);
+}
+
+action PIVOT_CHANGED
+{
+    ChangeProperty(".", "", "pivot", pivot);
+}
+
+action SCALE_CHANGED
+{
+    ChangeProperty(".", "", "scale", scale);
+}

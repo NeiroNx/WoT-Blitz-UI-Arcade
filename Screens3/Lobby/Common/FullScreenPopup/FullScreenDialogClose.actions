@@ -1,0 +1,18 @@
+action ON_CLOSE()
+{
+    DirectEvent("PLAY_SOUND", "**/IconButtonLight");
+    Event("CLOSE_NOTIFICATION");
+}
+
+action ENTER_SHORTCUT
+{
+    if (closeOnEnter)
+    {
+        Event("ON_CLOSE");
+    }
+    else
+    {
+        DirectEvent("PLAY_SOUND", "**/ButtonPositive");
+        DirectEvent("ON_CLICK_BUTTON", "**/ButtonPositive");
+    }
+}

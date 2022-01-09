@@ -1,0 +1,9 @@
+action ON_SLOWDOWN()
+{
+    BroadcastEvent("PLAYBACK_SLOWDOWN");
+}
+
+action ON_SPEEDUP()
+{
+    BroadcastEvent("PLAYBACK_SPEEDUP");
+}

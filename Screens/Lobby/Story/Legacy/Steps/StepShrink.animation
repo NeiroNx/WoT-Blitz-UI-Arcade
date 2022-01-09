@@ -1,0 +1,9 @@
+animation StepShrink
+{
+    parallel
+    {
+        Scale("ExpandedState", xScaleFactor, yScaleFactor, 0.2, EASE_OUT);
+        Opacity("ExpandedState", 0.0, 0.2, LINEAR);
+        Opacity("NormalState", 1.0, 0.2, LINEAR);
+    }
+}

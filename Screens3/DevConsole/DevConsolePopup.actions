@@ -1,0 +1,14 @@
+action SCROLL_TO(int lineIndex)
+{
+    DirectEvent("SCROLL_TO", "**/DevConsole", arg1=lineIndex);
+}
+
+action SCROLL_TO_END
+{
+    DirectEvent("SCROLL_TO_END", "**/DevConsole");
+}
+
+action MOVE_CURSOR_TO_END
+{
+    DirectEvent("MOVE_CURSOR_TO_END", "**/DevConsole");
+}

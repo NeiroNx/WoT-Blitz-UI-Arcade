@@ -1,0 +1,5 @@
+animation RewardHugeInit
+{
+    ChangeProperty(".", "", "pivot", pivot);
+    ChangeProperty(".", "", "scale", scale);
+}

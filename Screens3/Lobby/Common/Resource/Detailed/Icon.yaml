@@ -1,0 +1,77 @@
+Header:
+    version: 130
+Prototypes:
+-   class: "UIControl"
+    name: "Icon"
+    size: [96.000000, 96.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["ResourceDetailed", "resource", "{ }", "{ \"type\" = ResourceType.vehicle; }"]
+            - ["control", "fx", "null", "null"]
+            - ["control", "overlay", "null", "null"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["bool", "isBasicResource", "resource.type == ResourceType.gold or resource.type == ResourceType.free_xp or resource.type == ResourceType.elite_xp or resource.type == ResourceType.premium or resource.type == ResourceType.xp or resource.type == ResourceType.tankmenXP or resource.type == ResourceType.credits or resource.type == ResourceType.slots or resource.type == ResourceType.equipment_slots"]
+    children:
+    -   class: "UIControl"
+        name: "IconWrapper"
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "FxHolder"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                UIChildComponent0:
+                    childType: "kControl"
+                    condition: "not isNull(fx)"
+                    control: "fx"
+        -   class: "UIControl"
+            name: "ContentHolder"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                UIChildComponent0:
+                    childType: "kPrototype"
+                    condition: "resource.type == ResourceType.stuff and not isNull(resource.stuff)"
+                    prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/Detailed/StuffIcon.yaml"
+                    args:
+                        "stuff": "resource.stuff"
+                UIChildComponent1:
+                    childType: "kPrototype"
+                    condition: "resource.type == ResourceType.vehicle"
+                    prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/Detailed/VehicleIcon.yaml"
+                    args:
+                        "vehicle": "resource.vehicle"
+                UIChildComponent2:
+                    childType: "kPrototype"
+                    condition: "isBasicResource and not isNull(resource.basic)"
+                    prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/Detailed/BasicIcon.yaml"
+                    args:
+                        "type": "resource.type"
+        -   class: "UIControl"
+            name: "Overlay"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                UIChildComponent0:
+                    childType: "kControl"
+                    condition: "not isNull(overlay)"
+                    control: "overlay"

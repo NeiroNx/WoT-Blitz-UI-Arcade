@@ -1,0 +1,27 @@
+ratingValueStr = when
+    state == eBattleRatingState.HAS_RATING -> str1000Separated(currentRating),
+                                             localize("ratingBattles/calibration/ratingPlaceholder");
+
+ratingDiffValueStr = str(abs(difference));
+
+inCalibrationState =
+  state == eBattleRatingState.CALIBRATION or
+  state == eBattleRatingState.RECALIBRATION or
+  state == eBattleRatingState.NEED_RECALIBRATION;
+
+diffStyleClass = when
+    state == eBattleRatingState.NO_RATING  ->  "equal",
+    inCalibrationState ->                     "calibration",
+    difference > 0 ->                         "better",
+    difference < 0 ->                         "worse",
+    difference == 0 ->                        "equal",
+                                              "equal";
+
+league = toLowerCaseNotForLocalizedText(str(leagueType, eLeague));
+
+leagueStyleClass = when
+    state == eBattleRatingState.NO_RATING  -> "no-league",
+    state == eBattleRatingState.HAS_RATING -> league,
+                                             "";
+
+ratingStyles = "battle-rating diffStyle=" + diffStyleClass + " leagueStyle=" + leagueStyleClass;

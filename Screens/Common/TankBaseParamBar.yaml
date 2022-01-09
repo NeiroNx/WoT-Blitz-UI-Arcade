@@ -1,0 +1,153 @@
+Header:
+    version: "71"
+Controls:
+-   class: "UIControl"
+    name: "TankBaseParamBar"
+    size: [234.000000, 4.000000]
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "FixedSize"
+            verticalValue: 4.000000
+        UIDataSourceComponent0:
+            sourceType: "Expression"
+            source: "{segmentsCount = 0; segmentWidth = 4; space=2; displayValue=0.6; comparedValue=0.2; maxValue=0.9; deltaFlag=1; rounded=true; biggerValueRightExtreme = 0.0; commonValueRightExtreme=0.0}"
+        UIDataSourceComponent1:
+            sourceType: "File"
+            source: "~res:/UI/Screens/Common/ViewModels/TankBaseParamBar.model"
+        UIDataOnEventComponent0:
+            eventName: "BIGGER_EXTREME_CHANGED"
+            modelFieldExpression: "biggerValueRightExtreme"
+            dataExpression: "_event"
+        UIDataOnEventComponent1:
+            eventName: "COMMON_EXTREME_CHANGED"
+            modelFieldExpression: "commonValueRightExtreme"
+            dataExpression: "_event"
+    children:
+    -   class: "UISegmentedBar"
+        name: "bar_full"
+        color: [1.000000, 1.000000, 1.000000, 0.100000]
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                topAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        bindings:
+        - ["countSegments", "segmentsCount", "Read"]
+        - ["segmentWidth", "segmentWidth", "Read"]
+        - ["space", "space", "Read"]
+        - ["start", "fullBarStartValue", "Read"]
+        - ["rounded", "rounded", "Read"]
+    -   class: "UISegmentedBar"
+        name: "bar_max"
+        color: [1.000000, 1.000000, 1.000000, 0.350000]
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                topAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        bindings:
+        - ["countSegments", "segmentsCount", "Read"]
+        - ["segmentWidth", "segmentWidth", "Read"]
+        - ["space", "space", "Read"]
+        - ["start", "maxBarStartValue", "Read"]
+        - ["end", "maxBarEndValue", "Read"]
+        - ["rounded", "rounded", "Read"]
+    -   class: "UISegmentedBar"
+        name: "bar_common"
+        color: [1.000000, 0.674510, 0.149020, 1.000000]
+        extremeChangedEvent: "COMMON_EXTREME_CHANGED"
+        extremeChangedEventExpression: "_rightExtreme"
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                topAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        bindings:
+        - ["countSegments", "segmentsCount", "Read"]
+        - ["segmentWidth", "segmentWidth", "Read"]
+        - ["space", "space", "Read"]
+        - ["end", "commonBarEndValue", "Read"]
+        - ["rounded", "rounded", "Read"]
+    -   class: "UISegmentedBar"
+        name: "bar_bigger"
+        color: [0.317647, 0.650980, 0.098039, 1.000000]
+        extremeChangedEvent: "BIGGER_EXTREME_CHANGED"
+        extremeChangedEventExpression: "_rightExtreme"
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                topAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        bindings:
+        - ["visible", "deltaFlag == 1", "Read"]
+        - ["countSegments", "segmentsCount", "Read"]
+        - ["segmentWidth", "segmentWidth", "Read"]
+        - ["space", "space", "Read"]
+        - ["start", "biggerBarStartValue", "Read"]
+        - ["end", "biggerBarEndValue", "Read"]
+        - ["rounded", "rounded", "Read"]
+    -   class: "UISegmentedBar"
+        name: "bar_less"
+        color: [0.650980, 0.152941, 0.098039, 1.000000]
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                topAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        bindings:
+        - ["visible", "deltaFlag == -1", "Read"]
+        - ["countSegments", "segmentsCount", "Read"]
+        - ["segmentWidth", "segmentWidth", "Read"]
+        - ["space", "space", "Read"]
+        - ["start", "lessBarStartValue", "Read"]
+        - ["end", "lessBarEndValue", "Read"]
+        - ["rounded", "rounded", "Read"]
+    -   class: "UIControl"
+        name: "BarValue"
+        position: [0.000000, -3.000000]
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            LinearLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   class: "UIControl"
+            name: "Progress"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfMaxChild"
+            bindings:
+            - ["SizePolicy.horizontalValue", "rightDisplayValueExtreme * 100", "Read"]
+            children:
+            -   class: "UIControl"
+                name: "Indicator"
+                input: false
+                components:
+                    Background:
+                        drawType: "DRAW_FILL"
+                    Anchor:
+                        rightAnchorEnabled: true
+                        rightAnchor: -2.000000
+                        topAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 2.000000
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 10.000000

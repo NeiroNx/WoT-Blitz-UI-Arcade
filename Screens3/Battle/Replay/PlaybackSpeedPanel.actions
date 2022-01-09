@@ -1,0 +1,30 @@
+action CLICK_BUTTON
+{
+    Event("SWITCH_LIST_VISIBILITY");
+}
+
+action PRESS_ITEM(int value)
+{
+    Event("SWITCH_LIST_VISIBILITY");
+    Event("UPDATE_SELECTED_VALUE", arg1=value);
+}
+
+action SWITCH_LIST_VISIBILITY
+{
+    ChangeData(showList, not showList);
+}
+
+action UPDATE_SELECTED_VALUE(int index)
+{
+    ChangeData(selectedIndex, index);
+}
+
+action PLAYBACK_SLOWDOWN()
+{
+    ChangeData(selectedIndex, clamp(selectedIndex + 1, 0, size - 1));
+}
+
+action PLAYBACK_SPEEDUP()
+{
+    ChangeData(selectedIndex, clamp(selectedIndex - 1, 0, size - 1));
+}

@@ -1,0 +1,82 @@
+Header:
+    version: 135
+Prototypes:
+-   class: "UIControl"
+    name: "PersonalizationDisableWarningDialog"
+    size: [720.000000, 600.000000]
+    input: false
+    classes: ""
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        ModalInput: {}
+        UIVirtualActionEventComponent0:
+            virtualKeyAction: "Escape"
+            keyDownEvent: "PROXY_CANCEL"
+        UIShortcutEventComponent:
+            shortcuts: "PROXY_CANCEL,Back;PROXY_CANCEL,Escape;PROXY_WATCH_AD,Enter"
+        UIDataParamsComponent:
+            params:
+            - ["SessionDataModel", "session", "null", "{ }"]
+            - ["BattleAdvertisingBonus", "battleBonus", "null", "{ }"]
+            - ["LobbyDataModel", "lobby", "null", "{ }"]
+            events:
+            - "ACCEPT"
+            - "CANCEL"
+        UIChildComponent0:
+            prototypePath: "~res:/UI/Screens3/Lobby/Common/Dialog/TextDialog.yaml"
+            args:
+                "type": "eDialogType.CHOOSE"
+                "accentButtonType": "eButtonType.NEGATIVE"
+                "header": "\"\""
+                "headerImage": "\"~res:/Gfx/UI/Hangar/ads/ads_icon_new_big\""
+                "optionalButton": "\"Ads/PersonalizationDisableWarningDialog/KeepEnabledButton\""
+                "accentButton": "\"Ads/PersonalizationDisableWarningDialog/DisableButton\""
+                "contentControl": "Content"
+            eventActions:
+            - ["ACCENT_CLICKED", "ACCEPT", ""]
+            - ["OPTIONAL_CLICKED", "CANCEL", ""]
+Slots:
+-   class: "UIControl"
+    name: "Content"
+    size: [400.000000, 32.000000]
+    input: false
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+            spacing: 24.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfChildrenSum"
+    children:
+    -   class: "UIControl"
+        name: "Title"
+        input: false
+        classes: "t-subtitle bold white-wild-sand-text"
+        components:
+            UITextComponent:
+                text: "Ads/PersonalizationDisableWarningDialog/Title"
+                multiline: "MULTILINE_ENABLED"
+            Anchor:
+                hCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml"
+    -   class: "UIControl"
+        name: "Description"
+        input: false
+        classes: "t-body regular white-wild-sand-70-text"
+        components:
+            UITextComponent:
+                text: "Ads/PersonalizationDisableWarningDialog/Description"
+                multiline: "MULTILINE_ENABLED"
+            Anchor:
+                hCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml"

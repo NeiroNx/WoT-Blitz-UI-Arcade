@@ -1,0 +1,76 @@
+Header:
+    version: "71"
+StyleSheets:
+-   selector: ".discount-label.clan-supply"
+    properties:
+        sizePolicy-horizontalPolicy: "PercentOfChildrenSum"
+-   selector: ".discount-label.clan-supply #Image"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/LobbyCommon/DiscountClanSmall.txt"
+-   selector: ".discount-label.clan-supply #Value"
+    properties:
+        sizePolicy-horizontalPolicy: "PercentOfContent"
+        text-fontName: "WarHeliosCondC_Bold_19"
+-   selector: ".discount-label.action"
+    properties:
+        linearLayout-enabled: false
+        sizePolicy-horizontalPolicy: "PercentOfFirstChild"
+-   selector: ".discount-label.action #Image"
+    properties:
+        anchor-hCenterAnchor: 2.000000
+        anchor-vCenterAnchor: -1.000000
+        bg-sprite: "~res:/Gfx/UI/LobbyCommon/DiscountSmall"
+-   selector: ".discount-label.action #Value"
+    properties:
+        anchor-hCenterAnchor: 2.000000
+        anchor-vCenterAnchor: -3.000000
+        sizePolicy-horizontalPolicy: "PercentOfParent"
+        text-fontName: "WarHeliosCondC_Bold_19"
+-   selector: ".discount-label.action.big #Image"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/LobbyCommon/DiscountBig.txt"
+-   selector: ".discount-label.action.big #Value"
+    properties:
+        text-fontName: "WarHeliosCondC_Bold_25"
+Prototypes:
+-   class: "UIControl"
+    customClass: "UIDiscountLabel"
+    name: "DiscountLabel"
+    input: false
+    classes: "discount-label type=action"
+    components:
+        Background: {}
+        LinearLayout:
+            orientation: "RightToLeft"
+            spacing: 5.000000
+        SizePolicy:
+            verticalPolicy: "PercentOfFirstChild"
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Lobby/Common/DiscountLabel.yaml;~res:/UI/Screens/Fonts.yaml"
+    children:
+    -   class: "UIControl"
+        name: "Image"
+        input: false
+        components:
+            Background:
+                perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+    -   class: "UIStaticText"
+        name: "Value"
+        classes: "text-color-premium"
+        components:
+            Background:
+                align: ["LEFT", "TOP"]
+            UITextComponent:
+                text: "-ERR%"
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                verticalPolicy: "PercentOfParent"

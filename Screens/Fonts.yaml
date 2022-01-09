@@ -1,0 +1,110 @@
+Header:
+    version: "65"
+ImportedPackages:
+- "~res:/UI/Screens/FontsLocales/Fonts.ar.yaml"
+- "~res:/UI/Screens/FontsLocales/Fonts.th.yaml"
+- "~res:/UI/Screens/FontsLocales/Fonts.vi.yaml"
+- "~res:/UI/Screens/FontsLocales/Fonts.zh-Hant.yaml"
+- "~res:/UI/Screens/FontsLocales/Fonts.zh-Hans.yaml"
+- "~res:/UI/Screens/FontsLocales/Fonts.ko.yaml"
+- "~res:/UI/Screens/FontsLocales/Fonts.ja.yaml"
+- "~res:/UI/Screens/FontsColors.yaml"
+StyleSheets:
+-   selector: ".header0"
+    properties:
+        text-fontName: "WarHeliosCondC_Bold_30"
+-   selector: ".header1"
+    properties:
+        text-fontName: "WarHeliosCondC_Bold_25"
+-   selector: ".header2"
+    properties:
+        text-fontName: "WarHeliosCondC_Bold_23"
+-   selector: ".header3"
+    properties:
+        text-fontName: "WarHeliosCondC_Bold_21"
+-   selector: ".header4"
+    properties:
+        text-fontName: "WarHeliosCondC_Bold_19"
+-   selector: ".header5"
+    properties:
+        text-fontName: "WarHeliosCondC_Bold_17"
+-   selector: ".text1"
+    properties:
+        text-fontName: "WarHeliosCondC_21"
+-   selector: ".text2"
+    properties:
+        text-fontName: "WarHeliosCondC_19"
+-   selector: ".text2-small"
+    properties:
+        text-fontName: "WarHeliosCondC_17"
+-   selector: ".text3-small"
+    properties:
+        text-fontName: "WarHeliosCondC_14"
+-   selector: ".text2-small.de, .text2-small.es, .text2-small.fi, .text2-small.ar"
+    properties:
+        text-fontName: "WarHeliosCondC_16"
+-   selector: ".header1.pl"
+    properties:
+        text-fontName: "WarHeliosCondC_Bold_23"
+-   selector: ".header1.fr"
+    properties:
+        text-fontName: "WarHeliosCondC_Bold_23"
+-   selector: ".header1.it"
+    properties:
+        text-fontName: "WarHeliosCondC_Bold_23"
+-   selector: ".header1.ar"
+    properties:
+        text-fontName: "WarHeliosCondC_Bold_23"
+-   selector: ".text-mono"
+    properties:
+        text-fontName: "arialmb_17"
+-   selector: ".text-cond-bold-30-all-locals"
+    properties:
+        text-fontPath: "~res:/Fonts/WarHeliosCondCBold.ttf"
+        text-fontSize: 30.000000
+-   selector: ".fs-90"
+    properties:
+        text-fontSize: 90.000000
+-   selector: ".fs-56"
+    properties:
+        text-fontSize: 56.000000
+-   selector: ".fs-50"
+    properties:
+        text-fontSize: 50.000000
+-   selector: ".fs-30"
+    properties:
+        text-fontSize: 30.000000
+-   selector: ".fs-25"
+    properties:
+        text-fontSize: 25.000000
+-   selector: ".fs-21"
+    properties:
+        text-fontSize: 21.000000
+-   selector: ".fs-19"
+    properties:
+        text-fontSize: 19.000000
+-   selector: ".fs-17"
+    properties:
+        text-fontSize: 17.000000
+-   selector: ".fs-16"
+    properties:
+        text-fontSize: 16.000000
+-   selector: ".fs-15"
+    properties:
+        text-fontSize: 15.000000
+-   selector: ".fs-13"
+    properties:
+        text-fontSize: 13.000000
+-   selector: ".ru.bold, .tr.bold, .pt.bold, .pl.bold, .it.bold, .fr.bold, .fi.bold, .es.bold, .en.bold, .en_GB.bold, .de.bold, .es.bold, .cs.bold"
+    properties:
+        text-fontPath: "~res:/Fonts/WarHeliosCondCBold.ttf"
+-   selector: ".ru.regular, .tr.regular, .pt.regular, .pl.regular, .it.regular, .fr.regular, .fi.regular, .es.regular, .en.regular, .en_GB.regular, .de.regular, .es.regular, .cs.regular"
+    properties:
+        text-fontPath: "~res:/Fonts/WarHeliosCondC.ttf"
+-   selector: ".bold-140"
+    properties:
+        text-fontName: "WarHeliosCondC_Bold_140"
+-   selector: ".text-color-faded-white"
+    properties:
+        text-color: [1.000000, 1.000000, 1.000000, 0.600000]
+        text-colorInheritType: "COLOR_IGNORE_PARENT"

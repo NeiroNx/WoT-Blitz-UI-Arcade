@@ -1,0 +1,292 @@
+Header:
+    version: "110"
+ImportedPackages:
+- "~res:/UI/Screens/Fonts.yaml"
+- "~res:/UI/Screens/Common/PlayerNameWithTag.yaml"
+- "~res:/UI/Screens/Common/MenuItem.yaml"
+- "~res:/UI/Screens/Lobby/LobbyHeader.yaml"
+- "~res:/UI/Screens/Hangar/StatsInfo.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "Screen"
+    size: [1024.000000, 768.000000]
+    input: false
+    components:
+        Anchor:
+            leftAnchorEnabled: true
+            rightAnchorEnabled: true
+            topAnchorEnabled: true
+            bottomAnchorEnabled: true
+        LinearLayout:
+            orientation: "TopDown"
+        UIDataParamsComponent:
+            params:
+            - ["LobbyDataModel", "lobby", "null", "{ }"]
+            - ["AccountDataModel", "account", "null", "{ }"]
+            - ["BattleResultsViewModel", "results", "null", "{ }"]
+        UIDataLocalsComponent:
+            locals:
+            - ["string", "backText", "when lobby.labelType == eBackLabel.Back -> \"Switch/HubridPanel/Lobby/Back\", lobby.labelType == eBackLabel.Close -> \"Switch/HubridPanel/Lobby/Close\", lobby.labelType == eBackLabel.Hangar -> \"Switch/HubridPanel/Lobby/Hangar\", \"\""]
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Hangar/HangarBaseScreen.yaml"
+    children:
+    -   prototype: "LobbyHeader/Header"
+        name: "Header"
+        children:
+        -   path: "menuButton"
+            components:
+                UILayerComponent: {}
+            bindings:
+            - ["UILayerComponent.layer", "when account.tutorialData.isTutorialActive and account.tutorialData.currentHighlightControl == eTutorialHighlights.kMenuButton -> 1, 0"]
+            children: []
+        -   path: "menuButton/icon"
+            components:
+                Background:
+                    frame: 30
+        -   path: "menuButton/UnreadNews"
+            visible: false
+        -   path: "Layout/leftContent"
+            visible: true
+            children: []
+        -   path: "Layout/rightContent"
+            children:
+            -   prototype: "StatsInfo/CurrencyPanel"
+                name: "CurrencyPanel"
+    -   class: "UIControl"
+        name: "Content"
+        position: [0.000000, 80.000000]
+        size: [1024.000000, 688.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+    -   class: "UIControl"
+        name: "NavigationPanel"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                condition: "isGamepad and account.tutorialData.isTutorialActive"
+                prototypePath: "~res:/UI/Screens3/Common/NintendoSwitch/NavigationPanel/NavigationPanel.yaml"
+                args:
+                    "content": "TutorialModulesPanel"
+            UIChildComponent1:
+                condition: "isGamepad and not account.tutorialData.isTutorialActive"
+                prototypePath: "~res:/UI/Screens3/Common/NintendoSwitch/NavigationPanel/NavigationPanel.yaml"
+                args:
+                    "content": "NavigationPanelContent"
+    -   class: "UIControl"
+        name: "ExcellentBattleDialogHolder"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            IgnoreLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+Controls:
+-   prototype: "MenuItem/MenuPane"
+    name: "TabsPanel"
+    size: [520.000000, 77.000000]
+    input: false
+    classes: ""
+    components:
+        Anchor:
+            leftAnchorEnabled: false
+        LinearLayout:
+            padding: "0.000000"
+            safeAreaPaddingInset: false
+            spacing: 2.000000
+        SizePolicy:
+            horizontalPolicy: "Ignore"
+        UISwitchBarComponent: {}
+    bindings:
+    - ["UISwitchBarComponent.selectedElement", "results.selectedTab"]
+    children:
+    -   prototype: "MenuItem/ImageItem"
+        name: "Personal"
+        position: [193.000000, -14.000000]
+        components:
+            SizePolicy:
+                verticalPolicy: "PercentOfParent"
+            UISwitchBarElementComponent: {}
+        bindings:
+        - ["UISwitchBarElementComponent.id", "0"]
+        children:
+        -   path: "Icon"
+            components:
+                Background:
+                    sprite: "~res:/Gfx/UI/Hangar/SidebarIcons"
+                    frame: 2
+        -   path: "Text"
+            classes: "header5"
+            components:
+                UITextComponent:
+                    text: "#battle_results:PersonalPage"
+                Anchor:
+                    bottomAnchorEnabled: true
+                IgnoreLayout: {}
+    -   prototype: "MenuItem/ImageItem"
+        name: "Team"
+        position: [193.000000, -14.000000]
+        components:
+            SizePolicy:
+                verticalPolicy: "PercentOfParent"
+            UISwitchBarElementComponent: {}
+        bindings:
+        - ["UISwitchBarElementComponent.id", "1"]
+        children:
+        -   path: "Icon"
+            components:
+                Background:
+                    sprite: "~res:/Gfx/UI/Hangar/SidebarIcons"
+                    frame: 13
+        -   path: "Text"
+            classes: "header5"
+            components:
+                UITextComponent:
+                    text: "#battle_results:TeamPage"
+                Anchor:
+                    bottomAnchorEnabled: true
+                IgnoreLayout: {}
+    -   prototype: "MenuItem/ImageItem"
+        name: "Details"
+        position: [193.000000, -14.000000]
+        components:
+            SizePolicy:
+                verticalPolicy: "PercentOfParent"
+            UISwitchBarElementComponent: {}
+        bindings:
+        - ["UISwitchBarElementComponent.id", "2"]
+        children:
+        -   path: "Icon"
+            components:
+                Background:
+                    sprite: "~res:/Gfx/UI/Hangar/SidebarIcons"
+                    frame: 4
+        -   path: "Text"
+            classes: "header5"
+            components:
+                UITextComponent:
+                    text: "#battle_results:DetailsPage"
+                Anchor:
+                    bottomAnchorEnabled: true
+                IgnoreLayout: {}
+    -   prototype: "MenuItem/ImageItem"
+        name: "Achievement"
+        position: [193.000000, -14.000000]
+        components:
+            SizePolicy:
+                verticalPolicy: "PercentOfParent"
+            UISwitchBarElementComponent: {}
+        bindings:
+        - ["UISwitchBarElementComponent.id", "3"]
+        children:
+        -   path: "Icon"
+            components:
+                Background:
+                    sprite: "~res:/Gfx/UI/Hangar/SidebarIcons"
+                    frame: 3
+        -   path: "Text"
+            classes: "header5"
+            components:
+                UITextComponent:
+                    text: "#battle_results:AchivmientsPage"
+                Anchor:
+                    bottomAnchorEnabled: true
+                IgnoreLayout: {}
+-   class: "UIControl"
+    name: "HeaderLeftContent"
+    position: [0.000000, 0.000000]
+    size: [300.000000, 80.000000]
+    input: false
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+            dynamicPadding: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Lobby/BattleResults/BattleResults.yaml"
+    children:
+    -   class: "UIStaticText"
+        name: "Title"
+        position: [0.000000, 14.500000]
+        size: [300.000000, 25.000000]
+        classes: "header1"
+        components:
+            UITextComponent:
+                text: "LABEL"
+                fitting: "FITTING_REDUCE"
+                align: ["LEFT", "VCENTER"]
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                rightAnchor: 0.000000
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+                bottomAnchor: 0.000000
+    -   prototype: "PlayerNameWithTag/PlayerNameWithTag"
+        name: "PlayerNameWithTag"
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                bottomAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "Ignore"
+        children:
+        -   path: "name"
+            classes: "header1"
+        -   path: "tag"
+            classes: "header1 clan-tag"
+Slots:
+-   class: "UIControl"
+    name: "TutorialModulesPanel"
+    size: [768.000000, 40.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfMaxChild"
+        UIChildComponent0:
+            prototypePath: "~res:/UI/Screens3/Lobby/Common/TutorialNavigationPanel.yaml"
+            args:
+                "currentHiglightControl": "eTutorialHighlights.kMenuButton"
+-   class: "UIControl"
+    name: "NavigationPanelContent"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        LinearLayout:
+            orientation: "LeftToRight"
+            spacing: 24.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "PercentOfMaxChild"
+        UIShadowHoleComponent: {}
+    bindings:
+    - ["UIShadowHoleComponent.isEnabled", "account.tutorialData.isTutorialActive"]
+    children:
+    -   class: "UIControl"
+        name: "BattleButton"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            LinearLayout:
+                spacing: 24.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfMaxChild"
+            UIChildComponent0:
+                condition: "not account.tutorialData.isTutorialActive"
+                prototypePath: "~res:/UI/Screens3/Common/NintendoSwitch/NavigationPanel/IconWithLabel.yaml"
+                args:
+                    "text": "backText"
+                    "icon": "eNintendoSwitchControls.B"

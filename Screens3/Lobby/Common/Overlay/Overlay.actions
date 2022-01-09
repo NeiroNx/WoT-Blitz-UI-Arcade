@@ -1,0 +1,23 @@
+action FooterSizeChanged(float height)
+{
+	if (not (int(height) == footerH))
+	{
+    	ChangeData(footerH, int(height));
+    }
+}
+
+action TabBarSizeChanged(float height)
+{
+	if (not (int(height) == tabBarH))
+	{
+    	ChangeData(tabBarH, int(height));
+    }
+}
+
+action ContentSizeChanged(float height)
+{
+    if (not (int(height) == contentH))
+    {
+        ChangeData(contentH, int(height));
+    }
+}

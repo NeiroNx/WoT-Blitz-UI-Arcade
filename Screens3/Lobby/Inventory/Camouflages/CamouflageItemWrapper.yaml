@@ -1,0 +1,33 @@
+Header:
+    version: 130
+Prototypes:
+-   class: "UIControl"
+    name: "CamouflageItemWrapper"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        LinearLayout: {}
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "PercentOfChildrenSum"
+        UIAttachLayoutMasterComponent: {}
+        UIDataParamsComponent:
+            params:
+            - ["int", "currentItem", "0", "1"]
+            - ["int", "selectedItem", "0", "1"]
+            - ["CamouflageItem", "camoItem", "null", "{ \"itemId\" = 1011; }"]
+            - ["string", "masterId", "\"\"", "\"\""]
+            events:
+            - "ON_CAMO_CLICKED"
+        UIChildComponent0:
+            childType: "kOldExpression"
+            control: "when camoItem.state == eCamoInShopState.HIDDEN -> \"\", \"~res:/UI/Screens3/Lobby/Inventory/Camouflages/CamouflageItem.yaml\""
+            args:
+                "camoItem": "camoItem"
+                "selectedItem": "selectedItem"
+                "currentItem": "currentItem"
+            eventActions:
+            - ["ON_CAMO_CLICKED", "ON_CAMO_CLICKED", "_event"]
+    bindings:
+    - ["visible", "not (camoItem.state == eCamoInShopState.HIDDEN)"]
+    - ["UIAttachLayoutMasterComponent.attachId", "masterId"]

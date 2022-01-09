@@ -1,0 +1,9 @@
+action UpdateOpacity(float itemWidth, float parentWidth, float offset)
+{
+  Opacity(
+    ".",
+    min(
+      clamp(((indexInScrollableContainer + 1) * itemWidth + offset) / itemWidth, 0.0, 1.0),
+      clamp((parentWidth - itemWidth * indexInScrollableContainer - offset) / itemWidth, 0.0, 1.0))
+  );
+}

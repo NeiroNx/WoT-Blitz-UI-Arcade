@@ -1,0 +1,24 @@
+Header:
+    version: "79"
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/InventoryPanel/InventoryPanelContent/OptionalDeviceSlot.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "OptionalDevicesContent"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        LinearLayout:
+            spacing: 8.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "PercentOfMaxChild"
+        UIDataParamsComponent:
+            params:
+            - ["vector<OptionalDeviceSlotView>", "optionalDevices", "[ ]", "[ { }; { }; { }; ]"]
+        UIRepeatComponent:
+            control: "~res:/UI/Screens3/Lobby/InventoryPanel/InventoryPanelContent/OptionalDeviceSlot.yaml"
+            dataContainer: "optionalDevices"
+            args:
+                "iconFrame": "_index"
+                "model": "_item"

@@ -1,0 +1,4 @@
+animation ScrollToCurrencies
+{
+    ScrollToEnsureControlOnScreen("**/CurrencyDescriptionContainer", time = 0);
+}

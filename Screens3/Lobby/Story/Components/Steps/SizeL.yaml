@@ -1,0 +1,63 @@
+Header:
+    version: 120
+Prototypes:
+-   class: "UIControl"
+    name: "SizeL"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 160.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 160.000000
+        UIDataParamsComponent:
+            params:
+            - ["ResourceDetailed", "reward", "null", "{ \"type\" = ResourceType.stuff; }"]
+            - ["control", "overlay", "null", "null"]
+            - ["control", "fx", "null", "null"]
+        UIDataLocalVarsComponent:
+            data:
+            - ["vector2", "sizeVehicle", "vec2(160.000000, 128.000000)"]
+            - ["vector2", "sizeReward", "vec2(128.000000, 144.000000)"]
+    children:
+    -   class: "UIControl"
+        name: "ContentHolder"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                childType: "kControl"
+                condition: "not isNull(reward)"
+                control: "RewardContent"
+Slots:
+-   class: "UIControl"
+    name: "RewardContent"
+    size: [160.000000, 160.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+    children:
+    -   class: "UIControl"
+        name: "RewardHolder"
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                bottomAnchorEnabled: true
+                bottomAnchor: 12.000000
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                verticalPolicy: "FixedSize"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/Detailed/Big.yaml"
+                args:
+                    "resource": "reward"
+                    "overlay": "overlay"
+                    "fx": "fx"
+        bindings:
+        - ["SizePolicy.horizontalValue", "when reward.type == ResourceType.vehicle -> sizeVehicle.X, sizeReward.X"]
+        - ["SizePolicy.verticalValue", "when reward.type == ResourceType.vehicle -> sizeVehicle.Y, sizeReward.Y"]

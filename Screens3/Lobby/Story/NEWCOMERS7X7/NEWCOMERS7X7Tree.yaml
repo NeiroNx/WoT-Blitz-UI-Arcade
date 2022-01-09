@@ -1,0 +1,113 @@
+Header:
+    version: 127
+Prototypes:
+-   class: "UIControl"
+    name: "NEWCOMERS2020Tree"
+    size: [960.000000, 592.000000]
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens3/Lobby/Story/NEWCOMERS7X7/NEWCOMERS7X7TreeOnInit.animation"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["eBlitzDevice", "deviceType", "eBlitzDevice.DEVICE_PHONE", "eBlitzDevice.DEVICE_PHONE"]
+            - ["StoryView", "storyView", "null", "{ }"]
+            - ["int64", "serverTime", "0L", "1556668800L"]
+            - ["bool", "isGfx2", "false", "false"]
+            - ["eTutorialHighlights", "highlightControl", "eTutorialHighlights.kUnknown", "eTutorialHighlights.kUnknown"]
+            events:
+            - "DESELECT"
+            - "SHOW_STEP_INFO(int id)"
+            - "SELECT_STEP(int id)"
+            - "NEWCOMERS7X7_INITIALIZED"
+        UIDataLocalVarsComponent:
+            data:
+            - ["int", "gfx", "when isGfx2 -> 2, 1"]
+    children:
+    -   class: "UIControl"
+        name: "Fade"
+        input: false
+        classes: "black-70-bg"
+        components:
+            Background:
+                drawType: "DRAW_SCALE_TO_RECT"
+                sprite: "~res:/Gfx/Lobby/backgrounds/bg_gradient_vertical_0-100"
+            Anchor:
+                hCenterAnchorEnabled: true
+                bottomAnchorEnabled: true
+            IgnoreLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+                verticalValue: 60.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+    -   class: "UIControl"
+        name: "SafeArea"
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                topAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "parent - safeAreaInsets.left - safeAreaInsets.right"
+                verticalPolicy: "Formula"
+                verticalFormula: "parent - safeAreaInsets.bottom"
+        children:
+        -   class: "UIControl"
+            name: "Content"
+            input: false
+            components:
+                LinearLayout:
+                    orientation: "TopDown"
+                    dynamicPadding: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            children:
+            -   class: "UIControl"
+                name: "Spacer"
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "Formula"
+                        verticalFormula: "when screenHeight < 900 -> 140, 220"
+            -   class: "UIControl"
+                name: "StepsArea"
+                input: false
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfMaxChild"
+                children:
+                -   class: "UIControl"
+                    name: "Steps"
+                    input: false
+                    components:
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                            topAnchorEnabled: true
+                        LinearLayout: {}
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfChildrenSum"
+                            verticalPolicy: "PercentOfMaxChild"
+                        UIRepeatComponent:
+                            control: "~res:/UI/Screens3/Lobby/Story/Components/Steps/Line.yaml"
+                            dataContainer: "storyView.tree.groups[\"common\"].steps"
+                            args:
+                                "model": "_item"
+                                "highlightControl": "highlightControl"
+                                "isFirst": "_index == 0"
+                                "show7x7": "_index == 3"
+                                "masterId": "when _index == 3 -> \"STEP_7X7_BUTTON\", \"\""
+                            eventActions:
+                            - ["DESELECT", "DESELECT", ""]
+                            - ["SELECT_STEP", "SELECT_STEP", "_event.id"]
+                            - ["SHOW_STEP_INFO", "SHOW_STEP_INFO", "_event.id"]

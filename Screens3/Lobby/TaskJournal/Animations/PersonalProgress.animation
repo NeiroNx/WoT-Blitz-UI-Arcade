@@ -1,0 +1,27 @@
+animation AnimateProgress
+{
+	ChangeData(isPersonalTasksAnimationInProgress, true);
+	parallel
+	{
+		if (realDailyProgress > displayingDailyProgress)
+		{
+			ChangeData(displayingDailyProgress, realDailyProgress, 1.0, EASE_OUT);
+		}
+		else
+		{
+			ChangeData(displayingDailyProgress, realDailyProgress, 0.0);
+		}
+		
+		if (realWeeklyProgress > displayingWeeklyProgress)
+		{
+			ChangeData(displayingWeeklyProgress, realWeeklyProgress, 1.0, EASE_OUT);
+		}
+		else
+		{
+			ChangeData(displayingWeeklyProgress, realWeeklyProgress, 0.0);
+		}
+	}
+	ChangeData(isPersonalTasksAnimationInProgress, false);
+	
+	Event("PROXY_CHANGED");
+}

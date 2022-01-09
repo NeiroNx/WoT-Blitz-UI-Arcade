@@ -1,0 +1,67 @@
+Header:
+    version: 135
+Prototypes:
+-   class: "UIControl"
+    name: "CurrencyName"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        Anchor:
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfMaxChild"
+        UIDataParamsComponent:
+            params:
+            - ["ResourceDetailed", "currency", "null", "{ }"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["string", "proxyName", "when currency.type == ResourceType.stuff and not isNull(currency.stuff) -> currency.stuff.name, \"\""]
+            - ["string", "title", "when currency.type == ResourceType.gold -> \"shop/Gold\", currency.type == ResourceType.credits -> \"shop/Credits\", currency.type == ResourceType.free_xp -> \"hangar/freeXP\", currency.type == ResourceType.stuff -> currency.stuff.title, currency.type == ResourceType.unlocks -> currency.unlock.title, currency.type == ResourceType.vehicle -> currency.vehicle.info.name, currency.type == ResourceType.premium -> \"storage/Items/PremiumAccount/Title\", \"#currency wrong type\""]
+            - ["string", "description", "when currency.type == ResourceType.gold -> \"BattlePass/Tooltip/Gold\", currency.type == ResourceType.credits -> \"BattlePass/Tooltip/Silver\", currency.type == ResourceType.free_xp -> \"BattlePass/Tooltip/FreeXP\", currency.type == ResourceType.stuff -> currency.stuff.description, currency.type == ResourceType.unlocks -> currency.unlock.description, currency.type == ResourceType.vehicle -> \"\", currency.type == ResourceType.premium -> \"BattlePass/Tooltip/Premium\", \"#currency wrong type\""]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                useRtl: true
+            LinearLayout:
+                spacing: 8.000000
+                useRtl: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   class: "UIControl"
+            name: "Icon"
+            input: false
+            components:
+                Anchor:
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfFirstChild"
+                    verticalPolicy: "PercentOfFirstChild"
+                UIChildComponent0:
+                    childType: "kPrototype"
+                    condition: "not isNull(currency)"
+                    prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/Detailed/IconDeprecated.yaml"
+                    args:
+                        "resource": "currency"
+                        "size": "eCurrencySize.BODY"
+        -   class: "UIControl"
+            name: "Name"
+            input: false
+            classes: "t-body bold white-wild-sand-text"
+            components:
+                UITextComponent: {}
+                Anchor:
+                    bottomAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml"
+            bindings:
+            - ["UITextComponent.text", "localize(title)"]

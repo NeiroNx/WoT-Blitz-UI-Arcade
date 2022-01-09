@@ -1,0 +1,85 @@
+Header:
+    version: 141
+ImportedPackages:
+- "~res:/UI/Screens3/Common/DiscountLabel.yaml"
+- "~res:/UI/Screens3/Lobby/Common/Resource/CurrencyPrivate.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "CurrencyWithDiscountAndCounter"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        LinearLayout:
+            spacing: 8.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "PercentOfMaxChild"
+        UIDataParamsComponent:
+            params:
+            - ["bool", "showCountAnimation", "true", "true"]
+            - ["bool", "canAfford", "true", "true"]
+            - ["bool", "showDiscount", "true", "true"]
+            - ["bool", "forceFullValue", "false", "false"]
+            - ["ResourceModel", "resourceInitial", "null", "null"]
+            - ["ResourceModel", "resource", "null", "{ }"]
+        UIDataLocalVarsComponent:
+            data:
+            - ["int", "quantityCurrent", "when showCountAnimation and (when not isNull(resourceInitial) -> resourceInitial.quantity != resource.quantity, false) -> resourceInitial.quantity, resource.quantity"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["int", "quantityTarget", "resource.quantity"]
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/Lobby/Common/Resource/CurrencyWithDiscountAndCounter.actions"
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Color.style.yaml"
+    children:
+    -   prototype: "DiscountLabel/DiscountLabel"
+        name: "DiscountLabel"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "display": "not floatEqual(resource.discount.value, 0.000000) and showDiscount"
+                    "discount": "resource.discount.value"
+                    "discountReason": "resource.discount.reason"
+    -   prototype: "CurrencyPrivate/CurrencyPrivate"
+        name: "CurrencyPrivate"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "canAfford": "canAfford"
+                    "forceFullValue": "forceFullValue"
+                    "quantity": "quantityCurrent"
+                    "type": "resource.type"
+                    "showGrade": "resource.showGrade"
+                    "grade": "resource.grade"
+                    "imageURL": "resource.imageURL"
+                    "icon": "resource.icon"
+                    "localizedQuantity": "resource.localizedQuantity"
+                    "bonusQuantity": "resource.bonusQuantity"
+    -   class: "UIControl"
+        name: "ArrowContainer"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "Arrow"
+            input: false
+            classes: "green-la-palma-bg"
+            components:
+                Background:
+                    drawType: "DRAW_ALIGNED"
+                    sprite: "~res:/Gfx/Lobby/backgrounds/bg_triangle_8"
+                    spriteModification: ["FLIP_VERTICAL"]
+                UIOpacityComponent:
+                    opacity: 0.000000
+                Anchor:
+                    enabled: true
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"

@@ -1,0 +1,27 @@
+Header:
+    version: "47"
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/Common/Price.yaml"
+Controls:
+-   prototype: "Price/Price"
+    name: "Reward"
+    classes: "currency=gold align"
+    components:
+        LinearLayout:
+            spacing: 2.000000
+        StyleSheet:
+            inheritsStylesFromParent: false
+            styles: "~res:/UI/Screens/Common/Settings/PrimaryTab/Common/Styles/GoldRewardStyles.yaml;~res:/UI/Screens/Lobby/Common/Styles/PriceStyles.yaml"
+    children:
+    -   path: "Text"
+        classes: "header3 text-color=text-color-white"
+        components:
+            UITextComponent:
+                text: "250"
+                colorInheritType: "COLOR_MULTIPLY_ALPHA_ONLY"
+    -   path: "Icon"
+        components:
+            Background:
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+            Anchor:
+                vCenterAnchor: 1.000000

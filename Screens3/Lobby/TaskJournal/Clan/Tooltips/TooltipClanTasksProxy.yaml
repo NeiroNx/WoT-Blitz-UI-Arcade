@@ -1,0 +1,38 @@
+Header:
+    version: 119
+ImportedPackages:
+- "~res:/UI/Screens3/Common/Tooltip.yaml"
+Controls:
+-   class: "UIControl"
+    name: "ClanTasksProxy"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["string", "proxyName", "\"\"", "\"\""]
+            events:
+            - "FINISH_HIDE_POPUP_ANIMATION"
+    children:
+    -   prototype: "Tooltip/Slave"
+        name: "Slave"
+        position: [-84.000000, 65.000000]
+        components:
+            UIDataParamsComponent:
+                args:
+                    "offset": "0"
+                    "isAlignLeft": "false"
+                    "buttonVisible": "false"
+                    "rewardVisible": "false"
+                    "slaveAlign": "ePositionAlign.Right"
+                    "resource": "{ }"
+                    "title": "\"\""
+                    "text": "\"clanMissions/tutor/proxy\""
+                    "colorClass": "\"color=white-wild-sand-text\""
+                    "masterId": "\"TASK_JOURNAL_SLOT_21_CURRENCY_\" + proxyName"
+                eventActions:
+                - ["POPUP_ON_CLOSE_ACTION", "", ""]
+                - ["FINISH_HIDE_POPUP_ANIMATION", "FINISH_HIDE_POPUP_ANIMATION", ""]

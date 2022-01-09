@@ -1,0 +1,11 @@
+animation INIT
+{
+	if (videoFinished)
+	{
+		BroadcastEvent("INIT_ITEM", "**/Pages", selectedItem);
+		ChangeData(videoMovingProgress, 1.0);
+        ChangeProperty("**/Video", "", "visible", false);
+		Wait(slideShowTime);
+		DirectEvent("GO_TO_NEXT", ".");
+	}
+}

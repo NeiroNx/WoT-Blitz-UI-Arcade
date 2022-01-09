@@ -1,0 +1,5 @@
+action ON_SIZE_CHANGED(vector2 size)
+{
+    ChangeData(fragmentSize, size);
+    ChangeData(opacity, 1.0);
+}

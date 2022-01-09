@@ -1,0 +1,41 @@
+action StartConsumableProgress(float duration)
+{
+    parallel
+    {
+        ChangeProperty("**/ProgressLine", "RadialProgressComponent", "progress", 1.0, 0.4, SINE_OUT);
+        Opacity("**/ProgressLine", 0.7, 0.4, SINE_OUT);
+    }
+
+    Wait(0.2);
+    Opacity("**/ProgressLine", 1.0, 0.1, SINE_OUT);
+    Opacity("**/ProgressLine", 0.7, 0.1, SINE_OUT);
+
+    parallel
+    {
+        ChangeProperty("**/ProgressLine", "RadialProgressComponent", "progress", 0.0, duration-1);
+        sequence
+        {
+            Wait((duration-1)/2);
+            repeat(2)
+            {
+                Opacity("**/ProgressLine", 1.0, duration/32, SINE_OUT);
+                Opacity("**/ProgressLine", 0.5, duration/32, SINE_OUT);
+            }
+            repeat(4)
+            {
+                Opacity("**/ProgressLine", 1.0, duration/64, SINE_OUT);
+                Opacity("**/ProgressLine", 0.5, duration/64, SINE_OUT);
+            }
+            repeat(8)
+            {
+                Opacity("**/ProgressLine", 1.0, duration/128, SINE_OUT);
+                Opacity("**/ProgressLine", 0.5, duration/128, SINE_OUT);
+            }
+            repeat(16)
+            {
+                Opacity("**/ProgressLine", 1.0, duration/256, SINE_OUT);
+                Opacity("**/ProgressLine", 0.5, duration/256, SINE_OUT);
+            }
+        }
+    }
+}

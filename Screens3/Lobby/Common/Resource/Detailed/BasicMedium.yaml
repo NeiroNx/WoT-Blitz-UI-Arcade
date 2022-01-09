@@ -1,0 +1,165 @@
+Header:
+    version: 135
+Prototypes:
+-   class: "UIControl"
+    name: "BasicMedium"
+    size: [86.000000, 104.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            horizontalMin: 64.000000
+            verticalPolicy: "PercentOfParent"
+            verticalMin: 88.000000
+        UIDataParamsComponent:
+            params:
+            - ["string", "textStyle", "\"\"", "\"\""]
+            - ["int", "minQuantity", "0", "0"]
+            - ["int", "maxQuantity", "0", "0"]
+            - ["ResourceType", "type", "ResourceType.undefined", "ResourceType.slots"]
+            - ["BasicResource", "basic", "null", "{ }"]
+            - ["control", "fx", "null", "null"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["int", "quantity", "when minQuantity == maxQuantity and maxQuantity > 0 -> maxQuantity, basic.quantity"]
+            - ["int", "shortValue", "1000"]
+            - ["string", "spriteType", "when type == ResourceType.gold -> \"gold\", type == ResourceType.credits -> \"silver\", type == ResourceType.free_xp -> \"free-xp\", type == ResourceType.elite_xp -> \"elite-xp\", type == ResourceType.xp -> \"battle-xp\", type == ResourceType.tankmenXP -> \"crew-xp\", type == ResourceType.premium -> \"premium\", type == ResourceType.slots -> \"slot\", \"\""]
+            - ["string", "style", "(when textStyle.empty() -> \"t-subtitle\", textStyle) + \" bold white-wild-sand-text\""]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            Anchor:
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                orientation: "TopDown"
+                skipInvisible: false
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfChildrenSum"
+        children:
+        -   class: "UIControl"
+            name: "IconWrapper"
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfLastChild"
+                    verticalPolicy: "PercentOfLastChild"
+            children:
+            -   class: "UIControl"
+                name: "FxHolder"
+                input: false
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                    UIChildComponent0:
+                        childType: "kControl"
+                        condition: "not isNull(fx)"
+                        control: "fx"
+            -   class: "UIControl"
+                name: "Icon"
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 64.000000
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 64.000000
+                    UIChildComponent0:
+                        prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/Detailed/BasicIcon.yaml"
+                        args:
+                            "type": "type"
+                            "basic": "basic"
+        -   class: "UIControl"
+            name: "Quantity"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "Formula"
+                    verticalFormula: "max(maxChild, 24)"
+                UIChildComponent0:
+                    childType: "kControl"
+                    condition: "minQuantity == maxQuantity"
+                    control: "Text"
+                UIChildComponent1:
+                    childType: "kControl"
+                    control: "Range"
+            bindings:
+            - ["visible", "basic.quantity >= 0"]
+Slots:
+-   class: "UIControl"
+    name: "Range"
+    input: false
+    components:
+        Anchor:
+            hCenterAnchorEnabled: true
+            vCenterAnchorEnabled: true
+        LinearLayout:
+            spacing: 2.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "PercentOfMaxChild"
+    children:
+    -   class: "UIControl"
+        name: "min"
+        input: false
+        components:
+            UITextComponent: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml"
+        bindings:
+        - ["classes", "style"]
+        - ["UITextComponent.text", "when type == ResourceType.premium -> timeDiffShort(minQuantity), shortStr(minQuantity, shortValue)"]
+    -   class: "UIControl"
+        name: "line"
+        input: false
+        components:
+            UITextComponent: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml"
+        bindings:
+        - ["classes", "style"]
+        - ["UITextComponent.text", "\"-\""]
+    -   class: "UIControl"
+        name: "max"
+        input: false
+        components:
+            UITextComponent: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml"
+        bindings:
+        - ["classes", "style"]
+        - ["UITextComponent.text", "when type == ResourceType.premium -> timeDiffShort(maxQuantity), shortStr(maxQuantity, shortValue)"]
+-   class: "UIControl"
+    name: "Text"
+    input: false
+    components:
+        UITextComponent: {}
+        Anchor:
+            hCenterAnchorEnabled: true
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfContent"
+            verticalPolicy: "PercentOfContent"
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Font.style.yaml"
+    bindings:
+    - ["classes", "style"]
+    - ["UITextComponent.text", "when type == ResourceType.premium -> timeDiffShort(quantity), type == ResourceType.slots -> \"×\" + str1000Separated(quantity), str1000Separated(quantity)"]

@@ -1,0 +1,34 @@
+Header:
+    version: "100"
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/Dialog/TextDialog.yaml"
+Controls:
+-   class: "UIControl"
+    name: "TutorialDialog"
+    size: [640.000000, 480.000000]
+    input: false
+    components:
+        Anchor:
+            leftAnchorEnabled: true
+            rightAnchorEnabled: true
+            topAnchorEnabled: true
+            bottomAnchorEnabled: true
+        UIDataParamsComponent:
+            params:
+            - ["int", "totalGold", "0", "250"]
+    children:
+    -   prototype: "TextDialog/TextDialog"
+        name: "ChooseTextDialog"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "accentButtonType": "eButtonType.NEGATIVE"
+                    "type": "eDialogType.CHOOSE"
+                    "header": "\"Header\""
+                    "headerImage": "\"\""
+                    "accentButton": "\"hangarTutorial/SkipDialogue/SkipTutorial/Button\""
+                    "optionalButton": "\"hangarTutorial/SkipDialogue/BackToTutorial/Button\""
+                    "contentControl": "control(\"~res:/UI/Screens3/Lobby/Tutorial/TutorialDialogContent.yaml\", { totalReward = totalGold; }, [ ])"
+                eventActions:
+                - ["ACCENT_CLICKED", "SKIP_TUTORIAL_OK", ""]
+                - ["OPTIONAL_CLICKED", "CANCEL", ""]

@@ -1,0 +1,14 @@
+Header:
+    version: "92"
+Prototypes:
+-   class: "UIControl"
+    name: "DynamicTopSpacer"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "Formula"
+            verticalFormula: "when (screenHeight > 640 and screenHeight < 1023) -> 16, screenHeight*0.06"
+        UIDataParamsComponent:
+            params:
+            - ["bool", "panelVisible", "true", "true"]

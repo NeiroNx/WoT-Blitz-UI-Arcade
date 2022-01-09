@@ -1,0 +1,15 @@
+animation FINISH()
+{
+	Event("ON_PROGRESS_STATE_FINISHED", ".", eNewbieProgressionStepType.TestFinished);
+
+	ChangeData(inputDisabled, true);
+
+	parallel
+	{
+		Opacity("**/Additional", 0.0, 0.4, EASE_OUT);
+		Opacity("**/Button", 0.0, 0.4, EASE_OUT);
+		ChangeProperty("**/Button", "Anchor", "vCenterAnchor", 50, time = 0.4, interpolation=EASE_OUT);
+	}
+	
+	Event("ON_FINISHED");
+}

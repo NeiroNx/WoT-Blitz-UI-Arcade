@@ -1,0 +1,310 @@
+Header:
+    version: 138
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/Common/BoosterParamsTable.yaml"
+- "~res:/UI/Screens/Lobby/Common/Resource/ResourceLarge.yaml"
+- "~res:/UI/Screens/Lobby/Boosters/BoostersScreenPrototypes.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "Boosters"
+    size: [1024.000000, 688.000000]
+    input: false
+    components:
+        LinearLayout:
+            orientation: "BottomUp"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        ModalInput: {}
+        UIVirtualActionEventComponent0:
+            virtualKeyAction: "Options"
+            keyDownEvent: "GO_TO_SHOP"
+        UIVirtualActionEventComponent1:
+            virtualKeyAction: "Escape"
+            keyDownEvent: "BACK_EVENT"
+        UIShortcutEventComponent:
+            shortcuts: "BACK_EVENT,back"
+        UIDataParamsComponent:
+            params:
+            - ["LobbyDataModel", "lobby", "null", "{ }"]
+            - ["SessionDataModel", "session", "null", "{ }"]
+            - ["AppDataModel", "app", "null", "{ }"]
+            - ["AccountDataModel", "account", "null", "{ }"]
+            events:
+            - "GO_TO_SHOP"
+            - "PREMIUM_INFO_EVENT"
+            - "BACK_EVENT"
+            - "SHOP_BUTTON(eRequiredResource requiredResource)"
+        StyleSheet:
+            styles: "~res:/UI/Screens/Lobby/Boosters/BoostersScreen.styles.yaml;~res:/UI/Screens/Fonts.yaml;~res:/UI/Screens/Lobby/Common/Resource/ResourceStyle.yaml;~res:/UI/Styles/SlotStyles.yaml;~res:/UI/Styles/SafeAreaStyles.yaml"
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            LinearLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIScrollView"
+            name: "ItemsScroll"
+            autoUpdate: true
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    horizontalValue: 100.000000
+                    verticalPolicy: "PercentOfParent"
+                    verticalValue: 100.000000
+            children:
+            -   class: "UIScrollViewContainer"
+                name: "scrollContainerControl"
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfChildrenSum"
+                    FlowLayout:
+                        hPadding: "20.000000"
+                        hSpacing: 20.000000
+                        vPadding: "20.000000"
+                        vSpacing: 20.000000
+                        vSafeAreaPaddingInset: true
+                children:
+                -   prototype: "BoostersScreenPrototypes/BoosterGroup"
+                    name: "economic"
+                    children:
+                    -   path: "Header/TitleContainer/Title"
+                        components:
+                            UITextComponent:
+                                text: "boosters/Economical/Title"
+                    -   path: "Contents"
+                        components:
+                            Anchor:
+                                leftAnchorEnabled: true
+                                rightAnchorEnabled: true
+                            SizePolicy:
+                                horizontalPolicy: "Ignore"
+                            UIAnchorSafeAreaComponent:
+                                leftSafeInset: "INSET"
+                        children:
+                        -   prototype: "BoostersScreenPrototypes/ItemPrototype"
+                            name: "PremBooster"
+                            tag: -1
+                            classes: "slot"
+                            children:
+                            -   path: "EmptySlot"
+                                classes: "empty-slot button premium"
+                                children: []
+                            -   path: "EmptySlot/EmptySlotContent/Image"
+                                size: [80.000000, 80.000000]
+                                components:
+                                    Background:
+                                        sprite: "~res:/Gfx/UI/Booster/no_prem"
+                            -   path: "EmptySlot/EmptySlotContent/ItemCount"
+                                visible: false
+                                children: []
+                            -   path: "FilledSlot"
+                                children:
+                                -   prototype: "ResourceLarge/ResourceLarge"
+                                    name: "ActivePremium"
+                                    exclusiveInput: true
+                                    classes: "resource resource-type=resource-stuff quantity=quantity-off marked=marked-off have-badge=have-badge-off button"
+                                    children:
+                                    -   path: "IconContainer"
+                                        components:
+                                            Background:
+                                                sprite: "~res:/Gfx/UI/LobbyCommon/prem.psd"
+                                    -   class: "UIStaticText"
+                                        name: "TimeText"
+                                        size: [56.000000, 38.000000]
+                                        classes: "text-color-premium header0"
+                                        components:
+                                            UITextComponent:
+                                                text: "24 h."
+                                                colorInheritType: "COLOR_MULTIPLY_ON_PARENT"
+                                            Anchor:
+                                                hCenterAnchorEnabled: true
+                                                topAnchorEnabled: true
+                                                topAnchor: 35.000000
+                                            SizePolicy:
+                                                horizontalPolicy: "PercentOfContent"
+                                                verticalPolicy: "PercentOfContent"
+                        -   prototype: "BoostersScreenPrototypes/ItemPrototype"
+                            name: "XpBooster"
+                            components:
+                                UIAttachLayoutMasterComponent:
+                                    attachId: "BOOSTER_XP"
+                            children:
+                            -   path: "EmptySlot/EmptySlotContent/Image"
+                                components:
+                                    Background:
+                                        sprite: "~res:/Gfx/Shared/boosters/booster_battle-xp"
+                        -   prototype: "BoostersScreenPrototypes/ItemPrototype"
+                            name: "FreeXpBooster"
+                            tag: 1
+                            children:
+                            -   path: "EmptySlot/EmptySlotContent/Image"
+                                components:
+                                    Background:
+                                        sprite: "~res:/Gfx/Shared/boosters/booster_free-xp"
+                        -   prototype: "BoostersScreenPrototypes/ItemPrototype"
+                            name: "CrewXpBooster"
+                            tag: 2
+                            children:
+                            -   path: "EmptySlot/EmptySlotContent/Image"
+                                components:
+                                    Background:
+                                        sprite: "~res:/Gfx/Shared/boosters/booster_crew-xp"
+                        -   prototype: "BoostersScreenPrototypes/ItemPrototype"
+                            name: "CreditsBooster"
+                            tag: 3
+                            children:
+                            -   path: "EmptySlot/EmptySlotContent/Image"
+                                tag: 3
+                                components:
+                                    Background:
+                                        sprite: "~res:/Gfx/Shared/boosters/booster_credit"
+                        -   prototype: "BoostersScreenPrototypes/ItemPrototype"
+                            name: "GoldBooster"
+                            tag: 4
+                            children:
+                            -   path: "EmptySlot/EmptySlotContent/Image"
+                                tag: 4
+                                components:
+                                    Background:
+                                        sprite: "~res:/Gfx/Shared/boosters/booster_gold"
+                        -   prototype: "BoostersScreenPrototypes/ItemPrototype"
+                            name: "StoryBooster"
+                            visible: false
+                            tag: 5
+                            children:
+                            -   path: "EmptySlot/EmptySlotContent/Image"
+                                tag: 5
+                                components:
+                                    Background:
+                                        sprite: "~res:/Gfx/Shared/boosters/booster_2020-halloween"
+                -   prototype: "BoostersScreenPrototypes/BoosterGroup"
+                    name: "battle"
+                    tag: 1
+                    children:
+                    -   path: "Header/TitleContainer/Title"
+                        components:
+                            UITextComponent:
+                                text: "boosters/Battle/Title"
+                    -   path: "Contents"
+                        children:
+                        -   prototype: "BoostersScreenPrototypes/ItemPrototype"
+                            name: "Crewbooster"
+                            children:
+                            -   path: "EmptySlot/EmptySlotContent/Image"
+                                components:
+                                    Background:
+                                        sprite: "~res:/Gfx/Shared/boosters/booster_equipment"
+            -   class: "UIScrollBar"
+                name: "VerticalScrollbar"
+                input: false
+                orientation: "ORIENTATION_VERTICAL"
+                components:
+                    Anchor:
+                        rightAnchorEnabled: true
+                        topAnchorEnabled: true
+                        bottomAnchorEnabled: true
+                        bottomAnchor: 10.000000
+                    SizePolicy:
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 10.000000
+                children:
+                -   class: "UIControl"
+                    name: "slider"
+                    size: [10.000000, 20.000000]
+                    input: false
+                    components:
+                        Background:
+                            drawType: "DRAW_STRETCH_VERTICAL"
+                            sprite: "~res:/Gfx/UI/CommonUIElements/VerticalScroll"
+                            topBottomStretchCap: 10.000000
+        -   class: "UIScrollView"
+            name: "TableScroll"
+            autoUpdate: true
+            components:
+                Background: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfParent"
+            children:
+            -   class: "UIScrollViewContainer"
+                name: "scrollContainerControl"
+                components:
+                    LinearLayout:
+                        orientation: "TopDown"
+                        safeAreaPaddingInset: true
+                        spacing: 1.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        verticalPolicy: "Formula"
+                        verticalFormula: "max(parent, firstChild)"
+                children:
+                -   prototype: "BoosterParamsTable/Table"
+                    name: "Table"
+                    input: false
+                    components:
+                        Background: {}
+                        SizePolicy:
+                            verticalPolicy: "PercentOfChildrenSum"
+                        UIAttachLayoutMasterComponent:
+                            attachId: "BOOSTERS_TABLE"
+                -   class: "UIControl"
+                    name: "Spacer"
+                    input: false
+                    classes: "pane-bg"
+                    components:
+                        Background: {}
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "Formula"
+                            verticalFormula: "parentRest"
+            -   class: "UIScrollBar"
+                name: "VerticalScrollbar"
+                input: false
+                classes: "notch-tightly-right-inset"
+                orientation: "ORIENTATION_VERTICAL"
+                components:
+                    Anchor:
+                        rightAnchorEnabled: true
+                        topAnchorEnabled: true
+                        bottomAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 10.000000
+                    UIAnchorSafeAreaComponent: {}
+                children:
+                -   class: "UIControl"
+                    name: "slider"
+                    size: [10.000000, 20.000000]
+                    input: false
+                    components:
+                        Background:
+                            drawType: "DRAW_STRETCH_VERTICAL"
+                            sprite: "~res:/Gfx/UI/CommonUIElements/VerticalScroll"
+                            topBottomStretchCap: 10.000000
+    -   class: "UIControl"
+        name: "Header"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Boosters/BoostersHeader.yaml"
+                args:
+                    "statsData": "session.stats"
+                    "lobby": "lobby"
+                    "serverTime": "session.serverTime"
+                    "isGeneralPackLoaded": "app.sDlc.isGeneralPackLoaded"
+                    "isTutorialActive": "account.tutorialData.isTutorialActive"
+                    "firstLessonCompleted": "account.tutorialData.currentLesson > eTutorialLesson.kTurretUnlock"
+                eventActions:
+                - ["GO_TO_SHOP", "GO_TO_SHOP", ""]
+                - ["SHOP_BUTTON", "SHOP_BUTTON", "_event.requiredResource"]
+                - ["BACK_EVENT", "BACK_EVENT", ""]
+                - ["PREMIUM_INFO_EVENT", "PREMIUM_INFO_EVENT", ""]

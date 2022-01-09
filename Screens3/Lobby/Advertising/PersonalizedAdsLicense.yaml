@@ -1,0 +1,17 @@
+Header:
+    version: 134
+Prototypes:
+-   class: "UIControl"
+    name: "PersonalizedAdsLicense"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfFirstChild"
+            verticalPolicy: "PercentOfFirstChild"
+        UIChildComponent0:
+            prototypePath: "~res:/UI/Screens3/Lobby/Common/RichTextLink.yaml"
+            args:
+                "baseFontStyle": "\"regular\""
+                "key": "localize(\"Ads/PersonalizeAdsDialog/License\")"
+            eventActions:
+            - ["LINK_PRESSED", "LICENSE_REQUESTED", ""]

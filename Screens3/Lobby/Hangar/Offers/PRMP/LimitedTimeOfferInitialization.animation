@@ -1,0 +1,36 @@
+animation OfferInitialization
+{
+  if (index == currentOfferIndex)
+  {
+    if (fullPiggyBank and not fullPiggyEffectsShown)
+    {
+      Event("START_FULL_PIGGY_EFFECTS");
+    }
+    else
+    {
+      Event("STOP_FULL_PIGGY_EFFECTS");
+    }
+
+    if (progressAnimationNeeded)
+    {
+      Event("AnimateProgress");
+    }
+  }
+
+  Event("OfferRotation", arg1=false);
+  Move(".", x=0);
+  if (index != currentOfferIndex)
+  {
+    Move(".", x=width);
+  }
+
+  if (nextOfferIndex != currentOfferIndex)
+  {
+    Event("OfferRotation", arg1=true);
+  }
+
+  if (piggyBankOffer)
+  {
+    Opacity("**/PiggyBankOffer/Status", opacity=1.0, time=0.3, interpolation=EASE_OUT);
+  }
+}

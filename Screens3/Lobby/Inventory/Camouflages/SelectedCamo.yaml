@@ -1,0 +1,16 @@
+Header:
+    version: "96"
+Prototypes:
+-   class: "UIControl"
+    name: "SelectedCamo"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        Anchor:
+            hCenterAnchorEnabled: true
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "Formula"
+            horizontalFormula: "parent + 16"
+            verticalPolicy: "Formula"
+            verticalFormula: "parent + 16"

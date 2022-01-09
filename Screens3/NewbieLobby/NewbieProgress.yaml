@@ -1,0 +1,408 @@
+Header:
+    version: 128
+ImportedPackages:
+- "~res:/UI/Screens3/Common/BlurAndFade.yaml"
+- "~res:/UI/Screens3/NewbieLobby/ProgressStates/Elements/NewbieAvatar.yaml"
+- "~res:/UI/Screens3/Lobby/Common/ProgressBarWithCheckmarks.yaml"
+- "~res:/UI/Screens3/NewbieLobby/ProgressStates/Elements/Spacer.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "NewbieProgress"
+    size: [1024.000000, 768.000000]
+    components:
+        LinearLayout: {}
+        IgnoreLayout: {}
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIVirtualActionEventComponent0:
+            virtualKeyAction: "Escape"
+            keyDownEvent: "BACK_SHORTCUT"
+        UIVirtualActionEventComponent1:
+            virtualKeyAction: "Extra1"
+            keyDownEvent: "ENTER_SHORTCUT"
+        UIShortcutEventComponent:
+            shortcuts: "BACK_SHORTCUT,Back;BACK_SHORTCUT,Escape"
+        UIDataParamsComponent:
+            params:
+            - ["NewbieProgressViewModel", "progress", "null", "{ }"]
+            events:
+            - "ON_PROGRESS_FINISHED"
+        UIDataLocalVarsComponent:
+            data:
+            - ["int", "maxHangarLevel", "3"]
+            - ["float", "blurAndFadeOpacity", "0.000000"]
+            - ["eNewbieProgressionStepType", "progressState", "eNewbieProgressionStepType.Hangar"]
+            - ["float", "hangarProgressOpacity", "1.000000"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["eNewbieProgressionStepType", "nextState", "when progressState == eNewbieProgressionStepType.BattleEnding -> eNewbieProgressionStepType.ReceivedAchievement, when progressState == eNewbieProgressionStepType.ReceivedAchievement -> eNewbieProgressionStepType.ReceivedAvatar, when progressState == eNewbieProgressionStepType.ReceivedAvatar -> (when progress.hangarLevel == maxHangarLevel -> eNewbieProgressionStepType.TestFinished, eNewbieProgressionStepType.HangarProgression), when progressState == eNewbieProgressionStepType.TestFinished -> eNewbieProgressionStepType.HangarProgression, when progressState == eNewbieProgressionStepType.HangarProgression -> eNewbieProgressionStepType.Hangar, eNewbieProgressionStepType.Hangar"]
+            - ["int", "avatarIndex", "progress.hangarLevel - 1"]
+            - ["PlayerAvatar", "newAvatar", "when avatarIndex >= 0 and avatarIndex < progress.avatars.Size() -> progress.avatars[avatarIndex], null"]
+            - ["bool", "isDisplayTopLeftAvatar", "progress.hangarLevel > 0 and (progressState == eNewbieProgressionStepType.HangarProgression or progressState == eNewbieProgressionStepType.Hangar or progressState == eNewbieProgressionStepType.TestFinished)"]
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/NewbieLobby/NewbieProgress.actions"
+        UIDataOnEventComponent0:
+            eventName: "ShowProgress"
+            modelFieldExpression: "progressState"
+            dataExpression: "eNewbieProgressionStepType.ReceivedAchievement"
+        UIDataOnEventComponent1:
+            eventName: "ShowProgress"
+            modelFieldExpression: "hangarProgressOpacity"
+            dataExpression: "0.000000"
+        UIDataOnEventComponent2:
+            eventName: "ShowProgress"
+            modelFieldExpression: "blurAndFadeOpacity"
+            dataExpression: "1.000000"
+    bindings:
+    - ["input", "blurAndFadeOpacity != 0.000000"]
+    children:
+    -   prototype: "BlurAndFade/BlurAndFade"
+        name: "BlurAndFade"
+        components:
+            IgnoreLayout: {}
+            UIDataParamsComponent:
+                args:
+                    "fadeOpacity": "blurAndFadeOpacity * 0.600000"
+                    "blurOpacity": "blurAndFadeOpacity"
+        children:
+        -   path: "Blur"
+            components:
+                UIPostProcessCacheComponent:
+                    cachedFileId: "HangarBlur"
+    -   class: "UIControl"
+        name: "LeftSafeAreaSpacer"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "safeAreaInsets.left"
+                verticalPolicy: "PercentOfParent"
+    -   class: "UIControl"
+        name: "ContentWrapper"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "Content"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                UIChildComponent0:
+                    condition: "progressState == eNewbieProgressionStepType.ReceivedAchievement"
+                    prototypePath: "~res:/UI/Screens3/NewbieLobby/ProgressStates/NewbieReceivedAchievement.yaml"
+                    args:
+                        "newbieProgress": "progress"
+                    eventActions:
+                    - ["ON_FINISHED", "GoToNextStep", ""]
+                UIChildComponent1:
+                    condition: "progressState == eNewbieProgressionStepType.ReceivedAvatar"
+                    prototypePath: "~res:/UI/Screens3/NewbieLobby/ProgressStates/NewbieReceivedAvatar.yaml"
+                    args:
+                        "newbieProgress": "progress"
+                    eventActions:
+                    - ["ON_FINISHED", "GoToNextStep", ""]
+                    - ["ANCHOR_AVATAR", "AnimateAvatarAnchoring", ""]
+                UIChildComponent2:
+                    condition: "progressState == eNewbieProgressionStepType.HangarProgression"
+                    prototypePath: "~res:/UI/Screens3/NewbieLobby/ProgressStates/NewbieHangarProgress.yaml"
+                    args:
+                        "isNextHangar": "nextState == eNewbieProgressionStepType.Hangar"
+                        "newbieProgress": "progress"
+                    eventActions:
+                    - ["ON_FINISHED", "GoToNextStep", ""]
+                UIChildComponent3:
+                    condition: "progressState == eNewbieProgressionStepType.TestFinished"
+                    prototypePath: "~res:/UI/Screens3/NewbieLobby/ProgressStates/NewbieTestFinished.yaml"
+                    args:
+                        "newbieProgress": "progress"
+                    eventActions:
+                    - ["ON_FINISHED", "GoToNextStep", ""]
+        -   class: "UIControl"
+            name: "TopLeftCorner"
+            input: false
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 24.000000
+                    topAnchorEnabled: true
+                    topAnchor: 16.000000
+                IgnoreLayout: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    horizontalValue: 38.000000
+                    verticalPolicy: "PercentOfChildrenSum"
+                    verticalValue: 38.000000
+                UIAttachLayoutMasterComponent:
+                    attachId: "TOP_LEFT_CORNER"
+            children:
+            -   class: "UIControl"
+                name: "NewbieAvatarWrapper"
+                size: [32.000000, 32.000000]
+                scale: [0.380000, 0.380000]
+                pivot: [0.500000, 0.500000]
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        verticalPolicy: "PercentOfChildrenSum"
+                bindings:
+                - ["visible", "isDisplayTopLeftAvatar"]
+                - ["input", "progress.hangarLevel > 0 and progressState == eNewbieProgressionStepType.Hangar"]
+                children:
+                -   prototype: "NewbieAvatar/NewbieAvatar"
+                    name: "NewbieAvatar"
+                    components:
+                        UIDataParamsComponent:
+                            args:
+                                "avatar": "when isDisplayTopLeftAvatar -> newAvatar, null"
+            -   class: "UIControl"
+                name: "AvatarPopupPlacer"
+                classes: "button-open-sound"
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                    UIAttachLayoutMasterComponent:
+                        attachId: "NEWBIE_AVATAR"
+                    UIInputEventComponent:
+                        onTouchUpInside: "NEWBIE_AVATAR_CLICKED"
+                    Sound: {}
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/ButtonSound.style.yaml"
+                bindings:
+                - ["input", "progress.hangarLevel > 0 and progressState == eNewbieProgressionStepType.Hangar"]
+        -   class: "UIControl"
+            name: "TopRightCorner"
+            input: false
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+                    rightAnchor: 61.000000
+                    topAnchorEnabled: true
+                    topAnchor: 42.000000
+                IgnoreLayout: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIAttachLayoutMasterComponent:
+                    attachId: "TOP_RIGHT_CORNER"
+            children:
+            -   class: "UIControl"
+                name: "NewbieHangarProgress"
+                classes: "button-open-sound"
+                components:
+                    UIOpacityComponent: {}
+                    LinearLayout:
+                        orientation: "TopDown"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfMaxChild"
+                        verticalPolicy: "PercentOfChildrenSum"
+                    UIAttachLayoutMasterComponent:
+                        attachId: "HANGAR_PROGRESS"
+                    UIInputEventComponent:
+                        onTouchUpInside: "NEWBIE_HANGAR_PROGRESS_CLICKED"
+                    Sound: {}
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/ButtonSound.style.yaml"
+                bindings:
+                - ["visible", "progress.hangarLevel > 0"]
+                - ["input", "progress.hangarLevel > 0 and progressState == eNewbieProgressionStepType.Hangar"]
+                - ["UIOpacityComponent.opacity", "hangarProgressOpacity"]
+                children:
+                -   class: "UIControl"
+                    name: "ProgressContainer"
+                    size: [32.000000, 32.000000]
+                    input: false
+                    components:
+                        LinearLayout:
+                            orientation: "TopDown"
+                            spacing: 4.000000
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfMaxChild"
+                            verticalPolicy: "PercentOfChildrenSum"
+                    children:
+                    -   class: "UIControl"
+                        name: "HangarSteps"
+                        size: [32.000000, 32.000000]
+                        input: false
+                        components:
+                            Anchor:
+                                hCenterAnchorEnabled: true
+                            LinearLayout:
+                                spacing: 16.000000
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfChildrenSum"
+                                verticalPolicy: "PercentOfMaxChild"
+                        children:
+                        -   class: "UIControl"
+                            name: "Step1"
+                            size: [32.000000, 32.000000]
+                            input: false
+                            components:
+                                UIOpacityComponent: {}
+                                Anchor:
+                                    bottomAnchorEnabled: true
+                                SizePolicy:
+                                    horizontalPolicy: "FixedSize"
+                                    horizontalValue: 50.000000
+                                    verticalPolicy: "FixedSize"
+                                    verticalValue: 37.500000
+                            children:
+                            -   class: "UIControl"
+                                name: "Image"
+                                size: [32.000000, 32.000000]
+                                input: false
+                                components:
+                                    Background:
+                                        drawType: "DRAW_SCALE_TO_RECT"
+                                        sprite: "~res:/Gfx/Lobby/backgrounds/tutor-tanks/icon_newcomers_hangar_lv1"
+                                    UIOpacityComponent: {}
+                                    Anchor:
+                                        bottomAnchorEnabled: true
+                                    SizePolicy:
+                                        horizontalPolicy: "PercentOfParent"
+                                        verticalPolicy: "PercentOfParent"
+                        -   class: "UIControl"
+                            name: "Step2"
+                            size: [32.000000, 32.000000]
+                            input: false
+                            components:
+                                UIOpacityComponent: {}
+                                Anchor:
+                                    bottomAnchorEnabled: true
+                                SizePolicy:
+                                    horizontalPolicy: "FixedSize"
+                                    horizontalValue: 50.000000
+                                    verticalPolicy: "FixedSize"
+                                    verticalValue: 37.500000
+                            children:
+                            -   class: "UIControl"
+                                name: "Image"
+                                size: [32.000000, 32.000000]
+                                input: false
+                                components:
+                                    Background:
+                                        drawType: "DRAW_SCALE_TO_RECT"
+                                        sprite: "~res:/Gfx/Lobby/backgrounds/tutor-tanks/icon_newcomers_hangar_lv2"
+                                    UIOpacityComponent: {}
+                                    Anchor:
+                                        bottomAnchorEnabled: true
+                                    SizePolicy:
+                                        horizontalPolicy: "PercentOfParent"
+                                        verticalPolicy: "PercentOfParent"
+                        -   class: "UIControl"
+                            name: "Step3"
+                            size: [32.000000, 32.000000]
+                            input: false
+                            components:
+                                UIOpacityComponent: {}
+                                Anchor:
+                                    bottomAnchorEnabled: true
+                                SizePolicy:
+                                    horizontalPolicy: "FixedSize"
+                                    horizontalValue: 50.000000
+                                    verticalPolicy: "FixedSize"
+                                    verticalValue: 37.500000
+                            children:
+                            -   class: "UIControl"
+                                name: "Image"
+                                size: [32.000000, 32.000000]
+                                input: false
+                                components:
+                                    Background:
+                                        drawType: "DRAW_SCALE_TO_RECT"
+                                        sprite: "~res:/Gfx/Lobby/backgrounds/tutor-tanks/icon_newcomers_hangar_lv3"
+                                    UIOpacityComponent: {}
+                                    Anchor:
+                                        bottomAnchorEnabled: true
+                                    SizePolicy:
+                                        horizontalPolicy: "PercentOfParent"
+                                        verticalPolicy: "PercentOfParent"
+                        -   class: "UIControl"
+                            name: "Step4"
+                            size: [32.000000, 32.000000]
+                            input: false
+                            components:
+                                UIOpacityComponent: {}
+                                Anchor:
+                                    bottomAnchorEnabled: true
+                                SizePolicy:
+                                    horizontalPolicy: "FixedSize"
+                                    horizontalValue: 50.000000
+                                    verticalPolicy: "FixedSize"
+                                    verticalValue: 37.500000
+                            children:
+                            -   class: "UIControl"
+                                name: "Image"
+                                size: [32.000000, 32.000000]
+                                input: false
+                                components:
+                                    Background:
+                                        drawType: "DRAW_SCALE_TO_RECT"
+                                        sprite: "~res:/Gfx/Lobby/backgrounds/tutor-tanks/icon_newcomers_hangar_lv4"
+                                    UIOpacityComponent: {}
+                                    Anchor:
+                                        bottomAnchorEnabled: true
+                                    SizePolicy:
+                                        horizontalPolicy: "PercentOfParent"
+                                        verticalPolicy: "PercentOfParent"
+                    -   class: "UIControl"
+                        name: "ComplexProgressBar"
+                        position: [0.000000, 37.000000]
+                        size: [32.000000, 32.000000]
+                        input: false
+                        components:
+                            UIOpacityComponent: {}
+                            Anchor:
+                                hCenterAnchorEnabled: true
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfChildrenSum"
+                                verticalPolicy: "PercentOfMaxChild"
+                        children:
+                        -   class: "UIControl"
+                            name: "ProgressBarSections"
+                            size: [32.000000, 32.000000]
+                            input: false
+                            components:
+                                Anchor:
+                                    vCenterAnchorEnabled: true
+                                SizePolicy:
+                                    horizontalPolicy: "PercentOfChildrenSum"
+                                    verticalPolicy: "FixedSize"
+                                    verticalValue: 24.000000
+                            children:
+                            -   prototype: "ProgressBarWithCheckmarks/Progressbar"
+                                name: "Progressbar"
+                                components:
+                                    Anchor:
+                                        vCenterAnchorEnabled: true
+                                    UIDataParamsComponent:
+                                        args:
+                                            "stepSize": "eStepSize.XS"
+                                            "pointIndexes": "[ 0; 1; 2; 3; ]"
+                                            "progressIndexes": "[ 0; 1; 2; ]"
+                                            "progressWidth": "46"
+                                            "progressHeight": "4"
+                                            "currentStep": "progress.hangarLevel - 1"
+                                            "currentProgress": "100.000000"
+                                            "lockType": "true"
+    -   class: "UIControl"
+        name: "RightSafeAreaSpacer"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "safeAreaInsets.right"
+                verticalPolicy: "PercentOfParent"

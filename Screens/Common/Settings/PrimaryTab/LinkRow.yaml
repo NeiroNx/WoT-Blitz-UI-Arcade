@@ -1,0 +1,64 @@
+Header:
+    version: "53"
+Prototypes:
+-   class: "UIControl"
+    name: "LinkRow"
+    size: [300.000000, 56.000000]
+    input: true
+    classes: "pane-bg touchable settings-button link-row button-open-sound"
+    components:
+        Background: {}
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "FixedSize"
+            verticalValue: 56.000000
+        UIDataSourceComponent0:
+            source: "~res:/UI/Examples/Model/Login/UserCenterButton.model"
+        Sound: {}
+        StyleSheet:
+            styles: "~res:/UI/Screens/Common/Settings/SettingsCommon.yaml;~res:/UI/Screens/Common/Settings/PrimaryTab/Styles/LinkRowStyles.yaml;~res:/UI/Styles/ButtonSoundStyles.yaml"
+    children:
+    -   class: "UIControl"
+        name: "TextContainer"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Background: {}
+            LinearLayout:
+                padding: "20"
+                spacing: 8.000000
+                dynamicSpacing: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "Value"
+            input: false
+            classes: "text2 text-color-white"
+            components:
+                UITextComponent:
+                    text: "#account:Blocks/Wargaming/Button/AccountManagement"
+                    colorInheritType: "COLOR_MULTIPLY_ALPHA_ONLY"
+                    fitting: "FITTING_POINTS"
+                    align: ["LEFT", "VCENTER"]
+                Anchor:
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens/Fonts.yaml"
+        -   class: "UIControl"
+            name: "Icon"
+            input: false
+            components:
+                Background:
+                    sprite: "~res:/Gfx/UI/LobbyCommon/IconsSmall.psd"
+                Anchor:
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 24.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 24.000000

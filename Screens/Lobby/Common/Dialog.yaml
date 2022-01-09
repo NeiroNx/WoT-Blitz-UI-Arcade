@@ -1,0 +1,52 @@
+Header:
+    version: "24"
+ImportedPackages:
+- "~res:/UI/Screens/Fonts.yaml"
+- "~res:/UI/Screens/Common/ScrollBar.yaml"
+- "~res:/UI/Screens/Common/StyledButton.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "Top"
+    size: [504.000000, 56.000000]
+    visible: true
+    noInput: true
+    components:
+        Anchor:
+            leftAnchorEnabled: true
+            rightAnchorEnabled: true
+            topAnchorEnabled: true
+        Background:
+            drawType: "DRAW_TILED"
+            sprite: "~res:/Gfx/UI/CommonUIElements/PopupBackTop"
+            leftRightStretchCap: 4.000000
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Lobby/Common/Dialog.yaml"
+-   class: "UIControl"
+    name: "ButtonHolder"
+    size: [540.000000, 0.000000]
+    visible: true
+    components:
+        LinearLayout:
+            padding: 20.000000
+            spacing: 20.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfMaxChild"
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Lobby/Common/Dialog.yaml"
+-   class: "UIControl"
+    name: "Dialog"
+    size: [100.000000, 100.000000]
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            verticalPolicy: "FixedSize"
+        Background:
+            drawType: "DRAW_STRETCH_BOTH"
+            sprite: "~res:/Gfx/UI/CommonUIElements/PopupBackMiddle"
+            leftRightStretchCap: 4.000000
+            topBottomStretchCap: 4.000000

@@ -1,0 +1,30 @@
+animation InitAnimation
+{
+	parallel
+	{
+		sequence
+		{
+			if (isFirstTimeHangarOpening)
+			{
+				Event("SHOW_FADE");
+			}
+		}
+		
+		sequence
+		{
+			if (not hangarTanks.skipInitialCameraAnimation and tutorialData.battleTutorial.totalBattlesCount == 0)
+			{
+				parallel
+				{
+					Event("HideEverything");
+					Event("SHOW_BLUR");
+				}
+			}
+			else
+			{
+				ChangeData(currentTank, hangarTanks.currentTank);
+				Event("SetInfoVisible");
+			}
+		}
+	}
+}

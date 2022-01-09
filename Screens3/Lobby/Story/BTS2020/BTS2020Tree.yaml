@@ -1,0 +1,85 @@
+Header:
+    version: "111"
+Prototypes:
+-   class: "UIControl"
+    name: "BTS2020Tree"
+    size: [960.000000, 466.000000]
+    input: false
+    components:
+        Anchor:
+            topAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "Formula"
+            verticalFormula: "parent - 4"
+        UIDataParamsComponent:
+            params:
+            - ["StoryView", "storyView", "null", "{ }"]
+            - ["bool", "isGfx2", "false", "false"]
+            events:
+            - "DESELECT"
+            - "SHOW_STEP_INFO(int id)"
+            - "SELECT_STEP(int id)"
+        UIDataLocalsComponent:
+            locals:
+            - ["int", "gfx", "when isGfx2 -> 2, 1"]
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/Lobby/Story/BTH2020/TreeScrollView.actions"
+    children:
+    -   class: "UIControl"
+        name: "ContentWrapper"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Story/BTH2020/TreeScrollView.yaml"
+                args:
+                    "tree": "storyView.tree"
+                    "inProgressStep": "storyView.story.inProgressStep"
+                    "selectedStep": "storyView.selectedStep"
+                    "content": "ContentHolder"
+                eventActions:
+                - ["SHOW_STEP_INFO", "SHOW_STEP_INFO", "_event.id"]
+                - ["SELECT_STEP", "SELECT_STEP", "_event.id"]
+                - ["DESELECT", "DESELECT", ""]
+Slots:
+-   class: "UIControl"
+    name: "ContentHolder"
+    input: false
+    components:
+        Anchor:
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "Formula"
+            horizontalFormula: "firstChild + 84"
+            verticalPolicy: "PercentOfFirstChild"
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 32.000000
+            LinearLayout:
+                dynamicPadding: true
+                spacing: 4.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfMaxChild"
+            UIRepeatComponent:
+                control: "~res:/UI/Screens3/Lobby/Story/Steps/StepLinear.yaml"
+                dataContainer: "storyView.tree.steps"
+                args:
+                    "model": "_item"
+                    "inProgressStep": "storyView.story.inProgressStep"
+                    "mainRewardIndex": "when _item.step.id == 3 or _item.step.id == 7 or _item.step.id == 10 or _item.step.id == 11 -> 0, 1"
+                    "bgImage": "\"~res:/Gfx/Lobby/events/event_2020-bts_steps/event_2020-bts_step_\" + str(_item.step.id)"
+                    "maximumProgress": "150.000000 / 256.000000 + 1.000000 / (256.000000 * gfx)"
+                    "leftAnchor": "when _item.step.id == 11 -> 20, 0"
+                eventActions:
+                - ["SELECT_STEP", "SCROLL_TO_STEP", "_event.id"]
+                - ["SHOW_STEP_INFO", "SHOW_STEP_INFO", "_event.id"]
+                elementNameExpression: "\"Step\" + str(_item.step.id)"

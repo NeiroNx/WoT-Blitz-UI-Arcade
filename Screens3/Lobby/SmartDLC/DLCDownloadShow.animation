@@ -1,0 +1,16 @@
+animation DLCDownloadShow
+{
+	parallel
+	{
+		Move ("**/TapArea", 0, 100, 0);
+		ChangeProperty (".","UIOpacityComponent","opacity", 0);
+	}
+	Event ("PANEL_VISIBLE");
+
+
+	parallel
+	{
+		Move ("**/TapArea", 0, 0, 0.4, SINE_OUT);
+		ChangeProperty (".","UIOpacityComponent","opacity", 1, 0.5, EASE_OUT);
+	}
+}

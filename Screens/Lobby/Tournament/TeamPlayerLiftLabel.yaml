@@ -1,0 +1,30 @@
+Header:
+    version: 121
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/Tournament/TeamLiftLabel.yaml"
+StyleSheets:
+-   selectors:
+    - "?"
+    properties:
+        visible: true
+Prototypes:
+-   prototype: "TeamLiftLabel/HintLift"
+    name: "HintLift"
+    components:
+        UIAttachLayoutSlaveComponent:
+            masterAlign: "RightCenter"
+            slaveAlign: "LeftCenter"
+        UIDataParamsComponent:
+            params:
+            - ["string", "liftTitle", "\"\"", "\"Something very smart\""]
+    children:
+    -   path: "InsideContainer"
+        components:
+            UIInputEventComponent:
+                onTouchUpInside: "TEAM_LIFT_PRESSED"
+        children: []
+    -   path: "InsideContainer/TextContainer/Title"
+        components:
+            UITextComponent: {}
+        bindings:
+        - ["UITextComponent.text", "liftTitle"]

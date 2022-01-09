@@ -1,0 +1,52 @@
+Header:
+    version: "85"
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/Dialog/TextDialog.yaml"
+Controls:
+-   class: "UIControl"
+    name: "LessonGoldDialog"
+    size: [640.000000, 480.000000]
+    input: false
+    components:
+        Anchor:
+            leftAnchorEnabled: true
+            rightAnchorEnabled: true
+            topAnchorEnabled: true
+            bottomAnchorEnabled: true
+        ModalInput: {}
+        UIDataParamsComponent:
+            params:
+            - ["TutorialDataModel", "tutorialData", "null", "{ }"]
+            events:
+            - "OPTIONAL_CLICKED"
+            - "ACCENT_CLICKED"
+        UIDataLocalsComponent:
+            locals:
+            - ["ResourceModel", "resource", "tutorialData.currentLessonBonus"]
+    children:
+    -   prototype: "TextDialog/TextDialog"
+        name: "InfoTextDialog"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "accentButtonType": "eButtonType.POSITIVE"
+                    "type": "eDialogType.INFO"
+                    "header": "\"\""
+                    "headerImage": "\"~res:/Gfx/Lobby/currency/currency_gold_xl\""
+                    "accentButton": "\"#common:DialogButton/OK\""
+                    "optionalButton": "\"#common:DialogButton/Cancel\""
+                    "contentControl": "control(\"~res:/UI/Screens3/Lobby/Common/Dialog/TextBuyConfirmation.yaml\", { resource1Model = resource; resource2Model = null; resource3Model = null; resource4Model = null; baseContent = \"hangarTutorial/Funnel/Ammo/AddGold\"; }, [ ])"
+                eventActions:
+                - ["START_CLOSING_ANIMATION", "", ""]
+                - ["ACCENT_CLICKED", "ACCENT_CLICKED", ""]
+                - ["OPTIONAL_CLICKED", "OPTIONAL_CLICKED", ""]
+        children:
+        -   path: "DialogContent/Metaphor"
+            components:
+                Anchor:
+                    topAnchor: -60.000000
+        -   path: "DialogContent/UIScrollView/scrollContainerControl/Content"
+            position: [24.000000, 0.000000]
+        -   path: "DialogContent/Footer/OptionalButtonContainer"
+            position: [25.000000, 24.000000]
+            children: []

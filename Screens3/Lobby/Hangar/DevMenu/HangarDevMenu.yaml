@@ -1,0 +1,56 @@
+Header:
+    version: 135
+Controls:
+-   class: "UIControl"
+    name: "HangarDevMenu"
+    size: [232.000000, 266.000000]
+    input: false
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+            spacing: 2.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfChildrenSum"
+        UIAttachLayoutSlaveComponent:
+            attachId: "kHangarSettings"
+            masterAlign: "BottomCenter"
+            slaveAlign: "TopCenter"
+            additionalOffset: [0.000000, 15.000000]
+        UIDataParamsComponent:
+            events:
+            - "ON_DEV_MENU(eDevMenuType id)"
+        UIDataLocalBindingsComponent:
+            data:
+            - ["vector<eDevMenuType>", "items", "[ eDevMenuType.DebugUISettings; eDevMenuType.UIProfiling; eDevMenuType.DevOptions; eDevMenuType.IssueNavigator; eDevMenuType.UIExamples; eDevMenuType.ShowDebugOverlay; ]"]
+        UIRepeatComponent:
+            control: "~res:/UI/Screens3/Lobby/Hangar/DevMenu/HangarDevMenuItem.yaml"
+            dataContainer: "items"
+            args:
+                "id": "_item"
+            eventActions:
+            - ["ON_CLICK", "ON_DEV_MENU", "_item"]
+    children:
+    -   class: "UIControl"
+        name: "ArrowRight"
+        position: [-4.000000, 69.000000]
+        pivot: [1.000000, 0.500000]
+        input: false
+        classes: "grey-shark-50-bg"
+        components:
+            Background:
+                drawType: "DRAW_ALIGNED"
+                sprite: "~res:/Gfx/Lobby/backgrounds/bg_triangle_8.psd"
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                align: []
+            Anchor:
+                hCenterAnchorEnabled: true
+                topAnchorEnabled: true
+                topAnchor: -7.000000
+            IgnoreLayout: {}
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "content+10"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"

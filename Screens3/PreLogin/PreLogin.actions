@@ -1,0 +1,28 @@
+action REPORT_NICKNAME_ERROR(string text)
+{
+  if (preLoginData.activePreLoginScreen == ePreLoginScreen.DemoNickname
+      or preLoginData.activePreLoginScreen == ePreLoginScreen.ExternalNetworkNickname)
+  {
+    DirectEvent("ShowNicknameError", "./ContentLayer/Content/NicknameConfiguration", arg1=text);
+  }
+}
+
+action REPORT_NICKNAME_CAPTCHA_ERROR(string text)
+{
+  if (preLoginData.activePreLoginScreen == ePreLoginScreen.DemoNickname
+      or preLoginData.activePreLoginScreen == ePreLoginScreen.ExternalNetworkNickname)
+  {
+    DirectEvent("ShowCaptchaError", "./ContentLayer/Content/NicknameConfiguration", arg1=text);
+  }
+}
+
+action START_TRANSITION
+{
+  Opacity("**/ContentLayer/Content", opacity=0.0, time=0.3);
+  Event("TRANSITION_END");
+}
+
+action CONTENT_APPEARENCE
+{
+  Opacity("**/ContentLayer/Content", opacity=1.0, time=0.3);
+}

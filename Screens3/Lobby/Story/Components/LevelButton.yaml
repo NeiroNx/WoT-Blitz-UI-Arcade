@@ -1,0 +1,172 @@
+Header:
+    version: 119
+Prototypes:
+-   class: "UIControl"
+    name: "LevelButton"
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens3/Lobby/Story/Components/LevelButtonOnInit.animation"
+        SizePolicy:
+            horizontalPolicy: "PercentOfFirstChild"
+            verticalPolicy: "PercentOfFirstChild"
+        UIDataParamsComponent:
+            params:
+            - ["int", "levelValue", "0", "1"]
+            - ["string", "levelDescription", "\"\"", "\"HALLOWEEN2020/LevelButton/Second/Level/Description\""]
+            - ["ResourceDetailed", "price", "null", "{ \"type\" = ResourceType.gold; }"]
+            - ["bool", "canAfford", "false", "true"]
+            - ["bool", "isSelected", "false", "true"]
+            - ["string", "imagePath", "\"\"", "\"~res:/Gfx/Lobby/events/event_2020-halloween_button_3\""]
+            - ["eBlitzDevice", "deviceType", "eBlitzDevice.DEVICE_DESKTOP", "eBlitzDevice.DEVICE_PHONE"]
+            events:
+            - "ON_TOUCH"
+        UIDataLocalVarsComponent:
+            data:
+            - ["float", "selectedOpacity", "when isSelected -> 1.000000, 0.000000"]
+            - ["float", "iconBrightness", "0.000000"]
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/Lobby/Story/Components/LevelButton.actions"
+    children:
+    -   class: "UIControl"
+        name: "ContentHolder"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/ButtonDecorator.yaml"
+                args:
+                    "content": "Content"
+                    "sound": "eButtonSound.CHOOSE"
+                    "isSelected": "isSelected"
+                    "ltrbSafeZone": "vec4(8.000000, 8.000000, 8.000000, 8.000000)"
+                eventActions:
+                - ["PUSH", "PUSH", "_event.scale, _event.opacity, _event.time"]
+                - ["PULL", "PULL", "_event.time"]
+                - ["HOVER", "HOVER", "_event.brightness, _event.time"]
+                - ["CANCEL_HOVER", "CANCEL_HOVER", "_event.time"]
+                - ["SELECT", "SELECT", "_event.time"]
+                - ["CANCEL_SELECT", "CANCEL_SELECT", "_event.time"]
+                - ["ON_TOUCH", "ON_TOUCH", ""]
+Slots:
+-   class: "UIControl"
+    name: "Content"
+    input: false
+    components:
+        UIOpacityComponent: {}
+        LinearLayout:
+            orientation: "TopDown"
+            spacing: 2.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfFirstChild"
+            verticalPolicy: "PercentOfChildrenSum"
+    children:
+    -   class: "UIControl"
+        name: "Body"
+        pivot: [0.500000, 0.500000]
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+        children:
+        -   class: "UIControl"
+            name: "Image"
+            input: false
+            components:
+                UITextureComponent:
+                    materialPath: "~res:/Materials.custom/2d.Textured.HSV.material"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+            bindings:
+            - ["UITextureComponent.spritePath", "imagePath"]
+            - ["UITextureComponent.materialParams", "\"value,\" + str(int(iconBrightness))"]
+        -   class: "UIControl"
+            name: "Level"
+            input: false
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 6.500000
+                    vCenterAnchorEnabled: true
+                    vCenterAnchor: 8.000000
+                LinearLayout:
+                    orientation: "TopDown"
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 155.000000
+                    verticalPolicy: "PercentOfChildrenSum"
+            children:
+            -   class: "UIControl"
+                name: "Value"
+                input: false
+                classes: "t-content-h1 bold white-wild-sand-text"
+                components:
+                    UITextComponent:
+                        fitting: "FITTING_POINTS"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml"
+                bindings:
+                - ["UITextComponent.text", "localize(\"Story/LevelButton/Level/Value\", { \"value\" = levelValue; })"]
+            -   class: "UIControl"
+                name: "Description"
+                input: false
+                classes: "t-caps bold white-wild-sand-text"
+                components:
+                    UITextComponent:
+                        multiline: "MULTILINE_ENABLED"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml"
+                bindings:
+                - ["UITextComponent.text", "localize(levelDescription)"]
+        -   class: "UIControl"
+            name: "Selected"
+            input: false
+            components:
+                UIOpacityComponent: {}
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 6.500000
+                    topAnchorEnabled: true
+                    topAnchor: 2.000000
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 155.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 200.000000
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens3/Lobby/Common/Selection.yaml"
+                    args:
+                        "selectionType": "eSelectionBorderType.kR8"
+                        "isVisible": "true"
+            bindings:
+            - ["UIOpacityComponent.opacity", "selectedOpacity"]
+    -   class: "UIControl"
+        name: "Price"
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "Formula"
+                verticalFormula: "max(firstChild, 20)"
+            UIChildComponent0:
+                condition: "not isNull(price)"
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/CurrencyAdapter.yaml"
+                args:
+                    "currencySize": "eCurrencySize.BODY"
+                    "canAfford": "canAfford"
+                    "resource": "price"

@@ -1,0 +1,15 @@
+Header:
+    version: "24"
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/Common/Link.yaml"
+Controls:
+-   prototype: "Link/Link"
+    name: "ProfileLink"
+    components:
+        StyleSheet:
+            styles: "~res:/UI/Screens/Fonts.yaml;~res:/UI/Screens/Login/ProfileLink.yaml"
+    children:
+    -   path: "Text"
+        components:
+            UITextComponent:
+                text: "#ban_reason:suspended_link"

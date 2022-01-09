@@ -1,0 +1,93 @@
+Header:
+    version: 123
+Prototypes:
+-   class: "UIControl"
+    name: "VehicleBig"
+    size: [160.000000, 144.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            horizontalMin: 160.000000
+            verticalPolicy: "PercentOfParent"
+            verticalMin: 128.000000
+        UIDataParamsComponent:
+            params:
+            - ["VehicleResource", "vehicle", "null", "{ }"]
+            - ["control", "fx", "null", "null"]
+            - ["control", "overlay", "null", "null"]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                bottomAnchorEnabled: true
+            LinearLayout:
+                orientation: "TopDown"
+                spacing: 4.000000
+                skipInvisible: false
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfChildrenSum"
+        children:
+        -   class: "UIControl"
+            name: "IconWrapper"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   class: "UIControl"
+                name: "FxHolder"
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                    UIChildComponent0:
+                        childType: "kControl"
+                        condition: "not isNull(fx)"
+                        control: "fx"
+            -   class: "UIControl"
+                name: "Icon"
+                input: false
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 160.000000
+                        verticalPolicy: "FixedSize"
+                    UIChildComponent0:
+                        prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/Detailed/VehicleIcon.yaml"
+                        args:
+                            "vehicle": "vehicle"
+            -   class: "UIControl"
+                name: "Overlay"
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                    UIChildComponent0:
+                        childType: "kControl"
+                        condition: "not isNull(overlay)"
+                        control: "overlay"
+        -   class: "UIControl"
+            name: "Name"
+            input: false
+            components:
+                UITextComponent:
+                    fitting: "FITTING_POINTS"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "Formula"
+                    verticalFormula: "max(content, 24)"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml;"
+            bindings:
+            - ["classes", "\"t-subtitle bold \" + (when not isNull(vehicle) and (vehicle.info.isPremium or vehicle.stats.isPremiumized) -> \"yellow-lightning-text\", not isNull(vehicle) and vehicle.info.isCollectible -> \"blue-rimmi-text\", \"white-wild-sand-text\")"]
+            - ["UITextComponent.text", "when not isNull(vehicle) -> localize(vehicle.info.shortName), \"\""]

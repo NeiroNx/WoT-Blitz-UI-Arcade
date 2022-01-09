@@ -1,0 +1,41 @@
+Header:
+    version: "25"
+ImportedPackages:
+- "~res:/UI/Styles/BackgroundStyles.yaml"
+- "~res:/UI/Styles/SafeAreaStyles.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "Footer"
+    size: [960.000000, 94.000000]
+    classes: "notch-tightly-bottom-inset"
+    components:
+        SizePolicy:
+            verticalPolicy: "FixedSize"
+            verticalValue: 94.000000
+        Anchor:
+            leftAnchorEnabled: true
+            rightAnchorEnabled: true
+            bottomAnchorEnabled: true
+        UIAnchorSafeAreaComponent:
+            leftSafeInset: "INSET"
+            rightSafeInset: "INSET"
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Lobby/Common/Footer.yaml"
+    children:
+    -   class: "UIControl"
+        name: "FooterBackground"
+        size: [1112.000000, 115.000000]
+        input: false
+        classes: "footer-background"
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+            UIAnchorSafeAreaComponent:
+                leftSafeInset: "REVERSE"
+                rightSafeInset: "REVERSE"
+                bottomSafeInset: "REVERSE"
+            Background: {}

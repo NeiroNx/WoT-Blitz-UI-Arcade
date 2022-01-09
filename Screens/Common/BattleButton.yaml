@@ -1,0 +1,201 @@
+Header:
+    version: 120
+ImportedPackages:
+- "~res:/UI/Screens/Common/StyledButton.yaml"
+- "~res:/UI/Styles/ButtonSoundStyles.yaml"
+- "~res:/UI/Screens/Lobby/Common/BadgeNew.yaml"
+StyleSheets:
+-   selectors:
+    - "#Caption"
+    - ".repair * #Repair"
+    properties:
+        visible: true
+-   selectors:
+    - "#Repair"
+    - ".repair * #Caption"
+    properties:
+        visible: false
+-   selectors:
+    - ".disabled #OldBattleButton #Caption"
+    properties:
+        text-color: [1.000000, 1.000000, 1.000000, 0.501961]
+        text-shadowColor: [0.000000, 0.000000, 0.000000, 0.749020]
+-   selectors:
+    - ".enabled ? #EffectsContainer"
+    properties:
+        visible: true
+-   selectors:
+    - "#Effects"
+    - "#EffectsContainer"
+    properties:
+        visible: false
+-   selectors:
+    - ".disabled #OldBattleButton"
+    - ".repair #OldBattleButton"
+    properties:
+        bg-frame: 1
+-   selectors:
+    - ".repair"
+    properties:
+        sound-touchUpInside: "GUI/buttons/ok"
+-   selectors:
+    - "#Caption"
+    properties:
+        text-color: [1.000000, 1.000000, 1.000000, 1.000000]
+        text-shadowColor: [0.494118, 0.164706, 0.000000, 0.752941]
+-   selectors:
+    - ".battleButton:pressed_inside"
+    properties:
+        bg-color: [1.000000, 1.000000, 1.000000, 0.501961]
+-   selectors:
+    - ".disabled ? .battleButton:pressed_inside"
+    properties:
+        bg-color: [1.000000, 1.000000, 1.000000, 0.501961]
+Prototypes:
+-   class: "UIControl"
+    name: "OldBattleButton"
+    size: [190.000000, 64.000000]
+    exclusiveInput: true
+    classes: "battleButton"
+    components:
+        Background:
+            sprite: "~res:/Gfx/UI/Hangar/OldPlayButton"
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Common/BattleButton.yaml;~res:/UI/Screens/Fonts.yaml"
+    children:
+    -   class: "UIControl"
+        name: "Caption"
+        position: [98.000000, 3.000000]
+        size: [190.000000, 64.000000]
+        input: false
+        classes: "header0"
+        components:
+            UITextComponent:
+                text: "BATTLE"
+                colorInheritType: "COLOR_MULTIPLY_ON_PARENT"
+                shadowOffset: [0.000000, -1.000000]
+                fitting: "FITTING_REDUCE"
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 10.000000
+                rightAnchorEnabled: true
+                rightAnchor: 10.000000
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+    -   class: "UIControl"
+        name: "Repair"
+        position: [98.000000, 3.000000]
+        size: [190.000000, 64.000000]
+        input: false
+        classes: "header0"
+        components:
+            UITextComponent:
+                text: "hangar repair button"
+                colorInheritType: "COLOR_IGNORE_PARENT"
+                shadowOffset: [0.000000, -1.000000]
+                fitting: "FITTING_REDUCE"
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 10.000000
+                rightAnchorEnabled: true
+                rightAnchor: 10.000000
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+    -   class: "UIControl"
+        name: "EffectsContainer"
+        size: [200.000000, 74.000000]
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: -5.000000
+                rightAnchorEnabled: true
+                rightAnchor: -5.000000
+                topAnchorEnabled: true
+                topAnchor: -5.000000
+                bottomAnchorEnabled: true
+                bottomAnchor: -5.000000
+        children:
+        -   class: "UIParticles"
+            name: "particlesTop"
+            position: [100.000000, 7.000030]
+            size: [200.000000, 74.000000]
+            pivot: [0.500000, 0.094595]
+            input: false
+            effectPath: "~res:/3d/FX/UI/battle_top.sc2"
+            autoStart: true
+            components:
+                Background:
+                    drawType: "DRAW_FILL"
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 0.000000
+                    rightAnchorEnabled: true
+                    rightAnchor: 0.000000
+                    topAnchorEnabled: true
+                    topAnchor: 0.000000
+                    bottomAnchorEnabled: true
+                    bottomAnchor: 0.000000
+        -   class: "UIParticles"
+            name: "particlesBottom"
+            position: [100.000000, 66.999969]
+            size: [200.000000, 74.000000]
+            pivot: [0.500000, 0.905405]
+            input: false
+            effectPath: "~res:/3d/FX/UI/battle_bottom.sc2"
+            autoStart: true
+            components:
+                Background:
+                    drawType: "DRAW_FILL"
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 0.000000
+                    rightAnchorEnabled: true
+                    rightAnchor: 0.000000
+                    topAnchorEnabled: true
+                    topAnchor: 0.000000
+                    bottomAnchorEnabled: true
+                    bottomAnchor: 0.000000
+        -   class: "UIParticles"
+            name: "particlesGlow"
+            position: [100.000000, 37.000000]
+            size: [200.000000, 74.000000]
+            pivot: [0.500000, 0.500000]
+            input: false
+            effectPath: "~res:/3d/FX/UI/battle_glow.sc2"
+            autoStart: true
+            components:
+                Background:
+                    drawType: "DRAW_FILL"
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 0.000000
+                    rightAnchorEnabled: true
+                    rightAnchor: 0.000000
+                    topAnchorEnabled: true
+                    topAnchor: 0.000000
+                    bottomAnchorEnabled: true
+                    bottomAnchor: 0.000000
+    -   class: "UIControl"
+        name: "highlight"
+        position: [95.000000, 32.000000]
+        size: [210.000000, 84.000000]
+        pivot: [0.500000, 0.500000]
+        visible: false
+        input: false
+        components:
+            Background:
+                drawType: "DRAW_STRETCH_BOTH"
+                sprite: "~res:/Gfx/UI/HangarTutorial/HighlightTile"
+                leftRightStretchCap: 15.000000
+                topBottomStretchCap: 15.000000
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: -10.000000
+                rightAnchorEnabled: true
+                rightAnchor: -10.000000
+                topAnchorEnabled: true
+                topAnchor: -10.000000
+                bottomAnchorEnabled: true
+                bottomAnchor: -10.000000

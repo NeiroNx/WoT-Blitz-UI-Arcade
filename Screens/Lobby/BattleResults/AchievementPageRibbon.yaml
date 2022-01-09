@@ -1,0 +1,57 @@
+Header:
+    version: "70"
+ImportedPackages:
+- "~res:/UI/Screens/Fonts.yaml"
+- "~res:/UI/Styles/BattleRibbons.yaml"
+- "~res:/UI/Styles/ButtonStyle.yaml"
+- "~res:/UI/Screens/Lobby/Common/RibbonPrototype.yaml"
+Controls:
+-   class: "UIControl"
+    name: "RibbonContainer"
+    size: [120.000000, 139.000000]
+    classes: "button button-open-sound"
+    components:
+        Background: {}
+        SizePolicy:
+            verticalPolicy: "PercentOfChildrenSum"
+        UIInputEventComponent:
+            onTouchUpInside: "OnRibbonTap"
+        UIDataParamsComponent:
+            params:
+            - ["BattleRibbonViewModel", "ribbon", "null", "{ }"]
+            events:
+            - "OnRibbonTap"
+        UIDataLocalsComponent:
+            locals:
+            - ["vector<string>", "gradeList", "[ \"common\"; \"rare\"; \"epic\"; \"legendary\"; ]"]
+            - ["string", "localizedTitle", "localize(ribbon.title)"]
+            - ["string", "gradeClass", "gradeList[ribbon.grade]"]
+            - ["string", "iconClass", "ribbon.id"]
+        Sound: {}
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Lobby/BattleResults/AchievementPageRibbon.yaml;~res:/UI/Styles/ButtonSoundStyles.yaml"
+    children:
+    -   prototype: "RibbonPrototype/Ribbon"
+        name: "Ribbon"
+        components:
+            Background:
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+            Anchor:
+                hCenterAnchorEnabled: true
+                bottomAnchorEnabled: true
+        bindings:
+        - ["classes", "\"ribbon disable-fx \" + iconClass + \" \" + gradeClass", "Read"]
+        children:
+        -   path: "Info"
+            components:
+                Anchor:
+                    bottomAnchor: 0.000000
+            children: []
+        -   path: "Info/Name"
+            components:
+                UITextComponent: {}
+                SizePolicy:
+                    horizontalMax: 120.000000
+            bindings:
+            - ["UITextComponent.text", "localizedTitle", "Read"]

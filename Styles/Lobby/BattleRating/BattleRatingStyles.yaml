@@ -1,0 +1,77 @@
+Header:
+    version: "108"
+StyleSheets:
+-   selectors:
+    - ".battle-rating.better #RatingDiff"
+    properties:
+        text-color: [0.494118, 0.827451, 0.129412, 1.000000]
+-   selectors:
+    - ".battle-rating.worse #RatingDiff"
+    properties:
+        text-color: [1.000000, 0.000000, 0.000000, 1.000000]
+-   selectors:
+    - ".battle-rating.better #UpDownMark"
+    properties:
+        bg-frame: 0
+-   selectors:
+    - ".battle-rating.worse #UpDownMark"
+    properties:
+        bg-frame: 1
+-   selectors:
+    - ".battle-rating.equal #UpDownMark"
+    - ".battle-rating.equal #RatingDiff"
+    properties:
+        visible: false
+-   selectors:
+    - ".battle-rating.bronze #LeagueBanner"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/leagues/league_icon_bronze_l"
+-   selectors:
+    - ".battle-rating.silver #LeagueBanner"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/leagues/league_icon_silver_l"
+-   selectors:
+    - ".battle-rating.gold #LeagueBanner"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/leagues/league_icon_gold_l"
+-   selectors:
+    - ".battle-rating.platinum #LeagueBanner"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/leagues/league_icon_platinum_l"
+-   selectors:
+    - ".battle-rating.diamond #LeagueBanner"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/leagues/league_icon_brilliant_l"
+-   selectors:
+    - ".custom-number.bronze"
+    properties:
+        bg-color: [0.992157, 0.854902, 0.560784, 1.000000]
+-   selectors:
+    - ".custom-number.silver"
+    properties:
+        bg-color: [1.000000, 1.000000, 1.000000, 1.000000]
+-   selectors:
+    - ".custom-number.gold"
+    properties:
+        bg-color: [0.988235, 0.937255, 0.505882, 1.000000]
+-   selectors:
+    - ".custom-number.platinum"
+    properties:
+        bg-color: [0.980392, 0.964706, 0.850980, 1.000000]
+-   selectors:
+    - ".custom-number.diamond"
+    properties:
+        bg-color: [0.980392, 0.964706, 0.850980, 1.000000]
+-   selectors:
+    - ".battle-rating.calibration #UpDownMark"
+    - ".battle-rating.calibration #RatingDiff"
+    properties:
+        visible: false
+-   selectors:
+    - ".battle-rating.calibration #LeagueBanner"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/leagues/league_icon_calibration_l"
+-   selectors:
+    - ".battle-rating.no-league #LeagueBanner"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/leagues/league_icon_no-league"

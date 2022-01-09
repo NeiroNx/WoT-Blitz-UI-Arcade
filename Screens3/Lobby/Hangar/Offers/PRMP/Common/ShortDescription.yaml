@@ -1,0 +1,38 @@
+Header:
+    version: "92"
+Prototypes:
+-   class: "UIControl"
+    name: "ShortOfferDescription"
+    input: false
+    classes: "red-red-bg"
+    components:
+        Background: {}
+        SizePolicy:
+            horizontalPolicy: "Formula"
+            horizontalFormula: "maxChild + 16"
+            verticalPolicy: "Formula"
+            verticalFormula: "maxChild + 6"
+        UIDataParamsComponent:
+            params:
+            - ["string", "shortDescr", "\"\"", "\"КОПИЛКА\""]
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Color.style.yaml"
+    children:
+    -   class: "UIControl"
+        name: "Label"
+        input: false
+        classes: "bold t-caption white-wild-sand-text"
+        components:
+            UITextComponent:
+                colorInheritType: "COLOR_IGNORE_PARENT"
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 8.000000
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml"
+        bindings:
+        - ["UITextComponent.text", "shortDescr"]

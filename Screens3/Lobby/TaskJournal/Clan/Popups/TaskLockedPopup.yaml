@@ -1,0 +1,32 @@
+Header:
+    version: 119
+ImportedPackages:
+- "~res:/UI/Screens3/Common/PopupMenuWithRichText.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "TaskLockedPopup"
+    input: false
+    components:
+        Anchor:
+            leftAnchorEnabled: true
+            rightAnchorEnabled: true
+            topAnchorEnabled: true
+            bottomAnchorEnabled: true
+        UIDataParamsComponent:
+            params:
+            - ["int", "taskSlotIndex", "0", "0"]
+            - ["SessionDataModel", "session", "null", "{ }"]
+            - ["int64", "unlockTime", "0L", "0L"]
+    children:
+    -   prototype: "PopupMenuWithRichText/Slave"
+        name: "Slave"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "title": "\"\""
+                    "text": "localize(\"clanMissions/tooltips/questLocked\", { \"time\" = timeDiff(unlockTime - session.serverTime); })"
+                    "slaveAlign": "ePositionAlign.Left"
+                    "masterId": "\"TASK_\" + str(taskSlotIndex) + \"_BUTTON\""
+                eventActions:
+                - ["POPUP_ON_CLOSE_ACTION", "POPUP_ON_CLOSE_ACTION", ""]
+                - ["FINISH_HIDE_POPUP_ANIMATION", "FINISH_HIDE_POPUP_ANIMATION", ""]

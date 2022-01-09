@@ -1,0 +1,5 @@
+animation ScrollToControl
+{
+    ScrollToEnsureControlOnScreen(animationControlPath, 0.3);
+    Event ("CLEAR_ANIMATION_CONTROL_PATH");
+}

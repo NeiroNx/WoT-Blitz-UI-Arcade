@@ -1,0 +1,15 @@
+animation ServerConnectionQuality
+{
+	parallel
+	{
+		ChangeProperty("**/Bad","SizePolicy", "verticalValue", 0, 0);
+		ChangeProperty("**/Medium","SizePolicy", "verticalValue", 0, 0);
+		ChangeProperty("**/Good","SizePolicy", "verticalValue", 0, 0);
+		ChangeProperty("**/Perfect","SizePolicy", "verticalValue", 0, 0);
+	}
+
+	ChangeProperty("**/Bad","SizePolicy", "verticalValue", 8, 0.04, SINE_OUT);
+	ChangeProperty("**/Medium","SizePolicy", "verticalValue", 16, 0.08, SINE_OUT);
+	ChangeProperty("**/Good","SizePolicy", "verticalValue", 24, 0.12, SINE_OUT);
+	ChangeProperty("**/Perfect","SizePolicy", "verticalValue", 32, 0.16, SINE_OUT);
+}

@@ -1,0 +1,18 @@
+action ShowBlur()
+{
+    if (footerVisible)
+    {
+        Opacity("**/Footer/FooterWrapper/BlurWrapper", 0.0);
+        if (showBlur)
+        {
+            RenderPostProcess("**/Footer/FooterWrapper/BlurWrapper/Blur", force = true);
+        }
+    }
+
+    ChangeData(showBlur, true);
+
+    if (footerVisible)
+    {
+        Opacity("**/Footer/FooterWrapper/BlurWrapper", 1.0, blurAnimationTime, EASE_IN);
+    }
+}

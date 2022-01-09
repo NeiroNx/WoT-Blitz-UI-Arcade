@@ -1,0 +1,67 @@
+Header:
+    version: "79"
+Prototypes:
+-   class: "UIControl"
+    name: "KarmaBase"
+    size: [608.000000, 64.000000]
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+            padding: "8; 0"
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfMaxChild"
+    children:
+    -   class: "UIControl"
+        name: "Body"
+        size: [608.000000, 64.000000]
+        input: false
+        components:
+            UITextureComponent:
+                spritePath: "~res:/Gfx/Lobby/backgrounds/bg_dark_r8"
+                drawType: "DRAW_STRETCH_BOTH"
+                leftRightStretchCap: 8.000000
+                topBottomStretchCap: 8.000000
+            LinearLayout:
+                orientation: "TopDown"
+                padding: "12"
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 608.000000
+                verticalPolicy: "PercentOfMaxChild"
+                verticalMin: 64.000000
+                verticalMax: 80.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens/Lobby/Notifications/Popups/Notification.style.yaml"
+-   class: "UIControl"
+    name: "Content"
+    position: [75.000000, 0.000000]
+    size: [931.000000, 84.000000]
+    input: false
+    components:
+        Anchor:
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            verticalPolicy: "PercentOfMaxChild"
+        UIAnchorSafeAreaComponent:
+            leftSafeInset: "INSET"
+            rightSafeInset: "INSET"
+-   class: "UIControl"
+    name: "icon"
+    input: false
+    classes: "notification-icon-default white-wild-sand-bg"
+    components:
+        Background:
+            drawType: "DRAW_ALIGNED"
+        Anchor:
+            leftAnchorEnabled: true
+            leftAnchor: 7.000000
+            vCenterAnchorEnabled: true
+        IgnoreLayout: {}
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 56.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 56.000000
+        StyleSheet:
+            styles: "~res:/UI/Screens/Lobby/Notifications/Popups/Notification.style.yaml;~res:/UI/Screens3/Color.style.yaml"

@@ -1,0 +1,6 @@
+Header:
+    version: "24"
+StyleSheets:
+-   selector: ".ko.bold, .ko.regular"
+    properties:
+        text-fontPath: "~res:/Fonts/cfg/CoreSans.fntconf"

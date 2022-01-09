@@ -1,0 +1,177 @@
+Header:
+    version: 130
+Prototypes:
+-   class: "UIControl"
+    name: "Popup"
+    size: [1024.000000, 768.000000]
+    input: false
+    components:
+        Anchor:
+            leftAnchorEnabled: true
+            rightAnchorEnabled: true
+            topAnchorEnabled: true
+            bottomAnchorEnabled: true
+        UIDataParamsComponent:
+            params:
+            - ["DebugPopupModel", "model", "null", "{ }"]
+            events:
+            - "OVERLAY_PRESSED"
+            - "CONSOLE_PRESSED"
+            - "DEBUG_UI_PRESSED"
+            - "RELOAD_PRESSED"
+            - "RESTORE_PRESSED"
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+    children:
+    -   class: "UIControl"
+        name: "fpsText"
+        position: [919.000000, 748.000000]
+        size: [100.000000, 20.000000]
+        input: false
+        classes: "regular t-body"
+        components:
+            UITextComponent:
+                shadowOffset: [0.000000, 1.000000]
+                align: ["RIGHT", "VCENTER"]
+            Anchor:
+                rightAnchorEnabled: true
+                rightAnchor: 5.000000
+                bottomAnchorEnabled: true
+        bindings:
+        - ["visible", "model.showFpsCount"]
+        - ["UITextComponent.text", "format(\"FPS: %(param)\", { \"param\" = model.fpsCount; })"]
+    -   class: "UIControl"
+        name: "controlsCount"
+        position: [834.000000, 728.000000]
+        size: [185.000000, 20.000000]
+        input: false
+        classes: "blue-murzillah-bg regular t-body"
+        components:
+            Background:
+            UITextComponent:
+                shadowOffset: [0.000000, 1.000000]
+                multiline: "MULTILINE_ENABLED"
+                align: ["RIGHT", "VCENTER"]
+            Anchor:
+                rightAnchorEnabled: true
+                rightAnchor: 5.000000
+                bottomAnchorEnabled: true
+                bottomAnchor: 20.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+        bindings:
+        - ["visible", "model.showControlsCount"]
+        - ["UITextComponent.text", "format(\"Controls Total Count: %(param)\", { \"param\" = model.controlsCount; })"]
+    -   class: "UIControl"
+        name: "memoryUsage"
+        position: [5.000000, 334.000000]
+        size: [507.000000, 100.000000]
+        input: false
+        classes: "regular t-body"
+        components:
+            UITextComponent:
+                colorInheritType: "COLOR_IGNORE_PARENT"
+                shadowOffset: [0.000000, 1.000000]
+                align: ["LEFT", "VCENTER"]
+                useRtlAlign: "DONT_USE"
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 5.000000
+                hCenterAnchorEnabled: true
+                hCenterAnchor: 0.000000
+                vCenterAnchorEnabled: true
+                vCenterAnchor: 0.000000
+        bindings:
+        - ["visible", "model.showMemoryUsage"]
+        - ["UITextComponent.text", "format(\"Memory: %(param1) MB; Allocated textures: %(param2); Occupied space: %(param3) MB\", { \"param1\" = bytesToMb(model.memoryResidentBytes); \"param2\" = model.cachedTexturesCount; \"param3\" = bytesToMb(model.cachedTexturesOccupiedBytes); })"]
+    -   class: "UIControl"
+        name: "OverlayButton"
+        position: [954.000000, 0.000000]
+        size: [70.000000, 70.000000]
+        classes: "grey-shark-50-bg t-button bold"
+        components:
+            Background:
+            UITextComponent:
+                text: "Overlay"
+            Anchor:
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+            UIInputEventComponent:
+                onTouchUpInside: "OVERLAY_PRESSED"
+        bindings:
+        - ["visible", "model.overlayButtonEnabled"]
+    -   class: "UIControl"
+        name: "ConsoleButton"
+        position: [954.000000, 80.000000]
+        size: [70.000000, 70.000000]
+        classes: "grey-shark-50-bg t-button bold"
+        components:
+            Background:
+            UITextComponent:
+                text: "Console"
+            Anchor:
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+                topAnchor: 80.000000
+                vCenterAnchorEnabled: false
+            UIInputEventComponent:
+                onTouchUpInside: "CONSOLE_PRESSED"
+        bindings:
+        - ["visible", "model.consoleButtonEnabled"]
+    -   class: "UIControl"
+        name: "DebugUIButton"
+        position: [954.000000, 160.000000]
+        size: [70.000000, 70.000000]
+        classes: "grey-shark-50-bg t-button bold"
+        components:
+            Background:
+            UITextComponent:
+                text: "Debug UI"
+            Anchor:
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+                topAnchor: 160.000000
+                vCenterAnchorEnabled: false
+            UIInputEventComponent:
+                onTouchUpInside: "DEBUG_UI_PRESSED"
+        bindings:
+        - ["visible", "model.debugUIButtonEnabled"]
+    -   class: "UIControl"
+        name: "ReloadButton"
+        position: [954.000000, 240.000000]
+        size: [70.000000, 70.000000]
+        classes: "grey-shark-50-bg t-button bold"
+        components:
+            Background:
+            UITextComponent:
+                text: "Reload"
+            Anchor:
+                rightAnchorEnabled: true
+                rightAnchor: 80.000000
+                topAnchorEnabled: true
+                topAnchor: 80.000000
+                vCenterAnchorEnabled: false
+            UIInputEventComponent:
+                onTouchUpInside: "RELOAD_PRESSED"
+        bindings:
+        - ["visible", "model.reloadButtonEnabled and model.inBattle"]
+    -   class: "UIControl"
+        name: "RestoreHealthButton"
+        position: [954.000000, 320.000000]
+        size: [70.000000, 70.000000]
+        classes: "grey-shark-50-bg t-button bold"
+        components:
+            Background:
+            UITextComponent:
+                text: "Restore"
+            Anchor:
+                rightAnchorEnabled: true
+                rightAnchor: 80.000000
+                topAnchorEnabled: true
+                topAnchor: 160.000000
+                vCenterAnchorEnabled: false
+            UIInputEventComponent:
+                onTouchUpInside: "RESTORE_PRESSED"
+        bindings:
+        - ["visible", "model.restoreHealthButtonEnabled and model.inBattle"]

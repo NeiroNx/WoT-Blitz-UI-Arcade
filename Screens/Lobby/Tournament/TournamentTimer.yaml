@@ -1,0 +1,21 @@
+Header:
+    version: "20"
+ImportedPackages:
+- "~res:/UI/Screens/Fonts.yaml"
+- "~res:/UI/Screens/Lobby/Common/Timer.yaml"
+Prototypes:
+-   class: "UIControl"
+    customClass: "UITournamentRoomTimer"
+    name: "UITournamentRoomTimer"
+    size: [72.000000, 23.000000]
+    noInput: true
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "PercentOfMaxChild"
+    children:
+    -   prototype: "Timer/Timer"
+        name: "TournamentLargeScaleTimer"
+        children:
+        -   path: "Time"
+            classes: "text2 text-color-white"

@@ -1,0 +1,5 @@
+animation INIT
+{
+    BroadcastEvent("AnimateNumber");
+    DirectEvent("START_SLIDE_SHOW", ".", startPaginatorProgress);
+}

@@ -1,0 +1,27 @@
+Header:
+    version: 117
+ImportedPackages:
+- "~res:/UI/Screens3/Common/PopupMenuWithRichText.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "SquadBattlesPopup"
+    input: false
+    components:
+        Anchor:
+            leftAnchorEnabled: true
+            rightAnchorEnabled: true
+            topAnchorEnabled: true
+            bottomAnchorEnabled: true
+    children:
+    -   prototype: "PopupMenuWithRichText/Slave"
+        name: "Slave"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "title": "\"\""
+                    "text": "localize(\"clanMissions/tooltips/leaderboardTab/missionsCompleted\")"
+                    "slaveAlign": "ePositionAlign.Top"
+                    "masterId": "\"LEADERBOARD_SQUAD_BATTLES_ICON\""
+                eventActions:
+                - ["POPUP_ON_CLOSE_ACTION", "POPUP_ON_CLOSE_ACTION", ""]
+                - ["FINISH_HIDE_POPUP_ANIMATION", "FINISH_HIDE_POPUP_ANIMATION", ""]

@@ -1,0 +1,17 @@
+resourceModel =
+{
+	typeStyle = when
+        resourceReflection.type == ResourceType.vehicle -> "resource-vehicle",
+        resourceReflection.type == ResourceType.gold -> "resource-gold",
+        resourceReflection.type == ResourceType.unlocks -> "resource-unlock",
+        resourceReflection.type == ResourceType.free_xp -> "resource-free-xp",
+        resourceReflection.type == ResourceType.premium -> "resource-premium",
+        resourceReflection.type == ResourceType.xp -> "resource-xp",
+        resourceReflection.type == ResourceType.tankmenXP -> "resource-crew-xp",
+        resourceReflection.type == ResourceType.credits -> "resource-credit",
+        resourceReflection.type == ResourceType.stuff -> "resource-stuff",
+        resourceReflection.type == ResourceType.slots -> "resource-slot",
+        resourceReflection.type == ResourceType.achievement -> "resource-rare-achievement",
+        resourceReflection.type == ResourceType.real_currency -> "resource-real-currency",
+        "";				
+};          

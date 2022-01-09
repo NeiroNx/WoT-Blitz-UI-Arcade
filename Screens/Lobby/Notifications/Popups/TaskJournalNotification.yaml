@@ -1,0 +1,521 @@
+Header:
+    version: 121
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/Notifications/Popups/Notification.yaml"
+- "~res:/UI/Screens/Lobby/Common/RichText.yaml"
+- "~res:/UI/Screens3/Lobby/Common/NotificationButton.yaml"
+- "~res:/UI/Screens3/Lobby/Common/CheckMark.yaml"
+- "~res:/UI/Screens3/Lobby/Common/NotificationButtonWithText.yaml"
+Controls:
+-   class: "UIControl"
+    customClass: "UITaskJournalNotification"
+    name: "TaskJournalNotification"
+    size: [32.000000, 32.000000]
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+            padding: "8;0"
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfMaxChild"
+        UIDataSourceComponent0:
+            source: "~res:/UI/Examples/Model/Lobby/Notifications/Popups/TaskJournalNotification.model"
+        UIDataSourceComponent1:
+            sourceType: "File"
+            source: "~res:/UI/Screens/Lobby/Notifications/Popups/ViewModels/TaskJournalNotificationView.model"
+    children:
+    -   prototype: "Notification/Notification"
+        name: "TaskJournalNotificationContent"
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: false
+                hCenterAnchorEnabled: true
+                rightAnchorEnabled: false
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 608.000000
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   class: "UIControl"
+            name: "Content"
+            input: false
+            components:
+                LinearLayout: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   class: "UIControl"
+                name: "ContentQuestProgress"
+                input: false
+                components:
+                    LinearLayout:
+                        padding: "16"
+                        spacing: 16.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfMaxChild"
+                bindings:
+                - ["visible", "notificationType == eNotificationType.QUEST_PROGRESS"]
+                children:
+                -   prototype: "Notification/icon"
+                    name: "icon"
+                    components:
+                        Background:
+                            sprite: "~res:/Gfx/Lobby/icons/icon_task-journal_s"
+                        SizePolicy:
+                            horizontalPolicy: "FixedSize"
+                            horizontalValue: 24.000000
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 24.000000
+                        StyleSheet:
+                            styles: "~res:/UI/Screens/Lobby/Notifications/Popups/Styles/TaskJournalNotificationStyles.yaml"
+                -   class: "UIControl"
+                    name: "ContentContainer"
+                    size: [32.000000, 32.000000]
+                    input: false
+                    components:
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        LinearLayout:
+                            spacing: 8.000000
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfMaxChild"
+                    children:
+                    -   class: "UIControl"
+                        name: "Left"
+                        input: false
+                        components:
+                            Anchor:
+                                vCenterAnchorEnabled: true
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                verticalPolicy: "PercentOfChildrenSum"
+                                verticalMin: 64.000000
+                                verticalMax: 80.000000
+                            FlowLayout:
+                                hSpacing: 5.000000
+                                vPadding: "10"
+                                vDynamicPadding: true
+                                vDynamicSpacing: true
+                                useRtl: true
+                        children:
+                        -   class: "UIControl"
+                            name: "Caption"
+                            position: [0.000000, 1.000000]
+                            input: false
+                            classes: "t-caption bold color=white-wild-sand-text"
+                            components:
+                                UITextComponent:
+                                    colorInheritType: "COLOR_IGNORE_PARENT"
+                                    align: ["LEFT", "VCENTER"]
+                                    useRtlAlign: "USE_BY_SYSTEM"
+                                Anchor:
+                                    vCenterAnchorEnabled: true
+                                SizePolicy:
+                                    horizontalPolicy: "PercentOfContent"
+                                    verticalPolicy: "PercentOfContent"
+                                StyleSheet:
+                                    styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+                            bindings:
+                            - ["UITextComponent.text", "localize(\"NOTIFICATION_MISSION\")"]
+                        -   class: "UIControl"
+                            name: "CaptionQuestProgress"
+                            input: false
+                            classes: "t-caption regular color=white-wild-sand-70-text"
+                            components:
+                                UITextComponent:
+                                    multiline: "MULTILINE_ENABLED"
+                                    fitting: "FITTING_POINTS"
+                                    align: ["LEFT", "VCENTER"]
+                                    useRtlAlign: "USE_BY_SYSTEM"
+                                Anchor:
+                                    vCenterAnchorEnabled: true
+                                SizePolicy:
+                                    horizontalPolicy: "Formula"
+                                    horizontalFormula: "min(parent, content)"
+                                    verticalPolicy: "PercentOfContent"
+                                    verticalMax: 40.000000
+                                StyleSheet:
+                                    styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+                            bindings:
+                            - ["UITextComponent.text", "questTitle"]
+                    -   class: "UIControl"
+                        name: "Right"
+                        size: [32.000000, 32.000000]
+                        input: false
+                        components:
+                            Anchor:
+                                vCenterAnchorEnabled: true
+                            LinearLayout:
+                                orientation: "TopDown"
+                                spacing: 8.000000
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfMaxChild"
+                                verticalPolicy: "PercentOfChildrenSum"
+                        children:
+                        -   class: "UIControl"
+                            name: "ProgressBar"
+                            size: [32.000000, 32.000000]
+                            input: false
+                            classes: "white-wild-sand-15-bg"
+                            components:
+                                Background: {}
+                                Anchor:
+                                    hCenterAnchorEnabled: true
+                                SizePolicy:
+                                    horizontalPolicy: "FixedSize"
+                                    verticalPolicy: "FixedSize"
+                                    verticalValue: 4.000000
+                                StyleSheet:
+                                    styles: "~res:/UI/Screens3/Color.style.yaml"
+                            children:
+                            -   class: "UIControl"
+                                name: "Progress"
+                                input: false
+                                classes: "yellow-chalky-bg"
+                                components:
+                                    Background:
+                                        drawType: "DRAW_FILL"
+                                    Anchor:
+                                        leftAnchorEnabled: true
+                                        bottomAnchorEnabled: true
+                                    IgnoreLayout: {}
+                                    SizePolicy:
+                                        horizontalPolicy: "PercentOfParent"
+                                        verticalPolicy: "FixedSize"
+                                        verticalValue: 4.000000
+                                    StyleSheet:
+                                        styles: "~res:/UI/Screens3/Color.style.yaml"
+                                bindings:
+                                - ["SizePolicy.horizontalValue", "progressPercent"]
+                        -   class: "UIControl"
+                            name: "ProgressContainer"
+                            input: false
+                            components:
+                                Anchor:
+                                    hCenterAnchorEnabled: true
+                                    vCenterAnchorEnabled: true
+                                LinearLayout:
+                                    enabled: true
+                                    spacing: 4.000000
+                                SizePolicy:
+                                    horizontalPolicy: "PercentOfChildrenSum"
+                                    verticalPolicy: "PercentOfMaxChild"
+                            children:
+                            -   class: "UIControl"
+                                name: "DailyProgressAmount"
+                                input: false
+                                classes: "white-text t-overline bold"
+                                components:
+                                    UITextComponent:
+                                        colorInheritType: "COLOR_IGNORE_PARENT"
+                                    SizePolicy:
+                                        horizontalPolicy: "PercentOfContent"
+                                        verticalPolicy: "PercentOfContent"
+                                    StyleSheet:
+                                        styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+                                bindings:
+                                - ["UITextComponent.text", "currentProgress"]
+                            -   class: "UIControl"
+                                name: "DailySeparator"
+                                input: false
+                                classes: "white-text t-overline bold"
+                                components:
+                                    UITextComponent:
+                                        text: "/"
+                                        colorInheritType: "COLOR_IGNORE_PARENT"
+                                    SizePolicy:
+                                        horizontalPolicy: "PercentOfContent"
+                                        verticalPolicy: "PercentOfContent"
+                                    StyleSheet:
+                                        styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+                            -   class: "UIControl"
+                                name: "DailyProgressTotal"
+                                input: false
+                                classes: "white-text t-overline bold"
+                                components:
+                                    UITextComponent:
+                                        colorInheritType: "COLOR_IGNORE_PARENT"
+                                    SizePolicy:
+                                        horizontalPolicy: "PercentOfContent"
+                                        verticalPolicy: "PercentOfContent"
+                                    StyleSheet:
+                                        styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+                                bindings:
+                                - ["UITextComponent.text", "totalProgress"]
+            -   class: "UIControl"
+                name: "ContentQuestCompleted"
+                input: false
+                components:
+                    LinearLayout:
+                        padding: "16"
+                        spacing: 16.000000
+                        useRtl: false
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfMaxChild"
+                bindings:
+                - ["visible", "notificationType == eNotificationType.QUEST_COMPLETED"]
+                children:
+                -   prototype: "Notification/icon"
+                    name: "iconMark"
+                    components:
+                        Background:
+                            sprite: "~res:/Gfx/Lobby/icons/icon_complete_s"
+                        SizePolicy:
+                            horizontalPolicy: "FixedSize"
+                            horizontalValue: 24.000000
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 24.000000
+                        StyleSheet:
+                            styles: "~res:/UI/Screens/Lobby/Notifications/Popups/Styles/TaskJournalNotificationStyles.yaml"
+                -   class: "UIControl"
+                    name: "QuestCompletedContainer"
+                    position: [56.000000, 0.000000]
+                    size: [32.000000, 32.000000]
+                    input: false
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfMaxChild"
+                    children:
+                    -   class: "UIControl"
+                        name: "OneQuestCompleted"
+                        size: [32.000000, 32.000000]
+                        input: false
+                        components:
+                            Anchor:
+                                vCenterAnchorEnabled: true
+                            LinearLayout:
+                                orientation: "TopDown"
+                                padding: "10"
+                                dynamicPadding: true
+                                useRtl: true
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                verticalPolicy: "PercentOfChildrenSum"
+                                verticalMin: 64.000000
+                                verticalMax: 80.000000
+                        bindings:
+                        - ["visible", "completedQuestAmount == 1"]
+                        children:
+                        -   class: "UIControl"
+                            name: "Caption"
+                            input: false
+                            components:
+                                UITextComponent:
+                                    colorInheritType: "COLOR_IGNORE_PARENT"
+                                    align: ["LEFT", "VCENTER"]
+                                    useRtlAlign: "USE_BY_SYSTEM"
+                                Anchor:
+                                    leftAnchorEnabled: true
+                                SizePolicy:
+                                    horizontalPolicy: "PercentOfParent"
+                                    verticalPolicy: "PercentOfContent"
+                                StyleSheet:
+                                    styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+                            bindings:
+                            - ["classes", "captionClass"]
+                            - ["UITextComponent.text", "localize(\"NOTIFICATION_MISSION_COMPLETED\")"]
+                        -   class: "UIControl"
+                            name: "QuestTitle"
+                            size: [32.000000, 32.000000]
+                            input: false
+                            classes: "t-caption regular color=white-wild-sand-70-text"
+                            components:
+                                UITextComponent:
+                                    multiline: "MULTILINE_ENABLED"
+                                    fitting: "FITTING_POINTS"
+                                    align: ["LEFT", "VCENTER"]
+                                    useRtlAlign: "USE_BY_SYSTEM"
+                                Anchor:
+                                    leftAnchorEnabled: true
+                                    vCenterAnchorEnabled: true
+                                SizePolicy:
+                                    horizontalPolicy: "PercentOfParent"
+                                    verticalPolicy: "PercentOfContent"
+                                    verticalMax: 40.000000
+                                StyleSheet:
+                                    styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+                            bindings:
+                            - ["UITextComponent.text", "questTitle"]
+                    -   class: "UIControl"
+                        name: "SomeQuestCompleted"
+                        size: [32.000000, 32.000000]
+                        input: false
+                        components:
+                            Anchor:
+                                vCenterAnchorEnabled: true
+                            LinearLayout:
+                                orientation: "TopDown"
+                                dynamicPadding: true
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                verticalPolicy: "PercentOfChildrenSum"
+                                verticalMin: 64.000000
+                                verticalMax: 80.000000
+                        children:
+                        -   prototype: "RichText/RichText"
+                            name: "Caption"
+                            size: [264.000000, 32.000000]
+                            components:
+                                RichContent: {}
+                                Anchor:
+                                    vCenterAnchorEnabled: true
+                                SizePolicy:
+                                    horizontalPolicy: "PercentOfParent"
+                                FlowLayout:
+                                    useRtl: true
+                                StyleSheet:
+                                    inheritsStylesFromParent: false
+                                    styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+                            bindings:
+                            - ["visible", "completedQuestAmount > 1"]
+                            - ["RichContent.text", "completedQuestAmountString"]
+                            - ["RichContent.baseClasses", "captionClass"]
+                        -   class: "UIControl"
+                            name: "Hint"
+                            size: [32.000000, 32.000000]
+                            input: false
+                            classes: "t-caption regular color=white-wild-sand-70-text"
+                            components:
+                                UITextComponent:
+                                    fitting: "FITTING_POINTS"
+                                    align: ["LEFT", "VCENTER"]
+                                    useRtlAlign: "USE_BY_SYSTEM"
+                                Anchor:
+                                    leftAnchorEnabled: true
+                                    vCenterAnchorEnabled: true
+                                SizePolicy:
+                                    horizontalPolicy: "PercentOfParent"
+                                    verticalPolicy: "PercentOfContent"
+                                StyleSheet:
+                                    styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+                            bindings:
+                            - ["visible", "showHint"]
+                            - ["UITextComponent.text", "localize(\"NOTIFICATION_GET_REWARD\")"]
+                -   class: "UIControl"
+                    name: "ChestProgressContainer"
+                    input: false
+                    components:
+                        Anchor:
+                            rightAnchorEnabled: true
+                            vCenterAnchorEnabled: true
+                            vCenterAnchor: -2.000000
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfMaxChild"
+                            verticalPolicy: "PercentOfChildrenSum"
+                    bindings:
+                    - ["visible", "hasChestProgress"]
+                    children:
+                    -   class: "UIControl"
+                        name: "ChestImage"
+                        input: false
+                        components:
+                            Background:
+                                drawType: "DRAW_SCALE_PROPORTIONAL"
+                                frame: 2
+                            Anchor:
+                                hCenterAnchorEnabled: true
+                                bottomAnchorEnabled: true
+                            SizePolicy:
+                                horizontalPolicy: "FixedSize"
+                                horizontalValue: 80.000000
+                                verticalPolicy: "FixedSize"
+                                verticalValue: 56.000000
+                            StyleSheet:
+                                styles: "~res:/UI/Screens/Lobby/Notifications/Popups/Styles/TaskJournalNotificationStyles.yaml"
+                        bindings:
+                        - ["classes", "chestStyleName"]
+                    -   class: "UIControl"
+                        name: "ProgressBar"
+                        size: [32.000000, 32.000000]
+                        input: false
+                        classes: "white-wild-sand-15-bg"
+                        components:
+                            Background: {}
+                            Anchor:
+                                hCenterAnchorEnabled: true
+                                bottomAnchorEnabled: true
+                                bottomAnchor: 8.000000
+                            SizePolicy:
+                                horizontalPolicy: "FixedSize"
+                                verticalPolicy: "FixedSize"
+                                verticalValue: 4.000000
+                            StyleSheet:
+                                styles: "~res:/UI/Screens3/Color.style.yaml"
+                        bindings:
+                        - ["visible", "not canOpenChest"]
+                        children:
+                        -   class: "UIControl"
+                            name: "Progress"
+                            input: false
+                            classes: "yellow-chalky-bg"
+                            components:
+                                Background: {}
+                                Anchor:
+                                    leftAnchorEnabled: true
+                                    bottomAnchorEnabled: true
+                                IgnoreLayout: {}
+                                SizePolicy:
+                                    horizontalPolicy: "PercentOfParent"
+                                    verticalPolicy: "FixedSize"
+                                    verticalValue: 4.000000
+                                StyleSheet:
+                                    styles: "~res:/UI/Screens3/Color.style.yaml"
+                            bindings:
+                            - ["SizePolicy.horizontalValue", "progressPercent"]
+                    -   class: "UIControl"
+                        name: "CheckMarkContainer"
+                        size: [32.000000, 32.000000]
+                        input: false
+                        components:
+                            Anchor:
+                                rightAnchorEnabled: true
+                                bottomAnchorEnabled: true
+                                bottomAnchor: 4.000000
+                            IgnoreLayout: {}
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfFirstChild"
+                                verticalPolicy: "PercentOfFirstChild"
+                        bindings:
+                        - ["visible", "canOpenChest"]
+                        children:
+                        -   prototype: "CheckMark/CheckMark"
+                            name: "CheckMark"
+                            components:
+                                SizePolicy: {}
+                            bindings:
+                            - ["visible", "true"]
+                            - ["SizePolicy.horizontalValue", "size"]
+                            - ["SizePolicy.verticalValue", "size"]
+            -   prototype: "NotificationButton/NotificationButton"
+                name: "GoToTaskJournal"
+                components:
+                    UIInputEventComponent:
+                        onTouchUpInside: "GO_TO_TASK_JOURNAL"
+                        onTouchUpInsideData: "isClanNotification"
+                bindings:
+                - ["visible", "not canOpenChest"]
+            -   class: "UIControl"
+                name: "GetAwardContainer"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfMaxChild"
+                        verticalPolicy: "PercentOfParent"
+                bindings:
+                - ["visible", "canOpenChest"]
+                children:
+                -   prototype: "NotificationButtonWithText/NotificationButtonWithText"
+                    name: "GetAward"
+                    components:
+                        UIInputEventComponent:
+                            onTouchUpInside: "GO_TO_TASK_JOURNAL"
+                        UIDataParamsComponent:
+                            args:
+                                "text": "localize(\"missionJournal/getReward/button\")"

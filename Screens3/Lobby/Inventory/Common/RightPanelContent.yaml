@@ -1,0 +1,16 @@
+Header:
+    version: "79"
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Inventory/Common/RightPanelHeader.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "RightPanelContent"
+    size: [308.000000, 312.000000]
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+            padding: "16;32"
+            spacing: 24.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfChildrenSum"

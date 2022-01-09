@@ -1,0 +1,5 @@
+action CLOSE_SCREEN_IMPL
+{
+  PlaySound("GUI/buttons/close");
+  Event("CLOSE_SCREEN");
+}

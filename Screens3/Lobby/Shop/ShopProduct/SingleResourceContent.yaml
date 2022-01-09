@@ -1,0 +1,42 @@
+Header:
+    version: 134
+Prototypes:
+-   class: "UIControl"
+    name: "SingleResourceContent"
+    size: [240.000000, 47.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "FixedSize"
+            verticalValue: 47.000000
+        UIDataParamsComponent:
+            params:
+            - ["ResourceDetailed", "resource", "null", "{ }"]
+            - ["ShopProductBonus", "bonus", "null", "{ }"]
+            - ["bool", "forceFullValue", "true", "true"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["int", "quantity", "when isNull(bonus) -> resource.basic.quantity, resource.basic.quantity - bonus.amount"]
+    bindings:
+    - ["visible", "quantity > 0"]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                condition: "not isNull(resource.basic)"
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/CurrencyPrivate.yaml"
+                args:
+                    "currencySize": "eCurrencySize.HUGE_BOLD"
+                    "shortTime": "true"
+                    "forceFullValue": "forceFullValue"
+                    "type": "resource.type"
+                    "quantity": "quantity"

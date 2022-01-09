@@ -1,0 +1,54 @@
+Header:
+    version: 130
+Prototypes:
+-   class: "UIControl"
+    name: "Title"
+    input: false
+    components:
+        LinearLayout:
+            spacing: 16.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "PercentOfMaxChild"
+        UIDataParamsComponent:
+            params:
+            - ["ArtefactGrade", "grade", "ArtefactGrade.unknown", "ArtefactGrade.common"]
+            - ["string", "title", "\"\"", "\"Awesome name\""]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["bool", "hasGrade", "not (grade == ArtefactGrade.unknown)"]
+    children:
+    -   class: "UIControl"
+        name: "Name"
+        input: false
+        classes: "t-content-h4 regular color=white-wild-sand-text"
+        components:
+            UITextComponent:
+                colorInheritType: "COLOR_IGNORE_PARENT"
+                align: ["LEFT", "VCENTER"]
+            Anchor:
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+        bindings:
+        - ["UITextComponent.text", "localize(title)"]
+    -   class: "UIControl"
+        name: "Grade"
+        input: false
+        components:
+            Anchor:
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfMaxChild"
+            UIChildComponent0:
+                condition: "hasGrade"
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/GradesSmall.yaml"
+                args:
+                    "size": "eButtonSize.NORMAL"
+                    "grade": "grade"
+        bindings:
+        - ["visible", "hasGrade"]

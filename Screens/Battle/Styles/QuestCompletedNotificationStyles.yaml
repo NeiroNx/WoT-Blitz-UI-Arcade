@@ -1,0 +1,39 @@
+Header:
+    version: 133
+StyleSheets:
+-   selectors:
+    - ".play-icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/task-journal/icon_play-battle_l"
+-   selectors:
+    - ".xp-icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/task-journal/icon_exp_l"
+-   selectors:
+    - ".kill-icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/task-journal/icon_destroyed-tank_l"
+-   selectors:
+    - ".squad-icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/task-journal/icon_squad_l"
+-   selectors:
+    - ".damage-icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/task-journal/icon_damage_l"
+-   selectors:
+    - ".supremacy-icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/task-journal/icon_supremacy_l"
+-   selectors:
+    - ".halloween-icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/task-journal/icon_halloween_l"
+-   selectors:
+    - ".use-gold-ammo"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/task-journal/icon_change_ammunition_l"
+-   selectors:
+    - ".use-consumable"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/task-journal/icon_consumable_repair-kit_l"

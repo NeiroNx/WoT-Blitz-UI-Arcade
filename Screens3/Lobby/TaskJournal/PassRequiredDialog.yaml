@@ -1,0 +1,39 @@
+Header:
+    version: "102"
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/Dialog/TextDialog.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "PassRequiredDialog"
+    size: [1024.000000, 700.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["ResourceModel", "resource", "null", "{ }"]
+            events:
+            - "CANCEL_CLICKED"
+            - "OK_CLICKED"
+        UIDataLocalsComponent:
+            locals:
+            - ["string", "cancelButtonText", "localize(\"#common:DialogButton/Cancel\")"]
+            - ["string", "okButtonText", "localize(\"BattlePass/BuyPaidBattlePass/Button\")"]
+    children:
+    -   prototype: "TextDialog/TextDialog"
+        name: "TextDialog"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "accentButtonType": "eButtonType.ALTERNATIVE"
+                    "type": "eDialogType.CHOOSE"
+                    "header": "\"\""
+                    "headerImage": "\"\""
+                    "accentButton": "okButtonText"
+                    "optionalButton": "cancelButtonText"
+                    "contentControl": "control(\"~res:/UI/Screens3/Lobby/TaskJournal/PassRequiredDialogContent.yaml\", { \"resource\" = resource; }, [ ])"
+                eventActions:
+                - ["ACCENT_CLICKED", "OK_CLICKED", ""]
+                - ["OPTIONAL_CLICKED", "CANCEL_CLICKED", ""]

@@ -1,0 +1,9 @@
+Header:
+    version: "83"
+StyleSheets:
+-   selectors:
+    - ".subscription-stage-index"
+    properties:
+        text-fontSize: 148.000000
+        text-ascendScale: 0.460000
+        text-descendScale: 0.200000

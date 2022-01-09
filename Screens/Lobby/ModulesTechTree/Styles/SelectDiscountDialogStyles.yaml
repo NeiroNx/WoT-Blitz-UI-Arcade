@@ -1,0 +1,21 @@
+Header:
+    version: "48"
+StyleSheets:
+-   selector: ".cell #Selection"
+    properties:
+        visible: false
+-   selector: ".cell:selected #Selection"
+    properties:
+        visible: true
+-   selector: ".cell ? #Price #Silver, .cell ? #Price #Gold, .cell ? #Price #Exp"
+    properties:
+        visible: false
+-   selector: ".cell.silver ? #Price #Silver"
+    properties:
+        visible: true
+-   selector: ".cell.gold ? #Price #Gold"
+    properties:
+        visible: true
+-   selector: ".cell.exp ? #Price #Exp"
+    properties:
+        visible: true

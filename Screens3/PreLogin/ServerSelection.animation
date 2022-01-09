@@ -1,0 +1,61 @@
+animation ScanerAnimation
+{
+	sequence
+	{
+		parallel
+		{
+			ChangeProperty("**/Bad","SizePolicy", "verticalValue", 0, 0);
+			ChangeProperty("**/Medium","SizePolicy", "verticalValue", 0, 0);
+			ChangeProperty("**/Good","SizePolicy", "verticalValue", 0, 0);
+			ChangeProperty("**/Perfect","SizePolicy", "verticalValue", 0, 0);
+		}
+
+		ChangeProperty("**/Bad","SizePolicy", "verticalValue", 8, 0.04, SINE_OUT);
+		ChangeProperty("**/Medium","SizePolicy", "verticalValue", 16, 0.08, SINE_OUT);
+		ChangeProperty("**/Good","SizePolicy", "verticalValue", 24, 0.12, SINE_OUT);
+		ChangeProperty("**/Perfect","SizePolicy", "verticalValue", 32, 0.16, SINE_OUT);
+	}
+
+	repeat
+	{
+		parallel
+		{
+			MoveToControl("**/ScanerLineBottom", "**/Bottom", time=12, interpolation=EASE_IN_EASE_OUT);
+			sequence
+			{	
+				Opacity("**/ScanerLineBottom", opacity=0.2, time=6.0, interpolation=EASE_IN_EASE_OUT);
+				Opacity("**/ScanerLineBottom", opacity=0, time=6.0, interpolation=EASE_IN_EASE_OUT);
+			}
+
+			MoveToControl("**/ScanerLineTop", "**/Top", time=12, interpolation=EASE_IN_EASE_OUT);
+			sequence
+			{
+				Opacity("**/ScanerLineTop", opacity=0.2, time=6.0, interpolation=EASE_IN_EASE_OUT);
+				Opacity("**/ScanerLineTop", opacity=0, time=6.0, interpolation=EASE_IN_EASE_OUT);
+			}
+
+			MoveToControl("**/ScanerLineRight", "**/Right", time=12, interpolation=EASE_IN_EASE_OUT);
+			sequence
+			{
+				Opacity("**/ScanerLineRight", opacity=0.2, time=6.0, interpolation=EASE_IN_EASE_OUT);
+				Opacity("**/ScanerLineRight", opacity=0, time=6.0, interpolation=EASE_IN_EASE_OUT);
+			}
+
+			MoveToControl("**/ScanerLineLeft", "**/Left", time=12, interpolation=EASE_IN_EASE_OUT);
+			sequence
+			{
+				Opacity("**/ScanerLineLeft", opacity=0.2, time=6.0, interpolation=EASE_IN_EASE_OUT);
+				Opacity("**/ScanerLineLeft", opacity=0, time=6.0, interpolation=EASE_IN_EASE_OUT);
+			}
+
+			sequence
+			{
+				Wait(4);
+				Opacity("**/Grid", opacity=0.36, time=1, interpolation=EASE_IN_EASE_OUT);
+				Opacity("**/Grid", opacity=0.12, time=1, interpolation=EASE_IN_EASE_OUT);
+				Wait(6);
+			}
+		}
+		Wait(2);
+	}
+}

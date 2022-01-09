@@ -1,0 +1,71 @@
+Header:
+    version: 138
+ImportedPackages:
+- "~res:/UI/Screens/Common/PopupMenu.yaml"
+Prototypes:
+-   prototype: "PopupMenu/PopupMenu"
+    name: "PopupMenu"
+    size: [400.000000, 180.000000]
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+        SizePolicy:
+            verticalPolicy: "PercentOfChildrenSum"
+        UIAttachLayoutSlaveComponent:
+            attachId: "PrebattleRoomSpectator"
+            masterAlign: "TopCenter"
+            slaveAlign: "BottomCenter"
+            additionalOffset: [0.000000, -14.000000]
+        StyleSheet:
+            styles: "~res:/UI/Screens/Lobby/Training/PrebattleRoomSpectatorPopup.yaml;~res:/UI/Screens/Lobby/Training/Styles/PrebattleRoomSpectatorPopupStyles.yaml;~res:/UI/Screens/Fonts.yaml"
+    children:
+    -   path: "Arrow"
+        components:
+            Background:
+                spriteModification: ["FLIP_VERTICAL"]
+            Anchor:
+                hCenterAnchor: 0.000000
+                topAnchorEnabled: false
+                topAnchor: 0.000000
+                bottomAnchorEnabled: true
+                bottomAnchor: -17.000000
+            IgnoreLayout: {}
+    -   prototype: "PopupMenu/ActionsPopupButton"
+        name: "ObserveAllies"
+        position: [-62.000000, 38.000000]
+        components:
+            UIInputEventComponent:
+                onTouchUpInside: "OBSERVE_ALLIES"
+        children:
+        -   path: "Text"
+            components:
+                UITextComponent:
+                    text: "#training_rooms:RoomScreen/Spectator/WatchAllies"
+    -   prototype: "PopupMenu/ActionsPopupButton"
+        name: "ObserveBoth"
+        position: [15.000000, 94.000000]
+        components:
+            UIInputEventComponent:
+                onTouchUpInside: "OBSERVE_BOTH"
+        children:
+        -   path: "Text"
+            components:
+                UITextComponent:
+                    text: "#training_rooms:RoomScreen/Spectator/WatchBothTeams"
+        -   prototype: "PopupMenu/SeparateLine"
+            name: "SeparateLine"
+            position: [30.000000, 31.000000]
+    -   prototype: "PopupMenu/ActionsPopupButton"
+        name: "StopObserve"
+        position: [14.000000, -18.000000]
+        components:
+            UIInputEventComponent:
+                onTouchUpInside: "STOP_OBSERVE"
+        children:
+        -   path: "Text"
+            components:
+                UITextComponent:
+                    text: "#training_rooms:RoomScreen/Spectator/Unwatch"
+        -   prototype: "PopupMenu/SeparateLine"
+            name: "SeparateLine"
+            position: [33.000000, 56.000000]

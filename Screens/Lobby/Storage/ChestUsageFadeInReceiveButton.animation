@@ -1,0 +1,7 @@
+animation FadeInReceiveButton {
+	sequence {
+		Opacity("**/ReceiveButton/TapArea", opacity=0, time=0.0, interpolation=EASE_IN_EASE_OUT);
+		ChangeProperty("**/ReceiveButton", "", "visible", true);
+		Opacity("**/ReceiveButton/TapArea", opacity=1, time=0.6, interpolation=EASE_IN_EASE_OUT);
+	}
+};

@@ -1,0 +1,9 @@
+animation GlowPulsation
+{
+    Opacity(".", opacity=0.0, time=0.0, interpolation=EASE_IN_EASE_OUT);
+    repeat
+	{
+		Opacity(".", opacity=0.3, time=0.5, interpolation=EASE_IN_EASE_OUT);
+		Opacity(".", opacity=0.0, time=0.5, interpolation=EASE_IN_EASE_OUT);
+	}
+}

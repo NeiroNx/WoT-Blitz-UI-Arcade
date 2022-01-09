@@ -1,0 +1,147 @@
+Header:
+    version: "93"
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/Selection.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "OptionalDevicesSlot"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 152.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 80.000000
+        UIDataParamsComponent:
+            params:
+            - ["int", "selectedDescr", "0", "0"]
+            - ["bool", "isReadyToUnlock", "false", "false"]
+            - ["eOptionalDeviceSlotState", "state", "eOptionalDeviceSlotState.LOCKED", "eOptionalDeviceSlotState.LOCKED"]
+            - ["SlotDevices", "slot", "null", "{ }"]
+        UIDataLocalsComponent:
+            locals:
+            - ["bool", "isLocked", "(not isReadyToUnlock) and state == eOptionalDeviceSlotState.LOCKED"]
+            - ["bool", "isRightSelected", "selectedDescr == slot.devices[1].compactDescr"]
+            - ["bool", "isLeftSelected", "selectedDescr == slot.devices[0].compactDescr"]
+            - ["bool", "isSelected", "isLeftSelected or isRightSelected"]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            UIOpacityComponent: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        bindings:
+        - ["UIOpacityComponent.opacity", "when isLocked -> 0.300000, 1"]
+        children:
+        -   class: "UIControl"
+            name: "Background"
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_FILL"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+            bindings:
+            - ["classes", "when (not isLocked and isSelected) -> \"white-wild-sand-15-bg\", \"black-35-bg\""]
+        -   class: "UIControl"
+            name: "Items"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                LinearLayout:
+                    spacing: 8.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   class: "UIControl"
+                name: "Left"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        verticalPolicy: "PercentOfChildrenSum"
+                    UIChildComponent0:
+                        prototypePath: "~res:/UI/Screens3/Lobby/Inventory/OptionalDevices/OptionalDevicesItem.yaml"
+                        args:
+                            "isLocked": "isLocked"
+                            "device": "slot.devices[0]"
+                            "isInstalled": "state == eOptionalDeviceSlotState.FIRST_INSTALLED"
+                            "isUnlocked": "state != eOptionalDeviceSlotState.LOCKED"
+                            "isSelected": "isLeftSelected"
+                            "isRight": "false"
+            -   class: "UIControl"
+                name: "Right"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        verticalPolicy: "PercentOfChildrenSum"
+                    UIChildComponent0:
+                        prototypePath: "~res:/UI/Screens3/Lobby/Inventory/OptionalDevices/OptionalDevicesItem.yaml"
+                        args:
+                            "isLocked": "isLocked"
+                            "device": "slot.devices[1]"
+                            "isSelected": "isRightSelected"
+                            "isInstalled": "state == eOptionalDeviceSlotState.SECOND_INSTALLED"
+                            "isUnlocked": "state != eOptionalDeviceSlotState.LOCKED"
+                            "isRight": "true"
+    -   class: "UIControl"
+        name: "Locked"
+        input: false
+        components:
+            Anchor:
+                enabled: true
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfMaxChild"
+        bindings:
+        - ["visible", "isLocked"]
+        children:
+        -   class: "UIControl"
+            name: "Background"
+            input: false
+            classes: "black-15-bg"
+            components:
+                Background: {}
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 32.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 32.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "Icon"
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_ALIGNED"
+                    sprite: "~res:/Gfx/Lobby/icons/icon_lock"
+                Anchor:
+                    enabled: true
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                    vCenterAnchor: 1.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"

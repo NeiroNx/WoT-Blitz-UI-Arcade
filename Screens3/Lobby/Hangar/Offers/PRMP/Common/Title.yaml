@@ -1,0 +1,24 @@
+Header:
+    version: "96"
+Prototypes:
+-   class: "UIControl"
+    name: "OfferTitle"
+    size: [338.000000, 112.000000]
+    input: false
+    components:
+        RichContent:
+            baseClasses: "t-content-h1 bold white-wild-sand-text"
+        RichContentAliases0:
+            aliases: "fs-50-bold,<span class=\"t-content-h1 bold white-wild-sand-text\" />;fs-50-regular-op-70,<span class=\"t-content-h1 regular white-wild-sand-70-text\" />"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfChildrenSum"
+        FlowLayout:
+            hSpacing: 14.000000
+        UIDataParamsComponent:
+            params:
+            - ["string", "title", "\"OFFER_TITLE\"", "\"Matilda Black Prince\""]
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Font.style.yaml"
+    bindings:
+    - ["RichContent.text", "title"]

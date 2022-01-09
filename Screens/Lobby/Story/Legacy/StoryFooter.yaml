@@ -1,0 +1,42 @@
+Header:
+    version: "85"
+ImportedPackages:
+- "~res:/UI/Screens/Common/StyledInfoButton.yaml"
+- "~res:/UI/Screens/Common/StyledButton.yaml"
+Controls:
+-   class: "UIControl"
+    name: "StoryFooter"
+    size: [960.000000, 0.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfFirstChild"
+        UIDataParamsComponent:
+            params:
+            - ["Story", "story", "null", "{ }"]
+            - ["StatsDataModel", "statsData", "null", "{ }"]
+            - ["StoryStepModel", "selectedStep", "null", "{ }"]
+            events:
+            - "FOOTER_COMPLETE_BUTTON_PRESSED"
+            - "FOOTER_INFO_BUTTON_PRESSED"
+        UIDataLocalsComponent:
+            locals:
+            - ["string", "footerPackage", "when isNull(selectedStep) -> \"~res:/UI/Screens/Lobby/Story/Legacy/StoryFooterNotSelected.yaml\", \"~res:/UI/Screens/Lobby/Story/Legacy/StoryFooterSelected.yaml\""]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent:
+                control: "footerPackage"
+                args:
+                    "story": "story"
+                    "statsData": "statsData"
+                    "selectedStep": "selectedStep"
+                eventActions:
+                - ["FOOTER_COMPLETE_BUTTON_PRESSED", "FOOTER_COMPLETE_BUTTON_PRESSED", "_event"]
+                - ["FOOTER_INFO_BUTTON_PRESSED", "FOOTER_INFO_BUTTON_PRESSED", "_event"]

@@ -1,0 +1,39 @@
+Header:
+    version: "111"
+ImportedPackages:
+- "~res:/UI/Screens3/Common/PopupMenuWithRichText.yaml"
+Controls:
+-   class: "UIControl"
+    name: "CamoHint"
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens3/Lobby/Inventory/CamoUnavailableHint.animation"
+        Anchor:
+            leftAnchorEnabled: true
+            rightAnchorEnabled: true
+            topAnchorEnabled: true
+            bottomAnchorEnabled: true
+        UIDataParamsComponent:
+            params:
+            - ["bool", "isBottom", "true", "false"]
+            - ["bool", "visible", "true", "true"]
+            - ["string", "masterId", "\"\"", "\"\""]
+            events:
+            - "SET_SKIP_NOT_TUTOR_FLAG_EVENT"
+    bindings:
+    - ["visible", "visible"]
+    children:
+    -   prototype: "PopupMenuWithRichText/Slave"
+        name: "Slave"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "offset": "0"
+                    "buttonVisible": "false"
+                    "isAlignLeft": "true"
+                    "title": "\"\""
+                    "text": "localize(\"#hangar_tutorial:customization/CustomizationUnavailable/hint/descr\")"
+                    "colorClass": "\"color=white-wild-sand-text\""
+                    "slaveAlign": "when isBottom -> ePositionAlign.Bottom, ePositionAlign.Top"
+                    "masterId": "masterId"

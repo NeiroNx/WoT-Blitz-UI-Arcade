@@ -1,0 +1,24 @@
+action ACTION_PRESSED
+{
+	if(modulesModel.currentAction != eModulesAction.NONE and modulesModel.currentAction != eModulesAction.SHOW_TANK)
+	{
+	    Event("MODULES_MAIN_ACTION");
+	}
+}
+
+action SHOW_MODULES
+{
+	if(modulesModel.selectedNode.contentType == eModuleNodeContentType.VEHICLE and not account.tutorialData.isTutorialActive)
+	{
+		if(modulesModel.selectedCompactDescr != modulesModel.currentVehicle.compactDescr)
+		{
+			Event("SHOW_TANK_MODULES", arg1=modulesModel.selectedCompactDescr);
+		}
+	}
+}
+
+action ITEM_SELECTED_EVENT(int descr)
+{
+	PlaySound(sound="GUI/buttons/choose");
+	Event("ITEM_SELECTED", arg1=descr);
+}

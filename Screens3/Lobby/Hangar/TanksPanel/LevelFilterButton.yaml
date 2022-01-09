@@ -1,0 +1,33 @@
+Header:
+    version: "108"
+Prototypes:
+-   class: "UIControl"
+    name: "LevelFilterButton"
+    size: [151.000000, 48.000000]
+    input: false
+    components:
+        Anchor:
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 56.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 56.000000
+        UIDataParamsComponent:
+            params:
+            - ["int", "level", "1", "2"]
+            - ["bool", "active", "false", "true"]
+            - ["bool", "enabled", "true", "true"]
+            events:
+            - "ON_CLICK_BUTTON"
+        UIDataLocalControlComponent0:
+            name: "LevelIcon"
+            prototypePath: "~res:/UI/Screens3/Lobby/Hangar/TanksPanel/IconContent.yaml"
+            args:
+                "iconPath": "\"~res:/Gfx/Lobby/icons/icon_level_\" + str(level)"
+        UIChildComponent0:
+            prototypePath: "~res:/UI/Screens3/Lobby/Hangar/TanksPanel/FilterButton.yaml"
+            args:
+                "content": "LevelIcon"
+                "active": "active"
+                "enabled": "enabled"

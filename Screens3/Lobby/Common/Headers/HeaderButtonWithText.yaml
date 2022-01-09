@@ -1,0 +1,193 @@
+Header:
+    version: 120
+Prototypes:
+-   class: "UIControl"
+    name: "HeaderButton"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "Formula"
+            horizontalFormula: "firstChild - tapAreaOffset"
+            verticalPolicy: "Formula"
+            verticalFormula: "firstChild - tapAreaOffset"
+        UIDataParamsComponent:
+            params:
+            - ["bool", "badgeIsVisible", "false", "true"]
+            - ["string", "text", "\"\"", "\"button test\""]
+            - ["eButtonSound", "sound", "eButtonSound.UNKNOWN", "eButtonSound.OK"]
+            - ["string", "iconPath", "\"\"", "\"~res:/Gfx/Lobby/icons/icon_chevron_l\""]
+            - ["bool", "locked", "false", "false"]
+            events:
+            - "ON_CLICK_BUTTON"
+        UIDataLocalBindingsComponent:
+            data:
+            - ["float", "tapAreaOffset", "when isTouchScreen -> 16.000000, 0.000000"]
+            - ["string", "soundStyle", "when locked -> \"\", sound == eButtonSound.OPEN -> \"button-open-sound\", sound == eButtonSound.OK -> \"button-ok-sound\", sound == eButtonSound.CANCEL -> \"button-cancel-sound\", sound == eButtonSound.SELL -> \"button-sell-sound\", sound == eButtonSound.BUY -> \"button-buy-sound\", sound == eButtonSound.CLOSE -> \"button-close-sound\", \"\""]
+    children:
+    -   class: "UIControl"
+        name: "TapArea"
+        position: [0.000000, 0.000000]
+        size: [56.000000, 32.000000]
+        input: true
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "firstChild + tapAreaOffset"
+                verticalPolicy: "Formula"
+                verticalFormula: "firstChild + tapAreaOffset"
+            UIInputEventComponent:
+                onTouchUpInside: "ON_CLICK_BUTTON"
+                blockDuplicatedEvents: true
+            Sound: {}
+            StyleSheet:
+                styles: "~res:/UI/Screens3/ButtonSound.style.yaml"
+        bindings:
+        - ["classes", "\"button pressed-opacity long-element \" + soundStyle"]
+        children:
+        -   class: "UIControl"
+            name: "contentArea"
+            position: [79.000000, 24.000000]
+            size: [56.000000, 32.000000]
+            pivot: [0.500000, 0.500000]
+            input: false
+            classes: "content-area"
+            components:
+                UIOpacityComponent: {}
+                Anchor:
+                    enabled: true
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfLastChild"
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 32.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Common/Touch.style.yaml"
+            children:
+            -   class: "UIControl"
+                name: "Bg"
+                size: [32.000000, 32.000000]
+                input: false
+                classes: "white-wild-sand-15-bg"
+                components:
+                    Background: {}
+                    UIRoundedCornersComponent:
+                        radius: "4"
+                    IgnoreLayout: {}
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 32.000000
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+            -   class: "UIControl"
+                name: "Hover"
+                size: [32.000000, 32.000000]
+                input: false
+                classes: "button-fade white-wild-sand-10-bg"
+                components:
+                    Background: {}
+                    UIOpacityComponent: {}
+                    UIRoundedCornersComponent:
+                        radius: "4"
+                    IgnoreLayout: {}
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 32.000000
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/Common/Hover.style.yaml"
+            -   class: "UIControl"
+                name: "content"
+                size: [24.000000, 24.000000]
+                input: false
+                components:
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    LinearLayout:
+                        padding: "8; 4"
+                    SizePolicy:
+                        horizontalPolicy: "Formula"
+                        horizontalFormula: "min(childrenSum + linearLayoutLeadingPadding + linearLayoutTrailingPadding, 400)"
+                        verticalPolicy: "PercentOfMaxChild"
+                children:
+                -   class: "UIControl"
+                    name: "badge"
+                    position: [0.000000, 8.000000]
+                    size: [32.000000, 32.000000]
+                    input: false
+                    components:
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                            vCenterAnchor: 1.000000
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfMaxChild"
+                            verticalPolicy: "PercentOfMaxChild"
+                        UIChildComponent0:
+                            condition: "badgeIsVisible"
+                            prototypePath: "~res:/UI/Screens3/Lobby/Common/Badge.yaml"
+                            args:
+                                "type": "eBadgeType.EMPTY"
+                -   class: "UIControl"
+                    name: "spacer"
+                    size: [32.000000, 32.000000]
+                    input: false
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "FixedSize"
+                            horizontalValue: 8.000000
+                            verticalPolicy: "PercentOfParent"
+                    bindings:
+                    - ["visible", "badgeIsVisible"]
+                -   class: "UIControl"
+                    name: "text"
+                    position: [24.000000, 0.000000]
+                    input: false
+                    classes: "t-subtitle regular white-wild-sand-text"
+                    components:
+                        UITextComponent:
+                            fitting: "FITTING_POINTS"
+                            align: ["LEFT", "VCENTER"]
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "Formula"
+                            horizontalFormula: "when parent == 0 -> content, min(parentRest, content)"
+                            verticalPolicy: "PercentOfContent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Font.style.yaml"
+                    bindings:
+                    - ["UITextComponent.text", "text"]
+                -   class: "UIControl"
+                    name: "spacer_1"
+                    size: [32.000000, 32.000000]
+                    input: false
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "FixedSize"
+                            horizontalValue: 4.000000
+                            verticalPolicy: "PercentOfParent"
+                -   class: "UIControl"
+                    name: "Icon"
+                    position: [0.000000, 0.000000]
+                    size: [32.000000, 32.000000]
+                    pivot: [0.500000, 0.500000]
+                    angle: 90.000000
+                    input: false
+                    classes: "white-wild-sand-bg"
+                    components:
+                        Background:
+                            drawType: "DRAW_ALIGNED"
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfContent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Color.style.yaml"
+                    bindings:
+                    - ["Background.sprite", "iconPath"]

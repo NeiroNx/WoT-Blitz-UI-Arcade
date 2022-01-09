@@ -1,0 +1,21 @@
+Header:
+    version: 121
+Prototypes:
+-   class: "UIControl"
+    name: "XTimeLabel"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfFirstChild"
+            verticalPolicy: "PercentOfFirstChild"
+        UIDataParamsComponent:
+            params:
+            - ["OfferedProduct", "product", "null", "{ }"]
+        UIChildComponent0:
+            condition: "product.xTimed"
+            prototypePath: "~res:/UI/Screens3/Common/RemainingLabel.yaml"
+            args:
+                "bgStyle": "when product.availableAmount > 0 -> \"black-50-bg\", \"red-tamarillo-bg\""
+                "left": "product.availableAmount"
+                "isInfinite": "false"
+                "isShort": "false"

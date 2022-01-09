@@ -1,0 +1,14 @@
+animation ItemInitialization
+{
+  ChangeProperty("**/TitleWrapper/Title", "Anchor", "topAnchor", 0, 0, EASE_IN_EASE_OUT);
+  if (initializationAnimation != eInventoryPanelAnimation.kNoAnimation)
+  {
+    Opacity(".", opacity=0.0);
+    Move(".", y=(when initializationAnimation == eInventoryPanelAnimation.kFallDown -> -animationVerticalOffset, animationVerticalOffset));
+  }
+  else
+  {
+    Opacity(".", opacity=1.0);
+    Move(".", y=0.0);
+  }
+}

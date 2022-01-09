@@ -1,0 +1,98 @@
+Header:
+    version: 120
+Prototypes:
+-   class: "UIControl"
+    name: "NoClanContent"
+    size: [1000.000000, 32.000000]
+    input: false
+    components:
+        Anchor:
+            rightAnchorEnabled: true
+        IgnoreLayout: {}
+        SizePolicy:
+            horizontalPolicy: "Formula"
+            horizontalFormula: "max(parent - 88, 600)"
+            verticalPolicy: "PercentOfParent"
+        UIDataLocalVarsComponent:
+            data:
+            - ["string", "joinClanButtonString", "localize(\"clanMissions/joinClanScreen/button\")"]
+            - ["string", "joinClanString", "localize(\"clanMissions/joinClanScreen/title\")"]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+                vCenterAnchor: -24.000000
+            LinearLayout:
+                orientation: "TopDown"
+                spacing: 32.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                horizontalValue: 90.000000
+                verticalPolicy: "PercentOfChildrenSum"
+        children:
+        -   class: "UIControl"
+            name: "ImageAndText"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                LinearLayout:
+                    orientation: "TopDown"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfChildrenSum"
+            children:
+            -   class: "UIControl"
+                name: "Image"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    Background:
+                        drawType: "DRAW_SCALE_TO_RECT"
+                        sprite: "~res:/Gfx/Lobby/icons/icon_clans_l"
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 166.000000
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 166.000000
+            -   class: "UIControl"
+                name: "Text"
+                size: [32.000000, 32.000000]
+                input: false
+                classes: "t-content-h2 bold white-wild-sand-text"
+                components:
+                    UITextComponent:
+                        multiline: "MULTILINE_ENABLED"
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml"
+                bindings:
+                - ["UITextComponent.text", "joinClanString"]
+        -   class: "UIControl"
+            name: "JoinClanButton"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfChildrenSum"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens3/Lobby/Common/Button.yaml"
+                    args:
+                        "caption": "joinClanButtonString"
+                    eventActions:
+                    - ["ON_CLICK_BUTTON", "FIND_CLAN", ""]

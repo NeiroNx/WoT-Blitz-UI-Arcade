@@ -1,0 +1,47 @@
+Header:
+    version: 134
+Prototypes:
+-   class: "UIControl"
+    name: "Button"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfFirstChild"
+            verticalPolicy: "PercentOfFirstChild"
+        UIDataParamsComponent:
+            params:
+            - ["int64", "serverTime", "1561565973L", "1561565973L"]
+            - ["Story", "story", "null", "{ }"]
+            - ["int", "progressValue", "0", "50"]
+            - ["int", "progressMax", "0", "100"]
+            - ["bool", "isReady", "false", "false"]
+            events:
+            - "STORY_BUTTON_PRESSED(string storyName)"
+        UIDataLocalVarsComponent:
+            data:
+            - ["string", "icon", "story.settings.art[\"button\"]"]
+    children:
+    -   class: "UIControl"
+        name: "ContentHolder"
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                childType: "kPrototype"
+                prototypePath: "~res:/UI/Screens3/Lobby/Hangar/Story/StoryButtonWidget.yaml"
+                args:
+                    "serverTime": "serverTime"
+                    "story": "story"
+                    "progressValue": "progressValue"
+                    "progressMax": "progressMax"
+                    "imagePath": "icon"
+                    "showFx": "isReady"
+                    "isReady": "isReady"
+                    "showLevel": "false"
+                eventActions:
+                - ["ON_TOUCH", "STORY_BUTTON_PRESSED", "story.name"]

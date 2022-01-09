@@ -1,0 +1,17 @@
+animation _INIT(bool arg)
+{
+    ChangeData(inputDisabled, true);
+    Opacity("**/Additional", 0.0);
+	Opacity("**/Button", 0, 0);
+	ChangeProperty("**/Button", "Anchor", "vCenterAnchor", 50);
+
+	PlaySound("play_tut_2021_ui_hang_whoosh_common");
+	
+    Opacity("**/Additional", 1.0, 0.5);
+	parallel
+	{
+		Opacity("**/Button", 1.0, 0.4, EASE_OUT);
+		ChangeProperty("**/Button", "Anchor", "vCenterAnchor", 0, time = 0.4, interpolation=EASE_OUT);
+	}
+    ChangeData(inputDisabled, false);
+}

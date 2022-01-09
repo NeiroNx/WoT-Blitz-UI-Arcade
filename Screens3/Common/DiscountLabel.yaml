@@ -1,0 +1,70 @@
+Header:
+    version: 138
+Prototypes:
+-   class: "UIControl"
+    name: "DiscountLabel"
+    input: false
+    components:
+        Background: {}
+        SizePolicy:
+            horizontalFormula: "maxChild + 8"
+            verticalPolicy: "FixedSize"
+        UIDataParamsComponent:
+            params:
+            - ["eDiscountLabelSize", "size", "eDiscountLabelSize.Small", "eDiscountLabelSize.Big"]
+            - ["eDiscountReason", "discountReason", "eDiscountReason.ACTION", "eDiscountReason.ACTION"]
+            - ["float", "discount", "0.000000", "0.500000"]
+            - ["bool", "display", "true", "true"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["int", "height", "when size == eDiscountLabelSize.Big -> 40, size == eDiscountLabelSize.Medium -> 34, 24"]
+            - ["float", "value", "floor(discount * 100.000000)"]
+            - ["string", "discountStr", "when value > 0 -> percent(-value, 0), \"%\""]
+            - ["string", "fontStyle", "\"white-wild-sand-text bold not-localize \" + str(size, eDiscountLabelSize, \"fontSize\")"]
+        UIIdentifierComponent:
+            id: "discount_label"
+            params:
+            - ["string", "text", "discountStr"]
+            - ["float", "value", "value"]
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Color.style.yaml"
+    bindings:
+    - ["visible", "display"]
+    - ["classes", "when discountReason == eDiscountReason.CLAN_SUPPLY -> \"blue-elm-bg\", \"orange-tango-bg\""]
+    - ["SizePolicy.horizontalPolicy", "when size == eDiscountLabelSize.Small -> eSizePolicy.Formula, eSizePolicy.FixedSize"]
+    - ["SizePolicy.horizontalValue", "when size == eDiscountLabelSize.Medium -> 56, size == eDiscountLabelSize.Big -> 90, 100"]
+    - ["SizePolicy.verticalValue", "height"]
+    children:
+    -   class: "UIControl"
+        name: "Discount"
+        input: false
+        components:
+            UITextComponent: {}
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            UIIdentifierComponent:
+                id: "discount_value"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/Font.style.yaml"
+        bindings:
+        - ["classes", "fontStyle"]
+        - ["UITextComponent.text", "discountStr"]
+    -   class: "UIParticles"
+        name: "DiscountFX"
+        position: [45.000000, 20.000000]
+        size: [32.000000, 32.000000]
+        pivot: [0.500000, 0.500000]
+        input: false
+        effectPath: "~res:/3d/FX/UI/DiscountFX.sc2"
+        autoStart: true
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            ScalePolicy:
+                horizontalFormula: "parentSize.X / 90"
+                verticalFormula: "parentSize.Y / 40"

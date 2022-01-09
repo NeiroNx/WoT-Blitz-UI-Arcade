@@ -1,0 +1,33 @@
+Header:
+    version: "25"
+StyleSheets:
+-   selector: ".resource ? #Selection, .resource.marked-off ? #Mark"
+    properties:
+        visible: false
+-   selector: ".resource.have-badge-on ? #Badge"
+    properties:
+        visible: true
+-   selector: ".resource.have-badge-off ? #Badge"
+    properties:
+        visible: false
+-   selector: ".resource:selected ? #Selection, .resource.marked-on ? #Mark"
+    properties:
+        visible: true
+-   selector: ".resource.quantity-on ? #ItemCount"
+    properties:
+        visible: true
+-   selector: ".resource.quantity-off ? #ItemCount"
+    properties:
+        visible: false
+-   selector: ".resource.item-is-temp #Foreground #timer"
+    properties:
+        visible: true
+-   selector: ".resource.item-not-temp #Foreground #timer"
+    properties:
+        visible: false
+-   selector: ".resource.blocked * #Lock"
+    properties:
+        visible: true
+-   selector: ".resource.not-blocked * #Lock"
+    properties:
+        visible: false

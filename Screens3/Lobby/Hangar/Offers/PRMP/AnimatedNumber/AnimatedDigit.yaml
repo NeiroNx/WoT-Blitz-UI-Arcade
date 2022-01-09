@@ -1,0 +1,204 @@
+Header:
+    version: "100"
+Prototypes:
+-   class: "UIControl"
+    name: "AnimatedDigit"
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens3/Lobby/Hangar/Offers/PRMP/AnimatedNumber/AnimatedDigitInitialization.animation;FORCE_UPDATE,~res:/UI/Screens3/Lobby/Hangar/Offers/PRMP/AnimatedNumber/AnimatedDigitInitialization.animation"
+        LinearLayout: {}
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "PercentOfFirstChild"
+        UILayoutEventComponent:
+            sizeChangedEvent: "UPDATE_HEIGHT"
+            sizeChangedEventData: "_size.Y"
+        UIDataParamsComponent:
+            params:
+            - ["int", "initialNumber", "0", "200001310"]
+            - ["int", "targetNumber", "0", "300001310"]
+            - ["int", "orderIndex", "0", "8"]
+            - ["float", "animationTime", "1.000000", "1.000000"]
+            - ["string", "textStyle", "\"t-headline bold white-wild-sand-text\"", "\"t-caption bold white-wild-sand-text\""]
+            events:
+            - "DIGIT_ANIMATION_FINISHED"
+        UIDataLocalsComponent:
+            locals:
+            - ["bool", "initialized", "false"]
+            - ["bool", "animationRequested", "false"]
+            - ["float", "digitHeight", "-1.000000"]
+            - ["float", "speedOffset", "0.002000"]
+            - ["float", "minDigitTime", "0.010000 + speedOffset * orderIndex"]
+            - ["int", "order", "int(power(10, orderIndex))"]
+            - ["int", "increments", "targetNumber / order - initialNumber / order"]
+            - ["int", "initialDigit", "(initialNumber / order) % 10"]
+            - ["int", "targetDigit", "(targetNumber / order) % 10"]
+            - ["int", "maxDigitChanges", "int(max(round(animationTime / minDigitTime), 10))"]
+            - ["int", "allowedIncrements", "(min(maxDigitChanges, increments) / 10) * 10 + (increments % 10)"]
+            - ["bool", "needRoundCompletion", "initialDigit != 0 and (allowedIncrements >= 10 or targetDigit < initialDigit)"]
+            - ["int", "incrementsToShow", "when needRoundCompletion -> allowedIncrements - (10 - initialDigit), allowedIncrements"]
+            - ["int", "fullRounds", "incrementsToShow / 10"]
+            - ["int", "leftOver", "incrementsToShow % 10"]
+            - ["float", "digitChangeTime", "animationTime / allowedIncrements"]
+            - ["float", "startTime", "when needRoundCompletion -> (10 - initialDigit) * digitChangeTime, 0.000000"]
+            - ["float", "roundTime", "digitChangeTime * 10.000000"]
+            - ["float", "finishTime", "when fullRounds > 0 or needRoundCompletion -> targetDigit * digitChangeTime, leftOver * digitChangeTime"]
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/Lobby/Hangar/Offers/PRMP/AnimatedNumber/AnimatedDigit.actions"
+        UIDataOnEventComponent0:
+            eventName: "UPDATE_HEIGHT"
+            modelFieldExpression: "digitHeight"
+            dataExpression: "_event"
+        UIEventOnDataComponent0:
+            watchedDataExpression: "digitHeight"
+            ifExpression: "digitHeight > 0 and not initialized"
+            eventName: "SetInitialDigit"
+    children:
+    -   class: "UIControl"
+        name: "DigitSequence"
+        input: false
+        components:
+            LinearLayout:
+                orientation: "TopDown"
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml"
+        children:
+        -   class: "UIControl"
+            name: "Digit_0"
+            input: false
+            components:
+                UITextComponent:
+                    text: "0"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+            bindings:
+            - ["classes", "textStyle"]
+        -   class: "UIControl"
+            name: "Digit_1"
+            input: false
+            components:
+                UITextComponent:
+                    text: "1"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+            bindings:
+            - ["classes", "textStyle"]
+        -   class: "UIControl"
+            name: "Digit_2"
+            input: false
+            components:
+                UITextComponent:
+                    text: "2"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+            bindings:
+            - ["classes", "textStyle"]
+        -   class: "UIControl"
+            name: "Digit_3"
+            input: false
+            components:
+                UITextComponent:
+                    text: "3"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+            bindings:
+            - ["classes", "textStyle"]
+        -   class: "UIControl"
+            name: "Digit_4"
+            input: false
+            components:
+                UITextComponent:
+                    text: "4"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+            bindings:
+            - ["classes", "textStyle"]
+        -   class: "UIControl"
+            name: "Digit_5"
+            input: false
+            components:
+                UITextComponent:
+                    text: "5"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+            bindings:
+            - ["classes", "textStyle"]
+        -   class: "UIControl"
+            name: "Digit_6"
+            input: false
+            components:
+                UITextComponent:
+                    text: "6"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+            bindings:
+            - ["classes", "textStyle"]
+        -   class: "UIControl"
+            name: "Digit_7"
+            input: false
+            components:
+                UITextComponent:
+                    text: "7"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+            bindings:
+            - ["classes", "textStyle"]
+        -   class: "UIControl"
+            name: "Digit_8"
+            input: false
+            components:
+                UITextComponent:
+                    text: "8"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+            bindings:
+            - ["classes", "textStyle"]
+        -   class: "UIControl"
+            name: "Digit_9"
+            input: false
+            components:
+                UITextComponent:
+                    text: "9"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+            bindings:
+            - ["classes", "textStyle"]
+        -   class: "UIControl"
+            name: "Digit_0"
+            input: false
+            components:
+                UITextComponent:
+                    text: "0"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+            bindings:
+            - ["classes", "textStyle"]
+    -   class: "UIControl"
+        name: "Spacer"
+        input: false
+        components:
+            UITextComponent:
+                text: " "
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml"
+        bindings:
+        - ["visible", "orderIndex != 0 and (orderIndex % 3) == 0"]
+        - ["classes", "textStyle"]

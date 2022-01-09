@@ -1,0 +1,19 @@
+Header:
+    version: "21"
+ImportedPackages:
+- "~res:/UI/Screens/Hangar/HangarBaseScreen.yaml"
+- "~res:/UI/Screens/Lobby/LobbyCommon.yaml"
+- "~res:/UI/Screens/Lobby/LobbyHeader.yaml"
+- "~res:/UI/Screens/Common.yaml"
+- "~res:/UI/Screens/Common/WebViewWithLoader.yaml"
+Controls:
+-   prototype: "HangarBaseScreen/Screen"
+    name: "Screen"
+    children:
+    -   path: "Content"
+        position: [0.000000, 80.000000]
+        components:
+            Background: {}
+        children:
+        -   prototype: "WebViewWithLoader/WebViewWithLoader"
+            name: "WebViewWithLoader"

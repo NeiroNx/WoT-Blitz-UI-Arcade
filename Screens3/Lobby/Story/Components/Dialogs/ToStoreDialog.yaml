@@ -1,0 +1,121 @@
+Header:
+    version: 128
+Prototypes:
+-   class: "UIControl"
+    name: "ToStoreDialog"
+    size: [640.000000, 480.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["map<string,ResourceDetailed>", "currencies", "null", "{ \"prx\" = { \"type\" = ResourceType.stuff; \"stuff\" = { \"name\" = \"prx\"; }; }; }"]
+            - ["vector<string>", "currencyNames", "null", "[ \"prx\"; ]"]
+            events:
+            - "CANCEL"
+            - "TO_STORE"
+        UIDataLocalVarsComponent:
+            data:
+            - ["string", "problemText", "\"Story/ToStoreDialog/Problem/Description\""]
+            - ["string", "solutionText", "\"Story/ToStoreDialog/Solution\""]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["ResourceDetailed", "currency0", "when not currencyNames.Empty() and currencies.Contains(currencyNames[0]) -> currencies[currencyNames[0]], null"]
+            - ["ResourceDetailed", "currency1", "when currencyNames.Size() >= 2 and currencies.Contains(currencyNames[1]) -> currencies[currencyNames[1]], null"]
+            - ["ResourceDetailed", "currency2", "when currencyNames.Size() >= 3 and currencies.Contains(currencyNames[2]) -> currencies[currencyNames[2]], null"]
+    children:
+    -   class: "UIControl"
+        name: "ContentHolder"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Dialog/TextDialog.yaml"
+                args:
+                    "type": "eDialogType.CHOOSE"
+                    "header": "\"\""
+                    "accentButton": "\"taskJournal/BuyItemInStore/ProceedToStore/Button\""
+                    "optionalButton": "\"#common:DialogButton/Cancel\""
+                    "contentControl": "Content"
+                eventActions:
+                - ["OPTIONAL_CLICKED", "CANCEL", ""]
+                - ["ACCENT_CLICKED", "TO_STORE", ""]
+Slots:
+-   class: "UIControl"
+    name: "Content"
+    size: [400.000000, 120.000000]
+    input: false
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+            spacing: 19.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfChildrenSum"
+    children:
+    -   class: "UIControl"
+        name: "Problem"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfChildrenSum"
+            FlowLayout:
+                hDynamicInLinePadding: true
+                hSpacing: 6.000000
+                useRtl: true
+        children:
+        -   class: "UIControl"
+            name: "Description"
+            input: false
+            classes: "t-body regular white-wild-sand-70-text"
+            components:
+                UITextComponent: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml"
+            bindings:
+            - ["UITextComponent.text", "localize(problemText)"]
+        -   class: "UIControl"
+            name: "NotEnough"
+            input: false
+            components:
+                LinearLayout:
+                    spacing: 4.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIRepeatComponent:
+                    control: "~res:/UI/Screens3/Lobby/Common/Resource/CurrencyAdapter.yaml"
+                    dataContainer: "currencies"
+                    args:
+                        "currencySize": "eCurrencySize.BODY"
+                        "canAfford": "true"
+                        "resource": "_item"
+    -   class: "UIControl"
+        name: "Solution"
+        input: false
+        components:
+            RichContent:
+                baseClasses: "t-body regular white-wild-sand-70-text"
+            RichContentAliases0:
+                aliases:
+                - ["currency0", " <control class=\"\" control=\"~res:/UI/Screens3/Lobby/Common/Resource/CurrencyAdapter.yaml\" args1=\"forceHideValue=true\" args2=\"resource=currency0\" args3=\"currencySize=eCurrencySize.BODY\" />"]
+                - ["currency1", " <control class=\"\" control=\"~res:/UI/Screens3/Lobby/Common/Resource/CurrencyAdapter.yaml\" args1=\"forceHideValue=true\" args2=\"resource=currency1\" args3=\"currencySize=eCurrencySize.BODY\" />"]
+                - ["currency2", " <control class=\"\" control=\"~res:/UI/Screens3/Lobby/Common/Resource/CurrencyAdapter.yaml\" args1=\"forceHideValue=true\" args2=\"resource=currency2\" args3=\"currencySize=eCurrencySize.BODY\" />"]
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfChildrenSum"
+            FlowLayout:
+                hDynamicInLinePadding: true
+                hSpacing: 4.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml"
+        bindings:
+        - ["RichContent.text", "localize(solutionText)"]

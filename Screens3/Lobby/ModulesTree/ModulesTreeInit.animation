@@ -1,0 +1,7 @@
+animation INIT
+{
+    ScrollToEnsureControlOnScreen("**/RightEdge", 0);
+    ScrollToEnsureControlOnScreen("**/CurrentTankContainer/ScrollBorder", 0);
+    Wait(0.1);
+    ChangeData(lastDisplayedTankXp, modulesModel.currentVehicle.vehicle.xp.quantity);
+}

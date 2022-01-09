@@ -1,0 +1,425 @@
+Header:
+    version: "112"
+Prototypes:
+-   class: "UIControl"
+    name: "NintendoSwitchScheme"
+    size: [366.000000, 327.000000]
+    input: false
+    components:
+        Anchor:
+            hCenterAnchorEnabled: true
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 366.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 327.000000
+        UIDataParamsComponent:
+            params:
+            - ["vector<eNintendoSwitchControls>", "focused", "[ ]", "[ eNintendoSwitchControls.RightThumbstick; ]"]
+            - ["vector<eNintendoSwitchControls>", "enabled", "[ ]", "[ eNintendoSwitchControls.RightThumbstick; ]"]
+            - ["vector<eSideType>", "arrowSides", "[ ]", "[ eSideType.Right; eSideType.Left; eSideType.Top; eSideType.Bottom; ]"]
+        UIDataLocalsComponent:
+            locals:
+            - ["int", "arrowsCount", "3"]
+            - ["float", "animationTime", "0.900000"]
+    children:
+    -   class: "UIControl"
+        name: "Body"
+        position: [0.000000, 7.000000]
+        input: false
+        components:
+            Background:
+                sprite: "~res:/Gfx/Shared/backgrounds/nintendo-switch/bg_switch_body_m"
+            Anchor:
+                hCenterAnchorEnabled: true
+                bottomAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+    -   class: "UIControl"
+        name: "Controls"
+        size: [366.000000, 326.000000]
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                topAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "LeftTrigger"
+            position: [15.000000, 1.000000]
+            size: [63.000000, 41.000000]
+            input: false
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 15.000000
+                    topAnchorEnabled: true
+                    topAnchor: 1.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens3/Common/NintendoSwitch/Controls/NSControlForScheme.yaml"
+                    args:
+                        "animationTime": "animationTime"
+                        "flip": "0"
+                        "isFocused": "not Empty(focused) and Contains(focused, eNintendoSwitchControls.LeftTrigger)"
+                        "isEnabled": "not Empty(enabled) and Contains(enabled, eNintendoSwitchControls.LeftTrigger)"
+                        "masterID": "when not Empty(focused) and Contains(focused, eNintendoSwitchControls.LeftTrigger) -> str(eNintendoSwitchControls.LeftTrigger), \"\""
+                        "spritePath": "\"~res:/Gfx/Shared/backgrounds/nintendo-switch/bg_switch_control_zl_m\""
+        -   class: "UIControl"
+            name: "LeftShoulder"
+            position: [4.000000, 17.000000]
+            size: [76.000000, 51.000000]
+            input: false
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 4.000000
+                    topAnchorEnabled: true
+                    topAnchor: 17.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens3/Common/NintendoSwitch/Controls/NSControlForScheme.yaml"
+                    args:
+                        "animationTime": "animationTime"
+                        "flip": "0"
+                        "isFocused": "not Empty(focused) and Contains(focused, eNintendoSwitchControls.LeftShoulder)"
+                        "isEnabled": "not Empty(enabled) and Contains(enabled, eNintendoSwitchControls.LeftShoulder)"
+                        "masterID": "when not Empty(focused) and Contains(focused, eNintendoSwitchControls.LeftShoulder) -> str(eNintendoSwitchControls.LeftShoulder), \"\""
+                        "spritePath": "\"~res:/Gfx/Shared/backgrounds/nintendo-switch/bg_switch_control_r_m\""
+        -   class: "UIControl"
+            name: "RightTrigger"
+            position: [289.000000, 1.000000]
+            size: [63.000000, 41.000000]
+            input: false
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 289.000000
+                    topAnchorEnabled: true
+                    topAnchor: 1.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens3/Common/NintendoSwitch/Controls/NSControlForScheme.yaml"
+                    args:
+                        "animationTime": "animationTime"
+                        "flip": "1"
+                        "isFocused": "not Empty(focused) and Contains(focused, eNintendoSwitchControls.RightTrigger)"
+                        "isEnabled": "not Empty(enabled) and Contains(enabled, eNintendoSwitchControls.RightTrigger)"
+                        "masterID": "when not Empty(focused) and Contains(focused, eNintendoSwitchControls.RightTrigger) -> str(eNintendoSwitchControls.RightTrigger), \"\""
+                        "spritePath": "\"~res:/Gfx/Shared/backgrounds/nintendo-switch/bg_switch_control_zl_m\""
+        -   class: "UIControl"
+            name: "RightShoulder"
+            position: [285.000000, 17.000000]
+            size: [76.000000, 51.000000]
+            input: false
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 285.000000
+                    topAnchorEnabled: true
+                    topAnchor: 17.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens3/Common/NintendoSwitch/Controls/NSControlForScheme.yaml"
+                    args:
+                        "animationTime": "animationTime"
+                        "flip": "1"
+                        "isFocused": "not Empty(focused) and Contains(focused, eNintendoSwitchControls.RightShoulder)"
+                        "isEnabled": "not Empty(enabled) and Contains(enabled, eNintendoSwitchControls.RightShoulder)"
+                        "masterID": "when not Empty(focused) and Contains(focused, eNintendoSwitchControls.RightShoulder) -> str(eNintendoSwitchControls.RightShoulder), \"\""
+                        "spritePath": "\"~res:/Gfx/Shared/backgrounds/nintendo-switch/bg_switch_control_r_m\""
+        -   class: "UIControl"
+            name: "LeftThumbstick"
+            position: [28.000000, 96.000000]
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 28.000000
+                    topAnchorEnabled: true
+                    topAnchor: 96.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens3/Common/NintendoSwitch/Controls/NSControlForScheme.yaml"
+                    args:
+                        "animationTime": "animationTime"
+                        "flip": "0"
+                        "isFocused": "not Empty(focused) and Contains(focused, eNintendoSwitchControls.LeftThumbstick)"
+                        "isEnabled": "not Empty(enabled) and Contains(enabled, eNintendoSwitchControls.LeftThumbstick)"
+                        "masterID": "when not Empty(focused) and Contains(focused, eNintendoSwitchControls.LeftThumbstick) -> str(eNintendoSwitchControls.LeftThumbstick), \"\""
+                        "spritePath": "\"~res:/Gfx/Shared/backgrounds/nintendo-switch/bg_switch_control_direction_m\""
+        -   class: "UIControl"
+            name: "RightThumbstick"
+            position: [293.000000, 188.000000]
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+                    rightAnchor: 28.000000
+                    topAnchorEnabled: true
+                    topAnchor: 188.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens3/Common/NintendoSwitch/Controls/NSControlForScheme.yaml"
+                    args:
+                        "animationTime": "animationTime"
+                        "flip": "0"
+                        "isFocused": "not Empty(focused) and Contains(focused, eNintendoSwitchControls.RightThumbstick)"
+                        "isEnabled": "not Empty(enabled) and Contains(enabled, eNintendoSwitchControls.RightThumbstick)"
+                        "masterID": "when not Empty(focused) and Contains(focused, eNintendoSwitchControls.RightThumbstick) -> str(eNintendoSwitchControls.RightThumbstick), \"\""
+                        "spritePath": "\"~res:/Gfx/Shared/backgrounds/nintendo-switch/bg_switch_control_direction_m\""
+        -   class: "UIControl"
+            name: "Up"
+            position: [43.000000, 170.000000]
+            size: [23.000000, 23.000000]
+            input: false
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 43.000000
+                    topAnchorEnabled: true
+                    topAnchor: 170.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens3/Common/NintendoSwitch/Controls/NSControlForScheme.yaml"
+                    args:
+                        "animationTime": "animationTime"
+                        "flip": "0"
+                        "isFocused": "not Empty(focused) and Contains(focused, eNintendoSwitchControls.Up)"
+                        "isEnabled": "not Empty(enabled) and Contains(enabled, eNintendoSwitchControls.Up)"
+                        "masterID": "when not Empty(focused) and Contains(focused, eNintendoSwitchControls.Up) -> str(eNintendoSwitchControls.Up), \"\""
+                        "spritePath": "\"~res:/Gfx/Shared/backgrounds/nintendo-switch/bg_switch_control_top_m\""
+        -   class: "UIControl"
+            name: "Left"
+            position: [20.000000, 188.000000]
+            size: [24.000000, 23.000000]
+            input: false
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 20.000000
+                    topAnchorEnabled: true
+                    topAnchor: 188.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens3/Common/NintendoSwitch/Controls/NSControlForScheme.yaml"
+                    args:
+                        "animationTime": "animationTime"
+                        "flip": "0"
+                        "isFocused": "not Empty(focused) and Contains(focused, eNintendoSwitchControls.Left)"
+                        "isEnabled": "not Empty(enabled) and Contains(enabled, eNintendoSwitchControls.Left)"
+                        "masterID": "when not Empty(focused) and Contains(focused, eNintendoSwitchControls.Left) -> str(eNintendoSwitchControls.Left), \"\""
+                        "spritePath": "\"~res:/Gfx/Shared/backgrounds/nintendo-switch/bg_switch_control_left_m\""
+        -   class: "UIControl"
+            name: "Right"
+            position: [66.000000, 188.000000]
+            size: [23.000000, 23.000000]
+            input: false
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 66.000000
+                    topAnchorEnabled: true
+                    topAnchor: 188.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens3/Common/NintendoSwitch/Controls/NSControlForScheme.yaml"
+                    args:
+                        "animationTime": "animationTime"
+                        "flip": "0"
+                        "isFocused": "not Empty(focused) and Contains(focused, eNintendoSwitchControls.Right)"
+                        "isEnabled": "not Empty(enabled) and Contains(enabled, eNintendoSwitchControls.Right)"
+                        "masterID": "when not Empty(focused) and Contains(focused, eNintendoSwitchControls.Right) -> str(eNintendoSwitchControls.Right), \"\""
+                        "spritePath": "\"~res:/Gfx/Shared/backgrounds/nintendo-switch/bg_switch_control_right_m\""
+        -   class: "UIControl"
+            name: "Down"
+            position: [43.000000, 209.000000]
+            size: [23.000000, 23.000000]
+            input: false
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 43.000000
+                    topAnchorEnabled: true
+                    topAnchor: 209.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens3/Common/NintendoSwitch/Controls/NSControlForScheme.yaml"
+                    args:
+                        "animationTime": "animationTime"
+                        "flip": "0"
+                        "isFocused": "not Empty(focused) and Contains(focused, eNintendoSwitchControls.Down)"
+                        "isEnabled": "not Empty(enabled) and Contains(enabled, eNintendoSwitchControls.Down)"
+                        "masterID": "when not Empty(focused) and Contains(focused, eNintendoSwitchControls.Down) -> str(eNintendoSwitchControls.Down), \"\""
+                        "spritePath": "\"~res:/Gfx/Shared/backgrounds/nintendo-switch/bg_switch_control_down_m\""
+        -   class: "UIControl"
+            name: "X"
+            position: [43.000000, 209.000000]
+            size: [23.000000, 23.000000]
+            input: false
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 299.000000
+                    topAnchorEnabled: true
+                    topAnchor: 98.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens3/Common/NintendoSwitch/Controls/NSControlForScheme.yaml"
+                    args:
+                        "animationTime": "animationTime"
+                        "flip": "0"
+                        "isFocused": "not Empty(focused) and Contains(focused, eNintendoSwitchControls.X)"
+                        "isEnabled": "not Empty(enabled) and Contains(enabled, eNintendoSwitchControls.X)"
+                        "masterID": "when not Empty(focused) and Contains(focused, eNintendoSwitchControls.X) -> str(eNintendoSwitchControls.X), \"\""
+                        "spritePath": "\"~res:/Gfx/Shared/backgrounds/nintendo-switch/bg_switch_control_x_m\""
+        -   class: "UIControl"
+            name: "Y"
+            position: [43.000000, 209.000000]
+            size: [23.000000, 23.000000]
+            input: false
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 276.000000
+                    topAnchorEnabled: true
+                    topAnchor: 117.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens3/Common/NintendoSwitch/Controls/NSControlForScheme.yaml"
+                    args:
+                        "animationTime": "animationTime"
+                        "flip": "0"
+                        "isFocused": "not Empty(focused) and Contains(focused, eNintendoSwitchControls.Y)"
+                        "isEnabled": "not Empty(enabled) and Contains(enabled, eNintendoSwitchControls.Y)"
+                        "masterID": "when not Empty(focused) and Contains(focused, eNintendoSwitchControls.Y) -> str(eNintendoSwitchControls.Y), \"\""
+                        "spritePath": "\"~res:/Gfx/Shared/backgrounds/nintendo-switch/bg_switch_control_y_m\""
+        -   class: "UIControl"
+            name: "B"
+            position: [43.000000, 209.000000]
+            size: [23.000000, 23.000000]
+            input: false
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 299.000000
+                    topAnchorEnabled: true
+                    topAnchor: 137.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens3/Common/NintendoSwitch/Controls/NSControlForScheme.yaml"
+                    args:
+                        "animationTime": "animationTime"
+                        "flip": "0"
+                        "isFocused": "not Empty(focused) and Contains(focused, eNintendoSwitchControls.B)"
+                        "isEnabled": "not Empty(enabled) and Contains(enabled, eNintendoSwitchControls.B)"
+                        "masterID": "when not Empty(focused) and Contains(focused, eNintendoSwitchControls.B) -> str(eNintendoSwitchControls.B), \"\""
+                        "spritePath": "\"~res:/Gfx/Shared/backgrounds/nintendo-switch/bg_switch_control_b_m\""
+        -   class: "UIControl"
+            name: "A"
+            position: [43.000000, 209.000000]
+            size: [23.000000, 23.000000]
+            input: false
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 322.000000
+                    topAnchorEnabled: true
+                    topAnchor: 117.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens3/Common/NintendoSwitch/Controls/NSControlForScheme.yaml"
+                    args:
+                        "animationTime": "animationTime"
+                        "flip": "0"
+                        "isFocused": "not Empty(focused) and Contains(focused, eNintendoSwitchControls.A)"
+                        "isEnabled": "not Empty(enabled) and Contains(enabled, eNintendoSwitchControls.A)"
+                        "masterID": "when not Empty(focused) and Contains(focused, eNintendoSwitchControls.A) -> str(eNintendoSwitchControls.A), \"\""
+                        "spritePath": "\"~res:/Gfx/Shared/backgrounds/nintendo-switch/bg_switch_control_a_m\""
+        -   class: "UIControl"
+            name: "Minus"
+            position: [73.000000, 72.000000]
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Background:
+                    sprite: "~res:/Gfx/Shared/backgrounds/nintendo-switch/bg_switch_control_minus_m"
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 73.000000
+                    topAnchorEnabled: true
+                    topAnchor: 73.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                UIAttachLayoutMasterComponent:
+                    attachId: "Minus"
+                StyleSheet: {}
+        -   class: "UIControl"
+            name: "Plus"
+            position: [274.000000, 66.000000]
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Background:
+                    sprite: "~res:/Gfx/Shared/backgrounds/nintendo-switch/bg_switch_control_plus_m"
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 274.000000
+                    topAnchorEnabled: true
+                    topAnchor: 67.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                UIAttachLayoutMasterComponent:
+                    attachId: "Plus"
+                StyleSheet: {}
+    -   class: "UIControl"
+        name: "Arrows"
+        size: [366.000000, 327.000000]
+        input: false
+        components:
+            UIRepeatComponent:
+                control: "~res:/UI/Screens3/Common/NintendoSwitch/Scheme/PointingArrows.yaml"
+                dataContainer: "focused"
+                args:
+                    "flipVertical": "not Empty(focused) and (Contains(focused, eNintendoSwitchControls.RightTrigger) or Contains(focused, eNintendoSwitchControls.LeftTrigger))"
+                    "arrowsCount": "arrowsCount"
+                    "animationTime": "animationTime"
+                    "arrowSides": "arrowSides"
+                    "nsControl": "_item"

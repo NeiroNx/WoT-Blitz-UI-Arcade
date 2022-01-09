@@ -1,0 +1,89 @@
+action ShowBlur()
+{
+    if (timerVisible)
+    {
+        Opacity("**/BottomLabels/Timer/Timer/BlurWrapper", 0.0);
+        if (showBlur)
+        {
+            RenderPostProcess("**/BottomLabels/Timer/Timer/BlurWrapper/Blur", force = true);
+        }
+    }
+
+    if (product.xTimed)
+    {
+        Opacity("./Wrapper/RemainingLabel/RemainingLabelWrapper/BlurWrapper", 0.0);
+        if (showBlur)
+        {
+            RenderPostProcess("./Wrapper/RemainingLabel/RemainingLabelWrapper/BlurWrapper/Blur", force = true);
+        }
+    }
+
+    if (footerVisible)
+    {
+        Opacity("./Wrapper/Footer/FooterWrapper/BlurWrapper", 0.0);
+        if (showBlur)
+        {
+            RenderPostProcess("./Wrapper/Footer/FooterWrapper/BlurWrapper/Blur", force = true);
+        }
+    }
+
+    if (giftableVisible)
+    {
+        Opacity("**/BottomLabels/Giftable/Giftable/BlurWrapper", 0.0);
+        if (showBlur)
+        {
+            RenderPostProcess("**/BottomLabels/Giftable/Giftable/BlurWrapper/Blur", force = true);
+        }
+    }
+
+    ChangeData(showBlur, true);
+
+    parallel
+    {
+        if (timerVisible)
+        {
+            Opacity("**/BottomLabels/Timer/Timer/BlurWrapper", 1.0, blurAnimationTime, EASE_IN);
+        }
+
+        if (product.xTimed)
+        {
+            Opacity("./Wrapper/RemainingLabel/RemainingLabelWrapper/BlurWrapper", 1.0, blurAnimationTime, EASE_IN);
+        }
+
+        if (footerVisible)
+        {
+            Opacity("./Wrapper/Footer/FooterWrapper/BlurWrapper", 1.0, blurAnimationTime, EASE_IN);
+        }
+
+        if (giftableVisible)
+        {
+            Opacity("**/BottomLabels/Giftable/Giftable/BlurWrapper", 1.0, blurAnimationTime, EASE_IN);
+        }
+    }
+}
+
+action HideBlur()
+{
+    parallel
+    {
+        if (timerVisible)
+        {
+            Opacity("**/BottomLabels/Timer/Timer/BlurWrapper", 0);
+        }
+
+        if (product.xTimed)
+        {
+            Opacity("./Wrapper/RemainingLabel/RemainingLabelWrapper/BlurWrapper", 0);
+        }
+
+        if (footerVisible)
+        {
+            Opacity("./Wrapper/Footer/FooterWrapper/BlurWrapper", 0);
+        }
+
+        if (giftableVisible)
+        {
+            Opacity("**/BottomLabels/Giftable/Giftable/BlurWrapper", 0);
+        }
+    }
+}

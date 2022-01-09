@@ -1,0 +1,7 @@
+animation InitSelection(bool isReplacing)
+{
+	if (isSelected)
+	{
+		Event("OnRegionSelected");
+	}
+}

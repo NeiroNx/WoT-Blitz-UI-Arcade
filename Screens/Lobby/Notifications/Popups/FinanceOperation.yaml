@@ -1,0 +1,88 @@
+Header:
+    version: 125
+ImportedPackages:
+- "~res:/UI/Screens/Common/StyledButton.yaml"
+- "~res:/UI/Screens/Lobby/Notifications/Popups/Notification.yaml"
+- "~res:/UI/Styles/ButtonSoundStyles.yaml"
+Controls:
+-   class: "UIControl"
+    customClass: "UIFinanceOperationNotification"
+    name: "FinanceOperation"
+    size: [32.000000, 32.000000]
+    input: true
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfChildrenSum"
+        UIDataParamsComponent:
+            params:
+            - ["string", "text", "\"\"", "\"HANGAR_NOTIFICATION_RECEIVED\""]
+            - ["ResourceModel", "res", "null", "{ \"quantity\" = 333; \"type\" = ResourceType.gold; }"]
+    children:
+    -   class: "UIControl"
+        name: "Spacer"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "FixedSize"
+                verticalValue: 8.000000
+    -   prototype: "Notification/Notification"
+        name: "Layout"
+        position: [0.000000, 8.000000]
+        input: false
+        components:
+            LinearLayout: {}
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 608.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens/Lobby/Notifications/Popups/FinanceOperation.yaml;~res:/UI/Screens/Lobby/Notifications/Popups/Notification.style.yaml;~res:/UI/Screens3/Font.style.yaml"
+        children:
+        -   prototype: "Notification/icon"
+            name: "icon"
+            position: [0.000000, 8.000000]
+            classes: "finance-notification"
+        -   prototype: "Notification/Content"
+            name: "Content"
+            components:
+                LinearLayout:
+                    useRtl: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   class: "UIControl"
+                name: "Text"
+                position: [211.000000, 0.000000]
+                input: false
+                components:
+                    RichContent:
+                        baseClasses: "t-caption regular white-wild-sand-70-text"
+                    RichContentAliases0:
+                        aliases:
+                        - ["text_white", "<span class=\"t-caption bold white-wild-sand-text\"/>"]
+                        - ["icon", "<control control=\"~res:/UI/Screens3/Lobby/Common/Resource/Currency.yaml\" args1=\"resource = res\" args2=\"currencySize = eCurrencySize.SMALL\" args3=\"canAfford = true\" args4=\"forceFullValue = false\"/>"]
+                    Anchor:
+                        leftAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        verticalPolicy: "PercentOfMaxChild"
+                    FlowLayout:
+                        hSpacing: 4.000000
+                        useRtl: true
+                bindings:
+                - ["RichContent.text", "localize(text, { \"value\" = \"<icon/>\"; \"time\" = \"<icon/>\"; })"]
+        -   class: "UIControl"
+            name: "Spacer"
+            input: false
+            components:
+                Anchor:
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 16.000000
+                    verticalPolicy: "PercentOfParent"

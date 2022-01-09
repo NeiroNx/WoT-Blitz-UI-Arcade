@@ -1,0 +1,134 @@
+Header:
+    version: 133
+Prototypes:
+-   class: "UIControl"
+    name: "PiggyBankContent"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 240.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 47.000000
+        UIDataParamsComponent:
+            params:
+            - ["PiggyBankState", "piggy", "null", "{ }"]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                orientation: "TopDown"
+                spacing: 4.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfChildrenSum"
+        children:
+        -   class: "UIControl"
+            name: "Caption"
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                LinearLayout:
+                    spacing: 2.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfMaxChild"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml"
+            children:
+            -   class: "UIControl"
+                name: "Text"
+                input: false
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                    LinearLayout:
+                        spacing: 5.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        verticalPolicy: "PercentOfMaxChild"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml"
+                children:
+                -   class: "UIControl"
+                    name: "CurrentAmount"
+                    input: false
+                    classes: "t-headline bold white-wild-sand-text"
+                    components:
+                        UITextComponent:
+                            colorInheritType: "COLOR_IGNORE_PARENT"
+                            useRtlAlign: "USE_BY_CONTENT"
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfContent"
+                    bindings:
+                    - ["UITextComponent.text", "str1000Separated(piggy.current.quantity)"]
+                -   class: "UIControl"
+                    name: "Delimiter"
+                    input: false
+                    classes: "t-headline bold white-wild-sand-text"
+                    components:
+                        UITextComponent:
+                            text: "/"
+                            colorInheritType: "COLOR_IGNORE_PARENT"
+                            useRtlAlign: "USE_BY_CONTENT"
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfContent"
+                -   class: "UIControl"
+                    name: "MaxAmount"
+                    input: false
+                    classes: "t-headline bold white-wild-sand-text"
+                    components:
+                        UITextComponent:
+                            colorInheritType: "COLOR_IGNORE_PARENT"
+                            useRtlAlign: "USE_BY_CONTENT"
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfContent"
+                    bindings:
+                    - ["UITextComponent.text", "shortStr(piggy.max.quantity)"]
+            -   class: "UIControl"
+                name: "Icon"
+                input: false
+                components:
+                    UITextureComponent:
+                        drawType: "DRAW_SCALE_PROPORTIONAL"
+                        perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 24.000000
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 24.000000
+                bindings:
+                - ["UITextureComponent.spritePath", "when piggy.max.type == ResourceType.gold -> \"~res:/Gfx/Lobby/currency/currency_gold_m\", piggy.max.type == ResourceType.credits -> \"~res:/Gfx/Lobby/currency/currency_silver_m\", piggy.max.type == ResourceType.free_xp -> \"~res:/Gfx/Lobby/currency/currency_free-xp_m\", piggy.max.type == ResourceType.premium -> \"~res:/Gfx/Lobby/currency/currency_premium_m\", \"\""]
+        -   class: "UIControl"
+            name: "Progress"
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 160.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 4.000000
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens3/Lobby/Common/ProgressBar.yaml"
+                    args:
+                        "minimum": "0"
+                        "maximum": "piggy.max.quantity"
+                        "value": "piggy.current.quantity"
+                        "roundCorners": "true"

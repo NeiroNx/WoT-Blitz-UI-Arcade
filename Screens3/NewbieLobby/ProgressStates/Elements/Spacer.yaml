@@ -1,0 +1,18 @@
+Header:
+    version: 121
+Prototypes:
+-   class: "UIControl"
+    name: "Spacer"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            verticalPolicy: "FixedSize"
+        UIDataParamsComponent:
+            params:
+            - ["int", "width", "0", "0"]
+            - ["int", "height", "0", "0"]
+    bindings:
+    - ["SizePolicy.horizontalValue", "width"]
+    - ["SizePolicy.verticalValue", "height"]

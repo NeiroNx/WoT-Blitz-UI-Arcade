@@ -1,0 +1,174 @@
+Header:
+    version: "111"
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/Resource/Currency.yaml"
+- "~res:/UI/Screens3/Lobby/Common/Button.yaml"
+- "~res:/UI/Screens3/Lobby/Common/Dialog/TextDialog.yaml"
+Controls:
+-   class: "UIControl"
+    name: "ResearchDialog"
+    size: [640.000000, 480.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["bool", "hideDiscount", "false", "false"]
+            - ["int", "researchXpCost", "0", "2501"]
+            - ["int", "upgradeToTopGoldCost", "0", "35"]
+            - ["int", "totalPlayerFreeXp", "0", "0"]
+            - ["int", "totalPlayerTankXp", "0", "0"]
+            - ["int", "totalPlayerEliteXp", "0", "0"]
+            - ["int", "totalPlayerGold", "0", "0"]
+            - ["float", "eliteToFreeXpConversionGoldRate", "25.000000", "25.000000"]
+            - ["ModuleNodeModel", "moduleNode", "{ \"isEmptyNode\" = true; }", "{ }"]
+            - ["VehicleNodeModel", "vehicleNode", "{ \"isEmptyNode\" = true; }", "{ }"]
+            events:
+            - "START_CLOSING_ANIMATION"
+            - "CANCEL_CLICKED"
+            - "OK_CLICKED"
+        UIDataLocalsComponent:
+            locals:
+            - ["int", "battleXpNeeded", "min(totalPlayerTankXp, researchXpCost)"]
+            - ["int", "freeXpNeeded", "min(researchXpCost - battleXpNeeded, totalPlayerFreeXp)"]
+            - ["int", "maxInt", "2147483000"]
+            - ["int", "maxPlayerGoldForConvertation", "min(int(maxInt / eliteToFreeXpConversionGoldRate), totalPlayerGold)"]
+            - ["int", "maxBuyableEliteXp", "min(totalPlayerEliteXp, int(maxPlayerGoldForConvertation * eliteToFreeXpConversionGoldRate))"]
+            - ["int", "eliteXpNeeded", "min(researchXpCost - battleXpNeeded - freeXpNeeded, maxBuyableEliteXp)"]
+            - ["int", "goldForEliteXpConvertation", "int(ceil(eliteXpNeeded / eliteToFreeXpConversionGoldRate))"]
+            - ["eResearchDialogType", "dialogType", "when totalPlayerTankXp >= researchXpCost -> eResearchDialogType.kBattleXp, totalPlayerTankXp + totalPlayerFreeXp >= researchXpCost -> eResearchDialogType.kFreeXp, totalPlayerTankXp + totalPlayerFreeXp + maxBuyableEliteXp >= researchXpCost -> eResearchDialogType.kEliteXp, upgradeToTopGoldCost <= totalPlayerGold and upgradeToTopGoldCost > 0 and vehicleNode.isEmptyNode -> eResearchDialogType.kUpgradeModules, eResearchDialogType.kNotEnoughXp"]
+            - ["int", "goldNeeded", "when dialogType == eResearchDialogType.kUpgradeModules -> upgradeToTopGoldCost, when eliteXpNeeded > 0 -> goldForEliteXpConvertation, 0"]
+            - ["string", "textToStore", "localize(\"taskJournal/BuyItemInStore/ProceedToStore/Button\")"]
+            - ["string", "textResearch", "localize(\"RESEARCH\")"]
+            - ["string", "textToTop", "localize(\"#modules_tech_tree:Top/Button\")"]
+            - ["string", "okButtonText", "when dialogType == eResearchDialogType.kNotEnoughXp -> textToStore, when dialogType == eResearchDialogType.kUpgradeModules -> textToTop, textResearch"]
+            - ["string", "cancelButtonText", "localize(\"#common:DialogButton/Cancel\")"]
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/Lobby/ModulesTree/ResearchDialog.actions"
+    children:
+    -   prototype: "TextDialog/TextDialog"
+        name: "TextDialog"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "accentButtonType": "eButtonType.POSITIVE"
+                    "type": "eDialogType.CHOOSE"
+                    "header": "\"\""
+                    "headerImage": "\"\""
+                    "accentButton": "okButtonText"
+                    "optionalButton": "cancelButtonText"
+                    "contentControl": "control(\"~res:/UI/Screens3/Lobby/ModulesTree/ResearchDialogContent.yaml\", { \"dialogType\" = dialogType; \"moduleNode\" = moduleNode; \"vehicleNode\" = vehicleNode; \"battleXpNeeded\" = battleXpNeeded; \"eliteXpNeeded\" = eliteXpNeeded; \"freeXpNeeded\" = freeXpNeeded; \"goldNeeded\" = goldNeeded; \"hideDiscount\" = hideDiscount; }, [ ])"
+                eventActions:
+                - ["ACCENT_CLICKED", "OK_CLICKED", "dialogType"]
+                - ["OPTIONAL_CLICKED", "CANCEL_CLICKED", ""]
+                - ["START_CLOSING_ANIMATION", "START_CLOSING_ANIMATION", ""]
+        children:
+        -   path: "DialogContent/UIScrollView/scrollContainerControl/Content"
+            position: [24.000000, 48.000000]
+    -   class: "UIControl"
+        name: "HeaderCurrencyContainer"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            UIOpacityComponent: {}
+            Anchor:
+                rightAnchorEnabled: true
+                rightAnchor: 16.000000
+                topAnchorEnabled: true
+                topAnchor: 12.000000
+            LinearLayout:
+                spacing: 20.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   class: "UIControl"
+            name: "BattleXp"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+            bindings:
+            - ["visible", "battleXpNeeded > 0 or dialogType == eResearchDialogType.kNotEnoughXp"]
+            children:
+            -   prototype: "Currency/Currency"
+                name: "BattleXp"
+                components:
+                    UIDataParamsComponent:
+                        args:
+                            "currencySize": "eCurrencySize.BIG"
+                            "forButton": "false"
+                            "canAfford": "true"
+                            "isPlusTopPaneVisible": "false"
+                            "serverTime": "0L"
+                            "plusVisible": "false"
+                            "resource": "{ \"type\" = ResourceType.xp; \"quantity\" = totalPlayerTankXp; }"
+        -   class: "UIControl"
+            name: "FreeXp"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+            bindings:
+            - ["visible", "freeXpNeeded > 0 or dialogType == eResearchDialogType.kNotEnoughXp"]
+            children:
+            -   prototype: "Currency/Currency"
+                name: "FreeXp"
+                components:
+                    UIDataParamsComponent:
+                        args:
+                            "currencySize": "eCurrencySize.BIG"
+                            "forButton": "false"
+                            "canAfford": "true"
+                            "isPlusTopPaneVisible": "false"
+                            "serverTime": "0L"
+                            "plusVisible": "false"
+                            "resource": "{ \"type\" = ResourceType.free_xp; \"quantity\" = totalPlayerFreeXp; }"
+        -   class: "UIControl"
+            name: "EliteXp"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+            bindings:
+            - ["visible", "eliteXpNeeded > 0 or dialogType == eResearchDialogType.kNotEnoughXp"]
+            children:
+            -   prototype: "Currency/Currency"
+                name: "EliteXp"
+                components:
+                    UIDataParamsComponent:
+                        args:
+                            "currencySize": "eCurrencySize.BIG"
+                            "forButton": "false"
+                            "canAfford": "true"
+                            "isPlusTopPaneVisible": "false"
+                            "serverTime": "0L"
+                            "plusVisible": "false"
+                            "resource": "{ \"type\" = ResourceType.elite_xp; \"quantity\" = totalPlayerEliteXp; }"
+        -   class: "UIControl"
+            name: "Gold"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+            bindings:
+            - ["visible", "goldNeeded > 0 or dialogType == eResearchDialogType.kNotEnoughXp"]
+            children:
+            -   prototype: "Currency/Currency"
+                name: "Gold"
+                components:
+                    UIDataParamsComponent:
+                        args:
+                            "currencySize": "eCurrencySize.BIG"
+                            "forButton": "false"
+                            "canAfford": "true"
+                            "isPlusTopPaneVisible": "false"
+                            "serverTime": "0L"
+                            "plusVisible": "false"
+                            "resource": "{ \"type\" = ResourceType.gold; \"quantity\" = totalPlayerGold; }"

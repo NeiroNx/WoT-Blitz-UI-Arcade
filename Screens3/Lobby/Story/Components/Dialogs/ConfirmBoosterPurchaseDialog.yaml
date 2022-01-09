@@ -1,0 +1,113 @@
+Header:
+    version: 138
+Prototypes:
+-   class: "UIControl"
+    name: "ConfirmBoosterPurchaseDialog"
+    size: [640.000000, 480.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["StoryStepModel", "step", "null", "{ }"]
+            - ["map<string,ResourceDetailed>", "proxies", "null", "{ }"]
+            - ["StorySettings", "settings", "null", "{ }"]
+            events:
+            - "CANCEL"
+            - "CONFIRM"
+        UIDataLocalVarsComponent:
+            data:
+            - ["map<string,string>", "descriptionMap", "{ \"prx_halloween2021_boost_win_quest\" = \"HW21/ConfirmBoosterPurchaseDialog/Description/Win\"; \"prx_halloween2021_boost_master_quest\" = \"HW21/ConfirmBoosterPurchaseDialog/Description/Master\"; }"]
+            - ["string", "warning", "\"HW21/ConfirmBoosterPurchaseDialog/Warning\""]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["ResourceDetailed", "gold", "step.gross.buyout"]
+            - ["string", "boosterName", "step.questProxy"]
+            - ["string", "description", "when descriptionMap.Contains(boosterName) -> descriptionMap[boosterName], \"\""]
+            - ["ResourceDetailed", "proxyIcon", "when proxies.Contains(\"prx_halloween2021\") -> proxies[\"prx_halloween2021\"], null"]
+            - ["string", "image", "when settings.art.Contains(\"image-\" + boosterName) -> settings.art[\"image-\" + boosterName], \"\""]
+    children:
+    -   class: "UIControl"
+        name: "ContentHolder"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Dialog/TextDialog.yaml"
+                args:
+                    "type": "eDialogType.CHOOSE"
+                    "header": "\"\""
+                    "accentButton": "\"#common:Button/Claim\""
+                    "optionalButton": "\"#common:DialogButton/Cancel\""
+                    "contentControl": "Content"
+                eventActions:
+                - ["OPTIONAL_CLICKED", "CANCEL", ""]
+                - ["ACCENT_CLICKED", "CONFIRM", ""]
+Slots:
+-   class: "UIControl"
+    name: "Content"
+    size: [400.000000, 120.000000]
+    input: false
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+            spacing: 16.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfChildrenSum"
+    children:
+    -   class: "UIControl"
+        name: "Image"
+        input: false
+        components:
+            Background: {}
+            Anchor:
+                hCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+        bindings:
+        - ["Background.sprite", "image"]
+    -   class: "UIControl"
+        name: "Description"
+        input: false
+        components:
+            RichContent:
+                baseClasses: "t-body regular white-wild-sand-70-text"
+            RichContentAliases0:
+                aliases:
+                - ["body_highlighted", "<span class=\"t-body bold white-wild-sand-text\"/>"]
+                - ["proxyIcon", " <control class=\"\" control=\"~res:/UI/Screens3/Lobby/Common/Resource/CurrencyAdapter.yaml\" args1=\"forceHideValue=true\" args2=\"resource=proxyIcon\" args3=\"currencySize=eCurrencySize.BODY\" />"]
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfChildrenSum"
+            FlowLayout:
+                alignment: "Center"
+                hSpacing: 4.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml"
+        bindings:
+        - ["RichContent.text", "localize(description)"]
+    -   class: "UIControl"
+        name: "Warning"
+        input: false
+        components:
+            RichContent:
+                baseClasses: "t-body regular orange-orange-peel-text"
+            RichContentAliases0:
+                aliases:
+                - ["gold", " <control class=\"\" control=\"~res:/UI/Screens3/Lobby/Common/Resource/CurrencyAdapter.yaml\" args1=\"forceHideValue=true\" args2=\"resource=gold\" args3=\"currencySize=eCurrencySize.BODY\" />"]
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfChildrenSum"
+            FlowLayout:
+                alignment: "Center"
+                hSpacing: 4.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml"
+        bindings:
+        - ["RichContent.text", "localize(warning)"]

@@ -1,0 +1,44 @@
+animation Fire
+{
+    repeat
+    {
+        parallel
+        {
+            //Light1
+            {
+                Scale("Light1", 0.05, 0.05, 0*scale);
+                Scale("Light1", 0.9, 0.9, 0.4*scale);
+                Scale("Light1", 1., 1., 0.7667*scale);
+                Scale("Light1", 0.01, 0.01, 1.5*scale);
+            }
+            {
+                Move("Light1", 19, 37, 0*scale);
+                Move("Light1", 22, 20, 0.7667*scale);
+                Move("Light1", 24, 14, 0.5*scale);
+                Move("Light1", 17, 3, 1*scale);
+            }
+            //Light2
+            {
+                Scale("Light2", 0.05, 0.05, 0*scale);
+                Scale("Light2", 1., 1., 0.7*scale);
+                Scale("Light2", 0.5, 0.5, 1.8*scale);
+            }
+            {
+                Move("Light2", 23, 35, 0*scale);
+                Move("Light2", 29, 25, 0.9*scale);
+                Move("Light2", 33, 18, 1.2*scale);
+            }
+            //Light3
+            {
+                Scale("Light3", 0.05, 0.05, 0*scale);
+                Scale("Light3", 1, 1, 0.5*scale);
+                Scale("Light3", 0.2, 0.2, 1.7*scale);
+            }
+            {
+                Move("Light3", 16, 34, 0*scale);
+                Move("Light3", 11, 26, 0.5*scale);
+                Move("Light3", 13, 14, 1.7*scale);
+            }
+        }
+    }
+}

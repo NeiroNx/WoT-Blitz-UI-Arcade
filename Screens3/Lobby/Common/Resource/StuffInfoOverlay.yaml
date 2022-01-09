@@ -1,0 +1,56 @@
+Header:
+    version: 134
+Prototypes:
+-   class: "UIControl"
+    name: "StuffInfoOverlay"
+    size: [1000.000000, 900.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["LobbyDataModel", "lobby", "null", "{ }"]
+            - ["SessionDataModel", "session", "null", "{ }"]
+            - ["StuffResourceWithDescription", "resource", "null", "{ }"]
+            events:
+            - "BACK_EVENT"
+            - "OVERLAY_OPEN_FINISH"
+            - "CLOSE_OVERLAY"
+        UIDataLocalBindingsComponent:
+            data:
+            - ["string", "title", "\"StuffInfo/Overlay/Title\""]
+        UIChildComponent0:
+            condition: "true"
+            prototypePath: "~res:/UI/Screens3/Lobby/Common/Overlay/Overlay.yaml"
+            args:
+                "content": "StuffDescriptionWrapper"
+                "title": "localize(title)"
+            eventActions:
+            - ["OVERLAY_OPEN_FINISH", "OVERLAY_OPEN_FINISH", ""]
+            - ["BACK_EVENT", "BACK_EVENT", ""]
+Slots:
+-   class: "UIControl"
+    name: "StuffDescriptionWrapper"
+    size: [600.000000, 800.000000]
+    input: false
+    components:
+        Anchor:
+            hCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 600.000000
+            verticalPolicy: "Formula"
+            verticalFormula: "max(300, maxChild)"
+        UIChildComponent0:
+            childType: "kPrototype"
+            prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/Detailed/StuffDescription.yaml"
+            args:
+                "showLifetimeFromStuff": "true"
+                "hideQuantity": "true"
+                "hideCombine": "true"
+                "isIconLeft": "true"
+                "lobby": "lobby"
+                "session": "session"
+                "resource": "resource"

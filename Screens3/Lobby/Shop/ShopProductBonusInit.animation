@@ -1,0 +1,5 @@
+animation Init
+{
+    Opacity("Holder", opacity=0);
+	Event("AMOUNT_CHANGED", arg1=false);
+}

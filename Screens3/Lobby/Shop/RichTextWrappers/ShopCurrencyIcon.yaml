@@ -1,0 +1,22 @@
+Header:
+    version: "96"
+Prototypes:
+-   class: "UIControl"
+    name: "CurrencyIconRichText"
+    input: false
+    components:
+        UITextureComponent:
+            drawType: "DRAW_SCALE_PROPORTIONAL"
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 20.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 20.000000
+        UIDataParamsComponent:
+            params:
+            - ["ResourceType", "type", "ResourceType.undefined", "ResourceType.premium"]
+        UIDataLocalsComponent:
+            locals:
+            - ["string", "spritePath", "when type == ResourceType.gold -> \"~res:/Gfx/Lobby/currency/currency_gold_m\", type == ResourceType.credits -> \"~res:/Gfx/Lobby/currency/currency_silver_m\", type == ResourceType.free_xp -> \"~res:/Gfx/Lobby/currency/currency_free-xp_m\", type == ResourceType.elite_xp -> \"~res:/Gfx/Lobby/currency/currency_elite-xp_m\", type == ResourceType.xp -> \"~res:/Gfx/Lobby/currency/currency_battle-xp_m\", type == ResourceType.tankmenXP -> \"~res:/Gfx/Lobby/currency/currency_crew-xp_m\", type == ResourceType.vehicle -> \"~res:/Gfx/Lobby/currency/currency_tank_m\", type == ResourceType.unlocks -> \"~res:/Gfx/Lobby/currency/currency_camo-unlock_m\", type == ResourceType.premium -> \"~res:/Gfx/Lobby/currency/currency_premium_m\", \"\""]
+    bindings:
+    - ["UITextureComponent.spritePath", "spritePath"]

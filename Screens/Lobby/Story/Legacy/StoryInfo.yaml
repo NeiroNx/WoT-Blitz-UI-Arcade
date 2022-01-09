@@ -1,0 +1,65 @@
+Header:
+    version: "85"
+ImportedPackages:
+- "~res:/UI/Screens/Common/LoadingControl.yaml"
+Controls:
+-   class: "UIControl"
+    name: "Content"
+    size: [960.000000, 640.000000]
+    input: false
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["Story", "story", "null", "{ }"]
+            - ["StatsDataModel", "statsData", "null", "{ }"]
+            - ["int64", "serverTime", "0L", "1554299463L"]
+            - ["bool", "isHangarPreviousScreen", "false", "true"]
+            events:
+            - "BACK_EVENT"
+    children:
+    -   class: "UIControl"
+        name: "Header"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent:
+                control: "\"~res:/UI/Screens/Lobby/Story/Legacy/StoryHeader.yaml\""
+                args:
+                    "backButtonIcon": "backButtonIcon"
+                    "story": "story"
+                    "statsData": "statsData"
+                    "serverTime": "serverTime"
+                    "isHangarPreviousScreen": "isHangarPreviousScreen"
+                eventActions:
+                - ["BACK_EVENT", "BACK_EVENT", "_event"]
+    -   class: "UIControl"
+        name: "Info"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIWebView"
+            name: "WebView"
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+        -   prototype: "LoadingControl/LoadingControl"
+            name: "LoadingControl"
+            visible: false
+            input: false
+            children:
+            -   path: "FadeBackground"
+                input: false
+            -   path: "SpinnerPlaceholder"
+                input: false
+                children: []

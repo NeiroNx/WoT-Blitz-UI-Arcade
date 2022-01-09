@@ -1,0 +1,31 @@
+showElite = when
+              isPlayer -> isElite,
+              isPremium or isCollectible;
+
+__comment = "eShowAs enum values matter!";
+eShowAs = {
+  normal = 0;
+  premium = 1;
+  premiumized = 2;
+  collectible = 3;
+};
+
+showAs = when
+         isCollectible              -> eShowAs.collectible,
+         isPlayer and isPremiumized -> eShowAs.premiumized,
+         isPremium                  -> eShowAs.premium,
+                                       eShowAs.normal;
+
+classFrameIndex = when
+                 class == eTankClass.TANK_CLASS_LIGHT  -> 1,
+                 class == eTankClass.TANK_CLASS_MEDIUM -> 2,
+                 class == eTankClass.TANK_CLASS_HEAVY  -> 3,
+                 class == eTankClass.TANK_CLASS_AT_SPG -> 4,
+                                                          0;
+
+maxClassValue = 5;
+eliteFrame = showAs * maxClassValue;
+classFrame = classFrameIndex + showAs * maxClassValue;
+
+tankMaxLevel = 10;
+levelFrame = (level - 1) + tankMaxLevel * showAs;

@@ -1,0 +1,75 @@
+Header:
+    version: "111"
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/Resource/Currency.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "ResearchDalogRow"
+    size: [400.000000, 56.000000]
+    input: true
+    components:
+        LinearLayout:
+            spacing: 16.000000
+            dynamicSpacing: true
+            useRtl: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "FixedSize"
+            verticalValue: 56.000000
+        UIDataParamsComponent:
+            params:
+            - ["string", "text", "\"\"", "\"RESEARCH_YOU_NEED\""]
+            - ["bool", "isPositive", "true", "true"]
+            - ["ResourceModel", "resource", "null", "{ }"]
+        UIDataLocalsComponent:
+            locals:
+            - ["string", "textColorStyle", "when isPositive -> \"white-wild-sand-text\", \"red-red-text\""]
+    children:
+    -   class: "UIControl"
+        name: "Text"
+        position: [104.000000, 6.000000]
+        input: false
+        components:
+            UITextComponent:
+                fitting: "FITTING_POINTS"
+                align: ["LEFT", "VCENTER"]
+            Anchor:
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "min(parentRest, content)"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml"
+        bindings:
+        - ["classes", "\"t-body regular \" + textColorStyle"]
+        - ["UITextComponent.text", "localize(text)"]
+    -   prototype: "Currency/Currency"
+        name: "Currency"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "currencySize": "eCurrencySize.BIG"
+                    "forButton": "false"
+                    "canAfford": "isPositive"
+                    "isPlusTopPaneVisible": "false"
+                    "serverTime": "0L"
+                    "plusVisible": "false"
+                    "resource": "resource"
+    -   class: "UIControl"
+        name: "Separator"
+        size: [32.000000, 32.000000]
+        input: false
+        classes: "white-wild-sand-5-bg"
+        components:
+            Background:
+                drawType: "DRAW_FILL"
+            Anchor:
+                bottomAnchorEnabled: true
+            IgnoreLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "FixedSize"
+                verticalValue: 1.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"

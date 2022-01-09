@@ -1,0 +1,58 @@
+Header:
+    version: "100"
+StyleSheets:
+-   selectors:
+    - ".booster.enable"
+    properties:
+        bg-color: [1.000000, 1.000000, 1.000000, 1.000000]
+-   selectors:
+    - ".booster.disable"
+    properties:
+        input: false
+        bg-color: [1.000000, 1.000000, 1.000000, 0.700000]
+-   selectors:
+    - ".booster.disable #Notification"
+    properties:
+        visible: true
+        bg-sprite: "~res:/Gfx/Battle/backgrounds/bg_booster-indicator_off"
+        bg-color: [1.000000, 1.000000, 1.000000, 0.501961]
+-   selectors:
+    - ".booster.disable #Image #Icon"
+    properties:
+        bg-color: [1.000000, 1.000000, 1.000000, 0.501961]
+-   selectors:
+    - ".booster.enable #Image"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/backgrounds/bg_booster-grade"
+-   selectors:
+    - ".booster.common #Image"
+    properties:
+        bg-color: [0.517647, 0.521569, 0.525490, 1.000000]
+-   selectors:
+    - ".booster.rare #Image"
+    properties:
+        bg-color: [0.141176, 0.349020, 0.941176, 1.000000]
+-   selectors:
+    - ".booster.unique #Image"
+    properties:
+        bg-color: [0.549020, 0.023529, 0.803922, 1.000000]
+-   selectors:
+    - ".booster.legendary #Image"
+    properties:
+        bg-color: [1.000000, 0.752941, 0.000000, 1.000000]
+-   selectors:
+    - ".booster.on #Notification"
+    properties:
+        bg-sprite: "~res:/Gfx/Battle/backgrounds/bg_booster-indicator_on"
+-   selectors:
+    - ".booster.off #Notification"
+    properties:
+        bg-sprite: "~res:/Gfx/Battle/backgrounds/bg_booster-indicator_off"
+-   selectors:
+    - ".booster #Selection"
+    properties:
+        visible: false
+-   selectors:
+    - ".booster.selected #Selection"
+    properties:
+        visible: true

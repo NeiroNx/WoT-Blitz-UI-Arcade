@@ -1,0 +1,8 @@
+action MainActionRequested()
+{
+	if (canBuy or not chestLocked)
+	{
+		PlaySound(sound="GUI/buttons/ok");
+		Event("ON_BUY_CLICKED", arg1=canBuy);
+	}
+}

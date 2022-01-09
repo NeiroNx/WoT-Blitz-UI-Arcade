@@ -1,0 +1,73 @@
+Header:
+    version: "106"
+Prototypes:
+-   class: "UIControl"
+    name: "ResourceProgressBarAnimated"
+    size: [360.000000, 16.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfFirstChild"
+        UIDataParamsComponent:
+            params:
+            - ["int", "minimum", "0", "0"]
+            - ["int", "maximum", "100", "100"]
+            - ["int", "value", "50", "50"]
+            - ["int", "bonus", "0", "25"]
+            - ["ResourceDetailed", "resource", "null", "{ \"type\" = ResourceType.gold; }"]
+            - ["float", "animationTime", "1.000000", "1.000000"]
+            - ["string", "colorStyle", "\"yellow-chalky-bg\"", "\"yellow-chalky-bg\""]
+            - ["string", "bgStyle", "\"white-wild-sand-15-bg\"", "\"white-wild-sand-15-bg\""]
+            - ["bool", "startAnimation", "false", "false"]
+            - ["bool", "showGradient", "false", "true"]
+            events:
+            - "ON_ANIMATION_FINISHED"
+        UIDataLocalsComponent:
+            locals:
+            - ["int", "currentValue", "value"]
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/Lobby/Common/ResourceProgressBarAnimated.actions"
+    children:
+    -   class: "UIControl"
+        name: "ContentHolder"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/ResourceProgressBarPrivate.yaml"
+                args:
+                    "minimum": "minimum"
+                    "maximum": "maximum"
+                    "value": "currentValue"
+                    "bonus": "bonus"
+                    "progressBar": "ProgressBarHolder"
+                    "resource": "resource"
+Slots:
+-   class: "UIControl"
+    name: "ProgressBarHolder"
+    size: [360.000000, 0.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "FixedSize"
+            verticalValue: 8.000000
+        UIChildComponent0:
+            prototypePath: "~res:/UI/Screens3/Lobby/Common/ProgressBarAnimated.yaml"
+            args:
+                "minimum": "minimum"
+                "maximum": "maximum"
+                "value": "value + bonus"
+                "previousValue": "value"
+                "animationTime": "animationTime"
+                "colorStyle": "colorStyle"
+                "bgStyle": "bgStyle"
+                "showGradient": "showGradient"
+                "startAnimation": "startAnimation"
+                "animateOnInit": "false"
+            eventActions:
+            - ["VALUE_CHANGED", "ON_PROGRESS_VALUE_CHANGED", "_event.value"]
+            - ["AnimationFinished", "ON_ANIMATION_FINISHED", ""]

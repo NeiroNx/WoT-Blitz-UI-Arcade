@@ -1,0 +1,229 @@
+Header:
+    version: 120
+Prototypes:
+-   class: "UIControl"
+    name: "SizeLLong"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 336.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 160.000000
+        UIDataParamsComponent:
+            params:
+            - ["ResourceDetailed", "reward", "null", "{ \"type\" = ResourceType.stuff; }"]
+            - ["control", "overlay", "null", "null"]
+            - ["control", "fx", "null", "null"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["bool", "isBasic", "not isNull(reward) and (reward.type == ResourceType.gold or reward.type == ResourceType.free_xp or reward.type == ResourceType.elite_xp or reward.type == ResourceType.premium or reward.type == ResourceType.xp or reward.type == ResourceType.tankmenXP or reward.type == ResourceType.credits or reward.type == ResourceType.slots or reward.type == ResourceType.equipment_slots)"]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "DescriptionHolder"
+            input: false
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 16.000000
+                    bottomAnchorEnabled: true
+                    bottomAnchor: 12.000000
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 124.000000
+                UIChildComponent0:
+                    childType: "kControl"
+                    condition: "not isNull(reward)"
+                    control: "Description"
+            bindings:
+            - ["SizePolicy.horizontalValue", "when reward.type == ResourceType.vehicle -> 144, 176"]
+        -   class: "UIControl"
+            name: "RewardWrapper"
+            input: false
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfFirstChild"
+                    verticalPolicy: "PercentOfFirstChild"
+            bindings:
+            - ["Anchor.rightAnchor", "when reward.type == ResourceType.vehicle -> 16, 0"]
+            children:
+            -   class: "UIControl"
+                name: "RewardHolder"
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfFirstChild"
+                        verticalPolicy: "PercentOfFirstChild"
+                    UIChildComponent0:
+                        condition: "not isNull(reward) and reward.type != ResourceType.vehicle"
+                        prototypePath: "~res:/UI/Screens3/Lobby/Story/Components/Steps/SizeL.yaml"
+                        args:
+                            "reward": "reward"
+                            "overlay": "overlay"
+                            "fx": "fx"
+                    UIChildComponent1:
+                        childType: "kControl"
+                        condition: "reward.type == ResourceType.vehicle"
+                        control: "VehicleReward"
+Slots:
+-   class: "UIControl"
+    name: "Description"
+    size: [176.000000, 124.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIChildComponent0:
+            childType: "kControl"
+            condition: "reward.type == ResourceType.vehicle and not isNull(reward.vehicle)"
+            control: "VehicleDescription"
+        UIChildComponent1:
+            childType: "kControl"
+            condition: "reward.type == ResourceType.stuff and not isNull(reward.stuff)"
+            control: "StuffDescription"
+        UIChildComponent2:
+            childType: "kControl"
+            condition: "isBasic and not isNull(reward.basic)"
+            control: "BasicDescription"
+-   class: "UIControl"
+    name: "StuffDescription"
+    size: [176.000000, 124.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+    children:
+    -   class: "UIControl"
+        name: "Description"
+        input: false
+        classes: "t-subtitle bold white-wild-sand-text"
+        components:
+            UITextComponent:
+                multiline: "MULTILINE_ENABLED"
+                align: ["LEFT", "BOTTOM"]
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml"
+        bindings:
+        - ["UITextComponent.text", "localize(reward.stuff.title)"]
+-   class: "UIControl"
+    name: "BasicDescription"
+    size: [176.000000, 124.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+    children:
+    -   class: "UIControl"
+        name: "Description"
+        input: false
+        classes: "t-subtitle bold white-wild-sand-text"
+        components:
+            UITextComponent:
+                multiline: "MULTILINE_ENABLED"
+                align: ["LEFT", "BOTTOM"]
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml"
+        bindings:
+        - ["UITextComponent.text", "localize(when reward.type == ResourceType.credits -> \"shop/Credits\", reward.type == ResourceType.free_xp -> \"#battle_results:DetailsPage/ExperiencePage/FreeXp\", reward.type == ResourceType.gold -> \"shop/Gold\", reward.type == ResourceType.premium -> \"storage/Items/PremiumAccount/Title\", reward.type == ResourceType.tankmenXP -> \"#battle_results:DetailsPage/ExperiencePage/CrewXp\", reward.type == ResourceType.xp -> \"#battle_results:DetailsPage/ExperiencePage/Xp\", \"\")"]
+-   class: "UIControl"
+    name: "VehicleDescription"
+    size: [144.000000, 124.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+    children:
+    -   class: "UIControl"
+        name: "Description"
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                bottomAnchorEnabled: true
+            LinearLayout:
+                orientation: "TopDown"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfChildrenSum"
+        children:
+        -   class: "UIControl"
+            name: "VehicleInfo"
+            position: [48.000000, 0.000000]
+            input: false
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfFirstChild"
+                    verticalPolicy: "PercentOfFirstChild"
+                UIChildComponent0:
+                    childType: "kPrototype"
+                    prototypePath: "~res:/UI/Screens3/Lobby/Common/Vehicle/VehicleInfo.yaml"
+                    args:
+                        "class": "reward.vehicle.info.tankClass"
+                        "level": "reward.vehicle.info.level"
+                        "type": "when reward.vehicle.info.isPremium -> eVehicleDescriptionType.PREMIUM, reward.vehicle.info.isCollectible -> eVehicleDescriptionType.COLLECTIBLE, reward.vehicle.stats.isPremiumized -> eVehicleDescriptionType.PREMIUMISED, eVehicleDescriptionType.NORMAL"
+                        "elite": "reward.vehicle.stats.isElite"
+        -   class: "UIControl"
+            name: "Name"
+            input: false
+            components:
+                UITextComponent:
+                    multiline: "MULTILINE_ENABLED"
+                    align: ["LEFT", "BOTTOM"]
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml;"
+            bindings:
+            - ["classes", "\"t-subtitle bold \" + (when reward.vehicle.info.isPremium or reward.vehicle.stats.isPremiumized -> \"yellow-lightning-text\", reward.vehicle.info.isCollectible -> \"blue-rimmi-text\", \"white-wild-sand-text\")"]
+            - ["UITextComponent.text", "localize(reward.vehicle.info.name)"]
+-   class: "UIControl"
+    name: "VehicleReward"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 160.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 160.000000
+    children:
+    -   class: "UIControl"
+        name: "RewardHolder"
+        input: false
+        components:
+            Anchor:
+                bottomAnchorEnabled: true
+                bottomAnchor: 34.000000
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 160.000000
+                verticalPolicy: "FixedSize"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/Detailed/Icon.yaml"
+                args:
+                    "resource": "reward"
+                    "overlay": "overlay"
+                    "fx": "fx"

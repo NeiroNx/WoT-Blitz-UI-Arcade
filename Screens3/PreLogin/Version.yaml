@@ -1,0 +1,115 @@
+Header:
+    version: 128
+Prototypes:
+-   class: "UIControl"
+    name: "Version"
+    size: [1024.000000, 768.000000]
+    input: false
+    components:
+        LinearLayout:
+            orientation: "BottomUp"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["string", "buildInfo", "\"\"", "\"0.0.0.0 local_config\""]
+            - ["string", "versionText", "\"\"", "\"7.8\""]
+        StyleSheet:
+            styles: "~res:/UI/Screens3/OldFont.style.yaml;"
+    children:
+    -   class: "UIControl"
+        name: "Spacer"
+        position: [0.000000, 196.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "Formula"
+                verticalFormula: "when (screenHeight > 640 and screenHeight < 1023) -> 16, screenHeight*0.06"
+    -   class: "UIControl"
+        name: "Version"
+        input: false
+        classes: "t-caps bold white-wild-sand-70-text notch-tightly-right-inset"
+        components:
+            UITextComponent: {}
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 16.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            UIAnchorSafeAreaComponent: {}
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/SafeArea.style.yaml"
+        bindings:
+        - ["UITextComponent.text", "versionText"]
+    -   class: "UIControl"
+        name: "Spacer"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "FixedSize"
+                verticalValue: 16.000000
+    -   class: "UIControl"
+        name: "BuildInfo"
+        input: false
+        classes: "notch-tightly-right-inset"
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 8.000000
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "lastChild + 16"
+                verticalPolicy: "Formula"
+                verticalFormula: "lastChild + 16"
+            UIAnchorSafeAreaComponent: {}
+            StyleSheet:
+                styles: "~res:/UI/Screens3/SafeArea.style.yaml"
+        bindings:
+        - ["visible", "not empty(buildInfo)"]
+        children:
+        -   class: "UIControl"
+            name: "BG"
+            size: [32.000000, 32.000000]
+            input: false
+            classes: "black-25-bg"
+            components:
+                Background:
+                    drawType: "DRAW_STRETCH_BOTH"
+                    sprite: "~res:/Gfx/Lobby/backgrounds/bg_r2"
+                    leftRightStretchCap: 2.000000
+                    topBottomStretchCap: 2.000000
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "BuildInfoText"
+            position: [16.000000, 32.000000]
+            size: [32.000000, 32.000000]
+            input: false
+            classes: "t-caps bold white-wild-sand-70-text notch-tightly-bottom-inset"
+            components:
+                UITextComponent:
+                    multiline: "MULTILINE_ENABLED"
+                    align: ["LEFT"]
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 384.000000
+                    verticalPolicy: "PercentOfContent"
+                UIAnchorSafeAreaComponent:
+                    bottomSafeInset: "INSET_ONLY_IF_NOTCH"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+            bindings:
+            - ["UITextComponent.text", "buildInfo"]

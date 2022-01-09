@@ -1,0 +1,155 @@
+Header:
+    version: "102"
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/Resource/CurrencyWithDiscount.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "SkillsSet"
+    size: [410.000000, 96.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfMaxChild"
+        UIDataParamsComponent:
+            params:
+            - ["vector<string>", "activeSkills", "[ ]", "[ \"lucky_shot\"; \"surrounded_by_enemy\"; \"soft_recoil\"; \"skilled_ranging\"; \"fast_capture\"; ]"]
+            - ["eTankClass", "selectedTankClass", "eTankClass.TANK_CLASS_LIGHT", "eTankClass.TANK_CLASS_LIGHT"]
+            - ["string", "selectedName", "\"\"", "\"lucky_shot\""]
+            - ["eTutorialHighlights", "currentHighlightControl", "eTutorialHighlights.kUnknown", "eTutorialHighlights.kUnknown"]
+            - ["SkillsSet", "classSkills", "null", "{ }"]
+        UIDataLocalsComponent:
+            locals:
+            - ["string", "className", "when not isNull(classSkills) -> str(classSkills.tankClass, eTankClass), \"\""]
+            - ["map<string,string>", "vehicleTypeHeaders", "{ \"TANK_CLASS_LIGHT\" = \"#crew:skills/skillDescription/vehicleType/lightTank/tip\"; \"TANK_CLASS_MEDIUM\" = \"#crew:skills/skillDescription/vehicleType/mediumTank/tip\"; \"TANK_CLASS_HEAVY\" = \"#crew:skills/skillDescription/vehicleType/heavyTank/tip\"; \"TANK_CLASS_AT_SPG\" = \"#crew:skills/skillDescription/vehicleType/AT-SPG/tip\"; }"]
+            - ["map<string,string>", "chooseSkillHeaders", "{ \"TANK_CLASS_LIGHT\" = \"#crew:skills/skillDescription/chooseSkill/lightTank/tip\"; \"TANK_CLASS_MEDIUM\" = \"#crew:skills/skillDescription/chooseSkill/mediumTank/tip\"; \"TANK_CLASS_HEAVY\" = \"#crew:skills/skillDescription/chooseSkill/heavyTank/tip\"; \"TANK_CLASS_AT_SPG\" = \"#crew:skills/skillDescription/chooseSkill/AT-SPG/tip\"; }"]
+            - ["map<string,string>", "maxLevelHeaders", "{ \"TANK_CLASS_LIGHT\" = \"#crew:skills/skillDescription/maxLevel/lightTank/tip\"; \"TANK_CLASS_MEDIUM\" = \"#crew:skills/skillDescription/maxLevel/mediumTank/tip\"; \"TANK_CLASS_HEAVY\" = \"#crew:skills/skillDescription/maxLevel/heavyTank/tip\"; \"TANK_CLASS_AT_SPG\" = \"#crew:skills/skillDescription/maxLevel/AT-SPG/tip\"; }"]
+            - ["map<string,string>", "headers", "when classSkills.isAllTrained -> maxLevelHeaders, classSkills.undistributedExp > 0 -> chooseSkillHeaders, vehicleTypeHeaders"]
+            - ["bool", "expVisible", "classSkills.isAllTrained or classSkills.undistributedExp > 0"]
+            - ["string", "headerText", "localize(headers[className], { \"crew_exp\" = \"\"; })"]
+            - ["string", "classStyle", "toLowerCaseNotForLocalizedText(className)"]
+            - ["bool", "isTankClassSelected", "classSkills.tankClass == selectedTankClass"]
+            - ["string", "attachId", "when currentHighlightControl == eTutorialHighlights.kLastSkill and isTankClassSelected -> \"SKILLS_CONTAINER\", \"\""]
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Lobby/Common/Vehicle/VehicleInfo.style.yaml"
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            LinearLayout:
+                orientation: "TopDown"
+                spacing: 8.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfChildrenSum"
+        children:
+        -   class: "UIControl"
+            name: "Header"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                LinearLayout:
+                    spacing: 4.000000
+                    useRtl: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   class: "UIControl"
+                name: "Icon"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    UITextureComponent:
+                        perPixelAccuracy: "PER_PIXEL_ACCURACY_FORCED"
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+                bindings:
+                - ["classes", "classStyle"]
+            -   class: "UIControl"
+                name: "Text"
+                position: [24.000000, 4.000000]
+                size: [32.000000, 32.000000]
+                input: false
+                classes: "white-wild-sand-text t-caps bold"
+                components:
+                    UITextComponent: {}
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml"
+                bindings:
+                - ["UITextComponent.text", "headerText"]
+            -   class: "UIControl"
+                name: "Exp"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfMaxChild"
+                        verticalPolicy: "PercentOfMaxChild"
+                bindings:
+                - ["visible", "expVisible"]
+                children:
+                -   prototype: "CurrencyWithDiscount/CurrencyWithDiscount"
+                    name: "CurrencyWithDiscount"
+                    components:
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        UIDataParamsComponent:
+                            args:
+                                "currencySize": "eCurrencySize.SMALL"
+                                "resource": "{ \"quantity\" = classSkills.undistributedExp; \"type\" = ResourceType.tankmenXP; }"
+        -   class: "UIControl"
+            name: "List"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                LinearLayout: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   class: "UIControl"
+                name: "Space"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 26.000000
+                        verticalPolicy: "PercentOfParent"
+            -   class: "UIControl"
+                name: "Skills"
+                position: [26.000000, 0.000000]
+                size: [384.000000, 64.000000]
+                input: false
+                components:
+                    Anchor: {}
+                    LinearLayout:
+                        spacing: 16.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        verticalPolicy: "PercentOfMaxChild"
+                    UIAttachLayoutMasterComponent: {}
+                    UIRepeatComponent:
+                        control: "~res:/UI/Screens3/Lobby/Inventory/Crew/Skill.yaml"
+                        dataContainer: "classSkills.skills"
+                        args:
+                            "isSelected": "selectedName == _item.skillName"
+                            "isTankClassSelected": "isTankClassSelected"
+                            "currentHighlightControl": "currentHighlightControl"
+                            "activeSkills": "activeSkills"
+                            "skill": "_item"
+                bindings:
+                - ["UIAttachLayoutMasterComponent.attachId", "attachId"]

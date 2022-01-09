@@ -1,0 +1,23 @@
+animation Fullscreen
+{
+	if (previewModel.fullscreen)
+	{
+		parallel
+		{
+		  	Opacity("**/PanelWrapper", opacity=0.0, time=0.4, interpolation=EASE_IN);
+		  	ChangeProperty("**/TankParams", "Anchor", "rightAnchor", -500, 0.4, EASE_IN); 
+		  	Opacity("**/FooterWrapper", opacity=0.0, time=0.4, interpolation=EASE_IN);
+	  		ChangeProperty("**/Footer", "Anchor", "topAnchor", 500, 0.4, EASE_IN);
+	  	}
+	}
+	else
+	{
+		parallel
+		{
+		  	Opacity("**/PanelWrapper", opacity=1.0, time=0.4, interpolation=EASE_IN);
+		  	ChangeProperty("**/TankParams", "Anchor", "rightAnchor", 0, 0.4, EASE_OUT);
+		  	Opacity("**/FooterWrapper", opacity=1.0, time=0.4, interpolation=EASE_IN);
+	  		ChangeProperty("**/Footer", "Anchor", "topAnchor", 0, 0.4, EASE_IN);
+		}
+	}
+}

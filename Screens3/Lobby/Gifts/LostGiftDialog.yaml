@@ -1,0 +1,47 @@
+Header:
+    version: 140
+Prototypes:
+-   class: "UIControl"
+    name: "LostGiftDialog"
+    size: [720.000000, 600.000000]
+    input: false
+    classes: ""
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        ModalInput: {}
+        UIDataParamsComponent:
+            params:
+            - ["string", "productName", "\"\"", "\"Tank Bundle\""]
+            events:
+            - "ON_BUY_CLICKED"
+            - "ON_GIFT_CLICKED"
+        UIChildComponent0:
+            prototypePath: "~res:/UI/Screens3/Lobby/Common/Dialog/TextDialog.yaml"
+            args:
+                "backEnabled": "false"
+                "type": "eDialogType.CHOOSE"
+                "accentButtonType": "eButtonType.POSITIVE"
+                "header": "\"\""
+                "headerImage": "\"~res:/Gfx/Lobby/icons/icon_dialog_attention\""
+                "accentButton": "\"Gifts/LostGift/BuyForYourself\""
+                "optionalButton": "\"Gifts/LostGift/BuyAsGift\""
+                "optionalButtonType": "eButtonType.ALTERNATIVE"
+                "contentControl": "Content"
+            eventActions:
+            - ["ACCENT_CLICKED", "ON_BUY_CLICKED", ""]
+            - ["OPTIONAL_CLICKED", "ON_GIFT_CLICKED", ""]
+Slots:
+-   class: "UIControl"
+    name: "Content"
+    size: [299.000000, 80.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfChildrenSum"
+        UIChildComponent0:
+            prototypePath: "~res:/UI/Screens3/Lobby/Common/RichTextContent.yaml"
+            args:
+                "key": "localize(\"Gifts/LostGift/WarningText\", { \"name\" = productName; })"

@@ -1,0 +1,181 @@
+Header:
+    version: "24"
+ImportedPackages:
+- "~res:/UI/Screens/Common/StyledButton.yaml"
+- "~res:/UI/Screens/Common/Settings/SettingsCommon.yaml"
+Controls:
+-   class: "UIControl"
+    customClass: "DraggableDialog"
+    name: "Dialog"
+    size: [450.000000, 270.000000]
+    components:
+        Anchor:
+            hCenterAnchorEnabled: true
+            hCenterAnchor: 0.000000
+            vCenterAnchorEnabled: true
+            vCenterAnchor: 0.000000
+        Background:
+            drawType: "DRAW_STRETCH_BOTH"
+            sprite: "~res:/Gfx/UI/CommonUIElements/PopupBackMiddle"
+            color: [1.000000, 1.000000, 1.000000, 1.000000]
+            leftRightStretchCap: 10.000000
+            topBottomStretchCap: 10.000000
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Fonts.yaml"
+    children:
+    -   prototype: "StyledButton/StyledButton"
+        name: "CancelButton"
+        size: [192.000000, 49.000000]
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 15.000000
+                bottomAnchorEnabled: true
+                bottomAnchor: 15.000000
+        children:
+        -   path: "Caption"
+            components:
+                UITextComponent:
+                    text: "Cancel"
+                    fitting: "FITTING_REDUCE"
+    -   prototype: "StyledButton/StyledButton"
+        name: "OkButton"
+        size: [192.000000, 49.000000]
+        classes: "button button-color-green"
+        components:
+            Anchor:
+                rightAnchorEnabled: true
+                rightAnchor: 15.000000
+                bottomAnchorEnabled: true
+                bottomAnchor: 15.000000
+        children:
+        -   path: "Caption"
+            components:
+                UITextComponent:
+                    text: "OK"
+                    fitting: "FITTING_REDUCE"
+    -   class: "UIControl"
+        name: "TutorStep"
+        position: [15.000000, 140.000000]
+        size: [420.000000, 60.000000]
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 15.000000
+                rightAnchorEnabled: true
+                rightAnchor: 15.000000
+                topAnchorEnabled: true
+                topAnchor: 140.000000
+            Background:
+                drawType: "DRAW_STRETCH_BOTH"
+                leftRightStretchCap: 5.000000
+                topBottomStretchCap: 5.000000
+        children:
+        -   prototype: "SettingsCommon/Slider"
+            name: "Slider"
+            position: [45.000000, -9.000000]
+            value: 50.000000
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 47.000000
+                    hCenterAnchorEnabled: true
+                    rightAnchorEnabled: true
+                    rightAnchor: 47.000000
+                StyleSheet:
+                    inheritsStylesFromParent: false
+            children:
+            -   path: "thumbSpriteControl"
+                children:
+                -   class: "UIControl"
+                    name: "CurrValue"
+                    position: [180.000000, 0.000000]
+                    size: [60.000000, 30.000000]
+                    pivot: [0.000000, 1.000000]
+                    noInput: true
+                    classes: "header4 text-color-white"
+                    components:
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                            hCenterAnchor: 0.000000
+                            topAnchorEnabled: true
+                            topAnchor: -30.000000
+                        Background:
+                            align: ["LEFT", "TOP"]
+                        UITextComponent:
+                            text: "Curr"
+                            colorInheritType: "COLOR_IGNORE_PARENT"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens/Fonts.yaml"
+        -   class: "UIControl"
+            name: "MaxValue"
+            position: [365.000000, 15.000000]
+            size: [55.000000, 30.000000]
+            noInput: true
+            classes: "header4"
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+                    rightAnchor: 0.000000
+                    bottomAnchorEnabled: true
+                    bottomAnchor: 15.000000
+                Background:
+                    align: ["LEFT", "TOP"]
+                UITextComponent:
+                    text: "Max"
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+        -   class: "UIControl"
+            name: "MinValue"
+            position: [0.000000, 15.000000]
+            size: [55.000000, 30.000000]
+            noInput: true
+            classes: "header4"
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 0.000000
+                    bottomAnchorEnabled: true
+                    bottomAnchor: 15.000000
+                Background:
+                    align: ["LEFT", "TOP"]
+                UITextComponent:
+                    text: "Min"
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+    -   class: "UIStaticText"
+        name: "TitleText"
+        size: [450.000000, 40.000000]
+        noInput: true
+        classes: "header1 text-color-white"
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 0.000000
+                rightAnchorEnabled: true
+                rightAnchor: 0.000000
+                topAnchorEnabled: true
+                topAnchor: 0.000000
+            Background:
+                align: ["LEFT", "TOP"]
+            UITextComponent:
+                text: "Change Tutor Step"
+                colorInheritType: "COLOR_IGNORE_PARENT"
+    -   class: "UIStaticText"
+        name: "DialogText"
+        position: [0.000000, 40.000000]
+        size: [450.000000, 70.000000]
+        noInput: true
+        classes: "header1 text-color-white"
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 0.000000
+                rightAnchorEnabled: true
+                rightAnchor: 0.000000
+                topAnchorEnabled: true
+                topAnchor: 40.000000
+            Background:
+                align: ["LEFT", "TOP"]
+            UITextComponent:
+                text: "Select active tutor step"
+                colorInheritType: "COLOR_IGNORE_PARENT"

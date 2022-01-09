@@ -1,0 +1,93 @@
+Header:
+    version: 127
+Prototypes:
+-   class: "UIControl"
+    name: "EmptyTab"
+    size: [1024.000000, 768.000000]
+    input: false
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+            dynamicPadding: true
+            spacing: 32.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["bool", "showShopButton", "false", "false"]
+            - ["eStorageTab", "tab", "eStorageTab.Boosters", "eStorageTab.Boosters"]
+            events:
+            - "ON_TO_SHOP_BUTTON"
+        UIDataLocalBindingsComponent:
+            data:
+            - ["string", "descriptionString", "when tab == eStorageTab.Boosters -> \"storage/NoBoostersDescription\", tab == eStorageTab.Appearance -> \"storage/NoAppearanceDescription\", tab == eStorageTab.Certificates -> \"storage/NoCertificatesDescription\", tab == eStorageTab.Other -> \"storage/NoOtherDescription\", \"\""]
+            - ["string", "titleString", "when tab == eStorageTab.Boosters -> \"storage/NoBoostersTitle\", tab == eStorageTab.Appearance -> \"storage/NoAppearanceTitle\", tab == eStorageTab.Certificates -> \"storage/NoCertificatesTitle\", tab == eStorageTab.Other -> \"storage/NoOtherTitle\", \"\""]
+    children:
+    -   class: "UIControl"
+        name: "Control"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+            LinearLayout:
+                orientation: "TopDown"
+                spacing: 16.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfChildrenSum"
+        children:
+        -   class: "UIControl"
+            name: "Title"
+            size: [32.000000, 32.000000]
+            input: false
+            classes: "regular t-headline white-wild-sand-text"
+            components:
+                UITextComponent: {}
+                Anchor:
+                    hCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/Font.style.yaml"
+            bindings:
+            - ["UITextComponent.text", "localize(titleString)"]
+        -   class: "UIControl"
+            name: "Description"
+            size: [32.000000, 32.000000]
+            input: false
+            classes: "regular t-subtitle white-wild-sand-70-text"
+            components:
+                UITextComponent:
+                    multiline: "MULTILINE_ENABLED"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "min(content, 400)"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/Font.style.yaml"
+            bindings:
+            - ["UITextComponent.text", "localize(descriptionString)"]
+    -   class: "UIControl"
+        name: "ToShopButton"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfChildrenSum"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Button.yaml"
+                args:
+                    "type": "eButtonType.ALTERNATIVE"
+                    "caption": "\"storage/ToShopButton\""
+                eventActions:
+                - ["ON_CLICK_BUTTON", "ON_TO_SHOP_BUTTON", ""]
+        bindings:
+        - ["visible", "showShopButton"]

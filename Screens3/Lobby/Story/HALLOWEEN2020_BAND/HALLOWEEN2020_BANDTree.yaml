@@ -1,0 +1,100 @@
+Header:
+    version: 115
+Prototypes:
+-   class: "UIControl"
+    name: "HALLOWEEN2020_BANDTree"
+    size: [960.000000, 466.000000]
+    input: false
+    components:
+        Anchor:
+            topAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "Formula"
+            verticalFormula: "parent - 4"
+        UIDataParamsComponent:
+            params:
+            - ["StoryView", "storyView", "null", "{ }"]
+            - ["bool", "isGfx2", "false", "false"]
+            events:
+            - "DESELECT"
+            - "SHOW_STEP_INFO(int id)"
+            - "SELECT_STEP(int id)"
+        UIDataLocalBindingsComponent:
+            data:
+            - ["int", "gfx", "when isGfx2 -> 2, 1"]
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/Lobby/Story/BTH2020/TreeScrollView.actions"
+    children:
+    -   class: "UIControl"
+        name: "ContentWrapper"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Story/BTH2020/TreeScrollView.yaml"
+                args:
+                    "tree": "storyView.tree"
+                    "inProgressStep": "storyView.story.inProgressStep"
+                    "selectedStep": "storyView.selectedStep"
+                    "content": "ContentHolder"
+                eventActions:
+                - ["SHOW_STEP_INFO", "SHOW_STEP_INFO", "_event.id"]
+                - ["SELECT_STEP", "SELECT_STEP", "_event.id"]
+                - ["DESELECT", "DESELECT", ""]
+Slots:
+-   class: "UIControl"
+    name: "ContentHolder"
+    input: false
+    components:
+        Anchor:
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "Formula"
+            horizontalFormula: "maxChild + 64"
+            verticalPolicy: "PercentOfMaxChild"
+    children:
+    -   class: "UIControl"
+        name: "LeftSpacer"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "safeAreaInsets.left"
+                verticalPolicy: "PercentOfParent"
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 32.000000
+            LinearLayout:
+                dynamicPadding: true
+                spacing: 4.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfMaxChild"
+            UIRepeatComponent:
+                control: "~res:/UI/Screens3/Lobby/Story/Steps/StepLinear.yaml"
+                dataContainer: "storyView.tree.steps"
+                args:
+                    "model": "_item"
+                    "inProgressStep": "storyView.story.inProgressStep"
+                    "mainRewardIndex": "0"
+                    "bgImage": "\"~res:/Gfx/Lobby/events/event_2020-halloween_band_step\" + str(_item.step.id)"
+                    "maximumProgress": "180.000000 / 256.000000 + 1.000000 / (256.000000 * gfx)"
+                eventActions:
+                - ["SELECT_STEP", "SCROLL_TO_STEP", "_event.id"]
+                - ["SHOW_STEP_INFO", "SHOW_STEP_INFO", "_event.id"]
+                elementNameExpression: "\"Step\" + str(_item.step.id)"
+    -   class: "UIControl"
+        name: "RightSpacer"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "safeAreaInsets.right"
+                verticalPolicy: "PercentOfParent"

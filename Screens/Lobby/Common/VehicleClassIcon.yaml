@@ -1,0 +1,30 @@
+Header:
+    version: "20"
+StyleSheets:
+-   selector: ".light"
+    properties:
+        bg-frame: 1
+-   selector: ".medium"
+    properties:
+        bg-frame: 2
+-   selector: ".heavy"
+    properties:
+        bg-frame: 3
+-   selector: ".destroyers"
+    properties:
+        bg-frame: 4
+Prototypes:
+-   class: "UIControl"
+    name: "VehicleClassIcon"
+    components:
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 24.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 34.000000
+        Anchor:
+            vCenterAnchorEnabled: true
+            vCenterAnchor: -4.000000
+        Background:
+            sprite: "~res:/Gfx/UI/LobbyCommon/TankTypesSmall"
+            colorInherit: "COLOR_MULTIPLY_ON_PARENT"

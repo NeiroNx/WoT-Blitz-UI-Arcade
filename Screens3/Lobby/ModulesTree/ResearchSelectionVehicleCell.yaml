@@ -1,0 +1,125 @@
+Header:
+    version: 140
+ImportedPackages:
+- "~res:/UI/Screens3/Common/RadioButton/RadioButton.yaml"
+- "~res:/UI/Screens3/Lobby/Common/Resource/CurrencyWithDiscount.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "VehicleCell"
+    size: [400.000000, 56.000000]
+    classes: "button-checkbox-sound"
+    components:
+        LinearLayout:
+            spacing: 16.000000
+            useRtl: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "FixedSize"
+            verticalValue: 56.000000
+        UIInputEventComponent:
+            onTouchUpInside: "PRESSED"
+            onHoverSet: "HOVER_START"
+            onHoverRemoved: "HOVER_END"
+        UISwitchBarElementComponent: {}
+        UIDataParamsComponent:
+            params:
+            - ["ModulesTreeNodeModel", "tank", "null", "{ }"]
+            - ["bool", "resourceCanAfford", "true", "true"]
+            - ["bool", "showDiscount", "false", "false"]
+            - ["bool", "isSelected", "false", "false"]
+        UIDataLocalVarsComponent:
+            data:
+            - ["bool", "isHovered", "false"]
+        UIDataOnEventComponent0:
+            eventName: "HOVER_START"
+            modelFieldExpression: "isHovered"
+            dataExpression: "true"
+        UIDataOnEventComponent1:
+            eventName: "HOVER_END"
+            modelFieldExpression: "isHovered"
+            dataExpression: "false"
+        Sound: {}
+        StyleSheet:
+            styles: "~res:/UI/Screens3/ButtonSound.style.yaml"
+    bindings:
+    - ["input", "not isSelected"]
+    - ["UISwitchBarElementComponent.id", "tank.compactDescr"]
+    children:
+    -   class: "UIControl"
+        name: "Left"
+        input: false
+        components:
+            Anchor:
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                spacing: 32.000000
+                useRtl: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   prototype: "RadioButton/RadioButton"
+            name: "RadioButton"
+            components:
+                UIDataParamsComponent:
+                    args:
+                        "withInput": "false"
+                        "isHovered": "isHovered"
+                        "isEnabled": "true"
+                        "isSelected": "isSelected"
+            bindings:
+            - ["input", "withInput"]
+        -   class: "UIControl"
+            name: "TankName"
+            input: false
+            classes: "t-body bold color=white-wild-sand-text"
+            components:
+                UITextComponent:
+                    fitting: "FITTING_POINTS"
+                    align: ["LEFT", "VCENTER"]
+                Anchor:
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "min(parentRest, content)"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml"
+            bindings:
+            - ["UITextComponent.text", "localize(tank.vehicle.vehicleDataModel.name)"]
+    -   class: "UIControl"
+        name: "Right"
+        input: false
+        components:
+            Anchor:
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   prototype: "CurrencyWithDiscount/CurrencyWithDiscount"
+            name: "CurrencyWithDiscount"
+            components:
+                UIDataParamsComponent:
+                    args:
+                        "currencySize": "eCurrencySize.BIG"
+                        "forButton": "false"
+                        "canAfford": "resourceCanAfford"
+                        "showDiscount": "showDiscount"
+                        "plusVisible": "false"
+                        "resource": "tank.vehicle.xp"
+    -   class: "UIControl"
+        name: "Separator"
+        input: false
+        classes: "white-wild-sand-5-bg"
+        components:
+            Background: {}
+            Anchor:
+                bottomAnchorEnabled: true
+            IgnoreLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "FixedSize"
+                verticalValue: 1.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"

@@ -1,0 +1,39 @@
+action IMAGE_LOADED
+{
+	Event("LoadContent");
+
+	Opacity("**/Placeholder", opacity=0.0, time=0.25, interpolation=EASE_IN);
+	Opacity("**/Image", opacity=1.0, time=0.25, interpolation=EASE_IN);
+}
+
+action Timeout
+{
+	if (not show)
+	{
+		Wait(2 * loadDelay);
+		Event("LoadContent");
+	}
+}
+
+action LoadContent
+{
+	if (not show)
+	{
+		Event("ShowContent");
+	}
+}
+
+action ShowContent
+{
+	Wait(loadDelay);
+	ChangeData(show, true);
+	Opacity("**/Content", 1.0, fadeInTime, EASE_IN);
+}
+
+action PostInit
+{
+	Opacity("**/Content", 0.0);
+	Opacity("**/Image", 0.0);
+	Opacity("**/Placeholder", opacity=1.0);
+	Event("Timeout");
+} 

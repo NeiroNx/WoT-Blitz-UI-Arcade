@@ -1,0 +1,90 @@
+Header:
+    version: 141
+Prototypes:
+-   class: "UIControl"
+    name: "ShopSlider"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 240.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 400.000000
+        UIDataParamsComponent:
+            params:
+            - ["ShopBadgesSection", "badges", "null", "{ \"products\" = { 1 = { }; }; }"]
+            - ["bool", "initializationEnded", "false", "true"]
+            - ["bool", "blurEnabled", "false", "true"]
+            - ["float", "shopScrollBottomOffset", "0.000000", "40.000000"]
+            - ["float", "shopScrollTopOffset", "0.000000", "48.000000"]
+            - ["int64", "serverTime", "0L", "0L"]
+            - ["bool", "arabicLocalization", "false", "false"]
+            - ["bool", "debugMode", "false", "true"]
+            - ["bool", "smallScreen", "false", "true"]
+            - ["bool", "selected", "false", "true"]
+            - ["bool", "validItem", "true", "true"]
+            - ["ShopSlider", "slider", "null", "{ }"]
+            - ["bool", "firstShowAnimationAllowed", "false", "true"]
+            - ["bool", "new", "false", "true"]
+            events:
+            - "ON_SELECT_PRODUCT(int itemIndex)"
+            - "ON_PRODUCT_CLICKED(int id)"
+            - "DEV_BUY_PRODUCT(int id)"
+            - "GO_TO_GROUP(int id)"
+            - "GO_TO_PRODUCT(int id)"
+            - "ON_SLIDER_SHOWN"
+        UIDataLocalVarsComponent:
+            data:
+            - ["bool", "firstShow", "firstShowAnimationAllowed and new"]
+            - ["bool", "readyToShow", "false"]
+            - ["vector<int>", "oneVector", "[ 1; ]"]
+            - ["vector<int>", "emptyVector", "[ ]"]
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/Lobby/Shop/ShopSlider/ShopSlider.actions"
+        UIDataOnEventComponent0:
+            eventName: "CONTENT_SHOWN"
+            modelFieldExpression: "firstShow"
+            dataExpression: "false"
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIRepeatComponent:
+                control: "~res:/UI/Screens3/Lobby/Shop/ShopSlider/ShopSliderContent.yaml"
+                dataContainer: "[ 1; ]"
+                args:
+                    "badges": "badges"
+                    "firstShow": "firstShow"
+                    "readyToShow": "readyToShow"
+                    "initializationEnded": "initializationEnded"
+                    "blurEnabled": "blurEnabled"
+                    "arabicLocalization": "arabicLocalization"
+                    "debugMode": "debugMode"
+                    "slider": "slider"
+                    "serverTime": "serverTime"
+                    "shopScrollBottomOffset": "shopScrollBottomOffset"
+                    "shopScrollTopOffset": "shopScrollTopOffset"
+                    "selected": "selected"
+                eventActions:
+                - ["SHOWN", "CONTENT_SHOWN", ""]
+                - ["ON_PRODUCT_CLICKED", "ON_PRODUCT_CLICKED", "_event.id"]
+                - ["DEV_BUY_PRODUCT", "DEV_BUY_PRODUCT", "_event.id"]
+                - ["GO_TO_PRODUCT", "GO_TO_PRODUCT", "_event.id"]
+                loadingPolicy: "Lazy"
+    -   class: "UIControl"
+        name: "VisibilityIndicator"
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            UIRepeatComponent:
+                control: "~res:/UI/Screens3/Lobby/Shop/ShopProduct/VisibilityIndicator.yaml"
+                dataContainer: "when new -> oneVector, emptyVector"
+                eventActions:
+                - ["ON_VISIBLE", "OnSliderShown", ""]
+                loadingPolicy: "Lazy"

@@ -1,0 +1,114 @@
+Header:
+    version: "102"
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/Common/Dialog.yaml"
+- "~res:/UI/Screens/Common/StyledButton.yaml"
+Controls:
+-   class: "UIControl"
+    name: "SimpleDialog"
+    size: [1024.000000, 800.000000]
+    classes: "screen-background button-cancel-sound"
+    components:
+        Background: {}
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        ModalInput: {}
+        UIInputEventComponent:
+            onTouchUpInside: "CANCEL"
+        UIShortcutEventComponent:
+            shortcuts: "CANCEL, Back; CANCEL, Escape; ON_BUY_GOLD_OK_PRESSED, Enter;"
+            escape: "CANCEL"
+        Sound: {}
+        StyleSheet:
+            styles: "~res:/UI/Styles/BackgroundStyles.yaml;~res:/UI/Styles/ButtonSoundStyles.yaml"
+    children:
+    -   prototype: "Dialog/Dialog"
+        name: "Dialog"
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalValue: 504.000000
+                verticalPolicy: "PercentOfChildrenSum"
+        children:
+        -   class: "UIControl"
+            name: "Content"
+            size: [504.000000, 158.000000]
+            components:
+                LinearLayout:
+                    orientation: "TopDown"
+                    padding: "40.000000"
+                    dynamicPadding: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfMaxChild"
+                    verticalMin: 172.000000
+            children:
+            -   class: "UIControl"
+                name: "DialogText"
+                position: [25.000000, 27.000000]
+                input: false
+                classes: "text1 color=text-color-blue"
+                components:
+                    UITextComponent:
+                        text: "shop/NotEnoughGold"
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                        multiline: "MULTILINE_ENABLED"
+                    Anchor:
+                        leftAnchorEnabled: true
+                        leftAnchor: 20.000000
+                        rightAnchorEnabled: true
+                        rightAnchor: 20.000000
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens/Fonts.yaml"
+        -   prototype: "Dialog/ButtonHolder"
+            name: "ButtonHolder"
+            components:
+                SizePolicy:
+                    verticalPolicy: "Formula"
+                    verticalFormula: "maxChild + 20"
+            children:
+            -   prototype: "StyledButton/StyledButton"
+                name: "ButtonFirst"
+                classes: "button button-color-gray button-cancel-sound"
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                    UIInputEventComponent:
+                        onTouchUpInside: "CANCEL"
+                    StyleSheet:
+                        styles: "~res:/UI/Styles/ButtonStyle.yaml;~res:/UI/Screens/Fonts.yaml;~res:/UI/Styles/ButtonSoundStyles.yaml"
+                children:
+                -   path: "Caption"
+                    components:
+                        UITextComponent:
+                            text: "#common:DialogButton/Cancel"
+                            fitting: "FITTING_REDUCE"
+                        Anchor:
+                            leftAnchor: 5.000000
+                            rightAnchor: 5.000000
+            -   prototype: "StyledButton/StyledButton"
+                name: "ButtonSecond"
+                classes: "button button-color-green button-ok-sound"
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                    UIInputEventComponent:
+                        onTouchUpInside: "ON_BUY_GOLD_OK_PRESSED"
+                    StyleSheet:
+                        styles: "~res:/UI/Styles/ButtonStyle.yaml;~res:/UI/Screens/Fonts.yaml;~res:/UI/Styles/ButtonSoundStyles.yaml"
+                children:
+                -   path: "Caption"
+                    components:
+                        UITextComponent:
+                            text: "Purchase"
+                            fitting: "FITTING_REDUCE"
+                        Anchor:
+                            leftAnchor: 5.000000
+                            rightAnchor: 5.000000

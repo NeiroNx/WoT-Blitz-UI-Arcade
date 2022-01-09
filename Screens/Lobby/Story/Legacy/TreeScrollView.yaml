@@ -1,0 +1,132 @@
+Header:
+    version: 119
+Prototypes:
+-   class: "UIScrollView"
+    name: "Content"
+    size: [1920.000000, 200.000000]
+    input: false
+    autoUpdate: true
+    centerContent: true
+    components:
+        UIAnimationComponent:
+            animations: "PLAY_SCROLL,~res:/UI/Screens/Lobby/Story/Legacy/ScrollToCurrentStep.animation"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["TreeView", "tree", "null", "{ \"steps\" = { 1 = { \"step\" = { \"id\" = 1; \"dependencies\" = [ ]; \"price\" = [ { \"type\" = ResourceType.stuff; \"stuff\" = { \"quantity\" = 10; \"grade\" = ArtefactGrade.common; \"icon\" = \"~res:/Gfx/UI/StorageItemIcons/prx_spr19.psd\"; \"iconUrl\" = \"\"; }; }; ]; \"rewards\" = [ { \"type\" = ResourceType.premium; \"basic\" = { \"quantity\" = 259200; \"bonus\" = 0; }; }; ]; \"canBuy\" = true; \"isFinished\" = false; }; \"isSelected\" = false; \"isHighlighted\" = false; }; 2 = { \"step\" = { \"id\" = 2; \"dependencies\" = [ 1; ]; \"price\" = [ { \"type\" = ResourceType.stuff; \"stuff\" = { \"quantity\" = 15; \"grade\" = ArtefactGrade.common; \"icon\" = \"~res:/Gfx/UI/StorageItemIcons/prx_spr19.psd\"; \"iconUrl\" = \"\"; }; }; ]; \"rewards\" = [ { \"type\" = ResourceType.stuff; \"stuff\" = { \"quantity\" = 20; \"grade\" = ArtefactGrade.rare; \"icon\" = \"~res:/Gfx/Shared/boosters/booster_free-xp\"; \"iconUrl\" = \"\"; }; }; ]; \"canBuy\" = true; \"isFinished\" = false; }; \"isSelected\" = false; \"isHighlighted\" = false; }; 3 = { \"step\" = { \"id\" = 3; \"dependencies\" = [ 2; ]; \"price\" = [ { \"type\" = ResourceType.stuff; \"stuff\" = { \"quantity\" = 20; \"grade\" = ArtefactGrade.common; \"icon\" = \"~res:/Gfx/UI/StorageItemIcons/prx_spr19.psd\"; \"iconUrl\" = \"\"; }; }; ]; \"rewards\" = [ { \"type\" = ResourceType.credits; \"basic\" = { \"quantity\" = 300000; \"bonus\" = 0; }; }; ]; \"canBuy\" = true; \"isFinished\" = false; }; \"isSelected\" = false; \"isHighlighted\" = false; }; 4 = { \"step\" = { \"id\" = 4; \"dependencies\" = [ 3; ]; \"price\" = [ { \"type\" = ResourceType.stuff; \"stuff\" = { \"quantity\" = 25; \"grade\" = ArtefactGrade.common; \"icon\" = \"~res:/Gfx/UI/StorageItemIcons/prx_spr19.psd\"; \"iconUrl\" = \"\"; }; }; ]; \"rewards\" = [ { \"type\" = ResourceType.free_xp; \"basic\" = { \"quantity\" = 300000; \"bonus\" = 0; }; }; ]; \"canBuy\" = true; \"isFinished\" = false; }; \"isSelected\" = false; \"isHighlighted\" = false; }; 5 = { \"step\" = { \"id\" = 5; \"dependencies\" = [ 4; ]; \"price\" = [ { \"type\" = ResourceType.stuff; \"stuff\" = { \"quantity\" = 35; \"grade\" = ArtefactGrade.common; \"icon\" = \"~res:/Gfx/UI/StorageItemIcons/prx_spr19.psd\"; \"iconUrl\" = \"\"; }; }; ]; \"rewards\" = [ { \"type\" = ResourceType.vehicle; \"vehicle\" = { \"info\" = { \"shortName\" = \"#germany_vehicles:Lowe\"; \"bigIconPath\" = \"~res:/Gfx/UI/BigTankIcons/germany-Lowe.psd\"; \"level\" = 8; \"tankClass\" = eTankClass.TANK_CLASS_HEAVY; \"isCollectible\" = false; \"isPremium\" = true; }; \"stats\" = { \"isElite\" = true; \"isPremiumized\" = false; }; }; }; ]; \"canBuy\" = true; \"isFinished\" = false; }; \"isSelected\" = false; \"isHighlighted\" = false; }; 6 = { \"step\" = { \"id\" = 6; \"dependencies\" = [ ]; \"price\" = [ { \"type\" = ResourceType.stuff; \"stuff\" = { \"quantity\" = 10; \"grade\" = ArtefactGrade.common; \"icon\" = \"~res:/Gfx/UI/StorageItemIcons/prx_spr19.psd\"; \"iconUrl\" = \"\"; }; }; ]; \"rewards\" = [ { \"type\" = ResourceType.premium; \"basic\" = { \"quantity\" = 259200; \"bonus\" = 0; }; }; ]; \"canBuy\" = true; \"isFinished\" = false; }; \"isSelected\" = false; \"isHighlighted\" = false; }; 7 = { \"step\" = { \"id\" = 7; \"dependencies\" = [ 1; ]; \"price\" = [ { \"type\" = ResourceType.stuff; \"stuff\" = { \"quantity\" = 15; \"grade\" = ArtefactGrade.common; \"icon\" = \"~res:/Gfx/UI/StorageItemIcons/prx_spr19.psd\"; \"iconUrl\" = \"\"; }; }; ]; \"rewards\" = [ { \"type\" = ResourceType.stuff; \"stuff\" = { \"quantity\" = 20; \"grade\" = ArtefactGrade.rare; \"icon\" = \"~res:/Gfx/Shared/boosters/booster_free-xp\"; \"iconUrl\" = \"\"; }; }; ]; \"canBuy\" = true; \"isFinished\" = false; }; \"isSelected\" = false; \"isHighlighted\" = false; }; 8 = { \"step\" = { \"id\" = 8; \"dependencies\" = [ 2; ]; \"price\" = [ { \"type\" = ResourceType.stuff; \"stuff\" = { \"quantity\" = 20; \"grade\" = ArtefactGrade.common; \"icon\" = \"~res:/Gfx/UI/StorageItemIcons/prx_spr19.psd\"; \"iconUrl\" = \"\"; }; }; ]; \"rewards\" = [ { \"type\" = ResourceType.credits; \"basic\" = { \"quantity\" = 300000; \"bonus\" = 0; }; }; ]; \"canBuy\" = true; \"isFinished\" = false; }; \"isSelected\" = false; \"isHighlighted\" = false; }; 9 = { \"step\" = { \"id\" = 9; \"dependencies\" = [ 3; ]; \"price\" = [ { \"type\" = ResourceType.stuff; \"stuff\" = { \"quantity\" = 25; \"grade\" = ArtefactGrade.common; \"icon\" = \"~res:/Gfx/UI/StorageItemIcons/prx_spr19.psd\"; \"iconUrl\" = \"\"; }; }; ]; \"rewards\" = [ { \"type\" = ResourceType.free_xp; \"basic\" = { \"quantity\" = 300000; \"bonus\" = 0; }; }; ]; \"canBuy\" = true; \"isFinished\" = false; }; \"isSelected\" = false; \"isHighlighted\" = false; }; 10 = { \"step\" = { \"id\" = 10; \"dependencies\" = [ 4; ]; \"price\" = [ { \"type\" = ResourceType.stuff; \"stuff\" = { \"quantity\" = 35; \"grade\" = ArtefactGrade.common; \"icon\" = \"~res:/Gfx/UI/StorageItemIcons/prx_spr19.psd\"; \"iconUrl\" = \"\"; }; }; ]; \"rewards\" = [ { \"type\" = ResourceType.vehicle; \"vehicle\" = { \"info\" = { \"shortName\" = \"#germany_vehicles:Lowe\"; \"bigIconPath\" = \"~res:/Gfx/UI/BigTankIcons/germany-Lowe.psd\"; \"level\" = 8; \"tankClass\" = eTankClass.TANK_CLASS_HEAVY; \"isCollectible\" = false; \"isPremium\" = true; }; \"stats\" = { \"isElite\" = true; \"isPremiumized\" = false; }; }; }; ]; \"canBuy\" = true; \"isFinished\" = false; }; \"isSelected\" = false; \"isHighlighted\" = false; }; 11 = { \"step\" = { \"id\" = 11; \"dependencies\" = [ ]; \"price\" = [ { \"type\" = ResourceType.stuff; \"stuff\" = { \"quantity\" = 10; \"grade\" = ArtefactGrade.common; \"icon\" = \"~res:/Gfx/UI/StorageItemIcons/prx_spr19.psd\"; \"iconUrl\" = \"\"; }; }; ]; \"rewards\" = [ { \"type\" = ResourceType.premium; \"basic\" = { \"quantity\" = 259200; \"bonus\" = 0; }; }; ]; \"canBuy\" = true; \"isFinished\" = false; }; \"isSelected\" = false; \"isHighlighted\" = false; }; 12 = { \"step\" = { \"id\" = 12; \"dependencies\" = [ 1; ]; \"price\" = [ { \"type\" = ResourceType.stuff; \"stuff\" = { \"quantity\" = 15; \"grade\" = ArtefactGrade.common; \"icon\" = \"~res:/Gfx/UI/StorageItemIcons/prx_spr19.psd\"; \"iconUrl\" = \"\"; }; }; ]; \"rewards\" = [ { \"type\" = ResourceType.stuff; \"stuff\" = { \"quantity\" = 20; \"grade\" = ArtefactGrade.rare; \"icon\" = \"~res:/Gfx/Shared/boosters/booster_free-xp\"; \"iconUrl\" = \"\"; }; }; ]; \"canBuy\" = true; \"isFinished\" = false; }; \"isSelected\" = false; \"isHighlighted\" = false; }; 13 = { \"step\" = { \"id\" = 13; \"dependencies\" = [ 2; ]; \"price\" = [ { \"type\" = ResourceType.stuff; \"stuff\" = { \"quantity\" = 20; \"grade\" = ArtefactGrade.common; \"icon\" = \"~res:/Gfx/UI/StorageItemIcons/prx_spr19.psd\"; \"iconUrl\" = \"\"; }; }; ]; \"rewards\" = [ { \"type\" = ResourceType.credits; \"basic\" = { \"quantity\" = 300000; \"bonus\" = 0; }; }; ]; \"canBuy\" = true; \"isFinished\" = false; }; \"isSelected\" = false; \"isHighlighted\" = false; }; 14 = { \"step\" = { \"id\" = 14; \"dependencies\" = [ 3; ]; \"price\" = [ { \"type\" = ResourceType.stuff; \"stuff\" = { \"quantity\" = 25; \"grade\" = ArtefactGrade.common; \"icon\" = \"~res:/Gfx/UI/StorageItemIcons/prx_spr19.psd\"; \"iconUrl\" = \"\"; }; }; ]; \"rewards\" = [ { \"type\" = ResourceType.free_xp; \"basic\" = { \"quantity\" = 300000; \"bonus\" = 0; }; }; ]; \"canBuy\" = true; \"isFinished\" = false; }; \"isSelected\" = false; \"isHighlighted\" = false; }; 15 = { \"step\" = { \"id\" = 15; \"dependencies\" = [ 4; ]; \"price\" = [ { \"type\" = ResourceType.stuff; \"stuff\" = { \"quantity\" = 35; \"grade\" = ArtefactGrade.common; \"icon\" = \"~res:/Gfx/UI/StorageItemIcons/prx_spr19.psd\"; \"iconUrl\" = \"\"; }; }; ]; \"rewards\" = [ { \"type\" = ResourceType.vehicle; \"vehicle\" = { \"info\" = { \"shortName\" = \"#germany_vehicles:Lowe\"; \"bigIconPath\" = \"~res:/Gfx/UI/BigTankIcons/germany-Lowe.psd\"; \"level\" = 8; \"tankClass\" = eTankClass.TANK_CLASS_HEAVY; \"isCollectible\" = false; \"isPremium\" = true; }; \"stats\" = { \"isElite\" = true; \"isPremiumized\" = false; }; }; }; ]; \"canBuy\" = true; \"isFinished\" = false; }; \"isSelected\" = false; \"isHighlighted\" = false; }; }; }"]
+            - ["StoryStepModel", "selectedStep", "null", "{ \"id\" = 5; }"]
+            events:
+            - "DESELECT"
+            - "SELECT_STEP(int id)"
+            - "SHOW_STEP_INFO(int id)"
+        UIDataLocalVarsComponent:
+            data:
+            - ["int", "elementHSize", "100"]
+            - ["int", "elementSpacing", "15"]
+            - ["int", "offset", "40"]
+            - ["float", "scrollParentSize", "0.000000"]
+            - ["float", "scrollSize", "0.000000"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["int", "selectedStepPosition", "when not isNull(selectedStep) and selectedStep.id < 100 -> (elementHSize + elementSpacing) * (selectedStep.id - 1) + elementHSize / 2, 0"]
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens/Lobby/Story/Legacy/ScrollContentSizeChanged.actions"
+        UIDataOnEventComponent0:
+            eventName: "SCROLL_SIZE_CHANGED"
+            modelFieldExpression: "scrollSize"
+            dataExpression: "_event"
+        UIDataOnEventComponent1:
+            eventName: "SCROLL_PARENT_SIZE_CHANGED"
+            modelFieldExpression: "scrollParentSize"
+            dataExpression: "_event"
+        UIEventOnDataComponent0:
+            watchedDataExpression: "scrollParentSize"
+            ifExpression: "scrollSize > 0.000000"
+            eventName: "PLAY_SCROLL"
+        UIEventOnDataComponent1:
+            watchedDataExpression: "when not isNull(selectedStep) -> selectedStep.id, null"
+            ifExpression: "when not isNull(selectedStep) -> selectedStep.id > 0 and selectedStep.id < 100, false"
+            eventName: "PLAY_SCROLL"
+    children:
+    -   class: "UIScrollViewContainer"
+        name: "scrollContainerControl"
+        components:
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "lastChild + 80"
+                verticalPolicy: "PercentOfParent"
+            UILayoutEventComponent:
+                sizeChangedEvent: "ScrollContentSizeChanged"
+                sizeChangedEventData: "_size.X, _parentSize.X"
+            UIInputEventComponent:
+                onTouchUpInside: "DESELECT"
+        children:
+        -   class: "UIControl"
+            name: "Arrows"
+            input: false
+            components:
+                UIOpacityComponent:
+                    opacity: 0.500000
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 132.500000
+                    vCenterAnchorEnabled: true
+                LinearLayout:
+                    spacing: 85.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIRepeatComponent:
+                    control: "~res:/UI/Screens/Lobby/Story/Legacy/Steps/Arrow.yaml"
+                    dataContainer: "[ 30; 30; 30; 30; 30; 30; 30; 30; 30; 30; 30; 30; 30; 30; ]"
+                    args:
+                        "width": "_item"
+        -   class: "UIControl"
+            name: "Steps"
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                LinearLayout:
+                    spacing: 15.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIRepeatComponent:
+                    control: "~res:/UI/Screens/Lobby/Story/Legacy/Steps/StepHolder.yaml"
+                    dataContainer: "tree.steps"
+                    args:
+                        "model": "_item"
+                        "milestones": "[ ]"
+                        "showLabel": "true"
+                        "showProgress": "true"
+                    eventActions:
+                    - ["SHOW_STEP_INFO", "SHOW_STEP_INFO", "_event.id"]
+                    - ["SELECT_STEP", "SELECT_STEP", "_event.id"]
+    -   class: "UIScrollBar"
+        name: "HorizontalScrollbar"
+        visible: false
+        input: false
+        orientation: "ORIENTATION_HORIZONTAL"
+        components:
+            Anchor:
+                bottomAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "FixedSize"
+                verticalValue: 10.000000
+            ScrollBarDelegate:
+                delegate: ".."
+        children:
+        -   class: "UIControl"
+            name: "slider"
+            size: [20.000000, 10.000000]
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_STRETCH_HORIZONTAL"
+                    sprite: "~res:/Gfx/UI/CommonUIElements/HorizontalScroll"
+                    leftRightStretchCap: 10.000000

@@ -1,0 +1,115 @@
+Header:
+    version: 125
+Prototypes:
+-   class: "UIControl"
+    name: "ButtonDecorator"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfFirstChild"
+            verticalPolicy: "PercentOfFirstChild"
+        UIDataParamsComponent:
+            params:
+            - ["control", "content", "null", "null"]
+            - ["eButtonSound", "sound", "eButtonSound.UNKNOWN", "eButtonSound.OK"]
+            - ["bool", "isSelected", "false", "false"]
+            - ["vector4", "ltrbSafeZone", "vec4(0.000000, 0.000000, 0.000000, 0.000000)", "vec4(0.000000, 0.000000, 0.000000, 0.000000)"]
+            - ["vector2", "pushScale", "vec2(0.900000, 0.900000)", "vec2(0.900000, 0.900000)"]
+            - ["bool", "hasInput", "true", "true"]
+            - ["string", "masterId", "\"\"", "\"\""]
+            events:
+            - "PUSH(vector2 scale, float opacity, float time)"
+            - "PULL(float time)"
+            - "HOVER(float brightness, float time)"
+            - "CANCEL_HOVER(float time)"
+            - "SELECT(float time)"
+            - "CANCEL_SELECT(float time)"
+            - "ON_TOUCH"
+        UIDataLocalVarsComponent:
+            data:
+            - ["float", "pushOpacity", "0.700000"]
+            - ["float", "hoverBrightness", "10.000000"]
+            - ["float", "touchTime", "0.080000"]
+            - ["float", "hoverTime", "0.150000"]
+            - ["float", "selectTime", "0.200000"]
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/Lobby/Common/ButtonDecorator.actions"
+        UIEventOnDataComponent0:
+            watchedDataExpression: "isSelected"
+            ifExpression: "isSelected"
+            eventName: "SELECT"
+            eventData: "selectTime"
+        UIEventOnDataComponent1:
+            watchedDataExpression: "isSelected"
+            ifExpression: "not isSelected"
+            eventName: "CANCEL_SELECT"
+            eventData: "selectTime"
+    children:
+    -   class: "UIControl"
+        name: "SafeArea"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "lastChild + ltrbSafeZone.X + ltrbSafeZone.Z"
+                verticalPolicy: "Formula"
+                verticalFormula: "lastChild + ltrbSafeZone.Y + ltrbSafeZone.W"
+        children:
+        -   class: "UIControl"
+            name: "InteractionArea"
+            input: false
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    rightAnchorEnabled: true
+                    topAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfFirstChild"
+                    verticalPolicy: "PercentOfFirstChild"
+            bindings:
+            - ["Anchor.leftAnchor", "ltrbSafeZone.X"]
+            - ["Anchor.rightAnchor", "ltrbSafeZone.Z"]
+            - ["Anchor.topAnchor", "ltrbSafeZone.Y"]
+            - ["Anchor.bottomAnchor", "ltrbSafeZone.W"]
+            children:
+            -   class: "UIControl"
+                name: "ContentHolder"
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfFirstChild"
+                        verticalPolicy: "PercentOfFirstChild"
+                    UIChildComponent0:
+                        childType: "kControl"
+                        condition: "not isNull(content)"
+                        control: "content"
+            -   class: "UIControl"
+                name: "TapArea"
+                exclusiveInput: true
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        topAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                    UIAttachLayoutMasterComponent: {}
+                    UIInputEventComponent:
+                        onTouchDown: "ON_TOUCH_DOWN"
+                        onTouchDownData: "touchTime"
+                        onTouchUpInside: "ON_TOUCH_UP_INSIDE"
+                        onTouchUpInsideData: "touchTime"
+                        onTouchEntered: "ON_TOUCH_ENTERED"
+                        onTouchEnteredData: "touchTime"
+                        onTouchExited: "ON_TOUCH_EXITED"
+                        onTouchExitedData: "touchTime"
+                        onInputCanceled: "ON_TOUCH_CANCEL"
+                        onInputCanceledData: "touchTime"
+                        onHoverSet: "ON_HOVER_START"
+                        onHoverSetData: "hoverTime"
+                        onHoverRemoved: "ON_HOVER_END"
+                        onHoverRemovedData: "hoverTime"
+                bindings:
+                - ["input", "hasInput"]
+                - ["UIAttachLayoutMasterComponent.attachId", "masterId"]

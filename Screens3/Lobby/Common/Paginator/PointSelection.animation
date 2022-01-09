@@ -1,0 +1,22 @@
+animation Select
+{       
+        if (true)
+        {
+            Scale ("**/PressedFade", 0, 0);
+            ChangeProperty("**/PressedFade","UIOpacityComponent","opacity", 1);
+
+            parallel
+            {
+                Scale ("**/PressedFade", 1, 1, 0.3, SINE_IN_SINE_OUT);
+                ChangeProperty("**/PressedFade","UIOpacityComponent","opacity", 0, 0.3, SINE_IN_SINE_OUT);
+            }  
+        }
+        else
+        {
+            parallel
+            {
+                Scale ("**/PressedFade", 1, 1, 0.3, SINE_IN_SINE_OUT);
+                ChangeProperty("**/PressedFade","UIOpacityComponent","opacity", 0, 0.3, SINE_IN_SINE_OUT);
+            }
+        }
+}

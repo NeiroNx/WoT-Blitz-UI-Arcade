@@ -1,0 +1,21 @@
+Header:
+    version: 125
+Prototypes:
+-   class: "UIParticles"
+    name: "Explosion"
+    position: [12.000000, 12.000000]
+    size: [32.000000, 32.000000]
+    scale: [4.000000, 4.000000]
+    pivot: [0.500000, 0.500000]
+    input: false
+    effectPath: "~res:/3d/FX/inBattle_UI/Break_impact_1.sc2"
+    components:
+        Anchor:
+            hCenterAnchorEnabled: true
+            vCenterAnchorEnabled: true
+        IgnoreLayout: {}
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 32.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 32.000000

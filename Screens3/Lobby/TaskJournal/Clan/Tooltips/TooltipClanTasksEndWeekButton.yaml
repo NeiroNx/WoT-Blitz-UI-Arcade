@@ -1,0 +1,38 @@
+Header:
+    version: 120
+ImportedPackages:
+- "~res:/UI/Screens3/Common/Tooltip.yaml"
+Controls:
+-   class: "UIControl"
+    name: "ClanTasksEndWeekButton"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["bool", "canCollectRewards", "true", "true"]
+            events:
+            - "FINISH_HIDE_POPUP_ANIMATION"
+    children:
+    -   prototype: "Tooltip/Slave"
+        name: "Slave"
+        position: [-84.000000, 65.000000]
+        components:
+            UIDataParamsComponent:
+                args:
+                    "offset": "0"
+                    "isAlignLeft": "false"
+                    "buttonVisible": "false"
+                    "rewardVisible": "false"
+                    "slaveAlign": "ePositionAlign.Bottom"
+                    "resource": "{ }"
+                    "title": "\"\""
+                    "text": "when canCollectRewards -> \"clanMissions/tutor/ClaimButton\", \"clanMissions/tutor/NewWeekButton\""
+                    "colorClass": "\"color=white-wild-sand-text\""
+                    "masterId": "\"CLAN_TASKS_CLAIM_REWARDS\""
+                eventActions:
+                - ["POPUP_ON_CLOSE_ACTION", "", ""]
+                - ["FINISH_HIDE_POPUP_ANIMATION", "FINISH_HIDE_POPUP_ANIMATION", ""]

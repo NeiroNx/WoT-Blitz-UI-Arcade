@@ -1,0 +1,36 @@
+Header:
+    version: "24"
+Prototypes:
+-   class: "UIControl"
+    name: "GradientPane"
+    noInput: true
+    components:
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Lobby/Common/GradientPane.yaml"
+    children:
+    -   class: "UIControl"
+        name: "LeftPart"
+        noInput: true
+        components:
+            SizePolicy:
+                verticalPolicy: "PercentOfParent"
+            Anchor:
+                leftAnchorEnabled: true
+                hCenterAnchorEnabled: true
+            Background:
+                drawType: "DRAW_SCALE_TO_RECT"
+                sprite: "~res:/Gfx/UI/Hangar/BlackGradTile"
+    -   class: "UIControl"
+        name: "RightPart"
+        noInput: true
+        components:
+            SizePolicy:
+                verticalPolicy: "PercentOfParent"
+            Anchor:
+                hCenterAnchorEnabled: true
+                rightAnchorEnabled: true
+            Background:
+                drawType: "DRAW_SCALE_TO_RECT"
+                sprite: "~res:/Gfx/UI/Hangar/BlackGradTile"
+                spriteModification: ["FLIP_HORIZONTAL"]

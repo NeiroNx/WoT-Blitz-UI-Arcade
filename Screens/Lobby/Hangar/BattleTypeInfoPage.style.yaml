@@ -1,0 +1,21 @@
+Header:
+    version: 127
+StyleSheets:
+-   selectors:
+    - "#Icon.regular"
+    properties:
+        texture-spritePath: "~res:/Gfx/Shared/icons/icon_game-mode_random_colored"
+-   selectors:
+    - "#Icon.rating"
+    properties:
+        texture-spritePath: "~res:/Gfx/Shared/icons/icon_game-mode_rating_colored"
+-   selectors:
+    - "#Icon.arcade"
+    - "#Icon.hellgames"
+    - "#Icon.scuffle"
+    - "#Icon.nanomaps"
+    - "#Icon.lunar"
+    - "#Icon.vampiric"
+    - "#Icon.bossmode"
+    properties:
+        texture-spritePath: "~res:/Gfx/Shared/icons/icon_game-mode_realistic_colored"

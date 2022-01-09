@@ -1,0 +1,11 @@
+animation Init
+{
+	if(isFocused)
+	{
+		Event("SetFocus");
+	}
+	if(not isEnabled)
+	{
+		Event("SetDisabled");
+	}
+}

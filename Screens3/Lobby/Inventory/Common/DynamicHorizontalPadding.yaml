@@ -1,0 +1,60 @@
+Header:
+    version: "79"
+Prototypes:
+-   class: "UIControl"
+    name: "DynamicHorizontalPadding"
+    size: [16.000000, 32.000000]
+    input: false
+    classes: "padding only-notch-padding"
+    components:
+        LinearLayout: {}
+        SizePolicy:
+            horizontalFormula: "when parent < 1559 -> maxChild, 0"
+            verticalPolicy: "PercentOfParent"
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Lobby/Inventory/Common/DynamicHorizontalPadding.style.yaml"
+    children:
+    -   class: "UIControl"
+        name: "Mobile"
+        components:
+            LinearLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "Fixed"
+            size: [32.000000, 32.000000]
+            input: false
+            classes: "fixed"
+            components:
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 16.000000
+                    verticalPolicy: "PercentOfParent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Lobby/Inventory/Common/DynamicHorizontalPadding.style.yaml"
+        -   class: "UIControl"
+            name: "OnlyNotch"
+            size: [32.000000, 32.000000]
+            input: false
+            classes: "only-notch"
+            components:
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "when safeAreaInsets.right == 0 -> 16, safeAreaInsets.right"
+                    verticalPolicy: "PercentOfParent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Lobby/Inventory/Common/DynamicHorizontalPadding.style.yaml"
+        -   class: "UIControl"
+            name: "ClearAndNotch"
+            size: [32.000000, 32.000000]
+            input: false
+            classes: "fixed-plus-notch"
+            components:
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "safeAreaInsets.right + 16"
+                    verticalPolicy: "PercentOfParent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Lobby/Inventory/Common/DynamicHorizontalPadding.style.yaml"

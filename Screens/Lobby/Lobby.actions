@@ -1,0 +1,4 @@
+action SHOW_TUTORIAL(bool show)
+{
+    DirectEvent("SHOW_TUTORIAL", "./BaseLobby", arg1=show);
+}

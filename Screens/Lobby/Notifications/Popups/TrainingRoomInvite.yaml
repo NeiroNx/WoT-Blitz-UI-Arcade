@@ -1,0 +1,76 @@
+Header:
+    version: 121
+ImportedPackages:
+- "~res:/UI/Screens/Fonts.yaml"
+- "~res:/UI/Screens/Common/StyledButton.yaml"
+- "~res:/UI/Screens/Lobby/Notifications/Popups/Notification.yaml"
+- "~res:/UI/Styles/ButtonSoundStyles.yaml"
+- "~res:/UI/Screens3/Lobby/Common/NotificationButtonWithText.yaml"
+Controls:
+-   class: "UIControl"
+    customClass: "UITrainingRoomInviteNotification"
+    name: "TrainingRoomInvite"
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+            padding: "8;0"
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfMaxChild"
+    children:
+    -   prototype: "Notification/Notification"
+        name: "TrainingRoomInviteContent"
+        input: false
+        components:
+            LinearLayout: {}
+        children:
+        -   class: "UIControl"
+            name: "LeftContent"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                LinearLayout:
+                    padding: "16"
+                    spacing: 16.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            children:
+            -   prototype: "Notification/icon"
+                name: "icon"
+                components:
+                    Background:
+                        sprite: "~res:/Gfx/Lobby/icons/icon_info_s"
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 24.000000
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 24.000000
+            -   class: "UIControl"
+                name: "Text"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    RichContent:
+                        baseClasses: "t-caption regular color=white-wild-sand-70-text"
+                    RichContentAliases0:
+                        aliases:
+                        - ["t-caption_highlighted", "<span class=\"bold  t-caption white-wild-sand-text\"/>"]
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfChildrenSum"
+                    FlowLayout:
+                        hSpacing: 5.000000
+                        useRtl: true
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/Font.style.yaml"
+        -   prototype: "NotificationButtonWithText/NotificationButtonWithText"
+            name: "GoToRoomBtn"
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+                UIDataParamsComponent:
+                    args:
+                        "text": "localize(\"#common:DialogButton/Go\")"

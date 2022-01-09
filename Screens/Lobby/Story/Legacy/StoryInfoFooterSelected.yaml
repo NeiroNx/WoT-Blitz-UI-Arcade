@@ -1,0 +1,85 @@
+Header:
+    version: "85"
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/Story/Legacy/StoryInfoFooterNotSelected.yaml"
+Controls:
+-   prototype: "StoryInfoFooterNotSelected/StoryInfoFooterNotSelected"
+    name: "StoryInfoFooterSelected"
+    components:
+        UIDataParamsComponent:
+            params:
+            - ["Story", "story", "null", "{ }"]
+            - ["StoryStepModel", "selectedStep", "null", "{ }"]
+            events:
+            - "INFO_FOOTER_PRESSED"
+        UIDataLocalsComponent:
+            locals:
+            - ["string", "infoLabelHasGoldCost", "when story.stage.type == eStageType.BUY -> \"template_event/FinalStage/Hint/BuyCurrenciesForGold\", story.stage.type == eStageType.PROCESS -> \"template_event/ProgressStage/Hint/Currency\", \"\""]
+            - ["string", "infoLabelNoGoldCost", "when story.stage.type == eStageType.PROCESS -> \"template_event/ProgressStage/Hint/NoGold\", \"\""]
+            - ["string", "infoLabelSelected", "when selectedStep.canBuy -> infoLabelHasGoldCost, infoLabelNoGoldCost"]
+            - ["string", "infoLabel", "when selectedStep.isFinished -> \"template_event/ProgressStage/Hint/StepCompleted\", infoLabelSelected"]
+            - ["bool", "isInfoButtonVisible", "not selectedStep.isFinished"]
+    children:
+    -   path: "Content"
+        children:
+        -   class: "UIControl"
+            name: "InfoButton"
+            classes: "simple-button button-open-sound"
+            components:
+                UIOpacityComponent: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                UIInputEventComponent:
+                    onTouchUpInside: "INFO_FOOTER_PRESSED"
+                Sound: {}
+                StyleSheet:
+                    styles: "~res:/UI/Styles/ButtonSoundStyles.yaml;~res:/UI/Screens3/Lobby/Hangar/DevMenu/SimpleButton.style.yaml"
+            bindings:
+            - ["visible", "isInfoButtonVisible"]
+            children:
+            -   class: "UIControl"
+                name: "InfoIcon"
+                scale: [0.500000, 0.500000]
+                pivot: [1.000000, 0.000000]
+                input: false
+                components:
+                    Background:
+                        sprite: "~res:/Gfx/UI/LobbyCommon/IconsSmall"
+                        frame: 26
+                    Anchor:
+                        rightAnchorEnabled: true
+                        topAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 64.000000
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 64.000000
+                    UIAnchorSafeAreaComponent:
+                        rightSafeInset: "INSET"
+    -   path: "Content/InfoContainer"
+        children:
+        -   class: "UIControl"
+            name: "CurrencyBarsContainer"
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                LinearLayout:
+                    dynamicPadding: true
+                    spacing: 40.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIRepeatComponent:
+                    control: "~res:/UI/Screens/Lobby/Story/Legacy/StoryProgressBarCaption.yaml"
+                    dataContainer: "selectedStep.price"
+                    args:
+                        "selectedStep": "selectedStep"
+                        "priceItem": "_item"
+            bindings:
+            - ["visible", "not selectedStep.isFinished"]
+    -   path: "Content/InfoContainer/Label"
+        components:
+            UITextComponent: {}
+        bindings:
+        - ["UITextComponent.text", "localize(infoLabel)"]

@@ -1,0 +1,4 @@
+animation NEWCOMERS7X7TreeOnInit
+{
+    Event("NEWCOMERS7X7_INITIALIZED");
+}

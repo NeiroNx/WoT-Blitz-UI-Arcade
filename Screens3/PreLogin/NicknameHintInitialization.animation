@@ -1,0 +1,9 @@
+animation Initialize(bool replacing)
+{
+  Scale("./AnimatedContent", 0.01, 0.01);
+  Opacity("./AnimatedContent", 0.0);
+  if (quicked)
+  {
+    Event("AnimateHint", arg1=true, arg2=0.0, arg3=0.5);
+  }
+}

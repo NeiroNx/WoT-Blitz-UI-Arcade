@@ -1,0 +1,19 @@
+Header:
+    version: 128
+Prototypes:
+-   class: "UIControl"
+    name: "VehicleBundleItem"
+    input: false
+    components:
+        UITextureComponent:
+            drawType: "DRAW_SCALE_PROPORTIONAL"
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 40.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 40.000000
+        UIDataParamsComponent:
+            params:
+            - ["ResourceDetailed", "resource", "null", "{ }"]
+    bindings:
+    - ["UITextureComponent.spritePath", "resource.vehicle.info.bigIconPath"]

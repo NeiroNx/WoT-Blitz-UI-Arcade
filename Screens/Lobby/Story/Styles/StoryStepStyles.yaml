@@ -1,0 +1,43 @@
+Header:
+    version: "70"
+StyleSheets:
+-   selector: ".step #NormalState"
+    properties:
+        opacity-opacity:
+            value: 1.000000
+            transitionTime: 0.200000
+            transitionFunction: "LINEAR"
+-   selector: ".step.selected #NormalState"
+    properties:
+        opacity-opacity:
+            value: 0.000000
+            transitionTime: 0.200000
+            transitionFunction: "LINEAR"
+-   selector: ".step #NormalState #Button"
+    properties:
+        bg-gradient: "~res:/Gfx/UI/CommonUIElements/Button/gray_gradient"
+        bg-contour: "~res:/Gfx/UI/CommonUIElements/Button/gray_contour.psd"
+-   selector: ".step.completed #NormalState #Button"
+    properties:
+        bg-gradient: "~res:/Gfx/UI/CommonUIElements/Button/green_gradient.psd"
+        bg-contour: "~res:/Gfx/UI/CommonUIElements/Button/green_contour.psd"
+-   selector: ".step #ExpandedState"
+    properties:
+        scale:
+            value: [1.000000, 0.800000]
+            transitionTime: 0.200000
+            transitionFunction: "EASE_OUT"
+        opacity-opacity:
+            value: 0.000000
+            transitionTime: 0.200000
+            transitionFunction: "LINEAR"
+-   selector: ".step.selected #ExpandedState"
+    properties:
+        scale:
+            value: [1.000000, 1.000000]
+            transitionTime: 0.200000
+            transitionFunction: "EASE_OUT"
+        opacity-opacity:
+            value: 1.000000
+            transitionTime: 0.200000
+            transitionFunction: "LINEAR"

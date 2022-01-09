@@ -1,0 +1,49 @@
+Header:
+    version: "104"
+StyleSheets:
+-   selectors:
+    - ".radial-marker"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/BattleScreenHUD/markers/standart_damage_marker.psd"
+        bg-align: ["HCENTER", "TOP"]
+        sizePolicy-verticalPolicy: "FixedSize"
+        sizePolicy-verticalValue: 380.000000
+        anchor-vCenterAnchor: -190.000000
+-   selectors:
+    - ".radial-marker #DamageValue"
+    properties:
+        text-fontName: "WarHeliosCondC_Bold_19"
+        anchor-bottomAnchor: 221.000000
+-   selectors:
+    - ".radial-marker #Explosion"
+    properties:
+        anchor-bottomAnchor: 260.000000
+        anchor-hCenterAnchor: -1.000000
+-   selectors:
+    - ".ray-marker"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/BattleScreenHUD/markers/extended_damage_marker.psd"
+        sizePolicy-verticalPolicy: "PercentOfContent"
+        anchor-vCenterAnchor: -186.000000
+-   selectors:
+    - ".ray-marker #DamageValue"
+    properties:
+        text-fontName: "WarHeliosCondC_Bold_14"
+        anchor-bottomAnchor: 168.000000
+-   selectors:
+    - ".ray-marker #Explosion"
+    properties:
+        anchor-bottomAnchor: 199.000000
+        anchor-hCenterAnchor: -1.000000
+-   selectors:
+    - ".explosion-active"
+    properties:
+        bg-frame: 1
+-   selectors:
+    - ".explosion-active #Explosion"
+    properties:
+        visible: true
+-   selectors:
+    - ".explosion-not-active #Explosion"
+    properties:
+        visible: false

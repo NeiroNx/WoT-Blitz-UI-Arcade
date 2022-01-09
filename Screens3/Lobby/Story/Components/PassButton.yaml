@@ -1,0 +1,207 @@
+Header:
+    version: 138
+Prototypes:
+-   class: "UIControl"
+    name: "PassButton"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfFirstChild"
+            verticalPolicy: "PercentOfFirstChild"
+        UIDataParamsComponent:
+            params:
+            - ["ResourceDetailed", "price", "null", "{ \"type\" = ResourceType.real_currency; }"]
+            - ["ResourceDetailed", "proxyIcon", "null", "{ \"type\" = ResourceType.stuff; }"]
+            - ["string", "image", "\"\"", "\"~res:/Gfx/Lobby/events/2021-halloween/event_2021-halloween_button_1\""]
+            - ["bool", "isSelected", "false", "true"]
+            events:
+            - "ON_TOUCH"
+        UIDataLocalVarsComponent:
+            data:
+            - ["string", "dailyReward", "\"HW21/PassButton/DailyReward\""]
+            - ["string", "dailyLabel", "\"HW21/PassButton/DailyLabel\""]
+            - ["string", "description", "\"HW21/PassButton/Description\""]
+            - ["float", "iconBrightness", "0.000000"]
+            - ["float", "selectedOpacity", "when isSelected -> 1.000000, 0.000000"]
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/Lobby/Story/Components/PassButton.actions"
+    children:
+    -   class: "UIControl"
+        name: "ContentHolder"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/ButtonDecorator.yaml"
+                args:
+                    "content": "Content"
+                    "sound": "eButtonSound.CHOOSE"
+                    "isSelected": "isSelected"
+                    "hasInput": "not isNull(price) and price.type != ResourceType.undefined"
+                    "ltrbSafeZone": "vec4(0.000000, 0.000000, 0.000000, 0.000000)"
+                eventActions:
+                - ["PUSH", "PUSH", "_event.scale, _event.opacity, _event.time"]
+                - ["PULL", "PULL", "_event.time"]
+                - ["HOVER", "HOVER", "_event.brightness, _event.time"]
+                - ["CANCEL_HOVER", "CANCEL_HOVER", "_event.time"]
+                - ["SELECT", "SELECT", "_event.time"]
+                - ["CANCEL_SELECT", "CANCEL_SELECT", "_event.time"]
+                - ["ON_TOUCH", "ON_TOUCH", ""]
+Slots:
+-   class: "UIControl"
+    name: "Content"
+    pivot: [0.500000, 0.500000]
+    input: false
+    components:
+        UIOpacityComponent: {}
+        Anchor:
+            hCenterAnchorEnabled: true
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 400.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 232.000000
+    children:
+    -   class: "UIControl"
+        name: "Bg"
+        pivot: [0.500000, 0.500000]
+        input: false
+        components:
+            ClipContent: {}
+            UITextureComponent:
+                materialPath: "~res:/Materials.custom/2d.Textured.HSV.material"
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        bindings:
+        - ["UITextureComponent.spritePath", "image"]
+        - ["UITextureComponent.materialParams", "\"value,\" + str(int(iconBrightness))"]
+    -   class: "UIControl"
+        name: "Promo"
+        input: false
+        components:
+            Anchor:
+                bottomAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "FixedSize"
+                verticalValue: 64.000000
+        children:
+        -   class: "UIControl"
+            name: "Bg"
+            input: false
+            classes: "black-35-bg"
+            components:
+                Background: {}
+                UIRoundedCornersComponent:
+                    radius: "0; 0; 8; 8"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "Reward"
+            input: false
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 16.000000
+                    vCenterAnchorEnabled: true
+                    useRtl: true
+                LinearLayout:
+                    orientation: "TopDown"
+                    spacing: 2.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    horizontalMax: 212.000000
+                    verticalPolicy: "PercentOfChildrenSum"
+            children:
+            -   class: "UIControl"
+                name: "DailyLabel"
+                input: false
+                classes: "t-headline bold white-wild-sand-text"
+                components:
+                    UITextComponent:
+                        fitting: "FITTING_REDUCE"
+                        align: ["LEFT", "VCENTER"]
+                        useRtlAlign: "USE_BY_SYSTEM"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml"
+                bindings:
+                - ["UITextComponent.text", "localize(dailyLabel)"]
+            -   class: "UIControl"
+                name: "DailyReward"
+                input: false
+                classes: "t-subtitle regular white-wild-sand-text"
+                components:
+                    RichContent:
+                        baseClasses: "t-subtitle regular white-wild-sand-text"
+                    RichContentAliases0:
+                        aliases:
+                        - ["proxyIcon", "<control class=\"\" control=\"~res:/UI/Screens3/Lobby/Common/Resource/CurrencyAdapter.yaml\" args1=\"forceHideValue=true\" args2=\"resource=proxyIcon\"/>"]
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfMaxChild"
+                    FlowLayout:
+                        hSpacing: 4.000000
+                        useRtl: true
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml"
+                bindings:
+                - ["RichContent.text", "localize(dailyReward)"]
+        -   class: "UIControl"
+            name: "PriceLabel"
+            input: false
+            classes: "t-content-h2 bold yellow-lightning-text"
+            components:
+                UITextComponent:
+                    fitting: "FITTING_REDUCE"
+                Anchor:
+                    rightAnchorEnabled: true
+                    rightAnchor: 16.000000
+                    vCenterAnchorEnabled: true
+                    useRtl: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    horizontalMax: 140.000000
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml"
+            bindings:
+            - ["UITextComponent.text", "when not isNull(price) and not isNull(price.realCurrency) -> price.realCurrency.localizedValue, \"\""]
+    -   class: "UIControl"
+        name: "Selected"
+        input: false
+        components:
+            UIOpacityComponent: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Selection.yaml"
+                args:
+                    "selectionType": "eSelectionBorderType.kR8"
+                    "isVisible": "true"
+        bindings:
+        - ["UIOpacityComponent.opacity", "selectedOpacity"]
+    -   class: "UIControl"
+        name: "LoadingControl"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                condition: "isNull(price) or price.type == ResourceType.undefined"
+                prototypePath: "~res:/UI/Screens3/Common/LoadingOverlay.yaml"

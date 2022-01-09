@@ -1,0 +1,11 @@
+animation Initialization(bool replacing)
+{
+  ChangeProperty("Scroll/scrollContainerControl/Forms/InterativeHolder/Nicknames/NicknameVariants", "SizePolicy", "verticalValue", 0.0);
+  DirectEvent("EDIT_ENDED", "Scroll/scrollContainerControl/Forms/InterativeHolder/Nicknames/NicknameEdit/TextField", arg1=nicknameData.nickname);
+
+  if (quicked)
+  {
+    Event("ShowCaptchaError", arg1="Try another username. Try another username. Try another username.Try another username.Try another username.Try another username.");
+    Event("RequestAnimateSuggestions");
+  }
+}

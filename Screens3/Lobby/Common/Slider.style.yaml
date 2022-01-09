@@ -1,0 +1,11 @@
+Header:
+    version: "108"
+StyleSheets:
+-   selectors:
+    - ".slider:focused .focus"
+    properties:
+        visible: true
+-   selectors:
+    - ".slider .focus"
+    properties:
+        visible: false

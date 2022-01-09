@@ -1,0 +1,26 @@
+Header:
+    version: "106"
+Prototypes:
+-   class: "UIControl"
+    name: "ButtonBindings"
+    size: [1015.000000, 160.000000]
+    components:
+        Anchor:
+            leftAnchorEnabled: true
+            leftAnchor: 5.000000
+            rightAnchorEnabled: true
+            rightAnchor: 5.000000
+        LinearLayout:
+            orientation: "TopDown"
+            spacing: 1.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfChildrenSum"
+        UIDataParamsComponent:
+            params:
+            - ["KeyBindingInfoScheme", "inputBindingsInfo", "null", "{ }"]
+        UIRepeatComponent:
+            control: "~res:/UI/Screens/Common/Settings/InputKeyBindingsRow.yaml"
+            dataContainer: "inputBindingsInfo.bindings"
+            args:
+                "bindingsRow": "_item"

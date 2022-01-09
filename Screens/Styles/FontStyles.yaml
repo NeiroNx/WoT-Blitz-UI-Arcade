@@ -1,0 +1,195 @@
+Header:
+    version: "48"
+StyleSheets:
+-   selector: ".bold"
+    properties:
+        text-fontPath: "~res:/Fonts/HelveticaNeueWorld-75Bold.ttf"
+-   selector: ".regular"
+    properties:
+        text-fontPath: "~res:/Fonts/HelveticaNeueWorld-55Roman.ttf"
+-   selector: ".light"
+    properties:
+        text-fontPath: "~res:/Fonts/HelveticaNeueWorld-45Lt.ttf"
+-   selector: ".bold.zh-Hant, .regular.zh-Hant, .light.zh-Hant"
+    properties:
+        text-fontPath: "~res:/Fonts/XinGothic-TC-W6.otf"
+-   selector: ".bold.zh-Hans, .regular.zh-Hans, .light.zh-Hans"
+    properties:
+        text-fontPath: "~res:/Fonts/XinGothic-SC-W6.otf"
+-   selector: ".bold.ko, .regular.ko, .light.ko"
+    properties:
+        text-fontPath: "~res:/Fonts/CoreSans.ttf"
+-   selector: ".bold.ja"
+    properties:
+        text-fontPath: "~res:/Fonts/IwaGGoPro-Bd.otf"
+-   selector: ".regular.ja, .light.ja"
+    properties:
+        text-fontPath: "~res:/Fonts/IwaGGoPro-Md.otf"
+-   selector: ".t-caps"
+    properties:
+        text-fontSize: 11.000000
+        text-ascendScale: 0.650000
+        text-descendScale: 1.000000
+-   selector: ".t-caption"
+    properties:
+        text-fontSize: 13.000000
+        text-ascendScale: 0.750000
+        text-descendScale: 1.000000
+-   selector: ".t-overline"
+    properties:
+        text-fontSize: 13.000000
+        text-ascendScale: 0.750000
+        text-descendScale: 1.000000
+-   selector: ".t-button"
+    properties:
+        text-fontSize: 14.000000
+        text-ascendScale: 0.750000
+        text-descendScale: 0.750000
+-   selector: ".t-body"
+    properties:
+        text-fontSize: 15.000000
+        text-ascendScale: 0.650000
+        text-descendScale: 0.750000
+-   selector: ".t-subtitle"
+    properties:
+        text-fontSize: 17.000000
+        text-ascendScale: 0.700000
+        text-descendScale: 0.750000
+-   selector: ".t-headline"
+    properties:
+        text-fontSize: 20.000000
+        text-ascendScale: 0.650000
+        text-descendScale: 0.500000
+-   selector: ".t-title"
+    properties:
+        text-fontSize: 32.000000
+        text-ascendScale: 0.640000
+        text-descendScale: 0.400000
+-   selector: ".t-caps.ja"
+    properties:
+        text-ascendScale: 1.100000
+        text-descendScale: 1.200000
+-   selector: ".t-caps.ko"
+    properties:
+        text-ascendScale: 1.100000
+        text-descendScale: 1.700000
+-   selector: ".t-caps.zh-Hant"
+    properties:
+        text-ascendScale: 1.000000
+        text-descendScale: 1.450000
+-   selector: ".t-caps.zh-Hans"
+    properties:
+        text-ascendScale: 1.000000
+        text-descendScale: 1.400000
+-   selector: ".t-caption.ja"
+    properties:
+        text-ascendScale: 0.900000
+        text-descendScale: 1.000000
+-   selector: ".t-caption.ko"
+    properties:
+        text-ascendScale: 1.200000
+        text-descendScale: 1.700000
+-   selector: ".t-caption.zh-Hant"
+    properties:
+        text-ascendScale: 1.200000
+        text-descendScale: 1.300000
+-   selector: ".t-caption.zh-Hans"
+    properties:
+        text-ascendScale: 1.100000
+        text-descendScale: 1.400000
+-   selector: ".t-overline.ja"
+    properties:
+        text-ascendScale: 1.150000
+        text-descendScale: 1.350000
+-   selector: ".t-overline.ko"
+    properties:
+        text-ascendScale: 1.100000
+        text-descendScale: 1.900000
+-   selector: ".t-overline.zh-Hant"
+    properties:
+        text-ascendScale: 1.150000
+        text-descendScale: 1.450000
+-   selector: ".t-overline.zh-Hans"
+    properties:
+        text-ascendScale: 1.100000
+        text-descendScale: 1.450000
+-   selector: ".t-button.ja"
+    properties:
+        text-ascendScale: 1.050000
+        text-descendScale: 1.200000
+-   selector: ".t-button.ko"
+    properties:
+        text-ascendScale: 1.300000
+        text-descendScale: 2.100000
+-   selector: ".t-button.zh-Hant"
+    properties:
+        text-ascendScale: 1.250000
+        text-descendScale: 1.650000
+-   selector: ".t-button.zh-Hans"
+    properties:
+        text-ascendScale: 1.200000
+        text-descendScale: 1.750000
+-   selector: ".t-body.ja"
+    properties:
+        text-ascendScale: 1.000000
+        text-descendScale: 1.100000
+-   selector: ".t-body.ko"
+    properties:
+        text-ascendScale: 1.000000
+        text-descendScale: 1.500000
+-   selector: ".t-body.zh-Hant"
+    properties:
+        text-ascendScale: 1.050000
+        text-descendScale: 1.000000
+-   selector: ".t-body.zh-Hans"
+    properties:
+        text-ascendScale: 1.000000
+        text-descendScale: 1.050000
+-   selector: ".t-subtitle.ja"
+    properties:
+        text-ascendScale: 1.100000
+        text-descendScale: 1.100000
+-   selector: ".t-subtitle.ko"
+    properties:
+        text-ascendScale: 1.100000
+        text-descendScale: 1.500000
+-   selector: ".t-subtitle.zh-Hant"
+    properties:
+        text-ascendScale: 1.100000
+        text-descendScale: 1.100000
+-   selector: ".t-subtitle.zh-Hans"
+    properties:
+        text-ascendScale: 1.100000
+        text-descendScale: 1.100000
+-   selector: ".t-headline.ja"
+    properties:
+        text-ascendScale: 0.950000
+        text-descendScale: 0.800000
+-   selector: ".t-headline.ko"
+    properties:
+        text-ascendScale: 1.100000
+        text-descendScale: 1.500000
+-   selector: ".t-headline.zh-Hant"
+    properties:
+        text-ascendScale: 0.950000
+        text-descendScale: 0.850000
+-   selector: ".t-headline.zh-Hans"
+    properties:
+        text-ascendScale: 0.950000
+        text-descendScale: 0.850000
+-   selector: ".t-title.ja"
+    properties:
+        text-ascendScale: 0.900000
+        text-descendScale: 0.750000
+-   selector: ".t-title.ko"
+    properties:
+        text-ascendScale: 0.900000
+        text-descendScale: 1.100000
+-   selector: ".t-title.zh-Hant"
+    properties:
+        text-ascendScale: 0.950000
+        text-descendScale: 0.700000
+-   selector: ".t-title.zh-Hans"
+    properties:
+        text-ascendScale: 0.900000
+        text-descendScale: 0.700000

@@ -1,0 +1,220 @@
+Header:
+    version: "84"
+Prototypes:
+-   class: "UIControl"
+    name: "KarmaButton"
+    size: [200.000000, 64.000000]
+    input: true
+    classes: "profile-karma-button button-open-sound"
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "Formula"
+            verticalFormula: "max(parent, childrenSum)"
+        UIInputEventComponent:
+            onTouchUpInside: "ON_PRESSED"
+        UIDataParamsComponent:
+            params:
+            - ["int", "karmaLevel", "0", "5"]
+            - ["int", "maxKarmaLevel", "5", "5"]
+            events:
+            - "ON_PRESSED"
+        Sound: {}
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Lobby/Profile/Common/KarmaButton.style.yaml;~res:/UI/Screens3/ButtonSound.style.yaml"
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        position: [100.000000, 32.000000]
+        pivot: [0.500000, 0.500000]
+        input: false
+        components:
+            UIOpacityComponent: {}
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+            LinearLayout:
+                orientation: "TopDown"
+            SizePolicy:
+                verticalPolicy: "Formula"
+                verticalFormula: "max(parent, childrenSum)"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Lobby/Profile/Common/KarmaButton.style.yaml"
+        children:
+        -   class: "UIControl"
+            name: "Hover"
+            size: [32.000000, 32.000000]
+            input: false
+            classes: "hover white-wild-sand-10-bg"
+            components:
+                Background:
+                    drawType: "DRAW_STRETCH_BOTH"
+                    sprite: "~res:/Gfx/Lobby/backgrounds/bg_r1"
+                    leftRightStretchCap: 2.000000
+                    topBottomStretchCap: 1.000000
+                UIOpacityComponent: {}
+                Anchor:
+                    leftAnchorEnabled: true
+                    rightAnchorEnabled: true
+                    topAnchorEnabled: true
+                    topAnchor: -8.000000
+                    bottomAnchorEnabled: true
+                    bottomAnchor: -8.000000
+                IgnoreLayout: {}
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/Lobby/Profile/Common/KarmaButton.style.yaml"
+        -   class: "UIControl"
+            name: "Header"
+            position: [8.000000, 8.000000]
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                LinearLayout:
+                    dynamicPadding: true
+                    spacing: 4.000000
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "parent - 16"
+                    verticalPolicy: "PercentOfFirstChild"
+            children:
+            -   class: "UIControl"
+                name: "Title"
+                input: false
+                classes: "t-body regular color=white-wild-sand-50-text"
+                components:
+                    UITextComponent:
+                        text: "profile/Brief/Karma"
+                        multiline: "MULTILINE_ENABLED"
+                        fitting: "FITTING_POINTS"
+                        align: ["RIGHT", "VCENTER"]
+                    SizePolicy:
+                        horizontalPolicy: "Formula"
+                        horizontalFormula: "min(parentRest, content)"
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml"
+            -   class: "UIControl"
+                name: "InfoIcon"
+                input: false
+                components:
+                    UITextureComponent:
+                        spritePath: "~res:/Gfx/Lobby/icons/icon_info-color_xs"
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 24.000000
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 24.000000
+        -   class: "UIControl"
+            name: "Spacer"
+            input: false
+            components:
+                SizePolicy:
+                    verticalPolicy: "Formula"
+                    verticalFormula: "max(8, parentRest)"
+        -   class: "UIControl"
+            name: "StarsWrapper"
+            position: [56.000000, 36.000000]
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfFirstChild"
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 36.000000
+            children:
+            -   class: "UIControl"
+                name: "Stars"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                    LinearLayout:
+                        spacing: 2.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        verticalPolicy: "PercentOfMaxChild"
+                children:
+                -   class: "UIControl"
+                    name: "Star1"
+                    size: [32.000000, 32.000000]
+                    input: false
+                    components:
+                        UITextureComponent:
+                            spritePath: "~res:/Gfx/UI/Karma/Star_icon"
+                            drawType: "DRAW_SCALE_PROPORTIONAL"
+                        SizePolicy:
+                            horizontalPolicy: "FixedSize"
+                            horizontalValue: 16.000000
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 16.000000
+                    bindings:
+                    - ["UITextureComponent.frame", "when karmaLevel >= 1 -> 1, 0"]
+                -   class: "UIControl"
+                    name: "Star2"
+                    size: [32.000000, 32.000000]
+                    input: false
+                    components:
+                        UITextureComponent:
+                            spritePath: "~res:/Gfx/UI/Karma/Star_icon"
+                            drawType: "DRAW_SCALE_PROPORTIONAL"
+                        SizePolicy:
+                            horizontalPolicy: "FixedSize"
+                            horizontalValue: 16.000000
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 16.000000
+                    bindings:
+                    - ["UITextureComponent.frame", "when karmaLevel >= 2 -> 1, 0"]
+                -   class: "UIControl"
+                    name: "Star3"
+                    size: [32.000000, 32.000000]
+                    input: false
+                    components:
+                        UITextureComponent:
+                            spritePath: "~res:/Gfx/UI/Karma/Star_icon"
+                            drawType: "DRAW_SCALE_PROPORTIONAL"
+                        SizePolicy:
+                            horizontalPolicy: "FixedSize"
+                            horizontalValue: 16.000000
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 16.000000
+                    bindings:
+                    - ["UITextureComponent.frame", "when karmaLevel >= 3 -> 1, 0"]
+                -   class: "UIControl"
+                    name: "Star4"
+                    size: [32.000000, 32.000000]
+                    input: false
+                    components:
+                        UITextureComponent:
+                            spritePath: "~res:/Gfx/UI/Karma/Star_icon"
+                            drawType: "DRAW_SCALE_PROPORTIONAL"
+                        SizePolicy:
+                            horizontalPolicy: "FixedSize"
+                            horizontalValue: 16.000000
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 16.000000
+                    bindings:
+                    - ["UITextureComponent.frame", "when karmaLevel >= 4 -> 1, 0"]
+                -   class: "UIControl"
+                    name: "Star5"
+                    size: [32.000000, 32.000000]
+                    input: false
+                    components:
+                        UITextureComponent:
+                            spritePath: "~res:/Gfx/UI/Karma/Star_icon"
+                            drawType: "DRAW_SCALE_PROPORTIONAL"
+                        SizePolicy:
+                            horizontalPolicy: "FixedSize"
+                            horizontalValue: 16.000000
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 16.000000
+                    bindings:
+                    - ["UITextureComponent.frame", "when karmaLevel >= 5 -> 1, 0"]

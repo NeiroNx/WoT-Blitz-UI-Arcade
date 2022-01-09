@@ -1,0 +1,25 @@
+Header:
+    version: 138
+ImportedPackages:
+- "~res:/UI/Screens3/Common/PopupMenuWithRichText.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "NotEnoughParts"
+    input: false
+    components:
+        Anchor:
+            leftAnchorEnabled: true
+            rightAnchorEnabled: true
+            topAnchorEnabled: true
+            bottomAnchorEnabled: true
+    children:
+    -   prototype: "PopupMenuWithRichText/Slave"
+        name: "Slave"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "isAlignLeft": "false"
+                    "title": "\"\""
+                    "text": "localize(\"storage/Items/Warning/NotEnoughItems\")"
+                    "slaveAlign": "ePositionAlign.Bottom"
+                    "masterId": "\"BUY\""

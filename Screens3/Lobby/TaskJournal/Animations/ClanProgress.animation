@@ -1,0 +1,65 @@
+animation ClanProgress
+{
+	if (isAnimationInProgress == false and needAnimation)
+	{
+		Wait(0.05); // waiting overall initialization	
+		Scale(path="**/Particle", time = 0, x = 1.0, y = 1.0);
+		ChangeData(animationRewardIndex, (when cache.lastClanWeekCode == weekData.code -> cache.lastClanRewardIndex, 0));
+		ChangeData(animationRewardProgress, (when cache.lastClanWeekCode == weekData.code -> cache.lastClanRewardProgress, 0));
+		ChangeData(animationTargetRewardIndex, weekData.currentRewardIndex);
+		ChangeData(isAnimationInProgress, true);
+		Wait(0.05);
+
+		repeat(animationTargetRewardIndex - animationRewardIndex)
+		{
+			ChangeData(animationTargetRewardProgress, weekData.rewards[animationRewardIndex].proxyNeeded);
+			ChangeData(animationTime, float(animationTargetRewardProgress - animationRewardProgress) / animationTargetRewardProgress * basicAnimationTime);
+			DirectEvent("AnimateProgress", "./Rewards/ClanReward" + str(animationRewardIndex), 
+				(when receiveRewardAllowed -> eClanRewardState.CanBeTaken, timeFinished -> eClanRewardState.CannotBeTaken, eClanRewardState.Completed),
+				animationTargetRewardProgress, animationTime, basicAnimationTime);
+			ChangeData(animationRewardProgress, animationTargetRewardProgress, animationTime);
+			ChangeData(animationRewardIndex, animationRewardIndex + 1);
+			ChangeData(animationRewardProgress, 0);
+		}
+
+		if (animationTargetRewardIndex == weekData.currentRewardIndex)
+		{
+			ChangeData(animationTargetRewardIndex, weekData.currentRewardIndex);		
+			ChangeData(animationTargetRewardProgress, weekData.clanCurrentTaskProxy.quantity);
+			ChangeData(animationTime, float(animationTargetRewardProgress - animationRewardProgress) / weekData.rewards[animationRewardIndex].proxyNeeded * basicAnimationTime);
+
+			DirectEvent("AnimateProgress", "./Rewards/ClanReward" + str(animationTargetRewardIndex), 
+				(when animationTargetRewardProgress < weekData.rewards[animationRewardIndex].proxyNeeded 
+				-> eClanRewardState.InProgress, receiveRewardAllowed -> eClanRewardState.CanBeTaken, eClanRewardState.Completed), 
+				animationTargetRewardProgress, animationTime, basicAnimationTime);
+
+			ChangeData(animationRewardProgress, animationTargetRewardProgress, animationTime);
+
+			Scale(path="**/Particle", time = 0.5, y = 0.0);
+			if (animationTime < basicAnimationTime)
+			{
+				Wait(basicAnimationTime - animationTime);
+			}
+			
+
+			if (animationTargetRewardIndex != cache.lastClanRewardIndex)
+			{
+				ChangeData(cache.lastClanRewardIndex, animationTargetRewardIndex);
+			}
+			
+			if (animationTargetRewardProgress != cache.lastClanRewardProgress)
+			{
+				ChangeData(cache.lastClanRewardProgress, animationTargetRewardProgress);
+			}
+
+			if (cache.lastClanWeekCode != weekData.code)
+			{
+				ChangeData(cache.lastClanWeekCode, weekData.code);
+			}
+		}
+
+		ChangeData(isAnimationInProgress, false);
+		Wait(0.05);
+		Event("AnimateClanProgress");
+	}
+}

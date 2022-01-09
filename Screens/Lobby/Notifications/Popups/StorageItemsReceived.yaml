@@ -1,0 +1,224 @@
+Header:
+    version: "111"
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/Resource/Currency.yaml"
+Prototypes:
+-   class: "UIControl"
+    customClass: "UIStorageItemsReceivedNotification"
+    name: "StorageItemsReceived"
+    size: [32.000000, 32.000000]
+    input: true
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfFirstChild"
+            verticalPolicy: "PercentOfFirstChild"
+    children:
+    -   class: "UIControl"
+        name: "NotificationBase"
+        size: [608.000000, 64.000000]
+        input: false
+        components:
+            LinearLayout:
+                orientation: "TopDown"
+                padding: "8; 0"
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfMaxChild"
+            UIDataParamsComponent:
+                params:
+                - ["bool", "isButtonVisible", "false", "true"]
+                - ["int", "quantity", "0", "50"]
+                - ["string", "artefactTitle", "\"\"", "\"\""]
+                - ["ResourceModel", "resource", "null", "{ }"]
+                args:
+                    "isButtonVisible": "true"
+                    "quantity": "0"
+                    "artefactTitle": "\"\""
+                    "resource": "{ }"
+                events:
+                - "GO_TO_RECEIVED_STUFF"
+                eventActions:
+                - ["GO_TO_RECEIVED_STUFF", "", ""]
+        children:
+        -   class: "UIControl"
+            name: "Body"
+            size: [608.000000, 64.000000]
+            input: false
+            components:
+                LinearLayout:
+                    orientation: "LeftToRight"
+                    padding: "0;1"
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 608.000000
+                    verticalPolicy: "PercentOfMaxChild"
+                    verticalMin: 64.000000
+                    verticalMax: 80.000000
+            children:
+            -   class: "UIControl"
+                name: "Bg"
+                input: false
+                components:
+                    UITextureComponent:
+                        spritePath: "~res:/Gfx/Lobby/backgrounds/bg_dark_r8"
+                        drawType: "DRAW_STRETCH_BOTH"
+                        leftRightStretchCap: 8.000000
+                        topBottomStretchCap: 8.000000
+                    IgnoreLayout: {}
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+            -   class: "UIControl"
+                name: "IconWrapper"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 56.000000
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 56.000000
+                children:
+                -   class: "UIControl"
+                    name: "IconHolder"
+                    position: [11.000000, 4.000000]
+                    input: false
+                    components:
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfMaxChild"
+                            verticalPolicy: "PercentOfMaxChild"
+                        UIChildComponent0:
+                            childType: "kPrototype"
+                            prototypePath: "~res:/UI/Screens3/Lobby/Common/Notifications/Common/NotificationIcon.yaml"
+                            control: ""
+                            args:
+                                "iconPath": "\"~res:/Gfx/Lobby/icons/icon_finance_s\""
+            -   class: "UIControl"
+                name: "ContentHolder"
+                input: false
+                components:
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "Formula"
+                        verticalFormula: "when parent == 0 -> maxChild + 20, min(parent - 20, maxChild)"
+                children:
+                -   class: "UIControl"
+                    name: "Content"
+                    size: [100.000000, 50.000000]
+                    input: false
+                    components:
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfChildrenSum"
+                        FlowLayout:
+                            hSpacing: 4.000000
+                            useRtl: true
+                    children:
+                    -   class: "UIControl"
+                        name: "BodyRegular"
+                        input: false
+                        classes: "t-caption regular white-wild-sand-50-text align-left"
+                        components:
+                            UITextComponent:
+                                text: "NEWS_NOTIFICATION_ITEMS_RECEIVES"
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfContent"
+                                verticalPolicy: "PercentOfContent"
+                            StyleSheet:
+                                styles: "~res:/UI/Screens3/Font.style.yaml"
+                    -   class: "UIControl"
+                        name: "CurrencyHolder"
+                        input: false
+                        components:
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfFirstChild"
+                                verticalPolicy: "PercentOfFirstChild"
+                        bindings:
+                        - ["visible", "resource.type != ResourceType.undefined"]
+                        children:
+                        -   prototype: "Currency/Currency"
+                            name: "Currency"
+                            components:
+                                UIDataParamsComponent:
+                                    args:
+                                        "forceFullValue": "false"
+                                        "currencySize": "eCurrencySize.SMALL"
+                                        "forButton": "false"
+                                        "canAfford": "true"
+                                        "isPlusTopPaneVisible": "false"
+                                        "serverTime": "0L"
+                                        "plusVisible": "false"
+                                        "resource": "resource"
+                    -   class: "UIControl"
+                        name: "GradeText"
+                        position: [278.000000, 0.000000]
+                        input: false
+                        components:
+                            UITextComponent:
+                                colorInheritType: "COLOR_IGNORE_PARENT"
+                                align: ["LEFT", "VCENTER"]
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfContent"
+                                verticalPolicy: "PercentOfContent"
+                            StyleSheet:
+                                styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+                        bindings:
+                        - ["visible", "resource.grade != ArtefactGrade.unknown"]
+                        - ["classes", "when resource.grade == ArtefactGrade.common -> \"t-caption bold white-wild-sand-text\", \"t-caption bold grades-\" + str(resource.grade, ArtefactGrade) + \"-text\""]
+                        - ["UITextComponent.text", "artefactTitle"]
+                    -   class: "UIControl"
+                        name: "Quantity"
+                        position: [278.000000, 0.000000]
+                        input: false
+                        classes: "t-caption bold white-wild-sand-text align-left"
+                        components:
+                            UITextComponent: {}
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfContent"
+                                verticalPolicy: "PercentOfContent"
+                            StyleSheet:
+                                styles: "~res:/UI/Screens3/Font.style.yaml"
+                        bindings:
+                        - ["visible", "resource.type != ResourceType.stuff"]
+                        - ["UITextComponent.text", "localize(format(localize(\"#common:Value\"), { \"value\" = quantity; }))"]
+            -   class: "UIControl"
+                name: "Spacer"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 16.000000
+                        verticalPolicy: "PercentOfParent"
+            -   class: "UIControl"
+                name: "ButtonsHolder"
+                position: [519.000000, 1.000000]
+                size: [88.000000, 78.000000]
+                input: false
+                components:
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        verticalPolicy: "Formula"
+                        verticalFormula: "parent - 2"
+                    UIChildComponent0:
+                        childType: "kPrototype"
+                        condition: "isButtonVisible"
+                        prototypePath: "~res:/UI/Screens3/Lobby/Common/Notifications/Common/NotificationButtonWithText.yaml"
+                        args:
+                            "text": "localize(\"#common:DialogButton/Go\")"
+                        eventActions:
+                        - ["ON_BUTTON_CLICK", "GO_TO_RECEIVED_STUFF", ""]
+                bindings:
+                - ["visible", "isButtonVisible"]

@@ -1,0 +1,5 @@
+animation Initialize(bool isReplacing)
+{
+    Opacity(".", opacity=0.0, interpolation=EASE_OUT);
+    Move("./OfferedOption", y=moveOutY);
+}

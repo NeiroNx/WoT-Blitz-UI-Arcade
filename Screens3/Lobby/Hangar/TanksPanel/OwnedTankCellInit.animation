@@ -1,0 +1,17 @@
+animation Init 
+{
+    if (selected)
+    {
+		Opacity(path = "**/Selector", opacity=1);
+		ChangeProperty("**/Selector","SizePolicy","horizontalValue", 100);
+        Event("INIT_STARTED_INDEX");
+    }
+    else
+    {
+		Opacity(path = "**/Selector", opacity=0);
+		ChangeProperty("**/Selector","SizePolicy","horizontalValue", 0);
+    }
+
+    Opacity(".", opacity=0.0);
+    Opacity(".", opacity=1, time=0.3, interpolation=EASE_OUT);
+}

@@ -1,0 +1,18 @@
+Header:
+    version: "111"
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/Notifications/SystemNotificationPrototype.yaml"
+Prototypes:
+-   prototype: "SystemNotificationPrototype/Notification"
+    customClass: "UIBundleNotification"
+    name: "BundleNotification"
+    components:
+        UIDataParamsComponent:
+            params:
+            - ["bool", "isBundleFree", "false", "false"]
+    children:
+    -   path: "NotificationItem/Content/Status/Result"
+        components:
+            UITextComponent: {}
+        bindings:
+        - ["UITextComponent.text", "when isBundleFree -> localize(\"shop/Notification/FreeTransactionProcessing\"), localize(\"shop/Notification/TransactionProcessing\")"]

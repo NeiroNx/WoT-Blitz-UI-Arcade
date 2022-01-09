@@ -1,0 +1,4 @@
+animation Init()
+{
+	ChangeData(cachedTankDisplayValue, tankDisplayValue, 0.0);
+}

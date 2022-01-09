@@ -1,0 +1,5 @@
+action TANK_PRESSED
+{
+  Event("ON_TANK_PRESS");
+  Event("INIT_STARTED_INDEX");
+}

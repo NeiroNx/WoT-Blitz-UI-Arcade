@@ -1,0 +1,30 @@
+Header:
+    version: "44"
+StyleSheets:
+-   selector: ".delta-down-bad"
+    properties:
+        bg-frame: 1
+-   selector: ".delta-down-good"
+    properties:
+        bg-frame: 0
+        bg-spriteModification: ["FLIP_VERTICAL"]
+        bg-color: [0.654902, 1.000000, 0.258824, 1.000000]
+-   selector: ".delta-up-good"
+    properties:
+        bg-frame: 0
+        bg-color: [0.654902, 1.000000, 0.258824, 1.000000]
+-   selector: ".delta-up-bad"
+    properties:
+        bg-frame: 1
+        bg-spriteModification: ["FLIP_VERTICAL"]
+-   selector: ".number-param-prototype2-worse"
+    properties:
+        text-color: [0.996078, 0.000000, 0.000000, 1.000000]
+-   selector: ".number-param-prototype2-better"
+    properties:
+        text-color: [0.333333, 0.847059, 0.000000, 1.000000]
+-   selector: ".number-param-prototype2-down"
+    properties: {}
+-   selector: ".number-param-prototype2-up"
+    properties:
+        bg-spriteModification: ["FLIP_VERTICAL"]

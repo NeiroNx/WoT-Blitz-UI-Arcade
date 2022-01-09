@@ -1,0 +1,29 @@
+Header:
+    version: 135
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/Notifications/SystemNotificationPrototype.yaml"
+- "~res:/UI/Screens3/Lobby/Common/NotificationBigButton.yaml"
+Controls:
+-   prototype: "SystemNotificationPrototype/Notification"
+    customClass: "UIQuestActivatorExpiryNotification"
+    name: "QuestActivatorExpiry"
+    children:
+    -   path: "NotificationItem/Content"
+        children:
+        -   prototype: "NotificationBigButton/NotificationButton"
+            name: "NotificationButton"
+            children:
+            -   path: "BUTTON"
+                position: [64.000000, 32.000000]
+                size: [84.000000, 20.000000]
+                components:
+                    UITextComponent:
+                        text: "HANGAR_NOTIFICATIONS_DETAILS"
+    -   path: "NotificationItem/Content/Status/Icon"
+        components:
+            Background:
+                sprite: "~res:/Gfx/Lobby/icons/icon_expiry_s"
+    -   path: "NotificationItem/Content/Status/Result"
+        components:
+            UITextComponent:
+                text: "HANGAR_NOTIFICATION_QUEST_ACTIVATOR_EXPIRE_SOON"

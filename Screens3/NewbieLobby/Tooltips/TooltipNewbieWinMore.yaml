@@ -1,0 +1,51 @@
+Header:
+    version: 125
+ImportedPackages:
+- "~res:/UI/Screens3/Common/Tooltip.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "TooltipNewbieWinMore"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["int", "battlesNeeded", "0", "0"]
+            events:
+            - "FINISH_HIDE_POPUP_ANIMATION"
+        UIDataLocalVarsComponent:
+            data:
+            - ["string", "win2time", "\"NewbieHangar/Tooltips/WinMore2\""]
+            - ["string", "win1time", "\"NewbieHangar/Tooltips/WinMore1\""]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["string", "text", "when battlesNeeded == 2 -> win2time, win1time"]
+    children:
+    -   prototype: "Tooltip/Slave"
+        name: "Slave"
+        position: [-84.000000, 65.000000]
+        components:
+            UIDataParamsComponent:
+                args:
+                    "offset": "0"
+                    "isAlignLeft": "false"
+                    "buttonVisible": "false"
+                    "rewardVisible": "false"
+                    "slaveAlign": "ePositionAlign.Bottom"
+                    "resource": "{ }"
+                    "title": "\"\""
+                    "text": "text"
+                    "colorClass": "\"color=white-wild-sand-text\""
+                    "masterId": "\"BATTLE_BUTTON\""
+                eventActions:
+                - ["CONTINUE", "", ""]
+                - ["FINISH_HIDE_POPUP_ANIMATION", "FINISH_HIDE_POPUP_ANIMATION", ""]
+        children:
+        -   path: "Content"
+            components:
+                UIInputEventComponent:
+                    onTouchUpInside: "ANIMATE_POPUP_ON_HIDE"
+            children: []

@@ -1,0 +1,112 @@
+Header:
+    version: 121
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/Notifications/Popups/Notification.yaml"
+- "~res:/UI/Screens/Fonts.yaml"
+Controls:
+-   class: "UIControl"
+    customClass: "UIGenericNotification"
+    name: "VideoAdsReward"
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+            padding: "8; 0"
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 608.000000
+            verticalPolicy: "PercentOfMaxChild"
+        UIDataParamsComponent:
+            params:
+            - ["vector<ResourceModel>", "model", "null", "[ { \"type\" = ResourceType.xp; }; { \"type\" = ResourceType.credits; }; ]"]
+        StyleSheet:
+            styles: "~res:/UI/Screens/Lobby/Notifications/Popups/Notification.style.yaml"
+    children:
+    -   class: "UIControl"
+        name: "Body"
+        input: false
+        components:
+            UITextureComponent:
+                spritePath: "~res:/Gfx/Lobby/backgrounds/bg_dark_r8"
+                drawType: "DRAW_STRETCH_BOTH"
+                leftRightStretchCap: 8.000000
+                topBottomStretchCap: 8.000000
+            LinearLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfMaxChild"
+                verticalMin: 64.000000
+                verticalMax: 80.000000
+        children:
+        -   prototype: "Notification/icon"
+            name: "icon"
+            classes: "notification-icon-video"
+            components:
+                Anchor:
+                    leftAnchorEnabled: false
+        -   prototype: "Notification/Content"
+            name: "Content"
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+            children:
+            -   class: "UIControl"
+                name: "ContentWrapper"
+                input: false
+                components:
+                    Anchor:
+                        leftAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                        useRtl: true
+                    LinearLayout:
+                        spacing: 8.000000
+                        useRtl: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        verticalPolicy: "PercentOfMaxChild"
+                children:
+                -   class: "UIControl"
+                    name: "Label"
+                    input: false
+                    classes: "t-caption regular white-wild-sand-70-text"
+                    components:
+                        UITextComponent:
+                            text: "#hangar:notification/RewardForVideo"
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfContent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+                -   class: "UIControl"
+                    name: "RewardContainer"
+                    position: [214.000000, 0.000000]
+                    input: false
+                    components:
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                            useRtl: true
+                        LinearLayout:
+                            orientation: "LeftToRight"
+                            spacing: 8.000000
+                            useRtl: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfChildrenSum"
+                            verticalPolicy: "PercentOfMaxChild"
+                        UIRepeatComponent:
+                            control: "~res:/UI/Screens3/Lobby/Common/Resource/Currency.yaml"
+                            dataContainer: "model"
+                            args:
+                                "forceFullValue": "false"
+                                "currencySize": "eCurrencySize.SMALL"
+                                "resource": "_item"
+        -   class: "UIControl"
+            name: "Spacer"
+            input: false
+            components:
+                Anchor:
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 16.000000
+                    verticalPolicy: "PercentOfParent"

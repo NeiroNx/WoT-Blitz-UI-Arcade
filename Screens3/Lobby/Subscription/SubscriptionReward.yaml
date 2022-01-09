@@ -1,0 +1,51 @@
+Header:
+    version: 141
+Prototypes:
+-   class: "UIControl"
+    name: "SubscriptionReward"
+    input: true
+    exclusiveInput: true
+    classes: "subscription-reward button-open-sound"
+    components:
+        Anchor:
+            hCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfMaxChild"
+        UIAttachLayoutMasterComponent: {}
+        UIInputEventComponent:
+            onTouchUpInside: "ON_CURRENCY_CLICKED"
+            onTouchUpInsideData: "attachId"
+        UIDataParamsComponent:
+            params:
+            - ["string", "attachId", "\"\"", "\"\""]
+            - ["ResourceDetailed", "resource", "null", "{ }"]
+            events:
+            - "ON_CURRENCY_CLICKED"
+        Sound: {}
+        StyleSheet:
+            styles: "~res:/UI/Screens3/ButtonSound.style.yaml"
+    bindings:
+    - ["UIAttachLayoutMasterComponent.attachId", "attachId"]
+    children:
+    -   class: "UIControl"
+        name: "CurrencyWrapper"
+        pivot: [0.500000, 0.500000]
+        input: false
+        classes: "content-area"
+        components:
+            UIOpacityComponent: {}
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfMaxChild"
+            UIChildComponent0:
+                childType: "kPrototype"
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/CurrencyAdapter.yaml"
+                args:
+                    "resource": "resource"
+                    "currencySize": "eCurrencySize.BIG_BOLD"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Common/Touch.style.yaml"

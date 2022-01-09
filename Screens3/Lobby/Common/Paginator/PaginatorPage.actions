@@ -1,0 +1,12 @@
+action INIT_ITEM(int item)
+{   
+	ChangeData(selectedItem, item);	
+}
+
+action CHANGE_ITEM(int item)
+{    	
+	ChangeData(newPos, (index - item)*width);	
+	Wait(0.1);
+	ChangeProperty(".", "Anchor", "leftAnchor", newPos, 0.7, EASE_OUT);
+	Event("SET_SELECTED_ITEM", arg1 = item);
+}

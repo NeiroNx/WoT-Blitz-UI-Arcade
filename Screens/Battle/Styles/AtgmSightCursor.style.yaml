@@ -1,0 +1,55 @@
+Header:
+    version: "110"
+StyleSheets:
+-   selectors:
+    - ".atgm-cursor.shell"
+    properties:
+        visible: false
+-   selectors:
+    - ".atgm-cursor.atgm"
+    properties:
+        visible: true
+-   selectors:
+    - ".atgm-cursor.atgm.loaded #ReloadBarContainer #ReloadBarProgress"
+    properties:
+        bg-color: [0.368627, 0.992157, 0.000000, 1.000000]
+-   selectors:
+    - ".atgm-cursor.atgm.loading #ReloadBarContainer #ReloadBarProgress"
+    properties:
+        bg-color: [0.992157, 1.000000, 0.078431, 1.000000]
+-   selectors:
+    - ".atgm-cursor.atgm.launched #ReloadBarContainer #ReloadBarProgress"
+    properties:
+        bg-color: [0.368627, 0.992157, 0.000000, 1.000000]
+-   selectors:
+    - ".atgm-cursor.atgm.loading #ReloadBarContainer #ReloadBarBase"
+    properties:
+        bg-color: [1.000000, 0.313726, 0.078431, 1.000000]
+-   selectors:
+    - ".atgm-cursor.atgm.over #ReloadBarContainer #ReloadBarProgress"
+    properties:
+        bg-color: [0.000000, 0.000000, 0.000000, 0.250980]
+-   selectors:
+    - ".atgm-cursor.atgm #FuelBarContainer #FuelBarBase"
+    properties:
+        bg-color: [0.368627, 0.992157, 0.000000, 1.000000]
+-   selectors:
+    - ".atgm-cursor.atgm.over #FuelBarContainer #FuelBarBase"
+    properties:
+        bg-color: [0.000000, 0.000000, 0.000000, 0.250980]
+-   selectors:
+    - ".atgm-cursor.atgm.launched #FuelBarContainer #FuelBarBase"
+    properties:
+        bg-color: [0.992157, 1.000000, 0.078431, 1.000000]
+-   selectors:
+    - ".atgm-cursor.atgm.loading #FuelBarContainer #FuelBarBase"
+    properties:
+        bg-color: [0.000000, 0.000000, 0.000000, 0.250980]
+-   selectors:
+    - ".atgm-cursor.atgm.loaded #FuelBarContainer #FuelBarBase"
+    properties:
+        bg-color: [0.368627, 0.992157, 0.000000, 1.000000]
+-   selectors:
+    - ".used-fuel-bg"
+    properties:
+        bg-color: [0.000000, 0.000000, 0.000000, 0.250980]

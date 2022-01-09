@@ -1,0 +1,13 @@
+action SCROLL_TO_STEP(int stepId)
+{
+    parallel
+    {
+        ScrollToEnsureControlOnScreen("**/Step" + str(stepId), 0.6, eScrollToControlPolicy.kCenter);
+        Event("SELECT_STEP", arg1 = stepId);
+    }
+}
+
+action SCREEN_SIZE_CHANGED(vector2 size)
+{
+    ChangeData(screenSize, size);
+}

@@ -1,0 +1,9 @@
+animation ShellSelectHintHide
+{
+	PlaySound(sound="play_tut_2021_ui_battle_hints_off");
+	
+	DirectEvent("Disappear", "./Hint/Top/Content/HintHolder");
+	
+	Wait(1.0);
+	Event("OnFadeOut");	
+}

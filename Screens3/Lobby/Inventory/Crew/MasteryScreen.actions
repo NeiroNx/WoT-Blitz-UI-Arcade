@@ -1,0 +1,25 @@
+action MASTERY_SELECTED_INTERNAL (eCrewTrainingType selectedElement)
+{
+    ChangeData(showCountAnimation, false, 0);
+    Event("MASTERY_SELECTED", arg1=selectedElement);
+    BroadcastEvent("CURRENCY_ARROW_ANIMATION_STOP", "**/FooterContent");
+    BroadcastEvent("CURRENCY_ARROW_ANIMATION_FINALIZE", "**/FooterContent");
+}
+
+action CURRENCY_ARROW_ANIMATION_END ()
+{
+    Wait(0.4);
+
+    repeat
+    {
+        parallel
+        {
+            ChangeData(progressBarAnimationMastery, levelMastery, 1, EASE_OUT);
+            Opacity("**/ProgressBarAnimation", 0, 1, EASE_OUT);
+        }
+
+        ChangeData(progressBarAnimationMastery, tankMastery, 0);
+        Wait(0.01);
+        Opacity("**/ProgressBarAnimation", 1, 0);
+    }
+}

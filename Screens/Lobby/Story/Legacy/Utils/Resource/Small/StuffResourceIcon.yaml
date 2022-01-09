@@ -1,0 +1,68 @@
+Header:
+    version: "85"
+Controls:
+-   class: "UIControl"
+    name: "StuffResourceIcon"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 32.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 32.000000
+        UIDataParamsComponent:
+            params:
+            - ["StuffResource", "stuff", "null", "{ title = \"storage/Items/FreeXPBooster/Regular/Title\"; description = \"storage/Items/FreeXPBooster/Rare/Description\"; icon = \"~res:/Gfx/Shared/boosters/booster_free-xp\"; iconUrl = \"\"; quantity = 20; lifetime = 604800L; grade = ArtefactGrade.rare; type = ArtefactType.booster; itemCompactDescr = 0; isEnough = false; }"]
+        UIDataLocalsComponent:
+            locals: []
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "Grade"
+            input: false
+            components:
+                UITextureComponent:
+                    spritePath: "~res:/Gfx/UI/Storage/Items_back"
+                    drawType: "DRAW_SCALE_PROPORTIONAL"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            bindings:
+            - ["UITextureComponent.color", "when stuff.grade == ArtefactGrade.common -> rgba(4214879, 1.000000), stuff.grade == ArtefactGrade.rare -> rgba(408010, 1.000000), stuff.grade == ArtefactGrade.unique -> rgba(6948762, 1.000000), stuff.grade == ArtefactGrade.legendary -> rgba(14588165, 1.000000), rgba(16777215, 0.000000)"]
+        -   class: "UIControl"
+            name: "Icon"
+            input: false
+            components:
+                UITextureComponent:
+                    drawType: "DRAW_SCALE_PROPORTIONAL"
+                    perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            bindings:
+            - ["visible", "empty(stuff.iconUrl)"]
+            - ["UITextureComponent.spritePath", "stuff.icon"]
+        -   class: "UIControl"
+            name: "IconUrl"
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_PROPORTIONAL"
+                    perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                UIUrlImageComponent:
+                    placeholderScenePath: "~res:/UI/Screens/Common/LoadingControl.yaml"
+                    placeholderControlName: "LoadingControl"
+                    downscaleEnabled: false
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            bindings:
+            - ["visible", "not empty(stuff.iconUrl)"]
+            - ["UIUrlImageComponent.imageUrl", "stuff.iconUrl"]

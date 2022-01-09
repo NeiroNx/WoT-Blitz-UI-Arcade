@@ -1,0 +1,40 @@
+Header:
+    version: 134
+Prototypes:
+-   class: "UIControl"
+    name: "Paginator"
+    components:
+        LinearLayout: {}
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "PercentOfMaxChild"
+        UISwitchBarComponent:
+            onSelectElement: "CHANGED_SELECTED_ITEM"
+            onSelectElementData: "_selectedElement"
+            selectionEventType: "TOUCH_UP"
+        UIDataParamsComponent:
+            params:
+            - ["int", "selectedItem", "0", "0"]
+            - ["vector<int>", "points", "null", "[ 0; 1; 2; 3; 4; 5; ]"]
+            - ["int", "pointSize", "8", "4"]
+            - ["int", "PointCellWidth", "20", "20"]
+            - ["int", "PointCellHeight", "32", "32"]
+            - ["bool", "progressVisible", "false", "true"]
+            - ["float", "progress", "0.000000", "0.750000"]
+            - ["bool", "invert", "false", "false"]
+            events:
+            - "CHANGED_SELECTED_ITEM"
+        UIRepeatComponent:
+            control: "~res:/UI/Screens3/Lobby/Common/Paginator/Point.yaml"
+            dataContainer: "points"
+            args:
+                "pointSize": "pointSize"
+                "number": "_index"
+                "isSelected": "selectedItem == _index"
+                "PointCellWidth": "PointCellWidth"
+                "PointCellHeight": "PointCellHeight"
+                "progressVisible": "progressVisible"
+                "progress": "progress"
+                "invert": "invert"
+    bindings:
+    - ["UISwitchBarComponent.selectedElement", "selectedItem"]

@@ -1,0 +1,79 @@
+action ImageLoaded
+{
+    if (not imageLoaded)
+    {
+        ChangeData(imageLoaded, true);
+
+        if (not animating)
+        {
+            if (not firstShow)
+            {
+                ChangeData(animating, true);
+                Event("OrdinaryShow");
+            }
+
+            if (firstShow and readyToShow)
+            {
+                ChangeData(animating, true);
+                Event("ShowFirstTime");
+            }
+        }
+    }
+}
+
+action OrdinaryShow
+{
+    Wait(0.5);
+    Opacity("./Image", opacity=1.0, time=0.5, interpolation=EASE_IN);
+    Event("ShowContent");
+}
+
+action ShowContent
+{
+    ChangeData(show, true);
+    WaitEvent("CONTENT_LOADED");
+    DirectEvent("ShowBlur", "./Content/Content");
+    Opacity("./Content", 1.0, fadeInTime, EASE_IN);
+}
+
+action OnReadyForFirstShow
+{
+    if (not animating)
+    {
+        ChangeData(animating, true);
+        Event("ShowFirstTime");
+    }
+}
+
+action ShowFirstTime
+{
+    Event("SHOWN");
+    parallel
+    {
+        Opacity("./Placeholder", opacity=1.0, time=firstShowOpacityTime, interpolation=EASE_IN);
+        ChangeProperty("./Placeholder", "Anchor", "topAnchor", moveInTopAnchor, firstShowDropTime, BOUNCE_OUT);
+    }
+    parallel
+    {
+        Scale("./Placeholder", x=0.01, time=firstShowFoldTime, interpolation=EASE_IN);
+        sequence
+        {
+            Wait(firstShowFoldTime - firstShowOpacityTime);
+            Opacity("./Placeholder", opacity=0.0, time=firstShowOpacityTime, interpolation=EASE_OUT);
+        }
+        sequence
+        {
+            Wait(firstShowFoldTime - 0.1);
+            StartParticles("**/BlinkFx");
+        }
+    }
+    Scale("./Image", x=0.01);
+    parallel
+    {
+        Opacity("./Image", opacity=1.0, time=firstShowOpacityTime, interpolation=EASE_IN);
+        Scale("./Image", x=1.0, time=firstShowFoldTime, interpolation=EASE_IN);
+    }
+    Opacity("./Placeholder", opacity=1.0);
+    Scale("./Placeholder", x=1.0);
+    Event("ShowContent");
+}

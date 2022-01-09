@@ -1,0 +1,54 @@
+Header:
+    version: 130
+Prototypes:
+-   class: "UIControl"
+    name: "TankNameContainer"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        Anchor:
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "Formula"
+            horizontalFormula: "lastChild+6"
+            verticalPolicy: "FixedSize"
+            verticalValue: 20.000000
+    children:
+    -   class: "UIControl"
+        name: "Background"
+        position: [0.000000, 0.000000]
+        size: [60.000000, 24.000000]
+        input: false
+        components:
+            Background:
+                drawType: "DRAW_FILL"
+                color: [0.800000, 0.478431, 0.478431, 1.000000]
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+            UIRoundedCornersComponent:
+                radius: "2"
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "FixedSize"
+                verticalValue: 20.000000
+    -   class: "UIControl"
+        name: "TankName"
+        position: [3.000000, 0.000000]
+        size: [60.000000, 24.000000]
+        input: false
+        classes: "t-old-header6"
+        components:
+            UITextComponent:
+                text: "T110E3"
+                color: [0.349020, 0.070588, 0.070588, 1.000000]
+                align: ["RIGHT", "VCENTER"]
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/OldFont.style.yaml"

@@ -1,0 +1,48 @@
+Header:
+    version: "85"
+Controls:
+-   class: "UIControl"
+    name: "ProgressBar"
+    size: [320.000000, 8.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["int", "minimum", "0", "0"]
+            - ["int", "maximum", "0", "100"]
+            - ["int", "value", "0", "50"]
+            events: []
+        UIDataLocalsComponent:
+            locals:
+            - ["float", "progress", "float(value - minimum) / float(maximum - minimum) * 100.000000"]
+            - ["string", "progressBarClass", "when progress < 100.000000 -> \"progress-bar-not-ready\", \"progress-bar-ready\""]
+            - ["string", "styleClasses", "progressBarClass + \" color-white-20\""]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            Background:
+                drawType: "DRAW_FILL"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            StyleSheet:
+                styles: "~res:/UI/Styles/ProgressBarStyles.yaml;~res:/UI/Styles/ColorStyles.yaml"
+        bindings:
+        - ["classes", "styleClasses"]
+        children:
+        -   class: "UIControl"
+            name: "Overlay"
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_FILL"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            bindings:
+            - ["SizePolicy.horizontalValue", "progress"]

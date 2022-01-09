@@ -1,0 +1,302 @@
+Header:
+    version: "85"
+ImportedPackages:
+- "~res:/UI/Styles/ButtonStyle.yaml"
+- "~res:/UI/Screens/Fonts.yaml"
+- "~res:/UI/Styles/BackgroundStyles.yaml"
+- "~res:/UI/Screens/Lobby/Common/Arrow.yaml"
+- "~res:/UI/Styles/ColorStyles.yaml"
+StyleSheets:
+-   selectors:
+    - ".achiev-item.flexible"
+    properties:
+        sizePolicy-horizontalPolicy: "PercentOfMaxChild"
+-   selectors:
+    - ".achiev-item.flexible ? #Progress"
+    properties:
+        sizePolicy-horizontalPolicy: "PercentOfMaxChild"
+-   selectors:
+    - ".achiev-item.flexible #background"
+    properties:
+        sizePolicy-horizontalPolicy: "Formula"
+-   selectors:
+    - ".achiev-item"
+    properties:
+        sizePolicy-horizontalPolicy: "Ignore"
+-   selectors:
+    - ".achiev-item #background"
+    properties:
+        sizePolicy-horizontalPolicy: "PercentOfParent"
+-   selectors:
+    - ".achiev-item ? #Progress"
+    properties:
+        sizePolicy-horizontalPolicy: "PercentOfParent"
+-   selectors:
+    - ".achiev-item.flexible-progress ? #Progress"
+    properties:
+        sizePolicy-horizontalPolicy: "PercentOfMaxChild"
+Prototypes:
+-   class: "UIControl"
+    customClass: "UIAchievementItem"
+    name: "AchievementItem"
+    size: [120.000000, 129.000000]
+    input: false
+    classes: "achiev-item"
+    components:
+        Background: {}
+        SizePolicy:
+            verticalPolicy: "PercentOfFirstChild"
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Lobby/Common/AchievementItem.yaml"
+    children:
+    -   class: "UIControl"
+        name: "background"
+        position: [0.000000, 0.000000]
+        size: [120.000000, 129.000000]
+        classes: "button"
+        components:
+            Background:
+                colorInherit: "COLOR_MULTIPLY_ON_PARENT"
+            Anchor:
+                hCenterAnchorEnabled: true
+                topAnchorEnabled: true
+            LinearLayout:
+                orientation: "TopDown"
+            SizePolicy:
+                horizontalFormula: "max(120, maxChild)"
+                verticalPolicy: "Formula"
+                verticalFormula: "max(parent, childrenSum)"
+        children:
+        -   class: "UIControl"
+            name: "icon"
+            size: [100.000000, 95.000000]
+            input: false
+            components:
+                Background:
+                    colorInherit: "COLOR_MULTIPLY_ON_PARENT"
+                Anchor:
+                    hCenterAnchorEnabled: true
+            children:
+            -   class: "UIControl"
+                customClass: "UIAchievementIcon"
+                name: "image"
+                position: [50.000000, 47.500000]
+                size: [100.000000, 100.000000]
+                pivot: [0.500000, 0.500000]
+                input: false
+                components:
+                    Background:
+                        sprite: "~res:/Gfx/Lobby/medals/steelwall"
+                        colorInherit: "COLOR_MULTIPLY_ON_PARENT"
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+            -   class: "UIControl"
+                name: "count"
+                position: [65.000000, 66.500000]
+                size: [30.000000, 22.000000]
+                input: false
+                components:
+                    Background:
+                        drawType: "DRAW_STRETCH_BOTH"
+                        sprite: "~res:/Gfx/UI/ProfileScreen/Number"
+                        colorInherit: "COLOR_MULTIPLY_ON_PARENT"
+                        leftRightStretchCap: 4.000000
+                        topBottomStretchCap: 4.000000
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        hCenterAnchor: 30.000000
+                        vCenterAnchorEnabled: true
+                        vCenterAnchor: 30.000000
+                    LinearLayout:
+                        padding: "5.000000"
+                        dynamicPadding: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfMaxChild"
+                        horizontalMin: 30.000000
+                children:
+                -   class: "UIStaticText"
+                    name: "text"
+                    size: [0.000000, 21.000000]
+                    input: false
+                    classes: "header5"
+                    components:
+                        Background:
+                            align: ["LEFT", "TOP"]
+                            leftRightStretchCap: 4.000000
+                            topBottomStretchCap: 4.000000
+                        UITextComponent:
+                            colorInheritType: "COLOR_IGNORE_PARENT"
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+            -   class: "UIControl"
+                name: "series"
+                position: [65.000000, 66.500000]
+                size: [30.000000, 22.000000]
+                input: false
+                components:
+                    Background:
+                        sprite: "~res:/Gfx/UI/ProfileScreen/SeriesCounter"
+                        colorInherit: "COLOR_MULTIPLY_ON_PARENT"
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        hCenterAnchor: 30.000000
+                        vCenterAnchorEnabled: true
+                        vCenterAnchor: 30.000000
+                children:
+                -   class: "UIStaticText"
+                    name: "text"
+                    position: [-5.000000, -1.500000]
+                    size: [38.000000, 21.000000]
+                    input: false
+                    classes: "header5"
+                    components:
+                        UITextComponent:
+                            colorInheritType: "COLOR_MULTIPLY_ON_PARENT"
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                            hCenterAnchor: -1.000000
+                            vCenterAnchorEnabled: true
+                            vCenterAnchor: -2.000000
+        -   class: "UIStaticText"
+            name: "title"
+            position: [1.000000, 95.000000]
+            size: [118.000000, 0.000000]
+            input: false
+            classes: "header5"
+            components:
+                Background:
+                    colorInherit: "COLOR_MULTIPLY_ON_PARENT"
+                UITextComponent:
+                    colorInheritType: "COLOR_MULTIPLY_ALPHA_ONLY"
+                    multiline: "MULTILINE_ENABLED"
+                    align: ["HCENTER", "TOP"]
+                    useRtlAlign: "DONT_USE"
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 1.000000
+                    hCenterAnchorEnabled: true
+                    rightAnchorEnabled: true
+                    rightAnchor: 1.000000
+                SizePolicy:
+                    verticalPolicy: "PercentOfContent"
+        -   class: "UIControl"
+            customClass: "UIProgressBar"
+            name: "progressBar"
+            position: [20.000000, 95.000000]
+            size: [80.000000, 12.000000]
+            input: false
+            components:
+                Background:
+                    colorInherit: "COLOR_MULTIPLY_ON_PARENT"
+                Anchor:
+                    hCenterAnchorEnabled: true
+            children:
+            -   class: "UIControl"
+                name: "LeftValue"
+                position: [0.000000, 4.000000]
+                size: [40.000000, 4.000000]
+                input: false
+                components:
+                    Background:
+                        drawType: "DRAW_SCALE_TO_RECT"
+                        sprite: "~res:/Gfx/UI/LobbyCommon/ProgressBar"
+                        frame: 1
+                        colorInherit: "COLOR_MULTIPLY_ON_PARENT"
+                    Anchor:
+                        leftAnchorEnabled: true
+                        leftAnchor: 0.000000
+                        vCenterAnchorEnabled: true
+                        vCenterAnchor: 0.000000
+            -   class: "UIControl"
+                name: "RightValue"
+                position: [40.000000, 4.000000]
+                size: [40.000000, 4.000000]
+                input: false
+                components:
+                    Background:
+                        drawType: "DRAW_SCALE_TO_RECT"
+                        sprite: "~res:/Gfx/UI/LobbyCommon/ProgressBar"
+                        colorInherit: "COLOR_MULTIPLY_ON_PARENT"
+                    Anchor:
+                        rightAnchorEnabled: true
+                        rightAnchor: 0.000000
+                        vCenterAnchorEnabled: true
+                        vCenterAnchor: 0.000000
+        -   class: "UIControl"
+            name: "Progress"
+            position: [0.000000, 107.000000]
+            size: [120.000000, 22.000000]
+            input: false
+            components:
+                Background:
+                    colorInherit: "COLOR_MULTIPLY_ON_PARENT"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                SizePolicy:
+                    verticalPolicy: "PercentOfChildrenSum"
+                FlowLayout:
+                    hDynamicInLinePadding: true
+            children:
+            -   class: "UIControl"
+                name: "Diff"
+                size: [22.000000, 22.000000]
+                input: false
+                components:
+                    Background:
+                        colorInherit: "COLOR_MULTIPLY_ON_PARENT"
+                    Anchor:
+                        topAnchorEnabled: true
+                        bottomAnchorEnabled: true
+                    LinearLayout: {}
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                children:
+                -   class: "UIStaticText"
+                    name: "Value"
+                    size: [0.000000, 22.000000]
+                    input: false
+                    classes: "text2-small"
+                    components:
+                        UITextComponent:
+                            color: [0.380400, 0.764700, 0.000000, 1.000000]
+                            colorInheritType: "COLOR_MULTIPLY_ALPHA_ONLY"
+                            align: ["RIGHT", "VCENTER"]
+                            useRtlAlign: "DONT_USE"
+                        Anchor:
+                            topAnchorEnabled: true
+                            bottomAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                -   class: "UIControl"
+                    name: "deltaValueUpDown"
+                    size: [22.000000, 22.000000]
+                    input: false
+                    components:
+                        Background:
+                            sprite: "~res:/Gfx/UI/Hangar/CharacterArrow"
+                            colorInherit: "COLOR_MULTIPLY_ON_PARENT"
+                        Anchor:
+                            topAnchorEnabled: true
+                            bottomAnchorEnabled: true
+            -   class: "UIStaticText"
+                name: "Value"
+                position: [71.000000, 0.000000]
+                size: [0.000000, 22.000000]
+                input: false
+                classes: "text2-small"
+                components:
+                    UITextComponent:
+                        color: [0.627500, 0.725500, 0.800000, 1.000000]
+                        colorInheritType: "COLOR_MULTIPLY_ALPHA_ONLY"
+                        shadowOffset: [0.000000, 1.000000]
+                    Anchor:
+                        topAnchorEnabled: true
+                        bottomAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"

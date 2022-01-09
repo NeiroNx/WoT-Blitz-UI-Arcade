@@ -1,0 +1,8 @@
+Header:
+    version: "100"
+StyleSheets:
+-   selectors:
+    - ".button-color-red-nintendo"
+    properties:
+        bg-gradient: "~res:/Gfx/Lobby/controls/buttons/nintendo-switch/red_nintendo_gradient"
+        bg-contour: "~res:/Gfx/Lobby/controls/buttons/nintendo-switch/red_nintendo_contour"

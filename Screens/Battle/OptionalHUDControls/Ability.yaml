@@ -1,0 +1,246 @@
+Header:
+    version: "111"
+ImportedPackages:
+- "~res:/UI/Screens/Common/Selection.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "Ability"
+    input: true
+    exclusiveInput: false
+    classes: "ability ability-state=ability-off ability-grade-1"
+    components:
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 184.000000
+            verticalPolicy: "Formula"
+            verticalFormula: "when parent == 0 -> firstChild, max(parent, firstChild)"
+        StyleSheet:
+            styles: "~res:/UI/Screens/Battle/Styles/HUDLayerHellgamesStyles.yaml"
+    children:
+    -   class: "UIControl"
+        name: "AbilityButton"
+        classes: "button-color-gray"
+        components:
+            Background: {}
+            UIOpacityComponent: {}
+            LinearLayout:
+                orientation: "TopDown"
+                padding: "0;24"
+                spacing: 20.000000
+                dynamicSpacing: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "Formula"
+                verticalFormula: "max(parent, childrenSum + linearLayoutTrailingPadding)"
+            UIInputEventComponent: {}
+            StyleSheet:
+                styles: "~res:/UI/Screens/Battle/Styles/HUDLayerHellgamesStyles.yaml;~res:/UI/Styles/ButtonStyle.yaml"
+        children:
+        -   class: "UIControl"
+            name: "Background"
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_TILED_MULTILAYER"
+                    mask: "~res:/Gfx/UI/CommonUIElements/Button/mask.psd"
+                    detail: "~res:/Gfx/UI/CommonUIElements/Button/detail.psd"
+                    gradient: "~res:/Gfx/UI/CommonUIElements/Button/gray_gradient.psd"
+                    contour: "~res:/Gfx/UI/CommonUIElements/Button/gray_contour.psd"
+                    gradientMode: "Overlay"
+                    colorInherit: "COLOR_MULTIPLY_ON_PARENT"
+                    leftRightStretchCap: 20.000000
+                    topBottomStretchCap: 20.000000
+                IgnoreLayout: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens/Common/StyledButton.yaml;~res:/UI/Styles/ButtonSoundStyles.yaml"
+            children:
+            -   class: "UIControl"
+                name: "Control"
+                visible: true
+                input: false
+                components:
+                    Background:
+                        drawType: "DRAW_STRETCH_BOTH"
+                        sprite: "~res:/Gfx/UI/CommonUIElements/Button/mask.psd"
+                        color: [1.000000, 1.000000, 1.000000, 0.500000]
+                        leftRightStretchCap: 20.000000
+                        topBottomStretchCap: 20.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+        -   class: "UIControl"
+            name: "Content"
+            position: [8.000000, 0.000000]
+            size: [32.000000, 32.000000]
+            input: false
+            classes: "button"
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                LinearLayout:
+                    orientation: "TopDown"
+                    spacing: -8.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfChildrenSum"
+                StyleSheet:
+                    styles: "~res:/UI/Screens/Battle/Styles/HUDLayerHellgamesStyles.yaml"
+            children:
+            -   class: "UIControl"
+                name: "Notification"
+                size: [80.000000, 44.700001]
+                input: false
+                components:
+                    Background: {}
+                    UIOpacityComponent: {}
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                    StyleSheet:
+                        styles: "~res:/UI/Screens/Battle/Styles/HUDLayerHellgamesStyles.yaml"
+            -   class: "UIControl"
+                name: "AbilityDetailContainer"
+                size: [96.000000, 96.000000]
+                input: false
+                classes: "equipment_item ability-icon=reload-boost"
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                    LinearLayout:
+                        orientation: "TopDown"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfChildrenSum"
+                    StyleSheet:
+                        styles: ""
+                children:
+                -   class: "UIControl"
+                    name: "AbilityName"
+                    input: false
+                    classes: "header4"
+                    components:
+                        UITextComponent:
+                            text: "Name"
+                            multiline: "MULTILINE_ENABLED"
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "Formula"
+                            horizontalFormula: "parent - 16"
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 48.000000
+                        StyleSheet:
+                            styles: "~res:/UI/Screens/Fonts.yaml;~res:/UI/Screens/FontsColors.yaml;~res:/UI/Screens/Battle/Styles/HUDLayerHellgamesStyles.yaml"
+                -   class: "UIControl"
+                    name: "icon"
+                    size: [96.000000, 96.000000]
+                    input: false
+                    components:
+                        Background:
+                            drawType: "DRAW_ALIGNED"
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                        StyleSheet:
+                            styles: "~res:/UI/Styles/Lobby/Inventory/Event/InventoryBigStyles.yaml;~res:/UI/Screens/Battle/Styles/HUDLayerHellgamesStyles.yaml"
+                -   class: "UIControl"
+                    name: "Spacer"
+                    size: [32.000000, 32.000000]
+                    input: false
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 8.000000
+                -   class: "UIControl"
+                    name: "AbilityDescription"
+                    input: false
+                    classes: "text2-small text-color-common"
+                    components:
+                        UITextComponent:
+                            text: "Description"
+                            multiline: "MULTILINE_ENABLED"
+                            fitting: "FITTING_POINTS"
+                            align: ["HCENTER", "TOP"]
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "Formula"
+                            horizontalFormula: "parent - 16"
+                            verticalPolicy: "Formula"
+                            verticalMin: 63.000000
+                            verticalFormula: "max(63, content)"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens/Fonts.yaml"
+        -   class: "UIControl"
+            name: "BattlePoints"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                UIOpacityComponent: {}
+                Anchor:
+                    hCenterAnchorEnabled: true
+                LinearLayout:
+                    spacing: 3.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   class: "UIControl"
+                name: "PointsValue"
+                input: false
+                classes: "bold fs-19 text-color=text-color-white"
+                components:
+                    UITextComponent:
+                        text: "NaN"
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens/Fonts.yaml;~res:/UI/Screens/FontsColors.yaml"
+            -   class: "UIControl"
+                name: "Icon"
+                input: false
+                classes: "battle-points-icon"
+                components:
+                    Background:
+                        drawType: "DRAW_SCALE_PROPORTIONAL_ONE"
+                        sprite: "~res:/Gfx/Battle/currency/currency_2019-halloween_blood"
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+    -   prototype: "Selection/Selection"
+        name: "Selection"
+        visible: false
+        classes: "selection-color-orange"
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+    -   class: "UIControl"
+        name: "HotKey"
+        input: false
+        classes: "fs-13 bold text-color-light-beige"
+        components:
+            Background:
+                sprite: "~res:/Gfx/UI/BattleScreenHUD/HotKeyShadow"
+                leftRightStretchCap: 7.000000
+                topBottomStretchCap: 10.000000
+            UIOpacityComponent: {}
+            UITextComponent:
+                text: "1"
+            Anchor:
+                hCenterAnchorEnabled: true
+                bottomAnchorEnabled: true
+                bottomAnchor: -4.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens/Fonts.yaml;~res:/UI/Screens/FontsColors.yaml;~res:/UI/Screens/Battle/Styles/HUDLayerHellgamesStyles.yaml"

@@ -1,0 +1,102 @@
+Header:
+    version: 127
+Prototypes:
+-   class: "UIControl"
+    name: "Highlight"
+    size: [48.000000, 48.000000]
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens3/Battle/ModernTutorialHints/HighlightPulsation.animation"
+        UIAttachLayoutSlaveComponent:
+            slaveSizePolicy: "MasterSize"
+    children:
+    -   class: "UIControl"
+        name: "Angles"
+        size: [32.000000, 32.000000]
+        pivot: [0.500000, 0.500000]
+        input: false
+        components:
+            UIOpacityComponent: {}
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+        children:
+        -   class: "UIControl"
+            name: "AngleLeftTop"
+            pivot: [0.500000, 0.500000]
+            angle: 90.000000
+            input: false
+            classes: "white-wild-sand-bg"
+            components:
+                Background:
+                    drawType: "DRAW_ALIGNED"
+                    sprite: "~res:/Gfx/Shared/backgrounds/bg_corner_16.psd"
+                Anchor:
+                    leftAnchorEnabled: true
+                    topAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 16.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 16.000000
+        -   class: "UIControl"
+            name: "AngleRightTop"
+            pivot: [0.500000, 0.500000]
+            angle: 180.000000
+            input: false
+            classes: "white-wild-sand-bg"
+            components:
+                Background:
+                    drawType: "DRAW_ALIGNED"
+                    sprite: "~res:/Gfx/Shared/backgrounds/bg_corner_16.psd"
+                Anchor:
+                    rightAnchorEnabled: true
+                    topAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 16.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 16.000000
+        -   class: "UIControl"
+            name: "AngleRightBottom"
+            pivot: [0.500000, 0.500000]
+            angle: -90.000000
+            input: false
+            classes: "white-wild-sand-bg"
+            components:
+                Background:
+                    drawType: "DRAW_ALIGNED"
+                    sprite: "~res:/Gfx/Shared/backgrounds/bg_corner_16.psd"
+                Anchor:
+                    rightAnchorEnabled: true
+                    topAnchorEnabled: false
+                    bottomAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 16.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 16.000000
+        -   class: "UIControl"
+            name: "AngleLeftBottom"
+            input: false
+            classes: "white-wild-sand-bg"
+            components:
+                Background:
+                    drawType: "DRAW_ALIGNED"
+                    sprite: "~res:/Gfx/Shared/backgrounds/bg_corner_16.psd"
+                Anchor:
+                    leftAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 16.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 16.000000

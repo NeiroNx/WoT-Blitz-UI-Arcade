@@ -1,0 +1,11 @@
+animation ExpandAnimationInit
+{
+  if (expanded)
+  {
+      Rotate (path="**/ExpandButton/**/Icon", angle = 0);
+  }
+  else
+  {
+      Rotate (path="**/ExpandButton/**/Icon", angle = 180);
+  }
+}

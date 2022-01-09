@@ -1,0 +1,63 @@
+Header:
+    version: 133
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Inventory/Camouflages/CamouflageSlot.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "SlotList"
+    input: false
+    components:
+        Anchor:
+            hCenterAnchorEnabled: true
+        LinearLayout:
+            orientation: "TopDown"
+            spacing: 32.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfChildrenSum"
+        UIDataParamsComponent:
+            params:
+            - ["eCamouflageKind", "selectedSlot", "eCamouflageKind.WINTER", "eCamouflageKind.SUMMER"]
+            - ["vector<CamouflageSlotInfo>", "slots", "null", "[ { \"slot\" = eCamouflageKind.WINTER; }; { \"slot\" = eCamouflageKind.CUSTOM_SET; }; { \"slot\" = eCamouflageKind.DESERT; }; { \"slot\" = eCamouflageKind.SUMMER; }; ]"]
+            events:
+            - "SLOT_SELECTED"
+        UIIdentifierComponent:
+            id: "camo_slots_container"
+    children:
+    -   prototype: "CamouflageSlot/Slot"
+        name: "Kind"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "selectedSlot": "selectedSlot"
+                    "slotInfo": "slots[eCamouflageKind.CUSTOM_SET + 0]"
+                eventActions:
+                - ["ON_SLOT_CLICKED", "SLOT_SELECTED", "_event"]
+    -   prototype: "CamouflageSlot/Slot"
+        name: "Summer"
+        position: [0.000000, 117.000000]
+        components:
+            UIDataParamsComponent:
+                args:
+                    "selectedSlot": "selectedSlot"
+                    "slotInfo": "slots[eCamouflageKind.SUMMER + 0]"
+                eventActions:
+                - ["ON_SLOT_CLICKED", "SLOT_SELECTED", "_event"]
+    -   prototype: "CamouflageSlot/Slot"
+        name: "Winter"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "selectedSlot": "selectedSlot"
+                    "slotInfo": "slots[eCamouflageKind.WINTER + 0]"
+                eventActions:
+                - ["ON_SLOT_CLICKED", "SLOT_SELECTED", "_event"]
+    -   prototype: "CamouflageSlot/Slot"
+        name: "Desert"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "selectedSlot": "selectedSlot"
+                    "slotInfo": "slots[eCamouflageKind.DESERT + 0]"
+                eventActions:
+                - ["ON_SLOT_CLICKED", "SLOT_SELECTED", "_event"]

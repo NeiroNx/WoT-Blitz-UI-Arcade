@@ -1,0 +1,92 @@
+Header:
+    version: 138
+Prototypes:
+-   class: "UIControl"
+    name: "ChestUsage"
+    size: [960.000000, 640.000000]
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens/Lobby/Storage/ChestUsageInit.animation"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["vector<ResourceDetailed>", "rewards", "[ ]", "[ { \"type\" = ResourceType.premium; \"basic\" = { \"quantity\" = 86400; }; }; { \"type\" = ResourceType.gold; \"basic\" = { \"quantity\" = 86400; }; }; { \"type\" = ResourceType.credits; \"basic\" = { \"quantity\" = 86400; }; }; { \"type\" = ResourceType.premium; \"basic\" = { \"quantity\" = 86400; }; }; { \"type\" = ResourceType.premium; \"basic\" = { \"quantity\" = 86400; }; }; { \"type\" = ResourceType.premium; \"basic\" = { \"quantity\" = 86400; }; }; ]"]
+            - ["ChestParams", "params", "null", "{ }"]
+            - ["eBlitzDevice", "deviceType", "eBlitzDevice.DEVICE_DESKTOP", "eBlitzDevice.DEVICE_DESKTOP"]
+            - ["string", "uiView", "\"\"", "\"~res:/UI/Screens/Lobby/Storage/ChestUsageContent.yaml\""]
+            events:
+            - "ON_REWARD_CLICKED(int index)"
+            - "ON_CLOSE"
+            - "ON_ANIMATIONS_FINISHED"
+            - "ON_VIEWPORT_3D_CHANGED(rect value)"
+        UIDataLocalVarsComponent:
+            data:
+            - ["rect", "viewport3d", "rect(0.000000, 0.000000, 0.000000, 0.000000)"]
+            - ["vector2", "spawnPoint", "vec2(0.000000, 0.000000)"]
+            - ["bool", "startProgressAnimation", "false"]
+            - ["bool", "isAnimationsFinished", "false"]
+        UIDataLocalControlComponent0:
+            name: "content"
+            prototypePath: "~res:/UI/Screens/Lobby/Storage/ChestUsageContent.yaml"
+            args:
+                "rewards": "rewards"
+                "params": "params"
+                "devioceType": "deviceType"
+                "isAnimationsFinished": "isAnimationsFinished"
+                "startProgressAnimation": "startProgressAnimation"
+                "spawnPoint": "spawnPoint"
+            eventActions:
+            - ["ON_REWARD_CLICKED", "ON_REWARD_CLICKED", "_event.index"]
+            - ["FADE", "FADE", "_event.time"]
+            - ["ON_CLOSE", "ON_CLOSE", ""]
+            - ["CLAIM_REWARDS", "ON_CLOSE", ""]
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens/Lobby/Storage/ChestUsage.actions"
+        UIDataOnEventComponent0:
+            eventName: "VIEWPORT_3D_CHANGED"
+            modelFieldExpression: "viewport3d"
+            dataExpression: "_event"
+        UIDataOnEventComponent1:
+            eventName: "SET_REWARDS_SPAWN_POINT"
+            modelFieldExpression: "spawnPoint"
+            dataExpression: "_event"
+        UIEventOnDataComponent0:
+            watchedDataExpression: "viewport3d"
+            eventName: "ON_VIEWPORT_3D_CHANGED"
+            eventData: "viewport3d"
+    children:
+    -   class: "UI3DView"
+        name: "UI3DView"
+        input: false
+        components:
+            SceneComponent:
+                drawToFramebuffer: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UILayoutEventComponent:
+                positionChangedEvent: "VIEWPORT_3D_CHANGED"
+                positionChangedEventData: "_absoluteRect"
+                sizeChangedEvent: "VIEWPORT_3D_CHANGED"
+                sizeChangedEventData: "_absoluteRect"
+    -   class: "UIControl"
+        name: "UI2DView"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                childType: "kPrototype"
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/FullScreenPopup/FullscreenPopupWithContentSlot.yaml"
+                control: ""
+                args:
+                    "contentControl": "content"
+                    "padding": "0"
+                    "closeOnEnter": "true"
+                eventActions:
+                - ["ACCENT_CLICKED", "ON_CLOSE", ""]
+                - ["CLOSE_NOTIFICATION", "ON_CLOSE", ""]

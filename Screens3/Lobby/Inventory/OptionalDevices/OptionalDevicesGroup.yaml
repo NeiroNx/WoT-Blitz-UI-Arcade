@@ -1,0 +1,27 @@
+Header:
+    version: "92"
+Prototypes:
+-   class: "UIControl"
+    name: "OptionalDevicesGroup"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+            spacing: 16.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfChildrenSum"
+        UIDataParamsComponent:
+            params:
+            - ["int", "selectedDescr", "0", "0"]
+            - ["OptionalDevicesGroup", "group", "null", "{ }"]
+            - ["OptionalDeviceSlotView", "states", "null", "{ }"]
+        UIRepeatComponent:
+            control: "~res:/UI/Screens3/Lobby/Inventory/OptionalDevices/OptionalDevicesSlot.yaml"
+            dataContainer: "group.slots"
+            args:
+                "slot": "group.slots[_index]"
+                "state": "states.states[_index]"
+                "selectedDescr": "selectedDescr"
+                "isReadyToUnlock": "states.readyForUnlock and states.readyToUnlockIndex == _index"

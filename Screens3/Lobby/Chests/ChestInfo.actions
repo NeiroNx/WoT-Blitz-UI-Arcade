@@ -1,0 +1,7 @@
+action StuffChanged(float data)
+{
+	if (not (int(stuffH) == int(data)))
+	{
+		ChangeData(stuffH, data);
+	}
+}

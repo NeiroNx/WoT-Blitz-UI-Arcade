@@ -1,0 +1,11 @@
+action SCROLL_TO_TANK_SKILLS(eTankClass tankClass)
+{
+    if (tankClass == eTankClass.TANK_CLASS_AT_SPG)
+    {    
+        ScrollToEnsureControlOnScreen("**/SkillsSet" + str(int(tankClass) - 1), 0.2);
+    }
+    else 
+    {
+        ScrollToEnsureControlOnScreen("**/SkillsSet" + str(int(tankClass)), 0.2);
+    }
+}

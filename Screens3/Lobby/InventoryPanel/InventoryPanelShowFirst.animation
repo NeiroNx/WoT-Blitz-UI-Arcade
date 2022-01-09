@@ -1,0 +1,11 @@
+animation ShowFirstInventory
+{
+  if (crewFragmentVisible)
+  {
+    Event("ON_INVENTORY_TAB_SELECT", arg1=InventoryTabType.CREW);
+  }
+  else
+  {
+    Event("ON_INVENTORY_TAB_SELECT", arg1=InventoryTabType.MODULES);
+  }
+}

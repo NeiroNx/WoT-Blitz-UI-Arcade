@@ -1,0 +1,55 @@
+Header:
+    version: "102"
+Prototypes:
+-   class: "UIControl"
+    name: "WithoutRoundedCornersControl"
+    size: [320.000000, 300.000000]
+    input: false
+    components:
+        Background:
+            drawType: "DRAW_SCALE_PROPORTIONAL_ONE"
+        ClipContent: {}
+        UIUrlImageComponent:
+            upscaleForHighResolution: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "FixedSize"
+            verticalValue: 600.000000
+        UIDataParamsComponent:
+            params:
+            - ["string", "url", "\"\"", "\"\""]
+    bindings:
+    - ["UIUrlImageComponent.imageUrl", "url"]
+    children:
+    -   class: "UIControl"
+        name: "Label"
+        size: [32.000000, 32.000000]
+        input: false
+        classes: "grey-shark-50-bg"
+        components:
+            Background: {}
+            Anchor:
+                bottomAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "Formula"
+                verticalFormula: "maxChild +20"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+        children:
+        -   class: "UIControl"
+            name: "CAPS_BOLD"
+            input: false
+            classes: "t-caps bold color=white-wild-sand-text"
+            components:
+                UITextComponent:
+                    text: "Control without rounded corners"
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"

@@ -1,0 +1,60 @@
+Header:
+    version: "84"
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/Tabs/IconTabsBar.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "RightPanelHeaderContentTwoTitles"
+    size: [82.000000, 50.000000]
+    input: false
+    classes: ""
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["string", "title", "\"\"", "\"Title\""]
+            - ["string", "subTitle", "\"\"", "\"SubTitle\""]
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Font.style.yaml"
+    children:
+    -   class: "UIControl"
+        name: "Space"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            SizePolicy:
+                verticalPolicy: "PercentOfParent"
+    -   class: "UIControl"
+        name: "Title"
+        size: [32.000000, 32.000000]
+        input: false
+        classes: "regular t-subtitle color=white-wild-sand-text"
+        components:
+            UITextComponent:
+                fitting: "FITTING_POINTS"
+                align: ["LEFT", "VCENTER"]
+                useRtlAlign: "USE_BY_SYSTEM"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfContent"
+        bindings:
+        - ["UITextComponent.text", "title"]
+    -   class: "UIControl"
+        name: "SubTitle"
+        size: [32.000000, 32.000000]
+        input: false
+        classes: "regular t-caption color=white-wild-sand-50-text"
+        components:
+            UITextComponent:
+                fitting: "FITTING_POINTS"
+                align: ["LEFT", "VCENTER"]
+                useRtlAlign: "USE_BY_SYSTEM"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfContent"
+        bindings:
+        - ["UITextComponent.text", "subTitle"]

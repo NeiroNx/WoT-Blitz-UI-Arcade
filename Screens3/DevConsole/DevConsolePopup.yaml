@@ -1,0 +1,47 @@
+Header:
+    version: 140
+Prototypes:
+-   class: "UIPopup"
+    name: "DevConsolePopup"
+    size: [960.000000, 640.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["AppDataModel", "app", "null", "{ }"]
+            - ["DevConsoleViewModel", "console", "null", "{ }"]
+            events:
+            - "CLOSE_CONSOLE"
+            - "INPUT_CHANGED(string text)"
+            - "EXECUTE_AUTOCOMPLETION(int index)"
+            - "EXECUTE_COMMAND"
+            - "BROWSE_HISTORY_PREV"
+            - "BROWSE_HISTORY_NEXT"
+            - "BROWSE_COMPLETIONS_PREV"
+            - "BROWSE_COMPLETIONS_NEXT"
+            - "SEARCH"
+            - "AUTOCOMPLETE"
+            - "GO_TO_ARTICLE"
+        UIChildComponent0:
+            condition: "not isNull(console)"
+            prototypePath: "~res:/UI/Screens3/DevConsole/DevConsole.yaml"
+            args:
+                "app": "app"
+                "console": "console"
+            eventActions:
+            - ["CLOSE_CONSOLE", "CLOSE_CONSOLE", ""]
+            - ["INPUT_CHANGED", "INPUT_CHANGED", "_event.text"]
+            - ["EXECUTE_AUTOCOMPLETION", "EXECUTE_AUTOCOMPLETION", "_event.index"]
+            - ["EXECUTE_COMMAND", "EXECUTE_COMMAND", ""]
+            - ["BROWSE_HISTORY_PREV", "BROWSE_HISTORY_PREV", ""]
+            - ["BROWSE_HISTORY_NEXT", "BROWSE_HISTORY_NEXT", ""]
+            - ["BROWSE_COMPLETIONS_PREV", "BROWSE_COMPLETIONS_PREV", ""]
+            - ["BROWSE_COMPLETIONS_NEXT", "BROWSE_COMPLETIONS_NEXT", ""]
+            - ["SEARCH", "SEARCH", ""]
+            - ["AUTOCOMPLETE", "AUTOCOMPLETE", ""]
+            - ["GO_TO_ARTICLE", "GO_TO_ARTICLE", ""]
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/DevConsole/DevConsolePopup.actions"

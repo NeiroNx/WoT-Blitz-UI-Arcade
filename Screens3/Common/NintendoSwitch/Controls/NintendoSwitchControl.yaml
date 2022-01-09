@@ -1,0 +1,34 @@
+Header:
+    version: 115
+Prototypes:
+-   class: "UIControl"
+    name: "NintendoSwitchControl"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 24.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 24.000000
+        UIDataParamsComponent:
+            params:
+            - ["eNintendoSwitchControls", "switchControl", "eNintendoSwitchControls.A", "eNintendoSwitchControls.LeftTrigger"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["string", "iconPath", "when (switchControl == eNintendoSwitchControls.A or switchControl == eNintendoSwitchControls.B or switchControl == eNintendoSwitchControls.RightThumbstick or switchControl == eNintendoSwitchControls.RightThumbstickAxis or switchControl == eNintendoSwitchControls.LeftThumbstick or switchControl == eNintendoSwitchControls.LeftThumbstickAxis or switchControl == eNintendoSwitchControls.RightTrigger or switchControl == eNintendoSwitchControls.LeftTrigger) -> \"~res:/Gfx/Shared/icons/nintendo-switch/\", \"~res:/Gfx/Lobby/icons/nintendo-switch/\""]
+            - ["string", "iconSprite", "iconPath + (when switchControl == eNintendoSwitchControls.A -> \"icon_switch_a_m\", switchControl == eNintendoSwitchControls.B -> \"icon_switch_b_m\", switchControl == eNintendoSwitchControls.X -> \"icon_switch_x_m\", switchControl == eNintendoSwitchControls.Y -> \"icon_switch_y_m\", switchControl == eNintendoSwitchControls.Left -> \"icon_switch_left_dot_m\", switchControl == eNintendoSwitchControls.Right -> \"icon_switch_right_dot_m\", switchControl == eNintendoSwitchControls.Up -> \"icon_switch_top_dot_m\", switchControl == eNintendoSwitchControls.Down -> \"icon_switch_down_dot_m\", switchControl == eNintendoSwitchControls.AllArrows -> \"icon_switch_all_dot_m\", switchControl == eNintendoSwitchControls.HArrows -> \"icon_switch_direction_lr_m\", switchControl == eNintendoSwitchControls.VArrows -> \"icon_switch_direction_td_m\", switchControl == eNintendoSwitchControls.LeftThumbstick -> \"icon_switch_press_l_m\", switchControl == eNintendoSwitchControls.LeftThumbstickAxis -> \"icon_switch_press_l_m\", switchControl == eNintendoSwitchControls.LeftShoulder -> \"icon_switch_l_m\", switchControl == eNintendoSwitchControls.LeftTrigger -> \"icon_switch_zl_m\", switchControl == eNintendoSwitchControls.RightThumbstick -> \"icon_switch_press_r_m\", switchControl == eNintendoSwitchControls.RightThumbstickAxis -> \"icon_switch_press_r_m\", switchControl == eNintendoSwitchControls.RightShoulder -> \"icon_switch_r_m\", switchControl == eNintendoSwitchControls.RightTrigger -> \"icon_switch_zr_m\", switchControl == eNintendoSwitchControls.Minus -> \"icon_switch_minus_m\", switchControl == eNintendoSwitchControls.Plus -> \"icon_switch_plus_m\", switchControl == eNintendoSwitchControls.LeftArrow -> \"icon_switch_left_m\", switchControl == eNintendoSwitchControls.RightArrow -> \"icon_switch_right_m\", switchControl == eNintendoSwitchControls.UpArrow -> \"icon_switch_top_m\", switchControl == eNintendoSwitchControls.DownArrow -> \"icon_switch_down_m\", \"\")"]
+    children:
+    -   class: "UIControl"
+        name: "Icon"
+        input: false
+        components:
+            Background:
+                perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        bindings:
+        - ["Background.sprite", "iconSprite"]

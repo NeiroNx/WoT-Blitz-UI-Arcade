@@ -1,0 +1,193 @@
+Header:
+    version: "100"
+Prototypes:
+-   class: "UIControl"
+    name: "AnimatedNumber"
+    input: false
+    components:
+        ClipContent: {}
+        LinearLayout: {}
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "PercentOfMaxChild"
+        UIDataParamsComponent:
+            params:
+            - ["int", "initialNumber", "0", "2000000"]
+            - ["int", "targetNumber", "0", "2000000"]
+            - ["float", "animationTime", "1.000000", "1.000000"]
+            - ["string", "textStyle", "\"t-headline bold white-wild-sand-text\"", "\"t-caption bold white-wild-sand-text\""]
+            events:
+            - "NUMBER_ANIMATION_FINISHED"
+        UIDataLocalsComponent:
+            locals:
+            - ["int", "digitsInProgregress", "when (targetNumber / 1000000000) > 0 -> 10, (targetNumber / 100000000) > 0 -> 9, (targetNumber / 10000000) > 0 -> 8, (targetNumber / 1000000) > 0 -> 7, (targetNumber / 100000) > 0 -> 6, (targetNumber / 10000) > 0 -> 5, (targetNumber / 1000) > 0 -> 4, (targetNumber / 100) > 0 -> 3, (targetNumber / 10) > 0 -> 2, 1"]
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/Lobby/Hangar/Offers/PRMP/AnimatedNumber/AnimatedNumber.actions"
+        UIDataOnEventComponent0:
+            eventName: "DIGIT_ANIMATION_FINISHED"
+            modelFieldExpression: "digitsInProgregress"
+            dataExpression: "digitsInProgregress - 1"
+        UIEventOnDataComponent0:
+            watchedDataExpression: "digitsInProgregress"
+            ifExpression: "digitsInProgregress == 0"
+            eventName: "NUMBER_ANIMATION_FINISHED"
+    children:
+    -   class: "UIControl"
+        name: "Billions"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                condition: "(targetNumber / 1000000000) > 0"
+                prototypePath: "~res:/UI/Screens3/Lobby/Hangar/Offers/PRMP/AnimatedNumber/AnimatedDigit.yaml"
+                args:
+                    "initialNumber": "initialNumber"
+                    "targetNumber": "targetNumber"
+                    "orderIndex": "9"
+                    "textStyle": "textStyle"
+                    "animationTime": "animationTime"
+    -   class: "UIControl"
+        name: "HundredsOfMillions"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                condition: "(targetNumber / 100000000) > 0"
+                prototypePath: "~res:/UI/Screens3/Lobby/Hangar/Offers/PRMP/AnimatedNumber/AnimatedDigit.yaml"
+                args:
+                    "initialNumber": "initialNumber"
+                    "targetNumber": "targetNumber"
+                    "orderIndex": "8"
+                    "textStyle": "textStyle"
+                    "animationTime": "animationTime"
+    -   class: "UIControl"
+        name: "TensOfMillions"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                condition: "(targetNumber / 10000000) > 0"
+                prototypePath: "~res:/UI/Screens3/Lobby/Hangar/Offers/PRMP/AnimatedNumber/AnimatedDigit.yaml"
+                args:
+                    "initialNumber": "initialNumber"
+                    "targetNumber": "targetNumber"
+                    "orderIndex": "7"
+                    "textStyle": "textStyle"
+                    "animationTime": "animationTime"
+    -   class: "UIControl"
+        name: "Millions"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                condition: "(targetNumber / 1000000) > 0"
+                prototypePath: "~res:/UI/Screens3/Lobby/Hangar/Offers/PRMP/AnimatedNumber/AnimatedDigit.yaml"
+                args:
+                    "initialNumber": "initialNumber"
+                    "targetNumber": "targetNumber"
+                    "orderIndex": "6"
+                    "textStyle": "textStyle"
+                    "animationTime": "animationTime"
+    -   class: "UIControl"
+        name: "HundredsOfThousands"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                condition: "(targetNumber / 100000) > 0"
+                prototypePath: "~res:/UI/Screens3/Lobby/Hangar/Offers/PRMP/AnimatedNumber/AnimatedDigit.yaml"
+                args:
+                    "initialNumber": "initialNumber"
+                    "targetNumber": "targetNumber"
+                    "orderIndex": "5"
+                    "textStyle": "textStyle"
+                    "animationTime": "animationTime"
+    -   class: "UIControl"
+        name: "TensOfThousands"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                condition: "(targetNumber / 10000) > 0"
+                prototypePath: "~res:/UI/Screens3/Lobby/Hangar/Offers/PRMP/AnimatedNumber/AnimatedDigit.yaml"
+                args:
+                    "initialNumber": "initialNumber"
+                    "targetNumber": "targetNumber"
+                    "orderIndex": "4"
+                    "textStyle": "textStyle"
+                    "animationTime": "animationTime"
+    -   class: "UIControl"
+        name: "Thousands"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                condition: "(targetNumber / 1000) > 0"
+                prototypePath: "~res:/UI/Screens3/Lobby/Hangar/Offers/PRMP/AnimatedNumber/AnimatedDigit.yaml"
+                args:
+                    "initialNumber": "initialNumber"
+                    "targetNumber": "targetNumber"
+                    "orderIndex": "3"
+                    "textStyle": "textStyle"
+                    "animationTime": "animationTime"
+    -   class: "UIControl"
+        name: "Hundreds"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                condition: "(targetNumber / 100) > 0"
+                prototypePath: "~res:/UI/Screens3/Lobby/Hangar/Offers/PRMP/AnimatedNumber/AnimatedDigit.yaml"
+                args:
+                    "initialNumber": "initialNumber"
+                    "targetNumber": "targetNumber"
+                    "orderIndex": "2"
+                    "textStyle": "textStyle"
+                    "animationTime": "animationTime"
+    -   class: "UIControl"
+        name: "Tens"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                condition: "(targetNumber / 10) > 0"
+                prototypePath: "~res:/UI/Screens3/Lobby/Hangar/Offers/PRMP/AnimatedNumber/AnimatedDigit.yaml"
+                args:
+                    "initialNumber": "initialNumber"
+                    "targetNumber": "targetNumber"
+                    "orderIndex": "1"
+                    "textStyle": "textStyle"
+                    "animationTime": "animationTime"
+    -   class: "UIControl"
+        name: "Ones"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Hangar/Offers/PRMP/AnimatedNumber/AnimatedDigit.yaml"
+                args:
+                    "initialNumber": "initialNumber"
+                    "targetNumber": "targetNumber"
+                    "orderIndex": "0"
+                    "textStyle": "textStyle"
+                    "animationTime": "animationTime"

@@ -1,0 +1,82 @@
+Header:
+    version: 135
+Prototypes:
+-   class: "UIControl"
+    name: "Chance"
+    size: [50.000000, 72.000000]
+    input: false
+    components:
+        Anchor:
+            rightAnchorEnabled: true
+        LinearLayout:
+            useRtl: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "PercentOfMaxChild"
+        UIDataParamsComponent:
+            params:
+            - ["bool", "isTime", "false", "false"]
+            - ["bool", "quantityVisible", "true", "true"]
+            - ["bool", "spacer", "true", "true"]
+            - ["float", "chance", "0.000000", "0.170000"]
+            - ["int", "dropCount", "0", "3"]
+    children:
+    -   class: "UIControl"
+        name: "count"
+        input: false
+        classes: "t-body regular color=white-wild-sand-50-text"
+        components:
+            UITextComponent:
+                colorInheritType: "COLOR_IGNORE_PARENT"
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+        bindings:
+        - ["visible", "quantityVisible"]
+        - ["UITextComponent.text", "when isTime -> timeDiffShort(dropCount), shortStr(dropCount)"]
+    -   class: "UIControl"
+        name: "line"
+        input: false
+        classes: "t-body regular color=white-wild-sand-50-text"
+        components:
+            UITextComponent:
+                colorInheritType: "COLOR_IGNORE_PARENT"
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+        bindings:
+        - ["visible", "quantityVisible"]
+        - ["UITextComponent.text", "\" - \""]
+    -   class: "UIControl"
+        name: "chance"
+        input: false
+        classes: "t-body bold color=white-wild-sand-50-text"
+        components:
+            UITextComponent:
+                colorInheritType: "COLOR_IGNORE_PARENT"
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+        bindings:
+        - ["UITextComponent.text", "percent(chance)"]
+    -   class: "UIControl"
+        name: "spacer"
+        input: false
+        classes: "t-body regular color=white-wild-sand-50-text"
+        components:
+            UITextComponent:
+                colorInheritType: "COLOR_IGNORE_PARENT"
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+        bindings:
+        - ["visible", "spacer"]
+        - ["UITextComponent.text", "\"; \""]

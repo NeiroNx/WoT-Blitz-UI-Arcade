@@ -1,0 +1,67 @@
+Header:
+    version: "79"
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/InventoryPanel/InventoryPanelContent/EmptySlot.yaml"
+- "~res:/UI/Screens3/Lobby/InventoryPanel/InventoryPanelContent/LockedSlot.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "Slot"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 32.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 32.000000
+        UIDataParamsComponent:
+            params:
+            - ["EquipmentModel", "model", "null", "{ }"]
+            - ["bool", "visible", "true", "true"]
+            - ["bool", "isSlotLocked", "false", "false"]
+        UIDataLocalsComponent:
+            locals:
+            - ["string", "itemName", "when isNull(model) -> \"\", model.icon"]
+            - ["string", "slotStyle", "\"equipment_item  inventory-slot \" + \" \" + itemName"]
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Lobby/InventoryPanel/InventorySlot.style.yaml"
+    bindings:
+    - ["visible", "visible"]
+    - ["classes", "slotStyle"]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "Img"
+            size: [32.000000, 32.000000]
+            input: false
+            classes: "slot-img equipment-img"
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_TO_RECT"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 40.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 40.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Lobby/Inventory/Equipment/EquipmentItemImage.style.yaml;~res:/UI/Screens3/Lobby/InventoryPanel/InventorySlot.style.yaml"
+            bindings:
+            - ["visible", "not empty(itemName) or itemName == \"camo_filled\""]
+        -   prototype: "EmptySlot/EmptySlot"
+            name: "EmptySlot"
+            bindings:
+            - ["visible", "empty(itemName) or itemName == \"camo_empty\""]
+        -   prototype: "LockedSlot/LockedSlot"
+            name: "LockedSlot"
+            bindings:
+            - ["visible", "isSlotLocked"]

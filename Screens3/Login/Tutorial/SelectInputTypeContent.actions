@@ -1,0 +1,9 @@
+action SelectLeft()
+{
+	Event("SLOT_SELECTED", ".", eInputMode.MODE_KEYBOARD_MOUSE);
+}
+
+action SelectRight()
+{
+	Event("SLOT_SELECTED", ".", eInputMode.MODE_TOUCHSCREEN);
+}

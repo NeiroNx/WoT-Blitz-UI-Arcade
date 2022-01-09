@@ -1,0 +1,95 @@
+Header:
+    version: "111"
+Prototypes:
+-   class: "UIControl"
+    name: "Popover"
+    input: false
+    classes: "popover-button long-element pressed-opacity"
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfMaxChild"
+        UIDataParamsComponent:
+            params:
+            - ["string", "popoverText", "\"POPOVER BUTTON\"", "\"POPOVER BUTTON\""]
+            events:
+            - "BUTTON_CLICKED"
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/Lobby/Common/Popover.actions"
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        pivot: [0.500000, 0.500000]
+        input: true
+        classes: "content-area button-cancel-sound"
+        components:
+            UIOpacityComponent: {}
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "lastChild + 64"
+                verticalPolicy: "FixedSize"
+                verticalValue: 48.000000
+            UIInputEventComponent:
+                onTouchUpInside: "BUTTON_CLICKED"
+            Sound: {}
+            StyleSheet:
+                styles: "~res:/UI/Screens3/ButtonSound.style.yaml;~res:/UI/Screens3/Common/Touch.style.yaml"
+        children:
+        -   class: "UIControl"
+            name: "Background"
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_STRETCH_BOTH"
+                    sprite: "~res:/Gfx/Lobby/backgrounds/bg_popover_r48"
+                    perPixelAccuracy: "PER_PIXEL_ACCURACY_FORCED"
+                    leftRightStretchCap: 22.000000
+                    topBottomStretchCap: 22.000000
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+        -   class: "UIControl"
+            name: "Hover"
+            input: false
+            classes: "hover hide-on-pressed white-wild-sand-10-bg"
+            components:
+                Background: {}
+                UIOpacityComponent: {}
+                UIRoundedCornersComponent:
+                    radius: "24"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/Common/Touch.style.yaml;~res:/UI/Screens3/Common/Hover.style.yaml"
+        -   class: "UIControl"
+            name: "Text"
+            input: false
+            classes: "t-button bold white-wild-sand-text"
+            components:
+                UITextComponent:
+                    perPixelAccuracyType: "PER_PIXEL_ACCURACY_FORCED"
+                    multiline: "MULTILINE_ENABLED"
+                    fitting: "FITTING_POINTS"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                    vCenterAnchor: -1.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    horizontalMax: 512.000000
+                    verticalPolicy: "PercentOfContent"
+                    verticalMax: 40.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+            bindings:
+            - ["UITextComponent.text", "localize(popoverText)"]

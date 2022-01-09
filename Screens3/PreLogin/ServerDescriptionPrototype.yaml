@@ -1,0 +1,91 @@
+Header:
+    version: 121
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/Selection.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "ServerDescription"
+    size: [246.000000, 44.000000]
+    input: true
+    components:
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 384.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 48.000000
+        UISwitchBarElementComponent: {}
+        UIDataParamsComponent:
+            params:
+            - ["bool", "isSelected", "false", "true"]
+            - ["RegionDescription", "descr", "null", "{ }"]
+    bindings:
+    - ["UISwitchBarElementComponent.id", "descr.index"]
+    children:
+    -   class: "UIControl"
+        name: "Bg"
+        size: [246.000000, 44.000000]
+        input: false
+        classes: "black-bg"
+        components:
+            Background:
+                drawType: "DRAW_FILL"
+            UIOpacityComponent:
+                ignoreParentOpacity: true
+                opacity: 0.700000
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+    -   class: "UIControl"
+        name: "Content"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                spacing: 8.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   class: "UIControl"
+            name: "Label"
+            input: false
+            classes: "t-header bold white-wild-sand-text"
+            components:
+                UITextComponent:
+                    multiline: "MULTILINE_ENABLED"
+                    fitting: "FITTING_POINTS"
+                    align: ["LEFT", "VCENTER"]
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 256.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 32.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml"
+            bindings:
+            - ["UITextComponent.text", "descr.name"]
+        -   class: "UIControl"
+            name: "Flag"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Background:
+                    sprite: "~res:/Gfx/UI/CommonUIElements/RegionsIcon/IconRegion.psd"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+            bindings:
+            - ["Background.frame", "FlagToFrame(descr.flag)"]
+    -   prototype: "Selection/Selection"
+        name: "Selection"
+        components:
+            IgnoreLayout: {}
+            UIDataParamsComponent:
+                args:
+                    "selectionType": "eSelectionBorderType.kRect"
+                    "isVisible": "isSelected"

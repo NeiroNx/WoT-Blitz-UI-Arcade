@@ -1,0 +1,50 @@
+Header:
+    version: 127
+Prototypes:
+-   class: "UIControl"
+    name: "NewComersEventNotification"
+    size: [960.000000, 640.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["control", "frontFx", "null", "null"]
+            - ["control", "fx", "null", "null"]
+            - ["string", "image", "\"\"", "\"~res:/Gfx/Lobby/events/okr_new-comers/okr_na_tank_free\""]
+            - ["string", "header", "\"\"", "\"Великолепно!\""]
+            - ["string", "description", "\"\"", "\"Ты отлично справился с задачей и вернул наш новейший танк! В качестве награды ты назначаешься его новым командиром\""]
+            - ["VehicleResource", "vehicle", "null", "null"]
+            events:
+            - "CLOSE"
+        UIDataLocalControlComponent0:
+            name: "Content"
+            prototypePath: "~res:/UI/Screens3/Lobby/Common/FullScreenPopup/NewComersEventNotificationContent.yaml"
+            args:
+                "frontFx": "frontFx"
+                "fx": "fx"
+                "image": "image"
+                "header": "header"
+                "description": "description"
+                "vehicle": "vehicle"
+            eventActions:
+            - ["CLOSE", "CLOSE", ""]
+    children:
+    -   class: "UIControl"
+        name: "ContentHolder"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/FullScreenPopup/FullscreenPopupWithContentSlot.yaml"
+                args:
+                    "contentControl": "Content"
+                    "showBlurAndFade": "false"
+                    "isButtonVisible": "false"
+                eventActions:
+                - ["CLOSE_NOTIFICATION", "CLOSE", ""]
+                - ["ACCENT_CLICKED", "CLOSE", ""]

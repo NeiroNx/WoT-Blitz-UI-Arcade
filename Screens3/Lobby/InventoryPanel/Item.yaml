@@ -1,0 +1,177 @@
+Header:
+    version: "111"
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/InventoryPanel/InventoryItemTitle.yaml"
+- "~res:/UI/Screens3/Lobby/InventoryPanel/InventoryPanelContent/LockedSlot.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "Item"
+    size: [68.000000, 64.000000]
+    input: true
+    exclusiveInput: false
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens3/Lobby/InventoryPanel/ItemInitialization.animation"
+        UIOpacityComponent: {}
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            verticalPolicy: "FixedSize"
+            verticalValue: 64.000000
+        UIAttachLayoutMasterComponent: {}
+        UIInputEventComponent:
+            onHoverSet: "HoverAnim"
+            onHoverSetData: "true"
+            onHoverRemoved: "HoverAnim"
+            onHoverRemovedData: "false"
+        UISwitchBarElementComponent: {}
+        UIDataParamsComponent:
+            params:
+            - ["int", "freeXp", "0", "0"]
+            - ["InventoryPanelViewModel", "panel", "null", "{ }"]
+            - ["int", "layer", "0", "0"]
+            - ["string", "attachId", "\"\"", "\"\""]
+            - ["bool", "enabled", "true", "true"]
+            - ["InventoryPanelCamoViewModel", "camo", "null", "{ }"]
+            - ["InventoryPanelCrewViewModel", "crew", "null", "{ }"]
+            - ["vector<OptionalDeviceSlotView>", "optionalDevices", "[ ]", "[ { }; { }; { }; ]"]
+            - ["OwnedTank", "tank", "null", "{ }"]
+            - ["InventoryTabType", "switchId", "InventoryTabType.CREW", "InventoryTabType.CREW"]
+            - ["bool", "visible", "true", "true"]
+            - ["string", "contentPath", "\"\"", "\"~res:/UI/Screens3/Lobby/InventoryPanel/InventoryPanelContent/CamoContent.yaml\""]
+            - ["bool", "hasLock", "false", "false"]
+            - ["string", "titleText", "\"\"", "localize(\"#lobby:MainScreen/Crew/Title\")"]
+            - ["eInventoryItemTitleType", "titleType", "eInventoryItemTitleType.kDefault", "eInventoryItemTitleType.kInactiveTab"]
+            - ["bool", "hasBadge", "false", "true"]
+            - ["int", "panelAnimationIndex", "0", "0"]
+            - ["eInventoryPanelAnimation", "initializationAnimation", "eInventoryPanelAnimation.kNoAnimation", "eInventoryPanelAnimation.kNoAnimation"]
+            events:
+            - "ON_MODULE_PROGRESS_ANIMATION_ENDED"
+        UIDataLocalsComponent:
+            locals:
+            - ["float", "showAnimationTimeDelay", "0.080000"]
+            - ["float", "showAnimationTime", "0.160000"]
+            - ["bool", "isSelected", "titleType == eInventoryItemTitleType.kActiveTab"]
+            - ["string", "lockedStyle", "when hasLock -> \"locked\", \"\""]
+            - ["vector<ShellInfo>", "shellsEmpty", "[ ]"]
+            - ["vector<ShellInfo>", "shells", "when not isNull(tank) -> tank.shells, shellsEmpty"]
+            - ["bool", "isHovered", "false"]
+            - ["float", "itemOpacity", "when enabled -> 1.000000, 0.500000"]
+            - ["float", "animationVerticalOffset", "80.000000"]
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/Lobby/InventoryPanel/Item.actions"
+        UIDataOnEventComponent0:
+            eventName: "HOVER_START"
+            modelFieldExpression: "isHovered"
+            dataExpression: "true"
+        UIDataOnEventComponent1:
+            eventName: "HOVER_END"
+            modelFieldExpression: "isHovered"
+            dataExpression: "false"
+        Sound: {}
+        UILayerComponent: {}
+        StyleSheet:
+            styles: "~res:/UI/Screens3/ButtonSound.style.yaml"
+    bindings:
+    - ["visible", "visible"]
+    - ["enabled", "enabled and not isSelected"]
+    - ["classes", "\"inventory-item \" + lockedStyle"]
+    - ["UIOpacityComponent.opacity", "itemOpacity"]
+    - ["UIAttachLayoutMasterComponent.attachId", "attachId"]
+    - ["UISwitchBarElementComponent.id", "switchId"]
+    - ["UILayerComponent.layer", "layer"]
+    children:
+    -   class: "UIControl"
+        name: "ContentWrapper"
+        position: [48.000000, 32.000000]
+        size: [68.000000, 60.000000]
+        pivot: [0.500000, 0.500000]
+        input: false
+        classes: "content-area"
+        components:
+            UIOpacityComponent: {}
+            Anchor:
+                leftAnchorEnabled: true
+                topAnchorEnabled: true
+            LinearLayout:
+                orientation: "TopDown"
+                padding: "8; 0"
+                spacing: 4.000000
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "when parent == 0 -> maxChild, parent"
+                verticalPolicy: "FixedSize"
+                verticalValue: 64.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Lobby/InventoryPanel/Item.style.yaml"
+        children:
+        -   class: "UIControl"
+            name: "TitleWrapper"
+            position: [0.000000, 8.000000]
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "when parent == 0 -> firstChild, parent"
+                    verticalPolicy: "PercentOfChildrenSum"
+            children:
+            -   prototype: "InventoryItemTitle/Title"
+                name: "Title"
+                components:
+                    UITextComponent: {}
+                    Anchor:
+                        topAnchorEnabled: true
+                    UIDataParamsComponent:
+                        args:
+                            "transparent": "hasLock or titleType == eInventoryItemTitleType.kInactiveTab"
+                            "text": "titleText"
+                            "hasBadge": "hasBadge"
+                            "isHovered": "isHovered and not hasLock"
+                            "type": "titleType"
+                bindings:
+                - ["UITextComponent.text", "text"]
+        -   class: "UIControl"
+            name: "LockWrapper"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 32.000000
+            bindings:
+            - ["visible", "hasLock"]
+            children:
+            -   prototype: "LockedSlot/LockedSlot"
+                name: "LockedSlot"
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+        -   class: "UIControl"
+            name: "Content"
+            position: [0.000000, 28.000000]
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                LinearLayout:
+                    dynamicPadding: true
+                    spacing: 4.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 32.000000
+                UIChildComponent0:
+                    childType: "kOldExpression"
+                    control: "when not hasLock -> contentPath, \"\""
+                    args:
+                        "freeXp": "freeXp"
+                        "camo": "camo"
+                        "redGlowAnimation": "redGlowAnimation"
+                        "shells": "shells"
+                        "optionalDevices": "optionalDevices"
+                        "module": "panel.module"
+                        "tank": "tank"
+                        "crew": "crew"
+                    eventActions:
+                    - ["ON_MODULE_PROGRESS_ANIMATION_ENDED", "ON_MODULE_PROGRESS_ANIMATION_ENDED", ""]
+            bindings:
+            - ["visible", "not hasLock"]

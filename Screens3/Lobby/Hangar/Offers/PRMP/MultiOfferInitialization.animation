@@ -1,0 +1,7 @@
+animation Initialize(bool isReplacing)
+{
+    if (selected)
+    {
+        Event("DelayedOptionsMoveIn", arg1=true);
+    }
+}

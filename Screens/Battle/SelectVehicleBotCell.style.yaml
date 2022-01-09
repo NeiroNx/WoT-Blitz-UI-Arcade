@@ -1,0 +1,11 @@
+Header:
+    version: 121
+StyleSheets:
+-   selectors:
+    - ".cell:selected #Selection"
+    properties:
+        visible: true
+-   selectors:
+    - ".cell #Selection"
+    properties:
+        visible: false

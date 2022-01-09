@@ -1,0 +1,31 @@
+Header:
+    version: "105"
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/Dialog/TextDialog.yaml"
+Controls:
+-   class: "UIControl"
+    name: "LowerYourSettingsOfferDialog"
+    size: [1024.000000, 640.000000]
+    input: false
+    components:
+        Anchor:
+            leftAnchorEnabled: true
+            rightAnchorEnabled: true
+            topAnchorEnabled: true
+            bottomAnchorEnabled: true
+    children:
+    -   prototype: "TextDialog/TextDialog"
+        name: "InfoTextDialog"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "accentButtonType": "eButtonType.POSITIVE"
+                    "type": "eDialogType.CHOOSE"
+                    "header": "\"\""
+                    "headerImage": "\"\""
+                    "accentButton": "localize(\"#common:DialogButton/OK\")"
+                    "optionalButton": "localize(\"#common:DialogButton/Cancel\")"
+                    "contentControl": "control(\"~res:/UI/Screens3/Lobby/Common/Dialog/TextContent.yaml\", { \"contentText\" = localize(\"storage/Items/VehicleCertificate/Warning/NoSlot\"); }, [ ])"
+                eventActions:
+                - ["ACCENT_CLICKED", "ACCENT_CLICKED", ""]
+                - ["OPTIONAL_CLICKED", "OPTIONAL_CLICKED", ""]

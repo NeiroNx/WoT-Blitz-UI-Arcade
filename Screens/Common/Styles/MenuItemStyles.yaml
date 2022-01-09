@@ -1,0 +1,37 @@
+Header:
+    version: "44"
+StyleSheets:
+-   selector: ".tab"
+    properties:
+        bg-color: [0.627451, 0.725490, 0.800000, 1.000000]
+-   selector: ".tab * #Text"
+    properties:
+        text-color: [0.620000, 0.720000, 0.800000, 1.000000]
+-   selector: ".tab #Content #Icon"
+    properties:
+        visible: false
+-   selector: ".tab:selected"
+    properties:
+        bg-drawType: "DRAW_STRETCH_BOTH"
+        bg-color: [1.000000, 1.000000, 1.000000, 1.000000]
+        bg-leftRightStretchCap: 5.000000
+        bg-sprite: "~res:/Gfx/UI/SettingsScreen/over_button_tab_bar"
+        bg-topBottomStretchCap: 5.000000
+-   selector: ".tab:selected #Text"
+    properties:
+        text-color: [1.000000, 1.000000, 1.000000, 1.000000]
+-   selector: ".tab-color"
+    properties:
+        bg-color: [0.192157, 0.243137, 0.301961, 0.705882]
+-   selector: ".tab #Badge"
+    properties:
+        visible: false
+-   selector: ".tab.badge #Badge"
+    properties:
+        visible: true
+-   selector: ".tab.locked #Content"
+    properties:
+        bg-color: [1.000000, 1.000000, 1.000000, 0.500000]
+-   selector: ".tab.locked #Content #Icon"
+    properties:
+        visible: true

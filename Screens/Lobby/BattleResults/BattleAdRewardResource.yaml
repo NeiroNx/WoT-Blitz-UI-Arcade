@@ -1,0 +1,50 @@
+Header:
+    version: "73"
+Prototypes:
+-   class: "UIControl"
+    name: "BattleAdRewardResource"
+    input: false
+    components:
+        Anchor:
+            rightAnchorEnabled: true
+        LinearLayout:
+            useRtl: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "PercentOfMaxChild"
+        UIDataParamsComponent:
+            params:
+            - ["ResourceDetailed", "resource", "null", "{ type = ResourceType.credits; }"]
+        UIDataLocalsComponent:
+            locals:
+            - ["int", "iconFrame", "when resource.type == ResourceType.credits -> 1, resource.type == ResourceType.xp -> 3, 0"]
+            - ["string", "value", "when isNull(resource.basic) -> \"\", \"+\" + str1000Separated(resource.basic.quantity)"]
+    children:
+    -   class: "UIControl"
+        name: "Value"
+        input: false
+        classes: "header1 text-color-white"
+        components:
+            Background: {}
+            UITextComponent:
+                useRtlAlign: "USE_BY_SYSTEM"
+            Anchor:
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens/Fonts.yaml"
+        bindings:
+        - ["UITextComponent.text", "value", "Read"]
+    -   class: "UIControl"
+        name: "Icon"
+        input: false
+        components:
+            Background:
+                sprite: "~res:/Gfx/UI/LobbyCommon/CurrencyIconsBig.psd"
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+        bindings:
+        - ["Background.frame", "iconFrame", "Read"]

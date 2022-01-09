@@ -1,0 +1,4 @@
+animation AcceptClicked
+{
+	BroadcastEvent("ACCENT_ACTION", dest = "InfoTextDialog", arg1=false);	
+}

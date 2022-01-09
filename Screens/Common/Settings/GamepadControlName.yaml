@@ -1,0 +1,85 @@
+Header:
+    version: "111"
+Prototypes:
+-   class: "UIControl"
+    name: "Control"
+    size: [32.000000, 32.000000]
+    input: false
+    classes: "left"
+    components:
+        LinearLayout:
+            spacing: 6.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "PercentOfMaxChild"
+        UIDataParamsComponent:
+            params:
+            - ["bool", "descVisible", "true", "true"]
+            - ["bool", "isleftToRight", "true", "true"]
+            - ["string", "descriptionValue", "\"\"", "\"Отмена\""]
+            - ["string", "nameValue", "\"\"", "\"Снайперский режим\""]
+            - ["eNintendoSwitchControls", "switchControl", "eNintendoSwitchControls.A", "eNintendoSwitchControls.AllArrows"]
+        UIDataLocalsComponent:
+            locals:
+            - ["string", "textAlign", "when isleftToRight -> \"align-left\", \"align-right\""]
+            - ["eOrientation", "orientation", "when isleftToRight -> eOrientation.LeftToRight, eOrientation.RightToLeft"]
+    bindings:
+    - ["LinearLayout.orientation", "orientation"]
+    children:
+    -   class: "UIControl"
+        name: "Icon"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfMaxChild"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Common/NintendoSwitch/Controls/NintendoSwitchControl.yaml"
+                args:
+                    "switchControl": "switchControl"
+    -   class: "UIControl"
+        name: "TextWrapper"
+        position: [32.000000, 0.000000]
+        size: [135.000000, 32.000000]
+        input: false
+        components:
+            LinearLayout:
+                orientation: "TopDown"
+                padding: "2"
+                spacing: 2.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfChildrenSum"
+        children:
+        -   class: "UIControl"
+            name: "Name"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                UITextComponent: {}
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "max(parent, content)"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml"
+            bindings:
+            - ["classes", "\"t-body bold white-wild-sand-text \" + textAlign"]
+            - ["UITextComponent.text", "localize(nameValue)"]
+        -   class: "UIControl"
+            name: "Descriptions"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                UITextComponent: {}
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "max(parent, content)"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml"
+            bindings:
+            - ["visible", "descVisible"]
+            - ["classes", "\"t-caption regular white-wild-sand-50-text \" + textAlign"]
+            - ["UITextComponent.text", "localize(descriptionValue)"]

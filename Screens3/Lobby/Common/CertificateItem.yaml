@@ -1,0 +1,15 @@
+Header:
+    version: 127
+Prototypes:
+-   class: "UIControl"
+    name: "CertificateItem"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        Background:
+            sprite: "~res:/Gfx/Lobby/icons/icon_certificate_notification"
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 32.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 32.000000

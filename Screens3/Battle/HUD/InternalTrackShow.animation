@@ -1,0 +1,40 @@
+animation InternalTrackAnimationShow
+{
+    parallel
+    {
+        Opacity("**/TrackIconWrapper", opacity=1.0, time=0.0, interpolation=LINEAR);
+        repeat
+        {
+            parallel
+            {
+                sequence
+                {
+                    Rotate (path="**/TrackIcon2", angle=-540, time=3);
+                    ChangeProperty("**/TrackIcon2", "", "angle", 0, 0);
+                }
+                repeat(4)
+                {
+                    ChangeProperty("**/TrackIcon3", "UIOpacityComponent", "opacity", 0, 0);
+                    ChangeProperty("**/TrackIcon3", "Anchor", "hCenterAnchor", -26, 0);
+
+                    parallel
+                    {
+                        ChangeProperty("**/TrackIcon3", "Anchor", "hCenterAnchor", -36, 0.75, EASE_IN_EASE_OUT);
+
+                        sequence
+                        {
+                            ChangeProperty("**/TrackIcon3", "UIOpacityComponent", "opacity", 1, 0.15, EASE_IN_EASE_OUT);
+                            ChangeProperty("**/TrackIcon3", "UIOpacityComponent", "opacity", 1, 0.3);
+                            ChangeProperty("**/TrackIcon3", "UIOpacityComponent", "opacity", 0, 0.3, EASE_IN_EASE_OUT);
+                        }
+                    }
+                }
+            }
+        }
+        sequence
+        {
+            WaitEvent("INTERNAL_TRACK_HIDE_ANIMATION_COMPLETE");
+            Stop();
+        }
+    }
+}

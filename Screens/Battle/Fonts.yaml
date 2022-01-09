@@ -1,0 +1,61 @@
+Header:
+    version: 135
+StyleSheets:
+-   selectors:
+    - ".text3-small-battle"
+    properties:
+        text-fontName: "WarHeliosCondC_Bold_13"
+-   selectors:
+    - ".bold-text-loading-small"
+    properties:
+        text-fontName: "WarHeliosCondC_Bold_14"
+-   selectors:
+    - ".text-arena-state"
+    properties:
+        text-fontName: "WarHeliosCondC_Bold_50"
+-   selectors:
+    - ".text-countdown-before-battle"
+    properties:
+        text-fontName: "WarHeliosCondC_Bold_70"
+-   selectors:
+    - ".text-arialmb"
+    properties:
+        text-fontName: "arialmb_16"
+-   selectors:
+    - ".text-marker-damage-points"
+    properties:
+        text-fontName: "WarHeliosCondC_Bold_17_markers"
+-   selectors:
+    - ".text-marker-health-points"
+    properties:
+        text-fontName: "WarHeliosCondC_Bold_10_markers"
+        text-color: [0.909800, 0.909800, 0.909800, 1.000000]
+-   selectors:
+    - ".text-marker-health-points.Increased"
+    properties:
+        text-fontName: "WarHeliosCondC_Bold_17_markers"
+        text-color: [0.909800, 0.909800, 0.909800, 1.000000]
+-   selectors:
+    - ".text-marker-nickname"
+    properties:
+        text-fontName: "WarHeliosCondC_Bold_13"
+-   selectors:
+    - ".text-marker-nickname.Phone"
+    properties:
+        text-fontName: "WarHeliosCondC_Bold_23"
+-   selectors:
+    - ".text-marker-health-points.Phone"
+    properties:
+        text-fontName: "WarHeliosCondC_Bold_17_markers"
+        text-color: [0.909804, 0.909804, 0.909804, 1.000000]
+-   selectors:
+    - ".text-marker-health-points.Phone.Increased"
+    properties:
+        text-fontName: "WarHeliosCondC_Bold_19_markers"
+        text-color: [0.909804, 0.909804, 0.909804, 1.000000]
+-   selectors:
+    - ".cursor-small-font"
+    properties:
+        text-fontName: "WarHeliosCondC_Bold_14"
+        text-shadowOffset: [1.000000, 1.000000]
+        text-shadowColor: [0.000000, 0.000000, 0.000000, 1.000000]

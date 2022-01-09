@@ -1,0 +1,287 @@
+Header:
+    version: "92"
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Profile/Common/LeagueIcon.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "LeaguesPrototype"
+    size: [140.000000, 320.000000]
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "START_ANIMATION,"
+        Anchor: {}
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 112.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 320.000000
+        UIDataParamsComponent:
+            params:
+            - ["eLeague", "league", "eLeague.NO_LEAGUE", "eLeague.PLATINUM"]
+            - ["string", "title", "\"#Золотая\"", "\"#Золотая\""]
+            - ["bool", "isCurrentLeague", "false", "true"]
+            - ["bool", "isSelfProfile", "true", "true"]
+            - ["string", "rating", "\"#3742\"", "\"#3742\""]
+        UIDataLocalsComponent:
+            locals:
+            - ["string", "styleNoLeague", "\"white-wild-sand-50-bg\""]
+            - ["string", "styleBronze", "\"orange-tango-bg\""]
+            - ["string", "styleSilver", "\"blue-riptide-bg\""]
+            - ["string", "styleGold", "\"yellow-lightning-bg\""]
+            - ["string", "stylePlatinum", "\"orange-orange-peel-bg\""]
+            - ["string", "styleDiamond", "\"purple-chupretto-bg\""]
+            - ["string", "style", "when league == eLeague.NO_LEAGUE -> styleNoLeague, when league == eLeague.BRONZE -> styleBronze, when league == eLeague.SILVER -> styleSilver, when league == eLeague.GOLD -> styleGold, when league == eLeague.PLATINUM -> stylePlatinum, when league == eLeague.DIAMOND -> styleDiamond, \"\""]
+            - ["int", "frame", "when league == eLeague.NO_LEAGUE -> 6, when league == eLeague.BRONZE -> 1, when league == eLeague.SILVER -> 2, when league == eLeague.GOLD -> 3, when league == eLeague.PLATINUM -> 4, when league == eLeague.DIAMOND -> 5, 0"]
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens3/Lobby/Profile/Common/LeagueInfoPrototype.yaml"
+    children:
+    -   class: "UIControl"
+        name: "Backgrounds"
+        input: false
+        components:
+            UIOpacityComponent:
+                opacity: 0.400000
+            Anchor:
+                vCenterAnchorEnabled: true
+                vCenterAnchor: -16.000000
+            IgnoreLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        bindings:
+        - ["visible", "isCurrentLeague"]
+        children:
+        -   class: "UIControl"
+            name: "Small"
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_STRETCH_BOTH"
+                    sprite: "~res:/Gfx/UI/ProfileScreen/rating_gradient.psd"
+                    frame: 0
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    topAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 20.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+            bindings:
+            - ["classes", "style"]
+        -   class: "UIControl"
+            name: "Medium"
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_STRETCH_BOTH"
+                    sprite: "~res:/Gfx/UI/ProfileScreen/rating_gradient.psd"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    topAnchorEnabled: true
+                    topAnchor: 20.000000
+                    bottomAnchorEnabled: true
+                    bottomAnchor: 20.000000
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 40.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+            bindings:
+            - ["classes", "style"]
+        -   class: "UIControl"
+            name: "Big"
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_STRETCH_BOTH"
+                    sprite: "~res:/Gfx/UI/ProfileScreen/rating_gradient.psd"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    topAnchorEnabled: true
+                    topAnchor: 40.000000
+                    bottomAnchorEnabled: true
+                    bottomAnchor: 40.000000
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 60.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+            bindings:
+            - ["classes", "style"]
+    -   class: "UIControl"
+        name: "Data"
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: false
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                orientation: "TopDown"
+                skipInvisible: false
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "YourLeague"
+            input: false
+            classes: "t-caption regular color=white-wild-sand-50-text"
+            components:
+                UITextComponent: {}
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    topAnchorEnabled: true
+                    topAnchor: 5.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 20.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml"
+            bindings:
+            - ["visible", "isCurrentLeague"]
+            - ["UITextComponent.text", "when isSelfProfile -> localize(\"ratingBattles/infoScreen/currentLeague\"), localize(\"ratingBattles/infoScreen/currentLeague2\")"]
+        -   class: "UIControl"
+            name: "Spacer"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 16.000000
+        -   class: "UIControl"
+            name: "Icon"
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    verticalPolicy: "FixedSize"
+            bindings:
+            - ["SizePolicy.horizontalValue", "when isCurrentLeague -> 144, 122"]
+            - ["SizePolicy.verticalValue", "when isCurrentLeague -> 144, 122"]
+            children:
+            -   prototype: "LeagueIcon/LeagueIcon"
+                name: "LeagueIcon"
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        horizontalValue: 100.000000
+                        verticalPolicy: "PercentOfParent"
+                        verticalValue: 100.000000
+                    UIDataParamsComponent:
+                        args:
+                            "showAnimation": "isCurrentLeague"
+                            "league": "league"
+        -   class: "UIControl"
+            name: "Spacer_1"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 8.000000
+        -   class: "UIControl"
+            name: "TextWrapper"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                LinearLayout:
+                    orientation: "TopDown"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   class: "UIControl"
+                name: "TextActive"
+                input: false
+                components:
+                    Anchor: {}
+                    LinearLayout:
+                        orientation: "TopDown"
+                        spacing: 8.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfChildrenSum"
+                bindings:
+                - ["visible", "isCurrentLeague"]
+                children:
+                -   class: "UIControl"
+                    name: "Name"
+                    input: false
+                    classes: "t-headline bold color=white-wild-sand-text"
+                    components:
+                        UITextComponent: {}
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfContent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Font.style.yaml"
+                    bindings:
+                    - ["UITextComponent.text", "title"]
+                -   class: "UIControl"
+                    name: "Rating"
+                    input: false
+                    components:
+                        UITextComponent: {}
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfContent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Font.style.yaml"
+                    bindings:
+                    - ["classes", "when league == eLeague.NO_LEAGUE -> \"t-body regular not-localize color=white-wild-sand-50-text\", \"t-title bold not-localize color=orange-orange-peel-text\""]
+                    - ["UITextComponent.text", "rating"]
+            -   class: "UIControl"
+                name: "TextInactive"
+                input: false
+                components:
+                    Anchor: {}
+                    LinearLayout:
+                        orientation: "TopDown"
+                        spacing: 8.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfChildrenSum"
+                bindings:
+                - ["visible", "not isCurrentLeague"]
+                children:
+                -   class: "UIControl"
+                    name: "Name"
+                    input: false
+                    classes: "t-subtitle regular color=white-wild-sand-text"
+                    components:
+                        UITextComponent: {}
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfContent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Font.style.yaml"
+                    bindings:
+                    - ["UITextComponent.text", "title"]
+                -   class: "UIControl"
+                    name: "Rating"
+                    input: false
+                    classes: "t-body regular color=white-wild-sand-50-text not-localize"
+                    components:
+                        UITextComponent: {}
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfContent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Font.style.yaml"
+                    bindings:
+                    - ["UITextComponent.text", "rating"]

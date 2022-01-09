@@ -1,0 +1,63 @@
+Header:
+    version: "77"
+Controls:
+-   class: "UIControl"
+    name: "ProgressItem"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfFirstChild"
+            verticalPolicy: "PercentOfFirstChild"
+        UIDataParamsComponent:
+            params:
+            - ["ProgressItem", "progressItem", "null", "{ \"type\" = eProgressItemType.PROGRESS; }"]
+            events: []
+        UIDataLocalsComponent:
+            locals:
+            - ["string", "emptyProgress", "localize(\"#symbols:Dash\") + \" / \" + localize(\"#symbols:Dash\")"]
+            - ["string", "progressString", "when progressItem.currentValue != -1 and progressItem.maxValue != -1 -> str1000Separated(int(progressItem.currentValue)) + \" / \" + str1000Separated(int(progressItem.maxValue)), emptyProgress"]
+            - ["string", "emptyValue", "localize(\"#symbols:Dash\")"]
+            - ["string", "valueString", "when progressItem.currentValue != -1 -> str1000Separated(int(progressItem.currentValue)), emptyValue"]
+            - ["float", "fractional", "abs(progressItem.percent) - floor(abs(progressItem.percent))"]
+            - ["int", "precision", "when fractional < 0.100000 -> 0, 1"]
+            - ["string", "percentileString", "when progressItem.percent > 0.000000 -> percent(progressItem.percent, precision), emptyValue"]
+            - ["string", "resultString", "when progressItem.type == eProgressItemType.PROGRESS -> progressString, progressItem.type == eProgressItemType.VALUE -> valueString, progressItem.type == eProgressItemType.PERCENTILE -> percentileString, \"\""]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            LinearLayout:
+                spacing: 10.000000
+                useRtl: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfMaxChild"
+            StyleSheet:
+                styles: "~res:/UI/Screens/Fonts.yaml;~res:/UI/Screens/FontsColors.yaml"
+        children:
+        -   class: "UIControl"
+            name: "ProgressLabel"
+            input: false
+            classes: "text1 text-color-blue"
+            components:
+                UITextComponent:
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                    align: ["LEFT", "VCENTER"]
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+            bindings:
+            - ["UITextComponent.text", "localize(progressItem.label)"]
+        -   class: "UIControl"
+            name: "Progress"
+            input: false
+            classes: "text1 text-color-white"
+            components:
+                UITextComponent:
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+            bindings:
+            - ["UITextComponent.text", "resultString"]

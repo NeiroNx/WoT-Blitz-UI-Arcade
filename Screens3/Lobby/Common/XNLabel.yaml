@@ -1,0 +1,92 @@
+Header:
+    version: 130
+Prototypes:
+-   class: "UIControl"
+    name: "XNLabel"
+    input: false
+    components:
+        LinearLayout:
+            padding: "6"
+            dynamicPadding: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfFirstChild"
+            horizontalMin: 32.000000
+            verticalPolicy: "PercentOfFirstChild"
+        UIDataParamsComponent:
+            params:
+            - ["string", "bgColor", "\"white-wild-sand-bg\"", "\"white-wild-sand-bg\""]
+            - ["int", "count", "0", "12"]
+            - ["string", "textColor", "\"green-la-palma-text\"", "\"green-la-palma-text\""]
+    children:
+    -   class: "UIControl"
+        name: "Control"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            LinearLayout: {}
+            IgnoreLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfFirstChild"
+        children:
+        -   class: "UIControl"
+            name: "Left"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_ALIGNED"
+                    sprite: "~res:/Gfx/Lobby/backgrounds/bg_leaf_20_r4_left"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+            bindings:
+            - ["classes", "bgColor"]
+        -   class: "UIControl"
+            name: "Color"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_FILL"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+            bindings:
+            - ["classes", "bgColor"]
+        -   class: "UIControl"
+            name: "Right"
+            position: [7.000000, 0.000000]
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_ALIGNED"
+                    sprite: "~res:/Gfx/Lobby/backgrounds/bg_leaf_20_r4_left"
+                    spriteModification: ["FLIP_HORIZONTAL", "FLIP_VERTICAL"]
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+            bindings:
+            - ["classes", "bgColor"]
+    -   class: "UIControl"
+        name: "text"
+        input: false
+        components:
+            UITextComponent: {}
+            Anchor:
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml"
+        bindings:
+        - ["classes", "\"t-caption bold \" + textColor"]
+        - ["UITextComponent.text", "\"×\" + str(count)"]

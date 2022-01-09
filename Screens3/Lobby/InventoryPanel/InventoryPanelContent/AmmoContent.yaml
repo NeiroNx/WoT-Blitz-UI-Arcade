@@ -1,0 +1,31 @@
+Header:
+    version: "77"
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/InventoryPanel/InventoryPanelContent/AmmoSlot.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "AmmoContent"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfLastChild"
+            verticalPolicy: "PercentOfMaxChild"
+        UIDataParamsComponent:
+            params:
+            - ["vector<ShellInfo>", "shells", "[ ]", "[ { shell = { iconType = \"hc\"; }; count = 5; }; { shell = { iconType = \"ap\"; }; count = 0; }; { shell = { iconType = \"he\"; }; count = 10; }; ]"]
+    children:
+    -   class: "UIControl"
+        name: "Slots"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            LinearLayout:
+                spacing: 4.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfMaxChild"
+            UIRepeatComponent:
+                control: "~res:/UI/Screens3/Lobby/InventoryPanel/InventoryPanelContent/AmmoSlot.yaml"
+                dataContainer: "shells"
+                args:
+                    "shellInfo": "_item"

@@ -1,0 +1,100 @@
+Header:
+    version: 128
+Prototypes:
+-   class: "UIControl"
+    name: "InternalTrackIcon"
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "START_INTERNAL_TRACK_HIDE_ANIMATION,~res:/UI/Screens3/Battle/HUD/InternalTrackHide.animation;INTERNAL_TRACK_SHOW_ANIMATION,~res:/UI/Screens3/Battle/HUD/InternalTrackShow.animation"
+        UIOpacityComponent: {}
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 128.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 32.000000
+        UIEventBindingComponent: {}
+    children:
+    -   class: "UIControl"
+        name: "Fade"
+        input: false
+        components:
+            Background:
+                drawType: "DRAW_SCALE_TO_RECT"
+                sprite: "~res:/Gfx/Shared/backgrounds/bg_loader-circle_shadow"
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                horizontalValue: 200.000000
+                verticalPolicy: "PercentOfParent"
+                verticalValue: 300.000000
+    -   class: "UIControl"
+        name: "TrackIconWrapper"
+        input: false
+        components:
+            UIOpacityComponent: {}
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   class: "UIControl"
+            name: "TrackIcon1"
+            size: [32.000000, 32.000000]
+            input: false
+            classes: "white-wild-sand-bg"
+            components:
+                Background:
+                    drawType: "DRAW_ALIGNED"
+                    sprite: "~res:/Gfx/Shared/icons/icon_internal-track_mine_1"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "TrackIcon2"
+            position: [50.500000, 9.000000]
+            size: [32.000000, 32.000000]
+            pivot: [0.500000, 0.500000]
+            input: false
+            classes: "white-wild-sand-bg"
+            components:
+                Background:
+                    drawType: "DRAW_ALIGNED"
+                    sprite: "~res:/Gfx/Shared/icons/icon_internal-track_mine_2"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    hCenterAnchor: -7.000000
+                    vCenterAnchorEnabled: true
+                    vCenterAnchor: -0.500000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "TrackIcon3"
+            position: [32.000000, 7.500000]
+            input: false
+            classes: "green-green"
+            components:
+                Background:
+                    drawType: "DRAW_ALIGNED"
+                    sprite: "~res:/Gfx/Shared/icons/icon_internal-track_mine_3"
+                UIOpacityComponent:
+                    opacity: 1.000000
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    hCenterAnchor: -26.000000
+                    vCenterAnchorEnabled: true
+                    vCenterAnchor: -0.500000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"

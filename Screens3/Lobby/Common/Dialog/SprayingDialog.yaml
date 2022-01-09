@@ -1,0 +1,329 @@
+Header:
+    version: 127
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/Dialog/TextDialog.yaml"
+- "~res:/UI/Screens3/Lobby/Common/Slider.yaml"
+- "~res:/UI/Screens3/Lobby/Common/Resource/Detailed/Medium.yaml"
+- "~res:/UI/Screens3/Lobby/Common/Resource/Detailed/StuffMedium.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "SprayingDialog"
+    size: [640.000000, 480.000000]
+    input: false
+    components:
+        Anchor:
+            leftAnchorEnabled: true
+            rightAnchorEnabled: true
+            topAnchorEnabled: true
+            bottomAnchorEnabled: true
+        UIDataParamsComponent:
+            params:
+            - ["float", "currentValue", "0.000000", "60.000000"]
+            - ["int", "maxValue", "0", "100"]
+            - ["StuffResource", "source", "null", "{ }"]
+            - ["ResourceDetailed", "target", "null", "{ \"type\" = ResourceType.vehicle; }"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["bool", "isRTL", "localize(\"LANGUAGE_CODE\") == \"ar\""]
+            - ["string", "targetName", "when target.type == ResourceType.gold -> \"shop/Gold\", target.type == ResourceType.credits -> \"shop/Credits\", target.type == ResourceType.free_xp -> \"hangar/freeXP\", target.type == ResourceType.stuff -> target.stuff.title, target.type == ResourceType.unlocks -> target.unlock.title, target.type == ResourceType.vehicle -> target.vehicle.info.name, target.type == ResourceType.premium -> \"storage/Items/PremiumAccount/Title\", \"\""]
+            - ["bool", "isMaxValue", "round(currentValue) == float(maxValue)"]
+    children:
+    -   prototype: "TextDialog/TextDialog"
+        name: "TextDialog"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "optionalButton": "\"Cancel\""
+                    "accentButton": "\"storage/button/Split\""
+                    "contentControl": "Content"
+                    "type": "eDialogType.CHOOSE"
+                eventActions:
+                - ["START_CLOSING_ANIMATION", "", ""]
+                - ["ACCENT_CLICKED", "ON_SPRAYING", ""]
+                - ["OPTIONAL_CLICKED", "ON_CANCEL", ""]
+Slots:
+-   class: "UIControl"
+    name: "Content"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+            spacing: 12.000000
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 400.000000
+            verticalPolicy: "PercentOfChildrenSum"
+    children:
+    -   class: "UIControl"
+        name: "Spacer"
+        size: [16.000000, 16.000000]
+        input: false
+    -   class: "UIControl"
+        name: "Header"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   class: "UIControl"
+            name: "Value"
+            input: false
+            classes: "t-subtitle regular white-wild-sand-text"
+            components:
+                UITextComponent:
+                    text: "storage/header/Splitting"
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                    multiline: "MULTILINE_ENABLED"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "min(parent - 48, content)"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/Font.style.yaml"
+    -   class: "UIControl"
+        name: "Items"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+            LinearLayout:
+                spacing: 16.000000
+                useRtl: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   prototype: "StuffMedium/StuffMedium"
+            name: "StuffMedium"
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 80.000000
+                    verticalPolicy: "FixedSize"
+                UIDataParamsComponent:
+                    args:
+                        "stuff": "source"
+        -   class: "UIControl"
+            name: "Arrow"
+            position: [72.000000, 18.000000]
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Anchor:
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 94.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 94.000000
+            children:
+            -   class: "UIControl"
+                name: "IconLeft"
+                size: [64.000000, 64.000000]
+                pivot: [0.500000, 0.500000]
+                angle: 90.000000
+                input: false
+                classes: "green-green-bg"
+                components:
+                    Background:
+                        drawType: "DRAW_ALIGNED"
+                        sprite: "~res:/Gfx/UI/ProfileScreen/rating_arrow.psd"
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 94.000000
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 94.000000
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+                bindings:
+                - ["visible", "not isRTL"]
+            -   class: "UIControl"
+                name: "IconRight"
+                size: [64.000000, 64.000000]
+                pivot: [0.500000, 0.500000]
+                angle: 90.000000
+                input: false
+                classes: "green-green-bg"
+                components:
+                    Background:
+                        drawType: "DRAW_ALIGNED"
+                        sprite: "~res:/Gfx/UI/ProfileScreen/rating_arrow.psd"
+                        spriteModification: ["FLIP_VERTICAL"]
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 94.000000
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 94.000000
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+                bindings:
+                - ["visible", "isRTL"]
+        -   prototype: "Medium/Medium"
+            name: "ResourceDetailedMedium"
+            components:
+                Anchor:
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 80.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 100.000000
+                UIDataParamsComponent:
+                    args:
+                        "resource": "target"
+    -   class: "UIControl"
+        name: "ItemsNames"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                spacing: 16.000000
+                useRtl: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   class: "UIControl"
+            name: "Left"
+            size: [32.000000, 16.000000]
+            input: false
+            components:
+                Anchor:
+                    topAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 80.000000
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   class: "UIControl"
+                name: "StuffName"
+                input: false
+                classes: "t-subtitle regular white-wild-sand-text"
+                components:
+                    UITextComponent:
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                        multiline: "MULTILINE_ENABLED"
+                        align: ["HCENTER", "VCENTER"]
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        topAnchorEnabled: true
+                        bottomAnchorEnabled: false
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        horizontalMax: 160.000000
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+                bindings:
+                - ["UITextComponent.text", "localize(source.title)"]
+        -   class: "UIControl"
+            name: "ArrowSpacer"
+            size: [94.000000, 16.000000]
+            input: false
+        -   class: "UIControl"
+            name: "Right"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 80.000000
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   class: "UIControl"
+                name: "ResourceName"
+                input: false
+                classes: "t-subtitle regular white-wild-sand-text"
+                components:
+                    UITextComponent:
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                        multiline: "MULTILINE_ENABLED"
+                        align: ["HCENTER", "VCENTER"]
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        topAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        horizontalMax: 160.000000
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+                bindings:
+                - ["UITextComponent.text", "localize(targetName)"]
+    -   class: "UIControl"
+        name: "ExchangeOptions"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            LinearLayout:
+                orientation: "TopDown"
+                spacing: 12.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfChildrenSum"
+        bindings:
+        - ["visible", "maxValue > 1"]
+        children:
+        -   class: "UIControl"
+            name: "Spacer_1"
+            size: [16.000000, 8.000000]
+            input: false
+        -   prototype: "Slider/Slider"
+            name: "Slider"
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                UIDataParamsComponent:
+                    args:
+                        "step": "0.100000"
+                        "currentValue": "currentValue"
+                        "maxAllowedValue": "float(maxValue)"
+                        "maxValue": "float(maxValue)"
+                        "minValue": "1.000000"
+                        "minAllowedValue": "1.000000"
+                    eventActions:
+                    - ["ON_SLIDER_EDITING_FINISHED", "ON_SLIDER_EDITING_FINISHED", "_event.value"]
+                    - ["ON_SLIDER_TOUCHED", "ON_SLIDER_TOUCHED", "_event.index"]
+                    - ["ON_SLIDER_CHANGED", "ON_SLIDER_CHANGED", "_event.value"]
+                    - ["ON_SLIDER_PLUS", "ON_SLIDER_PLUS", "_event.index"]
+                    - ["ON_SLIDER_MINUS", "ON_SLIDER_MINUS", "_event.index"]
+            children:
+            -   path: "Body/UISlider/thumbSpriteControl/TitleBold"
+                components:
+                    Anchor: {}
+                bindings:
+                - ["Anchor.vCenterAnchor", "-32"]
+        -   class: "UIControl"
+            name: "Text"
+            input: false
+            components:
+                UITextComponent:
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                    align: ["LEFT", "VCENTER"]
+                Anchor:
+                    hCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+            bindings:
+            - ["classes", "when isMaxValue -> \"t-subtitle regular red-red-text\", \"t-subtitle regular white-wild-sand-text\""]
+            - ["UITextComponent.text", "when isMaxValue -> localize(\"storage/Items/Splitting/SplitAllItems\"), localize(\"storage/Items/Splitting/ChooseItemsNumber\")"]

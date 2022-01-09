@@ -1,0 +1,5 @@
+animation SlotSelected(int selectedSlotIndex)
+{
+	PlaySound(sound="GUI/buttons/choose");
+	Event("ON_SLOT_CLICKED", arg1=selectedSlotIndex);
+}

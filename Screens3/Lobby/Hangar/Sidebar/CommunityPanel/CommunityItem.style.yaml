@@ -1,0 +1,17 @@
+Header:
+    version: "71"
+ImportedPackages:
+- "~res:/UI/Screens3/Common/Touch.style.yaml"
+StyleSheets:
+-   selector: ".community-item * .hover"
+    properties:
+        visible: false
+-   selector: ".community-item * .content-area"
+    properties:
+        opacity-opacity: 1.000000
+-   selector: ".community-item:hover * .hover, .community-item * .separator"
+    properties:
+        visible: true
+-   selector: ".community-item:pressed_inside * .content-area"
+    properties:
+        opacity-opacity: 0.700000

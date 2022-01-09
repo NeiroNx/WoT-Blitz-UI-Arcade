@@ -1,0 +1,40 @@
+Header:
+    version: 138
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/TreeArrows/ArrowLine.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "Content"
+    input: false
+    components:
+        LinearLayout: {}
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 26.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 1.000000
+        UIDataParamsComponent:
+            params:
+            - ["bool", "isVisible", "true", "true"]
+    bindings:
+    - ["visible", "isVisible"]
+    children:
+    -   prototype: "ArrowLine/Line"
+        name: "Line"
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                horizontalValue: 100.000000
+                verticalPolicy: "PercentOfParent"
+                verticalValue: 100.000000
+    -   class: "UIControl"
+        name: "ArrowHead"
+        input: false
+        components:
+            Anchor:
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/TreeArrows/Arrow.yaml"

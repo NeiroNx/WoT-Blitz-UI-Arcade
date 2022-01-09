@@ -1,0 +1,74 @@
+Header:
+    version: "80"
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/Resource/Currency.yaml"
+Controls:
+-   class: "UIControl"
+    name: "TutorialDialogContent"
+    size: [340.000000, 133.000000]
+    input: false
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+            padding: "48; 0"
+            spacing: 10.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfChildrenSum"
+        UIDataParamsComponent:
+            params:
+            - ["int", "totalReward", "0", "300"]
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/Font.style.yaml"
+    children:
+    -   class: "UIControl"
+        name: "Message"
+        position: [0.000000, 25.000000]
+        size: [32.000000, 32.000000]
+        input: false
+        classes: "white-wild-sand-70-text regular t-body"
+        components:
+            UITextComponent:
+                text: "hangarTutorial/SkipDialogue/LosingReward"
+                multiline: "MULTILINE_ENABLED"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfContent"
+    -   class: "UIControl"
+        name: "RewardContainer"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Background:
+                colorInherit: "COLOR_IGNORE_PARENT"
+            Anchor:
+                hCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfChildrenSum"
+        children:
+        -   prototype: "Currency/Currency"
+            name: "Currency"
+            components:
+                UIDataParamsComponent:
+                    args:
+                        "currencySize": "eCurrencySize.BIG"
+                        "forButton": "false"
+                        "canAfford": "true"
+                        "isPlusTopPaneVisible": "false"
+                        "serverTime": "0L"
+                        "plusVisible": "false"
+                        "resource": "{ type = ResourceType.gold; quantity = totalReward; }"
+    -   class: "UIControl"
+        name: "Warning"
+        position: [0.000000, 109.000000]
+        size: [32.000000, 32.000000]
+        input: false
+        classes: "t-body regular yellow-lightning-text"
+        components:
+            UITextComponent:
+                text: "hangarTutorial/SkipDialogue/ResumingUnavailable"
+                multiline: "MULTILINE_ENABLED"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfContent"

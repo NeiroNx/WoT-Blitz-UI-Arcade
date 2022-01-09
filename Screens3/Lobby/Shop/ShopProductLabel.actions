@@ -1,0 +1,71 @@
+action OnTextSizeChanged(int newSize)
+{
+  if (updateSize and newSize != 0)
+  {
+    ChangeData(textWidth, newSize);
+    ChangeData(moveOffset, (textWidth + spacing));
+    ChangeData(updateSize, false);
+
+    if (textWidth > width)
+    {
+      if (centerText)
+      {
+        ChangeData(centerText, false);
+      }
+      Event("AnimateCreepingLine", arg1=true);
+    }
+    else
+    {
+      Event("AnimateCentered", arg1=true);
+    }
+  }
+}
+
+action AnimateCreepingLine(bool play)
+{
+  // argument to just kill existing animation
+  if (play)
+  {
+    ChangeProperty(currentControl, "Anchor", animationProperty, 0);
+    ChangeProperty(nextControl, "Anchor", animationProperty, moveOffset);
+    ChangeData(animating, true);
+    Opacity("TextHolder", opacity=1, time=fadeInTime, interpolation=EASE_IN);
+    repeat
+    {
+      Wait(pauseTime);
+      ChangeProperty(nextControl, "Anchor", animationProperty, moveOffset);
+      parallel
+      {
+        ChangeProperty(currentControl, "Anchor", animationProperty, -moveOffset, scrollTime);
+        ChangeProperty(nextControl, "Anchor", animationProperty, 0, scrollTime);
+      }
+      Wait(pauseTime);
+      ChangeProperty(currentControl, "Anchor", animationProperty, moveOffset);
+      parallel
+      {
+        ChangeProperty(nextControl, "Anchor", animationProperty, -moveOffset, scrollTime);
+        ChangeProperty(currentControl, "Anchor", animationProperty, 0, scrollTime);
+      }
+    }
+  }
+}
+
+action AnimateCentered(bool play)
+{
+  // argument to just kill existing animation
+  if (play)
+  {
+    ChangeData(animating, false);
+    ChangeData(centerText, true);
+    Opacity("TextHolder", opacity=1, time=fadeInTime, interpolation=EASE_IN);
+  }
+}
+
+action TEXT_CHANGED(bool animate)
+{
+  Event("AnimateCentered", arg1=false);
+  Event("AnimateCreepingLine", arg1=false);
+  Opacity("TextHolder", opacity=0, time=(when animate -> fadeInTime, 0), interpolation=EASE_OUT);
+  ChangeData(updateSize, true);
+  ChangeData(text, labelText);
+}

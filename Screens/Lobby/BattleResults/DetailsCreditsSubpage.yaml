@@ -1,0 +1,637 @@
+Header:
+    version: 115
+ImportedPackages:
+- "~res:/UI/Screens/Common.yaml"
+- "~res:/UI/Screens/Lobby/BattleResults/DetailsRewardSubpage.yaml"
+- "~res:/UI/Screens/Lobby/BattleResults/BattleResultsCommon.yaml"
+- "~res:/UI/Screens/Lobby/BattleResults/ExpensesRowWithClanDiscount.yaml"
+Prototypes:
+-   prototype: "DetailsRewardSubpage/Page"
+    name: "Page"
+    components:
+        UIDataParamsComponent:
+            params:
+            - ["BattleResultsViewModel", "results", "null", "{ }"]
+            - ["SessionDataModel", "session", "null", "{ }"]
+            events:
+            - "BUY_PREMIUM"
+        UIDataLocalBindingsComponent:
+            data:
+            - ["bool", "hasBooster", "results.economics.aDropData.Contains(\"booster\")"]
+            - ["int", "boosterCredit", "when hasBooster -> results.economics.aDropData[\"booster\"].credits, 0"]
+            - ["int", "boosterGold", "when hasBooster -> results.economics.aDropData[\"booster\"].gold, 0"]
+            - ["bool", "showCreditsFactor", "int(results.economics.creditsFactor) > 1"]
+            - ["bool", "showPremiumBanners", "not session.stats.isPremiumAccount and not results.isTutorial and not results.flagTraining"]
+            - ["bool", "showHeroReward", "results.economics.heroRewardCredits.base > 0 or results.economics.heroRewardCredits.premium > 0"]
+            - ["bool", "showQuestReward", "results.economics.questCredits.base > 0 or results.economics.questCredits.premium > 0"]
+            - ["string", "creditsFactorStr", "localize(\"XP_FACTOR_FORMAT\", { \"xpFactor\" = str(results.economics.creditsFactor, 0); })"]
+            - ["string", "baseCellsBgColorClass", "when results.economics.withPremium -> \"color-white-25\", \"color-white\""]
+            - ["string", "premCellsBgColorClass", "when results.economics.withPremium -> \"color-white\", \"color-white-25\""]
+            - ["string", "boosterGoldStringed", "str1000Separated(boosterGold)"]
+            - ["string", "boosterCreditsStringed", "str1000Separated(boosterCredit)"]
+            - ["string", "questGoldStringed", "str1000Separated(results.economics.questGold)"]
+            - ["string", "ammunitionCreditsColorClass", "when results.economics.ammunitionRefillCostCredits > 0 -> \"text-color-red\", \"text-color-white\""]
+            - ["string", "ammunitionCreditsTextClasses", "\"header4 \" + ammunitionCreditsColorClass"]
+            - ["string", "ammunitionCreditsRefillStr", "str1000Separated(-results.economics.ammunitionRefillCostCredits)"]
+            - ["string", "ammunitionCreditsGoldClass", "when results.economics.ammunitionRefillCostGold > 0 -> \"text-color-red\", \"text-color-white\""]
+            - ["string", "ammunitionGoldTextClasses", "\"header4 \" + ammunitionCreditsGoldClass"]
+            - ["string", "ammunitionGoldRefillStr", "str1000Separated(-results.economics.ammunitionRefillCostGold)"]
+            - ["string", "baseCreditsResultColor", "when results.economics.creditsResult.base < 0 -> \"text-color-red\", \"text-color-white\""]
+            - ["string", "baseCreditsResultClasses", "\"header4 \" + baseCreditsResultColor"]
+            - ["string", "premCreditsResultColor", "when results.economics.creditsResult.premium < 0 -> \"text-color-red\", \"text-color-white\""]
+            - ["string", "premCreditsResultClasses", "\"header4 \" + premCreditsResultColor"]
+            - ["string", "goldResultColor", "when results.economics.goldResult < 0 -> \"text-color-red\", \"text-color-white\""]
+            - ["string", "goldResultClasses", "\"header4 \" + goldResultColor"]
+    children:
+    -   path: "Content"
+        position: [0.000000, 0.000000]
+        children: []
+    -   path: "Content/UIScrollView/scrollContainerControl/Container"
+        components:
+            LinearLayout:
+                dynamicPadding: true
+        children:
+        -   class: "UIControl"
+            name: "ClanSupplyDiscount"
+            size: [740.000000, 32.000000]
+            input: false
+            bindings:
+            - ["visible", "results.economics.totalCreditsDiscounted > 0"]
+            children:
+            -   class: "UIControl"
+                name: "LabelContainer"
+                size: [370.000000, 32.000000]
+                components:
+                    Anchor:
+                        leftAnchorEnabled: true
+                        hCenterAnchorEnabled: true
+                        topAnchorEnabled: true
+                    LinearLayout:
+                        spacing: 5.000000
+                children:
+                -   class: "UIControl"
+                    name: "Label"
+                    size: [182.000000, 32.000000]
+                    input: false
+                    classes: "header3"
+                    components:
+                        UITextComponent:
+                            text: "#battle_results:DetailsPage/CreditsExperiencePage/SupplyBonus"
+                            colorInheritType: "COLOR_IGNORE_PARENT"
+                        Anchor:
+                            leftAnchorEnabled: true
+                            leftAnchor: 0.000000
+                            hCenterAnchorEnabled: true
+                            hCenterAnchor: 0.000000
+                            topAnchorEnabled: true
+                            topAnchor: 0.000000
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens/Fonts.yaml"
+                -   class: "UIControl"
+                    name: "Icon"
+                    size: [50.000000, 30.000000]
+                    input: false
+                    components:
+                        Background:
+                            sprite: "~res:/Gfx/UI/LobbyCommon/DiscountClanSmall"
+                        Anchor:
+                            rightAnchorEnabled: true
+            -   prototype: "DetailsRewardSubpage/RewardCell"
+                name: "Credits"
+                position: [157.000000, -15.000000]
+                components:
+                    Anchor:
+                        rightAnchorEnabled: true
+                children:
+                -   path: "WithPrem"
+                    bindings:
+                    - ["classes", "premCellsBgColorClass"]
+                    children: []
+                -   path: "WithPrem/Value"
+                    components:
+                        UITextComponent: {}
+                    bindings:
+                    - ["UITextComponent.text", "str1000Separated(results.economics.totalCreditsDiscounted)"]
+                -   path: "WithoutPrem"
+                    bindings:
+                    - ["classes", "baseCellsBgColorClass"]
+                    children: []
+                -   path: "WithoutPrem/Value"
+                    components:
+                        UITextComponent: {}
+                    bindings:
+                    - ["UITextComponent.text", "str1000Separated(results.economics.totalCreditsDiscounted)"]
+            -   class: "UIControl"
+                name: "Splitter"
+                position: [0.000000, 31.000000]
+                size: [740.000000, 1.000000]
+                input: false
+                components:
+                    Background:
+                        drawType: "DRAW_SCALE_TO_RECT"
+                        sprite: "~res:/Gfx/UI/BattleResultsScreen/TableLine"
+                        perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                    Anchor:
+                        leftAnchorEnabled: true
+                        rightAnchorEnabled: true
+                        bottomAnchorEnabled: true
+    -   path: "Content/UIScrollView/scrollContainerControl/Container/Header/WithoutPrem"
+        bindings:
+        - ["classes", "baseCellsBgColorClass"]
+        children: []
+    -   path: "Content/UIScrollView/scrollContainerControl/Container/Header/WithPrem"
+        bindings:
+        - ["classes", "premCellsBgColorClass"]
+        children: []
+    -   path: "Content/UIScrollView/scrollContainerControl/Container/Table"
+        children:
+        -   prototype: "DetailsRewardSubpage/RewardRow"
+            name: "Earned"
+            children:
+            -   path: "Label"
+                components:
+                    LinearLayout:
+                        spacing: 5.000000
+                children:
+                -   class: "UIControl"
+                    name: "Label"
+                    position: [185.000000, 0.000000]
+                    size: [370.000000, 32.000000]
+                    input: false
+                    classes: "text1"
+                    components:
+                        UITextComponent:
+                            text: "#battle_results:DetailsPage/CreditsExperiencePage/Earned"
+                            fontName: "WarHeliosCondC_21"
+                            colorInheritType: "COLOR_IGNORE_PARENT"
+                            align: ["LEFT", "VCENTER"]
+                            useRtlAlign: "DONT_USE"
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfParent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens/Fonts.yaml"
+                -   class: "UIControl"
+                    name: "LabelXpFactor"
+                    input: false
+                    classes: "text1"
+                    components:
+                        UITextComponent:
+                            fontName: "WarHeliosCondC_21"
+                            colorInheritType: "COLOR_IGNORE_PARENT"
+                            align: ["LEFT", "VCENTER"]
+                            useRtlAlign: "DONT_USE"
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfParent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens/Fonts.yaml"
+                    bindings:
+                    - ["visible", "showCreditsFactor"]
+                    - ["UITextComponent.text", "\"(\" + creditsFactorStr + \")\""]
+            -   path: "VerticalBox"
+                children:
+                -   prototype: "DetailsRewardSubpage/RewardCell"
+                    name: "RewardCell"
+                    position: [157.000000, -15.000000]
+                    children:
+                    -   path: "WithPrem"
+                        bindings:
+                        - ["classes", "premCellsBgColorClass"]
+                        children: []
+                    -   path: "WithPrem/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "str1000Separated(results.economics.battleCredits.premium)"]
+                    -   path: "WithoutPrem"
+                        bindings:
+                        - ["classes", "baseCellsBgColorClass"]
+                        children: []
+                    -   path: "WithoutPrem/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "str1000Separated(results.economics.battleCredits.base)"]
+        -   prototype: "DetailsRewardSubpage/RewardRow"
+            name: "HealingReward"
+            bindings:
+            - ["visible", "results.economics.hasHealingReward"]
+            children:
+            -   path: "Label"
+                components:
+                    UITextComponent:
+                        text: "#battle_results:DetailsPage/CreditsPage/CreditsForHealedHP"
+            -   path: "VerticalBox"
+                children:
+                -   prototype: "DetailsRewardSubpage/RewardCell"
+                    name: "RewardCell"
+                    position: [157.000000, -15.000000]
+                    children:
+                    -   path: "WithPrem"
+                        bindings:
+                        - ["classes", "premCellsBgColorClass"]
+                        children: []
+                    -   path: "WithPrem/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "str1000Separated(results.economics.healingCredits.premium)"]
+                    -   path: "WithoutPrem"
+                        bindings:
+                        - ["classes", "baseCellsBgColorClass"]
+                        children: []
+                    -   path: "WithoutPrem/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "str1000Separated(results.economics.healingCredits.base)"]
+        -   prototype: "DetailsRewardSubpage/RewardRow"
+            name: "BoosterReward"
+            bindings:
+            - ["visible", "hasBooster"]
+            children:
+            -   path: "Label"
+                components:
+                    UITextComponent:
+                        text: "#battle_results:DetailsPage/CreditsExperiencePage/BoosterImpact"
+            -   path: "VerticalBox"
+                children:
+                -   prototype: "DetailsRewardSubpage/RewardCell"
+                    name: "CreditsRewardCell"
+                    position: [452.000000, 122.000000]
+                    bindings:
+                    - ["visible", "boosterCredit > 0"]
+                    children:
+                    -   path: "WithPrem"
+                        bindings:
+                        - ["classes", "premCellsBgColorClass"]
+                        children: []
+                    -   path: "WithPrem/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "boosterCreditsStringed"]
+                    -   path: "WithoutPrem"
+                        bindings:
+                        - ["classes", "baseCellsBgColorClass"]
+                        children: []
+                    -   path: "WithoutPrem/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "boosterCreditsStringed"]
+                -   prototype: "DetailsRewardSubpage/RewardCell"
+                    name: "GoldRewardCell"
+                    position: [452.000000, 122.000000]
+                    bindings:
+                    - ["visible", "boosterGold"]
+                    children:
+                    -   path: "WithPrem"
+                        bindings:
+                        - ["classes", "premCellsBgColorClass"]
+                        children: []
+                    -   path: "WithPrem/Icon"
+                        components:
+                            Background:
+                                frame: 0
+                    -   path: "WithPrem/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "boosterGoldStringed"]
+                    -   path: "WithoutPrem"
+                        bindings:
+                        - ["classes", "baseCellsBgColorClass"]
+                        children: []
+                    -   path: "WithoutPrem/Icon"
+                        components:
+                            Background:
+                                frame: 0
+                    -   path: "WithoutPrem/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "boosterGoldStringed"]
+            -   class: "UIControl"
+                name: "LabelXpFactor"
+                position: [185.000000, 0.000000]
+                size: [370.000000, 32.000000]
+                input: false
+                components:
+                    UITextComponent:
+                        fontName: "WarHeliosCondC_21"
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                        align: ["LEFT", "VCENTER"]
+                        useRtlAlign: "DONT_USE"
+                    Anchor:
+                        topAnchorEnabled: true
+                        topAnchor: 0.000000
+                        bottomAnchorEnabled: true
+                        bottomAnchor: 0.000000
+                    IgnoreLayout: {}
+        -   prototype: "DetailsRewardSubpage/RewardRow"
+            name: "HeroReward"
+            bindings:
+            - ["visible", "showHeroReward"]
+            children:
+            -   path: "Label"
+                components:
+                    UITextComponent:
+                        text: "#battle_results:DetailsPage/CreditsExperiencePage/heroReward"
+            -   path: "VerticalBox"
+                children:
+                -   prototype: "DetailsRewardSubpage/RewardCell"
+                    name: "RewardCell"
+                    position: [157.000000, -15.000000]
+                    children:
+                    -   path: "WithPrem"
+                        bindings:
+                        - ["classes", "premCellsBgColorClass"]
+                        children: []
+                    -   path: "WithPrem/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "str1000Separated(results.economics.heroRewardCredits.premium)"]
+                    -   path: "WithoutPrem"
+                        bindings:
+                        - ["classes", "baseCellsBgColorClass"]
+                        children: []
+                    -   path: "WithoutPrem/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "str1000Separated(results.economics.heroRewardCredits.base)"]
+        -   prototype: "DetailsRewardSubpage/RewardRow"
+            name: "QuestsReward"
+            position: [0.000000, 96.000000]
+            bindings:
+            - ["visible", "showQuestReward"]
+            children:
+            -   path: "Label"
+                components:
+                    UITextComponent:
+                        text: "#battle_results:DetailsPage/CreditsExperiencePage/Quest_Reward"
+            -   path: "VerticalBox"
+                children:
+                -   prototype: "DetailsRewardSubpage/RewardCell"
+                    name: "Credits"
+                    position: [157.000000, -15.000000]
+                    children:
+                    -   path: "WithPrem"
+                        bindings:
+                        - ["classes", "premCellsBgColorClass"]
+                        children: []
+                    -   path: "WithPrem/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "str1000Separated(results.economics.questCredits.premium)"]
+                    -   path: "WithoutPrem"
+                        bindings:
+                        - ["classes", "baseCellsBgColorClass"]
+                        children: []
+                    -   path: "WithoutPrem/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "str1000Separated(results.economics.questCredits.base)"]
+                -   prototype: "DetailsRewardSubpage/RewardCell"
+                    name: "Gold"
+                    position: [157.000000, -15.000000]
+                    bindings:
+                    - ["visible", "results.economics.questGold > 0"]
+                    children:
+                    -   path: "WithPrem"
+                        bindings:
+                        - ["classes", "premCellsBgColorClass"]
+                        children: []
+                    -   path: "WithPrem/Icon"
+                        components:
+                            Background:
+                                frame: 0
+                    -   path: "WithPrem/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "questGoldStringed"]
+                    -   path: "WithoutPrem"
+                        bindings:
+                        - ["classes", "baseCellsBgColorClass"]
+                        children: []
+                    -   path: "WithoutPrem/Icon"
+                        components:
+                            Background:
+                                frame: 0
+                    -   path: "WithoutPrem/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["UITextComponent.text", "questGoldStringed"]
+        -   prototype: "ExpensesRowWithClanDiscount/ExpensesRowWithClanDiscount"
+            name: "AutoRepair"
+            components:
+                UIDataParamsComponent:
+                    args:
+                        "label": "localize(\"#battle_results:DetailsPage/CreditsExperiencePage/Repair_Tank\")"
+                        "showDiscountValue": "true"
+                        "withPremium": "results.economics.withPremium"
+                        "value": "results.economics.repairCost"
+        -   prototype: "DetailsRewardSubpage/RewardRow"
+            name: "AutoLoad"
+            children:
+            -   path: "Label"
+                components:
+                    UITextComponent:
+                        text: "#battle_results:DetailsPage/CreditsExperiencePage/Refill_Ammo"
+            -   path: "VerticalBox"
+                children:
+                -   prototype: "DetailsRewardSubpage/RewardCell"
+                    name: "Credits"
+                    children:
+                    -   path: "WithPrem"
+                        bindings:
+                        - ["classes", "premCellsBgColorClass"]
+                        children: []
+                    -   path: "WithPrem/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["classes", "ammunitionCreditsTextClasses"]
+                        - ["UITextComponent.text", "ammunitionCreditsRefillStr"]
+                    -   path: "WithoutPrem"
+                        bindings:
+                        - ["classes", "baseCellsBgColorClass"]
+                        children: []
+                    -   path: "WithoutPrem/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["classes", "ammunitionCreditsTextClasses"]
+                        - ["UITextComponent.text", "ammunitionCreditsRefillStr"]
+                -   prototype: "DetailsRewardSubpage/RewardCell"
+                    name: "Gold"
+                    bindings:
+                    - ["visible", "results.economics.ammunitionRefillCostGold > 0"]
+                    children:
+                    -   path: "WithPrem"
+                        bindings:
+                        - ["classes", "premCellsBgColorClass"]
+                        children: []
+                    -   path: "WithPrem/Icon"
+                        components:
+                            Background:
+                                frame: 0
+                    -   path: "WithPrem/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["classes", "ammunitionGoldTextClasses"]
+                        - ["UITextComponent.text", "ammunitionGoldRefillStr"]
+                    -   path: "WithoutPrem"
+                        bindings:
+                        - ["classes", "baseCellsBgColorClass"]
+                        children: []
+                    -   path: "WithoutPrem/Icon"
+                        components:
+                            Background:
+                                frame: 0
+                    -   path: "WithoutPrem/Value"
+                        components:
+                            UITextComponent: {}
+                        bindings:
+                        - ["classes", "ammunitionGoldTextClasses"]
+                        - ["UITextComponent.text", "ammunitionGoldRefillStr"]
+        -   prototype: "ExpensesRowWithClanDiscount/ExpensesRowWithClanDiscount"
+            name: "AutoConsumables"
+            components:
+                UIDataParamsComponent:
+                    args:
+                        "label": "localize(\"#battle_results:DetailsPage/CreditsExperiencePage/Refill_Equipment\")"
+                        "showDiscountValue": "false"
+                        "withPremium": "results.economics.withPremium"
+                        "value": "results.economics.consumablesRefillCost"
+        -   prototype: "ExpensesRowWithClanDiscount/ExpensesRowWithClanDiscount"
+            name: "AutoProvisions"
+            components:
+                UIDataParamsComponent:
+                    args:
+                        "label": "localize(\"#battle_results:DetailsPage/CreditsExperiencePage/Refill_Provisions\")"
+                        "showDiscountValue": "false"
+                        "withPremium": "results.economics.withPremium"
+                        "value": "results.economics.provisionRefillCost"
+        -   prototype: "ExpensesRowWithClanDiscount/ExpensesRowWithClanDiscount"
+            name: "AutoCamo"
+            components:
+                UIDataParamsComponent:
+                    args:
+                        "label": "localize(\"#battle_results:DetailsPage/CreditsExperiencePage/Refill_Camouflage\")"
+                        "showDiscountValue": "true"
+                        "withPremium": "results.economics.withPremium"
+                        "value": "results.economics.camouflageRefreshCost"
+    -   path: "Content/UIScrollView/scrollContainerControl/Container/Total/Label"
+        components:
+            UITextComponent:
+                align: ["LEFT", "VCENTER"]
+    -   path: "Content/UIScrollView/scrollContainerControl/Container/Total/VerticalBox"
+        children:
+        -   prototype: "DetailsRewardSubpage/RewardCell"
+            name: "Credits"
+            position: [157.000000, -15.000000]
+            children:
+            -   path: "WithPrem"
+                bindings:
+                - ["classes", "premCellsBgColorClass"]
+                children: []
+            -   path: "WithPrem/Value"
+                components:
+                    UITextComponent: {}
+                bindings:
+                - ["classes", "premCreditsResultClasses"]
+                - ["UITextComponent.text", "str1000Separated(results.economics.creditsResult.premium)"]
+            -   path: "WithoutPrem"
+                bindings:
+                - ["classes", "baseCellsBgColorClass"]
+                children: []
+            -   path: "WithoutPrem/Value"
+                components:
+                    UITextComponent: {}
+                bindings:
+                - ["classes", "baseCreditsResultClasses"]
+                - ["UITextComponent.text", "str1000Separated(results.economics.creditsResult.base)"]
+        -   prototype: "DetailsRewardSubpage/RewardCell"
+            name: "Gold"
+            position: [157.000000, -15.000000]
+            bindings:
+            - ["visible", "results.economics.goldResult != 0"]
+            children:
+            -   path: "WithPrem"
+                bindings:
+                - ["classes", "premCellsBgColorClass"]
+                children: []
+            -   path: "WithPrem/Icon"
+                components:
+                    Background:
+                        frame: 0
+            -   path: "WithPrem/Value"
+                components:
+                    UITextComponent: {}
+                bindings:
+                - ["classes", "goldResultClasses"]
+                - ["UITextComponent.text", "str1000Separated(results.economics.goldResult)"]
+            -   path: "WithoutPrem"
+                bindings:
+                - ["classes", "baseCellsBgColorClass"]
+                children: []
+            -   path: "WithoutPrem/Icon"
+                components:
+                    Background:
+                        frame: 0
+            -   path: "WithoutPrem/Value"
+                components:
+                    UITextComponent: {}
+                bindings:
+                - ["classes", "goldResultClasses"]
+                - ["UITextComponent.text", "str1000Separated(results.economics.goldResult)"]
+    -   path: "Banner"
+        bindings:
+        - ["visible", "showPremiumBanners"]
+        children: []
+    -   path: "Banner/PremiumBanner"
+        classes: ""
+    -   class: "UIControl"
+        name: "TrainingNoteContainer"
+        size: [1024.000000, 50.000000]
+        input: false
+        classes: "notch-tightly-bottom-inset"
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                bottomAnchorEnabled: true
+            IgnoreLayout: {}
+            UIAnchorSafeAreaComponent: {}
+            StyleSheet:
+                styles: "~res:/UI/Styles/SafeAreaStyles.yaml"
+        children:
+        -   prototype: "BattleResultsCommon/TrainingNote"
+            name: "TrainingNote"
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    rightAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                IgnoreLayout: {}
+                SizePolicy:
+                    horizontalPolicy: "Ignore"
+                DebugRender:
+                    enabled: false
+            bindings:
+            - ["visible", "results.flagTraining"]

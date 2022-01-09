@@ -1,0 +1,11 @@
+Header:
+    version: "48"
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/Common/Resource/ResourceSmall.yaml"
+Prototypes:
+-   prototype: "ResourceSmall/ResourceSmallBinded"
+    name: "ResourceSmallBindedRightAligned"
+    components:
+        Anchor:
+            rightAnchorEnabled: true
+            rightAnchor: 1.000000

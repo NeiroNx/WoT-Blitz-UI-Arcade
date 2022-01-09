@@ -1,0 +1,45 @@
+Header:
+    version: 133
+ImportedPackages:
+- "~res:/UI/Screens3/Battle/ModernTutorialHints/Common/HintFrames.yaml"
+- "~res:/UI/Screens3/Battle/ModernTutorialHints/Common/HintBlurred.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "HintHolder"
+    size: [344.000000, 112.000000]
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "Disappear,~res:/UI/Screens3/Battle/ModernTutorialHints/Common/HintWithFramesHide.animation"
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfMaxChild"
+        UIDataParamsComponent:
+            params:
+            - ["string", "text", "\"\"", "\"Для перехода в <highlight>снайперский режим</highlight> нажми <switchButtonZR/>. Так легче попадать по танку противника\""]
+            - ["string", "icon", "\"\"", "\"~res:/Gfx/Battle/tips/notifications/target\""]
+            - ["string", "title", "\"\"", "\"Title title title\""]
+            - ["float", "masterX", "48.000000", "344.000000"]
+            - ["float", "masterY", "48.000000", "112.000000"]
+            - ["string", "frameTargetId", "\"\"", "\"Hint\""]
+            - ["eTransition", "transitionType", "eTransition.Surround", "eTransition.Surround"]
+    children:
+    -   prototype: "HintBlurred/HintBlurred"
+        name: "HintBlurred"
+        components:
+            UIAttachLayoutMasterComponent:
+                attachId: "Hint"
+            UIDataParamsComponent:
+                args:
+                    "title": "title"
+                    "text": "text"
+                    "icon": "icon"
+    -   prototype: "HintFrames/HintFramesPrototype"
+        name: "HintFramesPrototype"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "masterY": "masterY"
+                    "masterX": "masterX"
+                    "controlId": "frameTargetId"
+                    "transitionType": "transitionType"

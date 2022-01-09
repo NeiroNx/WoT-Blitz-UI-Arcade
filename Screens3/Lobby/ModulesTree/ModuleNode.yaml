@@ -1,0 +1,250 @@
+Header:
+    version: 127
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/Resource/Currency.yaml"
+- "~res:/UI/Screens3/Lobby/Common/Vehicle/VehicleLevel.yaml"
+- "~res:/UI/Screens3/Lobby/Common/CheckMark.yaml"
+- "~res:/UI/Screens3/Lobby/Common/Selection.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "ModuleNode"
+    size: [64.000000, 72.000000]
+    classes: "module-node button-choose-sound"
+    components:
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 64.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 64.000000
+        UIInputEventComponent:
+            onDoubleTouch: "DOUBLE_TAP_ACTION"
+            onDoubleTouchData: "id"
+        UISwitchBarElementComponent: {}
+        UIDataParamsComponent:
+            params:
+            - ["int", "freeXp", "0", "500"]
+            - ["int", "tankXp", "0", "300"]
+            - ["int", "id", "0", "0"]
+            - ["int", "var", "0", "0"]
+            - ["bool", "isSelected", "false", "true"]
+            - ["eVehicleNodeStatus", "vehicleStatus", "eVehicleNodeStatus.OWNED", "eVehicleNodeStatus.OWNED"]
+            - ["ModuleNodeModel", "module", "null", "{ \"status\" = eModuleNodeStatus.CAN_BE_RESEARCHED; }"]
+            - ["bool", "clickable", "true", "true"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["bool", "isResearched", "module.status != eModuleNodeStatus.LOCKED and module.status != eModuleNodeStatus.CAN_BE_RESEARCHED"]
+            - ["string", "bgColorStyle", "when isResearched -> \"grey-shark-70-bg\", \"white-wild-sand-15-bg\""]
+            - ["int", "cost", "module.price.quantity"]
+            - ["bool", "isAnimationVisible", "when vehicleStatus != eVehicleNodeStatus.OWNED -> false, module.status == eModuleNodeStatus.CAN_BE_RESEARCHED and tankXp + freeXp >= cost -> true, false"]
+            - ["string", "glowAnimation", "when tankXp >= cost -> \"~res:/3d/FX/UI/ModuleFx/Glow_blue.sc2\", when tankXp + freeXp >= cost -> \"~res:/3d/FX/UI/ModuleFx/Glow_red.sc2\", \"\""]
+            - ["string", "arrowAnimation", "when tankXp >= cost -> \"~res:/3d/FX/UI/ModuleFx/Strelka.sc2\", when tankXp + freeXp >= cost -> \"~res:/3d/FX/UI/ModuleFx/strelka_red.sc2\", \"\""]
+            - ["string", "modulesIconsPath", "\"~res:/Gfx/UI/ModulesTechTree/\""]
+            - ["string", "specialIconPath", "when module.specialType == eSpecialModuleType.DrumGun -> \"~res:/Gfx/Lobby/icons/icon_damage_drum_s\", when module.specialType == eSpecialModuleType.PumpGun -> \"~res:/Gfx/Lobby/icons/icon_rate-of-fire_pump_s\", when module.specialType == eSpecialModuleType.AtgmGun -> \"~res:/Gfx/Lobby/icons/icon_rocket\", when module.specialType == eSpecialModuleType.InternalTrack -> \"~res:/Gfx/Lobby/icons/icon_back-traks_s\", \"\""]
+        UIIdentifierComponent:
+            id: "module_node"
+            params:
+            - ["string", "module_type", "module.iconPath"]
+            - ["string", "status", "str(int(module.status), eModuleNodeStatus)"]
+            - ["int", "level", "module.level"]
+    bindings:
+    - ["input", "clickable"]
+    - ["UISwitchBarElementComponent.id", "id"]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        position: [32.000000, 32.000000]
+        pivot: [0.500000, 0.500000]
+        input: false
+        classes: "content-area"
+        components:
+            UIOpacityComponent: {}
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Lobby/ModulesTree/ModuleNode.style.yaml"
+        children:
+        -   class: "UIControl"
+            name: "Background"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Background: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+            bindings:
+            - ["classes", "bgColorStyle"]
+        -   class: "UIControl"
+            name: "Hover"
+            size: [32.000000, 32.000000]
+            input: false
+            classes: "hover white-wild-sand-5-bg"
+            components:
+                Background: {}
+                UIOpacityComponent: {}
+                Anchor:
+                    leftAnchorEnabled: true
+                    rightAnchorEnabled: true
+                    topAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/Lobby/ModulesTree/ModuleNode.style.yaml"
+        -   prototype: "Selection/Selection"
+            name: "Selection"
+            components:
+                UIDataParamsComponent:
+                    args:
+                        "isVisible": "isSelected"
+        -   class: "UIParticles"
+            name: "Glow"
+            size: [32.000000, 32.000000]
+            scale: [0.700000, 0.700000]
+            pivot: [0.500000, 0.500000]
+            input: false
+            autoStart: true
+            startDelay: 0.400000
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+            bindings:
+            - ["visible", "isAnimationVisible"]
+            - ["effectPath", "glowAnimation"]
+        -   class: "UIControl"
+            name: "Icon"
+            size: [97.000000, 60.000000]
+            input: false
+            components:
+                UITextureComponent:
+                    drawType: "DRAW_SCALE_PROPORTIONAL"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 48.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 48.000000
+            bindings:
+            - ["UITextureComponent.spritePath", "modulesIconsPath + module.iconPath"]
+        -   class: "UIParticles"
+            name: "Arrow"
+            size: [48.000000, 48.000000]
+            scale: [1.300000, 1.300000]
+            pivot: [0.500000, 0.500000]
+            input: false
+            autoStart: true
+            startDelay: 0.400000
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+            bindings:
+            - ["visible", "isAnimationVisible"]
+            - ["effectPath", "arrowAnimation"]
+        -   class: "UIControl"
+            name: "SpecialTypeIcon"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+                    rightAnchor: -8.000000
+                    topAnchorEnabled: true
+                    topAnchor: -8.000000
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 24.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 24.000000
+            bindings:
+            - ["visible", "module.specialType != eSpecialModuleType.None"]
+            children:
+            -   class: "UIControl"
+                name: "Bg"
+                size: [32.000000, 32.000000]
+                input: false
+                classes: "gray-cape-cod-bg"
+                components:
+                    Background:
+                        drawType: "DRAW_STRETCH_BOTH"
+                        sprite: "~res:/Gfx/Lobby/backgrounds/bg_r2"
+                        leftRightStretchCap: 2.000000
+                        topBottomStretchCap: 2.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+            -   class: "UIControl"
+                name: "Icon"
+                size: [32.000000, 32.000000]
+                input: false
+                classes: "white-wild-sand-bg"
+                components:
+                    Background:
+                        drawType: "DRAW_ALIGNED"
+                        perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+                bindings:
+                - ["Background.sprite", "specialIconPath"]
+        -   prototype: "CheckMark/CheckMark"
+            name: "CheckMark"
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+                    rightAnchor: -8.000000
+                    bottomAnchorEnabled: true
+                    bottomAnchor: -8.000000
+                UIDataParamsComponent:
+                    args:
+                        "isVisible": "module.status == eModuleNodeStatus.INSTALLED"
+        -   class: "UIControl"
+            name: "PriceContainer"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                    bottomAnchor: 4.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+            bindings:
+            - ["visible", "(not isResearched) and module.price.quantity > 0"]
+            children:
+            -   prototype: "Currency/Currency"
+                name: "Currency"
+                components:
+                    UIDataParamsComponent:
+                        args:
+                            "forceFullValue": "false"
+                            "currencySize": "eCurrencySize.SMALL"
+                            "forButton": "false"
+                            "canAfford": "true"
+                            "isPlusTopPaneVisible": "false"
+                            "serverTime": "0L"
+                            "plusVisible": "false"
+                            "resource": "module.price"
+        -   prototype: "VehicleLevel/VehicleLevel"
+            name: "Level"
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 4.000000
+                    topAnchorEnabled: true
+                    topAnchor: 2.000000
+                UIDataParamsComponent:
+                    args:
+                        "level": "module.level"
+                        "type": "module.vehicleDescriptionType"

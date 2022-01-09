@@ -1,0 +1,461 @@
+Header:
+    version: 135
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/Button.yaml"
+- "~res:/UI/Screens3/Common/TextField.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "NewAccountScreen"
+    size: [960.000000, 640.000000]
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens3/PreLogin/NewAccount.animation"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UILayoutEventComponent:
+            visibilityMarginsEvent: "KEYBOARD_EVENT"
+            visibilityMarginsEventData: "_visibilityMargins.bottom"
+        ModalInput: {}
+        UIShortcutEventComponent:
+            shortcuts: "ENTER_SHORTCUT,Enter;BACK_SHORTCUT,Escape;BACK_SHORTCUT,Back"
+        UIDataParamsComponent:
+            params:
+            - ["PreLoginData", "preLoginData", "null", "{ }"]
+            events:
+            - "FIELD_CLICKED"
+            - "EDITING_STARTED"
+            - "RELOAD_CAPTCHA"
+            - "CAPTCHA_CHANGED"
+            - "REGION_SELECTION_PRESSED"
+            - "CREATE_PRESSED"
+            - "MAIL_CHANGED"
+            - "PASSWORD_CHANGED"
+            - "USER_NAME_CHANGED"
+            - "BACK_PRESSED"
+        UIDataLocalVarsComponent:
+            data:
+            - ["float", "keyboardHeight", "0.000000"]
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/PreLogin/NewAccount.actions"
+        UIEventOnDataComponent0:
+            watchedDataExpression: "preLoginData.registrationPowFailed"
+            ifExpression: "(_lastValue == false) and (_value == true)"
+            eventName: "SHOW_CAPTCHA"
+        UIEventOnDataComponent1:
+            watchedDataExpression: "preLoginData.registrationPowFailed"
+            ifExpression: "(_lastValue == true) and (_value == false)"
+            eventName: "HIDE_CAPTCHA"
+    children:
+    -   class: "UIControl"
+        name: "FadesWrapper"
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "BackButtonFade"
+            input: false
+            classes: "black-25-bg"
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_TO_RECT"
+                    sprite: "~res:/Gfx/Lobby/backgrounds/bg_radial-gradient_quarter"
+                Anchor:
+                    leftAnchorEnabled: true
+                    topAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 480.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 480.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "TopFade"
+            input: false
+            classes: "black-25-bg"
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_TO_RECT"
+                    sprite: "~res:/Gfx/Lobby/backgrounds/bg_gradient_vertical_0-100"
+                    spriteModification: ["FLIP_VERTICAL"]
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    topAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                    verticalValue: 50.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "BottomFade"
+            input: false
+            classes: "black-70-bg"
+            components:
+                Background:
+                    drawType: "DRAW_STRETCH_BOTH"
+                    sprite: "~res:/Gfx/Lobby/backgrounds/bg_gradient_vertical_0-100"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                IgnoreLayout: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                    verticalValue: 50.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+    -   class: "UIScrollView"
+        name: "Scroll"
+        classes: "notch-tightly-bottom-inset"
+        autoUpdate: true
+        centerContent: true
+        components:
+            ClipContent:
+                enabled: false
+            Anchor:
+                hCenterAnchorEnabled: true
+                topAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "Formula"
+                verticalFormula: "parent - keyboardHeight"
+            UIAnchorSafeAreaComponent: {}
+            StyleSheet:
+                styles: "~res:/UI/Screens3/SafeArea.style.yaml"
+        children:
+        -   class: "UIScrollViewContainer"
+            name: "scrollContainerControl"
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    rightAnchorEnabled: true
+                LinearLayout:
+                    orientation: "TopDown"
+                SizePolicy:
+                    verticalPolicy: "PercentOfChildrenSum"
+            children:
+            -   class: "UIControl"
+                name: "Forms"
+                position: [0.000000, 0.000000]
+                input: false
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                    LinearLayout:
+                        orientation: "TopDown"
+                        spacing: 16.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfMaxChild"
+                        verticalPolicy: "PercentOfChildrenSum"
+                children:
+                -   class: "UIControl"
+                    name: "Header"
+                    position: [356.500000, 308.000000]
+                    size: [32.000000, 32.000000]
+                    input: false
+                    classes: "t-headline bold white-wild-sand-text"
+                    components:
+                        UITextComponent:
+                            text: "Login/CreateAccount/Header"
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfContent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Font.style.yaml"
+                -   class: "UIControl"
+                    name: "Spacer"
+                    size: [32.000000, 32.000000]
+                    input: false
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 8.000000
+                -   prototype: "TextField/TextField"
+                    name: "Email"
+                    components:
+                        UIAttachLayoutMasterComponent:
+                            attachId: "LOGIN"
+                        UIDataParamsComponent:
+                            args:
+                                "keyboardType": "eKeyboardType.KEYBOARD_TYPE_EMAIL_ADDRESS"
+                                "textFieldType": "eTextFieldType.Text"
+                                "isEnabled": "true"
+                                "canCleaned": "true"
+                                "filterRegExp": "\"^[a-zA-Z0-9@\\._-]+$\""
+                                "validatedWithError": "preLoginData.registrationCredentials.loginValidationState == eCredentialValidationState.Invalid"
+                                "showValidate": "preLoginData.registrationCredentials.loginValidationState != eCredentialValidationState.None"
+                                "placeholderText": "localize(\"Login/CreateAccount/EmailForm/Placeholder\")"
+                                "text": "preLoginData.registrationCredentials.login"
+                                "textStyle": "\"t-subtitle regular\""
+                                "placeholderTextColor": "\"white-wild-sand-50-text\""
+                                "bgStyle": "\"black-50-bg\""
+                                "leftIconImage": "\"~res:/Gfx/Lobby/icons/icon_search_s\""
+                                "maxLength": "50"
+                            eventActions:
+                            - ["FIELD_CLICKED", "FIELD_CLICKED", "eLoginFieldId.Login"]
+                            - ["EDITING_STARTED", "EDITING_STARTED", "eLoginFieldId.Login"]
+                            - ["TEXT_CHANGED", "MAIL_CHANGED", "_event"]
+                -   prototype: "TextField/TextField"
+                    name: "PlayerName"
+                    components:
+                        UIAttachLayoutMasterComponent:
+                            attachId: "PLAYER_NAME"
+                        UIDataParamsComponent:
+                            args:
+                                "keyboardType": "eKeyboardType.KEYBOARD_TYPE_EMAIL_ADDRESS"
+                                "textFieldType": "eTextFieldType.Text"
+                                "isEnabled": "true"
+                                "canCleaned": "true"
+                                "filterRegExp": "\"^[a-zA-Z0-9_]+$\""
+                                "validatedWithError": "preLoginData.registrationCredentials.playerNameValidationState == eCredentialValidationState.Invalid"
+                                "showValidate": "preLoginData.registrationCredentials.playerNameValidationState != eCredentialValidationState.None"
+                                "placeholderText": "localize(\"Login/CreateAccount/UserName/Placeholder\")"
+                                "text": "preLoginData.registrationCredentials.playerName"
+                                "textStyle": "\"t-subtitle regular\""
+                                "placeholderTextColor": "\"white-wild-sand-50-text\""
+                                "bgStyle": "\"black-50-bg\""
+                                "leftIconImage": "\"~res:/Gfx/Lobby/icons/icon_search_s\""
+                                "maxLength": "24"
+                            eventActions:
+                            - ["FIELD_CLICKED", "FIELD_CLICKED", "eLoginFieldId.PlayerName"]
+                            - ["EDITING_STARTED", "EDITING_STARTED", "eLoginFieldId.PlayerName"]
+                            - ["TEXT_CHANGED", "USER_NAME_CHANGED", "_event"]
+                -   prototype: "TextField/TextField"
+                    name: "Password"
+                    components:
+                        UIAttachLayoutMasterComponent:
+                            attachId: "PASSWORD"
+                        UIDataParamsComponent:
+                            args:
+                                "isPassword": "true"
+                                "isLastEdit": "not preLoginData.registrationCredentials.isCaptchaLoaded"
+                                "keyboardType": "eKeyboardType.KEYBOARD_TYPE_EMAIL_ADDRESS"
+                                "textFieldType": "eTextFieldType.Text"
+                                "isEnabled": "true"
+                                "canCleaned": "true"
+                                "filterRegExp": "\"^[a-zA-Z0-9_]+$\""
+                                "validatedWithError": "preLoginData.registrationCredentials.passwordValidationState == eCredentialValidationState.Invalid"
+                                "showValidate": "preLoginData.registrationCredentials.passwordValidationState != eCredentialValidationState.None"
+                                "placeholderText": "localize(\"Login/LogInScreen/Password/Placeholder\")"
+                                "text": "preLoginData.registrationCredentials.password"
+                                "textStyle": "\"t-subtitle regular\""
+                                "placeholderTextColor": "\"white-wild-sand-50-text\""
+                                "bgStyle": "\"black-50-bg\""
+                                "leftIconImage": "\"~res:/Gfx/Lobby/icons/icon_search_s\""
+                                "maxLength": "100"
+                            eventActions:
+                            - ["FIELD_CLICKED", "FIELD_CLICKED", "eLoginFieldId.Password"]
+                            - ["EDITING_STARTED", "EDITING_STARTED", "eLoginFieldId.Password"]
+                            - ["TEXT_CHANGED", "PASSWORD_CHANGED", "_event"]
+                -   class: "UIControl"
+                    name: "CaptchaContainer"
+                    size: [32.000000, 32.000000]
+                    input: false
+                    components:
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                        LinearLayout:
+                            dynamicSpacing: true
+                        SizePolicy:
+                            horizontalPolicy: "FixedSize"
+                            horizontalValue: 364.000000
+                            verticalPolicy: "PercentOfMaxChild"
+                    children:
+                    -   class: "UIControl"
+                        name: "CaptchaImage"
+                        input: false
+                        components:
+                            UIOpacityComponent: {}
+                            Anchor:
+                                topAnchorEnabled: true
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfFirstChild"
+                                verticalPolicy: "PercentOfMaxChild"
+                            UIChildComponent0:
+                                condition: "preLoginData.registrationPowFailed"
+                                prototypePath: "~res:/UI/Screens3/Common/Captcha.yaml"
+                                args:
+                                    "loading": "not preLoginData.registrationCredentials.isCaptchaLoaded"
+                                    "captchaSpriteName": "preLoginData.registrationCredentials.captchaSpriteName"
+                                eventActions:
+                                - ["RELOAD_CAPTCHA", "RELOAD_CAPTCHA", ""]
+                    -   class: "UIControl"
+                        name: "CaptchaText"
+                        size: [32.000000, 32.000000]
+                        input: false
+                        components:
+                            UIOpacityComponent: {}
+                            Anchor:
+                                topAnchorEnabled: true
+                            SizePolicy:
+                                horizontalPolicy: "FixedSize"
+                                horizontalValue: 164.000000
+                                verticalPolicy: "PercentOfMaxChild"
+                            UIAttachLayoutMasterComponent:
+                                attachId: "CAPTCHA"
+                            UIChildComponent0:
+                                condition: "preLoginData.registrationPowFailed"
+                                prototypePath: "~res:/UI/Screens3/Common/TextField.yaml"
+                                args:
+                                    "isLastEdit": "preLoginData.registrationCredentials.isCaptchaLoaded"
+                                    "maxLength": "10"
+                                    "leftIconImage": "\"~res:/Gfx/Lobby/icons/icon_search_s\""
+                                    "bgStyle": "\"black-50-bg\""
+                                    "placeholderTextColor": "\"white-wild-sand-50-text\""
+                                    "textStyle": "\"t-body regular\""
+                                    "text": "preLoginData.registrationCredentials.captchaText"
+                                    "placeholderText": "localize(\"Login/CreateAccount/Captcha/Placeholder\")"
+                                    "validatedWithError": "preLoginData.registrationCredentials.captchaTextValidationState == eCredentialValidationState.Invalid"
+                                    "showValidate": "preLoginData.registrationCredentials.captchaTextValidationState != eCredentialValidationState.None"
+                                    "filterRegExp": "NUMBER_LETTER"
+                                    "canCleaned": "true"
+                                    "isEnabled": "true"
+                                    "textFieldType": "eTextFieldType.Text"
+                                    "keyboardType": "eKeyboardType.KEYBOARD_TYPE_NUMBER_PAD"
+                                eventActions:
+                                - ["FIELD_CLICKED", "FIELD_CLICKED", "eLoginFieldId.Captcha"]
+                                - ["EDITING_STARTED", "EDITING_STARTED", "eLoginFieldId.Captcha"]
+                                - ["TEXT_CHANGED", "CAPTCHA_CHANGED", "_event"]
+                -   prototype: "Button/Button"
+                    name: "CreateButton"
+                    components:
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "FixedSize"
+                            horizontalValue: 364.000000
+                        UIDataParamsComponent:
+                            args:
+                                "isLoading": "preLoginData.registrationPowInProgress"
+                                "size": "eButtonSize.NORMAL"
+                                "type": "eButtonType.POSITIVE"
+                                "caption": "\"Login/CreateAccount/AcceptButton\""
+                            eventActions:
+                            - ["ON_CLICK_BUTTON", "CREATE_PRESSED", ""]
+                -   class: "UIControl"
+                    name: "Control"
+                    size: [32.000000, 32.000000]
+                    input: false
+            -   class: "UIControl"
+                name: "ErrorPopup"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    IgnoreLayout: {}
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                    UIChildComponent0:
+                        condition: "preLoginData.loginFieldsErrors.fieldId != eLoginFieldId.None"
+                        prototypePath: "~res:/UI/Screens3/Common/PopupMenu.yaml"
+                        args:
+                            "defaultTextHMax": "200"
+                            "text": "preLoginData.loginFieldsErrors.errorMessage"
+                            "slaveAlign": "ePositionAlign.Right"
+                            "masterId": "when preLoginData.loginFieldsErrors.fieldId == eLoginFieldId.Login -> \"LOGIN\", preLoginData.loginFieldsErrors.fieldId == eLoginFieldId.Password -> \"PASSWORD\", preLoginData.loginFieldsErrors.fieldId == eLoginFieldId.PlayerName -> \"PLAYER_NAME\", preLoginData.loginFieldsErrors.fieldId == eLoginFieldId.Captcha -> \"CAPTCHA\", \"\""
+                            "title": "\"\""
+    -   class: "UIControl"
+        name: "BackButton"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 16.000000
+                topAnchorEnabled: true
+                topAnchor: 16.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfMaxChild"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/IconButton.yaml"
+                args:
+                    "isBgVisible": "true"
+                    "image": "\"~res:/Gfx/Lobby/icons/icon_arrow-rounded\""
+                eventActions:
+                - ["ON_CLICK_BUTTON", "BACK_PRESSED", ""]
+    -   class: "UIControl"
+        name: "ServerLink"
+        position: [360.000000, 436.000000]
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                bottomAnchorEnabled: true
+            LinearLayout:
+                orientation: "TopDown"
+                spacing: 16.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfChildrenSum"
+        children:
+        -   class: "UIControl"
+            name: "SelectServer"
+            position: [0.000000, 160.000000]
+            size: [32.000000, 48.000000]
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                LinearLayout:
+                    spacing: 4.000000
+                    useRtl: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   class: "UIControl"
+                name: "Text"
+                size: [32.000000, 32.000000]
+                input: false
+                classes: "t-body regular white-wild-sand-50-text"
+                components:
+                    UITextComponent:
+                        text: "Login/SelectServerCaption"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml"
+            -   class: "UIControl"
+                name: "ServerLink"
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfMaxChild"
+                        verticalPolicy: "PercentOfMaxChild"
+                    UIChildComponent0:
+                        prototypePath: "~res:/UI/Screens3/Lobby/Common/RichTextLink.yaml"
+                        args:
+                            "soundStyle": "\"button-open-sound\""
+                            "baseFontSize": "\"t-body\""
+                            "baseFontStyle": "\"bold\""
+                            "key": "localize(preLoginData.currentRegion.name)"
+                            "isExternalLink": "false"
+                        eventActions:
+                        - ["LINK_PRESSED", "REGION_SELECTION_PRESSED", ""]
+        -   class: "UIControl"
+            name: "Spacer"
+            position: [0.000000, 196.000000]
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "Formula"
+                    verticalFormula: "when (screenHeight < 1023) -> 16, screenHeight*0.06"

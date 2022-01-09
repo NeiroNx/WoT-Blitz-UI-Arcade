@@ -1,0 +1,26 @@
+Header:
+    version: 141
+Prototypes:
+-   class: "UIControl"
+    name: "BasicBundleItemText"
+    input: false
+    classes: "t-caption regular white-wild-sand-text"
+    components:
+        UITextComponent: {}
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 40.000000
+            verticalPolicy: "PercentOfContent"
+        UIDataParamsComponent:
+            params:
+            - ["ResourceDetailed", "resource", "null", "{ }"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["bool", "hasNumericValue", "not isNull(resource.basic) or not isNull(resource.devices)"]
+            - ["int", "quantity", "when not isNull(resource.basic) -> resource.basic.quantity, not isNull(resource.devices) -> resource.devices.amount, 0"]
+            - ["string", "stringedValue", "when quantity < 2 -> \"\", resource.type == ResourceType.real_currency -> resource.realCurrency.localizedValue, resource.type == ResourceType.premium and toDays(resource.basic.quantity) > 0L -> str(toDays(resource.basic.quantity)) + localize(\"#common:Time/Days\"), resource.type == ResourceType.premium and toHours(resource.basic.quantity) > 0L -> str(toHours(resource.basic.quantity)) + localize(\"#common:Time/Hours\"), resource.type == ResourceType.premium -> str(resource.basic.quantity / 60) + localize(\"#common:Time/Minutes\"), resource.type == ResourceType.slots or resource.type == ResourceType.equipment_slots -> (\"x\" + shortStr(quantity, 1000)), shortStr(quantity, 1000)"]
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Font.style.yaml"
+    bindings:
+    - ["visible", "hasNumericValue"]
+    - ["UITextComponent.text", "stringedValue"]

@@ -1,0 +1,37 @@
+animation ANIMATE_PROGRESS
+{
+	if (currentLevelIndex < oldLevelIndex or (currentLevelIndex == oldLevelIndex and currentLevelProgress < oldLevelProgress))
+	{
+		// reset progress from server -> close screen
+		Event("BACK_BUTTON_CLICKED");
+	}
+	else 
+	{
+
+		Wait(0.1); // need because lazy loading
+
+		if (isPaidOpened and not serializationInfo.isDisplayedPaidUnlock)
+		{
+			Event("BATTLE_PASS_UNLOCKED");
+			BroadcastEvent("LOCK_UNLOCKED", "**/LevelsContainer");
+			BroadcastEvent("LOCK_UNLOCKED", "**/AnchoredLevels");
+		}
+
+		BroadcastEvent("SHOW_LEVEL_PROGRESS_ANIMATION", "**/LevelsContainer");
+			
+		if (currentLevelIndex == levelsCount - 1)
+		{
+			DirectEvent("SHOW_LEVEL_PROGRESS_ANIMATION", "**/AnchoredLevels/level_anchored" + str(currentLevelIndex));
+		}
+		
+		Wait((currentLevelProgress + currentLevelIndex * 10 - oldLevelIndex * 10 - oldLevelProgress) * 0.05 + 0.35);
+
+		if (not isNull(battlePass.chest))
+		{
+			DirectEvent("ANIMATE_CHEST", ".");
+			Wait(5.0);
+		}
+
+		DirectEvent("PROGRESS_ANIMATION_ENDED", ".");	
+	}
+}

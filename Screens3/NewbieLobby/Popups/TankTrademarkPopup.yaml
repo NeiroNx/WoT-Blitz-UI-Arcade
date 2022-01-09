@@ -1,0 +1,83 @@
+Header:
+    version: 134
+ImportedPackages:
+- "~res:/UI/Screens3/Common/PopupMenuWithRichText.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "TankTrademarkPopup"
+    size: [960.000000, 640.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params: []
+            events:
+            - "ON_POPUP_BUTTON_CLICKED"
+            - "POPUP_ON_CLOSE_ACTION"
+            - "FINISH_HIDE_POPUP_ANIMATION"
+    children:
+    -   prototype: "PopupMenuWithRichText/Slave"
+        name: "Slave"
+        components:
+            UIAttachLayoutSlaveComponent:
+                masterAlign: "BottomCenter"
+                slaveAlign: "TopCenter"
+            UIAttachLayoutSmartSlaveComponent: {}
+            UIDataParamsComponent:
+                args:
+                    "masterId": "\"TANK_NAME_INFO_BUTTON\""
+                    "buttonCaption": "localize(\"Trademarks/T34_button_caption\")"
+                    "buttonVisible": "true"
+                    "title": "\"\""
+                    "text": "localize(\"Trademarks/T34_text\")"
+                eventActions:
+                - ["FINISH_HIDE_POPUP_ANIMATION", "FINISH_HIDE_POPUP_ANIMATION", ""]
+                - ["POPUP_ON_CLOSE_ACTION", "POPUP_ON_CLOSE_ACTION", ""]
+                - ["CONTINUE", "ON_POPUP_BUTTON_CLICKED", ""]
+            UIDataLocalVarsComponent:
+                data:
+                - ["string", "selectedSide", "\"bottom\""]
+            UIDataLocalBindingsComponent:
+                data:
+                - ["string", "alignStyle", "when isAlignLeft -> \" text-align-left\", \" text-align-center\""]
+                - ["string", "textStyle", "\"t-subtitle regular \" + colorClass + alignStyle"]
+                - ["string", "titleStyle", "\"t-subtitle bold \" + colorClass + alignStyle"]
+            UIDataOnEventComponent0:
+                eventName: ""
+                modelFieldExpression: ""
+                dataExpression: ""
+        bindings:
+        - ["UIAttachLayoutSlaveComponent.attachId", "masterId"]
+        - ["UIAttachLayoutSmartSlaveComponent.attachId", ""]
+        - ["UIAttachLayoutSmartSlaveComponent.slaveAlign", ""]
+        children:
+        -   path: "Content"
+            components:
+                LinearLayout:
+                    spacing: 16.000000
+            children: []
+        -   path: "Content/Text"
+            components:
+                SizePolicy:
+                    horizontalMax: 256.000000
+        -   path: "Content/ButtonWrapper"
+            bindings:
+            - ["visible", "buttonVisible"]
+            children: []
+        -   path: "Content/ButtonWrapper/Button"
+            components:
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "parent - 32"
+                UIDataParamsComponent:
+                    args:
+                        "isExternalLink": "true"
+                        "enabled": "true"
+                        "size": "eButtonSize.SMALL"
+                        "type": "eButtonType.OPTIONAL_LIGHT"
+                        "caption": "buttonCaption"
+            bindings:
+            - ["visible", "true"]
+            children: []

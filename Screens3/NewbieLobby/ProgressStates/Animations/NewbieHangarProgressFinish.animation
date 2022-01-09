@@ -1,0 +1,72 @@
+animation FINISH()
+{
+	Event("ON_PROGRESS_STATE_FINISHED", ".", eNewbieProgressionStepType.HangarProgression);
+
+	if (currentStep < 2)
+	{
+		ChangeData(inputDisabled, true);
+
+		if (isNextHangar)
+		{
+			Event("DisableBlurAndFade", arg1=0.6);
+		}
+
+		Event("ShowHangarProgress", arg1=movingTime);
+
+		ChangeProperty("**/Effect2", "", "visible", false);
+		ChangeProperty("**/Effect3", "", "visible", false);
+		
+		parallel
+		{
+			Scale("**/ProgressContainer", 0.3, 0.3, movingTime, EASE_OUT);
+			MoveToMaster("**/ProgressContainer", "TOP_RIGHT_CORNER", 0, 0, movingTime, EASE_OUT);
+			Opacity("**/ProgressContainer", 0.0, movingTime);
+			Opacity("**/Bottom", 0.0, movingTime);
+			Opacity("**/Caption", 0.0, movingTime);
+			Opacity("**/Button", 0.0, 0.4, EASE_OUT);
+			ChangeProperty("**/Button", "Anchor", "vCenterAnchor", 50, time = 0.4, interpolation=EASE_OUT);
+		}
+
+		Event("ON_FINISHED");
+
+		if (isNextHangar)
+		{
+			Event("ON_PROGRESS_FINISHED");
+		}
+	}
+	else
+	{
+
+			ChangeData(inputDisabled, true);
+			parallel
+			{
+				Opacity("**/Button", 0.0, 0.4, EASE_IN);
+				ChangeProperty("**/Button", "Anchor", "vCenterAnchor", 70, time = 0.4, interpolation=EASE_IN);
+				Scale("**/AnimatedEffect4", 0, 0, time=0.4, interpolation = EASE_IN);
+			}
+			Opacity("**/Bottom", 0.0, 0.4, EASE_IN);
+			ChangeProperty("**/AnimatedEffect4", "", "visible", false);
+			Opacity("**/Nations", 0.0);
+			ChangeData(isDisplayingNations, true);
+            ChangeProperty("**/Nations", "Anchor", "topAnchor", -100);
+			
+			parallel
+			{			
+				PlaySound("play_tut_2021_ui_hang_achiev_upgrade_done");
+				Opacity("**/Nations", 1.0, nationsAppearingTime, EASE_OUT);
+				ChangeData(nationsVerticalShift, 0, nationsAppearingTime, EASE_OUT);
+				//ChangeProperty("**/Nations", "Anchor", "topAnchor", 0, nationsAppearingTime, EASE_OUT);
+			}
+			Wait(0.4);
+			PlaySound("play_tut_2021_ui_hang_locks_destroy_whoosh");
+			ChangeData(showNationsUnlockAnimation, true);
+			Wait(0.2);
+			Wait(locksEffectTime - 0.2);
+			Wait(0.7);
+
+			Event("AnimateScreenShot", "../../../../../../../../../NewbieLobby", 0.7);
+			Wait(0.05);
+
+			Event("ON_SELECT_NATION");
+	}
+}

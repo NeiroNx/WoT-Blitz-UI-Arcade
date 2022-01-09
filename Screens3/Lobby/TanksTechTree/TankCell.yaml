@@ -1,0 +1,95 @@
+Header:
+    version: 134
+Prototypes:
+-   class: "UIControl"
+    name: "TankCell"
+    input: false
+    components:
+        GridCellComponent: {}
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 216.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 96.000000
+        UIDataParamsComponent:
+            params:
+            - ["bool", "lastCellByX", "false", "false"]
+            - ["bool", "lastCellByY", "false", "false"]
+            - ["int", "columnWidth", "0", "0"]
+            - ["int", "columnHeight", "0", "0"]
+            - ["eTutorialHighlights", "currentHiglightTypeTank", "eTutorialHighlights.kUnknown", "eTutorialHighlights.kUnknown"]
+            - ["TechTreeTankCellViewModel", "model", "null", "{ }"]
+            events:
+            - "TANK_FOCUSED(int descr)"
+            - "ON_CELL_TOUCH"
+        UIDataLocalBindingsComponent:
+            data:
+            - ["bool", "vehicleDataModelEmpty", "isNull(model.vehicleNodeModel)"]
+            - ["bool", "firstLevelTank", "when not vehicleDataModelEmpty -> model.vehicleNodeModel.vehicleDataModel.level == 1, false"]
+            - ["eTankClass", "tankClass", "when not vehicleDataModelEmpty -> model.vehicleNodeModel.vehicleDataModel.tankClass, eTankClass.TANK_CLASS_NONE"]
+            - ["bool", "highlight", "(currentHiglightTypeTank == eTutorialHighlights.kTankLight and tankClass == eTankClass.TANK_CLASS_LIGHT) or (currentHiglightTypeTank == eTutorialHighlights.kTankMedium and tankClass == eTankClass.TANK_CLASS_MEDIUM) or (currentHiglightTypeTank == eTutorialHighlights.kTankHeavy and tankClass == eTankClass.TANK_CLASS_HEAVY) or (currentHiglightTypeTank == eTutorialHighlights.kTankAtSPG and tankClass == eTankClass.TANK_CLASS_AT_SPG)"]
+            - ["int", "shadowHoleOffsetH", "20"]
+            - ["int", "shadowHoleOffsetV", "16"]
+            - ["string", "attachId", "when highlight and model.isCommentedNode -> \"TANK\", currentHiglightTypeTank == eTutorialHighlights.kTankFirstLevel and firstLevelTank -> \"TANK_FIRST_LEVEL\", not vehicleDataModelEmpty -> \"TANK_\" + str(model.vehicleNodeModel.vehicleDataModel.tankDescriptor), \"\""]
+            - ["int", "layer", "when firstLevelTank and currentHiglightTypeTank == eTutorialHighlights.kTankFirstLevel -> 1, 0"]
+        UIChildComponent0:
+            childType: "kOldExpression"
+            control: "when model.linesMask != 0 -> \"~res:/UI/Screens3/Lobby/TanksTechTree/Lines/Lines\" + str(model.linesMask) + \".yaml\", \"\""
+            eventActions:
+            - ["TANK_FOCUSED", "TANK_FOCUSED", "_event"]
+        UILayerComponent: {}
+    bindings:
+    - ["GridCellComponent.column", "model.x"]
+    - ["GridCellComponent.row", "model.y"]
+    - ["UILayerComponent.layer", "layer"]
+    children:
+    -   class: "UIControl"
+        name: "TankNodeContainer"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfMaxChild"
+            UIAttachLayoutMasterComponent: {}
+            UIChildComponent0:
+                childType: "kPrototype"
+                condition: "not isNull(model.vehicleNodeModel)"
+                prototypePath: "~res:/UI/Screens3/Lobby/ModulesTree/TankNode.yaml"
+                args:
+                    "requestFocus": "model.isRequestFocus"
+                    "focusable": "currentHiglightTypeTank == eTutorialHighlights.kUnknown"
+                    "soundOpen": "true"
+                    "isSelected": "false"
+                    "vehicle": "model.vehicleNodeModel"
+                eventActions:
+                - ["TANK_FOCUSED", "TANK_FOCUSED", "_event.descr"]
+                - ["TAP_ACTION", "ON_CELL_TOUCH", ""]
+            UIShadowHoleComponent: {}
+            UIIdentifierComponent:
+                id: "modules_tree_node"
+        bindings:
+        - ["UIAttachLayoutMasterComponent.attachId", "attachId"]
+        - ["UIShadowHoleComponent.isEnabled", "highlight"]
+        - ["UIShadowHoleComponent.leftOffset", "shadowHoleOffsetH"]
+        - ["UIShadowHoleComponent.rightOffset", "shadowHoleOffsetH"]
+        - ["UIShadowHoleComponent.topOffset", "shadowHoleOffsetV"]
+        - ["UIShadowHoleComponent.bottomOffset", "shadowHoleOffsetV"]
+    -   class: "UIControl"
+        name: "ControlForScrolling"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                childType: "kPrototype"
+                condition: "(highlight and model.isCommentedNode) or (firstLevelTank and currentHiglightTypeTank == eTutorialHighlights.kTankFirstLevel)"
+                prototypePath: "~res:/UI/Screens3/Lobby/TanksTechTree/CommentedControl.yaml"
+                args:
+                    "sizeCoefficientByY": "when lastCellByY -> 100.000000, 300.000000"
+                    "sizeCoefficientByX": "when lastCellByX -> 100.000000, 300.000000"

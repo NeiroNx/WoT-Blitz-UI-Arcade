@@ -1,0 +1,418 @@
+Header:
+    version: 128
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/Common/Resource/ResourceSmall.yaml"
+- "~res:/UI/Screens/Lobby/PRMPOffers/OfferPrototypes.yaml"
+- "~res:/UI/Screens/Lobby/Common/Timer.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "SubscriptionOffer"
+    size: [960.000000, 640.000000]
+    input: false
+    components:
+        Anchor:
+            leftAnchorEnabled: true
+            rightAnchorEnabled: true
+            topAnchorEnabled: true
+            bottomAnchorEnabled: true
+        UIDataParamsComponent:
+            params:
+            - ["SessionDataModel", "session", "null", "{ }"]
+            - ["BasicOffer", "offer", "null", "{ }"]
+            - ["int64", "arrivalTime", "0L", "0L"]
+            - ["int64", "lifeTime", "0L", "100L"]
+            - ["bool", "timeLimited", "false", "true"]
+            - ["bool", "persistent", "false", "true"]
+            - ["string", "taxMessage", "\"\"", "\"All prices include taxes\""]
+            events:
+            - "OFFER_ACTION"
+        UIDataLocalBindingsComponent:
+            data:
+            - ["float", "discountPercentage", "offer.offeredProduct.discountValue * 100.000000"]
+            - ["string", "discountStringed", "percent(-floor(discountPercentage), 0)"]
+            - ["bool", "showFullPriceIcon", "not offer.offeredProduct.fullPrice.resources.Empty() and empty(offer.offeredProduct.fullPrice.resources[0].localizedQuantity) and (offer.offeredProduct.fullPrice.resources[0].type == ResourceType.gold or offer.offeredProduct.fullPrice.resources[0].type == ResourceType.credits)"]
+            - ["int64", "endTime", "arrivalTime + lifeTime"]
+            - ["string", "timeLeftString", "timeDiff(endTime - session.serverTime)"]
+    children:
+    -   class: "UIControl"
+        name: "ContentWrapper"
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+            LinearLayout:
+                orientation: "RightToLeft"
+                dynamicSpacing: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                horizontalValue: 80.000000
+                horizontalMax: 800.000000
+        children:
+        -   class: "UIControl"
+            name: "Price"
+            input: false
+            components:
+                Anchor:
+                    topAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                    vCenterAnchor: -20.000000
+                LinearLayout:
+                    orientation: "BottomUp"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfFirstChild"
+            children:
+            -   class: "UIControl"
+                name: "Triangle"
+                input: false
+                components:
+                    Background:
+                        sprite: "~res:/Gfx/UI/Offers/SubscriptionOffer/offer-bg-triangle.psd"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+            -   class: "UIControl"
+                name: "Bg"
+                input: false
+                components:
+                    Background:
+                        drawType: "DRAW_SCALE_TO_RECT"
+                        sprite: "~res:/Gfx/UI/Offers/SubscriptionOffer/offer-bg-gradient.psd"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                children:
+                -   class: "UIControl"
+                    name: "PriceWrapper"
+                    input: false
+                    components:
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                            bottomAnchorEnabled: true
+                            bottomAnchor: 8.000000
+                        LinearLayout:
+                            orientation: "TopDown"
+                            spacing: -12.000000
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfMaxChild"
+                            verticalPolicy: "PercentOfChildrenSum"
+                    children:
+                    -   class: "UIControl"
+                        name: "Wrapper"
+                        position: [85.500000, 0.000000]
+                        size: [32.000000, 32.000000]
+                        input: false
+                        components:
+                            Anchor:
+                                rightAnchorEnabled: true
+                            LinearLayout:
+                                orientation: "TopDown"
+                                dynamicPadding: true
+                                spacing: 4.000000
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfLastChild"
+                                verticalPolicy: "PercentOfChildrenSum"
+                        children:
+                        -   class: "UIControl"
+                            name: "TaxMessageHook"
+                            position: [85.000000, -1.000000]
+                            input: false
+                            components:
+                                Anchor:
+                                    rightAnchorEnabled: true
+                                SizePolicy:
+                                    horizontalPolicy: "PercentOfMaxChild"
+                                    verticalPolicy: "PercentOfMaxChild"
+                            children:
+                            -   class: "UIControl"
+                                name: "TaxMessage"
+                                position: [123.000000, 9.000000]
+                                pivot: [1.000000, 1.000000]
+                                input: false
+                                classes: "text3-small text-color-grey"
+                                components:
+                                    UITextComponent:
+                                        colorInheritType: "COLOR_IGNORE_PARENT"
+                                        shadowOffset: [1.000000, 1.000000]
+                                        align: ["RIGHT", "VCENTER"]
+                                    Anchor:
+                                        rightAnchorEnabled: true
+                                        topAnchorEnabled: true
+                                    SizePolicy:
+                                        horizontalPolicy: "PercentOfContent"
+                                        verticalPolicy: "PercentOfContent"
+                                    StyleSheet:
+                                        styles: "~res:/UI/Screens/Fonts.yaml"
+                                bindings:
+                                - ["visible", "not empty(taxMessage) and not offer.offeredProduct.salePrice.resources.Empty() and offer.offeredProduct.salePrice.resources[0].type == ResourceType.real_currency"]
+                                - ["UITextComponent.text", "taxMessage"]
+                        -   class: "UIControl"
+                            name: "FullPrice"
+                            input: false
+                            components:
+                                Anchor:
+                                    rightAnchorEnabled: true
+                                SizePolicy:
+                                    horizontalPolicy: "PercentOfMaxChild"
+                                    verticalPolicy: "PercentOfMaxChild"
+                                UIChildComponent0:
+                                    childType: "kControl"
+                                    condition: "offer.offeredProduct.fullPriceValid and not offer.offeredProduct.fullPrice.resources.Empty()"
+                                    control: "FullPriceContainer"
+                    -   class: "UIControl"
+                        name: "SalePrice"
+                        position: [0.000000, 53.000000]
+                        input: false
+                        components:
+                            Anchor:
+                                hCenterAnchorEnabled: true
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfMaxChild"
+                                verticalPolicy: "PercentOfMaxChild"
+                            UIChildComponent0:
+                                childType: "kControl"
+                                condition: "not offer.offeredProduct.salePrice.resources.Empty()"
+                                control: "SalePrice"
+        -   class: "UIControl"
+            name: "ProductImage"
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_PROPORTIONAL"
+                    align: ["RIGHT", "BOTTOM"]
+                UIUrlImageComponent:
+                    placeholderScenePath: "~res:/UI/Screens/Common/LoadingControl.yaml"
+                    placeholderControlName: "LoadingControl"
+                    upscaleForHighResolution: true
+                Anchor:
+                    rightAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                    vCenterAnchor: 52.000000
+                IgnoreLayout: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                    verticalMax: 350.000000
+            bindings:
+            - ["UIUrlImageComponent.imageUrl", "offer.productImageUrl"]
+        -   class: "UIControl"
+            name: "Content"
+            input: false
+            components:
+                Anchor:
+                    vCenterAnchorEnabled: true
+                    vCenterAnchor: -32.000000
+                LinearLayout:
+                    orientation: "TopDown"
+                    spacing: 40.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfChildrenSum"
+            children:
+            -   class: "UIControl"
+                name: "Header"
+                input: false
+                components:
+                    LinearLayout:
+                        orientation: "TopDown"
+                        spacing: 16.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfChildrenSum"
+                children:
+                -   prototype: "OfferPrototypes/Title"
+                    name: "Title"
+                    components:
+                        RichContent: {}
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                    bindings:
+                    - ["RichContent.text", "offer.title"]
+                -   class: "UIControl"
+                    name: "DescriptionWrapper"
+                    input: false
+                    components:
+                        LinearLayout:
+                            spacing: 4.000000
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfChildrenSum"
+                            verticalPolicy: "PercentOfMaxChild"
+                    children:
+                    -   prototype: "OfferPrototypes/DescriptionContainer"
+                        name: "DescriptionContainer"
+                        children:
+                        -   path: "Description"
+                            components:
+                                UITextComponent: {}
+                            bindings:
+                            - ["UITextComponent.text", "offer.shortDescription"]
+                    -   class: "UIControl"
+                        name: "TimerWrapper"
+                        components:
+                            SizePolicy:
+                                horizontalPolicy: "Formula"
+                                horizontalFormula: "lastChild + 16"
+                                verticalPolicy: "PercentOfParent"
+                        bindings:
+                        - ["visible", "timeLimited"]
+                        children:
+                        -   class: "UIControl"
+                            name: "Bg"
+                            input: false
+                            classes: "color-white-15"
+                            components:
+                                Background:
+                                    drawType: "DRAW_FILL"
+                                SizePolicy:
+                                    horizontalPolicy: "PercentOfParent"
+                                    verticalPolicy: "PercentOfParent"
+                                StyleSheet:
+                                    styles: "~res:/UI/Styles/ColorStyles.yaml"
+                        -   prototype: "Timer/Timer"
+                            name: "Timer"
+                            components:
+                                Anchor:
+                                    hCenterAnchorEnabled: true
+                                    vCenterAnchorEnabled: true
+                            children:
+                            -   path: "Icon"
+                                components:
+                                    Background:
+                                        sprite: "~res:/Gfx/UI/LobbyCommon/timer_icon2.psd"
+                            -   path: "Time"
+                                classes: "fs-15 bold text-color-white"
+                                components:
+                                    UITextComponent: {}
+                                bindings:
+                                - ["UITextComponent.text", "timeLeftString"]
+            -   prototype: "OfferPrototypes/DetailedDescription"
+                name: "DetailedDescription"
+                components:
+                    RichContent: {}
+                bindings:
+                - ["RichContent.text", "offer.detailedDescription"]
+            -   class: "UIControl"
+                name: "RemainingProducts"
+                input: false
+                components:
+                    Anchor:
+                        bottomAnchorEnabled: true
+                        bottomAnchor: -60.000000
+                    IgnoreLayout: {}
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfFirstChild"
+                        verticalPolicy: "PercentOfFirstChild"
+                    UIChildComponent0:
+                        condition: "offer.offeredProduct.xTimed and (persistent or offer.offeredProduct.availableAmount == 0)"
+                        prototypePath: "~res:/UI/Screens3/Lobby/Hangar/Offers/PRMP/Common/XTimeLabel.yaml"
+                        args:
+                            "product": "offer.offeredProduct"
+Slots:
+-   prototype: "ResourceSmall/ResourceSmallBinded"
+    name: "SalePrice"
+    components:
+        SizePolicy:
+            verticalMin: 112.000000
+        UIDataSourceComponent0:
+            sourceType: "Expression"
+            source: "offer.offeredProduct.salePrice.resources[0]"
+        UIDataSourceComponent2:
+            sourceType: "File"
+            source: "~res:/UI/Screens/Lobby/PRMPOffers/ViewModels/OfferBigPriceResourceView.model"
+    bindings:
+    - ["classes", "resourceClassesOverride"]
+    children:
+    -   path: "Value"
+        components:
+            Background:
+                align: ["HCENTER", "TOP"]
+            UITextComponent:
+                fitting: "FITTING_REDUCE"
+                align: ["HCENTER", "VCENTER"]
+        bindings:
+        - ["classes", "textClasses"]
+    -   path: "BonusValue"
+        components:
+            IgnoreLayout: {}
+    -   path: "Back"
+        components:
+            Anchor:
+                vCenterAnchorEnabled: true
+                vCenterAnchor: 4.000000
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 52.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 52.000000
+        bindings:
+        - ["visible", "showResourceIcon"]
+        children: []
+    -   path: "Back/Icon"
+        components:
+            Background:
+                drawType: "DRAW_SCALE_PROPORTIONAL"
+    -   path: "DiscountLabel"
+        components:
+            IgnoreLayout: {}
+        children: []
+    -   path: "DiscountLabel/Value"
+        components:
+            UITextComponent: {}
+        bindings:
+        - ["UITextComponent.text", "discountStringed"]
+-   class: "UIControl"
+    name: "FullPriceContainer"
+    input: false
+    classes: "bg=color-white-alpha-60"
+    components:
+        Background: {}
+        SizePolicy:
+            horizontalPolicy: "PercentOfFirstChild"
+            verticalPolicy: "PercentOfMaxChild"
+            verticalMin: 32.000000
+        StyleSheet:
+            styles: "~res:/UI/Styles/ColorStyles.yaml"
+    bindings:
+    - ["visible", "offer.offeredProduct.fullPriceValid"]
+    children:
+    -   prototype: "ResourceSmall/ResourceSmallBinded"
+        name: "FullPrice"
+        components:
+            UIDataSourceComponent0:
+                sourceType: "Expression"
+                source: "offer.offeredProduct.fullPrice.resources[0]"
+        children:
+        -   path: "Value"
+            classes: "header3 type=plain-text text-color-faded-white"
+        -   path: "BonusValue"
+            components:
+                IgnoreLayout: {}
+        -   path: "Back"
+            components:
+                Anchor:
+                    vCenterAnchorEnabled: true
+            bindings:
+            - ["visible", "showFullPriceIcon"]
+            children: []
+        -   path: "DiscountLabel"
+            bindings:
+            - ["visible", "hasDiscount"]
+            children: []
+    -   class: "UIControl"
+        name: "Strike"
+        input: false
+        components:
+            Background:
+                drawType: "DRAW_FILL"
+                color: [1.000000, 1.000000, 1.000000, 0.600000]
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: -5.000000
+                rightAnchorEnabled: true
+                rightAnchor: -5.000000
+                vCenterAnchorEnabled: true
+                vCenterAnchor: 1.000000
+            SizePolicy:
+                verticalPolicy: "FixedSize"
+                verticalValue: 2.000000

@@ -1,0 +1,365 @@
+Header:
+    version: 141
+ImportedPackages:
+- "~res:/UI/Screens/Common/LoadingControl.yaml"
+- "~res:/UI/Styles/SafeAreaStyles.yaml"
+- "~res:/UI/Screens/Fonts.yaml"
+- "~res:/UI/Styles/NetEaseStyles.yaml"
+- "~res:/UI/Screens3/PreLogin/AOGASControl.yaml"
+- "~res:/UI/Screens3/PreLogin/Version.yaml"
+- "~res:/UI/Screens3/Lobby/Common/IconButton.yaml"
+Prototypes:
+-   prototype: "LoadingControl/LoadingControl"
+    name: "ConnectingScreen"
+    components:
+        StyleSheet:
+            styles: "~res:/UI/Screens/Common/LoadingControl.yaml;~res:/UI/Screens/Login/ConnectingScreen.yaml"
+    children:
+    -   path: "FadeBackground"
+        visible: false
+    -   class: "UIControl"
+        name: "FadesWrapper"
+        input: false
+        classes: "netease-content"
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "BackButtonFade"
+            input: false
+            classes: "black-25-bg"
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_TO_RECT"
+                    sprite: "~res:/Gfx/Lobby/backgrounds/bg_radial-gradient_quarter"
+                Anchor:
+                    leftAnchorEnabled: true
+                    topAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 480.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 480.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "TopFade"
+            input: false
+            classes: "black-25-bg"
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_TO_RECT"
+                    sprite: "~res:/Gfx/Lobby/backgrounds/bg_gradient_vertical_0-100"
+                    spriteModification: ["FLIP_VERTICAL"]
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    topAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                    verticalValue: 50.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "BottomFade"
+            input: false
+            classes: "black-70-bg"
+            components:
+                Background:
+                    drawType: "DRAW_STRETCH_BOTH"
+                    sprite: "~res:/Gfx/Lobby/backgrounds/bg_gradient_vertical_0-100"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                IgnoreLayout: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                    verticalValue: 50.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+    -   prototype: "Version/Version"
+        name: "Version"
+    -   prototype: "AOGASControl/AOGASControl"
+        name: "AOGASControl"
+        position: [406.000000, 16.000000]
+        classes: "netease-content"
+        components:
+            Anchor:
+                topAnchorEnabled: true
+                topAnchor: 64.000000
+    -   class: "UIControl"
+        name: "LoginInfoPanel"
+        position: [262.000000, 309.000000]
+        size: [500.000000, 100.000000]
+        visible: false
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                hCenterAnchor: 0.000000
+                vCenterAnchorEnabled: true
+                vCenterAnchor: -100.000000
+        children:
+        -   class: "UIControl"
+            name: "Middle"
+            size: [500.000000, 300.000000]
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_TILED"
+                    sprite: "~res:/Gfx/UI/CommonUIElements/PopupBackMiddle"
+                    leftRightStretchCap: 4.000000
+                    topBottomStretchCap: 4.000000
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 0.000000
+                    rightAnchorEnabled: true
+                    rightAnchor: 0.000000
+                    topAnchorEnabled: true
+                    topAnchor: 0.000000
+                    bottomAnchorEnabled: true
+                    bottomAnchor: 0.000000
+            children:
+            -   class: "UIStaticText"
+                name: "DialogText"
+                position: [20.000000, 80.000000]
+                size: [460.000000, 60.000000]
+                input: false
+                classes: "text1 text-color-white"
+                components:
+                    Background:
+                        align: ["LEFT", "TOP"]
+                        leftRightStretchCap: 7.000000
+                    UITextComponent:
+                        text: "LOGIN_QUEUE_ERROR_TEXT"
+                        multiline: "MULTILINE_ENABLED"
+                        align: ["HCENTER", "VCENTER"]
+                        useRtlAlign: "DONT_USE"
+                    Anchor:
+                        leftAnchorEnabled: true
+                        leftAnchor: 20.000000
+                        rightAnchorEnabled: true
+                        rightAnchor: 20.000000
+                        vCenterAnchorEnabled: true
+                    StyleSheet:
+                        styles: "~res:/UI/Screens/FontsColors.yaml;~res:/UI/Screens/Fonts.yaml"
+    -   class: "UIControl"
+        name: "DevDisconnectButton"
+        position: [983.000000, 0.000000]
+        size: [41.000000, 50.000000]
+        visible: false
+        input: true
+        exclusiveInput: true
+        components:
+            Background:
+                drawType: "DRAW_TILED_MULTILAYER"
+                mask: "~res:/Gfx/UI/CommonUIElements/Button/mask"
+                detail: "~res:/Gfx/UI/CommonUIElements/Button/detail"
+                gradient: "~res:/Gfx/UI/CommonUIElements/Button/gray_gradient.txt"
+                contour: "~res:/Gfx/UI/CommonUIElements/Button/gray_contour.txt"
+                gradientMode: "Overlay"
+                perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                leftRightStretchCap: 20.000000
+                topBottomStretchCap: 20.000000
+            Anchor:
+                leftAnchorEnabled: false
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+            UIInputEventComponent:
+                onTouchUpInside: "ON_DEV_DISCONNECT"
+        children:
+        -   class: "UIControl"
+            name: "Caption"
+            position: [9.000000, 7.000000]
+            input: false
+            classes: "t-title regular color=white-wild-sand-text"
+            components:
+                UITextComponent:
+                    text: "D"
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                    align: ["LEFT", "VCENTER"]
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+    -   class: "UIControl"
+        name: "AgeRatingInfo"
+        position: [336.000000, 616.000000]
+        size: [265.000000, 220.000000]
+        input: false
+        classes: "netease-content"
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                bottomAnchorEnabled: true
+                bottomAnchor: 16.000000
+            LinearLayout:
+                orientation: "TopDown"
+                dynamicPadding: true
+                spacing: 8.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "Formula"
+                verticalFormula: "when (screenHeight < 1023) -> 128, 220"
+        children:
+        -   class: "UIControl"
+            name: "SelfRegulatoryConvention"
+            input: false
+            classes: "t-body regular white-wild-sand-text"
+            components:
+                UITextComponent:
+                    text: "netease/loginScreen/AASSelfRegulatoryConvention"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "TextWrapper1"
+            position: [0.000000, 0.000000]
+            size: [406.000000, 20.000000]
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                LinearLayout:
+                    spacing: 16.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   class: "UIControl"
+                name: "ClearanceNumberGAPP"
+                input: false
+                classes: "t-body regular white-wild-sand-text"
+                components:
+                    UITextComponent:
+                        text: "netease/loginScreen/clearanceNumberGAPP"
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+            -   class: "UIControl"
+                name: "PublicationNumberGAPP"
+                input: false
+                classes: "t-body regular white-wild-sand-text"
+                components:
+                    UITextComponent:
+                        text: "netease/loginScreen/publicationNumberGAPP"
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "TextWrapper2"
+            position: [62.000000, 28.000000]
+            size: [406.000000, 20.000000]
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                LinearLayout:
+                    spacing: 16.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   class: "UIControl"
+                name: "ClearanceNumberMOC"
+                input: false
+                classes: "t-body regular white-wild-sand-text"
+                components:
+                    UITextComponent:
+                        text: "netease/loginScreen/clearanceNumberMOC"
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+            -   class: "UIControl"
+                name: "PublisherInformation"
+                input: false
+                classes: "t-body regular white-wild-sand-text"
+                components:
+                    UITextComponent:
+                        text: "netease/loginScreen/publisherInformation"
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "CopyrightOwner"
+            position: [74.000000, 56.000000]
+            input: false
+            classes: "t-body regular white-wild-sand-text"
+            components:
+                UITextComponent:
+                    text: "netease/loginScreen/gameCopyrightOwner"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+    -   prototype: "IconButton/IconButton"
+        name: "AgeRatingIconButton"
+        classes: "netease-content"
+        components:
+            Anchor:
+                rightAnchorEnabled: true
+                rightAnchor: 16.000000
+                vCenterAnchorEnabled: false
+                bottomAnchorEnabled: true
+                bottomAnchor: 16.000000
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "when (screenHeight < 1023) -> 99, 170"
+                verticalPolicy: "Formula"
+                verticalFormula: "when (screenHeight < 1023) -> 128, 220"
+            UIDataParamsComponent:
+                args:
+                    "isBgVisible": "false"
+                    "image": "\"\""
+                eventActions: []
+            UIDataLocalBindingsComponent:
+                data:
+                - ["string", "hoverStyle", "(when isBgVisible -> \"button-fade \", \"button-fade-non-hide \") + (when type == eButtonType.OPTIONAL_DARK or type == eButtonType.SCENE -> \"black-10-bg\", \"white-wild-sand-10-bg\")"]
+                - ["eButtonSound", "soundType", "when not hasSound -> eButtonSound.UNKNOWN, sound != eButtonSound.UNKNOWN -> sound, type == eButtonType.POSITIVE or type == eButtonType.NO_BG -> eButtonSound.OPEN, type == eButtonType.ALTERNATIVE -> eButtonSound.OK, type == eButtonType.ALTERNATIVE -> eButtonSound.OK, type == eButtonType.NEGATIVE -> eButtonSound.SELL, eButtonSound.CANCEL"]
+                - ["string", "bgStyle", "when type == eButtonType.OPTIONAL_LIGHT -> \"white-wild-sand-15-bg\", type == eButtonType.OPTIONAL_DARK -> \"black-25-bg\", type == eButtonType.SCENE -> \"grey-shark-70-bg\", type == eButtonType.POSITIVE -> \"green-la-palma-bg\", \"\""]
+        bindings:
+        - ["visible", "false"]
+        - ["input", "false"]
+        children:
+        -   path: "TapArea"
+            bindings:
+            - ["input", "false"]
+            children: []
+        -   path: "TapArea/Content/Icon"
+            components:
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "when (screenHeight < 1023) -> 99, 170"
+                    verticalPolicy: "Formula"
+                    verticalFormula: "when (screenHeight < 1023) -> 128, 220"

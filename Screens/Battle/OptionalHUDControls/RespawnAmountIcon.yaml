@@ -1,0 +1,23 @@
+Header:
+    version: "70"
+Prototypes:
+-   class: "UIControl"
+    name: "RespawnAmountIcon"
+    size: [19.580000, 9.680000]
+    input: false
+    classes: "respawn_icon status=alive"
+    components:
+        Background:
+            drawType: "DRAW_SCALE_TO_RECT"
+            sprite: "~res:/Gfx/Battle/HUD/controls/icon_2019-halloween_live-count"
+            colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+            perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+        Anchor:
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfContent"
+            horizontalValue: 100.000000
+            verticalPolicy: "PercentOfContent"
+            verticalValue: 100.000000
+        StyleSheet:
+            styles: "~res:/UI/Screens/Battle/Styles/HUDLayerHellgamesStyles.yaml"

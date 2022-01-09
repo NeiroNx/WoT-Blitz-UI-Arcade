@@ -1,0 +1,118 @@
+Header:
+    version: 117
+Prototypes:
+-   class: "UIControl"
+    name: "StepLinearMainReward"
+    size: [96.000000, 80.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["ResourceDetailed", "reward", "null", "{ \"type\" = ResourceType.premium; }"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["bool", "isBasicReward", "reward.type == ResourceType.gold or reward.type == ResourceType.free_xp or reward.type == ResourceType.elite_xp or reward.type == ResourceType.premium or reward.type == ResourceType.xp or reward.type == ResourceType.tankmenXP or reward.type == ResourceType.credits or reward.type == ResourceType.slots or reward.type == ResourceType.equipment_slots"]
+            - ["string", "caption", "when isBasicReward and not isNull(reward.basic) -> (when reward.type == ResourceType.premium -> timeDiffShort(reward.basic.quantity), str1000Separated(reward.basic.quantity)), reward.type == ResourceType.stuff and not isNull(reward.stuff) -> \"×\" + str(reward.stuff.quantity), reward.type == ResourceType.unlocks and not isNull(reward.unlock) -> reward.unlock.title, \"\""]
+    children:
+    -   class: "UIControl"
+        name: "ContentHolder"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                childType: "kControl"
+                control: "StepLinearRewardContent"
+Slots:
+-   class: "UIControl"
+    name: "StepLinearRewardContent"
+    size: [88.000000, 88.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            Anchor:
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                orientation: "TopDown"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "ImageHolder"
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "min(parent, 160)"
+                    verticalPolicy: "PercentOfParent"
+                    verticalFormula: "min(parent, 96)"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/Detailed/IconXLDeprecated.yaml"
+                    args:
+                        "resource": "reward"
+                        "showUnlockStub": "false"
+                        "showVehicleLabel": "false"
+        -   class: "UIControl"
+            name: "CaptionHolder"
+            input: false
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 8.000000
+                    rightAnchorEnabled: true
+                    rightAnchor: 8.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfFirstChild"
+                UIChildComponent0:
+                    childType: "kControl"
+                    condition: "not empty(caption)"
+                    control: "RewardCaption"
+                UIChildComponent1:
+                    childType: "kControl"
+                    condition: "empty(caption) and not isNull(reward.vehicle)"
+                    control: "VehicleCaption"
+            bindings:
+            - ["visible", "not empty(caption) or not isNull(reward.vehicle)"]
+-   class: "UIControl"
+    name: "RewardCaption"
+    input: false
+    classes: "t-subtitle bold white-wild-sand-text"
+    components:
+        UITextComponent: {}
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfContent"
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Font.style.yaml"
+    bindings:
+    - ["visible", "not empty(caption)"]
+    - ["UITextComponent.text", "caption"]
+-   class: "UIControl"
+    name: "VehicleCaption"
+    input: false
+    components:
+        UITextComponent:
+            fitting: "FITTING_POINTS"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfContent"
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Font.style.yaml;"
+    bindings:
+    - ["classes", "\"t-subtitle bold \" + (when reward.vehicle.info.isPremium or reward.vehicle.stats.isPremiumized -> \"yellow-lightning-text\", reward.vehicle.info.isCollectible -> \"blue-rimmi-text\", \"white-wild-sand-text\")"]
+    - ["UITextComponent.text", "localize(reward.vehicle.info.shortName)"]

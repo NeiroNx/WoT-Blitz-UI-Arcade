@@ -1,0 +1,77 @@
+Header:
+    version: 134
+Prototypes:
+-   class: "UIControl"
+    name: "FooterTankInfo"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        Anchor:
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfMaxChild"
+        UIDataParamsComponent:
+            params:
+            - ["VehicleResource", "vehicle", "null", "{ }"]
+    children:
+    -   class: "UIControl"
+        name: "TankName"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfMaxChild"
+            FlowLayout:
+                hSpacing: 6.000000
+        children:
+        -   class: "UIControl"
+            name: "Flag"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Anchor:
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIChildComponent0:
+                    condition: "not isNull(vehicle)"
+                    prototypePath: "~res:/UI/Screens3/Lobby/Common/TankInfo/NationFlag.yaml"
+                    args:
+                        "subnation": "vehicle.info.subnation"
+                        "nation": "vehicle.info.nation"
+        -   class: "UIControl"
+            name: "Tier"
+            input: false
+            components:
+                Anchor:
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIChildComponent0:
+                    condition: "not isNull(vehicle)"
+                    prototypePath: "~res:/UI/Screens3/Lobby/Common/Vehicle/VehicleInfo.yaml"
+                    args:
+                        "class": "vehicle.info.tankClass"
+                        "level": "vehicle.info.level"
+                        "type": "when vehicle.info.isPremium -> eVehicleDescriptionType.PREMIUM, vehicle.info.isCollectible -> eVehicleDescriptionType.COLLECTIBLE, vehicle.stats.isPremiumized -> eVehicleDescriptionType.PREMIUMISED, eVehicleDescriptionType.NORMAL"
+                        "elite": "vehicle.stats.isElite"
+        -   class: "UIControl"
+            name: "Name"
+            input: false
+            components:
+                Anchor:
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIChildComponent0:
+                    condition: "not isNull(vehicle)"
+                    prototypePath: "~res:/UI/Screens3/Lobby/Common/Vehicle/VehicleName.yaml"
+                    args:
+                        "textStyle": "\"t-caption bold\""
+                        "isShortName": "true"
+                        "vehicle": "vehicle.info"
+                        "tankStats": "vehicle.stats"

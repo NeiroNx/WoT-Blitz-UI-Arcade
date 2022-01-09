@@ -1,0 +1,27 @@
+Header:
+    version: "23"
+StyleSheets:
+-   selector: ".common-description ? ? #CommonDescription"
+    properties:
+        visible: true
+-   selector: ".common-description ? ? #OpponentLiftDescription, .common-description ? ? #PlayerLiftDescription, .common-description ? ? #PlayerLiftDescriptionOpponentWait"
+    properties:
+        visible: false
+-   selector: ".opponent-description ? ? #OpponentLiftDescription"
+    properties:
+        visible: true
+-   selector: ".opponent-description ? ? #CommonDescription, .opponent-description ? ? #PlayerLiftDescription, .opponent-description ? ? #PlayerLiftDescriptionOpponentWait"
+    properties:
+        visible: false
+-   selector: ".player-description ? ? #PlayerLiftDescription"
+    properties:
+        visible: true
+-   selector: ".player-description ? ? #CommonDescription, .player-description ? ? #OpponentLiftDescription, .player-description ? ? #PlayerLiftDescriptionOpponentWait"
+    properties:
+        visible: false
+-   selector: ".player-description-opponent-wait ? ? #PlayerLiftDescriptionOpponentWait"
+    properties:
+        visible: true
+-   selector: ".player-description-opponent-wait ? ? #CommonDescription, .player-description-opponent-wait ? ? #OpponentLiftDescription, .player-description-opponent-wait ? ? #PlayerLiftDescription"
+    properties:
+        visible: false

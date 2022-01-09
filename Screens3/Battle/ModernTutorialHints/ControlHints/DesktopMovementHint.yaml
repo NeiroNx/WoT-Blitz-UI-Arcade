@@ -1,0 +1,113 @@
+Header:
+    version: 123
+ImportedPackages:
+- "~res:/UI/Screens3/Battle/ModernTutorialControls/KeyboardButton.yaml"
+- "~res:/UI/Screens3/Battle/ModernTutorialHints/TutorialHintBasic.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "DesktopMovementHint"
+    size: [1024.000000, 768.000000]
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens3/Battle/ModernTutorialHints/FadeIn.animation;Disappear,~res:/UI/Screens3/Battle/ModernTutorialHints/FadeOut.animation"
+        UIOpacityComponent: {}
+        Anchor:
+            hCenterAnchorEnabled: true
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            horizontalMax: 1200.000000
+            verticalPolicy: "PercentOfParent"
+    children:
+    -   class: "UIControl"
+        name: "HintPivot"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 105.000000
+                vCenterAnchorEnabled: true
+                vCenterAnchor: 50.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfChildrenSum"
+        children:
+        -   prototype: "TutorialHintBasic/HintContainer"
+            name: "HintContainer"
+            classes: "ArrowTop"
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                UIDataParamsComponent:
+                    args:
+                        "text": "localize(\"ModernTutorial/KeyboardMovementHint\")"
+                        "iconClass": "\"\""
+        -   class: "UIControl"
+            name: "KeyboardJoypad"
+            size: [32.000000, 32.000000]
+            visible: true
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    topAnchorEnabled: true
+                    topAnchor: -170.000000
+                LinearLayout:
+                    orientation: "TopDown"
+                    spacing: 8.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfChildrenSum"
+            children:
+            -   class: "UIControl"
+                name: "TopPart"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        verticalPolicy: "PercentOfMaxChild"
+                children:
+                -   prototype: "KeyboardButton/KeyboardButton"
+                    name: "Forward"
+                    children:
+                    -   path: "Text"
+                        components:
+                            UITextComponent:
+                                text: "W"
+            -   class: "UIControl"
+                name: "BottomPart"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    LinearLayout:
+                        spacing: 8.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        verticalPolicy: "PercentOfMaxChild"
+                children:
+                -   prototype: "KeyboardButton/KeyboardButton"
+                    name: "Left"
+                    children:
+                    -   path: "Text"
+                        components:
+                            UITextComponent:
+                                text: "A"
+                -   prototype: "KeyboardButton/KeyboardButton"
+                    name: "Backward"
+                    children:
+                    -   path: "Text"
+                        components:
+                            UITextComponent:
+                                text: "S"
+                -   prototype: "KeyboardButton/KeyboardButton"
+                    name: "Right"
+                    children:
+                    -   path: "Text"
+                        components:
+                            UITextComponent:
+                                text: "D"

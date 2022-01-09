@@ -1,0 +1,36 @@
+Header:
+    version: 133
+Prototypes:
+-   class: "UIControl"
+    name: "ImageWrapper"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["int", "parentWidth", "0", "0"]
+            - ["string", "imageUrl", "\"\"", "\"\""]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["int", "align", "when parentWidth < 1232 -> 480, 600"]
+    children:
+    -   class: "UIControl"
+        name: "imageContent"
+        input: false
+        components:
+            Background:
+                drawType: "DRAW_SCALE_PROPORTIONAL"
+            UIOpacityComponent: {}
+            UIUrlImageComponent: {}
+            Anchor:
+                leftAnchorEnabled: true
+                topAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 640.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 640.000000
+        bindings:
+        - ["UIUrlImageComponent.imageUrl", "imageUrl"]

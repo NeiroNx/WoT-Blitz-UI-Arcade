@@ -1,0 +1,218 @@
+Header:
+    version: 133
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/SideBar.yaml"
+- "~res:/UI/Screens3/Lobby/Common/Sidebar/SidebarItem/SideBarItem.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "TaskJournalScreen"
+    size: [1302.000000, 833.000000]
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "SCROLL_TO_BONUS_QUEST,~res:/UI/Screens3/Lobby/TaskJournal/Animations/ScrollToBonusQuest.animation"
+        Anchor:
+            leftAnchorEnabled: true
+            rightAnchorEnabled: true
+            topAnchorEnabled: true
+            bottomAnchorEnabled: true
+        LinearLayout: {}
+        ModalInput: {}
+        UIVirtualActionEventComponent0:
+            virtualKeyAction: "Escape"
+            keyDownEvent: "BACK_SHORTCUT"
+        UIVirtualActionEventComponent1:
+            virtualKeyAction: "Options"
+            keyDownEvent: "GO_TO_SHOP"
+        UIShortcutEventComponent:
+            shortcuts: "BACK_SHORTCUT,Back;BACK_SHORTCUT,Escape"
+        UIDataParamsComponent:
+            params:
+            - ["AccountDataModel", "account", "null", "{ }"]
+            - ["LobbyDataModel", "lobby", "null", "{ }"]
+            - ["AppDataModel", "app", "null", "{ }"]
+            - ["SessionDataModel", "session", "null", "{ }"]
+            - ["TaskJournal", "model", "null", "{ }"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["bool", "isInClan", "not isNull(account.clanData.clan)"]
+            - ["ClanApiError", "lastClanApiError", "account.clanData.lastClanApiError"]
+            - ["bool", "noClanDataVisible", "model.activeTab == eTaskJournalTab.Clan and not isInClan"]
+            - ["bool", "showClanApiError", "model.activeTab == eTaskJournalTab.Clan and not isInClan and (lastClanApiError == ClanApiError.INTERNAL_SERVER_ERROR or lastClanApiError == ClanApiError.SERVER_MAINTENANCE)"]
+        UIDataLocalControlComponent0:
+            name: "headerContent"
+            prototypePath: "~res:/UI/Screens3/Lobby/Common/Headers/TitleWithSubtitle.yaml"
+            args:
+                "touchable": "model.questsLevel > 1"
+                "title": "when model.activeTab == eTaskJournalTab.Personal -> \"taskJournal/MainHeader/Personal\", \"taskJournal/MainHeader/Clan\""
+                "subTitle": "when model.questsLevel > 0 -> format(localize(\"missionJournal/level\"), { \"level\" = model.questsLevel; }), \"\""
+                "iconPath": "when model.questsLevel > 1 -> \"~res:/Gfx/Lobby/icons/icon_info_xs\", \"\""
+                "soundType": "eButtonSound.OPEN"
+            eventActions:
+            - ["ON_TAB_SELECTED", "ON_TAB_SELECTED", "_event"]
+            - ["ON_SUBTITLE_TOUCHED", "SHOW_LEVEL_INFO", ""]
+        UIChildComponent0:
+            childType: "kPrototype"
+            condition: "showClanApiError"
+            prototypePath: "~res:/UI/Screens3/Lobby/TaskJournal/TaskJournalClanApiError.yaml"
+            args:
+                "error": "lastClanApiError"
+        UIChildComponent1:
+            condition: "noClanDataVisible"
+            prototypePath: "~res:/UI/Screens3/Lobby/TaskJournal/TaskJournalNoClanTab.yaml"
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/Lobby/TaskJournal/Animations/TaskJournal.actions"
+        UIDataOnEventComponent0:
+            eventName: "ON_SELECT_CLAN_TAB"
+            modelFieldExpression: "model.clanTasks.activeTab"
+            dataExpression: "_event"
+        UIDataOnEventComponent1:
+            eventName: "ON_TAB_SELECTED"
+            modelFieldExpression: "model.activeTab"
+            dataExpression: "_event"
+    children:
+    -   class: "UIControl"
+        name: "Background"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Background:
+                drawType: "DRAW_STRETCH_BOTH"
+            IgnoreLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        bindings:
+        - ["visible", "noClanDataVisible or showClanApiError"]
+        - ["Background.sprite", "when (noClanDataVisible or showClanApiError) and app.sDlc.isGeneralPackLoaded -> \"~res:/Gfx/UI/TaskJournal/Extended/no_clan_artwork\", \"\""]
+    -   prototype: "SideBar/Sidebar"
+        name: "Sidebar"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "backButtonLayer": "when account.tutorialData.currentHighlightControl == eTutorialHighlights.kBack -> 1, 0"
+                    "bgStyle": "\"black-15-bg\""
+                    "content": "SidebarButtons"
+                eventActions:
+                - ["ON_CLICK_BACK", "BACK_EVENT", ""]
+    -   class: "UIControl"
+        name: "ContentAndHeader"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "Header"
+            visible: true
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfFirstChild"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens3/Lobby/Common/Headers/BaseHeader.yaml"
+                    args:
+                        "statsData": "session.stats"
+                        "lobby": "lobby"
+                        "serverTime": "session.serverTime"
+                        "leftContent": "headerContent"
+                        "bgStyle": "\"black-15-bg\""
+                        "isGeneralPackLoaded": "app.sDlc.isGeneralPackLoaded"
+                        "showBackButton": "false"
+                        "isBackButtonInitiallyClickable": "false"
+                        "showStatsPanel": "false"
+                        "isFullScreen": "true"
+                    eventActions:
+                    - ["GO_TO_SHOP", "GO_TO_SHOP", ""]
+                    - ["PREMIUM_INFO_EVENT", "PREMIUM_INFO_EVENT", ""]
+                    - ["BACK_EVENT", "BACK_EVENT", ""]
+                    - ["SHOP_BUTTON", "SHOP_BUTTON", "_event.requiredResource"]
+        -   class: "UIControl"
+            name: "Content"
+            position: [0.000000, 80.000000]
+            input: false
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    rightAnchorEnabled: true
+                    topAnchorEnabled: true
+                    topAnchor: 64.000000
+                    bottomAnchorEnabled: true
+                UIAnchorSafeAreaComponent:
+                    leftSafeInset: "INSET"
+                    rightSafeInset: "INSET"
+                UIChildComponent0:
+                    childType: "kPrototype"
+                    condition: "model.activeTab == eTaskJournalTab.Personal and model.questsLevel > 1"
+                    prototypePath: "~res:/UI/Screens3/Lobby/TaskJournal/TaskJournalPersonalTab.yaml"
+                    args:
+                        "account": "account"
+                        "model": "model"
+                        "session": "session"
+                UIChildComponent1:
+                    childType: "kPrototype"
+                    condition: "isInClan and not showClanApiError and model.activeTab == eTaskJournalTab.Clan"
+                    prototypePath: "~res:/UI/Screens3/Lobby/TaskJournal/TaskJournalClanTab.yaml"
+                    args:
+                        "model": "model"
+                        "session": "session"
+                        "account": "account"
+                UIChildComponent2:
+                    condition: "model.activeTab == eTaskJournalTab.Personal and model.questsLevel <= 1"
+                    prototypePath: "~res:/UI/Screens3/Lobby/TaskJournal/Newbie/TaskJournalNewbieTab.yaml"
+                    args:
+                        "app": "app"
+                        "session": "session"
+                        "model": "model"
+                        "account": "account"
+                        "isDeveloperUI": "app.constants.developerUI"
+            bindings:
+            - ["visible", "not noClanDataVisible"]
+Slots:
+-   class: "UIControl"
+    name: "SidebarButtons"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 88.000000
+            verticalPolicy: "PercentOfChildrenSum"
+        UISwitchBarComponent:
+            onSelectElement: "ON_TAB_SELECTED"
+            onSelectElementData: "toEnum(_selectedElement, eTaskJournalTab)"
+            selectionEventType: "TOUCH_UP"
+            moveSelectionMode: "VerticalDpad"
+    bindings:
+    - ["UISwitchBarComponent.selectedElement", "model.activeTab"]
+    children:
+    -   prototype: "SideBarItem/Item"
+        name: "Personal"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "badge": "badge(model.personalTabBadge)"
+                    "badgeType": "eBadgeType.DIGIT"
+                    "attachId": "\"TASK_JOURNAL_PERSONAL_TAB\""
+                    "switchId": "int(eTaskJournalTab.Personal)"
+                    "select": "model.activeTab == eTaskJournalTab.Personal"
+                    "icon": "\"~res:/Gfx/Lobby/icons/icon_personal-task_m\""
+    -   prototype: "SideBarItem/Item"
+        name: "Clan"
+        position: [0.000000, 72.000000]
+        components:
+            UIDataParamsComponent:
+                args:
+                    "inputEnabled": "app.sDlc.isGeneralPackLoaded"
+                    "lock": "not app.sDlc.isGeneralPackLoaded"
+                    "badge": "badge(model.clanTabBadge)"
+                    "badgeType": "eBadgeType.DIGIT"
+                    "attachId": "\"TASK_JOURNAL_CLAN_TAB\""
+                    "switchId": "int(eTaskJournalTab.Clan)"
+                    "select": "model.activeTab == eTaskJournalTab.Clan"
+                    "icon": "\"~res:/Gfx/Lobby/icons/icon_clans_n.psd\""

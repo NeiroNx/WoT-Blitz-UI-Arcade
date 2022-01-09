@@ -1,0 +1,93 @@
+Header:
+    version: "80"
+ImportedPackages:
+- "~res:/UI/Screens/Common/StyledButton.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "FinanceCell"
+    size: [400.000000, 40.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "FixedSize"
+            verticalValue: 40.000000
+    children:
+    -   class: "UIControl"
+        name: "CaptionRegular"
+        input: false
+        classes: "t-caption regular color=white-wild-sand-text"
+        components:
+            UITextComponent:
+                text: "Title"
+                colorInheritType: "COLOR_IGNORE_PARENT"
+                align: ["LEFT", "VCENTER"]
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 10.000000
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+    -   class: "UIControl"
+        name: "Actions"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Anchor:
+                rightAnchorEnabled: true
+                rightAnchor: 10.000000
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                spacing: 4.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   prototype: "StyledButton/StyledButton"
+            name: "Action0"
+            size: [192.000000, 64.000000]
+            components:
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 70.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 30.000000
+                UIInputEventComponent: {}
+            children:
+            -   path: "Caption"
+                components:
+                    UITextComponent:
+                        text: "100"
+        -   prototype: "StyledButton/StyledButton"
+            name: "Action1"
+            size: [192.000000, 64.000000]
+            components:
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 70.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 30.000000
+                UIInputEventComponent: {}
+            children:
+            -   path: "Caption"
+                components:
+                    UITextComponent:
+                        text: "100"
+        -   prototype: "StyledButton/StyledButton"
+            name: "Action2"
+            size: [192.000000, 64.000000]
+            components:
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 70.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 30.000000
+                UIInputEventComponent: {}
+            children:
+            -   path: "Caption"
+                components:
+                    UITextComponent:
+                        text: "100"

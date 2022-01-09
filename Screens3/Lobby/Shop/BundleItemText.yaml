@@ -1,0 +1,29 @@
+Header:
+    version: 133
+Prototypes:
+-   class: "UIControl"
+    name: "BundleItemText"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 40.000000
+            verticalPolicy: "PercentOfFirstChild"
+        UIDataParamsComponent:
+            params:
+            - ["ResourceDetailed", "resource", "null", "{ \"type\" = ResourceType.stuff; }"]
+            - ["bool", "visible", "true", "true"]
+        UIChildComponent0:
+            condition: "not visible"
+        UIChildComponent1:
+            condition: "resource.type == ResourceType.stuff and resource.stuff.type != ArtefactType.player_avatar"
+            prototypePath: "~res:/UI/Screens3/Lobby/Shop/BundleItemText/StuffBundleItemText.yaml"
+            args:
+                "stuff": "resource.stuff"
+        UIChildComponent2:
+            condition: "resource.type == ResourceType.gold or resource.type == ResourceType.credits or resource.type == ResourceType.free_xp or resource.type == ResourceType.premium or resource.type == ResourceType.equipment_slots or resource.type == ResourceType.slots"
+            prototypePath: "~res:/UI/Screens3/Lobby/Shop/BundleItemText/BasicBundleItemText.yaml"
+            args:
+                "resource": "resource"
+    bindings:
+    - ["visible", "visible"]

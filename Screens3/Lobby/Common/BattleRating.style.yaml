@@ -1,0 +1,59 @@
+Header:
+    version: "108"
+StyleSheets:
+-   selectors:
+    - ".bronze * .icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/leagues/league_icon_bronze_m"
+-   selectors:
+    - ".silver * .icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/leagues/league_icon_silver_m"
+-   selectors:
+    - ".gold * .icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/leagues/league_icon_gold_m"
+-   selectors:
+    - ".platinum * .icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/leagues/league_icon_platinum_m"
+-   selectors:
+    - ".diamond * .icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/leagues/league_icon_brilliant_m"
+-   selectors:
+    - ".calibration * .icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/leagues/league_icon_calibration_m"
+-   selectors:
+    - ".delta.top"
+    properties:
+        bg-spriteModification: []
+-   selectors:
+    - ".delta.down"
+    properties:
+        bg-spriteModification: ["FLIP_VERTICAL"]
+-   selectors:
+    - ".bronzeWW * .icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/leagues/league_icon_bronze_l"
+-   selectors:
+    - ".silverWW * .icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/leagues/league_icon_silver_l"
+-   selectors:
+    - ".goldWW * .icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/leagues/league_icon_gold_l"
+-   selectors:
+    - ".platinumWW * .icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/leagues/league_icon_platinum_l"
+-   selectors:
+    - ".diamondWW * .icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/leagues/league_icon_brilliant_l"
+-   selectors:
+    - ".calibrationWW * .icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/leagues/league_icon_calibration_l"

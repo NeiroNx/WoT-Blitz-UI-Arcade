@@ -1,0 +1,116 @@
+Header:
+    version: 127
+Prototypes:
+-   class: "UIControl"
+    name: "NewComersEventNotificationContent"
+    size: [960.000000, 640.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["string", "image", "\"\"", "\"~res:/Gfx/Lobby/events/okr_new-comers/okr_na_tank_free\""]
+            - ["string", "header", "\"\"", "\"NEWCOMERS2020/Notification/End/Header\""]
+            - ["string", "description", "\"\"", "\"NEWCOMERS2020/Notification/End/Description\""]
+            - ["control", "frontFx", "null", "null"]
+            - ["control", "fx", "null", "null"]
+            - ["VehicleResource", "vehicle", "null", "{ }"]
+            events:
+            - "CLOSE"
+        UIDataLocalVarsComponent:
+            data:
+            - ["string", "nameStyle", "\"t-body bold\""]
+            - ["string", "vehicleInfoStyle", "\"t-body\""]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["eVehicleDescriptionType", "vehicleType", "when isNull(vehicle) -> eVehicleDescriptionType.NORMAL, vehicle.info.isPremium -> eVehicleDescriptionType.PREMIUM, vehicle.info.isCollectible -> eVehicleDescriptionType.COLLECTIBLE, vehicle.stats.isPremiumized -> eVehicleDescriptionType.PREMIUMISED, eVehicleDescriptionType.NORMAL"]
+    children:
+    -   class: "UIControl"
+        name: "ContentHolder"
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/FullScreenPopup/FullscreenNotificationContent.yaml"
+                args:
+                    "content": "null"
+                    "topPart": "TopPart"
+                    "description": "Description"
+                    "isButtonVisible": "true"
+                    "congratulationText": "localize(header)"
+                    "buttonText": "\"#common:DialogButton/OK\""
+                eventActions:
+                - ["ACCENT_CLICKED", "CLOSE", ""]
+Slots:
+-   class: "UIControl"
+    name: "TopPart"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfMaxChild"
+    children:
+    -   class: "UIControl"
+        name: "FX_holder"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                childType: "kControl"
+                condition: "not isNull(fx)"
+                control: "fx"
+    -   class: "UIControl"
+        name: "Image"
+        input: false
+        components:
+            Background: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+        bindings:
+        - ["Background.sprite", "image"]
+    -   class: "UIControl"
+        name: "FX_holder_front"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                childType: "kControl"
+                condition: "not isNull(frontFx)"
+                control: "frontFx"
+-   class: "UIControl"
+    name: "Description"
+    input: false
+    components:
+        UIOpacityComponent:
+            opacity: 0.750000
+        RichContent:
+            baseClasses: "t-body regular white-wild-sand-text"
+        RichContentAliases0:
+            aliases:
+            - ["vehicleInfo", "<control class=\"\" control=\"~res:/UI/Screens3/Lobby/Common/Vehicle/VehicleInfo.yaml\" args1=\"class=vehicle.info.tankClass\" args2=\"level=vehicle.info.level\" args3=\"type=vehicleType\" args4=\"elite=vehicle.stats.isElite\" args5=\"richTextStyle=vehicleInfoStyle\"/>"]
+            - ["vehicleName", "<control class=\"\" control=\"~res:/UI/Screens3/Lobby/Common/Vehicle/VehicleName.yaml\" args1=\"vehicle=vehicle.info\" args2=\"tankStats=vehicle.stats\" args3=\"textStyle=nameStyle\" args4=\"isShortName=true\" args5=\"verticalPolicy=eSizePolicy.PercentOfContent\" />"]
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            horizontalMax: 336.000000
+            verticalPolicy: "PercentOfChildrenSum"
+        FlowLayout:
+            hDynamicInLinePadding: true
+            hSpacing: 4.000000
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Font.style.yaml"
+    bindings:
+    - ["RichContent.text", "localize(description)"]

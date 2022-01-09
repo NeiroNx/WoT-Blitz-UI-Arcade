@@ -1,0 +1,19 @@
+Header:
+    version: "108"
+StyleSheets:
+-   selectors:
+    - ".selectable:selected #Background"
+    properties:
+        visible: true
+-   selectors:
+    - ".selectable:selected #Goal"
+    properties:
+        text-color: [1.000000, 1.000000, 1.000000, 1.000000]
+-   selectors:
+    - ".selectable #Background"
+    properties:
+        visible: false
+-   selectors:
+    - ".selectable #Goal"
+    properties:
+        text-color: [0.619608, 0.721569, 0.800000, 1.000000]

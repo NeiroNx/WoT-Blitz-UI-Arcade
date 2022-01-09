@@ -1,0 +1,879 @@
+Header:
+    version: 128
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Profile/Common/LeagueIcon.yaml"
+- "~res:/UI/Screens3/Lobby/Profile/Common/HorizontalDividerWithCaption.yaml"
+- "~res:/UI/Screens3/Lobby/Profile/Common/LeagueInfoPrototype.yaml"
+- "~res:/UI/Screens3/Lobby/Common/Button.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "RatingScreen"
+    size: [1004.000000, 800.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["ProfileViewModel", "profile", "null", "{ }"]
+            - ["SessionDataModel", "session", "null", "{ }"]
+            - ["AppDataModel", "app", "null", "{ }"]
+            - ["ProfileRatingViewModel", "model", "null", "{ \"rating\" = { \"state\" = eBattleRatingState.HAS_RATING; }; }"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["bool", "isSelfProfile", "profile.profileType == ePlayerProfileType.SELF"]
+            - ["bool", "showSeasonLeaders", "not app.netease.neteaseAvailable"]
+            - ["AccountGameModes", "gameModes", "session.gameModesAccountModel"]
+            - ["GameMode", "gameMode", "gameModes.gameModes[get(gameModes.gameModes, \"battleType\", str(eGameMode.Rating))]"]
+            - ["eBattleRatingState", "state", "model.rating.state"]
+            - ["bool", "isNoRating", "state == eBattleRatingState.NO_RATING"]
+            - ["bool", "isCalibration", "state == eBattleRatingState.CALIBRATION"]
+            - ["bool", "isRecalibration", "state == eBattleRatingState.RECALIBRATION"]
+            - ["bool", "isHasRating", "state == eBattleRatingState.HAS_RATING"]
+            - ["bool", "isNeedRecalibration", "state == eBattleRatingState.NEED_RECALIBRATION"]
+            - ["int", "currentRating", "when isHasRating -> model.rating.currentRating, 0"]
+            - ["int", "maxRating", "when isNoRating or isCalibration -> 0, model.rating.maxRating"]
+            - ["int", "calibrationRating", "when isHasRating or isRecalibration or isNeedRecalibration -> model.rating.calibrationRating, 0"]
+            - ["eLeague", "calibrationLeague", "when isHasRating or isRecalibration or isNeedRecalibration -> model.rating.calibrationLeagueType, eLeague.NO_LEAGUE"]
+            - ["eLeague", "currentLeague", "when isHasRating -> model.rating.leagueType, eLeague.NO_LEAGUE"]
+            - ["eLeague", "maxLeague", "when isNoRating or isCalibration -> eLeague.NO_LEAGUE, model.rating.maxLeagueType"]
+            - ["int64", "recalibrationDelay", "model.recalibrationStartTime - session.serverTime"]
+            - ["int64", "recalibrationInterval", "model.recalibrationInterval"]
+            - ["int", "calibrationBattlesLeft", "model.rating.calibrationBattlesLeft"]
+            - ["int", "calibrationBattlesPlayed", "model.rating.calibrationBattlesCount - calibrationBattlesLeft"]
+            - ["int", "calibrationBattlesTotal", "model.rating.calibrationBattlesCount"]
+            - ["string", "calibrationWarning", "localize(\"ratingBattles/calibration/hangar/seasonReset\", { \"battles_total\" = calibrationBattlesTotal; })"]
+            - ["string", "recalibrationWarning", "localize(\"ratingBattles/recalibration/calibrationWarning/active\", { \"interval\" = timeDiffShort(recalibrationInterval); \"battles_total\" = calibrationBattlesTotal; })"]
+            - ["string", "recalibrationDelayWarning", "when gameMode.gameModeOptions.activeFinishTime >= model.recalibrationStartTime -> localize(\"ratingBattles/recalibration/calibrationWarning/inactive\", { \"delay\" = timeDiff(recalibrationDelay); }), \"\""]
+            - ["string", "warningDescriptionText", "when isNeedRecalibration or isRecalibration -> recalibrationWarning, when not isHasRating or calibrationBattlesLeft > 0 -> calibrationWarning, recalibrationDelayWarning"]
+            - ["string", "warningDescriptionStyle", "\"t-body regular color=white-wild-sand-text\""]
+        UIChildComponent0:
+            prototypePath: "~res:/UI/Screens3/Lobby/Common/Overlay/Overlay.yaml"
+            args:
+                "hasCustomBg": "false"
+                "wasPushed": "true"
+                "rightCornerContent": "RightCornerContent"
+                "content": "SliderContent"
+                "playerName": "profile.playerNameData.name"
+                "clanTag": "when isNull(profile.clanData.clan) -> \"\", profile.clanData.clan.tag"
+                "title": "localize(\"profile/Rating/Header\")"
+            eventActions:
+            - ["BACK_EVENT", "BACK_EVENT", ""]
+            - ["OVERLAY_OPEN_FINISH", "OVERLAY_OPEN_FINISH", ""]
+Slots:
+-   class: "UIControl"
+    name: "RightCornerContent"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        Anchor:
+            rightAnchorEnabled: true
+            rightAnchor: 16.000000
+            vCenterAnchorEnabled: true
+        LinearLayout:
+            orientation: "RightToLeft"
+            spacing: 8.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "PercentOfMaxChild"
+    children:
+    -   prototype: "LeagueIcon/LeagueIcon"
+        name: "LeagueIcon"
+        components:
+            UITextureComponent:
+                drawType: "DRAW_SCALE_PROPORTIONAL"
+            SizePolicy:
+                horizontalValue: 40.000000
+                verticalValue: 40.000000
+            UIDataParamsComponent:
+                args:
+                    "showAnimation": "false"
+                    "league": "maxLeague"
+    -   class: "UIControl"
+        name: "LeagueInfo"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Anchor:
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                orientation: "TopDown"
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfChildrenSum"
+        children:
+        -   class: "UIControl"
+            name: "Rating"
+            input: false
+            classes: "t-body bold color=white-wild-sand-text not-localize"
+            components:
+                UITextComponent:
+                    align: ["RIGHT", "VCENTER"]
+                Anchor:
+                    rightAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml"
+            bindings:
+            - ["UITextComponent.text", "when maxRating > 0 -> str1000Separated(maxRating), localize(\"ratingBattles/calibration/ratingPlaceholder\")"]
+        -   class: "UIControl"
+            name: "Info"
+            input: false
+            classes: "t-caption regular color=white-wild-sand-50-text"
+            components:
+                UITextComponent:
+                    text: "ratingBattles/infoScreen/maxRatingPerSeason"
+                    align: ["RIGHT", "VCENTER"]
+                Anchor:
+                    rightAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml"
+-   class: "UIControl"
+    name: "SliderContent"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        Anchor:
+            hCenterAnchorEnabled: true
+            vCenterAnchorEnabled: true
+        LinearLayout:
+            orientation: "TopDown"
+            spacing: 40.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "PercentOfChildrenSum"
+    children:
+    -   class: "UIControl"
+        name: "Leagues"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+            LinearLayout:
+                orientation: "TopDown"
+                spacing: 16.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfChildrenSum"
+        children:
+        -   class: "UIControl"
+            name: "SeasonDates"
+            visible: false
+            input: false
+            classes: "t-caption bold color=white-wild-sand-text"
+            components:
+                UITextComponent:
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                    align: ["LEFT", "VCENTER"]
+                Anchor:
+                    hCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+            bindings:
+            - ["UITextComponent.text", "model.seasonDates"]
+        -   class: "UIControl"
+            name: "Leagues"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                LinearLayout:
+                    spacing: 40.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 480.000000
+            children:
+            -   prototype: "LeagueInfoPrototype/LeaguesPrototype"
+                name: "NoLeague"
+                components:
+                    Anchor:
+                        topAnchorEnabled: true
+                        topAnchor: 160.000000
+                    UIDataParamsComponent:
+                        args:
+                            "league": "eLeague.NO_LEAGUE"
+                            "title": "localize(\"ratingBattles/infoScreen/calibration\")"
+                            "isCurrentLeague": "currentLeague == eLeague.NO_LEAGUE"
+                            "isSelfProfile": "isSelfProfile"
+                            "rating": "when isNoRating or isNeedRecalibration -> (when not isSelfProfile -> localize(\"profile/Rating/Status/NoRating\"), localize(\"ratingBattles/battlesNeededShort\", { \"battles_total\" = calibrationBattlesTotal; })), when isCalibration or isRecalibration -> str(calibrationBattlesPlayed) + \" / \" + str(calibrationBattlesTotal), localize(\"ratingBattles/calibration/ratingPlaceholder\")"
+            -   prototype: "LeagueInfoPrototype/LeaguesPrototype"
+                name: "Bronze"
+                components:
+                    Anchor:
+                        topAnchorEnabled: true
+                        topAnchor: 128.000000
+                    UIDataParamsComponent:
+                        args:
+                            "league": "eLeague.BRONZE"
+                            "title": "localize(\"ratingBattles/infoScreen/bronze\")"
+                            "isCurrentLeague": "currentLeague == eLeague.BRONZE"
+                            "isSelfProfile": "isSelfProfile"
+                            "rating": "when currentLeague == eLeague.BRONZE -> str1000Separated(currentRating), localize(\"ratingBattles/infoScreen/bronze/range\")"
+            -   prototype: "LeagueInfoPrototype/LeaguesPrototype"
+                name: "Silver"
+                components:
+                    Anchor:
+                        topAnchorEnabled: true
+                        topAnchor: 96.000000
+                    UIDataParamsComponent:
+                        args:
+                            "league": "eLeague.SILVER"
+                            "title": "localize(\"ratingBattles/infoScreen/silver\")"
+                            "isCurrentLeague": "currentLeague == eLeague.SILVER"
+                            "isSelfProfile": "isSelfProfile"
+                            "rating": "when currentLeague == eLeague.SILVER -> str1000Separated(currentRating), localize(\"ratingBattles/infoScreen/silver/range\")"
+            -   prototype: "LeagueInfoPrototype/LeaguesPrototype"
+                name: "Gold"
+                components:
+                    Anchor:
+                        topAnchorEnabled: true
+                        topAnchor: 64.000000
+                    UIDataParamsComponent:
+                        args:
+                            "league": "eLeague.GOLD"
+                            "title": "localize(\"ratingBattles/infoScreen/gold\")"
+                            "isCurrentLeague": "currentLeague == eLeague.GOLD"
+                            "isSelfProfile": "isSelfProfile"
+                            "rating": "when currentLeague == eLeague.GOLD -> str1000Separated(currentRating), localize(\"ratingBattles/infoScreen/gold/range\")"
+            -   prototype: "LeagueInfoPrototype/LeaguesPrototype"
+                name: "Platinum"
+                components:
+                    Anchor:
+                        topAnchorEnabled: true
+                        topAnchor: 32.000000
+                    UIDataParamsComponent:
+                        args:
+                            "league": "eLeague.PLATINUM"
+                            "title": "localize(\"ratingBattles/infoScreen/platinum\")"
+                            "isCurrentLeague": "currentLeague == eLeague.PLATINUM"
+                            "isSelfProfile": "isSelfProfile"
+                            "rating": "when currentLeague == eLeague.PLATINUM -> str1000Separated(currentRating), localize(\"ratingBattles/infoScreen/platinum/range\")"
+            -   prototype: "LeagueInfoPrototype/LeaguesPrototype"
+                name: "Diamond"
+                components:
+                    Anchor:
+                        topAnchorEnabled: true
+                    UIDataParamsComponent:
+                        args:
+                            "league": "eLeague.DIAMOND"
+                            "title": "localize(\"ratingBattles/infoScreen/diamond\")"
+                            "isCurrentLeague": "currentLeague == eLeague.DIAMOND"
+                            "isSelfProfile": "isSelfProfile"
+                            "rating": "when currentLeague == eLeague.DIAMOND -> str1000Separated(currentRating), localize(\"ratingBattles/infoScreen/diamond/range\")"
+            -   prototype: "Button/Button"
+                name: "LeadersButton"
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        bottomAnchorEnabled: true
+                        bottomAnchor: 24.000000
+                    IgnoreLayout: {}
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 188.000000
+                    UIDataParamsComponent:
+                        args:
+                            "locked": "false"
+                            "caption": "localize(\"ratingBattles/infoScreen/button/leaderboard\")"
+                            "type": "eButtonType.OPTIONAL_LIGHT"
+                            "size": "eButtonSize.NORMAL"
+                            "sound": "eButtonSound.OPEN"
+                            "enabled": "showSeasonLeaders"
+                        eventActions:
+                        - ["ON_CLICK_BUTTON", "SHOW_LEADERS", "_event"]
+                bindings:
+                - ["visible", "enabled"]
+        -   class: "UIControl"
+            name: "Warning"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                LinearLayout:
+                    orientation: "TopDown"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfChildrenSum"
+            bindings:
+            - ["visible", "isSelfProfile"]
+            children:
+            -   class: "UIControl"
+                name: "Description"
+                input: false
+                components:
+                    UITextComponent:
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                        align: ["LEFT", "VCENTER"]
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+                bindings:
+                - ["classes", "warningDescriptionStyle"]
+                - ["UITextComponent.text", "warningDescriptionText"]
+    -   class: "UIControl"
+        name: "Statistic"
+        position: [0.000000, 556.000000]
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            LinearLayout:
+                orientation: "TopDown"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfChildrenSum"
+        bindings:
+        - ["visible", "not isNoRating"]
+        children:
+        -   prototype: "HorizontalDividerWithCaption/HorizontalDividerWithCaption"
+            name: "HorizontalDividerWithCaption"
+            components:
+                UIDataParamsComponent:
+                    args:
+                        "text": "localize(\"ratingBattles/Brief/Subheader\")"
+        -   class: "UIControl"
+            name: "Spacer"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 16.000000
+        -   class: "UIControl"
+            name: "RatingDiffs"
+            position: [0.000000, 32.000000]
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                LinearLayout:
+                    orientation: "TopDown"
+                    spacing: 16.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfChildrenSum"
+            children:
+            -   class: "UIControl"
+                name: "Description"
+                input: false
+                classes: "t-body regular color=white-wild-sand-50-text"
+                components:
+                    UITextComponent:
+                        text: "ratingBattles/Brief/RatingPerTier"
+                        multiline: "MULTILINE_ENABLED"
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml"
+            -   class: "UIControl"
+                name: "Data"
+                input: false
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                    LinearLayout: {}
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfMaxChild"
+                children:
+                -   class: "UIControl"
+                    name: "CalibrationRating"
+                    input: false
+                    components:
+                        LinearLayout:
+                            orientation: "TopDown"
+                            spacing: 8.000000
+                        SizePolicy:
+                            horizontalPolicy: "FixedSize"
+                            horizontalValue: 120.000000
+                            verticalPolicy: "PercentOfChildrenSum"
+                    children:
+                    -   prototype: "LeagueIcon/LeagueIcon"
+                        name: "LeagueIcon"
+                        components:
+                            SizePolicy:
+                                horizontalValue: 88.000000
+                                verticalValue: 88.000000
+                            UIDataParamsComponent:
+                                args:
+                                    "showAnimation": "false"
+                                    "league": "calibrationLeague"
+                    -   class: "UIControl"
+                        name: "Description"
+                        position: [0.500000, 88.000000]
+                        size: [119.000000, 60.000000]
+                        components:
+                            LinearLayout:
+                                orientation: "TopDown"
+                                spacing: 4.000000
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                verticalPolicy: "PercentOfChildrenSum"
+                        children:
+                        -   class: "UIControl"
+                            name: "Rating"
+                            input: false
+                            classes: "t-headline bold color=white-wild-sand-text not-localize"
+                            components:
+                                UITextComponent:
+                                    align: ["LEFT", "VCENTER"]
+                                Anchor:
+                                    hCenterAnchorEnabled: true
+                                SizePolicy:
+                                    horizontalPolicy: "PercentOfContent"
+                                    verticalPolicy: "PercentOfContent"
+                                StyleSheet:
+                                    styles: "~res:/UI/Screens3/Font.style.yaml"
+                            bindings:
+                            - ["UITextComponent.text", "when calibrationRating > 0 -> str1000Separated(calibrationRating), localize(\"ratingBattles/calibration/ratingPlaceholder\")"]
+                        -   class: "UIControl"
+                            name: "Description"
+                            position: [0.000000, 20.000000]
+                            input: false
+                            classes: "t-body regular color=white-wild-sand-50-text"
+                            components:
+                                UITextComponent:
+                                    text: "ratingBattles/Brief/RatingUponCalibration"
+                                    multiline: "MULTILINE_ENABLED"
+                                Anchor:
+                                    hCenterAnchorEnabled: true
+                                SizePolicy:
+                                    horizontalPolicy: "Formula"
+                                    horizontalFormula: "min(parentRest, content)"
+                                    verticalPolicy: "PercentOfContent"
+                                StyleSheet:
+                                    styles: "~res:/UI/Screens3/Font.style.yaml"
+                -   class: "UIControl"
+                    name: "Spacer"
+                    input: false
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "Formula"
+                            horizontalFormula: "when parent < 1040 -> 16, 24"
+                            verticalPolicy: "PercentOfParent"
+                -   class: "UIControl"
+                    name: "DiffsPerLevel"
+                    position: [136.000000, 0.000000]
+                    input: false
+                    components:
+                        LinearLayout:
+                            spacing: 16.000000
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfMaxChild"
+                        UIRepeatComponent:
+                            control: "~res:/UI/Screens3/Lobby/Profile/Common/RatingHistogram.yaml"
+                            dataContainer: "model.ratingInfoPerLevels"
+                            args:
+                                "level": "_item.level"
+                                "delta": "_item.ratingDiff"
+                                "percent": "_item.ratingDiffPercent"
+                                "style": "when _item.ratingDiff > 0 -> eRatingHistogramStyle.POSITIVE, when _item.ratingDiff < 0 -> eRatingHistogramStyle.NEGATIVE, eRatingHistogramStyle.NEUTRAL"
+                            elementNameExpression: "str(_item.level)"
+                -   class: "UIControl"
+                    name: "Spacer_1"
+                    input: false
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "Formula"
+                            horizontalFormula: "when parent < 1040 -> 16, 24"
+                            verticalPolicy: "PercentOfParent"
+                -   class: "UIControl"
+                    name: "CurrentRating"
+                    position: [680.000000, 0.000000]
+                    input: false
+                    components:
+                        LinearLayout:
+                            orientation: "TopDown"
+                            spacing: 8.000000
+                        SizePolicy:
+                            horizontalPolicy: "FixedSize"
+                            horizontalValue: 120.000000
+                            verticalPolicy: "PercentOfChildrenSum"
+                    children:
+                    -   prototype: "LeagueIcon/LeagueIcon"
+                        name: "LeagueIcon"
+                        components:
+                            SizePolicy:
+                                horizontalValue: 88.000000
+                                verticalValue: 88.000000
+                            UIDataParamsComponent:
+                                args:
+                                    "showAnimation": "currentLeague != eLeague.NO_LEAGUE"
+                                    "league": "currentLeague"
+                    -   class: "UIControl"
+                        name: "Description"
+                        position: [0.000000, 96.000000]
+                        size: [120.000000, 68.000000]
+                        components:
+                            LinearLayout:
+                                orientation: "TopDown"
+                                spacing: 4.000000
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                verticalPolicy: "PercentOfChildrenSum"
+                        children:
+                        -   class: "UIControl"
+                            name: "Rating"
+                            input: false
+                            classes: "t-headline bold color=white-wild-sand-text not-localize"
+                            components:
+                                UITextComponent: {}
+                                Anchor:
+                                    hCenterAnchorEnabled: true
+                                SizePolicy:
+                                    horizontalPolicy: "PercentOfContent"
+                                    verticalPolicy: "PercentOfContent"
+                                StyleSheet:
+                                    styles: "~res:/UI/Screens3/Font.style.yaml"
+                            bindings:
+                            - ["UITextComponent.text", "when currentRating > 0 -> str1000Separated(currentRating), localize(\"ratingBattles/calibration/ratingPlaceholder\")"]
+                        -   class: "UIControl"
+                            name: "Description"
+                            input: false
+                            classes: "t-body regular color=white-wild-sand-50-text"
+                            components:
+                                UITextComponent:
+                                    text: "ratingBattles/Brief/CurrentRating"
+                                    multiline: "MULTILINE_ENABLED"
+                                Anchor:
+                                    hCenterAnchorEnabled: true
+                                SizePolicy:
+                                    horizontalPolicy: "Formula"
+                                    horizontalFormula: "min(parentRest, content)"
+                                    verticalPolicy: "PercentOfContent"
+                                StyleSheet:
+                                    styles: "~res:/UI/Screens3/Font.style.yaml"
+        -   class: "UIControl"
+            name: "Spacer_1"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 40.000000
+        -   class: "UIControl"
+            name: "Battles"
+            position: [0.000000, 296.000000]
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                LinearLayout:
+                    orientation: "TopDown"
+                    spacing: 16.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfChildrenSum"
+            children:
+            -   class: "UIControl"
+                name: "Description"
+                input: false
+                classes: "t-body regular color=white-wild-sand-50-text"
+                components:
+                    UITextComponent:
+                        text: "ratingBattles/Brief/BattlesPerTier"
+                        multiline: "MULTILINE_ENABLED"
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml"
+            -   class: "UIControl"
+                name: "Data"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                    LinearLayout: {}
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfMaxChild"
+                children:
+                -   class: "UIControl"
+                    name: "Wins"
+                    input: false
+                    components:
+                        LinearLayout:
+                            orientation: "TopDown"
+                            spacing: 8.000000
+                        SizePolicy:
+                            horizontalPolicy: "FixedSize"
+                            horizontalValue: 120.000000
+                            verticalPolicy: "PercentOfChildrenSum"
+                    children:
+                    -   class: "UIControl"
+                        name: "WinsIcon"
+                        size: [32.000000, 32.000000]
+                        input: false
+                        components:
+                            UITextureComponent:
+                                spritePath: "~res:/Gfx/UI/ProfileScreen/battle_type.psd"
+                                drawType: "DRAW_ALIGNED"
+                            Anchor:
+                                hCenterAnchorEnabled: true
+                            SizePolicy:
+                                horizontalPolicy: "FixedSize"
+                                horizontalValue: 88.000000
+                                verticalPolicy: "FixedSize"
+                                verticalValue: 88.000000
+                    -   class: "UIControl"
+                        name: "Description"
+                        position: [0.500000, 88.000000]
+                        size: [119.000000, 60.000000]
+                        components:
+                            LinearLayout:
+                                orientation: "TopDown"
+                                spacing: 4.000000
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                verticalPolicy: "PercentOfChildrenSum"
+                        children:
+                        -   class: "UIControl"
+                            name: "Value"
+                            input: false
+                            classes: "t-headline bold color=white-wild-sand-text not-localize"
+                            components:
+                                UITextComponent:
+                                    align: ["LEFT", "VCENTER"]
+                                Anchor:
+                                    hCenterAnchorEnabled: true
+                                SizePolicy:
+                                    horizontalPolicy: "PercentOfContent"
+                                    verticalPolicy: "PercentOfContent"
+                                StyleSheet:
+                                    styles: "~res:/UI/Screens3/Font.style.yaml"
+                            bindings:
+                            - ["UITextComponent.text", "str1000Separated(model.winsCount)"]
+                        -   class: "UIControl"
+                            name: "Description"
+                            position: [0.000000, 20.000000]
+                            input: false
+                            classes: "t-body regular color=white-wild-sand-50-text"
+                            components:
+                                UITextComponent:
+                                    text: "ratingBattles/Brief/Victories"
+                                Anchor:
+                                    hCenterAnchorEnabled: true
+                                SizePolicy:
+                                    horizontalPolicy: "Formula"
+                                    horizontalFormula: "min(parentRest, content)"
+                                    verticalPolicy: "PercentOfContent"
+                                StyleSheet:
+                                    styles: "~res:/UI/Screens3/Font.style.yaml"
+                -   class: "UIControl"
+                    name: "Spacer"
+                    input: false
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "Formula"
+                            horizontalFormula: "when parent < 1040 -> 16, 24"
+                            verticalPolicy: "PercentOfParent"
+                -   class: "UIControl"
+                    name: "BattlesPerLevel"
+                    input: false
+                    components:
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        LinearLayout:
+                            spacing: 16.000000
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfMaxChild"
+                        UIRepeatComponent:
+                            control: "~res:/UI/Screens3/Lobby/Profile/Common/RatingHistogram.yaml"
+                            dataContainer: "model.ratingInfoPerLevels"
+                            args:
+                                "level": "_item.level"
+                                "delta": "_item.battlesCount"
+                                "percent": "_item.battlesPercentFromMax"
+                                "style": "eRatingHistogramStyle.NEUTRAL"
+                            elementNameExpression: "str(_item.level)"
+                -   class: "UIControl"
+                    name: "Spacer_1"
+                    input: false
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "Formula"
+                            horizontalFormula: "when parent < 1040 -> 16, 24"
+                            verticalPolicy: "PercentOfParent"
+                -   class: "UIControl"
+                    name: "Battles"
+                    input: false
+                    components:
+                        LinearLayout:
+                            orientation: "TopDown"
+                            spacing: 8.000000
+                        SizePolicy:
+                            horizontalPolicy: "FixedSize"
+                            horizontalValue: 120.000000
+                            verticalPolicy: "PercentOfChildrenSum"
+                    children:
+                    -   class: "UIControl"
+                        name: "Icon"
+                        input: false
+                        components:
+                            UITextureComponent:
+                                spritePath: "~res:/Gfx/Shared/icons/icon_game-mode_rating_colored"
+                            Anchor:
+                                hCenterAnchorEnabled: true
+                            SizePolicy:
+                                horizontalPolicy: "FixedSize"
+                                horizontalValue: 88.000000
+                                verticalPolicy: "FixedSize"
+                                verticalValue: 88.000000
+                    -   class: "UIControl"
+                        name: "Description"
+                        position: [0.500000, 88.000000]
+                        size: [119.000000, 60.000000]
+                        components:
+                            LinearLayout:
+                                orientation: "TopDown"
+                                spacing: 4.000000
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                verticalPolicy: "PercentOfChildrenSum"
+                        children:
+                        -   class: "UIControl"
+                            name: "Value"
+                            input: false
+                            classes: "t-headline bold color=white-wild-sand-text not-localize"
+                            components:
+                                UITextComponent:
+                                    align: ["LEFT", "VCENTER"]
+                                Anchor:
+                                    hCenterAnchorEnabled: true
+                                SizePolicy:
+                                    horizontalPolicy: "PercentOfContent"
+                                    verticalPolicy: "PercentOfContent"
+                                StyleSheet:
+                                    styles: "~res:/UI/Screens3/Font.style.yaml"
+                            bindings:
+                            - ["UITextComponent.text", "str1000Separated(model.battlesCount)"]
+                        -   class: "UIControl"
+                            name: "Description"
+                            position: [0.000000, 20.000000]
+                            input: false
+                            classes: "t-body regular color=white-wild-sand-50-text"
+                            components:
+                                UITextComponent:
+                                    text: "ratingBattles/Brief/Battles"
+                                Anchor:
+                                    hCenterAnchorEnabled: true
+                                SizePolicy:
+                                    horizontalPolicy: "Formula"
+                                    horizontalFormula: "min(parentRest, content)"
+                                    verticalPolicy: "PercentOfContent"
+                                StyleSheet:
+                                    styles: "~res:/UI/Screens3/Font.style.yaml"
+    -   class: "UIControl"
+        name: "FavouriteTanks"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            LinearLayout:
+                orientation: "TopDown"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfChildrenSum"
+        bindings:
+        - ["visible", "not isNoRating"]
+        children:
+        -   prototype: "HorizontalDividerWithCaption/HorizontalDividerWithCaption"
+            name: "HorizontalDividerWithCaption"
+            components:
+                UIDataParamsComponent:
+                    args:
+                        "text": "localize(\"ratingBattles/FavouriteTanks/Subheader\")"
+        -   class: "UIControl"
+            name: "Spacer"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 16.000000
+        -   class: "UIControl"
+            name: "Description"
+            position: [0.000000, 16.000000]
+            size: [325.000000, 60.000000]
+            input: false
+            classes: "t-body regular color=white-wild-sand-50-text"
+            components:
+                UITextComponent:
+                    text: "ratingBattles/FavouriteTanksHint"
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                    multiline: "MULTILINE_ENABLED"
+                    align: ["HCENTER", "VCENTER"]
+                Anchor:
+                    hCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    horizontalValue: 100.000000
+                    horizontalMax: 380.000000
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "Spacer_1"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 24.000000
+        -   class: "UIControl"
+            name: "Tanks"
+            position: [0.000000, 76.000000]
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                LinearLayout:
+                    spacing: 16.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIRepeatComponent:
+                    control: "~res:/UI/Screens3/Lobby/Profile/Common/FavoriteTank.yaml"
+                    dataContainer: "model.ratingInfoPerLevels"
+                    args:
+                        "level": "_item.level"
+                        "model": "_item.favoriteVehicle"
+                    elementNameExpression: "str(_item.level)"
+    -   class: "UIControl"
+        name: "BottomSpacing"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "FixedSize"
+                verticalValue: 32.000000

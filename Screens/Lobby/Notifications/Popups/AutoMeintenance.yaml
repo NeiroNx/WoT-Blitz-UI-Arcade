@@ -1,0 +1,22 @@
+Header:
+    version: 121
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/Notifications/SystemNotificationPrototype.yaml"
+Controls:
+-   prototype: "SystemNotificationPrototype/Notification"
+    customClass: "UIAutoMeintenanceNotification"
+    name: "AutoMeintenance"
+    children:
+    -   path: "NotificationItem/Content/Status/Icon"
+        components:
+            Background:
+                sprite: "~res:/Gfx/Lobby/icons/icon_attention_s"
+    -   path: "NotificationItem/Content/Status/Result"
+        components:
+            UITextComponent:
+                text: "resourcesSpendingProhibited/Notification/Gold/ResupplyUnavailable"
+                multiline: "MULTILINE_ENABLED"
+                useRtlAlign: "USE_BY_SYSTEM"
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true

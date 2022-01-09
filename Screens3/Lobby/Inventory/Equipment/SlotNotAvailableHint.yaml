@@ -1,0 +1,30 @@
+Header:
+    version: "77"
+ImportedPackages:
+- "~res:/UI/Screens3/Common/PopupMenuWithRichText.yaml"
+Controls:
+-   class: "UIControl"
+    name: "SlotNotAvailableHint"
+    size: [272.000000, 112.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["int", "slotIndex", "0", "1"]
+            - ["int", "level", "0", "4"]
+    children:
+    -   prototype: "PopupMenuWithRichText/Slave"
+        name: "Slave"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "buttonVisible": "false"
+                    "isAlignLeft": "true"
+                    "title": "\"\""
+                    "text": "localize(\"#hangar_tutorial:hangar/SlotUnavailableForLevel/hint\", { level = level; })"
+                    "colorClass": "\"color=white-wild-sand-text\""
+                    "slaveAlign": "ePositionAlign.Right"
+                    "masterId": "\"LOCKED_SLOT\" + str(slotIndex)"

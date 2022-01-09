@@ -1,0 +1,14 @@
+Header:
+    version: 123
+Prototypes:
+-   class: "UIControl"
+    name: "TankMarker"
+    size: [1.000000, 1.000000]
+    input: false
+    components:
+        UIAttachLayoutMasterComponent: {}
+        UIDataParamsComponent:
+            params:
+            - ["string", "attachId", "\"\"", "\"\""]
+    bindings:
+    - ["UIAttachLayoutMasterComponent.attachId", "attachId"]

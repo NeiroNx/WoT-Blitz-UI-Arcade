@@ -1,0 +1,48 @@
+action AnimateDigit
+{
+  if (initialized)
+  {
+    Event("Animate", arg1=false);
+  }
+  else
+  {
+    ChangeData(animationRequested, true);
+  }
+}
+
+action Animate(bool stop)
+{
+  if (not stop)
+  {
+    if (increments > 0)
+    {
+      if (needRoundCompletion)
+      {
+        Move("./DigitSequence", y=-(digitHeight * 10.0), time=startTime);
+        Move("./DigitSequence", y=0.0);
+      }
+
+      repeat (fullRounds)
+      {
+        Move("./DigitSequence", y=-(digitHeight * 10.0), time=roundTime);
+        Move("./DigitSequence", y=0.0);
+      }
+
+      if (targetDigit != 0)
+      {
+        Move("./DigitSequence", y=-targetDigit * digitHeight, time=finishTime);
+      }
+    }
+    Event("DIGIT_ANIMATION_FINISHED");
+  }
+}
+
+action SetInitialDigit()
+{
+  Move("./DigitSequence", y=-(initialDigit * digitHeight));
+  ChangeData(initialized, true);
+  if (animationRequested)
+  {
+    Event("Animate", arg1=false);
+  }
+}

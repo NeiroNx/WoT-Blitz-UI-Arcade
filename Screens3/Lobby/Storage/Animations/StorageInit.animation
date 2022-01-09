@@ -1,0 +1,8 @@
+animation Init(bool replacing)
+{
+	ChangeData(model.isControlInitialized, true);
+	if (model.startCombineEffect)
+	{
+		Event("StartCombineAnimation");	
+	}
+}

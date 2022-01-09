@@ -1,0 +1,84 @@
+Header:
+    version: "24"
+ImportedPackages:
+- "~res:/UI/Styles/Clans/ClansStyles.yaml"
+- "~res:/UI/Screens/Fonts.yaml"
+StyleSheets:
+-   selector: ".name-with-tag #spacer"
+    properties:
+        visible: false
+Prototypes:
+-   class: "UIControl"
+    customClass: "UIPlayerNameWithTag"
+    name: "PlayerNameWithTag"
+    size: [100.000000, 26.000000]
+    noInput: true
+    classes: "name-with-tag"
+    components:
+        LinearLayout: {}
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+        Background: {}
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Common/PlayerNameWithTag.yaml"
+    children:
+    -   class: "UIControl"
+        name: "spacer"
+        noInput: true
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+    -   class: "UIStaticText"
+        name: "name"
+        size: [58.000000, 26.000000]
+        classes: "header4 color=text-color-white"
+        components:
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "min(parentRest, content)"
+            Anchor:
+                vCenterAnchorEnabled: true
+            UITextComponent:
+                text: "PlayerName"
+                colorInheritType: "COLOR_MULTIPLY_ALPHA_ONLY"
+                fitting: "FITTING_POINTS"
+                align: ["LEFT", "VCENTER"]
+    -   class: "UIStaticText"
+        name: "tag"
+        size: [42.000000, 26.000000]
+        classes: "header4 clan-tag"
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+            Anchor:
+                vCenterAnchorEnabled: true
+            UITextComponent:
+                text: "[TAG]"
+                colorInheritType: "COLOR_MULTIPLY_ALPHA_ONLY"
+                fitting: "FITTING_NONE"
+                align: ["LEFT", "VCENTER"]
+-   prototype: "PlayerNameWithTag"
+    name: "PlayerNameWithTagHeader1"
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "PercentOfMaxChild"
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Common/PlayerNameWithTag.yaml"
+    children:
+    -   path: "name"
+        classes: "header1"
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                horizontalMax: 200.000000
+                verticalPolicy: "PercentOfContent"
+            UITextComponent:
+                text: "PlayerName1234567890ABCDEF"
+    -   path: "tag"
+        classes: "header1 clan-tag"
+        components:
+            SizePolicy:
+                verticalPolicy: "PercentOfContent"

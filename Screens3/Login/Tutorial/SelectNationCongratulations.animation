@@ -1,0 +1,66 @@
+animation _INIT(bool arg)
+{
+	if (showPrompts)
+	{
+		DirectEvent("NextPromptAnimation", ".");
+	}
+
+	
+
+	// init
+	ChangeData(headerOffsetY, -60);
+	ChangeData(dlcOffsetY, -60);
+	Opacity("**/Header", 0, 0);
+	Opacity("**/Dlc", 0, 0);
+	Scale("**/FX", 0, 0, 0);
+	Scale("**/Image", 0, 0, 0);
+	Scale("**/Flag", 0, 0, 0);
+
+	Wait(0.5);
+
+	// tank and fx animation
+
+	parallel
+	{
+		sequence
+		{
+			PlaySound("play_tut_2021_ui_hang_achiev_fin_tutor");
+			parallel
+			{
+				sequence
+				{
+					Scale("**/Image", 1.1, 1.1, 0.5, SINE_OUT);
+					Scale("**/Image", 1, 1, 0.2, SINE_IN_SINE_OUT);
+				}
+				sequence
+				{
+					Scale("**/Flag", 1.1, 1.1, 0.5, SINE_OUT);
+					Scale("**/Flag", 1, 1, 0.2, SINE_IN_SINE_OUT);
+				}
+			}
+		}
+		sequence
+		{
+			Wait(0.1);
+			parallel
+			{
+				Scale("**/FX", 3.15, 3.15, 0.7, SINE_OUT);
+				ChangeProperty("**/FX","Anchor","vCenterAnchor",20, 0.7);
+			}
+		}
+	}
+
+	// header animation
+	parallel
+	{
+		ChangeData(headerOffsetY, 0, 0.3, EASE_OUT);
+		Opacity("**/Header", 1, 0.3);
+	}
+
+	// bottom block animation
+	parallel
+	{
+		ChangeData(dlcOffsetY, 0, 0.3, EASE_OUT);
+		Opacity("**/Dlc", 1, 0.3);
+	}
+}

@@ -1,0 +1,67 @@
+Header:
+    version: 123
+ImportedPackages:
+- "~res:/UI/Screens3/Battle/ModernTutorialHints/TutorialHintBasic.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "NSMovementHint"
+    size: [1280.000000, 720.000000]
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens3/Battle/ModernTutorialHints/FadeIn.animation;Disappear,~res:/UI/Screens3/Battle/ModernTutorialHints/FadeOut.animation"
+        UIOpacityComponent: {}
+        Anchor:
+            hCenterAnchorEnabled: true
+            vCenterAnchorEnabled: true
+        LinearLayout:
+            enabled: false
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["eGamepadTip", "gamepadTip", "eGamepadTip.ForwardMovement", "eGamepadTip.ForwardMovement"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["string", "hintKey", "when gamepadTip == eGamepadTip.Camera -> \"ModernTutorial/NintendoCameraHint\", gamepadTip == eGamepadTip.ForwardMovement -> \"ModernTutorial/NintendoMovementHint\", gamepadTip == eGamepadTip.Shoot -> \"ModernTutorial/NintendoShootHint\", \"\""]
+            - ["eNintendoSwitchControls", "hintControl", "when gamepadTip == eGamepadTip.Camera -> eNintendoSwitchControls.RightThumbstick, gamepadTip == eGamepadTip.Shoot -> eNintendoSwitchControls.RightTrigger, gamepadTip == eGamepadTip.ForwardMovement -> eNintendoSwitchControls.LeftThumbstick, eNintendoSwitchControls.LeftThumbstick"]
+            - ["ePositionAlign", "hintAlign", "when gamepadTip == eGamepadTip.Camera or gamepadTip == eGamepadTip.Shoot -> ePositionAlign.Right, gamepadTip == eGamepadTip.ForwardMovement -> ePositionAlign.Left, ePositionAlign.Left"]
+            - ["vector<eNintendoSwitchControls>", "enabled", "[ eNintendoSwitchControls.A; eNintendoSwitchControls.B; eNintendoSwitchControls.X; eNintendoSwitchControls.Y; eNintendoSwitchControls.Left; eNintendoSwitchControls.Right; eNintendoSwitchControls.Up; eNintendoSwitchControls.Down; eNintendoSwitchControls.LeftThumbstick; eNintendoSwitchControls.LeftThumbstickAxis; eNintendoSwitchControls.LeftShoulder; eNintendoSwitchControls.LeftTrigger; eNintendoSwitchControls.RightThumbstick; eNintendoSwitchControls.RightThumbstickAxis; eNintendoSwitchControls.RightShoulder; eNintendoSwitchControls.RightTrigger; ]"]
+            - ["vector<eNintendoSwitchControls>", "cameraControls", "[ eNintendoSwitchControls.RightThumbstick; ]"]
+            - ["vector<eNintendoSwitchControls>", "movementControls", "[ eNintendoSwitchControls.LeftThumbstick; ]"]
+            - ["vector<eNintendoSwitchControls>", "shootControls", "[ eNintendoSwitchControls.RightTrigger; ]"]
+            - ["vector<eSideType>", "arrowSidesCameraAndMovement", "[ eSideType.Right; eSideType.Left; eSideType.Top; eSideType.Bottom; ]"]
+            - ["vector<eSideType>", "arrowSidesBottom", "[ eSideType.Bottom; ]"]
+            writeAllowed: false
+    children:
+    -   class: "UIControl"
+        name: "Scheme"
+        position: [0.000000, 0.000000]
+        input: false
+        components:
+            UIOpacityComponent: {}
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Common/NintendoSwitch/Scheme/NintendoSwitchScheme.yaml"
+                args:
+                    "focused": "when gamepadTip == eGamepadTip.Camera -> cameraControls, gamepadTip == eGamepadTip.ForwardMovement -> movementControls, gamepadTip == eGamepadTip.Shoot -> shootControls, cameraControls"
+                    "enabled": "enabled"
+                    "arrowSides": "when gamepadTip == eGamepadTip.Camera or gamepadTip == eGamepadTip.ForwardMovement -> arrowSidesCameraAndMovement, gamepadTip == eGamepadTip.Shoot -> arrowSidesBottom, arrowSidesCameraAndMovement"
+    -   prototype: "TutorialHintBasic/HintContainer"
+        name: "HintContainer"
+        classes: "ArrowRight"
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                hCenterAnchor: -240.000000
+                vCenterAnchorEnabled: true
+                vCenterAnchor: -45.000000
+            UIDataParamsComponent:
+                args:
+                    "text": "localize(\"ModernTutorial/NintendoMovementHint\", { \"button\" = \"<switchButtonLeftAxis/>\"; })"

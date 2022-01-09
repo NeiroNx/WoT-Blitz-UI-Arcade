@@ -1,0 +1,4 @@
+animation Newcomers2020TreeOnInit
+{
+    Event("NEWCOMERS2020_INITIALIZED");
+}

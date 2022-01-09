@@ -1,0 +1,237 @@
+Header:
+    version: "96"
+ImportedPackages:
+- "~res:/UI/Screens/Common/StyledInfoButton.yaml"
+Controls:
+-   class: "UIControl"
+    name: "StoryTreeHeader"
+    size: [960.000000, 0.000000]
+    input: false
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfFirstChild"
+        UIDataParamsComponent:
+            params:
+            - ["Story", "story", "null", "{ }"]
+            - ["StatsDataModel", "statsData", "null", "{ }"]
+            - ["int64", "serverTime", "0L", "1554299463L"]
+            - ["bool", "isHangarPreviousScreen", "false", "true"]
+            - ["bool", "neteaseAvailable", "false", "false"]
+            events:
+            - "WEB_INTERACTION_BUTTON_PRESSED"
+            - "HEADER_DETAILED_INFO_BUTTON_PRESSED"
+            - "BACK_EVENT"
+        UIDataLocalsComponent:
+            locals:
+            - ["string", "descriptionHeader", "when story.stage.type == eStageType.PROCESS -> story.stageResources.headerDescription.processHeader, story.stage.type == eStageType.BUY -> story.stageResources.headerDescription.buyHeader, \"\""]
+            - ["string", "descriptionHint", "when story.stage.type == eStageType.PROCESS -> story.stageResources.headerDescription.processHint, story.stage.type == eStageType.BUY -> story.stageResources.headerDescription.buyHint, \"\""]
+            - ["bool", "isCaptionsVisible", "not empty(descriptionHeader) or not empty(descriptionHint) or (story.stage.type == eStageType.BUY or story.stage.type == eStageType.PROCESS)"]
+            - ["bool", "showCaption", "isCaptionsVisible and (story.stageResources.headerDescription.isRequired or story.stageResources.leaderboard.isRequired or story.stageResources.subprogressQuest.isRequired)"]
+            - ["bool", "isDescriptionContainerVisible", "not empty(descriptionHeader) or not empty(descriptionHint) or (story.stage.type == eStageType.BUY and not empty(story.stageResources.headerDescription.buy))"]
+            - ["bool", "isStoryDescriptionVisible", "isDescriptionContainerVisible or (story.stageResources.webInteraction.isRequired and not neteaseAvailable) or story.stageResources.detailedInfo.isRequired"]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            LinearLayout:
+                orientation: "TopDown"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfChildrenSum"
+        children:
+        -   class: "UIControl"
+            name: "Header"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfChildrenSum"
+                UIChildComponent0:
+                    childType: "kOldExpression"
+                    control: "\"~res:/UI/Screens/Lobby/Story/Legacy/StoryHeader.yaml\""
+                    args:
+                        "story": "story"
+                        "statsData": "statsData"
+                        "serverTime": "serverTime"
+                        "isHangarPreviousScreen": "isHangarPreviousScreen"
+                    eventActions:
+                    - ["BACK_EVENT", "BACK_EVENT", "_event"]
+        -   class: "UIControl"
+            name: "StoryContent"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   class: "UIControl"
+                name: "Bg"
+                input: false
+                classes: "black-bg"
+                components:
+                    Background: {}
+                    UIOpacityComponent:
+                        opacity: 0.400000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+            -   class: "UIControl"
+                name: "Captions"
+                input: false
+                components:
+                    Anchor:
+                        leftAnchorEnabled: true
+                        leftAnchor: 20.000000
+                        rightAnchorEnabled: true
+                        rightAnchor: 20.000000
+                        vCenterAnchorEnabled: true
+                    LinearLayout:
+                        orientation: "TopDown"
+                        padding: "8"
+                        spacing: 8.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfChildrenSum"
+                    UIAnchorSafeAreaComponent:
+                        leftSafeInset: "INSET"
+                        rightSafeInset: "INSET"
+                bindings:
+                - ["visible", "showCaption"]
+                children:
+                -   class: "UIControl"
+                    name: "StoryDescription"
+                    input: false
+                    components:
+                        LinearLayout:
+                            spacing: 20.000000
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfMaxChild"
+                    bindings:
+                    - ["visible", "isStoryDescriptionVisible"]
+                    children:
+                    -   class: "UIControl"
+                        name: "DescriptionContainer"
+                        input: false
+                        components:
+                            Anchor:
+                                vCenterAnchorEnabled: true
+                            LinearLayout:
+                                orientation: "TopDown"
+                                spacing: 10.000000
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                verticalPolicy: "PercentOfChildrenSum"
+                            StyleSheet:
+                                styles: "~res:/UI/Screens/Fonts.yaml;~res:/UI/Screens/FontsColors.yaml"
+                        bindings:
+                        - ["visible", "isDescriptionContainerVisible"]
+                        children:
+                        -   class: "UIControl"
+                            name: "DescriptionHeader"
+                            input: false
+                            classes: "header1 text-color-white"
+                            components:
+                                UITextComponent:
+                                    colorInheritType: "COLOR_IGNORE_PARENT"
+                                    multiline: "MULTILINE_ENABLED"
+                                    align: ["LEFT", "VCENTER"]
+                                Anchor:
+                                    leftAnchorEnabled: true
+                                SizePolicy:
+                                    horizontalPolicy: "PercentOfParent"
+                                    verticalPolicy: "PercentOfContent"
+                            bindings:
+                            - ["visible", "not empty(descriptionHeader)"]
+                            - ["UITextComponent.text", "localize(descriptionHeader)"]
+                        -   class: "UIControl"
+                            name: "DescriptionHint"
+                            input: false
+                            classes: "text1 text-color-blue"
+                            components:
+                                UITextComponent:
+                                    colorInheritType: "COLOR_IGNORE_PARENT"
+                                    multiline: "MULTILINE_ENABLED"
+                                    align: ["LEFT", "VCENTER"]
+                                Anchor:
+                                    leftAnchorEnabled: true
+                                SizePolicy:
+                                    horizontalPolicy: "PercentOfParent"
+                                    verticalPolicy: "PercentOfContent"
+                            bindings:
+                            - ["visible", "not empty(descriptionHint)"]
+                            - ["UITextComponent.text", "localize(descriptionHint)"]
+                        -   class: "UIControl"
+                            name: "BuyText"
+                            input: false
+                            classes: "text1 text-color-red"
+                            components:
+                                UITextComponent:
+                                    colorInheritType: "COLOR_IGNORE_PARENT"
+                                    multiline: "MULTILINE_ENABLED"
+                                    align: ["LEFT", "VCENTER"]
+                                Anchor:
+                                    leftAnchorEnabled: true
+                                SizePolicy:
+                                    horizontalPolicy: "PercentOfParent"
+                                    verticalPolicy: "PercentOfContent"
+                            bindings:
+                            - ["visible", "story.stage.type == eStageType.BUY and not empty(story.stageResources.headerDescription.buy)"]
+                            - ["UITextComponent.text", "localize(story.stageResources.headerDescription.buy)"]
+                    -   class: "UIControl"
+                        name: "WebInteraction"
+                        input: false
+                        components:
+                            Anchor:
+                                vCenterAnchorEnabled: true
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfFirstChild"
+                                verticalPolicy: "PercentOfFirstChild"
+                            UIChildComponent0:
+                                childType: "kOldExpression"
+                                control: "\"~res:/UI/Screens/Lobby/Story/Legacy/Utils/WebInteractionButton.yaml\""
+                                args:
+                                    "web": "story.stageResources.webInteraction"
+                                    "icon": "\"~res:/Gfx/UI/Story/Web_btn\""
+                                eventActions:
+                                - ["ON_BUTTON_PRESSED", "WEB_INTERACTION_BUTTON_PRESSED", ""]
+                        bindings:
+                        - ["visible", "story.stageResources.webInteraction.isRequired"]
+                    -   prototype: "StyledInfoButton/StyledInfoButton"
+                        name: "InfoButton"
+                        classes: "button button-color-gray button-open-sound"
+                        components:
+                            Anchor:
+                                vCenterAnchorEnabled: true
+                            UIInputEventComponent:
+                                onTouchUpInside: "HEADER_DETAILED_INFO_BUTTON_PRESSED"
+                            StyleSheet:
+                                inheritsStylesFromParent: false
+                                styles: "~res:/UI/Styles/ButtonStyle.yaml;~res:/UI/Styles/ButtonSoundStyles.yaml"
+                        bindings:
+                        - ["visible", "story.stageResources.detailedInfo.isRequired"]
+                -   class: "UIControl"
+                    name: "StoryProgress"
+                    input: false
+                    components:
+                        Anchor:
+                            leftAnchorEnabled: true
+                        LinearLayout:
+                            spacing: 28.000000
+                            useRtl: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfChildrenSum"
+                            verticalPolicy: "PercentOfMaxChild"
+                        UIRepeatComponent:
+                            control: "~res:/UI/Screens/Lobby/Story/Legacy/Utils/ProgressItem.yaml"
+                            dataContainer: "story.stageResources.headerDescription.progressItems"
+                            args:
+                                "progressItem": "_item"
+                    bindings:
+                    - ["visible", "story.stage.type == eStageType.PROCESS and not story.stageResources.headerDescription.progressItems.Empty()"]

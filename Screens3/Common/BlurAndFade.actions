@@ -1,0 +1,17 @@
+action START_OVERLAY_OPENING
+{
+  parallel 
+  {
+      Opacity("**/Blur", 1, time=overlayOpeningTime, interpolation=EASE_OUT);
+      ChangeProperty("**/Fade", "UIOpacityComponent", "opacity", 0.35, time=overlayOpeningTime, interpolation=EASE_OUT);
+  } 
+}
+
+action START_OVERLAY_CLOSING
+{
+  parallel 
+  {
+    Opacity("**/Blur", 0.0, time=overlayClosingTime, interpolation=EASE_IN);
+    ChangeProperty("**/Fade", "UIOpacityComponent", "opacity", 0, time=overlayClosingTime, interpolation=EASE_IN); 
+  }
+}

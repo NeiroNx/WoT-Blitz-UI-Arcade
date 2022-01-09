@@ -1,0 +1,68 @@
+action SwipeOffset(int aLeftIndex, int aRightIndex, float aLeftPosition, float aRightPosition, float aLeftProportion, float aRightProportion, bool isInertion)
+{
+    ChangeData(leftIndex, aLeftIndex);
+    ChangeData(rightIndex, aRightIndex);
+    ChangeData(leftPosition, aLeftPosition);
+    ChangeData(rightPosition, aRightPosition);
+    ChangeData(leftProportion, aLeftProportion);
+    ChangeData(rightProportion, aRightProportion);
+}
+
+action OnPageCountChanged()
+{
+	ChangeData(currentIndex, 0);
+    ChangeData(leftIndex, 0);
+    ChangeData(rightIndex, 0);
+    ChangeData(leftPosition, 0);
+    ChangeData(rightPosition, 0);
+    ChangeData(leftProportion, 1.0);
+    ChangeData(rightProportion, 1.0);
+}
+
+action PageChanged(int pageIndex)
+{
+    PlaySound(sound="GUI/buttons/drag");
+    ChangeData(currentIndex, pageIndex);
+    ChangeData(pageChanging, false);
+}
+
+action PageChanging()
+{
+    ChangeData(pageChanging, true);
+}
+
+action SwipeStarted()
+{
+    ChangeData(swipeStarted, true);
+    ChangeData(lastPaginatorProgress, paginatorProgress);
+}
+
+action SwipeCanceled()
+{
+    ChangeData(swipeStarted, false);
+    DirectEvent("START_SLIDE_SHOW", ".", lastPaginatorProgress);
+}
+
+action SwipeFinished()
+{
+    ChangeData(swipeStarted, false);
+}
+
+action START_SLIDE_SHOW(float startProgress)
+{
+    ChangeData(paginatorProgress, startProgress);
+    ChangeData(paginatorProgress, 0.0, slideShowTime*startProgress);
+    if (leftPosition == 0)
+    {
+     DirectEvent("GO_TO_NEXT", ".");
+    }
+}
+
+action WidgetClicked()
+{
+    if (abs(leftPosition) <= tapOffsetThreshold)
+    {
+        PlaySound(sound="GUI/buttons/open");
+        Event("ON_SHOW_QUEST_INFO", ".", currentIndex);
+    }
+}

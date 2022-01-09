@@ -1,0 +1,320 @@
+Header:
+    version: "102"
+Prototypes:
+-   class: "UIControl"
+    name: "StepLinearDecorator"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfLastChild"
+            verticalPolicy: "PercentOfLastChild"
+        UIDataParamsComponent:
+            params:
+            - ["control", "content", "null", "null"]
+            - ["eButtonType", "type", "eButtonType.OPTIONAL_LIGHT", "eButtonType.OPTIONAL_LIGHT"]
+            - ["bool", "enabled", "true", "true"]
+            - ["bool", "isSelected", "false", "false"]
+            - ["float", "offset", "0.000000", "0.000000"]
+            - ["float", "opacity", "0.000000", "0.000000"]
+            events:
+            - "ON_TOUCH_EXITED(float time)"
+            - "ON_TOUCH_ENTERED(float time)"
+            - "ON_TOUCH_DOWN(float time)"
+            - "ON_CLICK_BUTTON"
+        UIDataLocalsComponent:
+            locals:
+            - ["eButtonSound", "sound", "when isSelected -> eButtonSound.OK, eButtonSound.CHOOSE"]
+    bindings:
+    - ["visible", "not isNull(content)"]
+    children:
+    -   class: "UIControl"
+        name: "Top"
+        input: false
+        components:
+            UIOpacityComponent: {}
+            ClipContent: {}
+            Anchor:
+                topAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "FixedSize"
+        bindings:
+        - ["visible", "opacity > 0.000000"]
+        - ["UIOpacityComponent.opacity", "opacity"]
+        - ["Anchor.topAnchor", "-offset"]
+        - ["SizePolicy.verticalValue", "offset"]
+        children:
+        -   class: "UIControl"
+            name: "BgHolder"
+            input: false
+            components:
+                Anchor:
+                    topAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfFirstChild"
+                UIChildComponent0:
+                    childType: "kControl"
+                    control: "Backgrounds"
+    -   class: "UIControl"
+        name: "TopSubstrate"
+        input: false
+        components:
+            UIOpacityComponent: {}
+            ClipContent: {}
+            Anchor:
+                topAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "FixedSize"
+                verticalValue: 0.000000
+        bindings:
+        - ["visible", "opacity > 0.000000"]
+        - ["UIOpacityComponent.opacity", "opacity"]
+        children:
+        -   class: "UIControl"
+            name: "BgHolder"
+            input: false
+            components:
+                Anchor:
+                    topAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfFirstChild"
+                UIChildComponent0:
+                    childType: "kControl"
+                    control: "Backgrounds"
+            bindings:
+            - ["Anchor.topAnchor", "-offset"]
+    -   class: "UIControl"
+        name: "Bottom"
+        input: false
+        components:
+            UIOpacityComponent: {}
+            ClipContent: {}
+            Anchor:
+                bottomAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "FixedSize"
+        bindings:
+        - ["visible", "opacity > 0.000000"]
+        - ["Anchor.bottomAnchor", "-offset"]
+        - ["SizePolicy.verticalValue", "offset"]
+        children:
+        -   class: "UIControl"
+            name: "BgHolder"
+            input: false
+            components:
+                Anchor:
+                    bottomAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfFirstChild"
+                UIChildComponent0:
+                    childType: "kControl"
+                    control: "Backgrounds"
+    -   class: "UIControl"
+        name: "BottomSubstrate"
+        input: false
+        components:
+            UIOpacityComponent: {}
+            ClipContent: {}
+            Anchor:
+                bottomAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "FixedSize"
+                verticalValue: 0.000000
+        bindings:
+        - ["visible", "opacity > 0.000000"]
+        - ["UIOpacityComponent.opacity", "opacity"]
+        children:
+        -   class: "UIControl"
+            name: "BgHolder"
+            input: false
+            components:
+                Anchor:
+                    bottomAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfFirstChild"
+                UIChildComponent0:
+                    childType: "kControl"
+                    control: "Backgrounds"
+            bindings:
+            - ["Anchor.bottomAnchor", "-offset"]
+    -   class: "UIControl"
+        name: "TapArea"
+        exclusiveInput: true
+        components:
+            UIOpacityComponent: {}
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIInputEventComponent:
+                onTouchDown: "ON_TOUCH_DOWN"
+                onTouchDownData: "0.08"
+                onTouchUpInside: "ON_CLICK_BUTTON"
+                onTouchEntered: "ON_TOUCH_ENTERED"
+                onTouchEnteredData: "0.08"
+                onTouchExited: "ON_TOUCH_EXITED"
+                onTouchExitedData: "0.08"
+            Sound: {}
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Lobby/Common/Button.style.yaml;~res:/UI/Screens3/ButtonSound.style.yaml"
+        bindings:
+        - ["enabled", "enabled"]
+        - ["classes", "\"button button-tap-area \" + str(sound, eButtonSound, \"style\")"]
+        children:
+        -   class: "UIControl"
+            name: "ContentWrapper"
+            pivot: [0.500000, 0.500000]
+            input: false
+            classes: "content-area"
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    rightAnchorEnabled: true
+                    topAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   class: "UIControl"
+                name: "ContentHolder"
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfFirstChild"
+                        verticalPolicy: "PercentOfFirstChild"
+                    UIChildComponent0:
+                        childType: "kControl"
+                        condition: "not isNull(content)"
+                        control: "content"
+            -   class: "UIControl"
+                name: "TopLine"
+                input: false
+                classes: "orange-orange-peel-bg"
+                components:
+                    Background: {}
+                    UIOpacityComponent: {}
+                    Anchor:
+                        topAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 4.000000
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+                bindings:
+                - ["UIOpacityComponent.opacity", "opacity"]
+            -   class: "UIControl"
+                name: "BottomLine"
+                input: false
+                classes: "orange-orange-peel-bg"
+                components:
+                    Background: {}
+                    UIOpacityComponent: {}
+                    Anchor:
+                        bottomAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 4.000000
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+                bindings:
+                - ["UIOpacityComponent.opacity", "opacity"]
+            -   class: "UIControl"
+                name: "Fade"
+                input: false
+                components:
+                    Background:
+                        drawType: "DRAW_STRETCH_BOTH"
+                        sprite: "~res:/Gfx/Lobby/backgrounds/bg_r1"
+                        leftRightStretchCap: 1.000000
+                        topBottomStretchCap: 1.000000
+                    UIOpacityComponent: {}
+                    IgnoreLayout: {}
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/Lobby/Common/Button.style.yaml"
+                bindings:
+                - ["classes", "\"button-fade \" + (when type == eButtonType.OPTIONAL_DARK -> \"black-10-bg\", \"white-wild-sand-10-bg\")"]
+Slots:
+-   class: "UIControl"
+    name: "Backgrounds"
+    size: [150.000000, 144.000000]
+    input: false
+    components:
+        UIOpacityComponent:
+            opacity: 0.300000
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "FixedSize"
+            verticalValue: 144.000000
+    children:
+    -   class: "UIControl"
+        name: "Small"
+        input: false
+        classes: "orange-tango-bg"
+        components:
+            Background:
+                drawType: "DRAW_STRETCH_BOTH"
+                sprite: "~res:/Gfx/UI/ProfileScreen/rating_gradient"
+            Anchor:
+                hCenterAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 32.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+    -   class: "UIControl"
+        name: "Medium"
+        input: false
+        classes: "orange-tango-bg"
+        components:
+            Background:
+                drawType: "DRAW_STRETCH_BOTH"
+                sprite: "~res:/Gfx/UI/ProfileScreen/rating_gradient"
+            Anchor:
+                hCenterAnchorEnabled: true
+                topAnchorEnabled: true
+                topAnchor: 20.000000
+                bottomAnchorEnabled: true
+                bottomAnchor: 20.000000
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 72.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+    -   class: "UIControl"
+        name: "Big"
+        input: false
+        classes: "orange-tango-bg"
+        components:
+            Background:
+                drawType: "DRAW_STRETCH_BOTH"
+                sprite: "~res:/Gfx/UI/ProfileScreen/rating_gradient"
+            Anchor:
+                hCenterAnchorEnabled: true
+                topAnchorEnabled: true
+                topAnchor: 40.000000
+                bottomAnchorEnabled: true
+                bottomAnchor: 40.000000
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 112.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"

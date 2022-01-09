@@ -1,0 +1,16 @@
+animation ShowVideoAdBonus
+{
+    if (canWatchAd)
+    {
+      if (results.skipAdBonusAnimation)
+      {
+        Pivot(".", x=0, time=0);
+      }
+      else
+      {
+        Event("AD_BONUS_ANIMATION_STARTED");
+        Wait(1.5);
+        Pivot(".", x=0, time=0.5, interpolation= EASE_OUT);
+      }
+    }
+}

@@ -1,0 +1,27 @@
+Header:
+    version: "79"
+Prototypes:
+-   class: "UIControl"
+    name: "RichText"
+    size: [389.000000, 32.000000]
+    input: false
+    components:
+        Background: {}
+        RichContent:
+            text: ""
+            baseClasses: "t-caption regular white-wild-sand-70-text"
+        RichContentAliases0:
+            aliases: "t-caption_highlighted,<span class=\"t-caption bold white-wild-sand-text\" />"
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "PercentOfChildrenSum"
+        FlowLayout:
+            hSpacing: 3.000000
+        UIDataSourceComponent0:
+            sourceType: "Reflection"
+            source: "~res:/UI/Examples/Model/Lobby/Common/RichText.model"
+        UIDataSourceComponent1:
+            sourceType: "File"
+            source: "~res:/UI/Screens/Lobby/Common/ViewModel/RichText.model"
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"

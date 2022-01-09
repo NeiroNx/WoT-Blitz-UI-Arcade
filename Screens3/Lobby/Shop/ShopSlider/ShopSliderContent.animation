@@ -1,0 +1,12 @@
+animation Init()
+{
+    Opacity("**/Image", 0.0);
+    Opacity("**/ProductContentNext", 0.0);
+    Opacity("**/ProductContent", 0.0);
+
+    if (firstShow)
+    {
+        Opacity("**/Placeholder", 0.0);
+        ChangeProperty("**/Placeholder", "Anchor", "topAnchor", -100);
+    }
+}

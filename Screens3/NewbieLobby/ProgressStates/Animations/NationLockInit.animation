@@ -1,0 +1,18 @@
+animation SHOW_UNLOCK()
+{
+	Opacity("**/LockIcon", 1.0);
+	Wait(desintegrationPeriod);
+	parallel
+	{
+		StartParticles(path="**/LockDisintegration");
+		Opacity("**/LockIcon", 0.0, 0.8);
+		sequence
+		{
+			Wait(0.7);
+			PlaySound("play_tut_2021_ui_hang_locks_destroy");
+		}
+	}
+	
+	Wait(effectTime);
+    StopParticles(path="**/LockDisintegration");
+}

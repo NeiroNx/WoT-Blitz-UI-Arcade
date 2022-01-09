@@ -1,0 +1,49 @@
+Header:
+    version: 125
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/BigSlot.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "SelectInputTypeDialogContent"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        Anchor:
+            hCenterAnchorEnabled: true
+        LinearLayout:
+            spacing: 32.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "PercentOfMaxChild"
+        UIDataParamsComponent:
+            params:
+            - ["eInputMode", "selectedSlot", "eInputMode.MODE_KEYBOARD_MOUSE", "eInputMode.MODE_KEYBOARD_MOUSE"]
+            events:
+            - "SLOT_SELECTED"
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/Login/Tutorial/SelectInputTypeContent.actions"
+        StyleSheet:
+            styles: "~res:/UI/Screens3/ButtonSound.style.yaml"
+    children:
+    -   prototype: "BigSlot/Slot"
+        name: "KeyboardIcon"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "texture": "\"~res:/Gfx/Lobby/icons/icon_keyboard_l\""
+                    "slotId": "int(eInputMode.MODE_KEYBOARD_MOUSE)"
+                    "selected": "selectedSlot == eInputMode.MODE_KEYBOARD_MOUSE"
+                    "backgroundVisible": "false"
+                eventActions:
+                - ["ON_SLOT_CLICKED", "SLOT_SELECTED", "eInputMode.MODE_KEYBOARD_MOUSE"]
+    -   prototype: "BigSlot/Slot"
+        name: "TouchIcon"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "texture": "\"~res:/Gfx/Lobby/icons/icon_touch_l\""
+                    "slotId": "int(eInputMode.MODE_TOUCHSCREEN)"
+                    "selected": "selectedSlot == eInputMode.MODE_TOUCHSCREEN"
+                    "backgroundVisible": "false"
+                eventActions:
+                - ["ON_SLOT_CLICKED", "SLOT_SELECTED", "eInputMode.MODE_TOUCHSCREEN"]

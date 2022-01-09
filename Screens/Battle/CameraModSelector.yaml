@@ -1,0 +1,169 @@
+Header:
+    version: 125
+ImportedPackages:
+- "~res:/UI/Screens/Battle/HotKey.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "CameraModSelector"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfFirstChild"
+        UIDataParamsComponent:
+            params:
+            - ["bool", "enabled", "true", "true"]
+            - ["string", "hotKeyText", "\"\"", "\"press\""]
+            events:
+            - "CAMERA_STATE_CHANGED(bool isCameraOn)"
+    children:
+    -   class: "UIControl"
+        name: "CameraMod"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            LinearLayout:
+                orientation: "TopDown"
+                padding: "4"
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "FixedSize"
+                verticalValue: 50.000000
+        children:
+        -   class: "UIControl"
+            name: "Bg"
+            size: [32.000000, 32.000000]
+            input: false
+            classes: "black-50-bg"
+            components:
+                Background: {}
+                UIRoundedCornersComponent:
+                    radius: "4"
+                IgnoreLayout: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "Options"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                LinearLayout:
+                    padding: "4"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfParent"
+            children:
+            -   class: "UIControl"
+                name: "FixCamera"
+                size: [32.000000, 32.000000]
+                input: true
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 56.000000
+                        verticalPolicy: "PercentOfParent"
+                    UIInputEventComponent:
+                        onTouchUpInside: "CAMERA_STATE_CHANGED"
+                        onTouchUpInsideData: "false"
+                children:
+                -   class: "UIControl"
+                    name: "Bg"
+                    size: [32.000000, 32.000000]
+                    input: false
+                    classes: "white-wild-sand-15-bg"
+                    components:
+                        Background: {}
+                        UIRoundedCornersComponent:
+                            radius: "4"
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfParent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Color.style.yaml"
+                    bindings:
+                    - ["visible", "not enabled"]
+                -   class: "UIControl"
+                    name: "Icon"
+                    size: [32.000000, 32.000000]
+                    input: false
+                    components:
+                        Background:
+                            drawType: "DRAW_ALIGNED"
+                            sprite: "~res:/Gfx/Battle/icons/replays/icon_camera-fixed"
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfContent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Color.style.yaml"
+                    bindings:
+                    - ["classes", "when not enabled -> \"white-wild-sand-bg\", \"white-wild-sand-50-bg\""]
+            -   class: "UIControl"
+                name: "FreeCamera"
+                size: [32.000000, 32.000000]
+                input: true
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 56.000000
+                        verticalPolicy: "PercentOfParent"
+                    UIInputEventComponent:
+                        onTouchUpInside: "CAMERA_STATE_CHANGED"
+                        onTouchUpInsideData: "true"
+                children:
+                -   class: "UIControl"
+                    name: "Bg"
+                    size: [32.000000, 32.000000]
+                    input: false
+                    classes: "white-wild-sand-15-bg"
+                    components:
+                        Background: {}
+                        UIRoundedCornersComponent:
+                            radius: "4"
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfParent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Color.style.yaml"
+                    bindings:
+                    - ["visible", "enabled"]
+                -   class: "UIControl"
+                    name: "Icon"
+                    size: [32.000000, 32.000000]
+                    input: false
+                    components:
+                        Background:
+                            drawType: "DRAW_ALIGNED"
+                            sprite: "~res:/Gfx/Battle/icons/replays/icon_camera-free"
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfContent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Color.style.yaml"
+                    bindings:
+                    - ["classes", "when enabled -> \"white-wild-sand-bg\", \"white-wild-sand-50-bg\""]
+    -   prototype: "HotKey/HotKey"
+        name: "HotKey"
+        position: [50.000000, 119.000000]
+        components:
+            Background:
+                colorInherit: "COLOR_IGNORE_PARENT"
+            Anchor:
+                hCenterAnchorEnabled: true
+                topAnchorEnabled: true
+                topAnchor: 46.000000
+        children:
+        -   path: "text"
+            components:
+                UITextComponent: {}
+            bindings:
+            - ["UITextComponent.text", "hotKeyText"]

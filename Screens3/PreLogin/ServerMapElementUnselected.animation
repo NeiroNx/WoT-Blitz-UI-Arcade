@@ -1,0 +1,20 @@
+animation Unselect
+{
+	parallel
+	{
+		Scale(path="./PointHolder", time = 0.3, x = 0.375, y = 0.375, interpolation = SINE_IN_SINE_OUT);
+
+		parallel
+		{
+			sequence
+			{
+				Scale(path="./PointHolder/Point", time = 0.4, x = 1.0, y = 1.0, interpolation = SINE_IN_SINE_OUT);
+			}
+			sequence
+			{
+				Rotate(path="./PointHolder/Point", angle = 0, time = 0);
+				Rotate(path="./PointHolder/Point", angle = 90, time = 0.4, interpolation = SINE_IN_SINE_OUT);
+			}
+		}
+	}
+}

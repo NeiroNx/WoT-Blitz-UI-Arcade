@@ -1,0 +1,38 @@
+Header:
+    version: "99"
+Prototypes:
+-   class: "UIControl"
+    name: "ControlHolder"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens3/Common/NintendoSwitch/Scheme/SetFocusedControl.animation"
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfMaxChild"
+        UIAttachLayoutMasterComponent: {}
+        UIDataParamsComponent:
+            params:
+            - ["float", "animationTime", "0.000000", "0.000000"]
+            - ["int", "flip", "0", "0"]
+            - ["bool", "isFocused", "false", "false"]
+            - ["bool", "isEnabled", "false", "false"]
+            - ["string", "masterID", "\"\"", "\"0\""]
+            - ["string", "spritePath", "\"\"", "\"~res:/Gfx/Shared/backgrounds/nintendo-switch/bg_switch_control_direction_m\""]
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/Common/NintendoSwitch/Scheme/ControlStates.actions"
+    bindings:
+    - ["UIAttachLayoutMasterComponent.attachId", "masterID"]
+    children:
+    -   class: "UIControl"
+        name: "ControlNS"
+        input: false
+        components:
+            Background: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+        bindings:
+        - ["Background.sprite", "spritePath"]
+        - ["Background.spriteModification", "flip"]

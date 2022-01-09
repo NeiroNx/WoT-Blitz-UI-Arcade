@@ -1,0 +1,190 @@
+Header:
+    version: 135
+Prototypes:
+-   class: "UIControl"
+    name: "ShopProductBonus"
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens3/Lobby/Shop/ShopProductBonusInit.animation"
+        Background:
+            drawType: "DRAW_FILL"
+        ClipContent: {}
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            verticalPolicy: "FixedSize"
+        UIDataParamsComponent:
+            params:
+            - ["ShopProductBonus", "bonus", "null", "{ \"amount\" = 1111; }"]
+            - ["bool", "reversedAnimation", "false", "false"]
+            - ["bool", "timeValue", "false", "false"]
+            - ["bool", "big", "true", "false"]
+        UIDataLocalVarsComponent:
+            data:
+            - ["string", "animationProperty", "when reversedAnimation -> \"rightAnchor\", \"leftAnchor\""]
+            - ["int", "width", "when big -> 90, 56"]
+            - ["int", "height", "when big -> 40, 32"]
+            - ["int", "iconSize", "when big -> 24, 20"]
+            - ["int", "maxContentWidth", "width - 8"]
+            - ["int", "contentWidth", "0"]
+            - ["int", "spacing", "16"]
+            - ["int", "moveOffset", "contentWidth + spacing"]
+            - ["bool", "animating", "false"]
+            - ["string", "currentControl", "\"./Holder/Container\""]
+            - ["string", "nextControl", "\"./Holder/ContainerNext\""]
+            - ["float", "baseTime", "3.000000"]
+            - ["float", "pauseTime", "3.000000"]
+            - ["float", "fadeInTime", "0.500000"]
+            - ["bool", "center", "false"]
+            - ["bool", "updateSize", "true"]
+            - ["int", "amount", "0"]
+            - ["string", "text", "\"\""]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["float", "scrollTime", "(contentWidth / maxContentWidth) * baseTime"]
+            - ["string", "textStyle", "when big -> \"t-headline bold white-wild-sand-text\", \"t-body regular white-wild-sand-text\""]
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/Lobby/Shop/ShopProductBonus.actions"
+        UIEventOnDataComponent0:
+            watchedDataExpression: "amount"
+            ifExpression: "amount != bonus.amount"
+            eventName: "AMOUNT_CHANGED"
+            eventData: "true"
+        UIEventOnDataComponent1:
+            watchedDataExpression: "bonus.amount"
+            eventName: "AMOUNT_CHANGED"
+            eventData: "true"
+    bindings:
+    - ["Background.color", "rgba(bonus.color.red * 255.000000, bonus.color.green * 255.000000, bonus.color.blue * 255.000000, bonus.color.alpha)"]
+    - ["SizePolicy.horizontalValue", "width"]
+    - ["SizePolicy.verticalValue", "height"]
+    children:
+    -   class: "UIControl"
+        name: "ResizeEventBarrier"
+        input: false
+        children:
+        -   class: "UIControl"
+            name: "TextWidthReporter"
+            input: false
+            components:
+                UITextComponent: {}
+                Anchor:
+                    bottomAnchorEnabled: true
+                    bottomAnchor: -100.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                UILayoutEventComponent:
+                    sizeChangedEvent: "OnTextSizeChanged"
+                    sizeChangedEventData: "int(_size.X)"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml"
+            bindings:
+            - ["classes", "textStyle"]
+            - ["UITextComponent.text", "text"]
+    -   class: "UIControl"
+        name: "Holder"
+        input: false
+        components:
+            UIOpacityComponent: {}
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 4.000000
+                rightAnchorEnabled: true
+                rightAnchor: 4.000000
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   class: "UIControl"
+            name: "Container"
+            input: false
+            components:
+                Anchor: {}
+                LinearLayout:
+                    spacing: 2.000000
+                    useRtl: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfMaxChild"
+            bindings:
+            - ["Anchor.leftAnchorEnabled", "not reversedAnimation and not center"]
+            - ["Anchor.hCenterAnchorEnabled", "center"]
+            - ["Anchor.rightAnchorEnabled", "reversedAnimation and not center"]
+            children:
+            -   class: "UIControl"
+                name: "Text"
+                input: false
+                components:
+                    UITextComponent: {}
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml"
+                bindings:
+                - ["classes", "textStyle"]
+                - ["UITextComponent.text", "text"]
+            -   class: "UIControl"
+                name: "Icon"
+                input: false
+                classes: "white-wild-sand-bg"
+                components:
+                    Background:
+                        drawType: "DRAW_SCALE_PROPORTIONAL"
+                    UIUrlImageComponent: {}
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        verticalPolicy: "FixedSize"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+                bindings:
+                - ["UIUrlImageComponent.imageUrl", "bonus.icon"]
+                - ["SizePolicy.horizontalValue", "iconSize"]
+                - ["SizePolicy.verticalValue", "iconSize"]
+        -   class: "UIControl"
+            name: "ContainerNext"
+            input: false
+            components:
+                Anchor: {}
+                LinearLayout:
+                    spacing: 2.000000
+                    useRtl: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfMaxChild"
+            bindings:
+            - ["visible", "animating"]
+            - ["Anchor.leftAnchorEnabled", "not reversedAnimation and not center"]
+            - ["Anchor.rightAnchorEnabled", "reversedAnimation and not center"]
+            children:
+            -   class: "UIControl"
+                name: "Text"
+                input: false
+                components:
+                    UITextComponent: {}
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml"
+                bindings:
+                - ["classes", "textStyle"]
+                - ["UITextComponent.text", "text"]
+            -   class: "UIControl"
+                name: "Icon"
+                input: false
+                classes: "white-wild-sand-bg"
+                components:
+                    Background:
+                        drawType: "DRAW_SCALE_PROPORTIONAL"
+                    UIUrlImageComponent: {}
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        verticalPolicy: "FixedSize"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+                bindings:
+                - ["UIUrlImageComponent.imageUrl", "bonus.icon"]
+                - ["SizePolicy.horizontalValue", "iconSize"]
+                - ["SizePolicy.verticalValue", "iconSize"]

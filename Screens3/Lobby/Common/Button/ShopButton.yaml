@@ -1,0 +1,126 @@
+Header:
+    version: 138
+Prototypes:
+-   class: "UIControl"
+    name: "ShopButton"
+    input: true
+    classes: "shop-button button-open-sound"
+    components:
+        Anchor:
+            topAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 72.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 72.000000
+        UIAttachLayoutMasterComponent: {}
+        UIInputEventComponent:
+            onTouchUpInside: "GO_TO_SHOP"
+        UIDataParamsComponent:
+            params:
+            - ["ShopBadges", "badges", "null", "{ }"]
+            events:
+            - "GO_TO_SHOP"
+        UIDataLocalVarsComponent:
+            data:
+            - ["string", "shopAttachId", "\"SHOP\""]
+        Sound: {}
+        UIIdentifierComponent:
+            id: "header_shop_button"
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Lobby/Common/Button/ShopButton.style.yaml;~res:/UI/Screens3/ButtonSound.style.yaml"
+    bindings:
+    - ["UIAttachLayoutMasterComponent.attachId", "shopAttachId"]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        pivot: [0.500000, 0.000000]
+        input: false
+        classes: "content-area"
+        components:
+            UIOpacityComponent: {}
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+        children:
+        -   class: "UIParticles"
+            name: "Particle"
+            position: [37.000000, 40.000000]
+            size: [32.000000, 32.000000]
+            scale: [0.300000, 0.300000]
+            pivot: [0.500000, 0.500000]
+            input: false
+            effectPath: "~res:/3d/FX/UI/shop-button/shopEffect.sc2"
+            autoStart: true
+        -   class: "UIControl"
+            name: "Icon"
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                    vCenterAnchor: -6.000000
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 48.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 48.000000
+            children:
+            -   class: "UIControl"
+                name: "Icon"
+                input: false
+                components:
+                    Background:
+                        sprite: "~res:/Gfx/Lobby/icons/icon_shop.psd"
+                        perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 24.000000
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 24.000000
+                bindings:
+                - ["Anchor.hCenterAnchor", "when isGamepad -> -1, 0"]
+            -   class: "UIControl"
+                name: "Badge"
+                input: false
+                components:
+                    Anchor:
+                        rightAnchorEnabled: true
+                        rightAnchor: -6.000000
+                        topAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfMaxChild"
+                        verticalPolicy: "PercentOfChildrenSum"
+                    UIChildComponent0:
+                        condition: "not isNull(badges) and (badges.hasGiftBadge or badges.badgesCount > 0)"
+                        prototypePath: "~res:/UI/Screens3/Lobby/Common/Badge.yaml"
+                        args:
+                            "value": "str(badges.badgesCount)"
+                            "type": "when badges.hasGiftBadge -> eBadgeType.GIFT, eBadgeType.DIGIT"
+        -   class: "UIControl"
+            name: "NSHotkey"
+            input: false
+            classes: "white-wild-sand-70-bg"
+            components:
+                Background:
+                    drawType: "DRAW_ALIGNED"
+                    sprite: "~res:/Gfx/Lobby/icons/nintendo-switch/icon_switch_plus_filled_dark_m"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                    bottomAnchor: 6.000000
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 24.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 24.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+            bindings:
+            - ["visible", "isGamepad"]

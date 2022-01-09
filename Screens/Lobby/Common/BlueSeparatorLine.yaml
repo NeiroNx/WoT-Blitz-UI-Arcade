@@ -1,0 +1,14 @@
+Header:
+    version: "23"
+Prototypes:
+-   class: "UIControl"
+    name: "BlueLine"
+    size: [100.000000, 1.000000]
+    components:
+        SizePolicy:
+            verticalPolicy: "FixedSize"
+            verticalValue: 1.000000
+        Background:
+            drawType: "DRAW_FILL"
+            color: [0.211765, 0.254902, 0.290196, 1.000000]
+            perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"

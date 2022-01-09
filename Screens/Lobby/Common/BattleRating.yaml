@@ -1,0 +1,68 @@
+Header:
+    version: "108"
+ImportedPackages:
+- "~res:/UI/Screens/Fonts.yaml"
+- "~res:/UI/Styles/Lobby/BattleRating/BattleRatingStyles.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "Rating"
+    position: [0.000000, 0.000000]
+    size: [105.000000, 20.000000]
+    input: false
+    classes: "battle-rating rating-league=no-league"
+    components:
+        LinearLayout:
+            spacing: 2.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Lobby/Common/BattleRating.yaml"
+    children:
+    -   class: "UIStaticText"
+        name: "CurrentRating"
+        size: [48.000000, 20.000000]
+        classes: "header3 text-color-white"
+        components:
+            UITextComponent:
+                text: "3 234"
+                colorInheritType: "COLOR_IGNORE_PARENT"
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfParent"
+    -   class: "UIControl"
+        name: "LeagueBanner"
+        input: false
+        components:
+            Background:
+                drawType: "DRAW_SCALE_PROPORTIONAL"
+                perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+            Anchor:
+                vCenterAnchorEnabled: true
+                vCenterAnchor: 1.000000
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 30.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 50.000000
+    -   class: "UIControl"
+        name: "UpDownMark"
+        size: [10.000000, 20.000000]
+        input: false
+        components:
+            Background:
+                sprite: "~res:/Gfx/UI/Hangar/CharacterArrow"
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfParent"
+    -   class: "UIStaticText"
+        name: "RatingDiff"
+        size: [11.000000, 20.000000]
+        classes: "header3"
+        components:
+            UITextComponent:
+                text: "8"
+                colorInheritType: "COLOR_IGNORE_PARENT"
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfParent"

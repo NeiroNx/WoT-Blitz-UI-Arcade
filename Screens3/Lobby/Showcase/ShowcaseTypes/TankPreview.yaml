@@ -1,0 +1,327 @@
+Header:
+    version: 138
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/IconButton.yaml"
+- "~res:/UI/Screens3/Lobby/Common/Button.yaml"
+- "~res:/UI/Screens3/Lobby/Common/Resource/Detailed/StuffIcon.yaml"
+- "~res:/UI/Screens3/Lobby/Common/ProgressBar.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "TankPreview"
+    size: [2000.000000, 768.000000]
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "ON_FULLSCREEN_CHANGED,~res:/UI/Screens3/Lobby/Showcase/ShowcaseTypes/PreviewFullscreen.animation"
+        LinearLayout:
+            orientation: "TopDown"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UILayoutEventComponent:
+            sizeChangedEvent: "PREVIEW_SIZE_CHANGED"
+            sizeChangedEventData: "_absoluteRect"
+        UIDataParamsComponent:
+            params:
+            - ["bool", "isTanksPanelExists", "false", "true"]
+            - ["ShowcasePreviewModel", "previewModel", "null", "{ \"previewType\" = ePreviewType.UnlockableCamo; }"]
+            - ["AccountDataModel", "account", "null", "{ }"]
+            - ["TankParams", "tankParams", "null", "{ }"]
+            - ["LobbyDataModel", "lobby", "null", "{ }"]
+            events:
+            - "ON_FULLSCREEN_CHANGED"
+            - "PREVIEW_STUFF_USE"
+        UIDataLocalVarsComponent:
+            data:
+            - ["bool", "canBeFullscreened", "previewModel.previewType == ePreviewType.Parameters"]
+            - ["bool", "isStuffPart", "previewModel.previewType == ePreviewType.StuffPart"]
+            - ["bool", "showFooter", "previewModel.previewType != ePreviewType.Default and previewModel.previewType != ePreviewType.CamoWithPanel and previewModel.previewType != ePreviewType.Parameters"]
+            - ["bool", "showTankParameters", "previewModel.previewType == ePreviewType.Parameters or previewModel.previewType == ePreviewType.Certificate or previewModel.previewType == ePreviewType.StuffPart"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["bool", "buttonEnabled", "(previewModel.previewType == ePreviewType.UnlockableCamo and previewModel.hasTank and previewModel.isCamoLockedForTank) or (previewModel.previewType == ePreviewType.StuffPart and previewModel.resource.stuff.quantity >= previewModel.neededParts) or previewModel.previewType == ePreviewType.Certificate"]
+            - ["string", "buttonCaption", "when previewModel.previewType == ePreviewType.Certificate -> \"#hangar_showcase:UseButton\", previewModel.previewType == ePreviewType.StuffPart -> \"#hangar_showcase:FuseButton\", previewModel.previewType == ePreviewType.UnlockableCamo -> \"#common:DialogButton/Unlock\", \"\""]
+        UIEventOnDataComponent0:
+            watchedDataExpression: "previewModel.fullscreen"
+            eventName: "ON_FULLSCREEN_CHANGED"
+            eventData: "previewModel.fullscreen"
+    children:
+    -   class: "UIControl"
+        name: "ContentWrapper"
+        input: false
+        components:
+            LinearLayout:
+                orientation: "RightToLeft"
+                padding: "16"
+                safeAreaPaddingInset: true
+                dynamicSpacing: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "PanelWrapper"
+            input: false
+            components:
+                UIOpacityComponent: {}
+                Anchor:
+                    topAnchorEnabled: true
+                    topAnchor: 56.000000
+                    bottomAnchorEnabled: true
+                    bottomAnchor: 56.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "Formula"
+                    verticalFormula: "parent - 112"
+            bindings:
+            - ["visible", "showTankParameters"]
+            children:
+            -   class: "UIControl"
+                name: "TankParams"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    Anchor:
+                        rightAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfMaxChild"
+                        verticalPolicy: "Formula"
+                        verticalFormula: "min(parent, maxChild)"
+                    UILayoutEventComponent:
+                        sizeChangedEvent: "PREVIEW_PARAMS_SIZE_CHANGED"
+                        sizeChangedEventData: "_absoluteRect"
+                    UIChildComponent0:
+                        childType: "kOldExpression"
+                        control: "\"~res:/UI/Screens3/Lobby/Common/VehicleParamsPanel/VehicleParamsPanel.yaml\""
+                        args:
+                            "tutorialData": "account.tutorialData"
+                            "tankParams": "tankParams"
+        -   prototype: "IconButton/IconButton"
+            name: "IconButton"
+            components:
+                Anchor:
+                    enabled: true
+                    topAnchorEnabled: true
+                    topAnchor: 56.000000
+                SizePolicy:
+                    horizontalValue: 64.000000
+                    verticalValue: 64.000000
+                UIDataParamsComponent:
+                    args:
+                        "visible": "canBeFullscreened"
+                        "image": "\"~res:/Gfx/Lobby/icons/icon_eye_s\""
+                        "type": "eButtonType.OPTIONAL_DARK"
+                        "sound": "eButtonSound.CHOOSE"
+                        "enabled": "true"
+                    eventActions:
+                    - ["ON_CLICK_BUTTON", "FULLSCREEN", ""]
+            children:
+            -   path: "TapArea/Content/Icon"
+                components:
+                    Background:
+                        drawType: "DRAW_ALIGNED"
+    -   class: "UIControl"
+        name: "ContentFooterDivision"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+            UIAttachLayoutMasterComponent:
+                attachId: "SHOWCASE_FOOTER"
+    -   class: "UIControl"
+        name: "FooterWrapper"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            UIOpacityComponent: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfChildrenSum"
+        bindings:
+        - ["visible", "showFooter"]
+        children:
+        -   class: "UIControl"
+            name: "Footer"
+            input: false
+            components:
+                Anchor:
+                    topAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfFirstChild"
+                UIChildComponent0:
+                    condition: "showFooter"
+                    prototypePath: "~res:/UI/Screens3/Common/Footer.yaml"
+                    args:
+                        "desktopStyle": "when isTanksPanelExists or not isStuffPart -> \"\", \"inventory-limited-width\""
+                        "bgStyle": "when isTanksPanelExists or not isStuffPart -> \"\", \"black-50-bg\""
+                        "content": "FooterContent"
+    -   class: "UIControl"
+        name: "TankPanelSpacer"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "FixedSize"
+                verticalValue: 120.000000
+        bindings:
+        - ["visible", "isTanksPanelExists"]
+Slots:
+-   class: "UIControl"
+    name: "FooterContent"
+    size: [960.000000, 48.000000]
+    input: false
+    components:
+        LinearLayout:
+            orientation: "RightToLeft"
+            spacing: 24.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+    children:
+    -   class: "UIControl"
+        name: "PurchaseButtonWrapper"
+        input: false
+        components:
+            Anchor:
+                rightAnchorEnabled: false
+                rightAnchor: 0.000000
+                vCenterAnchorEnabled: true
+                bottomAnchorEnabled: false
+                bottomAnchor: 0.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfChildrenSum"
+        children:
+        -   prototype: "Button/Button"
+            name: "PurchaseButton"
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+                    rightAnchor: 0.000000
+                    bottomAnchorEnabled: true
+                    bottomAnchor: 0.000000
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 264.000000
+                UIAttachLayoutMasterComponent:
+                    attachId: "BUY"
+                UIInputEventComponent:
+                    onTouchUpInside: "BUTTON_CLICKED"
+                UIDataParamsComponent:
+                    args:
+                        "locked": "not buttonEnabled"
+                        "caption": "buttonCaption"
+                        "enabled": "buttonEnabled"
+                        "sound": "eButtonSound.OK"
+                    eventActions:
+                    - ["ON_CLICK_BUTTON", "PREVIEW_STUFF_USE", ""]
+    -   class: "UIControl"
+        name: "ProgressBarWrapper"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Anchor:
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                orientation: "TopDown"
+                spacing: 8.000000
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 96.000000
+                verticalPolicy: "PercentOfChildrenSum"
+        bindings:
+        - ["visible", "isStuffPart"]
+        children:
+        -   prototype: "ProgressBar/ProgressBar"
+            name: "ProgressBar"
+            components:
+                SizePolicy:
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 4.000000
+                UIDataParamsComponent:
+                    args:
+                        "maximum": "previewModel.neededParts"
+                        "value": "previewModel.resource.stuff.quantity"
+            children:
+            -   path: "Value"
+                components:
+                    SizePolicy: {}
+                bindings:
+                - ["SizePolicy.horizontalValue", "when progress < 100 -> progress, 100"]
+        -   class: "UIControl"
+            name: "ProgressContainer"
+            position: [61.000000, 120.000000]
+            size: [50.000000, 24.000000]
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                LinearLayout:
+                    spacing: 4.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   class: "UIControl"
+                name: "ProgressAmount"
+                input: false
+                classes: "t-subtitle regular white-wild-sand-text align-right"
+                components:
+                    UITextComponent:
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml"
+                bindings:
+                - ["UITextComponent.text", "previewModel.resource.stuff.quantity"]
+            -   class: "UIControl"
+                name: "Separator"
+                input: false
+                classes: "t-subtitle regular white-wild-sand-text"
+                components:
+                    UITextComponent:
+                        text: "/"
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml"
+            -   class: "UIControl"
+                name: "ProgressTotal"
+                input: false
+                classes: "t-subtitle regular white-wild-sand-text align-left"
+                components:
+                    UITextComponent:
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml"
+                bindings:
+                - ["UITextComponent.text", "previewModel.neededParts"]
+            -   prototype: "StuffIcon/StuffIcon"
+                name: "StuffIcon"
+                components:
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 20.000000
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 20.000000
+                    UIDataParamsComponent:
+                        args:
+                            "stuff": "previewModel.resource.stuff"

@@ -1,0 +1,82 @@
+Header:
+    version: 141
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/RichText.yaml"
+Prototypes:
+-   class: "UIControl"
+    customClass: "UIGenericNotification"
+    name: "PiggyBankOpenedNotification"
+    size: [608.000000, 72.000000]
+    input: true
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+            padding: "8; 0"
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfMaxChild"
+        UIDataParamsComponent:
+            params:
+            - ["PiggyBankOpenedViewModel", "model", "null", "{ }"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["string", "bpCreditsTitleKey", "\"BattlePass/SafeDeposit/Credits/Title\""]
+            - ["string", "bpGoldTitleKey", "\"BattlePass/SafeDeposit/Gold/Title\""]
+            - ["string", "bpFreeXpTitleKey", "\"BattlePass/SafeDeposit/FreeXP/Title\""]
+            - ["string", "bpTitleKey", "when model.resource.type == ResourceType.free_xp -> bpFreeXpTitleKey, when model.resource.type == ResourceType.gold -> bpGoldTitleKey, when model.resource.type == ResourceType.credits -> bpCreditsTitleKey, \"\""]
+            - ["string", "titleKey", "when not empty(model.piggyBankTitleKey) -> model.piggyBankTitleKey, bpTitleKey"]
+            - ["string", "key", "\"HANGAR_NOTIFICATION_PIGGY_BANK_OPENED\""]
+            - ["string", "string", "localize(key, { \"title\" = localize(titleKey); })"]
+    children:
+    -   class: "UIControl"
+        name: "NotificationBase"
+        position: [0.000000, 8.000000]
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfChildrenSum"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Notifications/NotificationBase.yaml"
+                args:
+                    "content": "Content"
+                    "iconPath": "\"~res:/Gfx/Lobby/icons/icon_finance_s\""
+                    "isButtonVisible": "false"
+Slots:
+-   class: "UIControl"
+    name: "Content"
+    size: [608.000000, 20.000000]
+    input: false
+    components:
+        Anchor:
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "Formula"
+            verticalFormula: "when parent == 0 -> childrenSum, min(parent, childrenSum)"
+    children:
+    -   class: "UIControl"
+        name: "MessageContent"
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                vCenterAnchorEnabled: true
+                useRtl: true
+            LinearLayout:
+                spacing: 8.000000
+                useRtl: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   prototype: "RichText/RichText"
+            name: "RichText"
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                UIDataParamsComponent:
+                    args:
+                        "resource1Model": "model.resource"
+                        "key": "string"

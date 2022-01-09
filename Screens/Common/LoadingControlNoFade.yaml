@@ -1,0 +1,29 @@
+Header:
+    version: "31"
+ImportedPackages:
+- "~res:/UI/Screens/Common/LoadingSpinner.yaml"
+Controls:
+-   class: "UIControl"
+    name: "LoadingControlNoFade"
+    size: [1024.000000, 768.000000]
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Common/LoadingControlNoFade.yaml"
+    children:
+    -   class: "UIControl"
+        name: "SpinnerPlaceholder"
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+        children:
+        -   prototype: "LoadingSpinner/LoadingSpinner"
+            name: "ProgressControl"
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true

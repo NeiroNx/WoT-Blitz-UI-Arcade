@@ -1,0 +1,92 @@
+Header:
+    version: "110"
+Prototypes:
+-   class: "UIControl"
+    name: "ResourcePreviewBinded"
+    size: [64.000000, 64.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["ResourceModel", "resource", "null", "{ \"quantity\" = 1380000; \"type\" = ResourceType.gold; \"discount\" = { \"value\" = 0.000000; }; }"]
+        UIDataLocalsComponent:
+            locals:
+            - ["string", "gradeHideClass", "when resource.showGrade -> \"\", \"hide-grade\""]
+            - ["bool", "showImageURL", "not empty(resource.imageURL) and resource.type == ResourceType.stuff"]
+            - ["bool", "resourceWithBuildInIcon", "resource.type == ResourceType.stuff or resource.type == ResourceType.achievement"]
+            - ["bool", "showBuiltInIcon", "not empty(resource.icon) and resourceWithBuildInIcon and not showImageURL"]
+            - ["string", "gradeClass", "when resource.grade != ArtefactGrade.unknown -> str(resource.grade, ArtefactGrade), \"\""]
+            - ["string", "resourceTypeClass", "when resource.type == ResourceType.vehicle -> \"resource-vehicle\", resource.type == ResourceType.gold -> \"resource-gold\", resource.type == ResourceType.unlocks -> \"resource-unlock\", resource.type == ResourceType.free_xp -> \"resource-free-xp\", resource.type == ResourceType.premium -> \"resource-premium\", resource.type == ResourceType.xp -> \"resource-xp\", resource.type == ResourceType.tankmenXP -> \"resource-crew-xp\", resource.type == ResourceType.credits -> \"resource-credit\", resource.type == ResourceType.stuff -> \"resource-stuff\", resource.type == ResourceType.slots -> \"resource-slot\", resource.type == ResourceType.achievement -> \"resource-rare-achievement\", resource.type == ResourceType.real_currency -> \"resource-real-currency\", \"\""]
+        StyleSheet:
+            styles: "~res:/UI/Screens/Lobby/Common/Resource/Style/ResourcePreview.yaml"
+    bindings:
+    - ["classes", "\"resource \" + resourceTypeClass + \" \" + gradeClass + \" \" + gradeHideClass"]
+    children:
+    -   class: "UIControl"
+        name: "Grade"
+        input: false
+        components:
+            Background:
+                drawType: "DRAW_STRETCH_HORIZONTAL"
+                sprite: "~res:/Gfx/UI/Storage/Items_back"
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfContent"
+    -   class: "UIControl"
+        name: "IconBack"
+        size: [98.000000, 116.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+    -   class: "UIControl"
+        name: "Icon"
+        size: [98.000000, 116.000000]
+        input: false
+        classes: "draw-type"
+        components:
+            Background:
+                drawType: "DRAW_SCALE_PROPORTIONAL"
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+    -   class: "UIControl"
+        name: "StuffIcon"
+        input: false
+        components:
+            Background:
+                drawType: "DRAW_SCALE_PROPORTIONAL"
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        bindings:
+        - ["visible", "showBuiltInIcon"]
+        - ["Background.sprite", "resource.icon"]
+    -   class: "UIControl"
+        name: "ImageURLIcon"
+        input: false
+        classes: "item_icon"
+        components:
+            Background:
+                drawType: "DRAW_SCALE_PROPORTIONAL"
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+            UIUrlImageComponent:
+                downscaleEnabled: false
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        bindings:
+        - ["visible", "showImageURL"]
+        - ["UIUrlImageComponent.imageUrl", "resource.imageURL"]

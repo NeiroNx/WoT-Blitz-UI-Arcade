@@ -1,0 +1,38 @@
+Header:
+    version: "84"
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/Story/Legacy/Utils/Resource/Detailed/ResourcePrototype.yaml"
+Controls:
+-   prototype: "ResourcePrototype/Content"
+    name: "Content"
+    components:
+        UIDataParamsComponent:
+            params:
+            - ["ResourceDetailed", "data", "null", "{ \"type\" = ResourceType.unlocks; \"unlock\" = { \"type\" = eItemType.CAMOUFLAGE; }; }"]
+            - ["bool", "showEye", "false", "true"]
+        UIDataLocalsComponent:
+            locals:
+            - ["string", "title", "data.unlock.title"]
+            - ["string", "description", "when data.unlock.kind == eCamouflageKind.CUSTOM_SET -> \"#hangar_showcase:CustomSet\", \"#hangar_showcase:Camouflage\""]
+    children:
+    -   path: "Layout/Image/IconContainer/Icon"
+        components:
+            UITextureComponent: {}
+        bindings:
+        - ["UITextureComponent.spritePath", "data.unlock.icon"]
+    -   class: "UIControl"
+        name: "EyeIcon"
+        input: false
+        components:
+            UITextureComponent:
+                spritePath: "~res:/Gfx/UI/LobbyCommon/eyeIcon"
+            Anchor:
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 64.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 32.000000
+        bindings:
+        - ["visible", "showEye and data.unlock.type == eItemType.CAMOUFLAGE"]

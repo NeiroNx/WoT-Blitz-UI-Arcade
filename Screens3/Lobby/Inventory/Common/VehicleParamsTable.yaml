@@ -1,0 +1,34 @@
+Header:
+    version: "85"
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Inventory/Common/RightPanelContent.yaml"
+- "~res:/UI/Screens3/Lobby/Inventory/Common/RightPanelHeader.yaml"
+- "~res:/UI/Screens3/Lobby/Common/VehicleParamsPanel/VehicleChangedParamsPanel.yaml"
+Prototypes:
+-   prototype: "RightPanelContent/RightPanelContent"
+    name: "RightPanelContent"
+    components:
+        UIDataParamsComponent:
+            params:
+            - ["string", "title", "\"\"", "\"Panel title\""]
+            - ["string", "sectionName", "\"\"", "\"changed\""]
+            - ["TankParams", "tankParams", "null", "{ }"]
+    children:
+    -   prototype: "RightPanelHeader/RightPanelHeader"
+        name: "RightPanelHeader"
+        children:
+        -   path: "ImageWrapper"
+            visible: false
+            children: []
+        -   path: "SubTitle"
+            components:
+                UITextComponent: {}
+            bindings:
+            - ["UITextComponent.text", "title"]
+    -   prototype: "VehicleChangedParamsPanel/VehicleChangedParamsPanel"
+        name: "VehicleChangedParamsPanel"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "tankParams": "tankParams"
+                    "sectionName": "sectionName"

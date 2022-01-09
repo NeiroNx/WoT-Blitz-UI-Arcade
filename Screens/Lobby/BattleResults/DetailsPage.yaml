@@ -1,0 +1,98 @@
+Header:
+    version: "95"
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/LobbyCommon.yaml"
+- "~res:/UI/Screens/Common/Tab.yaml"
+- "~res:/UI/Screens/Common/MenuItem.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "Page"
+    size: [1024.000000, 688.000000]
+    components:
+        Anchor:
+            leftAnchorEnabled: true
+            rightAnchorEnabled: true
+            topAnchorEnabled: true
+            bottomAnchorEnabled: true
+        UIDataParamsComponent:
+            params:
+            - ["BattleResultsViewModel", "results", "null", "{ }"]
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Lobby/BattleResults/DetailsPage.yaml"
+    children:
+    -   prototype: "MenuItem/MenuPane"
+        name: "DetailsTabs"
+        input: false
+        components:
+            SizePolicy:
+                verticalFormula: "maxChild"
+            UISwitchBarComponent:
+                onSelectElement: "ON_SELECT_SUB_TAB"
+                onValueChanged: "SUB_TAB_SELECT"
+        bindings:
+        - ["UISwitchBarComponent.selectedElement", "results.selectedDetailsPage"]
+        children:
+        -   prototype: "MenuItem/TextItem"
+            name: "Statistics"
+            position: [80.000000, 8.000000]
+            components:
+                UISwitchBarElementComponent: {}
+            bindings:
+            - ["UISwitchBarElementComponent.id", "\"STATISTICS\""]
+            children:
+            -   path: "Text"
+                components:
+                    UITextComponent:
+                        text: "#battle_results:DetailsPage/StatisticPage"
+        -   prototype: "MenuItem/TextItem"
+            name: "Efficiency"
+            position: [80.000000, 8.000000]
+            components:
+                UISwitchBarElementComponent: {}
+            bindings:
+            - ["UISwitchBarElementComponent.id", "\"EFFICIENCY\""]
+            children:
+            -   path: "Text"
+                components:
+                    UITextComponent:
+                        text: "#battle_results:DetailsPage/EfficiencyPage"
+        -   prototype: "MenuItem/TextItem"
+            name: "Credits"
+            position: [80.000000, 8.000000]
+            components:
+                UISwitchBarElementComponent: {}
+            bindings:
+            - ["UISwitchBarElementComponent.id", "\"CREDITS\""]
+            children:
+            -   path: "Text"
+                components:
+                    UITextComponent:
+                        text: "#battle_results:DetailsPage/CreditsPage"
+        -   prototype: "MenuItem/TextItem"
+            name: "Experience"
+            position: [80.000000, 8.000000]
+            components:
+                UISwitchBarElementComponent: {}
+            bindings:
+            - ["UISwitchBarElementComponent.id", "\"EXPERIENCE\""]
+            children:
+            -   path: "Text"
+                components:
+                    UITextComponent:
+                        text: "#battle_results:DetailsPage/ExperiencePage"
+    -   class: "UIControl"
+        name: "Content"
+        position: [0.000000, 70.000000]
+        size: [1024.000000, 618.000000]
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 0.000000
+                rightAnchorEnabled: true
+                rightAnchor: 0.000000
+                topAnchorEnabled: true
+                topAnchor: 74.000000
+                bottomAnchorEnabled: true
+                bottomAnchor: 0.000000

@@ -1,0 +1,217 @@
+Header:
+    version: "92"
+Controls:
+-   class: "UIControl"
+    name: "StoryTree"
+    size: [960.000000, 640.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["StoryView", "storyView", "null", "{ }"]
+            events:
+            - "SELECT_STEP(int id)"
+            - "SHOW_STEP_INFO(int id)"
+            - "DESELECT"
+        UIDataLocalsComponent:
+            locals:
+            - ["string", "processComment", "when empty(storyView.story.stageResources.customComment) -> \"template_event/ProgressStage/StepTree/Comment\", storyView.story.stageResources.customComment"]
+            - ["string", "buyComment", "when empty(storyView.story.stageResources.customComment) -> \"template_event/FinalStage/Hint/BuyCurrenciesToComplete\", storyView.story.stageResources.customComment"]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        size: [960.000000, 640.000000]
+        input: false
+        components:
+            Background:
+                drawType: "DRAW_FILL"
+                color: [0.070588, 0.125490, 0.160784, 0.200000]
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+            LinearLayout:
+                enabled: false
+                orientation: "TopDown"
+        children:
+        -   class: "UIControl"
+            name: "Clipper"
+            size: [1027.000000, 862.000000]
+            input: false
+            components:
+                ClipContent: {}
+                Anchor:
+                    enabled: true
+                    leftAnchorEnabled: true
+                    rightAnchorEnabled: false
+                    topAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                    bottomAnchor: -94.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            children:
+            -   class: "UIScrollView"
+                name: "TreeScrollView"
+                input: true
+                autoUpdate: true
+                centerContent: true
+                components:
+                    Anchor:
+                        leftAnchorEnabled: true
+                        rightAnchorEnabled: true
+                        topAnchorEnabled: true
+                        bottomAnchorEnabled: true
+                        bottomAnchor: 94.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                    UIInputEventComponent:
+                        onTouchUpInside: "DESELECT"
+                children:
+                -   class: "UIScrollViewContainer"
+                    name: "scrollContainerControl"
+                    input: true
+                    components:
+                        LinearLayout:
+                            orientation: "TopDown"
+                        SizePolicy:
+                            horizontalPolicy: "Formula"
+                            horizontalFormula: "max(parent, maxChild)"
+                            verticalPolicy: "PercentOfChildrenSum"
+                        UIInputEventComponent:
+                            onTouchUpInside: "DESELECT"
+                    children:
+                    -   class: "UIControl"
+                        name: "CommentContainer"
+                        input: false
+                        components:
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                verticalPolicy: "PercentOfChildrenSum"
+                            UIAnchorSafeAreaComponent:
+                                leftSafeInset: "INSET"
+                                rightSafeInset: "INSET"
+                            StyleSheet:
+                                styles: "~res:/UI/Screens/Fonts.yaml;~res:/UI/Screens/FontsColors.yaml"
+                        children:
+                        -   class: "UIControl"
+                            name: "ProcessComment"
+                            input: false
+                            classes: "text1 text-color-blue"
+                            components:
+                                UITextComponent:
+                                    colorInheritType: "COLOR_IGNORE_PARENT"
+                                    multiline: "MULTILINE_ENABLED"
+                                Anchor:
+                                    leftAnchorEnabled: true
+                                    rightAnchorEnabled: true
+                                    vCenterAnchorEnabled: true
+                                SizePolicy:
+                                    verticalPolicy: "PercentOfContent"
+                                UIAnchorSafeAreaComponent:
+                                    leftSafeInset: "INSET"
+                                    rightSafeInset: "INSET"
+                            bindings:
+                            - ["visible", "storyView.story.stage.type == eStageType.PROCESS"]
+                            - ["UITextComponent.text", "localize(processComment)"]
+                        -   class: "UIControl"
+                            name: "BuyComment"
+                            input: false
+                            classes: "text1 text-color-red"
+                            components:
+                                UITextComponent:
+                                    colorInheritType: "COLOR_IGNORE_PARENT"
+                                    multiline: "MULTILINE_ENABLED"
+                                Anchor:
+                                    leftAnchorEnabled: true
+                                    rightAnchorEnabled: true
+                                    vCenterAnchorEnabled: true
+                                SizePolicy:
+                                    verticalPolicy: "PercentOfContent"
+                                UIAnchorSafeAreaComponent:
+                                    leftSafeInset: "INSET"
+                                    rightSafeInset: "INSET"
+                            bindings:
+                            - ["visible", "storyView.story.stage.type == eStageType.BUY"]
+                            - ["UITextComponent.text", "localize(buyComment)"]
+                    -   class: "UIControl"
+                        name: "TreeContainer"
+                        input: false
+                        components:
+                            Background: {}
+                            Anchor:
+                                hCenterAnchorEnabled: true
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfFirstChild"
+                                verticalPolicy: "PercentOfFirstChild"
+                            UIChildComponent0:
+                                childType: "kOldExpression"
+                                control: "storyView.story.stageResources.treePath"
+                                args:
+                                    "tree": "storyView.tree"
+                                eventActions:
+                                - ["SELECT_STEP", "SELECT_STEP", "_event.id"]
+                                - ["SHOW_STEP_INFO", "SHOW_STEP_INFO", "_event.id"]
+                -   class: "UIScrollBar"
+                    name: "HorizontalScrollbar"
+                    input: false
+                    orientation: "ORIENTATION_HORIZONTAL"
+                    components:
+                        Anchor:
+                            leftAnchorEnabled: true
+                            leftAnchor: 10.000000
+                            rightAnchorEnabled: true
+                            rightAnchor: 0.000000
+                            bottomAnchorEnabled: true
+                            bottomAnchor: 0.000000
+                        SizePolicy:
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 10.000000
+                        UIAnchorSafeAreaComponent: {}
+                        ScrollBarDelegate:
+                            delegate: ".."
+                    children:
+                    -   class: "UIControl"
+                        name: "slider"
+                        input: false
+                        components:
+                            Background:
+                                drawType: "DRAW_STRETCH_HORIZONTAL"
+                                sprite: "~res:/Gfx/UI/CommonUIElements/HorizontalScroll"
+                                leftRightStretchCap: 10.000000
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                verticalPolicy: "PercentOfParent"
+                -   class: "UIScrollBar"
+                    name: "VerticalScrollbar"
+                    input: false
+                    orientation: "ORIENTATION_VERTICAL"
+                    components:
+                        Anchor:
+                            rightAnchorEnabled: true
+                            topAnchorEnabled: true
+                            bottomAnchorEnabled: true
+                            bottomAnchor: 10.000000
+                        SizePolicy:
+                            horizontalPolicy: "FixedSize"
+                            horizontalValue: 10.000000
+                        UIAnchorSafeAreaComponent: {}
+                        ScrollBarDelegate:
+                            delegate: ".."
+                    children:
+                    -   class: "UIControl"
+                        name: "slider"
+                        input: false
+                        components:
+                            Background:
+                                drawType: "DRAW_STRETCH_VERTICAL"
+                                sprite: "~res:/Gfx/UI/CommonUIElements/VerticalScroll"
+                                topBottomStretchCap: 10.000000
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                verticalPolicy: "PercentOfParent"

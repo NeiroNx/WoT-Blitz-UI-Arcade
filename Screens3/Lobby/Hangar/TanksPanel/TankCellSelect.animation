@@ -1,0 +1,23 @@
+animation Selection 
+{
+	Log("Hello, world!");
+	Opacity(path = "**/Selector", opacity=0);
+	ChangeProperty("**/Selector","SizePolicy","horizontalValue", 0);
+	if (true)
+	{
+		parallel
+		{
+			Opacity(path = "**/Selector", opacity=1, time=0.3, interpolation=SINE_OUT);
+			ChangeProperty("**/Selector","SizePolicy","horizontalValue", 100, time=0.3, interpolation=SINE_OUT);
+		}
+	}
+	else
+	{
+		parallel
+		{
+			Opacity(path = "**/Selector", opacity=0, time=0.1, interpolation=SINE_IN);
+			ChangeProperty("**/Selector","SizePolicy","horizontalValue", 0, time=0.1, interpolation=SINE_IN);
+		}
+	}
+	ScrollToEnsureControlOnScreen("**/Content", 0.3);
+}

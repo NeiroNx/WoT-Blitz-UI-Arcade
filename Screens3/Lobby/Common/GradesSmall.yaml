@@ -1,0 +1,227 @@
+Header:
+    version: 127
+Prototypes:
+-   class: "UIControl"
+    name: "GradesSmall"
+    input: false
+    components:
+        LinearLayout: {}
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfMaxChild"
+        UIDataParamsComponent:
+            params:
+            - ["eButtonSize", "size", "eButtonSize.SMALL", "eButtonSize.NORMAL"]
+            - ["ArtefactGrade", "grade", "ArtefactGrade.common", "ArtefactGrade.common"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["string", "textStyle", "when size == eButtonSize.SMALL -> \"t-caps bold\", \"t-subtitle regular\""]
+            - ["string", "gradeBgStyle", "when grade == ArtefactGrade.common -> \"white-wild-sand-70-bg\", grade == ArtefactGrade.rare -> \"grades-rare-bg\", grade == ArtefactGrade.unique -> \"grades-unique-bg\", grade == ArtefactGrade.legendary -> \"grades-legendary-bg\", \"white-wild-sand-bg\""]
+            - ["string", "gradeTextStyle", "when grade == ArtefactGrade.common -> \"white-wild-sand-70-text\", grade == ArtefactGrade.rare -> \"grades-rare-text\", grade == ArtefactGrade.unique -> \"grades-unique-text\", grade == ArtefactGrade.legendary -> \"grades-legendary-text\", \"white-wild-sand-text\""]
+            - ["string", "gradeKeyUpperCase", "when grade == ArtefactGrade.common -> localize(\"common/Grade/Standard/UpperCase\"), grade == ArtefactGrade.rare -> localize(\"common/Grade/Rare/UpperCase\"), grade == ArtefactGrade.unique -> localize(\"common/Grade/Special/UpperCase\"), grade == ArtefactGrade.legendary -> localize(\"common/Grade/Legendary/UpperCase\"), \"\""]
+            - ["string", "gradeKeyLowerCase", "when grade == ArtefactGrade.common -> \"#common:Grade/Standard\", grade == ArtefactGrade.rare -> \"#common:Grade/Rare\", grade == ArtefactGrade.unique -> \"#common:Grade/Special\", grade == ArtefactGrade.legendary -> \"#common:Grade/Legendary\", \"\""]
+            - ["bool", "isGlowVisible", "grade == ArtefactGrade.common or grade == ArtefactGrade.rare"]
+            - ["string", "gradeKey", "when size == eButtonSize.SMALL -> gradeKeyUpperCase, localize(gradeKeyLowerCase)"]
+    bindings:
+    - ["visible", "grade != ArtefactGrade.unknown"]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfLastChild"
+        children:
+        -   class: "UIControl"
+            name: "Glow"
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                LinearLayout: {}
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "parent + 32"
+                    verticalPolicy: "Formula"
+                    verticalFormula: "when size == eButtonSize.SMALL -> maxChild, maxChild + 8"
+            bindings:
+            - ["visible", "not isGlowVisible"]
+            children:
+            -   class: "UIControl"
+                name: "Left"
+                input: false
+                components:
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    LinearLayout:
+                        orientation: "TopDown"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfMaxChild"
+                        verticalPolicy: "PercentOfChildrenSum"
+                children:
+                -   class: "UIControl"
+                    name: "Top"
+                    input: false
+                    components:
+                        Background:
+                            drawType: "DRAW_ALIGNED"
+                            sprite: "~res:/Gfx/Lobby/backgrounds/grade_glow_right"
+                            spriteModification: ["FLIP_HORIZONTAL"]
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfContent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Color.style.yaml"
+                    bindings:
+                    - ["classes", "gradeBgStyle"]
+                -   class: "UIControl"
+                    name: "Bottom"
+                    input: false
+                    components:
+                        Background:
+                            drawType: "DRAW_ALIGNED"
+                            sprite: "~res:/Gfx/Lobby/backgrounds/grade_glow_right"
+                            spriteModification: ["FLIP_HORIZONTAL", "FLIP_VERTICAL"]
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfContent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Color.style.yaml"
+                    bindings:
+                    - ["classes", "gradeBgStyle"]
+            -   class: "UIControl"
+                name: "Center"
+                input: false
+                components:
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    LinearLayout:
+                        orientation: "TopDown"
+                        dynamicSpacing: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                children:
+                -   class: "UIControl"
+                    name: "Top"
+                    input: false
+                    components:
+                        Background:
+                            drawType: "DRAW_SCALE_TO_RECT"
+                            sprite: "~res:/Gfx/Lobby/backgrounds/grade_glow_center"
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfContent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Color.style.yaml"
+                    bindings:
+                    - ["classes", "gradeBgStyle"]
+                -   class: "UIControl"
+                    name: "Bottom"
+                    input: false
+                    components:
+                        Background:
+                            drawType: "DRAW_SCALE_TO_RECT"
+                            sprite: "~res:/Gfx/Lobby/backgrounds/grade_glow_center"
+                            spriteModification: ["FLIP_VERTICAL"]
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfContent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Color.style.yaml"
+                    bindings:
+                    - ["classes", "gradeBgStyle"]
+            -   class: "UIControl"
+                name: "Right"
+                input: false
+                components:
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    LinearLayout:
+                        orientation: "TopDown"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfMaxChild"
+                        verticalPolicy: "PercentOfChildrenSum"
+                children:
+                -   class: "UIControl"
+                    name: "Top"
+                    input: false
+                    components:
+                        Background:
+                            drawType: "DRAW_ALIGNED"
+                            sprite: "~res:/Gfx/Lobby/backgrounds/grade_glow_right"
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfContent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Color.style.yaml"
+                    bindings:
+                    - ["classes", "gradeBgStyle"]
+                -   class: "UIControl"
+                    name: "Bottom"
+                    input: false
+                    components:
+                        Background:
+                            drawType: "DRAW_ALIGNED"
+                            sprite: "~res:/Gfx/Lobby/backgrounds/grade_glow_right"
+                            spriteModification: ["FLIP_VERTICAL"]
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfContent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Color.style.yaml"
+                    bindings:
+                    - ["classes", "gradeBgStyle"]
+        -   class: "UIControl"
+            name: "Border"
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_STRETCH_BOTH"
+                    sprite: "~res:/Gfx/Lobby/backgrounds/bg_border_1px_r4"
+                    leftRightStretchCap: 4.000000
+                    topBottomStretchCap: 4.000000
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "maxChild + 8"
+                    verticalPolicy: "Formula"
+                    verticalFormula: "maxChild + 4"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+            bindings:
+            - ["classes", "gradeBgStyle"]
+            children:
+            -   class: "UIControl"
+                name: "GradeName"
+                input: false
+                components:
+                    UITextComponent: {}
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        horizontalMin: 24.000000
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+                bindings:
+                - ["classes", "gradeTextStyle + \" \" + textStyle"]
+                - ["UITextComponent.text", "gradeKey"]

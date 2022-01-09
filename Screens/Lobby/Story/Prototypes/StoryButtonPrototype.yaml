@@ -1,0 +1,190 @@
+Header:
+    version: "53"
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/Common/Timer.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "StoryButtonPrototype"
+    classes: "button button-open-sound"
+    components:
+        Background: {}
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 230.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 74.000000
+        UIInputEventComponent:
+            onTouchUpInside: "BUTTON_PRESSED"
+            onTouchUpInsideData: "id"
+        UIDataSourceComponent0:
+            source: "~res:/UI/Examples/Model/Lobby/Story/StoryButtonPrototype.model"
+        UIDataSourceComponent1:
+            sourceType: "File"
+            source: "~res:/UI/Screens/Lobby/Story/ViewModels/StoryButtonPrototypeView.model"
+        Sound: {}
+        StyleSheet:
+            styles: "~res:/UI/Styles/ButtonStyle.yaml;~res:/UI/Styles/ButtonSoundStyles.yaml"
+    children:
+    -   class: "UIParticles"
+        name: "FX"
+        position: [111.000000, 37.000000]
+        size: [32.000000, 32.000000]
+        pivot: [0.500000, 0.500000]
+        visible: false
+        input: false
+        components:
+            IgnoreLayout: {}
+    -   class: "UIControl"
+        name: "Back"
+        input: false
+        classes: "button-color-gray"
+        components:
+            Background:
+                drawType: "DRAW_TILED_MULTILAYER"
+                mask: "~res:/Gfx/UI/CommonUIElements/Button/mask"
+                detail: "~res:/Gfx/UI/CommonUIElements/Button/detail"
+                gradientMode: "Overlay"
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                leftRightStretchCap: 20.000000
+                topBottomStretchCap: 20.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+    -   class: "UIParticles"
+        name: "FX2"
+        position: [111.000000, 37.000000]
+        size: [32.000000, 32.000000]
+        pivot: [0.500000, 0.500000]
+        visible: false
+        input: false
+        components:
+            IgnoreLayout: {}
+    -   class: "UIControl"
+        name: "Layout"
+        input: false
+        components:
+            Background:
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+            LinearLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "Footer"
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_STRETCH_BOTH"
+                    sprite: "~res:/Gfx/UI/Story/counter_back"
+                    colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                    leftRightStretchCap: 3.000000
+                    topBottomStretchCap: 3.000000
+                Anchor:
+                    bottomAnchorEnabled: true
+                    bottomAnchor: 1.000000
+                IgnoreLayout: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 24.000000
+            children:
+            -   class: "UIControl"
+                name: "Type"
+                input: false
+                components:
+                    Background:
+                        colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                        perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                    Anchor:
+                        rightAnchorEnabled: true
+                        rightAnchor: 4.000000
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+                bindings:
+                - ["Background.sprite", "stageIcon", "Read"]
+        -   class: "UIControl"
+            name: "IconContainer"
+            input: false
+            components:
+                Background:
+                    colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 90.000000
+                    verticalPolicy: "PercentOfParent"
+        -   class: "UIControl"
+            name: "TextContainer"
+            input: false
+            components:
+                Background:
+                    colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                LinearLayout:
+                    orientation: "TopDown"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            children:
+            -   class: "UIControl"
+                name: "Title"
+                size: [32.000000, 32.000000]
+                input: false
+                classes: "header4 text-color-gold"
+                components:
+                    UITextComponent:
+                        text: "<!-- НАЗВАНИЕ ИВЕНТА -->"
+                        multiline: "MULTILINE_ENABLED"
+                        align: ["RIGHT", "VCENTER"]
+                    Anchor:
+                        rightAnchorEnabled: true
+                        rightAnchor: 5.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens/Fonts.yaml;~res:/UI/Screens/FontsColors.yaml"
+            -   prototype: "Timer/TimerPrototype"
+                name: "ExpireTimer"
+                components:
+                    Background:
+                        colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                    Anchor:
+                        rightAnchorEnabled: true
+                        rightAnchor: 28.000000
+                    LinearLayout:
+                        useRtl: true
+                    SizePolicy:
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 24.000000
+                    UIDataSourceComponent0:
+                        sourceType: "Expression"
+                        source: "stage"
+                children:
+                -   path: "Time"
+                    bindings:
+                    - ["classes", "\"header5 \" + textColorClass", "Read"]
+    -   class: "UIControl"
+        name: "Badge"
+        input: false
+        classes: "color-red"
+        components:
+            Background:
+                drawType: "DRAW_SCALE_PROPORTIONAL"
+                sprite: "~res:/Gfx/UI/CommonUIElements/WhiteCircle"
+            Anchor:
+                rightAnchorEnabled: true
+                rightAnchor: -5.000000
+                topAnchorEnabled: true
+                topAnchor: -4.000000
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 16.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 16.000000
+            StyleSheet:
+                styles: "~res:/UI/Styles/ColorStyles.yaml"
+        bindings:
+        - ["visible", "isBadgeVisible", "Read"]

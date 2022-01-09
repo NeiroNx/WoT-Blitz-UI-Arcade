@@ -1,0 +1,33 @@
+Header:
+    version: "100"
+StyleSheets:
+-   selectors:
+    - ".point .content-area"
+    properties:
+        opacity-opacity:
+            value: 0.250000
+            transitionTime: 0.600000
+            transitionFunction: "SINE_OUT"
+-   selectors:
+    - ".point:selected .content-area"
+    - ".point:selected:hover .content-area"
+    properties:
+        opacity-opacity:
+            value: 1.000000
+            transitionTime: 0.400000
+            transitionFunction: "SINE_OUT"
+-   selectors:
+    - ".point:hover .content-area"
+    properties:
+        opacity-opacity:
+            value: 0.500000
+            transitionTime: 0.150000
+            transitionFunction: "SINE_OUT"
+-   selectors:
+    - ".point"
+    properties:
+        input: false
+-   selectors:
+    - ".point.Desktop"
+    properties:
+        input: true

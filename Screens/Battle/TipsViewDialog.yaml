@@ -1,0 +1,306 @@
+Header:
+    version: "24"
+ImportedPackages:
+- "~res:/UI/Screens/Battle/Tips.yaml"
+- "~res:/UI/Screens/Common.yaml"
+- "~res:/UI/Screens/Common/StyledButton.yaml"
+- "~res:/UI/Screens/Common/StyledBackButton.yaml"
+- "~res:/UI/Screens/Common/Settings/SwitchWithCaptionAndDescription.yaml"
+- "~res:/UI/Screens/Common/Settings/SettingsCommon.yaml"
+Controls:
+-   class: "UIControl"
+    name: "Dialog"
+    size: [1024.000000, 768.000000]
+    components:
+        Anchor:
+            leftAnchorEnabled: true
+            rightAnchorEnabled: true
+            topAnchorEnabled: true
+            bottomAnchorEnabled: true
+        StyleSheet:
+            styles: "~res:/UI/Screens/Battle/TipsViewDialog.yaml"
+    children:
+    -   class: "UIControl"
+        name: "back"
+        position: [0.000000, 0.000000]
+        size: [1024.000000, 768.000000]
+        noInput: true
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 0.000000
+                rightAnchorEnabled: true
+                rightAnchor: 0.000000
+                topAnchorEnabled: true
+                topAnchor: 0.000000
+                bottomAnchorEnabled: true
+                bottomAnchor: 0.000000
+            Background:
+                drawType: "DRAW_FILL"
+                color: [0.000000, 0.000000, 0.000000, 0.900000]
+                colorInherit: "COLOR_IGNORE_PARENT"
+        children:
+        -   class: "UIControl"
+            name: "mapLogo"
+            position: [464.500000, 23.000000]
+            size: [95.000000, 85.000000]
+            noInput: true
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    hCenterAnchor: 0.000000
+                Background:
+                    sprite: "~res:/Gfx/UI/BattleLoadingScreen/GameplayIcon"
+                    frame: 2
+                    align: ["HCENTER", "TOP"]
+        -   prototype: "Tips/hint"
+            name: "hint"
+            components:
+                Anchor:
+                    bottomAnchorEnabled: true
+        -   prototype: "StyledBackButton/StyledBackButton"
+            name: "OkButton"
+        -   prototype: "StyledButton/StyledButton"
+            name: "NextTipButton"
+            position: [782.000000, 424.000000]
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+                    rightAnchor: 20.000000
+                    bottomAnchorEnabled: true
+                    bottomAnchor: 280.000000
+            children:
+            -   path: "Caption"
+                components:
+                    UITextComponent:
+                        text: "Next Tip"
+        -   class: "UIControl"
+            name: "SupremacyBattles"
+            position: [15.000000, 240.000000]
+            size: [994.000000, 60.000000]
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 15.000000
+                    rightAnchorEnabled: true
+                    rightAnchor: 15.000000
+                    topAnchorEnabled: true
+                    topAnchor: 240.000000
+                Background:
+                    drawType: "DRAW_STRETCH_BOTH"
+                    sprite: "~res:/Gfx/UI/CommonUIElements/BottomLayer"
+                    leftRightStretchCap: 5.000000
+                    topBottomStretchCap: 5.000000
+            children:
+            -   prototype: "SettingsCommon/Slider"
+                name: "Slider"
+                position: [47.000000, 15.000000]
+                value: 31.220800
+                components:
+                    Anchor:
+                        leftAnchorEnabled: true
+                        leftAnchor: 42.000000
+                        hCenterAnchorEnabled: true
+                        rightAnchorEnabled: true
+                        rightAnchor: 42.000000
+                        bottomAnchorEnabled: true
+                        bottomAnchor: -9.500000
+                    StyleSheet:
+                        inheritsStylesFromParent: false
+                children:
+                -   path: "thumbSpriteControl"
+                    children:
+                    -   class: "UIControl"
+                        name: "CurrValue"
+                        position: [467.000000, 69.000000]
+                        size: [60.000000, 30.000000]
+                        noInput: true
+                        classes: "header4 color=text-color-white"
+                        components:
+                            Anchor:
+                                hCenterAnchorEnabled: true
+                                bottomAnchorEnabled: true
+                                bottomAnchor: -30.000000
+                            Background:
+                                align: ["LEFT", "TOP"]
+                            UITextComponent:
+                                text: "Curr"
+                                colorInheritType: "COLOR_IGNORE_PARENT"
+                            StyleSheet:
+                                styles: "~res:/UI/Screens/Fonts.yaml"
+            -   class: "UIControl"
+                name: "MaxValue"
+                position: [137.000000, 222.000000]
+                size: [55.000000, 30.000000]
+                noInput: true
+                classes: "header4 color=text-color-white"
+                components:
+                    Anchor:
+                        rightAnchorEnabled: true
+                        bottomAnchorEnabled: true
+                        bottomAnchor: 15.000000
+                    UITextComponent:
+                        text: "Max"
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens/Fonts.yaml"
+            -   class: "UIControl"
+                name: "MinValue"
+                position: [137.000000, 222.000000]
+                size: [55.000000, 30.000000]
+                noInput: true
+                classes: "header4 color=text-color-white"
+                components:
+                    Anchor:
+                        leftAnchorEnabled: true
+                        rightAnchorEnabled: false
+                        bottomAnchorEnabled: true
+                        bottomAnchor: 15.000000
+                    UITextComponent:
+                        text: "Min"
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens/Fonts.yaml"
+            -   class: "UIControl"
+                name: "Hint"
+                position: [0.000000, 93.000000]
+                size: [55.000000, 30.000000]
+                pivot: [0.000000, 1.000000]
+                noInput: true
+                classes: "header4 color=text-color-white"
+                components:
+                    Anchor:
+                        leftAnchorEnabled: true
+                        hCenterAnchorEnabled: true
+                    UITextComponent:
+                        text: "SupremacyBattlesCount"
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                        align: ["LEFT", "TOP"]
+                    StyleSheet:
+                        styles: "~res:/UI/Screens/Fonts.yaml"
+        -   class: "UIControl"
+            name: "Battles"
+            position: [15.000000, 140.000000]
+            size: [994.000000, 60.000000]
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 15.000000
+                    rightAnchorEnabled: true
+                    rightAnchor: 15.000000
+                    topAnchorEnabled: true
+                    topAnchor: 140.000000
+                Background:
+                    drawType: "DRAW_STRETCH_BOTH"
+                    sprite: "~res:/Gfx/UI/CommonUIElements/BottomLayer"
+                    leftRightStretchCap: 5.000000
+                    topBottomStretchCap: 5.000000
+            children:
+            -   prototype: "SettingsCommon/Slider"
+                name: "Slider"
+                position: [82.000000, -38.000000]
+                value: 45.210300
+                components:
+                    Anchor:
+                        leftAnchorEnabled: true
+                        leftAnchor: 42.000000
+                        hCenterAnchorEnabled: true
+                        rightAnchorEnabled: true
+                        rightAnchor: 42.000000
+                        bottomAnchorEnabled: true
+                        bottomAnchor: -10.000000
+                    StyleSheet:
+                        inheritsStylesFromParent: false
+                children:
+                -   path: "thumbSpriteControl"
+                    children:
+                    -   class: "UIControl"
+                        name: "CurrValue"
+                        position: [497.000000, 300.000000]
+                        size: [60.000000, 30.000000]
+                        noInput: true
+                        classes: "header4 color=text-color-white"
+                        components:
+                            Anchor:
+                                hCenterAnchorEnabled: true
+                                bottomAnchorEnabled: true
+                                bottomAnchor: -30.000000
+                            Background:
+                                align: ["LEFT", "TOP"]
+                            UITextComponent:
+                                text: "Curr"
+                                colorInheritType: "COLOR_IGNORE_PARENT"
+                            StyleSheet:
+                                styles: "~res:/UI/Screens/Fonts.yaml"
+            -   class: "UIControl"
+                name: "MaxValue"
+                position: [137.000000, 222.000000]
+                size: [55.000000, 30.000000]
+                noInput: true
+                classes: "header4 color=text-color-white"
+                components:
+                    Anchor:
+                        rightAnchorEnabled: true
+                        bottomAnchorEnabled: true
+                        bottomAnchor: 15.000000
+                    UITextComponent:
+                        text: "Max"
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens/Fonts.yaml"
+            -   class: "UIControl"
+                name: "MinValue"
+                position: [137.000000, 222.000000]
+                size: [55.000000, 30.000000]
+                noInput: true
+                classes: "header4 color=text-color-white"
+                components:
+                    Anchor:
+                        leftAnchorEnabled: true
+                        rightAnchorEnabled: false
+                        bottomAnchorEnabled: true
+                        bottomAnchor: 15.000000
+                    UITextComponent:
+                        text: "Min"
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens/Fonts.yaml"
+            -   class: "UIControl"
+                name: "Hint"
+                position: [0.000000, 93.000000]
+                size: [55.000000, 30.000000]
+                pivot: [0.000000, 1.000000]
+                noInput: true
+                classes: "header4 color=text-color-white"
+                components:
+                    Anchor:
+                        leftAnchorEnabled: true
+                        hCenterAnchorEnabled: true
+                    UITextComponent:
+                        text: "BattlesCount"
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                        align: ["LEFT", "TOP"]
+                    StyleSheet:
+                        styles: "~res:/UI/Screens/Fonts.yaml"
+        -   prototype: "SwitchWithCaptionAndDescription/SwitchWithCaptionAndDescription"
+            name: "GameplayMode"
+            position: [15.000000, 330.000000]
+            size: [270.000000, 80.000000]
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 15.000000
+                    topAnchorEnabled: true
+                    topAnchor: 430.000000
+            children:
+            -   path: "ContentLinearLayout/TextVerticalLayout/GroupCaption"
+                components:
+                    Anchor:
+                        rightAnchorEnabled: true
+                    UITextComponent:
+                        text: "Supremacy Mode"
+                        align: ["HCENTER", "VCENTER"]
+            -   path: "ContentLinearLayout/TextVerticalLayout/Description"
+                components:
+                    UITextComponent:
+                        text: ""

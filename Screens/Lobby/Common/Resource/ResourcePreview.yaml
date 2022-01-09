@@ -1,0 +1,56 @@
+Header:
+    version: 141
+Prototypes:
+-   class: "UIControl"
+    customClass: "UIResourceLargeControl"
+    name: "ResourcePreview"
+    position: [0.000000, 0.000000]
+    size: [98.000000, 116.000000]
+    input: false
+    classes: "resource resource-type=resource-stuff grade=unknown preview-mode=preview-mode-off size-type"
+    components:
+        Background:
+            colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+        Anchor:
+            hCenterAnchorEnabled: true
+            vCenterAnchorEnabled: true
+        SizePolicy: {}
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens/Lobby/Common/Resource/ResourcePreview.actions"
+        StyleSheet:
+            styles: "~res:/UI/Screens/Lobby/Common/Resource/Style/ResourcePreview.yaml"
+    children:
+    -   class: "UIControl"
+        name: "Grade"
+        input: false
+        components:
+            Background:
+                drawType: "DRAW_STRETCH_HORIZONTAL"
+                sprite: "~res:/Gfx/UI/Storage/Items_back"
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfContent"
+    -   class: "UIControl"
+        name: "IconBack"
+        size: [98.000000, 116.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+    -   class: "UIControl"
+        name: "Icon"
+        size: [98.000000, 116.000000]
+        input: false
+        classes: "draw-type"
+        components:
+            Background:
+                drawType: "DRAW_SCALE_PROPORTIONAL_ONE"
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"

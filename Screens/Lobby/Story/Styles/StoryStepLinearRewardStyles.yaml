@@ -1,0 +1,38 @@
+Header:
+    version: "56"
+StyleSheets:
+-   selector: ".resource.resource-premium #ImageContainer #Img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/Quests/AddCurrencyIconsHuge_200percent.psd"
+        bg-frame: 7
+-   selector: ".resource.resource-free-xp #ImageContainer #Img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/LobbyCommon/BigStar.psd"
+-   selector: ".resource.resource-credits #ImageContainer #Img"
+    properties:
+        bg-drawType: "DRAW_SCALE_PROPORTIONAL_ONE"
+        bg-sprite: "~res:/Gfx/UI/Subscription/SilverCurrency.psd"
+-   selector: ".resource.resource-gold #ImageContainer #Img"
+    properties:
+        bg-drawType: "DRAW_SCALE_PROPORTIONAL_ONE"
+        bg-sprite: "~res:/Gfx/UI/Subscription/GoldCurrency.psd"
+-   selector: ".resource.default #ImageContainer #Grade"
+    properties:
+        bg-sprite: ""
+        bg-color: [1.000000, 0.752941, 0.000000, 1.000000]
+-   selector: ".resource.unique #ImageContainer #Grade"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/Storage/Items_back.psd"
+        bg-color: [0.549020, 0.023529, 0.803922, 1.000000]
+-   selector: ".resource.common #ImageContainer #Grade"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/Storage/Items_back.psd"
+        bg-color: [0.517647, 0.521569, 0.525490, 1.000000]
+-   selector: ".resource.rare #ImageContainer #Grade"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/Storage/Items_back.psd"
+        bg-color: [0.141176, 0.349020, 0.941176, 1.000000]
+-   selector: ".resource.legendary #ImageContainer #Grade"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/Storage/Items_back.psd"
+        bg-color: [1.000000, 0.752941, 0.000000, 1.000000]

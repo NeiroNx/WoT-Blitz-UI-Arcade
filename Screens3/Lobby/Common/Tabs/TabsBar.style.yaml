@@ -1,0 +1,13 @@
+Header:
+    version: "104"
+StyleSheets:
+-   selectors:
+    - ".horizontal"
+    properties:
+        sizePolicy-horizontalPolicy: "PercentOfChildrenSum"
+        sizePolicy-verticalPolicy: "PercentOfMaxChild"
+-   selectors:
+    - ".vertical"
+    properties:
+        sizePolicy-horizontalPolicy: "PercentOfMaxChild"
+        sizePolicy-verticalPolicy: "PercentOfChildrenSum"

@@ -1,0 +1,33 @@
+Header:
+    version: 115
+Prototypes:
+-   class: "UIControl"
+    name: "PointingArrow"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        LinearLayout:
+            spacing: -32.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "PercentOfMaxChild"
+        UIDataParamsComponent:
+            params:
+            - ["int", "arrowsCount", "3", "3"]
+            - ["float", "animationTime", "1.000000", "1.000000"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["float", "wait", "animationTime / 2"]
+            - ["float", "arrowsDeltaWait", "(animationTime / arrowsCount) * 0.600000"]
+            - ["float", "arrow1Delay", "0.000000"]
+            - ["float", "arrow2Delay", "arrow1Delay + arrowsDeltaWait"]
+            - ["float", "arrow3Delay", "when arrowsCount == 3 -> arrow2Delay + arrowsDeltaWait, -1.000000"]
+            - ["vector<float>", "delays", "[ arrow1Delay; arrow2Delay; arrow3Delay; ]"]
+        UIRepeatComponent:
+            control: "~res:/UI/Screens3/Common/PointingArrow/PointingArrowItem.yaml"
+            dataContainer: "delays"
+            args:
+                "animationTime": "animationTime"
+                "delay": "_item"
+                "startOpacity": "0.100000"
+                "finishOpacity": "0.700000"

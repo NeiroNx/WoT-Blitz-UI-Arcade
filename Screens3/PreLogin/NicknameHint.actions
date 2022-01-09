@@ -1,0 +1,27 @@
+action AnimateHint(bool show, float delayTime, float time)
+{
+  if (show)
+  {
+    if (index > 0 and delayTime > 0.0)
+    {
+      Wait(delayTime * index);
+    }
+    parallel
+    {
+      Scale("./AnimatedContent", 1.0, 1.0, time);
+      Opacity("./AnimatedContent", 1.0, time);
+    }
+  }
+  else
+  {
+    if (index < lastIndex and delayTime > 0.0)
+    {
+      Wait(delayTime * (lastIndex - index));
+    }
+    parallel
+    {
+      Scale("./AnimatedContent", 0.01, 0.01, time);
+      Opacity("./AnimatedContent", 0.0, time);
+    }
+  }
+}

@@ -1,0 +1,126 @@
+Header:
+    version: 130
+Prototypes:
+-   class: "UIControl"
+    name: "SideBarSelector"
+    size: [88.000000, 72.000000]
+    input: false
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent: {}
+    children:
+    -   class: "UIControl"
+        name: "SelectionLine"
+        size: [32.000000, 32.000000]
+        input: false
+        classes: "orange-orange-peel-bg"
+        components:
+            Background:
+                drawType: "DRAW_FILL"
+            Anchor:
+                rightAnchorEnabled: true
+            IgnoreLayout: {}
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 4.000000
+                verticalPolicy: "PercentOfParent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+    -   class: "UIControl"
+        name: "Bright"
+        input: false
+        components:
+            UIOpacityComponent:
+                opacity: 1.000000
+            Anchor:
+                rightAnchorEnabled: true
+                rightAnchor: 4.000000
+            IgnoreLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "Element_1"
+            input: false
+            classes: "red-tamarillo-bg"
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_TO_RECT"
+                    sprite: "~res:/Gfx/Lobby/backgrounds/bg_gradient_horizontal_0-100"
+                UIOpacityComponent:
+                    opacity: 0.500000
+                Anchor:
+                    rightAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "parent * 0.6"
+                    verticalPolicy: "Formula"
+                    verticalFormula: "parent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "Element_2"
+            input: false
+            classes: "red-tamarillo-bg"
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_TO_RECT"
+                    sprite: "~res:/Gfx/Lobby/backgrounds/bg_gradient_horizontal_0-100"
+                UIOpacityComponent:
+                    opacity: 0.500000
+                Anchor:
+                    rightAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "parent * 0.85"
+                    verticalPolicy: "Formula"
+                    verticalFormula: "parent * 0.8"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "Element_4"
+            input: false
+            classes: "red-tamarillo-bg"
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_TO_RECT"
+                    sprite: "~res:/Gfx/Lobby/backgrounds/bg_gradient_horizontal_0-100"
+                UIOpacityComponent:
+                    opacity: 0.500000
+                Anchor:
+                    rightAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "parent * 0.95"
+                    verticalPolicy: "Formula"
+                    verticalFormula: "parent * 0.6"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "Element_5"
+            input: false
+            classes: "red-tamarillo-bg"
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_TO_RECT"
+                    sprite: "~res:/Gfx/Lobby/backgrounds/bg_gradient_horizontal_0-100"
+                UIOpacityComponent:
+                    opacity: 0.500000
+                Anchor:
+                    rightAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "parent"
+                    verticalPolicy: "Formula"
+                    verticalFormula: "parent * 0.2"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"

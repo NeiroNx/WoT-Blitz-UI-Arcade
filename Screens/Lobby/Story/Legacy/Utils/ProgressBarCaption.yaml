@@ -1,0 +1,132 @@
+Header:
+    version: "85"
+Controls:
+-   class: "UIControl"
+    name: "ProgressBarCaption"
+    size: [320.000000, 0.000000]
+    input: false
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+            spacing: 5.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            horizontalMax: 320.000000
+            verticalPolicy: "PercentOfChildrenSum"
+        UIDataParamsComponent:
+            params:
+            - ["int", "minimum", "0", "0"]
+            - ["int", "maximum", "0", "100"]
+            - ["int", "value", "0", "20"]
+            - ["ResourceDetailed", "resource", "null", "{ type = ResourceType.stuff; stuff = { title = \"storage/Items/FreeXPBooster/Regular/Title\"; description = \"storage/Items/FreeXPBooster/Rare/Description\"; icon = \"~res:/Gfx/Shared/boosters/booster_free-xp\"; iconUrl = \"\"; quantity = 20; lifetime = 604800L; grade = ArtefactGrade.rare; type = ArtefactType.booster; itemCompactDescr = 0; isEnough = false; }; }"]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        size: [320.000000, 0.000000]
+        input: false
+        components:
+            LinearLayout:
+                orientation: "TopDown"
+                spacing: 5.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                horizontalMax: 320.000000
+                verticalPolicy: "PercentOfChildrenSum"
+        children:
+        -   class: "UIControl"
+            name: "ProgressBarHolder"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 8.000000
+                UIChildComponent:
+                    control: "\"~res:/UI/Screens/Lobby/Story/Legacy/Utils/ProgressBar.yaml\""
+                    args:
+                        "minimum": "minimum"
+                        "maximum": "maximum"
+                        "value": "value"
+        -   class: "UIControl"
+            name: "Caption"
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                LinearLayout:
+                    spacing: 2.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfMaxChild"
+                StyleSheet:
+                    styles: "~res:/UI/Screens/Fonts.yaml"
+            children:
+            -   class: "UIControl"
+                name: "TextContainer"
+                input: false
+                components:
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    LinearLayout:
+                        spacing: 2.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        verticalPolicy: "PercentOfMaxChild"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens/Fonts.yaml;~res:/UI/Screens/FontsColors.yaml"
+                children:
+                -   class: "UIControl"
+                    name: "Current"
+                    input: false
+                    classes: "text2 text-color-white"
+                    components:
+                        UITextComponent:
+                            colorInheritType: "COLOR_IGNORE_PARENT"
+                            align: ["RIGHT", "VCENTER"]
+                            useRtlAlign: "USE_BY_CONTENT"
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfContent"
+                    bindings:
+                    - ["UITextComponent.text", "str1000Separated(value)"]
+                -   class: "UIControl"
+                    name: "Delimiter"
+                    input: false
+                    classes: "text2 text-color-white"
+                    components:
+                        UITextComponent:
+                            text: "/"
+                            colorInheritType: "COLOR_IGNORE_PARENT"
+                            align: ["RIGHT", "VCENTER"]
+                            useRtlAlign: "USE_BY_CONTENT"
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfContent"
+                -   class: "UIControl"
+                    name: "Total"
+                    input: false
+                    classes: "text2 text-color-white"
+                    components:
+                        UITextComponent:
+                            colorInheritType: "COLOR_IGNORE_PARENT"
+                            align: ["RIGHT", "VCENTER"]
+                            useRtlAlign: "USE_BY_CONTENT"
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfContent"
+                    bindings:
+                    - ["UITextComponent.text", "str1000Separated(maximum)"]
+            -   class: "UIControl"
+                name: "ResourceIconHolder"
+                input: false
+                components:
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfFirstChild"
+                        verticalPolicy: "PercentOfFirstChild"
+                    UIChildComponent:
+                        control: "when resource.type == ResourceType.stuff -> \"~res:/UI/Screens/Lobby/Story/Legacy/Utils/Resource/Small/StuffResourceIcon.yaml\", \"~res:/UI/Screens/Lobby/Story/Legacy/Utils/Resource/Small/ResourceDetailedIcon.yaml\""
+                        args:
+                            "stuff": "resource.stuff"
+                            "type": "resource.type"

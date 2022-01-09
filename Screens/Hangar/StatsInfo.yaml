@@ -1,0 +1,280 @@
+Header:
+    version: "111"
+ImportedPackages:
+- "~res:/UI/Screens/Common/StyledButton.yaml"
+- "~res:/UI/Screens/Common/IconButton.yaml"
+- "~res:/UI/Screens/Fonts.yaml"
+- "~res:/UI/Styles/SmartDLCStyles.yaml"
+- "~res:/UI/Screens/Common/UnreadIcon.yaml"
+StyleSheets:
+-   selectors:
+    - "#shopButton #Badge"
+    properties:
+        visible: false
+-   selectors:
+    - "#shopButton #Gift"
+    properties:
+        visible: false
+-   selectors:
+    - "#shopButton.have-badge #Badge"
+    properties:
+        visible: true
+        bg-sprite: "~res:/Gfx/UI/CommonUIElements/WhiteCircle"
+        bg-color: [1.000000, 0.000000, 0.000000, 1.000000]
+-   selectors:
+    - "#shopButton.have-gift #Gift"
+    properties:
+        visible: true
+-   selectors:
+    - "#shopButton.have-badge #Badge.no-general-pack.no-general-pack-hidden"
+    properties:
+        visible: false
+-   selectors:
+    - "#shopButton.have-gift #Badge"
+    properties:
+        visible: false
+-   selectors:
+    - "#shopButton.have-badge #Gift"
+    properties:
+        visible: false
+        bg-sprite: "~res:/Gfx/UI/CommonUIElements/WhiteCircle"
+        bg-color: [1.000000, 0.000000, 0.000000, 1.000000]
+Prototypes:
+-   class: "UIControl"
+    name: "Stat"
+    size: [96.000000, 80.000000]
+    classes: "button"
+    components:
+        Background: {}
+        Anchor:
+            topAnchorEnabled: true
+            vCenterAnchorEnabled: true
+            bottomAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Hangar/StatsInfo.yaml"
+    children:
+    -   class: "UIControl"
+        name: "Value"
+        size: [42.000000, 32.000000]
+        input: false
+        components:
+            Background:
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+            Anchor:
+                rightAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                padding: "5.000000"
+                spacing: 2.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+        children:
+        -   class: "UIStaticText"
+            name: "Text"
+            size: [0.000000, 30.000000]
+            input: false
+            classes: "header1"
+            components:
+                Background:
+                    colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                UITextComponent:
+                    fitting: "FITTING_REDUCE"
+                    align: ["RIGHT", "VCENTER"]
+                Anchor:
+                    rightAnchorEnabled: true
+                    rightAnchor: 33.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    horizontalMax: 115.000000
+        -   class: "UIControl"
+            name: "iconWrapper"
+            input: false
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfLastChild"
+            children:
+            -   class: "UIControl"
+                name: "plus"
+                position: [0.000000, 8.000000]
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    Background:
+                        sprite: "~res:/Gfx/UI/Hangar/plus_btn.psd"
+                        colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                    Anchor:
+                        rightAnchorEnabled: true
+                        rightAnchor: -8.000000
+                        topAnchorEnabled: true
+                        topAnchor: -4.000000
+                    IgnoreLayout: {}
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+            -   class: "UIControl"
+                name: "Icon"
+                input: false
+                components:
+                    Background:
+                        drawType: "DRAW_ALIGNED"
+                        sprite: "~res:/Gfx/UI/LobbyCommon/CurrencyIconsBig"
+                        colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 30.000000
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 30.000000
+-   class: "UIControl"
+    customClass: "UIStatsInfoControl"
+    name: "EmptyCurrencyPanel"
+    size: [116.000000, 80.000000]
+    input: false
+    components:
+        Anchor:
+            rightAnchorEnabled: true
+        LinearLayout:
+            padding: "8.000000"
+            dynamicPadding: true
+            spacing: 10.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Hangar/StatsInfo.yaml"
+    children:
+    -   class: "UIControl"
+        name: "Spacer"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+    -   class: "UIControl"
+        name: "statContainer"
+        size: [0.000000, 80.000000]
+        input: false
+        components:
+            Background:
+                color: [0.000000, 0.000000, 0.000000, 1.000000]
+            Anchor:
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+            LinearLayout:
+                orientation: "RightToLeft"
+                spacing: 5.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+    -   prototype: "StyledButton/DefaultStyledButton"
+        name: "shopButton"
+        size: [80.000000, 64.000000]
+        classes: "button button-color-green no-general-pack-disabled"
+        components:
+            Anchor:
+                vCenterAnchorEnabled: true
+            UIInputEventComponent:
+                onTouchUpInside: "SHOP_BUTTON"
+                onTouchUpInsideData: "eRequiredResource.kInternalBundles"
+            UIVirtualActionEventComponent0:
+                virtualKeyAction: "Options"
+                keyDownEvent: "SHOP_BUTTON"
+                keyDownEventData: "eRequiredResource.kInternalBundles"
+            Focus:
+                state: "Enabled"
+        children:
+        -   class: "UIControl"
+            name: "icon"
+            position: [0.000000, 0.000000]
+            size: [80.000000, 64.000000]
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_ALIGNED"
+                    sprite: "~res:/Gfx/UI/LobbyCommon/IconsSmall"
+                    frame: 23
+                    colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                Anchor:
+                    leftAnchorEnabled: true
+                    rightAnchorEnabled: true
+                    topAnchorEnabled: true
+                    bottomAnchorEnabled: true
+        -   class: "UIControl"
+            name: "Badge"
+            size: [16.000000, 16.000000]
+            input: false
+            classes: "no-general-pack-hidden"
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_TO_RECT"
+                Anchor:
+                    rightAnchorEnabled: true
+                    rightAnchor: -2.000000
+                    topAnchorEnabled: true
+                    topAnchor: -2.000000
+-   prototype: "EmptyCurrencyPanel"
+    name: "CurrencyPanel"
+    components:
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Hangar/StatsInfo.yaml;~res:/UI/Styles/SmartDLCStyles.yaml"
+    children:
+    -   path: "statContainer"
+        components:
+            LinearLayout:
+                spacing: 10.000000
+        children:
+        -   prototype: "Stat"
+            name: "freeXP"
+            classes: "button no-general-pack-disabled"
+            children:
+            -   path: "Value/Text"
+                components:
+                    UITextComponent:
+                        text: "122 000"
+            -   path: "Value/iconWrapper/Icon"
+                components:
+                    Background:
+                        frame: 2
+        -   prototype: "Stat"
+            name: "credits"
+            classes: "button no-general-pack-disabled"
+            children:
+            -   path: "Value/Text"
+                components:
+                    UITextComponent:
+                        text: "122 000"
+            -   path: "Value/iconWrapper/Icon"
+                components:
+                    Background:
+                        frame: 1
+        -   prototype: "Stat"
+            name: "gold"
+            classes: "button no-general-pack-disabled"
+            children:
+            -   path: "Value/Text"
+                components:
+                    UITextComponent:
+                        text: "12 200"
+    -   path: "shopButton"
+        children:
+        -   class: "UIControl"
+            name: "Gift"
+            position: [216.000000, -9.000000]
+            input: false
+            components:
+                Background:
+                    sprite: "~res:/Gfx/UI/LobbyCommon/present_badge.psd"
+                Anchor:
+                    rightAnchorEnabled: true
+                    rightAnchor: -4.000000
+                    topAnchorEnabled: true
+                    topAnchor: -4.000000
+                IgnoreLayout: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+    -   path: "shopButton/Badge"
+        position: [66.000000, 0.000000]

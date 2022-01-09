@@ -1,0 +1,137 @@
+Header:
+    version: 134
+Prototypes:
+-   class: "UIControl"
+    name: "StorageOption"
+    size: [400.000000, 56.000000]
+    classes: "button-choose-sound"
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "FixedSize"
+            verticalValue: 56.000000
+        UIInputEventComponent:
+            onTouchUpInside: "PRESSED"
+            onHoverSet: "HOVER_START"
+            onHoverRemoved: "HOVER_END"
+        UIDataParamsComponent:
+            params:
+            - ["bool", "selected", "false", "false"]
+            - ["bool", "enabled", "true", "true"]
+            - ["string", "labelKey", "\"#Label\"", "\"Внутренняя память\""]
+            - ["int64", "minimalSize", "0L", "900L"]
+            - ["int64", "fullSize", "0L", "1500L"]
+            - ["int64", "freeSpace", "0L", "1000L"]
+            - ["string", "freeSpaceStringed", "\"###\"", "\"8.8 Gb\""]
+            events:
+            - "PRESSED"
+        UIDataLocalVarsComponent:
+            data:
+            - ["bool", "hovered", "false"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["bool", "enoughSpace", "freeSpace >= minimalSize"]
+            - ["string", "labelColorStyle", "when not enoughSpace -> \"red-red-text\", freeSpace > fullSize -> \"green-la-palma-text\", \"white-wild-sand-text\""]
+            - ["string", "spaceColorStyle", "when not enoughSpace -> \"red-red-text\", freeSpace > fullSize -> \"green-la-palma-text\", \"white-wild-sand-50-text\""]
+        UIDataOnEventComponent0:
+            eventName: "HOVER_START"
+            modelFieldExpression: "hovered"
+            dataExpression: "true"
+        UIDataOnEventComponent1:
+            eventName: "HOVER_END"
+            modelFieldExpression: "hovered"
+            dataExpression: "false"
+        Sound: {}
+        StyleSheet:
+            styles: "~res:/UI/Screens3/ButtonSound.style.yaml"
+    bindings:
+    - ["enabled", "not selected and enoughSpace"]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            Anchor:
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                dynamicSpacing: true
+                useRtl: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   class: "UIControl"
+            name: "StoragePoint"
+            input: false
+            components:
+                Anchor:
+                    vCenterAnchorEnabled: true
+                LinearLayout:
+                    spacing: 32.000000
+                    useRtl: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   class: "UIControl"
+                name: "Radio"
+                input: false
+                components:
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfFirstChild"
+                        verticalPolicy: "PercentOfFirstChild"
+                    UIChildComponent0:
+                        prototypePath: "~res:/UI/Screens3/Common/RadioButton/RadioButton.yaml"
+                        args:
+                            "isSelected": "selected"
+                            "isEnabled": "enabled"
+                            "isHovered": "hovered"
+                            "withInput": "false"
+            -   class: "UIControl"
+                name: "Label"
+                position: [64.000000, 6.000000]
+                input: false
+                components:
+                    UITextComponent: {}
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml"
+                bindings:
+                - ["classes", "\"t-body bold \" + labelColorStyle"]
+                - ["UITextComponent.text", "localize(labelKey)"]
+        -   class: "UIControl"
+            name: "FreeSpace"
+            position: [289.000000, 6.000000]
+            input: false
+            components:
+                UITextComponent: {}
+                Anchor:
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml"
+            bindings:
+            - ["classes", "\"t-body regular \" + spaceColorStyle"]
+            - ["UITextComponent.text", "freeSpaceStringed"]
+    -   class: "UIControl"
+        name: "Line"
+        input: false
+        classes: "white-wild-sand-15-bg"
+        components:
+            Background: {}
+            Anchor:
+                bottomAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "FixedSize"
+                verticalValue: 1.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"

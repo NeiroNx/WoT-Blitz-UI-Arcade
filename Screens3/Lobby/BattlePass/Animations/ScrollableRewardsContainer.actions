@@ -1,0 +1,15 @@
+action UpdateFreeRewardsVisibility(float contentWidth, float parentWidth, float positionX)
+{
+  if (freeRewardsCount > 0)
+  {
+    BroadcastEvent("UpdateWhileScroll", "**/FreeRewards", (contentWidth / float(freeRewardsCount)), parentWidth, positionX);
+  }
+}
+
+action UpdatePaidRewardsVisibility(float contentWidth, float parentWidth, float positionX)
+{
+  if (paidRewardsCount > 0)
+  {
+    BroadcastEvent("UpdateWhileScroll", "**/PaidRewards", (contentWidth / float(paidRewardsCount)), parentWidth, positionX);
+  }
+}

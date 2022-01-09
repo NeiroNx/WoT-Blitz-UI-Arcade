@@ -1,0 +1,138 @@
+Header:
+    version: 135
+Prototypes:
+-   class: "UIControl"
+    name: "TankListCellSelector"
+    size: [357.000000, 111.000000]
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "START_SELECTED_ANIMATION,~res:/UI/Screens3/Lobby/Profile/Common/TankListCellSelector.animation;_INIT,~res:/UI/Screens3/Lobby/Profile/Common/TankListCellSelectorFirst.animation"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["int", "addDeltaPercents", "10", "10"]
+            - ["bool", "selected", "false", "true"]
+        UIEventOnDataComponent0:
+            watchedDataExpression: "selected"
+            ifExpression: "true"
+            eventName: "START_SELECTED_ANIMATION"
+    children:
+    -   class: "UIControl"
+        name: "Bright"
+        input: false
+        components:
+            UIOpacityComponent:
+                opacity: 0.000000
+            Anchor:
+                rightAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+        bindings:
+        - ["visible", "selected"]
+        children:
+        -   class: "UIControl"
+            name: "Element_1"
+            input: false
+            classes: "red-tamarillo-bg"
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_TO_RECT"
+                    sprite: "~res:/Gfx/Lobby/backgrounds/bg_gradient_horizontal_0-100"
+                UIOpacityComponent:
+                    opacity: 0.500000
+                Anchor:
+                    rightAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "parent * 0.8"
+                    verticalPolicy: "Formula"
+                    verticalFormula: "parent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "Element_2"
+            input: false
+            classes: "red-tamarillo-bg"
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_TO_RECT"
+                    sprite: "~res:/Gfx/Lobby/backgrounds/bg_gradient_horizontal_0-100"
+                UIOpacityComponent:
+                    opacity: 0.500000
+                Anchor:
+                    rightAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "parent * 0.85"
+                    verticalPolicy: "Formula"
+                    verticalFormula: "parent * 0.8"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "Element_3"
+            input: false
+            classes: "red-tamarillo-bg"
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_TO_RECT"
+                    sprite: "~res:/Gfx/Lobby/backgrounds/bg_gradient_horizontal_0-100"
+                UIOpacityComponent:
+                    opacity: 0.500000
+                Anchor:
+                    rightAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "parent * 0.9"
+                    verticalPolicy: "Formula"
+                    verticalFormula: "parent * 0.6"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "Element_4"
+            input: false
+            classes: "red-tamarillo-bg"
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_TO_RECT"
+                    sprite: "~res:/Gfx/Lobby/backgrounds/bg_gradient_horizontal_0-100"
+                UIOpacityComponent:
+                    opacity: 0.500000
+                Anchor:
+                    rightAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "parent * 0.95"
+                    verticalPolicy: "Formula"
+                    verticalFormula: "parent * 0.4"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "Element_5"
+            input: false
+            classes: "red-tamarillo-bg"
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_TO_RECT"
+                    sprite: "~res:/Gfx/Lobby/backgrounds/bg_gradient_horizontal_0-100"
+                UIOpacityComponent:
+                    opacity: 0.500000
+                Anchor:
+                    rightAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "parent"
+                    verticalPolicy: "Formula"
+                    verticalFormula: "parent * 0.2"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"

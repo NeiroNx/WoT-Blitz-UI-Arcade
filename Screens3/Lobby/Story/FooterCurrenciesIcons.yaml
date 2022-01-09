@@ -1,0 +1,24 @@
+Header:
+    version: 135
+Prototypes:
+-   class: "UIControl"
+    name: "FooterCurrenciesNames"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        LinearLayout:
+            spacing: 4.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "PercentOfMaxChild"
+        UIDataParamsComponent:
+            params:
+            - ["map<string,ResourceDetailed>", "currenciesMap", "{ }", "{ \"a\" = { \"type\" = ResourceType.stuff; }; \"b\" = { }; }"]
+        UIRepeatComponent:
+            control: "~res:/UI/Screens3/Lobby/Common/Resource/CurrencyAdapter.yaml"
+            dataContainer: "currenciesMap"
+            args:
+                "forceHideValue": "true"
+                "resource": "_item"
+    bindings:
+    - ["visible", "currenciesMap.Size() > 0"]

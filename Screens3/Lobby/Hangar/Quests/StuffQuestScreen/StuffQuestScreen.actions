@@ -1,0 +1,35 @@
+action SwipeOffset(int aLeftIndex, int aRightIndex, float aLeftPosition, float aRightPosition, float aLeftProportion, float aRightProportion, bool isInertion)
+{
+    ChangeData(leftIndex, aLeftIndex);
+    ChangeData(rightIndex, aRightIndex);
+    ChangeData(leftPosition, aLeftPosition);
+    ChangeData(rightPosition, aRightPosition);
+    ChangeData(leftProportion, aLeftProportion);
+    ChangeData(rightProportion, aRightProportion);
+}
+
+action PageChanged(int pageIndex)
+{
+    PlaySound(sound="GUI/buttons/drag");
+    ChangeData(currentIndex, pageIndex);
+}
+
+action OnPageCountChanged()
+{
+	ChangeData(currentIndex, 0);
+    ChangeData(leftIndex, 0);
+    ChangeData(rightIndex, 0);
+    ChangeData(leftPosition, 0);
+    ChangeData(rightPosition, 0);
+    ChangeData(leftProportion, 1.0);
+    ChangeData(rightProportion, 1.0);
+}
+
+action BACK_SHORTCUT()
+{
+	if (canClose)
+	{
+	    PlaySound(sound="GUI/buttons/close");
+		Event("BACK_EVENT");
+	}
+}

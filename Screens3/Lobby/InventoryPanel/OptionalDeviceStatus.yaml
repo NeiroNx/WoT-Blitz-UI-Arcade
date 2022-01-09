@@ -1,0 +1,26 @@
+Header:
+    version: "79"
+Prototypes:
+-   class: "UIControl"
+    name: "OptionalDeviceStatus"
+    input: false
+    components:
+        Background: {}
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 3.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 7.000000
+        UIDataParamsComponent:
+            params:
+            - ["eOptionalDeviceStatus", "status", "eOptionalDeviceStatus.EMPTY", "eOptionalDeviceStatus.READY_TO_INSTALL"]
+        UIDataLocalsComponent:
+            locals:
+            - ["string", "emptyStyle", "\"white-wild-sand-25-bg\""]
+            - ["string", "readyToInstallStyle", "\"white-wild-sand-70-bg\""]
+            - ["string", "installedStyle", "\"green-green-bg\""]
+            - ["string", "statusStyle", "when status == eOptionalDeviceStatus.EMPTY -> emptyStyle, status == eOptionalDeviceStatus.READY_TO_INSTALL -> readyToInstallStyle, status == eOptionalDeviceStatus.INSTALLED -> installedStyle, \"\""]
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Color.style.yaml"
+    bindings:
+    - ["classes", "statusStyle"]

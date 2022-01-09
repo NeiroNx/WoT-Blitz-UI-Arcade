@@ -1,0 +1,177 @@
+action ItemsContainerUpdate(float itemWidth, float itemHeight, float containerWidth, float containerHeight, float positionY)
+{
+	ChangeData(itemCountInRow, int((containerWidth - itemWidth) / (itemWidth + rowSpacing) + 1));
+	Event("STORAGE_ITEM_CONTAINER_UPDATE", arg1 = itemHeight, arg2 = containerHeight, arg3 = positionY);
+}
+
+action StartInstallAnimation(string stuffName)
+{
+	PlaySound(sound="GUI/buttons/module_install");
+	DirectEvent("StartInstallAnimation", "**/stuff_" + stuffName);
+} 
+
+action StartCombineAnimation(string stuffName)
+{
+	Wait(0.5);
+	DirectEvent("StartCombineAnimation", "**/stuff_" + stuffName);
+} 
+
+action BACK_SHORTCUT()
+{
+	PlaySound(sound="GUI/buttons/close");
+    Event("BACK_EVENT");
+}
+
+action NEXT_TAB()
+{
+	if (storage.selectedTab == eStorageTab.Certificates)
+	{
+		DirectEvent("ON_TAB_SELECTED", ".", eStorageTab.Appearance);
+	}
+	else
+	{
+		if (storage.selectedTab == eStorageTab.Appearance)
+		{
+			DirectEvent("ON_TAB_SELECTED", ".", eStorageTab.Boosters);
+		}
+		else
+		{
+			if (storage.selectedTab == eStorageTab.Boosters)
+			{
+				DirectEvent("ON_TAB_SELECTED", ".", eStorageTab.Other);
+			}
+			else
+			{
+				DirectEvent("ON_TAB_SELECTED", ".", eStorageTab.Certificates);
+			}
+		}
+	}
+
+	Wait(0.01);
+	DirectEvent("ScrollToSelected", ".", 1.0);
+}
+
+action PREV_TAB()
+{
+	if (storage.selectedTab == eStorageTab.Other)
+	{
+		DirectEvent("ON_TAB_SELECTED", ".", eStorageTab.Boosters);
+	}
+	else
+	{
+		if (storage.selectedTab == eStorageTab.Boosters)
+		{
+			DirectEvent("ON_TAB_SELECTED", ".", eStorageTab.Appearance);
+		}
+		else
+		{
+			if (storage.selectedTab == eStorageTab.Appearance)
+			{
+				DirectEvent("ON_TAB_SELECTED", ".", eStorageTab.Certificates);
+			}
+			else
+			{
+				DirectEvent("ON_TAB_SELECTED", ".", eStorageTab.Other);
+			}
+		}
+	}
+
+	Wait(0.01);
+	DirectEvent("ScrollToSelected", ".", 1.0);
+}
+
+action ON_UP()
+{
+	if (selectedTabData.selectedIndex >= itemCountInRow)
+	{
+		DirectEvent("ON_ITEM_SELECTED", ".", max(0,selectedTabData.selectedIndex - itemCountInRow));
+		Wait(0.01);
+		DirectEvent("ScrollToSelected", ".", 0.5);
+		PlaySound(sound="GUI/buttons/open");
+	}
+}
+
+action ON_DOWN()
+{
+	if (selectedTabData.selectedIndex < itemCountInTab - itemCountInRow and selectedTabData.selectedIndex < selectedTabData.items.Size() - itemCountInRow)
+	{
+		DirectEvent("ON_ITEM_SELECTED", ".", min(itemCountInTab,selectedTabData.selectedIndex + itemCountInRow));
+		Wait(0.01);
+		DirectEvent("ScrollToSelected", ".", 0.5);
+		PlaySound(sound="GUI/buttons/open");
+	}
+}
+
+action ON_LEFT()
+{
+	if (itemCountInRow > 0 and selectedTabData.selectedIndex % itemCountInRow > 0)
+	{
+		DirectEvent("ON_ITEM_SELECTED", ".", max(0,selectedTabData.selectedIndex - 1));
+		PlaySound(sound="GUI/buttons/open");
+	}
+}
+
+action ON_RIGHT()
+{
+	if (itemCountInRow > 0 and selectedTabData.selectedIndex % itemCountInRow < itemCountInRow - 1 and selectedTabData.selectedIndex < selectedTabData.items.Size() - 1)
+	{
+		DirectEvent("ON_ITEM_SELECTED", ".", min(itemCountInTab,selectedTabData.selectedIndex + 1));
+		PlaySound(sound="GUI/buttons/open");
+	}
+}
+
+action ScrollToSelected(float time)
+{
+	if (selectedTabData.selectedIndex >= 0 and selectedTabData.selectedIndex <= itemCountInTab)
+	{
+        if (not isNull(selectedTabData.items[0].resource))
+        {
+            ScrollToEnsureControlOnScreen("**/stuff_" + selectedTabData.items[selectedTabData.selectedIndex].resource.name, time);
+        }
+        else
+        {
+            ScrollToEnsureControlOnScreen("**/gift_" + selectedTabData.items[selectedTabData.selectedIndex].gift.id, time);
+        }
+	}
+}
+
+action ON_MAIN_ACTION()
+{
+	if (storage.selectedItemInfo.footerActions.Size() > 0)
+	{
+		DirectEvent("ON_ACTION", ".", storage.selectedItemInfo.footerActions[0].actionType);
+		PlaySound(sound="GUI/buttons/open");
+	}
+}
+
+action ON_OPTIONAL_ACTION()
+{
+	if (storage.selectedItemInfo.footerActions.Size() > 1)
+	{
+		DirectEvent("ON_ACTION", ".", storage.selectedItemInfo.footerActions[1].actionType);
+		PlaySound(sound="GUI/buttons/open");
+	}
+}
+
+action ScrollToTop()
+{
+    if (selectedTabData.items.Size() > 0)
+	{
+        if (not isNull(selectedTabData.items[0].resource))
+        {
+            ScrollToEnsureControlOnScreen("**/stuff_" + selectedTabData.items[0].resource.name, 1);
+        }
+        else
+        {
+            ScrollToEnsureControlOnScreen("**/gift_" + str(selectedTabData.items[0].gift.id), 1);
+        }
+	}
+}
+
+action ScrollStuffDescriptionToTop()
+{
+    if (selectedTabData.selectedIndex >= 0 and selectedTabData.selectedIndex < selectedTabData.items.Size())
+	{
+		Scroll("**/RightPanel/Content/ContentArea", 0, 0, 1);
+	}
+}

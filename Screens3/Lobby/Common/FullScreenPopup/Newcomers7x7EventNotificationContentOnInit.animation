@@ -1,0 +1,4 @@
+animation Newcomers7x7EventNotificationContentOnInit()
+{
+    Event("Start", arg1 = appearTime);
+}

@@ -1,0 +1,7 @@
+animation ChestUsageContentInit
+{
+    if (not rewards.Empty())
+    {
+        ChangeProperty("**/ClaimButtonHolder/Button", "SizePolicy", "horizontalPolicy", 7);
+    }
+}

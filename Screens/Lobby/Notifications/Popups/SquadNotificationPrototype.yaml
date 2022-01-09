@@ -1,0 +1,82 @@
+Header:
+    version: "77"
+Prototypes:
+-   class: "UIControl"
+    name: "Notification"
+    size: [32.000000, 32.000000]
+    input: true
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "Formula"
+            verticalFormula: "maxChild + 8"
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            UITextureComponent:
+                spritePath: "~res:/Gfx/Lobby/backgrounds/bg_dark_r8"
+                drawType: "DRAW_STRETCH_BOTH"
+                leftRightStretchCap: 8.000000
+                topBottomStretchCap: 8.000000
+            Anchor:
+                bottomAnchorEnabled: true
+            LinearLayout: {}
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 608.000000
+                verticalPolicy: "PercentOfContent"
+                verticalMin: 64.000000
+                verticalMax: 80.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+        children:
+        -   class: "UIControl"
+            name: "LeftPart"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                LinearLayout:
+                    padding: "16"
+                    spacing: 16.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            children:
+            -   class: "UIControl"
+                name: "Icon"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    UITextureComponent:
+                        spritePath: "~res:/Gfx/Lobby/icons/icon_platoon_s"
+                        drawType: "DRAW_SCALE_TO_RECT"
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 24.000000
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 24.000000
+            -   class: "UIControl"
+                name: "Content"
+                input: false
+                classes: "t-caption regular color=white-wild-sand-text"
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+        -   class: "UIControl"
+            name: "ButtonContent"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+                    rightAnchor: 16.000000
+                LinearLayout: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfParent"

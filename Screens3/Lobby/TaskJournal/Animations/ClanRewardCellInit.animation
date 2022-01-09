@@ -1,0 +1,5 @@
+animation Init(bool arg)
+{
+	ChangeData(rewardOpacity, when state == eClanRewardState.Closed or state == eClanRewardState.CannotBeTaken -> 0.500000, 1.000000);
+	ChangeData(displayingProgress, progress);
+}

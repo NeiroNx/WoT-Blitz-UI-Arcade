@@ -1,0 +1,66 @@
+Header:
+    version: "95"
+Prototypes:
+-   class: "UIControl"
+    name: "InfoScreen"
+    size: [960.000000, 640.000000]
+    input: false
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["Story", "story", "null", "{ }"]
+            - ["StatsDataModel", "statsData", "null", "{ }"]
+            - ["LobbyDataModel", "lobby", "null", "{ }"]
+            - ["int64", "serverTime", "0L", "1554299463L"]
+            events:
+            - "BACK_EVENT"
+    children:
+    -   class: "UIControl"
+        name: "Header"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                childType: "kPrototype"
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Headers/StoryHeader.yaml"
+                args:
+                    "story": "story"
+                    "statsData": "statsData"
+                    "lobby": "lobby"
+                    "serverTime": "serverTime"
+                    "currentScreen": "eCurrentScreen.kStoryInfo"
+                eventActions:
+                - ["BACK_EVENT", "BACK_EVENT", ""]
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIWebView"
+            name: "WebView"
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+        -   class: "UIControl"
+            name: "LoadingOverlay"
+            visible: false
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens3/Common/LoadingOverlay.yaml"
+                    args:
+                        "bgStyle": "\"black-15-bg\""

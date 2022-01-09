@@ -1,0 +1,9 @@
+Header:
+    version: "23"
+StyleSheets:
+-   selector: ".vehicle-class.elite #EliteIcon"
+    properties:
+        visible: true
+-   selector: ".vehicle-class.not-elite #EliteIcon"
+    properties:
+        visible: false

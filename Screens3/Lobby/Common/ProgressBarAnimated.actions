@@ -1,0 +1,40 @@
+action Animate(bool reset)
+{
+    ChangeData(isAnimationPlaying, true);
+    parallel
+    {
+        sequence
+        {
+            if (reset)
+            {
+                ChangeData(currentValue, previousValue);
+            }
+
+            if (previousValue != value)
+            {
+                ChangeData(currentValue, value, animationTime, EASE_IN_EASE_OUT);
+            }
+
+            ChangeData(isAnimationPlaying, false);
+            Event("AnimationFinished");
+            Stop();
+        }
+
+        sequence
+        {
+            WaitEvent("SkipAnimation");
+            ChangeData(currentValue, value);
+            ChangeData(isAnimationPlaying, false);
+            Event("AnimationFinished");
+            Stop();
+        }
+    }
+}
+
+action PlayAnimation()
+{
+    if (not isAnimationPlaying)
+    {
+        Event("Animate", arg1 = false);
+    }
+}

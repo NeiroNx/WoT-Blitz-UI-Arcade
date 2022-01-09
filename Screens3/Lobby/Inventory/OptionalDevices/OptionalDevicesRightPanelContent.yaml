@@ -1,0 +1,67 @@
+Header:
+    version: 130
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Inventory/Common/RightPanelContent.yaml"
+- "~res:/UI/Screens3/Lobby/Inventory/Common/RightPanelHeader.yaml"
+- "~res:/UI/Screens3/Lobby/Common/RichText.yaml"
+Prototypes:
+-   prototype: "RightPanelContent/RightPanelContent"
+    name: "RightPanelContent"
+    components:
+        UIDataParamsComponent:
+            params:
+            - ["TankParams", "tankParams", "null", "{ }"]
+            - ["OptionalDeviceItem", "item", "null", "{ }"]
+    children:
+    -   prototype: "RightPanelHeader/RightPanelHeader"
+        name: "RightPanelHeader"
+        components:
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Lobby/Inventory/OptionalDevices/OptionalDevicesItemImage.style.yaml"
+        bindings:
+        - ["classes", "\"optional_device_item \" + item.icon"]
+        children:
+        -   path: "SubTitle"
+            components:
+                UITextComponent: {}
+            bindings:
+            - ["UITextComponent.text", "item.title"]
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfChildrenSum"
+        children:
+        -   prototype: "RichText/RichText"
+            name: "RichText"
+            components:
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "min(parentRest, childrenSum)"
+                UIDataParamsComponent:
+                    args:
+                        "baseFontSize": "\"t-body\""
+                        "baseFontStyle": "\"regular\""
+                        "baseFontColor": "\"white-wild-sand-50-text\""
+                        "key": "item.description"
+                        "resource1Model": "null"
+                        "resource2Model": "null"
+                        "resource3Model": "null"
+                        "resource4Model": "null"
+    -   class: "UIControl"
+        name: "TankParams"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                childType: "kOldExpression"
+                control: "\"~res:/UI/Screens3/Lobby/Common/VehicleParamsPanel/VehicleChangedParamsPanel.yaml\""
+                args:
+                    "tankParams": "tankParams"
+        bindings:
+        - ["visible", "not tankParams.sectionsByType[\"changed\"].content.Empty()"]

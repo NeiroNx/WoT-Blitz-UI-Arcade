@@ -1,0 +1,63 @@
+Header:
+    version: "79"
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/InventoryPanel/InventoryPanelContent/EmptySlot.yaml"
+- "~res:/UI/Screens3/Lobby/InventoryPanel/InventoryPanelContent/LockedSlot.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "Slot"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 32.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 32.000000
+        UIDataParamsComponent:
+            params:
+            - ["bool", "isCamo", "true", "true"]
+            - ["bool", "filled", "false", "true"]
+            - ["bool", "visible", "true", "true"]
+            - ["bool", "isSlotLocked", "false", "false"]
+        UIDataLocalsComponent:
+            locals:
+            - ["string", "isCamoStyle", "when isCamo -> \"camouflage-item\", \"attachment-item\""]
+            - ["string", "filledStyle", "when filled -> \"filled\", \"empty\""]
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Lobby/InventoryPanel/InventorySlot.style.yaml"
+    bindings:
+    - ["visible", "visible"]
+    - ["classes", "filledStyle + \" \" + isCamoStyle + \" \""]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "Img"
+            size: [32.000000, 32.000000]
+            input: false
+            classes: "slot-img equipment-img"
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_TO_RECT"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Lobby/Inventory/Equipment/EquipmentItemImage.style.yaml;~res:/UI/Screens3/Lobby/InventoryPanel/InventorySlot.style.yaml"
+            bindings:
+            - ["visible", "filled"]
+        -   prototype: "EmptySlot/EmptySlot"
+            name: "EmptySlot"
+            bindings:
+            - ["visible", "not isSlotLocked and not filled"]
+        -   prototype: "LockedSlot/LockedSlot"
+            name: "LockedSlot"
+            bindings:
+            - ["visible", "isSlotLocked"]

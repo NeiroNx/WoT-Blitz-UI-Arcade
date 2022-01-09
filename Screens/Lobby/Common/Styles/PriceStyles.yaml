@@ -1,0 +1,48 @@
+Header:
+    version: "23"
+StyleSheets:
+-   selector: ".gold #Icon"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/LobbyCommon/CurrencyIconsBig"
+        bg-frame: 0
+-   selector: ".credits #Icon"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/LobbyCommon/CurrencyIconsBig"
+        bg-frame: 1
+-   selector: ".freeXP #Icon"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/LobbyCommon/CurrencyIconsBig"
+        bg-frame: 2
+-   selector: ".XP #Icon"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/LobbyCommon/CurrencyIconsBig"
+        bg-frame: 3
+-   selector: ".experience #Icon"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/LobbyCommon/CurrencyIconsBig"
+        bg-frame: 4
+-   selector: ".boosters #Icon"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/LobbyCommon/CurrencyIconsBig"
+        bg-frame: 5
+-   selector: ".details #Icon"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/LobbyCommon/CurrencyIconsBig"
+        bg-frame: 6
+-   selector: ".crewXP #Icon"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/LobbyCommon/CurrencyIconsBig"
+        bg-frame: 4
+-   selector: ".eliteXP #Icon"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/LobbyCommon/CurrencyIconsBig"
+        bg-frame: 7
+-   selector: ".empty-price"
+    properties:
+        visible: false
+-   selector: ".price"
+    properties:
+        linearLayout-spacing: 5.000000
+-   selector: ".bonus .price"
+    properties:
+        linearLayout-spacing: 0.000000

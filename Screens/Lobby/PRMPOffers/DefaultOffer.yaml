@@ -1,0 +1,346 @@
+Header:
+    version: 121
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/PRMPOffers/OfferPrototypes.yaml"
+- "~res:/UI/Screens/Lobby/Common/Timer.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "DefaultOffer"
+    size: [960.000000, 640.000000]
+    input: false
+    components:
+        Anchor:
+            leftAnchorEnabled: true
+            rightAnchorEnabled: true
+            topAnchorEnabled: true
+            bottomAnchorEnabled: true
+        UIDataParamsComponent:
+            params:
+            - ["SessionDataModel", "session", "null", "{ }"]
+            - ["BasicOffer", "offer", "null", "{ }"]
+            - ["int64", "arrivalTime", "0L", "0L"]
+            - ["int64", "lifeTime", "0L", "100L"]
+            - ["bool", "timeLimited", "false", "true"]
+            - ["bool", "persistent", "false", "true"]
+            - ["string", "taxMessage", "\"\"", "\"All prices include tax\""]
+            events:
+            - "OFFER_ACTION"
+        UIDataLocalBindingsComponent:
+            data:
+            - ["float", "discountPercentage", "offer.offeredProduct.discountValue * 100.000000"]
+            - ["bool", "showDiscount", "offer.showDiscountValue and discountPercentage >= 1.000000"]
+            - ["string", "discountStringed", "percent(-floor(discountPercentage), 0)"]
+            - ["int64", "endTime", "arrivalTime + lifeTime"]
+            - ["string", "timeLeftString", "timeDiff(endTime - session.serverTime)"]
+    children:
+    -   class: "UIControl"
+        name: "ContentWrapper"
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   class: "UIControl"
+            name: "BackgroundContainrer"
+            input: false
+            components:
+                LinearLayout:
+                    enabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            children:
+            -   class: "UIControl"
+                name: "bg"
+                input: false
+                components:
+                    Background:
+                        drawType: "DRAW_SCALE_TO_RECT"
+                        sprite: "~res:/Gfx/UI/Offers/DefaultOffer/offer-bg-gradient.psd"
+                        color: [1.000000, 1.000000, 1.000000, 0.500000]
+                    Anchor:
+                        enabled: true
+                        topAnchorEnabled: true
+                        topAnchor: -44.000000
+                        bottomAnchorEnabled: true
+                        bottomAnchor: -44.000000
+                    SizePolicy:
+                        horizontalPolicy: "Formula"
+                        horizontalFormula: "when parent > 1000 -> (parent - 800)/2 + 800, parent * 0.9"
+                        verticalPolicy: "Formula"
+            -   class: "UIControl"
+                name: "triangle"
+                input: false
+                components:
+                    Background:
+                        drawType: "DRAW_SCALE_TO_RECT"
+                        sprite: "~res:/Gfx/UI/Offers/DefaultOffer/offer-bg-triangle.psd"
+                        color: [1.000000, 1.000000, 1.000000, 0.500000]
+                        align: ["LEFT", "VCENTER"]
+                    Anchor:
+                        rightAnchorEnabled: true
+                        topAnchorEnabled: true
+                        topAnchor: -44.000000
+                        bottomAnchorEnabled: true
+                        bottomAnchor: -44.000000
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 60.000000
+        -   class: "UIControl"
+            name: "Content"
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                LinearLayout:
+                    orientation: "TopDown"
+                    spacing: 24.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    horizontalValue: 80.000000
+                    horizontalMax: 800.000000
+                    verticalPolicy: "PercentOfChildrenSum"
+                    verticalMin: 260.000000
+                    verticalMax: 330.000000
+            children:
+            -   class: "UIControl"
+                name: "discount"
+                input: false
+                classes: "bold-140 text-color-white"
+                components:
+                    UITextComponent:
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                        shadowOffset: [1.000000, 1.000000]
+                        align: ["RIGHT", "VCENTER"]
+                    Anchor:
+                        rightAnchorEnabled: true
+                        rightAnchor: -16.000000
+                        vCenterAnchorEnabled: true
+                        vCenterAnchor: -28.000000
+                    IgnoreLayout: {}
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens/Fonts.yaml"
+                bindings:
+                - ["visible", "showDiscount"]
+                - ["UITextComponent.text", "discountStringed"]
+            -   class: "UIControl"
+                name: "ProductImage"
+                input: false
+                components:
+                    Background:
+                        drawType: "DRAW_SCALE_PROPORTIONAL"
+                        align: ["HCENTER", "BOTTOM"]
+                    UIUrlImageComponent:
+                        placeholderScenePath: "~res:/UI/Screens/Common/LoadingControl.yaml"
+                        placeholderControlName: "LoadingControl"
+                    Anchor:
+                        rightAnchorEnabled: true
+                        rightAnchor: -35.000000
+                        bottomAnchorEnabled: true
+                        bottomAnchor: -86.000000
+                    IgnoreLayout: {}
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 420.000000
+                        verticalPolicy: "PercentOfContent"
+                bindings:
+                - ["UIUrlImageComponent.imageUrl", "offer.productImageUrl"]
+            -   class: "UIControl"
+                name: "header"
+                input: false
+                components:
+                    LinearLayout:
+                        enabled: true
+                        orientation: "TopDown"
+                        spacing: 4.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfChildrenSum"
+                children:
+                -   prototype: "OfferPrototypes/Title"
+                    name: "title"
+                    components:
+                        RichContent: {}
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            horizontalValue: 65.000000
+                    bindings:
+                    - ["RichContent.text", "offer.title"]
+                -   class: "UIControl"
+                    name: "descriptionWrapper"
+                    input: false
+                    components:
+                        LinearLayout:
+                            spacing: 4.000000
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfChildrenSum"
+                            verticalPolicy: "PercentOfMaxChild"
+                    children:
+                    -   prototype: "OfferPrototypes/DescriptionContainer"
+                        name: "descriptionContainer"
+                        children:
+                        -   path: "Description"
+                            components:
+                                UITextComponent: {}
+                            bindings:
+                            - ["UITextComponent.text", "offer.shortDescription"]
+                    -   class: "UIControl"
+                        name: "TimerWrapper"
+                        input: false
+                        components:
+                            SizePolicy:
+                                horizontalPolicy: "Formula"
+                                horizontalFormula: "lastChild + 16"
+                                verticalPolicy: "PercentOfParent"
+                        bindings:
+                        - ["visible", "timeLimited"]
+                        children:
+                        -   class: "UIControl"
+                            name: "Bg"
+                            input: false
+                            classes: "color-white-15"
+                            components:
+                                Background:
+                                    drawType: "DRAW_FILL"
+                                SizePolicy:
+                                    horizontalPolicy: "PercentOfParent"
+                                    verticalPolicy: "PercentOfParent"
+                                StyleSheet:
+                                    styles: "~res:/UI/Styles/ColorStyles.yaml"
+                        -   prototype: "Timer/Timer"
+                            name: "Timer"
+                            components:
+                                Anchor:
+                                    hCenterAnchorEnabled: true
+                                    vCenterAnchorEnabled: true
+                            children:
+                            -   path: "Icon"
+                                components:
+                                    Background:
+                                        sprite: "~res:/Gfx/UI/LobbyCommon/timer_icon2.psd"
+                            -   path: "Time"
+                                classes: "fs-15 bold text-color-white"
+                                components:
+                                    UITextComponent: {}
+                                bindings:
+                                - ["UITextComponent.text", "timeLeftString"]
+            -   class: "UIControl"
+                name: "middle"
+                input: false
+                components:
+                    LinearLayout:
+                        orientation: "TopDown"
+                        spacing: 24.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        horizontalValue: 62.000000
+                        verticalPolicy: "PercentOfChildrenSum"
+                children:
+                -   prototype: "OfferPrototypes/DetailedDescription"
+                    name: "detailedDescription"
+                    components:
+                        RichContent: {}
+                    bindings:
+                    - ["RichContent.text", "offer.detailedDescription"]
+                -   class: "UIControl"
+                    name: "RemainingProducts"
+                    input: false
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfFirstChild"
+                            verticalPolicy: "PercentOfFirstChild"
+                        UIChildComponent0:
+                            condition: "offer.offeredProduct.xTimed and (persistent or offer.offeredProduct.availableAmount == 0)"
+                            prototypePath: "~res:/UI/Screens3/Lobby/Hangar/Offers/PRMP/Common/XTimeLabel.yaml"
+                            args:
+                                "product": "offer.offeredProduct"
+    -   class: "UIControl"
+        name: "PriceContainer"
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                bottomAnchorEnabled: true
+                bottomAnchor: 90.000000
+            LinearLayout:
+                orientation: "TopDown"
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfChildrenSum"
+        children:
+        -   class: "UIControl"
+            name: "TaxMessage"
+            input: false
+            classes: "text3-small text-color-grey"
+            components:
+                UITextComponent:
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                    shadowOffset: [1.000000, 1.000000]
+                    align: ["RIGHT", "VCENTER"]
+                Anchor:
+                    hCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens/Fonts.yaml"
+            bindings:
+            - ["visible", "not empty(taxMessage) and not offer.offeredProduct.salePrice.resources.Empty() and offer.offeredProduct.salePrice.resources[0].type == ResourceType.real_currency"]
+            - ["UITextComponent.text", "taxMessage"]
+        -   class: "UIControl"
+            name: "Pricing"
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                LinearLayout:
+                    orientation: "LeftToRight"
+                    padding: "8; 0"
+                    dynamicPadding: true
+                    spacing: 28.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   class: "UIControl"
+                name: "FullPrice"
+                input: false
+                components:
+                    UIOpacityComponent:
+                        opacity: 0.600000
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfFirstChild"
+                        verticalPolicy: "PercentOfFirstChild"
+                    UIChildComponent0:
+                        condition: "offer.offeredProduct.fullPriceValid"
+                        prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/Currencies.yaml"
+                        args:
+                            "crossOut": "true"
+                            "currencySize": "eCurrencySize.BIG_BOLD"
+                            "price": "offer.offeredProduct.fullPrice"
+                            "showDiscount": "false"
+                bindings:
+                - ["visible", "offer.offeredProduct.fullPriceValid"]
+            -   class: "UIControl"
+                name: "SalePrice"
+                input: false
+                components:
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfFirstChild"
+                        verticalPolicy: "PercentOfFirstChild"
+                    UIChildComponent0:
+                        prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/Currencies.yaml"
+                        args:
+                            "currencySize": "eCurrencySize.HUGE_BOLD"
+                            "price": "offer.offeredProduct.salePrice"

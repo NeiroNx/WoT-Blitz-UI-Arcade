@@ -1,0 +1,43 @@
+Header:
+    version: 130
+Prototypes:
+-   class: "UIControl"
+    name: "DailyChestsSection"
+    size: [940.000000, 600.000000]
+    input: false
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+            spacing: 8.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "PercentOfMaxChild"
+        UIDataParamsComponent:
+            params:
+            - ["bool", "arabicLocalization", "false", "false"]
+            - ["int64", "serverTime", "0L", "0L"]
+            - ["DailyChestsData", "dailyChests", "null", "{ }"]
+            events:
+            - "ON_CHEST_CLICKED"
+    children:
+    -   class: "UIControl"
+        name: "slots"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            LinearLayout:
+                spacing: 40.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfMaxChild"
+            UIRepeatComponent:
+                control: "~res:/UI/Screens3/Lobby/Chests/DailyChestSlot.yaml"
+                args:
+                    "imagePattern": "dailyChests.chestImagePattern"
+                    "dailyChest": "_item"
+                    "dailyBonusUpdate": "dailyChests.dailyBonusUpdate"
+                    "serverTime": "serverTime"
+                    "purchaseAllowedForCountry": "dailyChests.purchaseAllowedForCountry"
+                    "arabicLocalization": "arabicLocalization"
+                eventActions:
+                - ["ON_CHEST_CLICKED", "ON_CHEST_CLICKED", "_item.descr"]

@@ -1,0 +1,15 @@
+Header:
+    version: "96"
+Prototypes:
+-   class: "UIControl"
+    name: "Space"
+    input: false
+    classes: "t-body regular"
+    components:
+        UITextComponent:
+            text: " "
+        SizePolicy:
+            horizontalPolicy: "PercentOfContent"
+            verticalPolicy: "PercentOfContent"
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Font.style.yaml"

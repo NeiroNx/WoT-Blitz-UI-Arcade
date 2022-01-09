@@ -1,0 +1,7 @@
+text = when (count >= 100) -> "99+",
+		str(count);
+
+typeStyle =  when type == eBadge.unread -> "header3 " + "unread",
+			when type == eBadge.squad -> "header3 " + "squad",
+			when type == eBadge.tournaments -> "header3 " + "tournaments",
+			"";

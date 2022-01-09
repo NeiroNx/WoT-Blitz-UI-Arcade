@@ -1,0 +1,906 @@
+Header:
+    version: 141
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/Button.yaml"
+- "~res:/UI/Screens3/Lobby/Common/Timer.yaml"
+- "~res:/UI/Screens3/Lobby/Common/BlurLite.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "StuffQuestSlide"
+    size: [960.000000, 640.000000]
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens3/Lobby/Hangar/Quests/StuffQuestScreen/StuffQuestSlide.animation"
+        ClipContent: {}
+        Anchor:
+            leftAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["bool", "previewFromTooltip", "false", "false"]
+            - ["float", "point", "0.000000", "0.000000"]
+            - ["float", "proportion", "0.000000", "1.000000"]
+            - ["bool", "hidden", "false", "false"]
+            - ["SessionDataModel", "session", "null", "{ }"]
+            - ["StuffQuest", "quest", "null", "{ \"status\" = eStuffQuestStatus.Active; }"]
+            - ["int", "index", "0", "0"]
+            events:
+            - "ON_SKIP_CLICKED"
+            - "ON_REWARD_CLICKED"
+            - "ON_QUEST_ACTION"
+        UIDataLocalVarsComponent:
+            data:
+            - ["bool", "showBlur", "quest.urlImage == \"\""]
+            - ["string", "defaultImage", "\"~res:/Gfx/Lobby/backgrounds/bg_task-jornal_item\""]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["bool", "isStarted", "quest.status != eStuffQuestStatus.NotStarted"]
+            - ["bool", "isActive", "quest.status == eStuffQuestStatus.Active"]
+            - ["bool", "isFailed", "quest.status == eStuffQuestStatus.Failed"]
+            - ["bool", "isCompleted", "quest.status == eStuffQuestStatus.Completed"]
+            - ["bool", "showProgress", "isActive or isFailed"]
+            - ["bool", "actionButtonHidden", "not isStarted and session.serverTime >= quest.stuffExpirationTime"]
+            - ["bool", "actionButtonLocked", "quest.status == eStuffQuestStatus.Failed and session.serverTime <= quest.time + 4L"]
+            - ["vector<ResourceDetailed>", "rewards", "when isFailed -> quest.failRewards, quest.successRewards"]
+            - ["string", "headerText", "when not isStarted or isActive -> quest.stuffTitle, isCompleted -> \"stuff_quest/screen/header/completed\", isFailed -> \"stuff_quest/screen/header/failed\", \"stuff_quest/screen/header/not_started\""]
+            - ["string", "urlImage", "quest.urlImage"]
+            - ["bool", "showGrayscale", "isFailed"]
+            - ["float", "saturation", "when showGrayscale -> -100.000000, 0.000000"]
+        UIDataOnEventComponent0:
+            eventName: "StuffQuestBackgroundLoaded"
+            modelFieldExpression: "showBlur"
+            dataExpression: "true"
+    bindings:
+    - ["Anchor.leftAnchor", "point"]
+    children:
+    -   class: "UIControl"
+        name: "BackgroundImage"
+        input: false
+        classes: "black-bg"
+        components:
+            Background:
+                drawType: "DRAW_FILL"
+            UIPostProcessSourceComponent0:
+                id: "QuestImage"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+        children:
+        -   class: "UIControl"
+            name: "DefaultBackground"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_PROPORTIONAL_ONE"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            bindings:
+            - ["visible", "urlImage == \"\""]
+            - ["Background.sprite", "defaultImage"]
+        -   class: "UIControl"
+            name: "UrlBackground"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_PROPORTIONAL_ONE"
+                UIUrlImageComponent:
+                    imageLoadedEvent: "StuffQuestBackgroundLoaded"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            bindings:
+            - ["visible", "urlImage != \"\""]
+            - ["UIUrlImageComponent.imageUrl", "urlImage"]
+        -   class: "UIControl"
+            name: "LeftTop"
+            input: false
+            classes: "black-50-bg"
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_PROPORTIONAL"
+                    sprite: "~res:/Gfx/Lobby/backgrounds/bg_radial-gradient_quarter"
+                Anchor:
+                    leftAnchorEnabled: true
+                    topAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 400.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 400.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "RightTop"
+            input: false
+            classes: "black-50-bg"
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_PROPORTIONAL"
+                    sprite: "~res:/Gfx/Lobby/backgrounds/bg_radial-gradient_quarter"
+                    spriteModification: ["FLIP_HORIZONTAL"]
+                Anchor:
+                    rightAnchorEnabled: true
+                    topAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 400.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 400.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "LeftBottom"
+            input: false
+            classes: "black-50-bg"
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_PROPORTIONAL"
+                    sprite: "~res:/Gfx/Lobby/backgrounds/bg_radial-gradient_quarter"
+                    spriteModification: ["FLIP_VERTICAL"]
+                Anchor:
+                    leftAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 400.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 400.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "RightBottom"
+            input: false
+            classes: "black-50-bg"
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_PROPORTIONAL"
+                    sprite: "~res:/Gfx/Lobby/backgrounds/bg_radial-gradient_quarter"
+                    spriteModification: ["FLIP_HORIZONTAL", "FLIP_VERTICAL"]
+                Anchor:
+                    rightAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 400.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 400.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+    -   class: "UIControl"
+        name: "BackgroundHSV"
+        input: false
+        components:
+            Background:
+                usePostProcessedSprite: true
+            UIPostProcessInputComponent:
+                id: "QuestImage"
+            UIPostProcessSourceComponent0:
+                id: "QuestImageHSV"
+            UIPostProcessTextureComponent0:
+                materialPath: "~res:/Materials.custom/2d.Textured.HSV.material"
+                needClearAlphaAfterRender: true
+                minFilter: "Linear"
+                magFilter: "Linear"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        bindings:
+        - ["visible", "showBlur"]
+        - ["UIPostProcessTextureComponent0.customParameters", "getHSVParams(0.000000, saturation, 0.000000)"]
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            LinearLayout:
+                orientation: "TopDown"
+                padding: "48"
+                dynamicPadding: true
+                spacing: 28.000000
+                dynamicSpacing: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "HeaderContainer"
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                LinearLayout:
+                    orientation: "TopDown"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfChildrenSum"
+            children:
+            -   class: "UIControl"
+                name: "Header"
+                input: false
+                classes: "t-title bold color=white-wild-sand-text"
+                components:
+                    UITextComponent:
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                        align: ["LEFT", "VCENTER"]
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+                bindings:
+                - ["UITextComponent.text", "localize(headerText)"]
+        -   class: "UIControl"
+            name: "TimeInfo"
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                LinearLayout:
+                    orientation: "TopDown"
+                    spacing: 8.000000
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 640.000000
+                    verticalPolicy: "PercentOfChildrenSum"
+            bindings:
+            - ["visible", "not isCompleted"]
+            children:
+            -   class: "UIControl"
+                name: "Info"
+                input: false
+                components:
+                    UITextComponent:
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                        align: ["LEFT", "VCENTER"]
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+                bindings:
+                - ["classes", "when isFailed -> \"t-subtitle regular color=red-red-text\", \"t-subtitle regular color=white-wild-sand-text\""]
+                - ["UITextComponent.text", "when isFailed -> localize(\"stuff_quest/screen/timer/time_is_up\"), isActive -> localize(\"stuff_quest/screen/timer/time_active\"), localize(\"stuff_quest/screen/timer/time_to_do\")"]
+            -   class: "UIControl"
+                name: "TimerWrapper"
+                input: false
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                    LinearLayout:
+                        spacing: 8.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "Formula"
+                        verticalFormula: "maxChild - 8"
+                children:
+                -   class: "UIControl"
+                    name: "LeftLine"
+                    input: false
+                    classes: "white-wild-sand-50-bg"
+                    components:
+                        Background:
+                            drawType: "DRAW_SCALE_TO_RECT"
+                            sprite: "~res:/Gfx/Lobby/backgrounds/bg_gradient_horizontal_0-100"
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 1.000000
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Color.style.yaml"
+                -   prototype: "Timer/Timer"
+                    name: "Timer"
+                    components:
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        UIAttachLayoutMasterComponent:
+                            attachId: "TASK_JOURNAL_KEY_REWARDS_TIMER"
+                        UIDataParamsComponent:
+                            args:
+                                "colorStyle": "when isFailed -> \"red-red\", \"white-wild-sand\""
+                                "timerSize": "eTimerSize.Big"
+                                "time": "quest.time"
+                                "serverTime": "when isStarted -> session.serverTime, 0L"
+                -   class: "UIControl"
+                    name: "RightLine"
+                    input: false
+                    classes: "white-wild-sand-50-bg"
+                    components:
+                        Background:
+                            drawType: "DRAW_SCALE_TO_RECT"
+                            sprite: "~res:/Gfx/Lobby/backgrounds/bg_gradient_horizontal_0-100"
+                            spriteModification: ["FLIP_HORIZONTAL"]
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 1.000000
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "QuestsInfo"
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                LinearLayout:
+                    orientation: "TopDown"
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 500.000000
+                    verticalPolicy: "PercentOfChildrenSum"
+            children:
+            -   class: "UIControl"
+                name: "Header"
+                input: false
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 48.000000
+                bindings:
+                - ["visible", "isCompleted"]
+            -   class: "UIControl"
+                name: "Content"
+                input: false
+                components:
+                    LinearLayout:
+                        padding: "24;24"
+                        spacing: 24.000000
+                        useRtl: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "FixedSize"
+                children:
+                -   class: "UIControl"
+                    name: "Bg"
+                    input: false
+                    classes: "black-35-bg"
+                    components:
+                        Background: {}
+                        UIRoundedCornersComponent:
+                            radius: "5"
+                        IgnoreLayout: {}
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfParent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Color.style.yaml"
+                -   class: "UIControl"
+                    name: "Icon"
+                    input: false
+                    components:
+                        Background:
+                            drawType: "DRAW_SCALE_PROPORTIONAL_ONE"
+                            colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                            hCenterAnchor: 4.000000
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "FixedSize"
+                            horizontalValue: 60.000000
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 100.000000
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Lobby/TaskJournal/TaskJournalListCell.style.yaml"
+                    bindings:
+                    - ["classes", "str(quest.iconType)"]
+                -   class: "UIControl"
+                    name: "Info"
+                    input: false
+                    components:
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        LinearLayout:
+                            orientation: "TopDown"
+                            padding: "12"
+                            dynamicPadding: true
+                            spacing: 8.000000
+                            dynamicSpacing: false
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfParent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+                    children:
+                    -   class: "UIControl"
+                        name: "Description"
+                        size: [32.000000, 32.000000]
+                        input: false
+                        classes: "t-headline bold color=white-wild-sand-text"
+                        components:
+                            UITextComponent:
+                                colorInheritType: "COLOR_IGNORE_PARENT"
+                                multiline: "MULTILINE_ENABLED"
+                                fitting: "FITTING_POINTS"
+                                align: ["LEFT", "VCENTER"]
+                                useRtlAlign: "USE_BY_SYSTEM"
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                verticalPolicy: "Formula"
+                                verticalFormula: "min(48, content)"
+                            StyleSheet:
+                                styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+                        bindings:
+                        - ["UITextComponent.text", "localize(quest.title, { \"highlight_start\" = \"\"; \"highlight_end\" = \"\"; })"]
+                    -   class: "UIControl"
+                        name: "Progress"
+                        size: [32.000000, 32.000000]
+                        input: false
+                        components:
+                            LinearLayout:
+                                spacing: 8.000000
+                                useRtl: true
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                verticalPolicy: "PercentOfMaxChild"
+                        bindings:
+                        - ["visible", "isStarted"]
+                        children:
+                        -   class: "UIControl"
+                            name: "Text"
+                            visible: false
+                            input: false
+                            classes: "t-body regular color=white-wild-sand-50-text"
+                            components:
+                                UITextComponent:
+                                    text: "stuff_quest/screen/progress"
+                                    colorInheritType: "COLOR_IGNORE_PARENT"
+                                    align: ["LEFT", "VCENTER"]
+                                SizePolicy:
+                                    horizontalPolicy: "PercentOfContent"
+                                    verticalPolicy: "PercentOfContent"
+                                StyleSheet:
+                                    styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+                        -   class: "UIControl"
+                            name: "Value"
+                            input: false
+                            classes: "t-body regular color=white-wild-sand-text"
+                            components:
+                                UITextComponent:
+                                    colorInheritType: "COLOR_IGNORE_PARENT"
+                                    align: ["LEFT", "VCENTER"]
+                                SizePolicy:
+                                    horizontalPolicy: "PercentOfContent"
+                                    verticalPolicy: "PercentOfContent"
+                                StyleSheet:
+                                    styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+                            bindings:
+                            - ["UITextComponent.text", "str(quest.currentProgress) + \" / \" + str(quest.totalProgress)"]
+                -   class: "UIControl"
+                    name: "ProgressBar"
+                    input: false
+                    components:
+                        Anchor:
+                            bottomAnchorEnabled: true
+                            bottomAnchor: -4.000000
+                        IgnoreLayout: {}
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 4.000000
+                        UIChildComponent0:
+                            condition: "showProgress"
+                            prototypePath: "~res:/UI/Screens3/Lobby/Common/ProgressBar.yaml"
+                            args:
+                                "progressColor": "when isFailed -> \"red-red-bg\", \"yellow-chalky-bg\""
+                                "maximum": "quest.totalProgress"
+                                "value": "quest.currentProgress"
+                -   class: "UIControl"
+                    name: "CompleteLineContainer"
+                    input: false
+                    components:
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                            topAnchorEnabled: true
+                            topAnchor: -2.000000
+                        IgnoreLayout: {}
+                        SizePolicy:
+                            horizontalPolicy: "FixedSize"
+                            horizontalValue: 292.000000
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 5.000000
+                    bindings:
+                    - ["visible", "isCompleted"]
+                    children:
+                    -   class: "UIControl"
+                        name: "CompleteLine"
+                        input: false
+                        classes: "green-green-bg"
+                        components:
+                            Background:
+                                drawType: "DRAW_SCALE_TO_RECT"
+                                sprite: "~res:/Gfx/Lobby/backgrounds/bg_radial-gradient_full"
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                verticalPolicy: "PercentOfParent"
+                            StyleSheet:
+                                styles: "~res:/UI/Screens3/Color.style.yaml"
+                    -   class: "UIControl"
+                        name: "FadeLine"
+                        input: false
+                        classes: "black-25-bg"
+                        components:
+                            Background:
+                                drawType: "DRAW_SCALE_TO_RECT"
+                                sprite: "~res:/Gfx/Lobby/backgrounds/bg_radial-gradient_full"
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                verticalPolicy: "PercentOfParent"
+                            StyleSheet:
+                                styles: "~res:/UI/Screens3/Color.style.yaml"
+                -   class: "UIControl"
+                    name: "CompleteIconContainer"
+                    input: false
+                    components:
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                            topAnchorEnabled: true
+                            topAnchor: -32.000000
+                        IgnoreLayout: {}
+                        SizePolicy:
+                            horizontalPolicy: "FixedSize"
+                            horizontalValue: 48.000000
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 48.000000
+                    bindings:
+                    - ["visible", "isCompleted"]
+                    children:
+                    -   class: "UIControl"
+                        name: "CompleteIcon"
+                        input: false
+                        classes: "green-green-bg"
+                        components:
+                            Background:
+                                drawType: "DRAW_SCALE_PROPORTIONAL"
+                                sprite: "~res:/Gfx/Lobby/icons/icon_tick_xl"
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                verticalPolicy: "PercentOfParent"
+                            StyleSheet:
+                                styles: "~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "Rewards"
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                LinearLayout:
+                    orientation: "TopDown"
+                    padding: "8"
+                    dynamicPadding: true
+                    spacing: -4.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    horizontalValue: 80.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 188.000000
+            children:
+            -   class: "UIControl"
+                name: "MaskedBlurContainer"
+                input: false
+                components:
+                    IgnoreLayout: {}
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                bindings:
+                - ["visible", "showBlur"]
+                children:
+                -   class: "UIControl"
+                    name: "BlurMask"
+                    visible: false
+                    input: false
+                    components:
+                        UIPostProcessSourceComponent0:
+                            id: "QuestsBlurMask"
+                        LinearLayout: {}
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfParent"
+                    children:
+                    -   class: "UIControl"
+                        name: "Left"
+                        input: false
+                        components:
+                            Background:
+                                drawType: "DRAW_SCALE_TO_RECT"
+                                sprite: "~res:/Gfx/Lobby/backgrounds/bg_gradient_horizontal_0-100"
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                horizontalValue: 30.000000
+                                verticalPolicy: "PercentOfParent"
+                    -   class: "UIControl"
+                        name: "Centre"
+                        input: false
+                        components:
+                            Background:
+                                drawType: "DRAW_FILL"
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                verticalPolicy: "PercentOfParent"
+                    -   class: "UIControl"
+                        name: "Right"
+                        input: false
+                        components:
+                            Background:
+                                drawType: "DRAW_SCALE_TO_RECT"
+                                sprite: "~res:/Gfx/Lobby/backgrounds/bg_gradient_horizontal_0-100"
+                                spriteModification: ["FLIP_HORIZONTAL"]
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                horizontalValue: 30.000000
+                                verticalPolicy: "PercentOfParent"
+                -   class: "UIControl"
+                    name: "MaskedBlur"
+                    input: false
+                    components:
+                        UIPostProcessSourceComponent0:
+                            id: "QuestsMaskedBlur"
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfParent"
+                    children:
+                    -   prototype: "BlurLite/BlurLite"
+                        name: "BlurLite"
+                        components:
+                            UIPostProcessInputComponent:
+                                id: "QuestImage"
+                            UIPostProcessTextureComponent0:
+                                needClear: true
+                    -   class: "UIControl"
+                        name: "Mask"
+                        input: false
+                        components:
+                            Background:
+                                usePostProcessedSprite: true
+                            UIPostProcessInputComponent:
+                                id: "QuestsBlurMask"
+                            UIPostProcessTextureComponent0:
+                                materialPath: "~res:/Materials.custom/2d.Textured.AlphaMask.material"
+                                needClear: true
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                verticalPolicy: "PercentOfParent"
+                -   class: "UIControl"
+                    name: "BackgroundUnderBlur"
+                    input: false
+                    components:
+                        Background:
+                            usePostProcessedSprite: true
+                        UIPostProcessInputComponent:
+                            id: "QuestImageHSV"
+                        UIPostProcessTextureComponent0:
+                            materialPath: "~res:/Materials/2d.Textured.material"
+                            needClear: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfParent"
+                -   class: "UIControl"
+                    name: "ShowMaskedBlur"
+                    input: false
+                    components:
+                        Background:
+                            usePostProcessedSprite: true
+                        UIPostProcessInputComponent:
+                            id: "QuestsMaskedBlur"
+                        UIPostProcessTextureComponent0:
+                            materialPath: "~res:/Materials/2d.Textured.Alphablend.material"
+                            needClear: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfParent"
+                -   class: "UIControl"
+                    name: "Shadow"
+                    input: false
+                    components:
+                        LinearLayout: {}
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfParent"
+                    children:
+                    -   class: "UIControl"
+                        name: "Left"
+                        input: false
+                        classes: "black-35-bg"
+                        components:
+                            Background:
+                                drawType: "DRAW_SCALE_TO_RECT"
+                                sprite: "~res:/Gfx/Lobby/backgrounds/bg_gradient_horizontal_0-100"
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                horizontalValue: 30.000000
+                                verticalPolicy: "PercentOfParent"
+                            StyleSheet:
+                                styles: "~res:/UI/Screens3/Color.style.yaml"
+                    -   class: "UIControl"
+                        name: "Centre"
+                        input: false
+                        classes: "black-35-bg"
+                        components:
+                            Background: {}
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                verticalPolicy: "PercentOfParent"
+                            StyleSheet:
+                                styles: "~res:/UI/Screens3/Color.style.yaml"
+                    -   class: "UIControl"
+                        name: "Right"
+                        input: false
+                        classes: "black-35-bg"
+                        components:
+                            Background:
+                                drawType: "DRAW_SCALE_TO_RECT"
+                                sprite: "~res:/Gfx/Lobby/backgrounds/bg_gradient_horizontal_0-100"
+                                spriteModification: ["FLIP_HORIZONTAL"]
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                horizontalValue: 30.000000
+                                verticalPolicy: "PercentOfParent"
+                            StyleSheet:
+                                styles: "~res:/UI/Screens3/Color.style.yaml"
+            -   class: "UIControl"
+                name: "FailRewardsHint"
+                input: false
+                classes: "t-subtitle regular color=white-wild-sand-text"
+                components:
+                    UITextComponent:
+                        text: "stuff_quest/screen/rewards/fail_reward"
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                        multiline: "MULTILINE_ENABLED"
+                        align: ["LEFT", "VCENTER"]
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+                bindings:
+                - ["visible", "isFailed"]
+            -   class: "UIControl"
+                name: "Rewards"
+                input: false
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        bottomAnchorEnabled: true
+                        bottomAnchor: 16.000000
+                    LinearLayout: {}
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 144.000000
+                    UIRepeatComponent:
+                        control: "~res:/UI/Screens3/Lobby/Common/Resource/Detailed/Big.yaml"
+                        dataContainer: "rewards"
+                        args:
+                            "overlay": "control(\"~res:/UI/Screens3/Lobby/Hangar/Quests/StuffQuestScreen/StuffQuestRewardOverlay.yaml\", { \"index\" = _index; \"attachId\" = \"reward_\" + str(_index); }, [ { \"event\" = \"ON_REWARD_CLICKED\"; \"action\" = \"ON_REWARD_CLICKED\"; \"args\" = [ _index; ]; }; ])"
+                            "resource": "_item"
+                            "attachId": "\"quest_\" + quest.id + \"_reward_\" + str(_index)"
+                        elementNameExpression: "\"quest_\" + quest.id + \"_reward_\" + str(_index)"
+                bindings:
+                - ["SizePolicy.horizontalValue", "rewards.Size() * 140"]
+        -   class: "UIControl"
+            name: "ButtonsContainer"
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                LinearLayout:
+                    orientation: "LeftToRight"
+                    spacing: 16.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   class: "UIControl"
+                name: "SkipButton"
+                input: false
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                    LinearLayout:
+                        spacing: 16.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        verticalPolicy: "PercentOfChildrenSum"
+                    UIChildComponent0:
+                        condition: "not isStarted and not previewFromTooltip"
+                        prototypePath: "~res:/UI/Screens3/Lobby/Common/Button.yaml"
+                        args:
+                            "timerContent": "SkipTimer"
+                            "caption": "when not isStarted -> \"stuff_quest/screen/buttons/start_later\", \"stuff_quest/screen/buttons/take_reward\""
+                            "iconPath": "when isGamepad -> \"~res:/Gfx/Lobby/icons/nintendo-switch/icon_switch_x_m\", \"\""
+                            "size": "eButtonSize.NORMAL"
+                            "type": "eButtonType.ALTERNATIVE"
+                        eventActions:
+                        - ["ON_CLICK_BUTTON", "ON_SKIP_CLICKED", ""]
+                bindings:
+                - ["visible", "not isStarted and not previewFromTooltip"]
+            -   class: "UIControl"
+                name: "ActionButton"
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        verticalPolicy: "PercentOfChildrenSum"
+                    UIChildComponent0:
+                        condition: "not previewFromTooltip"
+                        prototypePath: "~res:/UI/Screens3/Lobby/Common/Button.yaml"
+                        args:
+                            "locked": "actionButtonLocked"
+                            "caption": "when not isStarted -> \"stuff_quest/screen/buttons/start_now\", isActive -> \"stuff_quest/screen/buttons/ok\", \"stuff_quest/screen/buttons/take_reward\""
+                            "iconPath": "when isGamepad -> \"~res:/Gfx/Lobby/icons/nintendo-switch/icon_switch_y_m\", \"\""
+                            "size": "eButtonSize.NORMAL"
+                            "type": "eButtonType.POSITIVE"
+                        eventActions:
+                        - ["ON_CLICK_BUTTON", "ON_QUEST_ACTION", ""]
+                bindings:
+                - ["visible", "not previewFromTooltip and not actionButtonHidden"]
+            -   class: "UIControl"
+                name: "OkButton"
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        verticalPolicy: "PercentOfChildrenSum"
+                    UIChildComponent0:
+                        condition: "previewFromTooltip"
+                        prototypePath: "~res:/UI/Screens3/Lobby/Common/Button.yaml"
+                        args:
+                            "caption": "\"stuff_quest/screen/buttons/ok\""
+                            "iconPath": "when isGamepad -> \"~res:/Gfx/Lobby/icons/nintendo-switch/icon_switch_y_m\", \"\""
+                            "size": "eButtonSize.NORMAL"
+                            "type": "eButtonType.POSITIVE"
+                        eventActions:
+                        - ["ON_CLICK_BUTTON", "ON_SKIP_CLICKED", ""]
+                bindings:
+                - ["visible", "previewFromTooltip"]
+Slots:
+-   class: "UIControl"
+    name: "SkipTimer"
+    input: false
+    classes: "gray-cape-cod-bg"
+    components:
+        Background: {}
+        Anchor:
+            rightAnchorEnabled: true
+            rightAnchor: -8.000000
+            topAnchorEnabled: true
+            topAnchor: -12.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfMaxChild"
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Color.style.yaml"
+    bindings:
+    - ["visible", "quest.stuffExpirationTime > 0L and not isStarted"]
+    children:
+    -   prototype: "Timer/Timer"
+        name: "Timer"
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            UIDataParamsComponent:
+                args:
+                    "timerSize": "eTimerSize.Small"
+                    "time": "quest.stuffExpirationTime"
+                    "serverTime": "session.serverTime"

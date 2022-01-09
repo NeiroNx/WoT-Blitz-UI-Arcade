@@ -1,0 +1,109 @@
+Header:
+    version: 130
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/Dialog/TextDialog.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "ChooseClusterDialog"
+    size: [640.000000, 480.000000]
+    input: false
+    components:
+        Anchor:
+            leftAnchorEnabled: true
+            rightAnchorEnabled: true
+            topAnchorEnabled: true
+            bottomAnchorEnabled: true
+        ModalInput: {}
+        UIVirtualActionEventComponent0:
+            virtualKeyAction: "Escape"
+            keyDownEvent: "OPTIONAL_CLICKED"
+        UIShortcutEventComponent:
+            shortcuts: "OPTIONAL_CLICKED,Escape;OPTIONAL_CLICKED,Back"
+        UIDataParamsComponent:
+            params:
+            - ["ChooseClusterViewModel", "clusterOptions", "null", "{ }"]
+            events:
+            - "CONFIRMATION"
+    children:
+    -   prototype: "TextDialog/TextDialog"
+        name: "InfoTextDialog"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "type": "eDialogType.INFO"
+                    "header": "\"\""
+                    "accentButton": "\"OK\""
+                    "contentControl": "Content"
+                eventActions:
+                - ["ACCENT_CLICKED", "CONFIRMATION", ""]
+                - ["OPTIONAL_CLICKED", "", ""]
+        children:
+        -   path: "DialogContent"
+            components:
+                UIIdentifierComponent:
+                    id: "cluster_selection_dialog"
+            children: []
+        -   path: "DialogContent/UIScrollView/scrollContainerControl"
+            components:
+                UIIdentifierComponent:
+                    id: "cluster_button_container"
+            children: []
+        -   path: "DialogContent/Footer/OptionalButtonContainer"
+            position: [25.000000, 24.000000]
+            children: []
+Slots:
+-   class: "UIControl"
+    name: "Content"
+    size: [405.000000, 37.000000]
+    input: false
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+            spacing: 1.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfChildrenSum"
+    children:
+    -   class: "UIControl"
+        name: "AutoButton"
+        size: [471.000000, 150.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfChildrenSum"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/PreLogin/Dialogs/ChooseClusterDialogButton.yaml"
+                args:
+                    "isSelected": "clusterOptions.clusterId == -1"
+                    "clusterName": "\"AUTO\""
+                eventActions:
+                - ["CLUSTER_CHOOSE", "AUTO_CHOSEN", ""]
+        children:
+        -   class: "UIControl"
+            name: "AutoButton"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfFirstChild"
+    -   class: "UIControl"
+        name: "Clusters"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            LinearLayout:
+                orientation: "TopDown"
+                spacing: 1.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfChildrenSum"
+            UIRepeatComponent:
+                control: "~res:/UI/Screens3/PreLogin/Dialogs/ChooseClusterDialogButton.yaml"
+                dataContainer: "clusterOptions.clusterNames"
+                args:
+                    "isSelected": "clusterOptions.clusterId == _index"
+                    "clusterName": "clusterOptions.clusterNames[_index]"
+                eventActions:
+                - ["CLUSTER_CHOOSE", "CLUSTER_CHOSEN", "_index"]

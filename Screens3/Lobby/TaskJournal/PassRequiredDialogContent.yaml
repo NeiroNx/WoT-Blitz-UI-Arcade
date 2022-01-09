@@ -1,0 +1,89 @@
+Header:
+    version: "102"
+Prototypes:
+-   class: "UIControl"
+    name: "PassRequiredDialogContent"
+    size: [512.000000, 152.000000]
+    input: false
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+            spacing: 16.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfChildrenSum"
+        UIDataParamsComponent:
+            params:
+            - ["ResourceModel", "resource", "null", "{ }"]
+        UIDataLocalsComponent:
+            locals:
+            - ["string", "text", "localize(\"BattlePass/PassRequiredDialog/Text\")"]
+    children:
+    -   class: "UIControl"
+        name: "Text"
+        size: [32.000000, 32.000000]
+        input: false
+        classes: "t-body regular white-wild-sand-70-text"
+        components:
+            UITextComponent:
+                multiline: "MULTILINE_ENABLED"
+            Anchor:
+                hCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                horizontalValue: 80.000000
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml"
+        bindings:
+        - ["UITextComponent.text", "text"]
+    -   class: "UIControl"
+        name: "RequiredlItem"
+        position: [-190.000000, 56.000000]
+        size: [100.000000, 140.000000]
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 96.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 96.000000
+        children:
+        -   class: "UIControl"
+            name: "IconBack"
+            size: [148.000000, 189.000000]
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+        -   class: "UIControl"
+            name: "Icon"
+            size: [98.000000, 116.000000]
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_PROPORTIONAL_ONE"
+                    colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            bindings:
+            - ["Background.sprite", "when (resource.imageURL == \"\") -> resource.icon, \"\""]
+        -   class: "UIControl"
+            name: "IconUrl"
+            size: [98.000000, 116.000000]
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_PROPORTIONAL_ONE"
+                    colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                UIUrlImageComponent:
+                    downscaleEnabled: false
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            bindings:
+            - ["UIUrlImageComponent.imageUrl", "resource.imageURL"]

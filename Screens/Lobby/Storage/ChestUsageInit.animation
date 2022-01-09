@@ -1,0 +1,11 @@
+animation ChestUsageInit
+{
+    parallel
+    {
+        ChangeProperty("**/IconButtonLight", "", "visible", false);
+        ChangeProperty("**/Blur", "", "visible", false);
+        ChangeProperty("**/Fade", "", "visible", false);
+        Opacity("**/CongratulationsContent/Group/TextContainer", 0.0);
+        Opacity("**/Fade", 0.0);
+    }
+}

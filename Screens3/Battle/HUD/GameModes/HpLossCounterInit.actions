@@ -1,0 +1,32 @@
+action FILL_HP_LOSS_COUNER(float startValue, float duration)
+{
+	parallel
+    {
+		Scale("./AllyHpLossCounter/Icon", 1.5, 1.5, 0.2, EASE_IN);
+		Scale("./EnemyHpLossCounter/Icon", 1.5, 1.5, 0.2, EASE_IN);
+	}
+	parallel
+    {
+		Scale("./AllyHpLossCounter/Icon", 1.0, 1.0, 0.2, EASE_OUT);
+		Scale("./EnemyHpLossCounter/Icon", 1.0, 1.0, 0.2, EASE_OUT);
+	}
+	parallel
+    {
+		ChangeProperty("./AllyHpLossCounter/Icon/Fire", "ProgressClip", "progress", startValue);
+		ChangeProperty("./EnemyHpLossCounter/Icon/Fire", "ProgressClip", "progress", startValue);
+	}
+	parallel
+    {
+		ChangeProperty("./AllyHpLossCounter/Icon/Fire", "ProgressClip", "progress", 1, duration - 0.4);
+		ChangeProperty("./EnemyHpLossCounter/Icon/Fire", "ProgressClip", "progress", 1, duration - 0.4);
+	}
+}
+
+action SET_HP_LOSS_VALUE(float allyTeam, float enemyTeam)
+{
+	parallel
+	{
+		ChangeProperty("./AllyHpLossCounter/Counter", "UITextComponent", "text", "-" + str(int(allyTeam * 100)) + "%");
+		ChangeProperty("./EnemyHpLossCounter/Counter", "UITextComponent", "text", "-" + str(int(enemyTeam * 100)) + "%");
+	}
+}

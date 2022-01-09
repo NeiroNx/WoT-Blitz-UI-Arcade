@@ -1,0 +1,338 @@
+Header:
+    version: 128
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/Timer.yaml"
+- "~res:/UI/Screens3/Lobby/Hangar/Offers/PRMP/Common/ShortDescription.yaml"
+- "~res:/UI/Screens3/Lobby/Hangar/Offers/PRMP/Common/Title.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "PiggyBankOffer"
+    size: [900.000000, 600.000000]
+    input: false
+    components:
+        Anchor:
+            leftAnchorEnabled: true
+            rightAnchorEnabled: true
+            topAnchorEnabled: true
+            bottomAnchorEnabled: true
+        UIDataParamsComponent:
+            params:
+            - ["SessionDataModel", "session", "null", "{ }"]
+            - ["BasicOffer", "offer", "null", "{ }"]
+            - ["bool", "timeLimited", "false", "true"]
+            - ["int64", "arrivalTime", "0L", "100L"]
+            - ["int64", "lifeTime", "0L", "100L"]
+            - ["string", "taxMessage", "\"\"", "\"All prices include tax\""]
+            events:
+            - "OFFER_ACTION"
+        UIDataLocalBindingsComponent:
+            data:
+            - ["float", "discountPercentage", "offer.offeredProduct.discountValue * 100.000000"]
+            - ["string", "discountStringed", "percent(-floor(discountPercentage), 0)"]
+            - ["bool", "fullMoneyBox", "offer.piggyBank.current.quantity >= offer.piggyBank.max.quantity"]
+    children:
+    -   class: "UIControl"
+        name: "ContentWrapper"
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+            LinearLayout:
+                orientation: "RightToLeft"
+                dynamicSpacing: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                horizontalValue: 80.000000
+                horizontalMax: 800.000000
+        children:
+        -   class: "UIControl"
+            name: "CapacityArrow"
+            input: false
+            components:
+                Anchor:
+                    topAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                    vCenterAnchor: -70.000000
+                LinearLayout:
+                    orientation: "BottomUp"
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 260.000000
+            children:
+            -   class: "UIControl"
+                name: "ProgressImageAnchor"
+                input: false
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        bottomAnchorEnabled: true
+                        bottomAnchor: 61.000000
+                    IgnoreLayout: {}
+                children:
+                -   class: "UIControl"
+                    name: "ProgressImage"
+                    pivot: [0.500000, 0.000000]
+                    input: false
+                    components:
+                        Background:
+                            drawType: "DRAW_SCALE_PROPORTIONAL"
+                        UIUrlImageComponent:
+                            placeholderScenePath: "~res:/UI/Screens/Common/LoadingControl.yaml"
+                            placeholderControlName: "LoadingControl"
+                            upscaleForHighResolution: true
+                        SizePolicy:
+                            horizontalPolicy: "FixedSize"
+                            horizontalValue: 460.000000
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 360.000000
+                    bindings:
+                    - ["UIUrlImageComponent.imageUrl", "offer.progressImageUrl"]
+            -   class: "UIControl"
+                name: "Triangle"
+                input: false
+                components:
+                    Background:
+                        drawType: "DRAW_SCALE_TO_RECT"
+                        sprite: "~res:/Gfx/UI/Offers/SubscriptionOffer/offer-bg-triangle.psd"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfContent"
+            -   class: "UIControl"
+                name: "Bg"
+                input: false
+                components:
+                    Background:
+                        drawType: "DRAW_SCALE_TO_RECT"
+                        sprite: "~res:/Gfx/UI/Offers/SubscriptionOffer/offer-bg-gradient.psd"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+            -   class: "UIControl"
+                name: "MaxCapacity"
+                input: false
+                classes: "t-content-h0 bold white-wild-sand-text"
+                components:
+                    UITextComponent: {}
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        bottomAnchorEnabled: true
+                        bottomAnchor: 54.000000
+                    IgnoreLayout: {}
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml"
+                bindings:
+                - ["UITextComponent.text", "shortStr(offer.piggyBank.max.quantity, 1000)"]
+            -   class: "UIControl"
+                name: "FrontImageAnchor"
+                input: false
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        bottomAnchorEnabled: true
+                        bottomAnchor: -120.000000
+                    IgnoreLayout: {}
+                children:
+                -   class: "UIControl"
+                    name: "FrontImage"
+                    pivot: [0.500000, 1.000000]
+                    input: false
+                    components:
+                        Background:
+                            drawType: "DRAW_SCALE_PROPORTIONAL"
+                        UIUrlImageComponent:
+                            placeholderScenePath: "~res:/UI/Screens/Common/LoadingControl.yaml"
+                            placeholderControlName: "LoadingControl"
+                            upscaleForHighResolution: true
+                        IgnoreLayout: {}
+                        SizePolicy:
+                            horizontalPolicy: "FixedSize"
+                            horizontalValue: 300.000000
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 600.000000
+                    bindings:
+                    - ["UIUrlImageComponent.imageUrl", "offer.productImageUrl"]
+        -   class: "UIControl"
+            name: "Content"
+            input: false
+            components:
+                Anchor:
+                    vCenterAnchorEnabled: true
+                    vCenterAnchor: -32.000000
+                LinearLayout:
+                    orientation: "TopDown"
+                    spacing: 68.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfChildrenSum"
+            children:
+            -   class: "UIControl"
+                name: "Header"
+                input: false
+                components:
+                    LinearLayout:
+                        orientation: "TopDown"
+                        spacing: 16.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfChildrenSum"
+                children:
+                -   prototype: "Title/OfferTitle"
+                    name: "OfferTitle"
+                    components:
+                        UIDataParamsComponent:
+                            args:
+                                "title": "offer.title"
+                -   class: "UIControl"
+                    name: "DescriptionWrapper"
+                    input: false
+                    components:
+                        LinearLayout:
+                            spacing: 4.000000
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfChildrenSum"
+                            verticalPolicy: "PercentOfMaxChild"
+                    children:
+                    -   prototype: "ShortDescription/ShortOfferDescription"
+                        name: "ShortOfferDescription"
+                        components:
+                            UIDataParamsComponent:
+                                args:
+                                    "shortDescr": "offer.shortDescription"
+                    -   prototype: "Timer/Timer"
+                        name: "Timer"
+                        components:
+                            UIDataParamsComponent:
+                                args:
+                                    "time": "arrivalTime + lifeTime"
+                                    "serverTime": "session.serverTime"
+            -   class: "UIControl"
+                name: "ProgressContent"
+                input: false
+                components:
+                    LinearLayout:
+                        orientation: "TopDown"
+                        spacing: 8.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfMaxChild"
+                        verticalPolicy: "PercentOfChildrenSum"
+                children:
+                -   class: "UIControl"
+                    name: "ProgressValue"
+                    input: false
+                    classes: "t-content-h1 bold white-wild-sand-text"
+                    components:
+                        UITextComponent: {}
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfContent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Font.style.yaml"
+                    bindings:
+                    - ["UITextComponent.text", "when fullMoneyBox -> localize(\"piggy_bank/offer/complete\"), shortStr(offer.piggyBank.current.quantity)"]
+                -   class: "UIControl"
+                    name: "ProgressWrapper"
+                    input: false
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "FixedSize"
+                            horizontalValue: 350.000000
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 24.000000
+                        UIChildComponent0:
+                            prototypePath: "~res:/UI/Screens3/Lobby/Hangar/Offers/PRMP/PiggyBankProgress.yaml"
+                            args:
+                                "state": "offer.piggyBank"
+                -   class: "UIControl"
+                    name: "Description"
+                    input: false
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfFirstChild"
+                        UIChildComponent0:
+                            childType: "kPrototype"
+                            prototypePath: "~res:/UI/Screens3/Lobby/Hangar/Offers/PRMP/PiggyBankDescription.yaml"
+                            args:
+                                "piggyBank": "offer.piggyBank"
+    -   class: "UIControl"
+        name: "PriceContainer"
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                bottomAnchorEnabled: true
+                bottomAnchor: 90.000000
+            LinearLayout:
+                orientation: "TopDown"
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfChildrenSum"
+        children:
+        -   class: "UIControl"
+            name: "TaxMessage"
+            input: false
+            classes: "t-caps regular white-wild-sand-70-text"
+            components:
+                UITextComponent: {}
+                Anchor:
+                    hCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml"
+            bindings:
+            - ["visible", "not empty(taxMessage) and not offer.offeredProduct.salePrice.resources.Empty() and offer.offeredProduct.salePrice.resources[0].type == ResourceType.real_currency"]
+            - ["UITextComponent.text", "taxMessage"]
+        -   class: "UIControl"
+            name: "Pricing"
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                LinearLayout:
+                    spacing: 28.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   class: "UIControl"
+                name: "FullPrice"
+                input: false
+                components:
+                    UIOpacityComponent:
+                        opacity: 0.600000
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfFirstChild"
+                        verticalPolicy: "PercentOfFirstChild"
+                    UIChildComponent0:
+                        condition: "offer.offeredProduct.fullPriceValid"
+                        prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/Currencies.yaml"
+                        args:
+                            "price": "offer.offeredProduct.fullPrice"
+                            "currencySize": "eCurrencySize.BIG_BOLD"
+                            "showDiscount": "false"
+                            "crossOut": "true"
+                bindings:
+                - ["visible", "offer.offeredProduct.fullPriceValid"]
+            -   class: "UIControl"
+                name: "SalePrice"
+                input: false
+                components:
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfFirstChild"
+                        verticalPolicy: "PercentOfFirstChild"
+                    UIChildComponent0:
+                        prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/Currencies.yaml"
+                        args:
+                            "price": "offer.offeredProduct.salePrice"
+                            "currencySize": "eCurrencySize.HUGE_BOLD"

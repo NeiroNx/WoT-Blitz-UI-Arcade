@@ -1,0 +1,58 @@
+Header:
+    version: "96"
+Controls:
+-   class: "UIControl"
+    name: "Content"
+    size: [128.000000, 128.000000]
+    input: false
+    components:
+        ClipContent: {}
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 40.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 40.000000
+        UIDataParamsComponent:
+            params:
+            - ["ResourceType", "type", "ResourceType.undefined", "ResourceType.credits"]
+            - ["BasicResource", "basic", "null", "{ quantity = 2000000; }"]
+        UIDataLocalsComponent:
+            locals:
+            - ["string", "iconPath", "when type == ResourceType.credits -> \"~res:/Gfx/Lobby/currency/currency_silver_xl\", type == ResourceType.free_xp -> \"~res:/Gfx/Lobby/currency/currency_free-xp_xl\", type == ResourceType.gold -> \"~res:/Gfx/Lobby/currency/currency_gold_xl\", type == ResourceType.premium -> \"~res:/Gfx/Lobby/currency/currency_premium_xl\", \"\""]
+    children:
+    -   class: "UIControl"
+        name: "Padding"
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 8.000000
+                rightAnchorEnabled: true
+                rightAnchor: 8.000000
+                topAnchorEnabled: true
+                topAnchor: 8.000000
+                bottomAnchorEnabled: true
+                bottomAnchor: 8.000000
+        children:
+        -   class: "UIControl"
+            name: "IconContainer"
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            children:
+            -   class: "UIControl"
+                name: "Icon"
+                input: false
+                components:
+                    UITextureComponent:
+                        drawType: "DRAW_SCALE_PROPORTIONAL"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                bindings:
+                - ["UITextureComponent.spritePath", "iconPath"]

@@ -1,0 +1,16 @@
+resourceTypeClassOverride = when
+                    not empty(localizedQuantity) -> "",
+                    type == ResourceType.gold -> "big-resource-gold",
+                    type == ResourceType.credits -> "big-resource-credit",
+                    "";
+
+resourceClassesOverride = "resource resource-type=" + resourceTypeClassOverride + " grade-state=" + gradeHideClass;
+
+isResource = type == ResourceType.gold or type == ResourceType.credits;
+fontSize = when
+           not empty(localizedQuantity) -> "fs-90",
+           isResource -> "fs-56",
+           "";
+textClasses = fontSize + " bold text-color-white type=plain-text";
+
+showResourceIcon = empty(localizedQuantity) and isResource;

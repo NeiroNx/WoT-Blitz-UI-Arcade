@@ -1,0 +1,13 @@
+Header:
+    version: "96"
+Prototypes:
+-   class: "UIControl"
+    name: "InvisibleLevelCell"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 216.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 10.000000

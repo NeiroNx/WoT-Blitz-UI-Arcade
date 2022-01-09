@@ -1,0 +1,11 @@
+animation Initialize
+{
+    Opacity(".", 0.0);
+    ChangeProperty("**/Content", "Anchor", "hCenterAnchor", -50);
+    Wait(index * 0.1);
+    parallel
+    {
+        Opacity(".", 1.0, 0.5, SINE_IN);
+        ChangeProperty("**/Content", "Anchor", "hCenterAnchor", 0, 0.5, SINE_IN);
+    }
+}

@@ -1,0 +1,31 @@
+Header:
+    version: "83"
+StyleSheets:
+-   selectors:
+    - ".grey-shark-bg-texture"
+    properties:
+        texture-color: [0.117647, 0.133333, 0.137255, 1.000000]
+-   selectors:
+    - ".finance-notification"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/icons/icon_finance_s"
+-   selectors:
+    - ".notification-icon-clan"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/icons/icon_clans_s"
+-   selectors:
+    - ".notification-icon-default"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/icons/icon_attention_s"
+-   selectors:
+    - ".notification-icon-video"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/icons/icon_video_s"
+-   selectors:
+    - ".notification-icon-like"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/icons/icon_like_s"
+-   selectors:
+    - ".notification-icon-attention"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/icons/icon_attention_s"

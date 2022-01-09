@@ -1,0 +1,7 @@
+animation ScrolToSelectedModule
+{
+    if (isSelected == true)
+    {
+        ScrollToEnsureControlOnScreen("**/ScrollBorder", 0.3);
+    }
+}

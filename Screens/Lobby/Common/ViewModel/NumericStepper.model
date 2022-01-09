@@ -1,0 +1,2 @@
+resultText = when (currentText == "" and  currentValue == limitMin) -> currentText,
+			when textSeporated -> str1000Separated(currentValue), str(currentValue);

@@ -1,0 +1,548 @@
+Header:
+    version: 127
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/BlurDynamic.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "ResourceRemovingTree"
+    size: [960.000000, 448.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UILayoutEventComponent:
+            sizeChangedEvent: "SCREEN_SIZE_CHANGED"
+            sizeChangedEventData: "_size"
+        UIDataParamsComponent:
+            params:
+            - ["eBlitzDevice", "deviceType", "eBlitzDevice.DEVICE_PHONE", "eBlitzDevice.DEVICE_PHONE"]
+            - ["StoryView", "storyView", "null", "{ }"]
+            - ["int64", "serverTime", "0L", "1556668800L"]
+            - ["bool", "isGfx2", "false", "false"]
+            events:
+            - "DESELECT"
+            - "SHOW_STEP_INFO(int id)"
+            - "SELECT_STEP(int id)"
+        UIDataLocalVarsComponent:
+            data:
+            - ["vector2", "screenSize", "vec2(0.000000, 0.000000)"]
+            - ["vector2", "scrollSize", "vec2(0.000000, 0.000000)"]
+            - ["vector2", "labelSize", "vec2(0.000000, 0.000000)"]
+            - ["vector<int>", "order", "[ 7; 1; 4; 2; 5; 3; 6; ]"]
+            - ["int", "stepIndex", "0"]
+            - ["int64", "alertTime", "when storyView.story.stage.type == eStageType.PROCESS or storyView.story.stage.type == eStageType.BUY -> 36L * 3600L, 0L"]
+            - ["int", "gfx", "when isGfx2 -> 2, 1"]
+            - ["int", "centralPart", "134"]
+            - ["int", "topAnchor", "108"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["ResourceDetailed", "prx_resource_removing", "storyView.story.stage.proxies[\"prx_resource_removing\"]"]
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/Lobby/Story/ResourceRemoving/ResourceRemovingTree.actions"
+        UIEventOnDataComponent0:
+            watchedDataExpression: "screenSize"
+            eventName: "ON_SCREEN_SIZE_CHANGED"
+    children:
+    -   class: "UIControl"
+        name: "TapArea"
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIInputEventComponent:
+                onTouchUpInside: "DESELECT"
+    -   class: "UIControl"
+        name: "SafeArea"
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                topAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "parent - safeAreaInsets.left - safeAreaInsets.right"
+                verticalPolicy: "Formula"
+                verticalFormula: "parent - topAnchor"
+        bindings:
+        - ["Anchor.topAnchor", "topAnchor"]
+        children:
+        -   class: "UIControl"
+            name: "Content"
+            input: false
+            components:
+                UIOpacityComponent: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            bindings:
+            - ["UIOpacityComponent.opacity", "when not floatEqual(screenSize.X, 0.000000) and not floatEqual(scrollSize.X, 0.000000) -> 1.000000, 0.000000"]
+            children:
+            -   class: "UIControl"
+                name: "StepsArea"
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                children:
+                -   class: "UIControl"
+                    name: "MaskedBlur"
+                    input: false
+                    components:
+                        UIPostProcessSourceComponent0:
+                            id: "StoryMaskedBlur"
+                        IgnoreLayout: {}
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfParent"
+                    children:
+                    -   prototype: "BlurDynamic/BlurDynamic"
+                        name: "BlurDynamic"
+                        components:
+                            UIPostProcessInputComponent:
+                                id: "StoryBackground"
+                            UIPostProcessTextureComponent0:
+                                needClear: true
+                    -   class: "UIControl"
+                        name: "Mask"
+                        input: false
+                        components:
+                            Background:
+                                usePostProcessedSprite: true
+                            UIPostProcessInputComponent:
+                                id: "StepMasks"
+                            UIPostProcessTextureComponent0:
+                                materialPath: "~res:/Materials.custom/2d.Textured.Mask.material"
+                                needClear: true
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                verticalPolicy: "PercentOfParent"
+                -   class: "UIControl"
+                    name: "BackgroundUnderBlur"
+                    input: false
+                    components:
+                        Background:
+                            usePostProcessedSprite: true
+                        UIPostProcessInputComponent:
+                            id: "StoryBackground"
+                        UIPostProcessTextureComponent0:
+                            materialPath: "~res:/Materials/2d.Textured.material"
+                            needClear: true
+                        IgnoreLayout: {}
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfParent"
+                -   class: "UIControl"
+                    name: "ShowMaskedBlur"
+                    input: false
+                    components:
+                        Background:
+                            usePostProcessedSprite: true
+                        UIPostProcessInputComponent:
+                            id: "StoryMaskedBlur"
+                        UIPostProcessTextureComponent0:
+                            materialPath: "~res:/Materials/2d.Textured.Alphablend.material"
+                            needClear: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfParent"
+                -   class: "UIControl"
+                    name: "ScrollWrapper"
+                    input: false
+                    components:
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "Formula"
+                            horizontalFormula: "parent -16"
+                            verticalPolicy: "Formula"
+                            verticalFormula: "min(parent, scrollSize.Y + labelSize.Y + 4.0)"
+                    children:
+                    -   class: "UIControl"
+                        name: "ScrollHolder"
+                        input: false
+                        components:
+                            Anchor:
+                                bottomAnchorEnabled: true
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                verticalPolicy: "Formula"
+                                verticalFormula: "parent - labelSize.Y - 4.0"
+                            UIChildComponent0:
+                                prototypePath: "~res:/UI/Screens3/Common/VerticalScrollView.yaml"
+                                args:
+                                    "useRightInset": "false"
+                                    "content": "StepsWrapper"
+                                    "centerContent": "true"
+                                    "horizontalPolicy": "eSizePolicy.PercentOfParent"
+                                    "ltrbClip": "vec4(1.000000, 1.000000, 1.000000, 0.000000)"
+                                eventActions:
+                                - ["ON_SCROLL_VIEW_TOUCH", "DESELECT", ""]
+                    -   class: "UIControl"
+                        name: "Labels"
+                        input: false
+                        components:
+                            Anchor:
+                                topAnchorEnabled: true
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                verticalPolicy: "PercentOfMaxChild"
+                            UIChildComponent0:
+                                childType: "kControl"
+                                control: "Labels"
+        -   class: "UIControl"
+            name: "OverlayArea"
+            input: false
+            components:
+                Anchor:
+                    topAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "Formula"
+                    verticalFormula: "parent + topAnchor"
+            bindings:
+            - ["Anchor.topAnchor", "-topAnchor"]
+            children:
+            -   class: "UIControl"
+                name: "TimerArea"
+                input: false
+                components:
+                    Anchor:
+                        bottomAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                        verticalValue: 33.333332
+                children:
+                -   class: "UIControl"
+                    name: "TimerWrapper"
+                    input: false
+                    components:
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                            vCenterAnchorEnabled: true
+                        LinearLayout:
+                            orientation: "TopDown"
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfMaxChild"
+                            verticalPolicy: "PercentOfChildrenSum"
+                    children:
+                    -   class: "UIControl"
+                        name: "Description"
+                        input: false
+                        classes: "t-body regular white-wild-sand-text"
+                        components:
+                            UIOpacityComponent:
+                                opacity: 0.650000
+                            UITextComponent:
+                                text: "BLACK2020/TimeLeft"
+                            Anchor:
+                                hCenterAnchorEnabled: true
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfContent"
+                                verticalPolicy: "PercentOfContent"
+                            StyleSheet:
+                                styles: "~res:/UI/Screens3/Font.style.yaml"
+                    -   class: "UIControl"
+                        name: "TimerHolder"
+                        input: false
+                        components:
+                            Anchor:
+                                hCenterAnchorEnabled: true
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfFirstChild"
+                                verticalPolicy: "PercentOfFirstChild"
+                            UIChildComponent0:
+                                prototypePath: "~res:/UI/Screens3/Lobby/Common/Timer.yaml"
+                                args:
+                                    "serverTime": "serverTime"
+                                    "time": "storyView.story.finishTime"
+                                    "timerSize": "eTimerSize.Big"
+                                    "alertTime": "alertTime"
+Slots:
+-   class: "UIControl"
+    name: "StepsWrapper"
+    size: [960.000000, 640.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfMaxChild"
+        UILayoutEventComponent:
+            sizeChangedEvent: "SCROLL_SIZE_CHANGED"
+            sizeChangedEventData: "_size"
+    children:
+    -   class: "UIControl"
+        name: "Mask"
+        visible: false
+        input: false
+        components:
+            UIPostProcessSourceComponent0:
+                id: "StepMasks"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   class: "UIControl"
+            name: "RewardsPart"
+            input: false
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "max(firstChild, 0.5 * (parent - centralPart))"
+                    verticalPolicy: "PercentOfFirstChild"
+            children:
+            -   class: "UIControl"
+                name: "StepsWrapper"
+                input: false
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfLastChild"
+                        verticalPolicy: "PercentOfLastChild"
+                children:
+                -   class: "UIControl"
+                    name: "BlurMask"
+                    input: false
+                    components:
+                        GridLayout:
+                            columnWidth: 176.000000
+                            rowHeight: 214.000000
+                        SizePolicy:
+                            horizontalPolicy: "Formula"
+                            horizontalFormula: "childrenSum + 8"
+                            verticalPolicy: "PercentOfChildrenSum"
+                        UIRepeatComponent:
+                            control: "~res:/UI/Screens3/Lobby/Story/Components/RepeatableBlurMask.yaml"
+                            dataContainer: "storyView.tree.groups.common.steps"
+                            args:
+                                "stepSize": "when _item.step.id == 2 or _item.step.id == 7 or (_item.step.id == 5 and screenSize.X < 1441) -> eStepSize.XL, eStepSize.L"
+                                "gridColumn": "when screenSize.X > 1440 -> (when _item.step.id == 7 or _item.step.id == 4 or _item.step.id == 5 -> 0, _item.step.id == 2 or _item.step.id == 3 -> 1, _item.step.id == 1 or _item.step.id == 6 -> 2, 3), (when _item.step.id == 7 or _item.step.id == 1 or _item.step.id == 2 or _item.step.id == 5 or _item.step.id == 3 -> 0, _item.step.id == 4 or _item.step.id == 6 -> 1, 2)"
+                                "gridRow": "when screenSize.X > 1440 -> (when _item.step.id == 7 or _item.step.id == 1 -> 0, _item.step.id == 4 or _item.step.id == 2 -> 1, _item.step.id == 5 or _item.step.id == 3 or _item.step.id == 6 -> 2, 3), (when _item.step.id == 7 -> 0, _item.step.id == 1 or _item.step.id == 4 -> 1, _item.step.id == 2 -> 2, _item.step.id == 5 -> 3, _item.step.id == 3 or _item.step.id == 6 -> 4, 5)"
+                                "isBlurMask": "true"
+                    bindings:
+                    - ["GridLayout.columnCount", "when screenSize.X > 1440 -> 3, 2"]
+                    - ["GridLayout.rowCount", "when screenSize.X > 1440 -> 3, 5"]
+        -   class: "UIControl"
+            name: "TradePart"
+            input: false
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "max(firstChild, 0.5 * (parent - centralPart))"
+                    verticalPolicy: "PercentOfFirstChild"
+            children:
+            -   class: "UIControl"
+                name: "TradeWrappper"
+                input: false
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfLastChild"
+                        verticalPolicy: "PercentOfLastChild"
+                children:
+                -   class: "UIControl"
+                    name: "BlurMask"
+                    input: false
+                    components:
+                        GridLayout:
+                            columnCount: 3
+                            columnWidth: 128.000000
+                            rowCount: 3
+                            rowHeight: 166.000000
+                        SizePolicy:
+                            horizontalPolicy: "Formula"
+                            horizontalFormula: "childrenSum + 8"
+                            verticalPolicy: "PercentOfChildrenSum"
+                        UIRepeatComponent:
+                            control: "~res:/UI/Screens3/Lobby/Story/Components/RepeatableBlurMask.yaml"
+                            dataContainer: "storyView.tree.groups.trade.steps"
+                            args:
+                                "stepSize": "when _item.step.id == 8 or _item.step.id == 14 -> eStepSize.ML, eStepSize.M"
+                                "gridColumn": "when _item.step.id == 8 or _item.step.id == 10 or _item.step.id == 13 -> 0, _item.step.id == 11 or _item.step.id == 14 -> 1, _item.step.id == 9 or _item.step.id == 12 -> 2, 3"
+                                "gridRow": "when _item.step.id == 8 or _item.step.id == 9 -> 0, _item.step.id == 10 or _item.step.id == 11 or _item.step.id == 12 -> 1, _item.step.id == 13 or _item.step.id == 14 -> 2, 3"
+                                "isBlurMask": "true"
+    -   class: "UIControl"
+        name: "TradePart"
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "max(firstChild, 0.5 * (parent - centralPart))"
+                verticalPolicy: "PercentOfFirstChild"
+        bindings:
+        - ["visible", "scrollSize.Y > 0.000000"]
+        children:
+        -   class: "UIControl"
+            name: "TradeWrappper"
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfLastChild"
+                    verticalPolicy: "PercentOfLastChild"
+            children:
+            -   class: "UIControl"
+                name: "Steps"
+                input: false
+                components:
+                    GridLayout:
+                        columnCount: 3
+                        columnWidth: 128.000000
+                        rowCount: 3
+                        rowHeight: 166.000000
+                    SizePolicy:
+                        horizontalPolicy: "Formula"
+                        horizontalFormula: "childrenSum + 8"
+                        verticalPolicy: "PercentOfChildrenSum"
+                    UIRepeatComponent:
+                        control: "~res:/UI/Screens3/Lobby/Story/Components/Repeatable.yaml"
+                        dataContainer: "storyView.tree.groups.trade.steps"
+                        args:
+                            "model": "_item"
+                            "stepSize": "when _item.step.id == 8 or _item.step.id == 14 -> eStepSize.ML, eStepSize.M"
+                            "gridColumn": "when _item.step.id == 8 or _item.step.id == 10 or _item.step.id == 13 -> 0, _item.step.id == 11 or _item.step.id == 14 -> 1, _item.step.id == 9 or _item.step.id == 12 -> 2, 3"
+                            "gridRow": "when _item.step.id == 8 or _item.step.id == 9 -> 0, _item.step.id == 10 or _item.step.id == 11 or _item.step.id == 12 -> 1, _item.step.id == 13 or _item.step.id == 14 -> 2, 3"
+                            "showInfinity": "false"
+                        eventActions:
+                        - ["DESELECT", "DESELECT", ""]
+                        - ["SELECT_STEP", "SCROLL_TO_STEP", "_event.id, \"**/Step\" + str(_event.id)"]
+                        - ["SHOW_STEP_INFO", "SHOW_STEP_INFO", "_event.id"]
+                        elementNameExpression: "\"Step\" + str(_item.step.id)"
+    -   class: "UIControl"
+        name: "RewardsPart"
+        input: false
+        components:
+            Anchor:
+                rightAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "max(firstChild, 0.5 * (parent - centralPart))"
+                verticalPolicy: "PercentOfFirstChild"
+        bindings:
+        - ["visible", "scrollSize.Y > 0.000000"]
+        children:
+        -   class: "UIControl"
+            name: "StepsWrapper"
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfLastChild"
+                    verticalPolicy: "PercentOfLastChild"
+            children:
+            -   class: "UIControl"
+                name: "Steps"
+                input: false
+                components:
+                    GridLayout:
+                        columnWidth: 176.000000
+                        rowHeight: 214.000000
+                    SizePolicy:
+                        horizontalPolicy: "Formula"
+                        horizontalFormula: "childrenSum + 8"
+                        verticalPolicy: "PercentOfChildrenSum"
+                    UIRepeatComponent:
+                        control: "~res:/UI/Screens3/Lobby/Story/Components/Repeatable.yaml"
+                        dataContainer: "storyView.tree.groups.common.steps"
+                        args:
+                            "model": "_item"
+                            "stepSize": "when _item.step.id == 2 or _item.step.id == 7 or (_item.step.id == 5 and screenSize.X < 1441) -> eStepSize.XL, eStepSize.L"
+                            "gridColumn": "when screenSize.X > 1440 -> (when _item.step.id == 7 or _item.step.id == 4 or _item.step.id == 5 -> 0, _item.step.id == 2 or _item.step.id == 3 -> 1, _item.step.id == 1 or _item.step.id == 6 -> 2, 3), (when _item.step.id == 7 or _item.step.id == 1 or _item.step.id == 2 or _item.step.id == 5 or _item.step.id == 3 -> 0, _item.step.id == 4 or _item.step.id == 6 -> 1, 2)"
+                            "gridRow": "when screenSize.X > 1440 -> (when _item.step.id == 7 or _item.step.id == 1 -> 0, _item.step.id == 4 or _item.step.id == 2 -> 1, _item.step.id == 5 or _item.step.id == 3 or _item.step.id == 6 -> 2, 3), (when _item.step.id == 7 -> 0, _item.step.id == 1 or _item.step.id == 4 -> 1, _item.step.id == 2 -> 2, _item.step.id == 5 -> 3, _item.step.id == 3 or _item.step.id == 6 -> 4, 5)"
+                        eventActions:
+                        - ["DESELECT", "DESELECT", ""]
+                        - ["SELECT_STEP", "SCROLL_TO_STEP", "_event.id, \"**/Step\" + str(_event.id)"]
+                        - ["SHOW_STEP_INFO", "SHOW_STEP_INFO", "_event.id"]
+                        elementNameExpression: "\"Step\" + str(_item.step.id)"
+                bindings:
+                - ["GridLayout.columnCount", "when screenSize.X > 1440 -> 3, 2"]
+                - ["GridLayout.rowCount", "when screenSize.X > 1440 -> 3, 5"]
+-   class: "UIControl"
+    name: "Labels"
+    size: [900.000000, 40.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfMaxChild"
+        UILayoutEventComponent:
+            sizeChangedEvent: "LABEL_SIZE_CHANGED"
+            sizeChangedEventData: "_size"
+    children:
+    -   class: "UIControl"
+        name: "TradeLabel"
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "max(392, 0.5 * (parent - 134))"
+                verticalPolicy: "PercentOfFirstChild"
+        children:
+        -   class: "UIControl"
+            name: "Description"
+            input: false
+            components:
+                RichContent:
+                    text: "RESOURCE_REMOVING/MainScreen/TradeLabel"
+                    baseClasses: "t-overline bold yellow-chalky-text"
+                RichContentAliases0:
+                    aliases:
+                    - ["prx_resource_removing", " <control class=\"\" control=\"~res:/UI/Screens3/Lobby/Common/Resource/CurrencyAdapter.yaml\" args1=\"forceHideValue=true\" args2=\"resource=prx_resource_removing\"/>"]
+                Anchor:
+                    hCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfChildrenSum"
+                FlowLayout:
+                    hDynamicInLinePadding: true
+                    hSpacing: 4.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml"
+    -   class: "UIControl"
+        name: "RewardsLabel"
+        input: false
+        components:
+            Anchor:
+                rightAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "max(360, 0.5 * (parent - 134))"
+                verticalPolicy: "PercentOfFirstChild"
+        children:
+        -   class: "UIControl"
+            name: "Description"
+            input: false
+            components:
+                RichContent:
+                    text: "RESOURCE_REMOVING/MainScreen/RewardsLabel"
+                    baseClasses: "t-overline bold yellow-chalky-text"
+                RichContentAliases0:
+                    aliases:
+                    - ["prx_resource_removing", " <control class=\"\" control=\"~res:/UI/Screens3/Lobby/Common/Resource/CurrencyAdapter.yaml\" args1=\"forceHideValue=true\" args2=\"resource=prx_resource_removing\"/>"]
+                Anchor:
+                    hCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfChildrenSum"
+                FlowLayout:
+                    hDynamicInLinePadding: true
+                    hSpacing: 4.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml"

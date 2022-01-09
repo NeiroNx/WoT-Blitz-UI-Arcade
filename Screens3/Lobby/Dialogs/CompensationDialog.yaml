@@ -1,0 +1,62 @@
+Header:
+    version: "104"
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/Dialog/TextDialog.yaml"
+Controls:
+-   class: "UIControl"
+    name: "CompensationDialog"
+    size: [640.000000, 480.000000]
+    input: false
+    components:
+        Anchor:
+            leftAnchorEnabled: true
+            rightAnchorEnabled: true
+            topAnchorEnabled: true
+            bottomAnchorEnabled: true
+        ModalInput: {}
+        UIDataParamsComponent:
+            params:
+            - ["Price", "compensation", "null", "{ }"]
+            - ["string", "tankName", "\"\"", "\"E-25\""]
+        UIDataLocalsComponent:
+            locals:
+            - ["string", "textCancelButton", "\"#common:DialogButton/Cancel\""]
+            - ["string", "textAffirmativeButton", "\"#common:DialogButton/OK\""]
+    children:
+    -   prototype: "TextDialog/TextDialog"
+        name: "InfoTextDialog"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "accentButton": "textAffirmativeButton"
+                    "accentButtonType": "eButtonType.POSITIVE"
+                    "contentControl": "control(\"~res:/UI/Screens3/Lobby/Dialogs/CompensationDialogContent.yaml\", { \"compensation\" = compensation; \"tankName\" = tankName; }, [ ])"
+                    "header": "\"\""
+                    "headerImage": "\"\""
+                    "optionalButton": "when empty(textCancelButton) -> \"#common:DialogButton/Cancel\", textCancelButton"
+                    "type": "eDialogType.CHOOSE"
+                eventActions:
+                - ["ACCENT_CLICKED", "ACCENT_CLICKED", ""]
+                - ["OPTIONAL_CLICKED", "OPTIONAL_CLICKED", ""]
+        children:
+        -   path: "DialogContent"
+            position: [-224.000000, -131.000000]
+            children: []
+        -   path: "DialogContent/Metaphor"
+            position: [192.000000, -32.000000]
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_PROPORTIONAL"
+                Anchor:
+                    topAnchor: -32.000000
+                SizePolicy:
+                    horizontalValue: 64.000000
+                    verticalValue: 56.000000
+        -   path: "DialogContent/UIScrollView"
+            position: [0.000000, 1.000000]
+            children: []
+        -   path: "DialogContent/UIScrollView/scrollContainerControl/Content"
+            position: [24.000000, 48.000000]
+        -   path: "DialogContent/Footer/OptionalButtonContainer"
+            position: [25.000000, 24.000000]
+            children: []

@@ -1,0 +1,9 @@
+animation Init()
+{
+	if (bgVisible)
+	{
+    	Opacity("**/Background", 0.0);
+		Opacity("**/Background", 1, 0.5, SINE_OUT);
+	}
+	PlaySound("play_ui_gift_open");
+}

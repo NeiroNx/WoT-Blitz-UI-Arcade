@@ -1,0 +1,50 @@
+Header:
+    version: "106"
+Prototypes:
+-   class: "UIControl"
+    name: "IconWithLabel"
+    size: [780.000000, 40.000000]
+    input: false
+    components:
+        LinearLayout:
+            spacing: 8.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "PercentOfFirstChild"
+            verticalFormula: "when parent == 0 -> childrenSum, min(parent/parentChildrenCount, childrenSum)"
+        UIDataParamsComponent:
+            params:
+            - ["eNintendoSwitchControls", "icon", "{ }", "eNintendoSwitchControls.Up"]
+            - ["string", "text", "\"\"", "\"Switch/BattleTutorial/MoveToDirection/Title\""]
+    children:
+    -   class: "UIControl"
+        name: "Icon"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                horizontalMax: 24.000000
+                verticalPolicy: "PercentOfFirstChild"
+                verticalMax: 24.000000
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Common/NintendoSwitch/Controls/NintendoSwitchControl.yaml"
+                args:
+                    "switchControl": "icon"
+    -   class: "UIControl"
+        name: "Text"
+        position: [32.000000, 4.000000]
+        input: false
+        classes: "t-caps bold white-wild-sand-text align-left"
+        components:
+            UITextComponent:
+                fitting: "FITTING_POINTS"
+            Anchor:
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "when parent == 0 -> content, min(parentRest, content)"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml"
+        bindings:
+        - ["UITextComponent.text", "localize(text)"]

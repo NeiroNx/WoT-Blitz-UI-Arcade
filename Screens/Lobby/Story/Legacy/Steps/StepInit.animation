@@ -1,0 +1,8 @@
+animation StepInit
+{
+    parallel
+    {
+        Opacity("NormalState", when model.isSelected -> 0.0, 1.0);
+        Opacity("ExpandedState", when model.isSelected -> 1.0, 0.0);
+    }
+}

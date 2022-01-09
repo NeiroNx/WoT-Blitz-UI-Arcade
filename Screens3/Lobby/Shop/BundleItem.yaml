@@ -1,0 +1,44 @@
+Header:
+    version: 128
+Prototypes:
+-   class: "UIControl"
+    name: "BundleItem"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 40.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 40.000000
+        UIDataParamsComponent:
+            params:
+            - ["ResourceDetailed", "resource", "null", "{ \"type\" = ResourceType.unlocks; }"]
+            - ["bool", "visible", "true", "true"]
+        UIChildComponent0:
+            condition: "not visible"
+        UIChildComponent1:
+            condition: "resource.type == ResourceType.unlocks"
+            prototypePath: "~res:/UI/Screens3/Lobby/Shop/BundleItem/CamoBundleItem.yaml"
+            args:
+                "resource": "resource"
+        UIChildComponent2:
+            condition: "resource.type == ResourceType.stuff and resource.stuff.type != ArtefactType.player_avatar"
+            prototypePath: "~res:/UI/Screens3/Lobby/Shop/BundleItem/StuffBundleItem.yaml"
+            args:
+                "resource": "resource"
+        UIChildComponent3:
+            condition: "resource.type == ResourceType.stuff"
+            prototypePath: "~res:/UI/Screens3/Lobby/Shop/BundleItem/AvatarBundleItem.yaml"
+            args:
+                "resource": "resource"
+        UIChildComponent4:
+            condition: "resource.type == ResourceType.vehicle"
+            prototypePath: "~res:/UI/Screens3/Lobby/Shop/BundleItem/VehicleBundleItem.yaml"
+            args:
+                "resource": "resource"
+        UIChildComponent5:
+            prototypePath: "~res:/UI/Screens3/Lobby/Shop/BundleItem/BasicBundleItem.yaml"
+            args:
+                "resource": "resource"
+    bindings:
+    - ["visible", "visible"]

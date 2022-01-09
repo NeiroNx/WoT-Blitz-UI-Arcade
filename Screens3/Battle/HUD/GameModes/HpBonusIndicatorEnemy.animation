@@ -1,0 +1,14 @@
+animation Appear
+{
+    Opacity(".", opacity=0.0, time=0.0, interpolation=EASE_IN_EASE_OUT);
+	ChangeProperty("./Content/ValueContainer/Text", "UITextComponent", "color", rgb(#ff0000));
+	Color(path="./Content/ValueContainer/Icon", color = rgb(#ff0000), time = 0);
+	Scale(".", time=0.0, y=0.0);
+	parallel
+    {
+		Opacity(".", opacity=1.0, time=0.5, interpolation=EASE_IN_EASE_OUT);
+		Scale(".", time=0.5, y=1.0);
+	}
+	Wait(4.0);
+    Opacity(".", opacity=0.0, time=0.5, interpolation=EASE_IN_EASE_OUT);
+}

@@ -1,0 +1,16 @@
+action HoverAnim (bool isHovered)
+{
+	if(not selected)
+	{
+		if (isHovered)
+		{
+			ChangeProperty("**/Icon", "UIOpacityComponent", "opacity", 1, 0.15, EASE_IN_EASE_OUT);
+			Event("HOVER_START");
+		}
+		else
+		{
+			ChangeProperty("**/Icon", "UIOpacityComponent", "opacity", 0.5, 0.15, EASE_IN_EASE_OUT);
+			Event("HOVER_END");
+		}
+	}
+}

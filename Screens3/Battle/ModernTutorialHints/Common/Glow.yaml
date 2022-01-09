@@ -1,0 +1,18 @@
+Header:
+    version: 128
+Prototypes:
+-   class: "UIControl"
+    name: "Glow"
+    position: [-16.000000, 0.000000]
+    size: [200.000000, 200.000000]
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens3/Battle/ModernTutorialHints/Common/GlowPulsation.animation"
+        Background:
+            drawType: "DRAW_STRETCH_BOTH"
+            sprite: "~res:/Gfx/Battle/BattleHints/glow/GlowButtonAttack"
+        UIOpacityComponent: {}
+        Anchor:
+            hCenterAnchorEnabled: true
+            vCenterAnchorEnabled: true

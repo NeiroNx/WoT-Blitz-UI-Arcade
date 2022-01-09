@@ -1,0 +1,56 @@
+Header:
+    version: 133
+ImportedPackages:
+- "~res:/UI/Screens3/Battle/ModernTutorialHints/FullscreenHintProto.yaml"
+- "~res:/UI/Screens3/Battle/ModernTutorialHints/Common/HintWithFrames.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "DesktopSniperModeHint"
+    size: [1024.000000, 768.000000]
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens3/Battle/ModernTutorialHints/SniperModeHint/DesktopSniperModeHintInit.animation;Disappear,~res:/UI/Screens3/Battle/ModernTutorialHints/SniperModeHint/DesktopSniperModeHintHide.animation"
+        UIOpacityComponent: {}
+        Anchor:
+            hCenterAnchorEnabled: true
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            horizontalMax: 1200.000000
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["eInputMode", "inputMode", "eInputMode.MODE_KEYBOARD_MOUSE", "eInputMode.MODE_KEYBOARD_MOUSE"]
+            - ["string", "controlName", "\"SHIFT\"", "\"SHIFT\""]
+    children:
+    -   prototype: "FullscreenHintProto/FullscreenHintProto"
+        name: "FullscreenHintProto"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "content": "Hint"
+                    "inputMode": "inputMode"
+Slots:
+-   class: "UIControl"
+    name: "Hint"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        Anchor:
+            bottomAnchorEnabled: true
+        LinearLayout:
+            orientation: "TopDown"
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfChildrenSum"
+    children:
+    -   prototype: "HintWithFrames/HintHolder"
+        name: "HintHolder"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "icon": "\"~res:/Gfx/Battle/tips/notifications/target\""
+                    "title": "\"#battle_hints:sniper_mode/title\""
+                    "text": "localize(\"#battle_hints:sniper_mode/hint2\", { \"control_name\" = controlName; })"
+                    "transitionType": "eTransition.None"

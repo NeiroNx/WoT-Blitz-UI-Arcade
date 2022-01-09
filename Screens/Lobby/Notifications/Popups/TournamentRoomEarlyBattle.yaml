@@ -1,0 +1,36 @@
+Header:
+    version: 121
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/Notifications/Popups/TournamentNotification.yaml"
+- "~res:/UI/Screens3/Lobby/Common/NotificationButtonWithText.yaml"
+Controls:
+-   prototype: "TournamentNotification/TournamentNotification"
+    customClass: "UITournamentRoomEarlyBattleNotification"
+    name: "TournamentRoomEarlyBattle"
+    children:
+    -   path: "Item/Content/Bg/LeftPart/Content"
+        children:
+        -   class: "UIControl"
+            name: "Text"
+            input: false
+            classes: "t-caption regular color=white-wild-sand-70-text"
+            components:
+                UITextComponent:
+                    text: "Bla bla bla"
+                    multiline: "MULTILINE_ENABLED"
+                    align: ["LEFT", "VCENTER"]
+                    useRtlAlign: "USE_BY_SYSTEM"
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "parent - 16"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/Font.style.yaml"
+    -   path: "Item/Content/Bg/ButtonContent"
+        children:
+        -   prototype: "NotificationButtonWithText/NotificationButtonWithText"
+            name: "GoToRoomBtn"
+            components:
+                UIDataParamsComponent:
+                    args:
+                        "text": "\"#common:DialogButton/Go\""

@@ -1,0 +1,22 @@
+action ShowPiggyFillEffect(ResourceType type)
+{
+  if (type == ResourceType.gold)
+  {
+    StopParticles("./PiggyFill_Gold");
+    StartParticles("./PiggyFill_Gold");
+  }
+}
+
+action StartFullPiggyEffects
+{
+  StopParticles("./FullPiggy_Rays");
+  StopParticles("./FullPiggy_Glow");
+  StartParticles("./FullPiggy_Rays");
+  StartParticles("./FullPiggy_Glow");
+}
+
+action StopFullPiggyEffects
+{
+  StopParticles("./FullPiggy_Rays");
+  StopParticles("./FullPiggy_Glow");
+}

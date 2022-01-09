@@ -1,0 +1,14 @@
+Header:
+    version: 133
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/Notifications/SystemNotificationPrototype.yaml"
+Controls:
+-   prototype: "SystemNotificationPrototype/Notification"
+    customClass: "UIGenericNotification"
+    name: "BundleFailNotification"
+    children:
+    -   path: "NotificationItem/Content/Status/Result"
+        components:
+            UITextComponent: {}
+        bindings:
+        - ["UITextComponent.text", "localize(\"GGMErrors/InternalItemExpired\")"]

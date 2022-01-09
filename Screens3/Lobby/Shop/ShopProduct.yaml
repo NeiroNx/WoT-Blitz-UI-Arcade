@@ -1,0 +1,109 @@
+Header:
+    version: 141
+Prototypes:
+-   class: "UIControl"
+    name: "ShopProduct"
+    classes: "shop-product button-open-sound"
+    components:
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 240.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 400.000000
+        UIInputEventComponent:
+            onTouchUpInside: "ON_PRODUCT_CLICKED"
+            onTouchUpInsideData: "product.id"
+        UIDataParamsComponent:
+            params:
+            - ["bool", "nintendoSwitch", "false", "false"]
+            - ["string", "taxMessage", "\"\"", "\"\""]
+            - ["bool", "forcedTimerHide", "false", "false"]
+            - ["bool", "initializationEnded", "false", "true"]
+            - ["bool", "blurEnabled", "false", "true"]
+            - ["ShopProduct", "product", "null", "{ }"]
+            - ["int64", "serverTime", "0L", "100L"]
+            - ["bool", "arabicLocalization", "false", "false"]
+            - ["bool", "debugMode", "false", "false"]
+            - ["float", "shopScrollBottomOffset", "0.000000", "40.000000"]
+            - ["float", "shopScrollTopOffset", "0.000000", "48.000000"]
+            - ["bool", "selected", "false", "true"]
+            - ["ShopBadgeState", "badge", "null", "{ }"]
+            - ["bool", "firstShowAnimationAllowed", "false", "true"]
+            events:
+            - "ON_PRODUCT_CLICKED(int id)"
+            - "DEV_BUY_PRODUCT(int id)"
+            - "GO_TO_PRODUCT(int id)"
+            - "ON_PRODUCT_SHOWN(int id)"
+        UIDataLocalVarsComponent:
+            data:
+            - ["bool", "new", "not isNull(badge) and not badge.shown"]
+            - ["bool", "firstShow", "firstShowAnimationAllowed and new"]
+            - ["bool", "readyToShow", "false"]
+            - ["vector<int>", "oneVector", "[ 1; ]"]
+            - ["vector<int>", "emptyVector", "[ ]"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["bool", "available", "not product.xTimed or product.availableTimes > 0 or (product.giftable and product.giftAvailableTimes > 0)"]
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/Lobby/Shop/ShopProduct.actions"
+        UIDataOnEventComponent0:
+            eventName: "CONTENT_SHOWN"
+            modelFieldExpression: "firstShow"
+            dataExpression: "false"
+        Sound: {}
+        StyleSheet:
+            styles: "~res:/UI/Screens3/ButtonSound.style.yaml;~res:/UI/Screens3/Common/Touch.style.yaml;~res:/UI/Screens3/Common/Hover.style.yaml"
+    bindings:
+    - ["input", "available and not product.pendingPurchase"]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        pivot: [0.500000, 0.500000]
+        input: false
+        classes: "content-area "
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIRepeatComponent:
+                control: "~res:/UI/Screens3/Lobby/Shop/ShopProduct/Loader.yaml"
+                dataContainer: "[ 1; ]"
+                args:
+                    "nintendoSwitch": "nintendoSwitch"
+                    "taxMessage": "taxMessage"
+                    "forcedTimerHide": "forcedTimerHide"
+                    "firstShow": "firstShow"
+                    "readyToShow": "readyToShow"
+                    "badge": "badge"
+                    "initializationEnded": "initializationEnded"
+                    "blurEnabled": "blurEnabled"
+                    "arabicLocalization": "arabicLocalization"
+                    "debugMode": "debugMode"
+                    "product": "product"
+                    "serverTime": "serverTime"
+                    "shopScrollBottomOffset": "shopScrollBottomOffset"
+                    "shopScrollTopOffset": "shopScrollTopOffset"
+                    "selected": "selected"
+                    "available": "available"
+                eventActions:
+                - ["SHOWN", "CONTENT_SHOWN", ""]
+                - ["DEV_BUY_PRODUCT", "DEV_BUY_PRODUCT", "_event.id"]
+                - ["GO_TO_PRODUCT", "GO_TO_PRODUCT", "_event.id"]
+                - ["ON_PRODUCT_SHOWN", "ON_PRODUCT_SHOWN", "_event.id"]
+                loadingPolicy: "Lazy"
+    -   class: "UIControl"
+        name: "VisibilityIndicator"
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            UIRepeatComponent:
+                control: "~res:/UI/Screens3/Lobby/Shop/ShopProduct/VisibilityIndicator.yaml"
+                dataContainer: "when new -> oneVector, emptyVector"
+                eventActions:
+                - ["ON_VISIBLE", "OnNewItemShown", "product.id"]
+                loadingPolicy: "Lazy"

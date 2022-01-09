@@ -1,0 +1,218 @@
+Header:
+    version: "111"
+StyleSheets:
+-   selectors:
+    - ".table-header #left-separator"
+    properties:
+        anchor-hCenterAnchor: -24.000000
+-   selectors:
+    - ".table-header #right-separator"
+    properties:
+        anchor-hCenterAnchor: 24.000000
+-   selectors:
+    - ".table-header #center #rating-container"
+    properties:
+        visible: false
+-   selectors:
+    - ".ratingBattle * .table-header #left-separator"
+    properties:
+        anchor-hCenterAnchor: -90.000000
+-   selectors:
+    - ".ratingBattle * .table-header #right-separator"
+    properties:
+        anchor-hCenterAnchor: 90.000000
+-   selectors:
+    - ".ratingBattle * .table-header #center #rating-container"
+    properties:
+        visible: true
+-   selectors:
+    - "#map-logo"
+    properties:
+        texture-spritePath: "~res:/Gfx/Shared/icons/icon_game-mode_random_colored"
+-   selectors:
+    - ".ratingBattle * #map-logo"
+    properties:
+        texture-spritePath: "~res:/Gfx/Shared/icons/icon_game-mode_rating_colored"
+-   selectors:
+    - ".scuffle * #map-logo"
+    - ".hellgames * #map-logo"
+    - ".arcadeBattle * #map-logo"
+    - ".lunar * #map-logo"
+    - ".nanomaps * #map-logo"
+    - ".vampiric * #map-logo"
+    - ".bossmode * #map-logo"
+    properties:
+        texture-spritePath: "~res:/Gfx/Shared/icons/icon_game-mode_realistic_colored"
+-   selectors:
+    - "#battle-type-tutorial"
+    properties:
+        visible: false
+-   selectors:
+    - "#battle-type-basic"
+    properties:
+        visible: true
+-   selectors:
+    - "#battle-type-rating"
+    properties:
+        visible: false
+-   selectors:
+    - "#battle-type-supremacy"
+    properties:
+        visible: false
+-   selectors:
+    - ".ratingBattle * #battle-type-rating"
+    properties:
+        visible: true
+-   selectors:
+    - ".supremacyMode * #battle-type-supremacy"
+    properties:
+        visible: true
+-   selectors:
+    - ".supremacyMode * #battle-type-basic"
+    properties:
+        visible: false
+-   selectors:
+    - ".tutorial * #table"
+    properties:
+        sizePolicy-verticalPolicy: "PercentOfFirstChild"
+-   selectors:
+    - "#header"
+    properties:
+        anchor-leftAnchorEnabled: true
+        anchor-leftAnchor: -18.000000
+        anchor-rightAnchorEnabled: true
+-   selectors:
+    - "#table"
+    properties:
+        sizePolicy-verticalPolicy: "PercentOfChildrenSum"
+-   selectors:
+    - "#battle-info-container"
+    properties:
+        sizePolicy-horizontalPolicy: "PercentOfParent"
+-   selectors:
+    - "#map-name-container"
+    properties:
+        sizePolicy-horizontalPolicy: "PercentOfParent"
+-   selectors:
+    - ".tutorial * #battle-type-tutorial"
+    properties:
+        visible: true
+-   selectors:
+    - ".tutorial * #battle-type-basic"
+    properties:
+        visible: false
+-   selectors:
+    - ".tutorial * #map-logo"
+    properties:
+        texture-spritePath: "~res:/Gfx/Shared/icons/icon_game-mode_rating_colored"
+-   selectors:
+    - ".tutorial * #map-name-container"
+    properties:
+        sizePolicy-horizontalPolicy: "PercentOfFirstChild"
+-   selectors:
+    - ".tutorial * #battle-info-container"
+    properties:
+        sizePolicy-horizontalPolicy: "PercentOfMaxChild"
+-   selectors:
+    - ".tutorial * #header"
+    properties:
+        sizePolicy-horizontalPolicy: "PercentOfChildrenSum"
+        anchor-leftAnchorEnabled: false
+        anchor-rightAnchorEnabled: false
+        anchor-hCenterAnchorEnabled: true
+-   selectors:
+    - ".tutorial * #spacer-2"
+    properties:
+        sizePolicy-verticalValue: 64.000000
+-   selectors:
+    - ".table-left .table-cell"
+    properties:
+        bg-spriteModification: ["FLIP_HORIZONTAL"]
+        linearLayout-orientation: "LeftToRight"
+-   selectors:
+    - ".table-left .table-cell #tank-icon"
+    properties:
+        bg-spriteModification: []
+-   selectors:
+    - ".table-left .table-cell #tank-icon #tank-level"
+    properties:
+        bg-align: ["LEFT", "TOP"]
+-   selectors:
+    - ".table-left .table-cell #squad"
+    properties:
+        anchor-leftAnchorEnabled: true
+        anchor-leftAnchor: -16.000000
+-   selectors:
+    - ".table-left .table-cell #name"
+    properties:
+        linearLayout-orientation: "RightToLeft"
+-   selectors:
+    - ".table-left .table-cell #name #spacer"
+    properties:
+        visible: true
+-   selectors:
+    - ".table-left * .table-cell-empty"
+    properties:
+        bg-spriteModification: ["FLIP_HORIZONTAL"]
+-   selectors:
+    - ".table-right .table-cell"
+    properties:
+        linearLayout-orientation: "RightToLeft"
+-   selectors:
+    - ".table-right .table-cell #tank-icon"
+    properties:
+        bg-spriteModification: ["FLIP_HORIZONTAL"]
+-   selectors:
+    - ".table-right .table-cell #tank-icon #tank-level"
+    properties:
+        bg-align: ["RIGHT", "TOP"]
+-   selectors:
+    - ".table-right .table-cell #squad"
+    properties:
+        anchor-rightAnchorEnabled: true
+        anchor-rightAnchor: -16.000000
+-   selectors:
+    - ".table-right .table-cell #name #spacer"
+    properties:
+        visible: true
+-   selectors:
+    - ".table-cell #tank-icon"
+    properties:
+        bg-frame: 0
+-   selectors:
+    - ".table-cell.alive #tank-icon"
+    properties:
+        bg-frame: 1
+-   selectors:
+    - ".table-cell #tank-name"
+    properties:
+        text-color: [1.000000, 1.000000, 1.000000, 0.500000]
+-   selectors:
+    - ".table-cell.ready #tank-name"
+    properties:
+        text-color: [1.000000, 1.000000, 1.000000, 1.000000]
+-   selectors:
+    - ".table-cell.player #tank-name"
+    properties:
+        text-color: [1.000000, 1.000000, 1.000000, 1.000000]
+-   selectors:
+    - ".table-cell"
+    properties:
+        bg-frame: 1
+-   selectors:
+    - ".table-cell.player"
+    properties:
+        bg-frame: 2
+-   selectors:
+    - ".tutorial * #table-content"
+    - ".tutorial * #table-header #left-separator"
+    - ".tutorial * #table-header #right-separator"
+    - ".tutorial * #table-header #title-left"
+    - ".tutorial * #table-header #title-right"
+    - ".tutorial * #mission"
+    properties:
+        visible: false
+-   selectors:
+    - "#spacer-2"
+    properties:
+        sizePolicy-verticalValue: 28.000000

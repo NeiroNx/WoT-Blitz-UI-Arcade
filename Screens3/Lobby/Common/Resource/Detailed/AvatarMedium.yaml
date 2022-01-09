@@ -1,0 +1,167 @@
+Header:
+    version: 140
+Prototypes:
+-   class: "UIControl"
+    name: "AvatarMedium"
+    size: [86.000000, 104.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            horizontalMin: 64.000000
+            verticalPolicy: "PercentOfParent"
+            verticalMin: 92.000000
+        UIDataParamsComponent:
+            params:
+            - ["string", "textStyle", "\"\"", "\"\""]
+            - ["int", "maxQuantity", "0", "0"]
+            - ["int", "minQuantity", "0", "0"]
+            - ["StuffResource", "stuff", "null", "{ }"]
+            - ["control", "fx", "null", "null"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["int", "shortValue", "1000"]
+            - ["string", "quantityStr", "when not (minQuantity == maxQuantity) -> shortStr(minQuantity, shortValue) + \"-\" + shortStr(maxQuantity, shortValue), maxQuantity > 0 -> str(maxQuantity), str(stuff.quantity)"]
+            - ["string", "style", "(when textStyle.empty() -> \"t-subtitle\", textStyle) + \" bold white-wild-sand-text\""]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            Anchor:
+                topAnchorEnabled: true
+                topAnchor: 4.000000
+            LinearLayout:
+                orientation: "TopDown"
+                spacing: -10.000000
+                skipInvisible: false
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfChildrenSum"
+        children:
+        -   class: "UIControl"
+            name: "Wrapper"
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfLastChild"
+                    verticalPolicy: "PercentOfLastChild"
+            children:
+            -   class: "UIControl"
+                name: "FxHolder"
+                input: false
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                    UIChildComponent0:
+                        childType: "kControl"
+                        condition: "not isNull(fx)"
+                        control: "fx"
+            -   class: "UIControl"
+                name: "Avatar"
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 64.000000
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 78.000000
+                    UIChildComponent0:
+                        prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/PlayerAvatar.yaml"
+                        args:
+                            "interactive": "false"
+                            "avatar": "stuff.avatar"
+                            "size": "eAvatarSize.NORMAL"
+                            "animated": "true"
+        -   class: "UIControl"
+            name: "Quantity"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "Formula"
+                    verticalFormula: "max(maxChild, 24)"
+                UIChildComponent0:
+                    childType: "kControl"
+                    condition: "not (minQuantity == maxQuantity)"
+                    control: "Range"
+                UIChildComponent1:
+                    childType: "kControl"
+                    control: "Text"
+            bindings:
+            - ["visible", "stuff.quantity >= 0 or maxQuantity > 0"]
+Slots:
+-   class: "UIControl"
+    name: "Range"
+    input: false
+    components:
+        Anchor:
+            hCenterAnchorEnabled: true
+            vCenterAnchorEnabled: true
+        LinearLayout:
+            spacing: 2.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "PercentOfMaxChild"
+    children:
+    -   class: "UIControl"
+        name: "count"
+        input: false
+        components:
+            UITextComponent: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml"
+        bindings:
+        - ["classes", "style"]
+        - ["UITextComponent.text", "\"×\" + shortStr(minQuantity, shortValue)"]
+    -   class: "UIControl"
+        name: "line"
+        input: false
+        components:
+            UITextComponent: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml"
+        bindings:
+        - ["classes", "style"]
+        - ["UITextComponent.text", "\"-\""]
+    -   class: "UIControl"
+        name: "max"
+        input: false
+        components:
+            UITextComponent: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml"
+        bindings:
+        - ["classes", "style"]
+        - ["UITextComponent.text", "shortStr(maxQuantity, shortValue)"]
+-   class: "UIControl"
+    name: "Text"
+    input: false
+    components:
+        UITextComponent: {}
+        Anchor:
+            hCenterAnchorEnabled: true
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfContent"
+            verticalPolicy: "PercentOfContent"
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Font.style.yaml"
+    bindings:
+    - ["classes", "style"]
+    - ["UITextComponent.text", "\"×\" + quantityStr"]

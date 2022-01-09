@@ -1,0 +1,80 @@
+Header:
+    version: 133
+Prototypes:
+-   class: "UIControl"
+    name: "CurrencyWithDiscount"
+    input: false
+    components:
+        LinearLayout:
+            spacing: 8.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "PercentOfMaxChild"
+        UIDataParamsComponent:
+            params:
+            - ["eCurrencySize", "currencySize", "eCurrencySize.BIG", "eCurrencySize.BIG_BOLD"]
+            - ["bool", "forButton", "false", "false"]
+            - ["bool", "canAfford", "true", "true"]
+            - ["bool", "showDiscount", "true", "false"]
+            - ["bool", "plusVisible", "false", "false"]
+            - ["ResourceModel", "resource", "null", "{ \"type\" = ResourceType.gold; \"quantity\" = 100; }"]
+            - ["bool", "forceFullValue", "true", "true"]
+            - ["bool", "crossOut", "false", "true"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["bool", "showDiscountLabel", "not floatEqual(resource.discount.value, 0.000000) and showDiscount"]
+    children:
+    -   class: "UIControl"
+        name: "DiscountLabel"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                condition: "showDiscountLabel"
+                prototypePath: "~res:/UI/Screens3/Common/DiscountLabel.yaml"
+                args:
+                    "discountReason": "resource.discount.reason"
+                    "discount": "resource.discount.value"
+        bindings:
+        - ["visible", "showDiscountLabel"]
+    -   class: "UIControl"
+        name: "Currency"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/Currency.yaml"
+                args:
+                    "currencySize": "currencySize"
+                    "forButton": "forButton"
+                    "canAfford": "canAfford"
+                    "isPlusTopPaneVisible": "false"
+                    "serverTime": "0L"
+                    "plusVisible": "plusVisible"
+                    "resource": "resource"
+                    "forceFullValue": "when currencySize == eCurrencySize.SMALL -> false, forceFullValue"
+    -   class: "UIControl"
+        name: "Line"
+        input: false
+        classes: "white-wild-sand-bg"
+        components:
+            Background: {}
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: -2.000000
+                rightAnchorEnabled: true
+                rightAnchor: -2.000000
+                vCenterAnchorEnabled: true
+                vCenterAnchor: 1.000000
+            IgnoreLayout: {}
+            SizePolicy:
+                verticalPolicy: "FixedSize"
+                verticalValue: 1.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+        bindings:
+        - ["visible", "crossOut"]

@@ -1,0 +1,31 @@
+Header:
+    version: 140
+Prototypes:
+-   class: "UIControl"
+    name: "VehicleName"
+    input: false
+    components:
+        UITextComponent:
+            align: ["LEFT", "VCENTER"]
+        Anchor: {}
+        SizePolicy:
+            horizontalPolicy: "PercentOfContent"
+        UIDataParamsComponent:
+            params:
+            - ["bool", "isShortName", "false", "false"]
+            - ["VehicleDataModel", "vehicle", "null", "{ }"]
+            - ["TankStats", "tankStats", "null", "{ }"]
+            - ["string", "textStyle", "\"t-body bold\"", "\"t-body bold\""]
+            - ["bool", "anchorBottom", "false", "false"]
+            - ["eSizePolicy", "verticalPolicy", "eSizePolicy.PercentOfContent", "eSizePolicy.PercentOfContent"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["string", "tankName", "when isNull(vehicle) -> \"\", isShortName -> vehicle.shortName, vehicle.name"]
+            - ["string", "color", "when (not isNull(vehicle) and vehicle.isPremium) or (not isNull(tankStats) and tankStats.isPremiumized) -> \"yellow-lightning-text\", not isNull(vehicle) and vehicle.isCollectible -> \"blue-rimmi-text\", \"white-wild-sand-text\""]
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+    bindings:
+    - ["classes", "textStyle + \" \" + color"]
+    - ["UITextComponent.text", "localize(tankName)"]
+    - ["Anchor.bottomAnchorEnabled", "anchorBottom"]
+    - ["SizePolicy.verticalPolicy", "verticalPolicy"]

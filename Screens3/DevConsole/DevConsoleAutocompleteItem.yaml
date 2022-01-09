@@ -1,0 +1,69 @@
+Header:
+    version: 125
+Prototypes:
+-   class: "UIControl"
+    name: "DevConsoleAutocompleteItem"
+    classes: "dev-console-autocomplete-item"
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfFirstChild"
+            verticalPolicy: "PercentOfFirstChild"
+        UIInputEventComponent:
+            onTouchUpInside: "PRESSED"
+        UIDataParamsComponent:
+            params:
+            - ["bool", "selected", "false", "true"]
+            - ["string", "command", "\"#cmd\"", "\".debugCommand\""]
+            events:
+            - "PRESSED"
+        UIDataLocalBindingsComponent:
+            data:
+            - ["string", "textStyle", "when selected -> \"bold\", \"regular\""]
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Common/Hover.style.yaml"
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        pivot: [0.500000, 0.500000]
+        input: false
+        classes: "white-wild-sand-50-border content-area"
+        components:
+            BorderComponent: {}
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/Common/Touch.style.yaml"
+        bindings:
+        - ["BorderComponent.border-visible", "selected"]
+        children:
+        -   class: "UIControl"
+            name: "CommandText"
+            input: false
+            components:
+                UITextComponent: {}
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "content + 8"
+                    verticalPolicy: "Formula"
+                    verticalFormula: "content + 8"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml"
+            bindings:
+            - ["classes", "\"t-body white-wild-sand-text \" + textStyle"]
+            - ["UITextComponent.text", "command"]
+        -   class: "UIControl"
+            name: "Fade"
+            input: false
+            classes: "hover white-wild-sand-10-bg"
+            components:
+                Background: {}
+                UIOpacityComponent: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Common/Hover.style.yaml;~res:/UI/Screens3/Color.style.yaml"

@@ -1,0 +1,213 @@
+Header:
+    version: 135
+Prototypes:
+-   class: "UIControl"
+    name: "ProgressBar"
+    size: [128.000000, 0.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfFirstChild"
+        UIDataParamsComponent:
+            params:
+            - ["Progress", "progress", "null", "{ \"value\" = 50; \"bonus\" = 25; }"]
+            - ["int", "labelValue", "0", "10"]
+            - ["color", "bgColor", "rgb(16777215)", "rgba(15096855, 0.300000)"]
+            - ["color", "valueColor", "rgb(16777215)", "rgb(16751872)"]
+            - ["string", "valueIcon", "\"~res:/Gfx/Lobby/icons/icon_battles_xs\"", "\"~res:/Gfx/Lobby/icons/icon_victory_s\""]
+            - ["string", "imageUrl", "\"\"", "\"\""]
+            events:
+            - "ANIMATION_FINISHED"
+        UIDataLocalVarsComponent:
+            data:
+            - ["float", "animationTime", "1.000000"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["int", "value", "when progress.value < progress.minimum -> progress.minimum, progress.value > progress.maximum -> progress.maximum, progress.value"]
+            - ["float", "percent", "when (progress.maximum - progress.minimum) != 0 -> float(value - progress.minimum) / float(progress.maximum - progress.minimum), 1.000000"]
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/Lobby/Story/NEWCOMERS2020/ProgressBar.actions"
+    children:
+    -   class: "UIControl"
+        name: "BgWrapper"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   class: "UIControl"
+            name: "PartOfLineL"
+            input: false
+            components:
+                Background:
+                    sprite: "~res:/Gfx/Lobby/events/okr_new-comers/progressbar_part"
+                    spriteModification: ["FLIP_HORIZONTAL"]
+                Anchor:
+                    leftAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+            bindings:
+            - ["Background.color", "when percent > 0.000000 -> valueColor, bgColor"]
+        -   class: "UIControl"
+            name: "Line"
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_FILL"
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 6.000000
+                    rightAnchorEnabled: true
+                    rightAnchor: 6.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            bindings:
+            - ["Background.color", "bgColor"]
+        -   class: "UIControl"
+            name: "PartOfLineR"
+            input: false
+            components:
+                Background:
+                    sprite: "~res:/Gfx/Lobby/events/okr_new-comers/progressbar_part"
+                Anchor:
+                    rightAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+            bindings:
+            - ["Background.color", "when percent < 1.000000 -> bgColor, valueColor"]
+    -   class: "UIControl"
+        name: "ValueWrapper"
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 6.000000
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "(parent - 12) * percent"
+                verticalPolicy: "PercentOfParent"
+        bindings:
+        - ["SizePolicy.horizontalValue", "percent"]
+        children:
+        -   class: "UIControl"
+            name: "Value"
+            input: false
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+                    topAnchorEnabled: true
+                    topAnchor: 20.000000
+                SizePolicy:
+                    horizontalPolicy: "Ignore"
+                    verticalPolicy: "PercentOfFirstChild"
+                UIChildComponent0:
+                    childType: "kControl"
+                    control: "FloatPopup"
+            bindings:
+            - ["visible", "percent > 0.000000 and percent < 1.000000"]
+        -   class: "UIControl"
+            name: "Bg"
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_FILL"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            bindings:
+            - ["Background.color", "valueColor"]
+Slots:
+-   class: "UIControl"
+    name: "FloatPopup"
+    pivot: [0.500000, 0.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfMaxChild"
+    children:
+    -   class: "UIControl"
+        name: "Background"
+        input: false
+        classes: "white-wild-sand-15-bg"
+        components:
+            Background:
+                drawType: "DRAW_STRETCH_BOTH"
+                sprite: "~res:/Gfx/Lobby/backgrounds/bg_r4"
+                leftRightStretchCap: 4.000000
+                topBottomStretchCap: 4.000000
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "maxChild + 8"
+                verticalPolicy: "FixedSize"
+                verticalValue: 26.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+        children:
+        -   class: "UIControl"
+            name: "CounterHolder"
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfFirstChild"
+                    verticalPolicy: "PercentOfFirstChild"
+                UIChildComponent0:
+                    childType: "kControl"
+                    control: "BattlesCounter"
+    -   class: "UIControl"
+        name: "Tail"
+        input: false
+        classes: "white-wild-sand-15-bg"
+        components:
+            Background:
+                drawType: "DRAW_STRETCH_BOTH"
+                sprite: "~res:/Gfx/Lobby/backgrounds/bg_triangle_8"
+                perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+            Anchor:
+                hCenterAnchorEnabled: true
+                topAnchorEnabled: true
+                topAnchor: -7.000000
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 6.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 7.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+-   class: "UIControl"
+    name: "BattlesCounter"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfFirstChild"
+            verticalPolicy: "PercentOfFirstChild"
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            UIOpacityComponent:
+                opacity: 0.700000
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/CurrencyPrivate.yaml"
+                args:
+                    "currencySize": "eCurrencySize.NEWCOMERS2020"
+                    "type": "ResourceType.stuff"
+                    "icon": "valueIcon"
+                    "imageURL": "when valueIcon.empty() -> imageUrl, \"\""
+                    "quantity": "labelValue"
+                    "forceHideGrade": "true"

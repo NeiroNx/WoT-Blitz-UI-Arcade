@@ -1,0 +1,57 @@
+Header:
+    version: "77"
+Prototypes:
+-   class: "UIControl"
+    name: "StoryInfoFooterNotSelected"
+    size: [960.000000, 94.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfFirstChild"
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            UITextureComponent:
+                spritePath: "~res:/Gfx/UI/Story/Footer"
+                drawType: "DRAW_STRETCH_HORIZONTAL"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "FixedSize"
+                verticalValue: 94.000000
+        children:
+        -   class: "UIControl"
+            name: "InfoContainer"
+            input: false
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 40.000000
+                    rightAnchorEnabled: true
+                    rightAnchor: 40.000000
+                    vCenterAnchorEnabled: true
+                LinearLayout:
+                    orientation: "TopDown"
+                    spacing: 10.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfChildrenSum"
+            children:
+            -   class: "UIControl"
+                name: "Label"
+                input: false
+                classes: "text1 text-color-blue"
+                components:
+                    UITextComponent:
+                        text: "template_event/ProgressStage/StepTree/Hint"
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                        multiline: "MULTILINE_ENABLED"
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens/Fonts.yaml;~res:/UI/Screens/FontsColors.yaml"

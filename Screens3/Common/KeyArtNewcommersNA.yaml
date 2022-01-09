@@ -1,0 +1,352 @@
+Header:
+    version: 128
+Prototypes:
+-   class: "UIControl"
+    name: "KeyArt"
+    size: [788.000000, 523.000000]
+    input: false
+    components:
+        Anchor:
+            leftAnchorEnabled: true
+            rightAnchorEnabled: true
+            topAnchorEnabled: true
+            bottomAnchorEnabled: true
+    children:
+    -   class: "UIControl"
+        name: "Holder"
+        size: [960.000000, 640.000000]
+        scale: [1.000000, 1.000000]
+        pivot: [0.500000, 0.500000]
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            ScalePolicy:
+                horizontalFormula: "max(parentSize.X / size.X, parentSize.Y / size.Y)"
+                verticalFormula: "max(parentSize.X / size.X, parentSize.Y / size.Y)"
+        children:
+        -   class: "UIControl"
+            name: "Layer"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            children:
+            -   class: "UIControl"
+                name: "0"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    Background:
+                        drawType: "DRAW_SCALE_TO_RECT"
+                        sprite: "~res:/Gfx/Lobby/backgrounds/key-art/key-art_newcommers_na"
+                        frame: 0
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                children:
+                -   class: "UIParticles"
+                    name: "explosion_flowmap"
+                    position: [407.000000, 304.000000]
+                    size: [32.000000, 32.000000]
+                    scale: [0.750000, 0.750000]
+                    pivot: [0.500000, 0.500000]
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreenNewPlayer/explosion_flowmap.sc2"
+                    autoStart: true
+                    components:
+                        Update:
+                            updateInvisible: true
+                -   class: "UIParticles"
+                    name: "fire_flowmap_pershing"
+                    position: [355.000000, 411.000000]
+                    size: [32.000000, 32.000000]
+                    scale: [0.750000, 0.750000]
+                    pivot: [0.500000, 0.500000]
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreenNewPlayer/fire_flowmap_pershing.sc2"
+                    autoStart: true
+                    components:
+                        Update:
+                            updateInvisible: true
+                -   class: "UIParticles"
+                    name: "hit_1"
+                    position: [371.000000, 297.000000]
+                    size: [32.000000, 32.000000]
+                    scale: [0.700000, 0.700000]
+                    pivot: [0.500000, 0.500000]
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreenNewPlayer/hit_1.sc2"
+                    autoStart: true
+                    components:
+                        Update:
+                            updateInvisible: true
+                -   class: "UIParticles"
+                    name: "IS3_smoke"
+                    position: [480.000000, 331.000000]
+                    size: [32.000000, 32.000000]
+                    scale: [0.700000, 0.700000]
+                    pivot: [0.500000, 0.500000]
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreenNewPlayer/IS3_smoke.sc2"
+                    autoStart: true
+                    components:
+                        Update:
+                            updateInvisible: true
+                -   class: "UIParticles"
+                    name: "shot_sherman_flowmap"
+                    position: [583.000000, 314.000000]
+                    size: [32.000000, 32.000000]
+                    scale: [0.750000, 0.750000]
+                    pivot: [0.500000, 0.500000]
+                    angle: -5.000000
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreenNewPlayer/shot_sherman_flowmap.sc2"
+                    autoStart: true
+                    components:
+                        Update:
+                            updateInvisible: true
+                -   class: "UIParticles"
+                    name: "bullet_sherman"
+                    position: [662.000000, 296.000000]
+                    size: [32.000000, 32.000000]
+                    scale: [0.750000, 0.750000]
+                    pivot: [0.500000, 0.500000]
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreenNewPlayer/bullet_sherman.sc2"
+                    autoStart: true
+                    components:
+                        Update:
+                            updateInvisible: true
+                -   class: "UIParticles"
+                    name: "smoke_pershing"
+                    position: [363.000000, 371.000000]
+                    size: [32.000000, 32.000000]
+                    scale: [0.700000, 0.700000]
+                    pivot: [0.500000, 0.500000]
+                    visible: true
+                    enabled: true
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreenNewPlayer/smoke_pershing.sc2"
+                    autoStart: true
+                    components:
+                        Update:
+                            updateInvisible: true
+                -   class: "UIParticles"
+                    name: "tank_smoke_3"
+                    position: [227.000000, 422.000000]
+                    size: [32.000000, 32.000000]
+                    scale: [0.700000, 0.700000]
+                    pivot: [0.500000, 0.500000]
+                    visible: true
+                    enabled: true
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreenNewPlayer/tank_smoke_3.sc2"
+                    autoStart: true
+                    components:
+                        Update:
+                            updateInvisible: true
+                -   class: "UIParticles"
+                    name: "Sherman_gun"
+                    position: [596.000000, 300.000000]
+                    size: [32.000000, 32.000000]
+                    scale: [0.550000, 0.700000]
+                    pivot: [0.500000, 0.500000]
+                    angle: 0.000000
+                    visible: true
+                    enabled: true
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreenNewPlayer/Sherman_gun.sc2"
+                    autoStart: true
+                    components:
+                        Update:
+                            updateInvisible: true
+                -   class: "UIParticles"
+                    name: "Tiger_gun"
+                    position: [172.000000, 310.000000]
+                    size: [32.000000, 32.000000]
+                    scale: [0.750000, 1.500000]
+                    pivot: [0.500000, 0.500000]
+                    angle: 0.000000
+                    visible: true
+                    enabled: true
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreenNewPlayer/Tiger_gun.sc2"
+                    autoStart: true
+                    components:
+                        Update:
+                            updateInvisible: true
+                -   class: "UIParticles"
+                    name: "Tiger_turret"
+                    position: [149.000000, 309.000000]
+                    size: [32.000000, 32.000000]
+                    scale: [-0.750000, 1.000000]
+                    pivot: [0.500000, 0.500000]
+                    angle: 0.000000
+                    visible: true
+                    enabled: true
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreenNewPlayer/Tiger_turret.sc2"
+                    autoStart: true
+                    components:
+                        Update:
+                            updateInvisible: true
+                -   class: "UIParticles"
+                    name: "shot_tiger"
+                    position: [191.000000, 307.000000]
+                    size: [32.000000, 32.000000]
+                    scale: [0.700000, 0.700000]
+                    pivot: [0.500000, 0.500000]
+                    visible: true
+                    enabled: true
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreenNewPlayer/shot_tiger.sc2"
+                    autoStart: true
+                    components:
+                        Update:
+                            updateInvisible: true
+            -   class: "UIControl"
+                name: "1"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    Background:
+                        drawType: "DRAW_SCALE_TO_RECT"
+                        sprite: "~res:/Gfx/Lobby/backgrounds/key-art/key-art_newcommers_na"
+                        frame: 1
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                children:
+                -   class: "UIParticles"
+                    name: "green"
+                    position: [611.000000, 473.000000]
+                    size: [32.000000, 32.000000]
+                    scale: [1.000000, 1.000000]
+                    pivot: [0.500000, 0.500000]
+                    angle: 30.000000
+                    visible: true
+                    enabled: true
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreenNewPlayer/green.sc2"
+                    autoStart: true
+                    components:
+                        Update:
+                            updateInvisible: true
+                -   class: "UIParticles"
+                    name: "antenna"
+                    position: [716.000000, 319.000000]
+                    size: [32.000000, 32.000000]
+                    scale: [0.700000, 1.000000]
+                    pivot: [0.500000, 0.500000]
+                    visible: true
+                    enabled: true
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreenNewPlayer/antenna.sc2"
+                    autoStart: true
+                    components:
+                        Update:
+                            updateInvisible: true
+                -   class: "UIParticles"
+                    name: "Fire"
+                    position: [901.000000, 588.000000]
+                    size: [32.000000, 32.000000]
+                    scale: [0.700000, 0.700000]
+                    pivot: [0.500000, 0.500000]
+                    visible: true
+                    enabled: true
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreenNewPlayer/Fire.sc2"
+                    autoStart: true
+                    components:
+                        Update:
+                            updateInvisible: true
+                -   class: "UIParticles"
+                    name: "burned_paper"
+                    position: [496.000000, 336.000000]
+                    size: [32.000000, 32.000000]
+                    pivot: [0.500000, 0.500000]
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreenNewPlayer/burned_paper.sc2"
+                    autoStart: true
+                    components:
+                        Update:
+                            updateInvisible: true
+                -   class: "UIParticles"
+                    name: "Glow_sherman_shot"
+                    position: [645.000000, 324.000000]
+                    size: [32.000000, 32.000000]
+                    scale: [0.750000, 0.900000]
+                    pivot: [0.500000, 0.500000]
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreenNewPlayer/Glow_sherman_shot.sc2"
+                    autoStart: true
+                    components:
+                        Update:
+                            updateInvisible: true
+                -   class: "UIParticles"
+                    name: "Glow_tank"
+                    position: [816.000000, 466.000000]
+                    size: [32.000000, 32.000000]
+                    scale: [0.730000, 0.900000]
+                    pivot: [0.500000, 0.500000]
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreenNewPlayer/Glow_tank.sc2"
+                    autoStart: true
+                    components:
+                        Update:
+                            updateInvisible: true
+                -   class: "UIParticles"
+                    name: "LightRays"
+                    position: [279.000000, 259.000000]
+                    size: [32.000000, 32.000000]
+                    scale: [0.700000, 0.700000]
+                    pivot: [0.500000, 0.500000]
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreenNewPlayer/LightRays.sc2"
+                    autoStart: true
+                    components:
+                        Update:
+                            updateInvisible: true
+                -   class: "UIParticles"
+                    name: "Shot_sherman"
+                    position: [545.000000, 290.000000]
+                    size: [32.000000, 32.000000]
+                    scale: [-0.850000, 0.850000]
+                    pivot: [0.500000, 0.500000]
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreenNewPlayer/Shot_sherman.sc2"
+                    autoStart: true
+                    components:
+                        Update:
+                            updateInvisible: true
+                -   class: "UIParticles"
+                    name: "Shot_sherman_1"
+                    position: [114.000000, 583.000000]
+                    size: [32.000000, 32.000000]
+                    scale: [1.000000, 1.000000]
+                    pivot: [0.500000, 0.500000]
+                    angle: 0.000000
+                    input: false
+                    effectPath: "~res:/3d/FX/UI/LoginScreenNewPlayer/dust.sc2"
+                    autoStart: true
+                    components:
+                        Update:
+                            updateInvisible: true
+            -   class: "UIControl"
+                name: "2"
+                size: [32.000000, 32.000000]
+                input: false
+            -   class: "UIControl"
+                name: "3"
+                size: [32.000000, 32.000000]
+                input: false

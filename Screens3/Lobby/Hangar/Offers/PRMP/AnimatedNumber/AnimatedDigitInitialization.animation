@@ -1,0 +1,7 @@
+animation InitializeDigit
+{
+  if (initialized)
+  {
+    Move("./DigitSequence", y=-(initialDigit * digitHeight));
+  }
+}

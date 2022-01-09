@@ -1,0 +1,27 @@
+Header:
+    version: "24"
+StyleSheets:
+-   selector: ".vi.bold"
+    properties:
+        text-fontPath: "~res:/Fonts/cfg/cinecavXUiBold.fntconf"
+-   selector: ".vi.bold.fs-13"
+    properties:
+        text-fontSize: 11.000000
+-   selector: ".vi.bold.fs-15"
+    properties:
+        text-fontSize: 13.000000
+-   selector: ".vi.bold.fs-16"
+    properties:
+        text-fontSize: 14.000000
+-   selector: ".vi.regular"
+    properties:
+        text-fontPath: "~res:/Fonts/cfg/cinecavXUi.fntconf"
+-   selector: ".vi.regular.fs-13"
+    properties:
+        text-fontSize: 11.000000
+-   selector: ".vi.regular.fs-15"
+    properties:
+        text-fontSize: 13.000000
+-   selector: ".vi.regular.fs-16"
+    properties:
+        text-fontSize: 14.000000

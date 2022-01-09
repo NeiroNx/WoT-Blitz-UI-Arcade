@@ -1,0 +1,9 @@
+action Enable(float time)
+{
+    ChangeData(opacity, 1.0, time, SINE_IN);
+}
+
+action Disable(float time)
+{
+    ChangeData(opacity, 0.0, time, SINE_IN);
+}

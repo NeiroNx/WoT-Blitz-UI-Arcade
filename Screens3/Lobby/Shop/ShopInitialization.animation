@@ -1,0 +1,35 @@
+animation Initialization
+{
+    Opacity("**/scrollContainerControl/SectionsHolder", 0.0);
+
+    if (not shop.sections.Empty())
+    {
+        if (view.initialSectionIndex >= 0)
+        {
+            DirectEvent("SelectSection", "**/SideBar/SideBar", arg1 = view.initialSectionIndex, arg2 = 0);
+            WaitEvent("CONTENT_SIZE_RECEIVED");
+            if (view.initialItemIndex >=0)
+            {
+                ScrollToEnsureControlOnScreen("**/UIScrollView/**/ShopSection" + str(view.initialSectionIndex) + "/**/ShopSectionItem" + str(view.initialItemIndex), 0, yPolicy = eScrollToControlPolicy.kCenter);
+            }
+            else
+            {
+                // hack to make section position nicely after return to the screen
+                ScrollToEnsureControlOnScreen("**/UIScrollView/**/ShopSection0");
+                ScrollToEnsureControlOnScreen("**/UIScrollView/**/ShopSection" + str(view.initialSectionIndex));
+            }
+        }
+
+        if (view.initialSectionIndex < 0)
+        {
+            DirectEvent("SelectSection", "**/SideBar/SideBar", arg1 = view.selectedSectionIndex, arg2 = 0);
+            WaitEvent("CONTENT_SIZE_RECEIVED");
+            ScrollToEnsureControlOnScreen("**/UIScrollView/**/ShopSection" + str(view.selectedSectionIndex) + "/**/ShopSectionItem" + str(view.selectedItemIndex), 0);
+        }
+    }
+
+    Opacity("**/scrollContainerControl/SectionsHolder", 1.0, 0.4, EASE_IN);
+
+    ChangeData(initializationEnded, true);
+    Event("INITIALIZATION_FINISHED");
+}

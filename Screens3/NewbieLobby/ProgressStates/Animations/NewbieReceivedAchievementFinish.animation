@@ -1,0 +1,20 @@
+animation FINISH()
+{
+	Event("ON_PROGRESS_STATE_FINISHED", ".", eNewbieProgressionStepType.ReceivedAchievement);
+
+	Opacity(".", opacity=1.0, time=0.0);
+	ChangeData(positionShift, 0);
+	ChangeData(inputDisabled, true);
+
+	parallel
+	{
+		Scale(path="**/AchievementEffect", x=0, y=0, time=0.4, interpolation=EASE_OUT);
+		Opacity(".", opacity=0.0, time=0.4, interpolation=EASE_IN_EASE_OUT);
+		ChangeData(positionShift, 400, 0.4, EASE_IN_EASE_OUT);
+		
+		Opacity("**/Button", 0.0, 0.4, EASE_OUT);
+		ChangeProperty("**/Button", "Anchor", "vCenterAnchor", 50, time = 0.4, interpolation=EASE_OUT);
+	}
+
+	Event("ON_FINISHED");
+}

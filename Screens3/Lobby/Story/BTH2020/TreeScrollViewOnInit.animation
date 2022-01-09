@@ -1,0 +1,4 @@
+animation TreeScrollViewOnInit
+{
+    ScrollToEnsureControlOnScreen("**/Step" + str(selectedStep.id), 0.0, eScrollToControlPolicy.kCenter);
+}

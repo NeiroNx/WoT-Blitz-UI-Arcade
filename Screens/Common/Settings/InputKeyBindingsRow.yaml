@@ -1,0 +1,27 @@
+Header:
+    version: "106"
+Prototypes:
+-   class: "UIControl"
+    name: "Control"
+    size: [1015.000000, 80.000000]
+    input: false
+    components:
+        Background: {}
+        Anchor:
+            leftAnchorEnabled: true
+            rightAnchorEnabled: true
+        LinearLayout:
+            spacing: 1.000000
+        UIDataParamsComponent:
+            params:
+            - ["KeyBindingInfoRow", "bindingsRow", "null", "{ }"]
+        UIRepeatComponent:
+            control: "~res:/UI/Screens/Common/Settings/InputKeyBindingField.yaml"
+            dataContainer: "bindingsRow.bindingsRow"
+            args:
+                "isSelected": "_item.isSelected"
+                "animOn": "_item.animOn"
+                "caption": "_item.caption"
+                "description": "_item.description"
+                "value": "_item.value"
+                "action": "_item.action"

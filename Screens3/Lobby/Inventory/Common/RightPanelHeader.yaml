@@ -1,0 +1,52 @@
+Header:
+    version: "84"
+Prototypes:
+-   class: "UIControl"
+    name: "RightPanelHeader"
+    size: [300.000000, 80.000000]
+    input: false
+    components:
+        LinearLayout:
+            spacing: 16.000000
+            useRtl: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfMaxChild"
+    children:
+    -   class: "UIControl"
+        name: "ImageWrapper"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 80.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 80.000000
+        children:
+        -   class: "UIControl"
+            name: "Img"
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_PROPORTIONAL"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+    -   class: "UIControl"
+        name: "SubTitle"
+        position: [94.000000, 28.000000]
+        input: false
+        classes: "t-subtitle regular white-wild-sand-text"
+        components:
+            UITextComponent:
+                text: "Item name"
+                multiline: "MULTILINE_ENABLED"
+                align: ["LEFT", "VCENTER"]
+            Anchor:
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "min(parentRest, content)"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml"

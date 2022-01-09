@@ -1,0 +1,13 @@
+animation START_SLIDE_SHOW
+{
+	if (videoFinished)
+	{
+		ChangeData(videoMovingProgress, 1.0, 0.7, EASE_OUT);
+        ChangeProperty("**/Video", "", "visible", false);		
+		Wait(slideShowTime);
+		if (selectedItem < pagesCount - 1)
+		{
+			DirectEvent("GO_TO_NEXT", ".");
+		}
+	}
+}

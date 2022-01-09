@@ -1,0 +1,37 @@
+Header:
+    version: "107"
+Controls:
+-   class: "UIControl"
+    name: "ProgressBar"
+    size: [320.000000, 8.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["StoryStepModel", "data", "null", "{ }"]
+            - ["ResourceDetailed", "priceItem", "null", "{ }"]
+            - ["string", "color", "\"blue-curious-blue-bg\"", "\"blue-curious-blue-bg\""]
+        UIDataLocalsComponent:
+            locals:
+            - ["int", "net", "when data.net.price.Empty() or priceItem.type != ResourceType.stuff -> 0, data.net.price[priceItem.stuff.name].stuff.quantity"]
+            - ["int", "value", "when priceItem.stuff.quantity > net -> (priceItem.stuff.quantity - net), 0"]
+            - ["int", "maximum", "priceItem.stuff.quantity"]
+    children:
+    -   class: "UIControl"
+        name: "ProgressBarHolder"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                childType: "kPrototype"
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/ProgressBar.yaml"
+                args:
+                    "value": "value"
+                    "maximum": "maximum"
+                    "progressColor": "color"
+                    "showGradient": "true"

@@ -1,0 +1,29 @@
+Header:
+    version: "85"
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Inventory/Common/RightPanelTabsHeader.yaml"
+- "~res:/UI/Screens3/Lobby/Inventory/Common/HeaderContent/RightPanelHeaderContentCapsTitle.yaml"
+Prototypes:
+-   prototype: "RightPanelTabsHeader/TabsHeader"
+    name: "RightPanelTabsHeaderCapsTitle"
+    components:
+        UIDataParamsComponent:
+            params:
+            - ["int", "activeTab", "0", "0"]
+            - ["string", "title", "\"\"", "\"HEADER\""]
+            - ["vector<TabIconInfo>", "info", "null", "[ { sprite = \"~res:/Gfx/Lobby/icons/icon_list_s\"; badge = { value = \"\"; }; }; { sprite = \"~res:/Gfx/Lobby/icons/icon_medal_s\"; badge = { value = \"\"; }; }; ]"]
+    children:
+    -   path: "ContentArea/Control"
+        children:
+        -   prototype: "RightPanelHeaderContentCapsTitle/RightPanelHeaderContentCapsTitle"
+            name: "RightPanelHeaderContentCapsTitle"
+            components:
+                UIDataParamsComponent:
+                    args:
+                        "title": "title"
+    -   path: "ContentArea/IconTabsBar"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "activeTab": "activeTab"
+                    "info": "info"

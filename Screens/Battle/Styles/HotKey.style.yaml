@@ -1,0 +1,27 @@
+Header:
+    version: "100"
+StyleSheets:
+-   selectors:
+    - ".hotkey .gamepad-up"
+    properties:
+        angle: -90.000000
+        pivot: [0.500000, 0.500000]
+        bg-sprite: "~res:/Gfx/Battle/HUD/controls/arrow_hud"
+-   selectors:
+    - ".hotkey .gamepad-down"
+    properties:
+        angle: 90.000000
+        pivot: [0.500000, 0.500000]
+        bg-sprite: "~res:/Gfx/Battle/HUD/controls/arrow_hud"
+-   selectors:
+    - ".hotkey .gamepad-left"
+    properties:
+        angle: 180.000000
+        pivot: [0.500000, 0.500000]
+        bg-sprite: "~res:/Gfx/Battle/HUD/controls/arrow_hud"
+-   selectors:
+    - ".hotkey .gamepad-right"
+    properties:
+        angle: 0.000000
+        pivot: [0.500000, 0.500000]
+        bg-sprite: "~res:/Gfx/Battle/HUD/controls/arrow_hud"

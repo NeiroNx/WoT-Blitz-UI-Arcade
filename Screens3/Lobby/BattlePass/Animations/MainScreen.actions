@@ -1,0 +1,126 @@
+action UpdateLevelsPosition(float parentWidth, float positionX)
+{
+	ChangeData(bpPathAnchorPositionX, positionX);
+	ChangeData(bpPathAnchorWidth, min(parentWidth - positionX, (itemWidth + 1) * (levelsCount + 1)));
+	Event("UPDATE_LEVELS_POSITIONS", arg1 = itemWidth, arg2 = parentWidth, arg3 = positionX);
+}
+
+action ROUTE_SCROLL_TO_LVL()
+{
+  DirectEvent("SCROLL_TO_LVL", "**/ScrollContainer/ScrollableArea/scrollContainerControl");
+}
+
+action BACK_SHORTCUT()
+{
+  if (account.tutorialData.currentHint != eTutorialHint.kBattlePass)
+  {
+    PlaySound(sound="GUI/buttons/close");
+    Event("BACK_BUTTON_CLICKED");
+  }
+}
+
+action ANIMATE_CHEST()
+{
+    if (not isNull(battlePass.chest) and not isOldCompleted and isCompleted)
+		{
+			DirectEvent("ANIMATE_CHEST_UNLOCKING", ".");
+			Wait(4.0);
+		}
+
+		if (isCompleted and not isNull(battlePass.chest))
+		{
+			DirectEvent("ANIMATE_CHEST_PROGRESS", ".", true);
+		}
+}
+
+action ANIMATE_CHEST_AFTER_OPENING()
+{
+    if (isCompleted and not isNull(battlePass.chest))
+	{
+		ChangeData(displayingChestProgress, currentChestProgress);
+		ChangeData(serializationInfo.lastDisplayedChestProgress, currentChestProgress);
+		
+		DirectEvent("ANIMATE_CHEST_PROGRESS", ".");
+	}
+}
+
+action ANIMATE_CHEST_UNLOCKING()
+{
+    Opacity("**/ChestButton/TapArea", 0.5);
+    parallel
+    {
+      Opacity("**/SpeedUpButtonHolder", 0.0, 1.5);
+      ChangeProperty("**/SpeedUpButtonHolder","Anchor","topAnchor",-120, 1.5, EASE_IN);
+    }
+
+	if (isPaidOpened)
+	{
+	parallel
+    {
+      StartParticles("**/Chest/Content/Left/LockDisintegration");
+      sequence
+      {
+        Wait(0.5);
+        Opacity("**/Chest/Content/Left/Lock", 0.0, 0.2);
+      }
+    }
+	}
+
+    Opacity("**/ChestButton/TapArea", 1.0, 1.0, EASE_IN);
+
+	if (isPaidOpened)
+	{
+		Wait(2.0);
+		StopParticles("**/Chest/Content/Left/LockDisintegration");
+	}
+}
+
+action ANIMATE_CHEST_PROGRESS()
+{
+	if (displayingChestProgress < totalChestProgress)
+	{
+		Scale("**/Chest/Content/Left/Glow", 0.1,0.1, 0.0);
+	}
+	else
+	{
+		Scale("**/Chest/Content/Left/Glow", 3.0 * additionalScale,3.0 * additionalScale, 0.0);
+	}
+
+	if (displayingChestProgress < currentChestProgress)
+	{
+      parallel
+      {
+        sequence
+        {
+          ChangeData(displayingChestProgress, currentChestProgress, 1.4, SINE_IN_SINE_OUT);
+          ChangeData(serializationInfo.lastDisplayedChestProgress, displayingChestProgress);
+        }
+        
+        sequence
+        {
+          Scale("**/Chest/Content/Left/CurrentProgress", 1.2,1.2, 1.0);
+          Scale("**/Chest/Content/Left/CurrentProgress", 1.0,1.0, 0.3);
+        }
+      }   
+	}
+
+    if (displayingChestProgress >= totalChestProgress)
+    {
+        Scale("**/Chest/Content/Left/Glow", 3.0 * additionalScale,3.0 * additionalScale, 1.7);
+        
+        Wait(2.0);
+        DirectEvent("LOOP_CHEST_ANIMATION", ".");
+    }
+}
+
+action LOOP_CHEST_ANIMATION()
+{
+  Scale("**/ChestItem/IconUrl", 1.2, 1.2, 1.0, EASE_IN);
+  Scale("**/ChestItem/IconUrl", 1.0, 1.0, 0.7, EASE_OUT);
+  Wait(0.5);
+
+  if (displayingChestProgress >= totalChestProgress)
+  {
+    DirectEvent("LOOP_CHEST_ANIMATION", ".");
+  }
+}

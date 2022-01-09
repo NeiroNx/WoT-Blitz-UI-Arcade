@@ -1,0 +1,14 @@
+action SetFocus
+{
+	Color (path="**/ControlNS", color = rgb(#ffffff));
+	repeat (99999)
+	{
+    	Color (path="**/ControlNS", color = rgb(#ffffff), time = animationTime/2, interpolation = SINE_IN);
+    	Color (path="**/ControlNS", color = rgb(#7ED321), time = animationTime/2, interpolation = SINE_OUT);
+    }
+}
+
+action SetDisabled
+{
+	Color (path="**/ControlNS", color = rgb(#636b70));
+}

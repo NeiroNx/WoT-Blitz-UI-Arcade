@@ -1,0 +1,9 @@
+action AvatarUpdate(float positionY, int index)
+{
+	Event("AVATAR_UPDATE", arg1 = positionY, arg2 =  index);
+}
+
+action AVATAR_IMAGE_LOADED
+{
+	DirectEvent("IMAGE_LOADED", "**/AnimatedLoader");
+} 

@@ -1,0 +1,26 @@
+Header:
+    version: "85"
+Controls:
+-   class: "UIControl"
+    name: "Content"
+    size: [960.000000, 640.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfFirstChild"
+        UIDataParamsComponent:
+            params:
+            - ["Story", "story", "{ }", "{ currencyTitles = { prx_victory2019 = \"\"; }; currencyDescriptions = { prx_victory2019 = \"victory_day_event/currency/terms\"; }; }"]
+            - ["ResourceDetailed", "proxy", "{ }", "{ type = ResourceType.stuff; stuff = { name = \"prx_victory2019\"; title = \"storage/Items/spring_event_2019/Title\"; description = \"storage/Items/spring_event_2019/Description\"; icon = \"~res:/Gfx/UI/StorageItemIcons/prx_spr19.psd\"; iconUrl = \"\"; quantity = 50; grade = ArtefactGrade.common; }; }"]
+        UIDataLocalsComponent:
+            locals:
+            - ["string", "proxyName", "when proxy.type == ResourceType.gold -> \"gold\", proxy.type == ResourceType.credits -> \"credits\", proxy.type == ResourceType.free_xp -> \"freeXp\", proxy.type == ResourceType.stuff -> proxy.stuff.name, \"\""]
+            - ["bool", "hasTitle", "story.currencyTitles.Contains(proxyName) and not empty(story.currencyTitles[proxyName])"]
+            - ["bool", "hasDescription", "story.currencyDescriptions.Contains(proxyName) and not empty(story.currencyDescriptions[proxyName])"]
+            - ["string", "package", "when hasTitle or hasDescription -> \"~res:/UI/Screens/Lobby/Story/Legacy/CurrencyDescription.yaml\", \"\""]
+        UIChildComponent:
+            control: "package"
+            args:
+                "story": "story"
+                "proxy": "proxy"

@@ -1,0 +1,32 @@
+Header:
+    version: "100"
+Prototypes:
+-   class: "UIControl"
+    name: "LabelWithControl"
+    input: false
+    components:
+        RichContent: {}
+        RichContentAliases0:
+            aliases: "button,<control control=\"~res:/UI/Screens3/Common/NintendoSwitch/Controls/NintendoSwitchControl.yaml\" args1=\"switchControl=switchControl\"/>"
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "PercentOfChildrenSum"
+        FlowLayout:
+            hSpacing: 5.000000
+        UIDataParamsComponent:
+            params:
+            - ["eNintendoSwitchControls", "switchControl", "eNintendoSwitchControls.X", "eNintendoSwitchControls.A"]
+            - ["string", "baseFontSize", "\"\"", "\"t-old-text1\""]
+            - ["string", "baseFontStyle", "\"\"", "\"\""]
+            - ["string", "baseFontColor", "\"\"", "\"old-blue-1-text\""]
+            - ["string", "key", "\"\"", "\"Press %(button) to pay respect\""]
+        UIDataLocalsComponent:
+            locals:
+            - ["string", "buttonAlias", "when isNull(switchControl) -> \"\", \"<button/>\""]
+            - ["string", "baseTextStyle", "baseFontSize + \" \" + baseFontStyle + \" \" + baseFontColor"]
+            - ["string", "finalString", "localize(key, { button = buttonAlias; })"]
+        StyleSheet:
+            styles: "~res:/UI/Screens3/OldFont.style.yaml;~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+    bindings:
+    - ["RichContent.text", "finalString"]
+    - ["RichContent.baseClasses", "baseTextStyle"]

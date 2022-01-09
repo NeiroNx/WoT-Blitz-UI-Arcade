@@ -1,0 +1,234 @@
+Header:
+    version: "22"
+ImportedPackages:
+- "~res:/UI/Styles/ButtonSoundStyles.yaml"
+- "~res:/UI/Styles/BackgroundStyles.yaml"
+- "~res:/UI/Styles/ColorStyles.yaml"
+- "~res:/UI/Screens/Fonts.yaml"
+- "~res:/UI/Styles/ButtonStyle.yaml"
+StyleSheets:
+-   selector: ".error-panel.visibility-visible"
+    properties:
+        visible: true
+-   selector: ".error-panel.visibility-hidden"
+    properties:
+        visible: false
+-   selector: ".download-btn.progress-loading #Icon #icon"
+    properties:
+        angle:
+            value: 3960000.000000
+            transitionTime: 10000.000000
+            transitionFunction: "LINEAR"
+        bg-frame: 0
+-   selector: ".download-btn.progress-loading #TextBox #Annotation"
+    properties:
+        text-color: [0.627451, 0.725490, 0.800000, 1.000000]
+-   selector: ".download-btn.progress-paused #Icon #icon"
+    properties:
+        bg-frame: 1
+-   selector: ".download-btn.progress-paused #TextBox #Annotation, .download-btn.progress-error #TextBox #Annotation"
+    properties:
+        text-color: [1.000000, 0.000000, 0.000000, 1.000000]
+-   selector: ".download-btn.progress-error #Icon #icon"
+    properties:
+        bg-frame: 3
+-   selector: ".download-btn.progress-finished #Icon #icon"
+    properties:
+        bg-frame: 2
+-   selector: ".download-btn.progress-finished #TextBox #Annotation"
+    properties:
+        text-color: [0.494118, 0.827451, 0.129412, 1.000000]
+-   selector: ".download-btn.progress-loading #TextBox #Annotation"
+    properties:
+        text-color: [0.627451, 0.725490, 0.800000, 1.000000]
+-   selector: ".download-btn.visibility-visible"
+    properties:
+        visible: true
+-   selector: ".download-btn.visibility-hidden"
+    properties:
+        visible: false
+-   selector: ".dlc-button-transition-appear"
+    properties:
+        bg-color: [1.000000, 1.000000, 1.000000, 1.000000]
+-   selector: ".dlc-button-transition-hide"
+    properties:
+        bg-color:
+            value: [1.000000, 1.000000, 1.000000, 0.000000]
+            transitionTime: 3.000000
+            transitionFunction: "LINEAR"
+
+Prototypes:
+-   class: "UIControl"
+    name: "DLCDownloadError"
+    noInput: true
+    classes: "button-open-sound error-panel"
+    components:
+        SizePolicy:
+            horizontalPolicy: "Formula"
+            horizontalFormula: "maxChild + 40"
+            verticalPolicy: "PercentOfLastChild"
+            verticalMin: 58.000000
+        Anchor:
+            hCenterAnchorEnabled: true
+            topAnchorEnabled: true
+        Sound: {}
+    children:
+    -   class: "UIControl"
+        name: "bg"
+        size: [300.000000, 58.000000]
+        classes: "black-bg-70"
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            Background:
+                drawType: "DRAW_FILL"
+                leftRightStretchCap: 10.000000
+                topBottomStretchCap: 10.000000
+    -   class: "UIControl"
+        name: "Info"
+        noInput: true
+        classes: "color-blue"
+        components:
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 20.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 20.000000
+            Anchor:
+                rightAnchorEnabled: true
+                rightAnchor: 3.000000
+                topAnchorEnabled: true
+                topAnchor: 3.000000
+            Background:
+                sprite: "~res:/Gfx/UI/LobbyCommon/info_button.psd"
+    -   class: "UIControl"
+        name: "TextContainer"
+        position: [20.000000, 0.000000]
+        noInput: true
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                horizontalMin: 260.000000
+                verticalPolicy: "PercentOfMaxChild"
+            Anchor:
+                enabled: true
+                hCenterAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+        children:
+        -   class: "UIStaticText"
+            name: "ErrorDescription"
+            position: [0.000000, 0.000000]
+            noInput: true
+            classes: "text2-small text-color-red"
+            components:
+                LinearLayout:
+                    enabled: true
+                    orientation: "TopDown"
+                    padding: 8.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    horizontalMax: 400.000000
+                    verticalPolicy: "PercentOfContent"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    topAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                UITextComponent:
+                    text: "It`s hangar error"
+                    multiline: "MULTILINE_ENABLED"
+-   class: "UIControl"
+    name: "DLCDownloadButton"
+    classes: "button button-color-gray button-open-sound download-btn"
+    components:
+        LinearLayout:
+            spacing: 10.000000
+            dynamicSpacing: false
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "FixedSize"
+            verticalValue: 64.000000
+        Background:
+            drawType: "DRAW_TILED_MULTILAYER"
+            mask: "~res:/Gfx/UI/CommonUIElements/Button/mask"
+            detail: "~res:/Gfx/UI/CommonUIElements/Button/detail"
+            gradientMode: "Overlay"
+            colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+            perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+            leftRightStretchCap: 20.000000
+            topBottomStretchCap: 20.000000
+    children:
+    -   class: "UIControl"
+        name: "Icon"
+        size: [64.000000, 64.000000]
+        noInput: true
+        components:
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 64.000000
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "icon"
+            size: [32.000000, 32.000000]
+            pivot: [0.500000, 0.500000]
+            noInput: true
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                Background:
+                    sprite: "~res:/Gfx/UI/Hangar/load_process_icons.psd"
+                    colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+    -   class: "UIControl"
+        name: "TextBox"
+        size: [100.000000, 52.000000]
+        noInput: true
+        components:
+            LinearLayout:
+                orientation: "TopDown"
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                horizontalMin: 100.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 52.000000
+            Anchor:
+                vCenterAnchorEnabled: true
+                vCenterAnchor: 1.000000
+        children:
+        -   class: "UIStaticText"
+            name: "Caption"
+            size: [80.000000, 24.000000]
+            classes: "header4 text-color-white"
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                Anchor:
+                    rightAnchorEnabled: true
+                    rightAnchor: 10.000000
+                UITextComponent:
+                    text: "dlc/HangarControl/Header/Main"
+                    colorInheritType: "COLOR_MULTIPLY_ALPHA_ONLY"
+                    align: ["RIGHT", "VCENTER"]
+        -   class: "UIControl"
+            name: "Spacer"
+            size: [0.000000, 1.000000]
+            noInput: true
+        -   class: "UIStaticText"
+            name: "Annotation"
+            size: [100.000000, 23.000000]
+            classes: "text2 text-color-blue"
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfContent"
+                Anchor:
+                    rightAnchorEnabled: true
+                    rightAnchor: 10.000000
+                UITextComponent:
+                    text: "dlc/HangarControl/Header/Main"
+                    colorInheritType: "COLOR_MULTIPLY_ALPHA_ONLY"
+                    fitting: "FITTING_REDUCE"
+                    align: ["RIGHT", "VCENTER"]

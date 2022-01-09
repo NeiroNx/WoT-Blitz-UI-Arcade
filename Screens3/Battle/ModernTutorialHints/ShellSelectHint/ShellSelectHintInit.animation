@@ -1,0 +1,4 @@
+animation ShellSelectHintInit
+{
+	PlaySound(sound="play_tut_2021_ui_battle_hints_on");
+}

@@ -1,0 +1,13 @@
+action OnNewItemShown(int id)
+{
+    if (firstShow)
+    {
+        ChangeData(readyToShow, true);
+    }
+
+    if (new)
+    {
+        Event("ON_PRODUCT_SHOWN", arg1=id);
+        ChangeData(new, false);
+    }
+}

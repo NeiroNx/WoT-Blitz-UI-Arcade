@@ -1,0 +1,44 @@
+action WeekChangeAnimation()
+{
+	ChangeData(isWeekChangingOutAnimation, true);
+
+	parallel
+	{
+		Scale(path=".", time = 0.4, x = 0.7,y = 0.7, interpolation=EASE_OUT);
+		Opacity(".", opacity=0.0, time=0.4, interpolation=EASE_OUT);
+	}
+	
+	ChangeData(isWeekChangingOutAnimation, false);
+	Event("OnReadyForWeekChangeData");
+	ChangeData(isWeekChangingInAnimation, true);
+	
+	Opacity(".", opacity=1.0, time=0.0);
+	Opacity("**/RewardsWithProgress", opacity=0.0, time=0.0);
+	Opacity("**/TabContent", opacity=0.0, time=0.0);
+	Scale(path=".", time = 0.0, x = 1.0,y = 1.0);
+	ChangeData(clanContentShift, -30.0);
+	ChangeData(clanRewardsShift, -30.0);
+
+	parallel
+	{
+		sequence
+		{
+			parallel
+			{
+				ChangeData(clanRewardsShift, 0.0, 0.6, SINE_OUT);
+				Opacity("**/RewardsWithProgress", opacity=1.0, time=0.6, interpolation=SINE_OUT);
+			}
+		}
+		sequence
+		{
+			Wait(0.4);
+			parallel
+			{
+				ChangeData(clanContentShift, 0.0, 0.6, SINE_OUT);
+				Opacity("**/TabContent", opacity=1.0, time=0.6, interpolation=SINE_OUT);
+			}
+		}
+	}
+
+	ChangeData(isWeekChangingInAnimation, false);
+}

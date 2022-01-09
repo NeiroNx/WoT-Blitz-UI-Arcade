@@ -1,0 +1,10 @@
+action ON_SELECTED()
+{
+	PlaySound(sound="GUI/buttons/choose");
+	
+    // left here because a_nazin wanted this to stay here
+    //ChangeProperty("**/Selection", "SizePolicy", "horizontalValue", 0, 5);
+    //Opacity(path = "**/Selection", opacity=0, time=5);
+    //Opacity(path = "**/Selection", opacity=1, time=5, interpolation=SINE_OUT);
+    //ChangeProperty("**/Selection","SizePolicy","horizontalValue", 100, time=5, interpolation=SINE_OUT);
+}

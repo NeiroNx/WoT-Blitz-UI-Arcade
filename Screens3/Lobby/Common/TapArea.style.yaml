@@ -1,0 +1,28 @@
+Header:
+    version: 123
+ImportedPackages:
+- "~res:/UI/Screens3/Common/Touch.style.yaml"
+- "~res:/UI/Screens3/Common/Hover.style.yaml"
+StyleSheets:
+-   selectors:
+    - ".checkbox-tap-area"
+    properties:
+        anchor-leftAnchor: -8.000000
+        anchor-rightAnchor: -8.000000
+        anchor-bottomAnchor: -8.000000
+        anchor-topAnchor: -8.000000
+-   selectors:
+    - ".checkbox-tap-area.Desktop"
+    - ".checkbox-tap-area.Desktop * .content-area"
+    properties:
+        anchor-leftAnchor: 0.000000
+        anchor-rightAnchor: 0.000000
+        anchor-bottomAnchor: 0.000000
+        anchor-topAnchor: 0.000000
+-   selectors:
+    - ".checkbox-tap-area .content-area"
+    properties:
+        anchor-leftAnchor: 8.000000
+        anchor-rightAnchor: 8.000000
+        anchor-bottomAnchor: 8.000000
+        anchor-topAnchor: 8.000000

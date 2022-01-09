@@ -1,0 +1,18 @@
+animation INIT(bool arg)
+{
+	ChangeData(loadingOpacity, 0.0);
+	ChangeData(errorOpacity, 0.0);
+	Event("StartLoader");
+
+	if (isLoading)
+	{
+		ChangeData(loadingOpacity, 1.0, opacityAnimationTime);
+	}
+	else
+	{
+		if (isError)
+		{
+			ChangeData(errorOpacity, 1.0, opacityAnimationTime);
+		}
+	}
+}

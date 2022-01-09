@@ -1,0 +1,38 @@
+Header:
+    version: "25"
+ImportedPackages:
+- "~res:/UI/Screens/Common/IconButton.yaml"
+- "~res:/UI/Styles/ButtonSoundStyles.yaml"
+StyleSheets:
+-   selector: ".checkbox #icon"
+    properties:
+        bg-color: [0.000000, 0.000000, 0.000000, 0.188235]
+-   selector: ".checkbox:selected #icon"
+    properties:
+        bg-color: [1.000000, 0.584314, 0.000000, 1.000000]
+-   selector: ".checkbox:disabled"
+    properties:
+        bg-color: [1.000000, 1.000000, 1.000000, 0.588235]
+Prototypes:
+-   prototype: "IconButton/IconButton"
+    name: "CheckBox"
+    size: [64.000000, 64.000000]
+    classes: "checkbox button-checkbox-sound"
+    components:
+        Background:
+            drawType: "DRAW_SCALE_PROPORTIONAL"
+            sprite: "~res:/Gfx/UI/CommonUIElements/Icons/chekbox_back.psd"
+            frame: 1
+            mask: ""
+            detail: ""
+            leftRightStretchCap: 0.000000
+            topBottomStretchCap: 0.000000
+        StyleSheet:
+            styles: "~res:/UI/Styles/ButtonStyle.yaml;~res:/UI/Screens/Lobby/Common/CheckBox.yaml;~res:/UI/Styles/BackgroundStyles.yaml"
+    children:
+    -   path: "icon"
+        components:
+            Anchor:
+                hCenterAnchor: 2.000000
+            Background:
+                sprite: "~res:/Gfx/UI/CommonUIElements/Icons/chekbox_icon_white.psd"

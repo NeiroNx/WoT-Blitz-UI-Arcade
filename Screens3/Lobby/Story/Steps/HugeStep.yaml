@@ -1,0 +1,93 @@
+Header:
+    version: 117
+Prototypes:
+-   class: "UIControl"
+    name: "HugeStep"
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens3/Lobby/Story/Steps/DefaultStepInit.animation"
+        SizePolicy:
+            horizontalPolicy: "PercentOfFirstChild"
+            verticalPolicy: "PercentOfFirstChild"
+        UIDataParamsComponent:
+            params:
+            - ["StoryStepView", "model", "null", "{ \"step\" = { \"repeats\" = { \"quantity\" = 10; }; \"isFinished\" = false; }; \"isHighlighted\" = true; \"isSelected\" = false; }"]
+            - ["StoryStepModel", "inProgressStep", "null", "{ }"]
+            - ["bool", "showPrice", "false", "true"]
+            - ["bool", "showLabel", "false", "true"]
+            - ["bool", "showVehicleInfo", "true", "false"]
+            - ["string", "progressColor", "\"blue-curious-blue-bg\"", "\"blue-curious-blue-bg\""]
+            - ["bool", "showEffects", "true", "true"]
+            - ["vector2", "sizeMin", "vec2(150.000000, 200.000000)", "vec2(150.000000, 200.000000)"]
+            - ["vector2", "sizeMax", "vec2(150.000000, 200.000000)", "vec2(150.000000, 200.000000)"]
+            - ["vector2", "repeatsSizeMin", "vec2(40.000000, 24.000000)", "vec2(40.000000, 24.000000)"]
+            - ["vector2", "repeatsSizeMax", "vec2(40.000000, 24.000000)", "vec2(40.000000, 24.000000)"]
+            events:
+            - "SHOW_STEP_INFO(int id)"
+            - "SELECT_STEP(int id)"
+    children:
+    -   class: "UIControl"
+        name: "StepHolder"
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                childType: "kPrototype"
+                prototypePath: "~res:/UI/Screens3/Lobby/Story/Steps/DefaultStep.yaml"
+                args:
+                    "model": "model"
+                    "inProgressStep": "inProgressStep"
+                    "showLabel": "showLabel"
+                    "showVehicleInfo": "showVehicleInfo"
+                    "progressColor": "progressColor"
+                    "showEffects": "showEffects"
+                    "sizeMin": "sizeMin"
+                    "sizeMax": "sizeMax"
+                    "repeatsSizeMin": "repeatsSizeMin"
+                    "repeatsSizeMax": "repeatsSizeMax"
+                    "showPrice": "showPrice"
+                    "rewardContent": "RewardContent"
+Slots:
+-   class: "UIControl"
+    name: "RewardContent"
+    size: [96.000000, 96.000000]
+    input: false
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+    children:
+    -   class: "UIControl"
+        name: "Reward"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                childType: "kPrototype"
+                condition: "not model.step.rewards.Empty()"
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/Detailed/IconXLDeprecated.yaml"
+                args:
+                    "resource": "model.step.rewards[0]"
+    -   class: "UIControl"
+        name: "Quantity"
+        input: false
+        classes: "t-headline bold white-wild-sand-text"
+        components:
+            UIOpacityComponent: {}
+            UITextComponent:
+                align: ["HCENTER", "TOP"]
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "Formula"
+                verticalFormula: "content + 8"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml"
+        bindings:
+        - ["visible", "not isNull(model.step.rewards[0].basic)"]
+        - ["UITextComponent.text", "when not isNull(model.step.rewards[0].basic) -> (when model.step.rewards[0].type == ResourceType.premium -> str(toDays(model.step.rewards[0].basic.quantity)) + \" \" + localize(\"#common:Time/Days\"), model.step.rewards[0].basic.quantity > 999999 -> shortStr(model.step.rewards[0].basic.quantity), str1000Separated(model.step.rewards[0].basic.quantity)), \"\""]

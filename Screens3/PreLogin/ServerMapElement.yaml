@@ -1,0 +1,383 @@
+Header:
+    version: 130
+Prototypes:
+-   class: "UIControl"
+    name: "Holder"
+    size: [150.000000, 0.000000]
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "OnRegionSelected,~res:/UI/Screens3/PreLogin/ServerMapElementSelected.animation;OnRegionDeselected,~res:/UI/Screens3/PreLogin/ServerMapElementUnselected.animation;_INIT,~res:/UI/Screens3/PreLogin/InitSelection.animation"
+        Anchor:
+            leftAnchorEnabled: true
+            topAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "Formula"
+            horizontalFormula: "parent * descr.layoutCoordX"
+            verticalPolicy: "Formula"
+            verticalFormula: "parent * descr.layoutCoordY"
+        UIDataParamsComponent:
+            params:
+            - ["bool", "isSelected", "false", "true"]
+            - ["RegionDescription", "descr", "null", "{ \"layoutCoordY\" = 0.1; }"]
+            events:
+            - "REGION_SELECTED"
+        UIDataLocalVarsComponent:
+            data:
+            - ["bool", "isVisible", "descr.layoutCoordY > 0.000000"]
+            - ["string", "selectedColor", "\"green-green-50-bg\""]
+            - ["string", "regularColor", "\"grey-shark-bg\""]
+        UIEventOnDataComponent0:
+            watchedDataExpression: "isSelected"
+            ifExpression: "isSelected"
+            eventName: "OnRegionSelected"
+        UIEventOnDataComponent1:
+            watchedDataExpression: "isSelected"
+            ifExpression: "not (isSelected)"
+            eventName: "OnRegionDeselected"
+    bindings:
+    - ["visible", "isVisible"]
+    children:
+    -   class: "UIControl"
+        name: "PointHolder"
+        size: [0.000000, 0.000000]
+        scale: [0.375000, 0.375000]
+        input: false
+        components:
+            Anchor:
+                rightAnchorEnabled: true
+                bottomAnchorEnabled: true
+        children:
+        -   class: "UIControl"
+            name: "Point"
+            position: [0.000000, 0.000000]
+            size: [32.000000, 32.000000]
+            pivot: [0.500000, 0.500000]
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_PROPORTIONAL"
+                    sprite: "~res:/Gfx/Lobby/icons/icon_select-point"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                IgnoreLayout: {}
+                ScalePolicy: {}
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+            bindings:
+            - ["classes", "when isSelected -> \"green-green-bg\", \"white-wild-sand-bg\""]
+        -   class: "UIControl"
+            name: "Control"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                LinearLayout:
+                    orientation: "BottomUp"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfChildrenSum"
+            children:
+            -   class: "UIControl"
+                name: "LabelBasement"
+                position: [42.000000, 32.000000]
+                size: [190.000000, 68.000000]
+                pivot: [0.500000, 0.500000]
+                angle: 0.000000
+                input: false
+                components:
+                    Background:
+                        drawType: "DRAW_SCALE_TO_RECT"
+                        sprite: "~res:/Gfx/Lobby/backgrounds/bg_gradient-triangle"
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 64.000000
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+                bindings:
+                - ["classes", "when isSelected -> \"green-green-50-bg\", \"white-wild-sand-25-bg\""]
+            -   class: "UIControl"
+                name: "Label"
+                size: [180.000000, 32.000000]
+                input: false
+                components:
+                    Background:
+                        drawType: "DRAW_FILL"
+                    UIOpacityComponent: {}
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "Formula"
+                        horizontalFormula: "maxChild+64"
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 64.000000
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/Font.style.yaml"
+                bindings:
+                - ["classes", "when isSelected -> \"green-green-50-bg\", \"white-wild-sand-25-bg\""]
+                children:
+                -   class: "UIControl"
+                    name: "TapArea_1"
+                    position: [-140.000000, -160.000000]
+                    size: [32.000000, 32.000000]
+                    exclusiveInput: true
+                    components:
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "Formula"
+                            horizontalFormula: "parent+32"
+                            verticalPolicy: "Formula"
+                            verticalFormula: "parent+32"
+                        UIInputEventComponent:
+                            onTouchUpInside: "REGION_SELECTED"
+                            onTouchUpInsideData: "descr.index"
+                            blockDuplicatedEvents: false
+                    bindings:
+                    - ["input", "not isSelected"]
+                -   class: "UIControl"
+                    name: "TapArea_2"
+                    position: [-140.000000, -160.000000]
+                    size: [32.000000, 32.000000]
+                    exclusiveInput: true
+                    components:
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                            topAnchorEnabled: true
+                            topAnchor: 64.000000
+                        SizePolicy:
+                            horizontalPolicy: "FixedSize"
+                            horizontalValue: 64.000000
+                            verticalPolicy: "FixedSize"
+                        UIInputEventComponent:
+                            onTouchUpInside: "REGION_SELECTED"
+                            onTouchUpInsideData: "descr.index"
+                            blockDuplicatedEvents: false
+                    bindings:
+                    - ["input", "not isSelected"]
+                -   class: "UIControl"
+                    name: "CornerLeftBottom"
+                    position: [0.000000, 14.000000]
+                    size: [8.000000, 8.000000]
+                    input: false
+                    components:
+                        Anchor:
+                            leftAnchorEnabled: true
+                            leftAnchor: -2.000000
+                            bottomAnchorEnabled: true
+                            bottomAnchor: -2.000000
+                    children:
+                    -   class: "UIControl"
+                        name: "Left"
+                        size: [32.000000, 32.000000]
+                        input: false
+                        components:
+                            Background: {}
+                            Anchor:
+                                leftAnchorEnabled: true
+                            SizePolicy:
+                                horizontalPolicy: "FixedSize"
+                                horizontalValue: 2.000000
+                                verticalPolicy: "FixedSize"
+                                verticalValue: 8.000000
+                            StyleSheet:
+                                styles: "~res:/UI/Screens3/Color.style.yaml;"
+                        bindings:
+                        - ["classes", "when isSelected -> \"green-green-bg\", \"white-wild-sand-bg\""]
+                    -   class: "UIControl"
+                        name: "Bottom"
+                        position: [0.000000, 3.000000]
+                        size: [32.000000, 32.000000]
+                        input: false
+                        components:
+                            Background: {}
+                            Anchor:
+                                bottomAnchorEnabled: true
+                            SizePolicy:
+                                horizontalPolicy: "FixedSize"
+                                horizontalValue: 8.000000
+                                verticalPolicy: "FixedSize"
+                                verticalValue: 2.000000
+                            StyleSheet:
+                                styles: "~res:/UI/Screens3/Color.style.yaml;"
+                        bindings:
+                        - ["classes", "when isSelected -> \"green-green-bg\", \"white-wild-sand-bg\""]
+                -   class: "UIControl"
+                    name: "CornerRightTop"
+                    position: [0.000000, 14.000000]
+                    size: [8.000000, 8.000000]
+                    angle: 180.000000
+                    input: false
+                    components:
+                        Anchor:
+                            rightAnchorEnabled: true
+                            rightAnchor: -10.000000
+                            topAnchorEnabled: true
+                            topAnchor: 6.000000
+                    children:
+                    -   class: "UIControl"
+                        name: "Left"
+                        size: [2.000000, 8.000000]
+                        input: false
+                        components:
+                            Background: {}
+                            Anchor:
+                                leftAnchorEnabled: true
+                            SizePolicy:
+                                horizontalPolicy: "FixedSize"
+                                horizontalValue: 2.000000
+                                verticalPolicy: "FixedSize"
+                                verticalValue: 8.000000
+                            StyleSheet:
+                                styles: "~res:/UI/Screens3/Color.style.yaml;"
+                        bindings:
+                        - ["classes", "when isSelected -> \"green-green-bg\", \"white-wild-sand-bg\""]
+                    -   class: "UIControl"
+                        name: "Bottom"
+                        position: [0.000000, 3.000000]
+                        size: [32.000000, 32.000000]
+                        input: false
+                        components:
+                            Background: {}
+                            Anchor:
+                                topAnchorEnabled: false
+                                bottomAnchorEnabled: true
+                            SizePolicy:
+                                horizontalPolicy: "FixedSize"
+                                horizontalValue: 8.000000
+                                verticalPolicy: "FixedSize"
+                                verticalValue: 2.000000
+                            StyleSheet:
+                                styles: "~res:/UI/Screens3/Color.style.yaml;"
+                        bindings:
+                        - ["classes", "when isSelected -> \"green-green-bg\", \"white-wild-sand-bg\""]
+                -   class: "UIControl"
+                    name: "CornerRightBottom"
+                    position: [0.000000, 14.000000]
+                    size: [8.000000, 8.000000]
+                    angle: 270.000000
+                    input: false
+                    components:
+                        Anchor:
+                            rightAnchorEnabled: true
+                            rightAnchor: -2.000000
+                            bottomAnchorEnabled: true
+                            bottomAnchor: -10.000000
+                    children:
+                    -   class: "UIControl"
+                        name: "Left"
+                        size: [32.000000, 32.000000]
+                        input: false
+                        components:
+                            Background: {}
+                            Anchor:
+                                leftAnchorEnabled: true
+                            SizePolicy:
+                                horizontalPolicy: "FixedSize"
+                                horizontalValue: 2.000000
+                                verticalPolicy: "FixedSize"
+                                verticalValue: 8.000000
+                            StyleSheet:
+                                styles: "~res:/UI/Screens3/Color.style.yaml;"
+                        bindings:
+                        - ["classes", "when isSelected -> \"green-green-bg\", \"white-wild-sand-bg\""]
+                    -   class: "UIControl"
+                        name: "Bottom"
+                        position: [0.000000, 3.000000]
+                        size: [32.000000, 32.000000]
+                        input: false
+                        components:
+                            Background: {}
+                            Anchor:
+                                bottomAnchorEnabled: true
+                            SizePolicy:
+                                horizontalPolicy: "FixedSize"
+                                horizontalValue: 8.000000
+                                verticalPolicy: "FixedSize"
+                                verticalValue: 2.000000
+                            StyleSheet:
+                                styles: "~res:/UI/Screens3/Color.style.yaml;"
+                        bindings:
+                        - ["classes", "when isSelected -> \"green-green-bg\", \"white-wild-sand-bg\""]
+                -   class: "UIControl"
+                    name: "CornerLeftTop"
+                    position: [-1.000000, 0.000000]
+                    size: [8.000000, 8.000000]
+                    angle: 90.000000
+                    input: false
+                    components:
+                        Anchor:
+                            leftAnchorEnabled: true
+                            leftAnchor: 6.000000
+                            topAnchorEnabled: true
+                            topAnchor: -2.000000
+                            bottomAnchorEnabled: false
+                    children:
+                    -   class: "UIControl"
+                        name: "Left"
+                        size: [32.000000, 32.000000]
+                        input: false
+                        components:
+                            Background: {}
+                            Anchor:
+                                leftAnchorEnabled: true
+                            SizePolicy:
+                                horizontalPolicy: "FixedSize"
+                                horizontalValue: 2.000000
+                                verticalPolicy: "FixedSize"
+                                verticalValue: 8.000000
+                            StyleSheet:
+                                styles: "~res:/UI/Screens3/Color.style.yaml;"
+                        bindings:
+                        - ["classes", "when isSelected -> \"green-green-bg\", \"white-wild-sand-bg\""]
+                    -   class: "UIControl"
+                        name: "Bottom"
+                        position: [0.000000, 3.000000]
+                        size: [32.000000, 32.000000]
+                        input: false
+                        components:
+                            Background: {}
+                            Anchor:
+                                bottomAnchorEnabled: true
+                            SizePolicy:
+                                horizontalPolicy: "FixedSize"
+                                horizontalValue: 8.000000
+                                verticalPolicy: "FixedSize"
+                                verticalValue: 2.000000
+                            StyleSheet:
+                                styles: "~res:/UI/Screens3/Color.style.yaml;"
+                        bindings:
+                        - ["classes", "when isSelected -> \"green-green-bg\", \"white-wild-sand-bg\""]
+                -   class: "UIControl"
+                    name: "ServerName"
+                    position: [32.000000, 12.000000]
+                    size: [180.000000, 32.000000]
+                    input: false
+                    classes: "t-caption bold white-wild-sand-text"
+                    components:
+                        UIOpacityComponent: {}
+                        UITextComponent:
+                            fontSize: 26.000000
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                            vCenterAnchorEnabled: true
+                            bottomAnchorEnabled: false
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfContent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Font.style.yaml"
+                    bindings:
+                    - ["UITextComponent.text", "capitalize(descr.name)"]
+CustomData:
+    Guides:
+        Holder:
+            Horizontal:
+            - -576.000000

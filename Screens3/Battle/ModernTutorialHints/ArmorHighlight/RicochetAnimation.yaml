@@ -1,0 +1,274 @@
+Header:
+    version: 128
+Prototypes:
+-   class: "UIControl"
+    name: "RicocheteAnimation"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfMaxChild"
+    children:
+    -   class: "UIControl"
+        name: "Icon"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            UITextureComponent:
+                spritePath: "~res:/Gfx/Battle/tips/notificationsColored/tank-zone_1"
+                drawType: "DRAW_SCALE_PROPORTIONAL"
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                horizontalValue: 100.000000
+                verticalPolicy: "PercentOfContent"
+                verticalValue: 100.000000
+    -   class: "UIControl"
+        name: "Animation"
+        input: false
+        components:
+            UIAnimationComponent:
+                animations: "_INIT,~res:/UI/Screens3/Battle/ModernTutorialHints/ArmorHighlight/RicochetAnimation.animation"
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            IgnoreLayout: {}
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 80.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 80.000000
+        children:
+        -   class: "UIControl"
+            name: "Tracer"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 80.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 80.000000
+            children:
+            -   class: "UIControl"
+                name: "Line1"
+                position: [36.000000, 40.000000]
+                size: [32.000000, 32.000000]
+                angle: -30.000000
+                input: false
+                components:
+                    LinearLayout:
+                        orientation: "TopDown"
+                        spacing: 5.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfMaxChild"
+                        verticalPolicy: "PercentOfChildrenSum"
+                children:
+                -   class: "UIControl"
+                    name: "Element3"
+                    position: [27.000000, 59.000000]
+                    size: [32.000000, 32.000000]
+                    input: false
+                    classes: "white-wild-sand-bg"
+                    components:
+                        Background:
+                            drawType: "DRAW_FILL"
+                            perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                        UIOpacityComponent:
+                            opacity: 0.000000
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "FixedSize"
+                            horizontalValue: 4.000000
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 9.000000
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Color.style.yaml"
+                -   class: "UIControl"
+                    name: "Element2"
+                    position: [27.000000, 59.000000]
+                    size: [32.000000, 32.000000]
+                    input: false
+                    classes: "white-wild-sand-bg"
+                    components:
+                        Background:
+                            drawType: "DRAW_FILL"
+                            perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                        UIOpacityComponent:
+                            opacity: 0.000000
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "FixedSize"
+                            horizontalValue: 4.000000
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 9.000000
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Color.style.yaml"
+                -   class: "UIControl"
+                    name: "Element1"
+                    position: [27.000000, 59.000000]
+                    size: [32.000000, 32.000000]
+                    input: false
+                    classes: "white-wild-sand-bg"
+                    components:
+                        Background:
+                            drawType: "DRAW_FILL"
+                            perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                        UIOpacityComponent:
+                            opacity: 0.000000
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "FixedSize"
+                            horizontalValue: 4.000000
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 9.000000
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Color.style.yaml"
+            -   class: "UIControl"
+                name: "Line1_1"
+                position: [56.000000, 28.000000]
+                size: [32.000000, 32.000000]
+                angle: 60.000000
+                input: false
+                components:
+                    LinearLayout:
+                        orientation: "TopDown"
+                        spacing: 5.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfMaxChild"
+                        verticalPolicy: "PercentOfChildrenSum"
+                children:
+                -   class: "UIControl"
+                    name: "Element5"
+                    position: [27.000000, 59.000000]
+                    size: [32.000000, 32.000000]
+                    input: false
+                    classes: "white-wild-sand-bg"
+                    components:
+                        Background:
+                            drawType: "DRAW_FILL"
+                            perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                        UIOpacityComponent:
+                            opacity: 0.000000
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "FixedSize"
+                            horizontalValue: 4.000000
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 9.000000
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Color.style.yaml"
+                -   class: "UIControl"
+                    name: "Element4"
+                    position: [27.000000, 59.000000]
+                    size: [32.000000, 32.000000]
+                    input: false
+                    classes: "white-wild-sand-bg"
+                    components:
+                        Background:
+                            drawType: "DRAW_FILL"
+                            perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                        UIOpacityComponent:
+                            opacity: 0.000000
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "FixedSize"
+                            horizontalValue: 4.000000
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 9.000000
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "Shards"
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 80.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 80.000000
+            children:
+            -   class: "UIControl"
+                name: "Shard1"
+                position: [29.000000, 37.000000]
+                size: [32.000000, 32.000000]
+                pivot: [0.500000, 0.500000]
+                angle: -69.999992
+                input: false
+                components:
+                    Background:
+                        sprite: "~res:/Gfx/Battle/tips/notifications/tank-zone_4"
+                        perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                    UIOpacityComponent:
+                        opacity: 0.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+            -   class: "UIControl"
+                name: "Shard2"
+                position: [31.000000, 42.000000]
+                size: [32.000000, 32.000000]
+                pivot: [0.500000, 0.500000]
+                angle: -100.000000
+                input: false
+                components:
+                    Background:
+                        drawType: "DRAW_SCALE_PROPORTIONAL_ONE"
+                        sprite: "~res:/Gfx/Battle/tips/notifications/tank-zone_4"
+                        perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                    UIOpacityComponent:
+                        opacity: 0.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        horizontalValue: 75.000000
+                        verticalPolicy: "PercentOfContent"
+                        verticalValue: 75.000000
+            -   class: "UIControl"
+                name: "Shard3"
+                position: [33.000000, 34.000000]
+                size: [32.000000, 32.000000]
+                pivot: [0.500000, 0.500000]
+                angle: -40.000000
+                input: false
+                components:
+                    Background:
+                        drawType: "DRAW_SCALE_PROPORTIONAL_ONE"
+                        sprite: "~res:/Gfx/Battle/tips/notifications/tank-zone_4"
+                        perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                    UIOpacityComponent:
+                        opacity: 0.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        horizontalValue: 75.000000
+                        verticalPolicy: "PercentOfContent"
+                        verticalValue: 75.000000
+        -   class: "UIControl"
+            name: "Shell"
+            pivot: [0.500000, 0.500000]
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_ALIGNED"
+                    sprite: "~res:/Gfx/Battle/tips/notifications/tank-zone_3"
+                UIOpacityComponent:
+                    opacity: 0.000000
+                IgnoreLayout: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"

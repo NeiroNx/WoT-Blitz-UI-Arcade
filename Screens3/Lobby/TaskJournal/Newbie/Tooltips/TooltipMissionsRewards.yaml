@@ -1,0 +1,42 @@
+Header:
+    version: 128
+ImportedPackages:
+- "~res:/UI/Screens3/Common/Tooltip.yaml"
+Controls:
+-   class: "UIControl"
+    name: "TooltipMissionsRewards"
+    size: [432.000000, 164.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            events:
+            - "FINISH_HIDE_POPUP_ANIMATION"
+    children:
+    -   prototype: "Tooltip/Slave"
+        name: "Slave"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "offset": "-4"
+                    "isAlignLeft": "false"
+                    "buttonVisible": "false"
+                    "rewardVisible": "false"
+                    "slaveAlign": "ePositionAlign.Right"
+                    "resource": "{ }"
+                    "title": "\"\""
+                    "text": "\"missionJournal/newbie/tutor/missionRewards\""
+                    "colorClass": "\"color=white-wild-sand-text\""
+                    "masterId": "\"TASK_JOURNAL_SLOT_0_CURRENCY_proxy_task_journal_daily\""
+                eventActions:
+                - ["POPUP_ON_CLOSE_ACTION", "", ""]
+                - ["FINISH_HIDE_POPUP_ANIMATION", "FINISH_HIDE_POPUP_ANIMATION", ""]
+        children:
+        -   path: "Content"
+            components:
+                Anchor:
+                    topAnchor: 14.000000
+                    bottomAnchor: 18.000000
+            children: []

@@ -1,0 +1,69 @@
+Header:
+    version: 128
+ImportedPackages:
+- "~res:/UI/Screens3/Battle/ModernTutorialHints/FullscreenHintProto.yaml"
+- "~res:/UI/Screens3/Battle/ModernTutorialHints/TutorialHintProto.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "DesktopSniperModeRepeatHint"
+    size: [1200.000000, 720.000000]
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens3/Battle/ModernTutorialHints/SlideIn.animation;Disappear,~res:/UI/Screens3/Battle/ModernTutorialHints/SlideOut.animation"
+        UIOpacityComponent:
+            opacity: 1.000000
+        Anchor:
+            hCenterAnchorEnabled: true
+            vCenterAnchorEnabled: true
+        LinearLayout:
+            orientation: "BottomUp"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["eInputMode", "inputMode", "eInputMode.MODE_UNKNOWN", "eInputMode.MODE_UNKNOWN"]
+            - ["string", "icon", "\"~res:/Gfx/Battle/tips/notifications/target\"", "\"~res:/Gfx/Battle/tips/notifications/target\""]
+            - ["string", "text", "\"#battle_hints:sniper_mode_repeat/hint2\"", "\"#battle_hints:sniper_mode_repeat/hint2\""]
+    children:
+    -   prototype: "FullscreenHintProto/FullscreenHintProto"
+        name: "FullscreenHintProto"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "inputMode": "inputMode"
+                    "content": "Content"
+        children:
+        -   path: "BottomSpacer"
+            position: [0.000000, 220.000000]
+Slots:
+-   class: "UIControl"
+    name: "Content"
+    position: [0.000000, 0.000000]
+    input: false
+    classes: "grey-shark-70-bg"
+    components:
+        Background:
+            drawType: "DRAW_FILL"
+            colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+            leftRightStretchCap: 8.000000
+            topBottomStretchCap: 8.000000
+        UIRoundedCornersComponent:
+            radius: " 8"
+        Anchor:
+            bottomAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfMaxChild"
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Color.style.yaml"
+    children:
+    -   prototype: "TutorialHintProto/Hint"
+        name: "Hint"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "icon": "icon"
+                    "text": "text"
+                    "backgroundStyle": "\"\""

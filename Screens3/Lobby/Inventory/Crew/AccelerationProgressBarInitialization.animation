@@ -1,0 +1,4 @@
+animation init
+{
+   ChangeProperty("./Content/ProgressWrapper/ProgresCenter/Progress/Bar/CurrentExp", "SizePolicy", "horizontalValue", float(model.currentExp) / float(model.nextLevelExp) * 100.0);
+}

@@ -1,0 +1,106 @@
+Header:
+    version: "39"
+ImportedPackages:
+- "~res:/UI/Screens/Common/StyledButton.yaml"
+- "~res:/UI/Screens/Battle/ReplayResultsFpsHistogram.yaml"
+Controls:
+-   class: "UIControl"
+    name: "ReplayResultsScreen"
+    size: [1024.000000, 768.000000]
+    components:
+        Anchor:
+            leftAnchorEnabled: true
+            rightAnchorEnabled: true
+            topAnchorEnabled: true
+            bottomAnchorEnabled: true
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Battle/ReplayResultsScreen.yaml"
+    children:
+    -   class: "UIControl"
+        name: "ReplayResultsHeader"
+        position: [0.000000, 0.000000]
+        size: [1024.000000, 52.000000]
+        input: false
+        classes: "header1 text-color-white"
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                hCenterAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+            UITextComponent:
+                text: "Replay Results"
+                colorInheritType: "COLOR_IGNORE_PARENT"
+        children:
+        -   prototype: "StyledButton/StyledButton"
+            name: "CloseButton"
+            components:
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 180.000000
+                    verticalPolicy: "PercentOfParent"
+                Anchor:
+                    rightAnchorEnabled: true
+                Background:
+                    gradient: "~res:/Gfx/UI/CommonUIElements/Button/gray_gradient.txt"
+            children:
+            -   path: "Caption"
+                components:
+                    UITextComponent:
+                        text: "Close"
+    -   class: "UIControl"
+        name: "ResultsContainer"
+        position: [0.000000, 50.000000]
+        components:
+            LinearLayout:
+                orientation: "TopDown"
+                spacing: 0.000000
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+                topAnchor: 50.000000
+                bottomAnchorEnabled: true
+        children:
+        -   class: "UIControl"
+            name: "PanelsContainer"
+            components:
+                LinearLayout: {}
+                SizePolicy:
+                    verticalPolicy: "PercentOfParent"
+                    verticalValue: 40.000000
+                Anchor:
+                    leftAnchorEnabled: true
+                    rightAnchorEnabled: true
+            children:
+            -   prototype: "ReplayResultsFpsHistogram/VerticalLayout"
+                name: "FPSVerticalLayout"
+                size: [501.000000, 467.000000]
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        horizontalValue: 50.000000
+                        verticalPolicy: "PercentOfParent"
+            -   prototype: "ReplayResultsFpsHistogram/VerticalLayout"
+                name: "FrameLengthVerticalLayout"
+                position: [512.000000, 0.000000]
+                size: [501.000000, 467.000000]
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        horizontalValue: 50.000000
+                        verticalPolicy: "PercentOfParent"
+        -   class: "UIControl"
+            customClass: "ReplayChartControl"
+            name: "ReplayChart"
+            position: [41.000000, 293.000000]
+            size: [1024.000000, 84.000000]
+            input: false
+            components:
+                SizePolicy:
+                    verticalPolicy: "PercentOfParent"
+                    verticalValue: 60.000000
+                Anchor:
+                    leftAnchorEnabled: true
+                    rightAnchorEnabled: true

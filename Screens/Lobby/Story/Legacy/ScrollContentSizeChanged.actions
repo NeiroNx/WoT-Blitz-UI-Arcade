@@ -1,0 +1,5 @@
+action ScrollContentSizeChanged(float contentWidth, float scrollWidth)
+{
+    Event("SCROLL_SIZE_CHANGED", arg1 = contentWidth);
+    Event("SCROLL_PARENT_SIZE_CHANGED", arg1 = scrollWidth);
+}

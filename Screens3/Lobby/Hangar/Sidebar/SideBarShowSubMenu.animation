@@ -1,0 +1,4 @@
+animation ShowSubMenu
+{
+    ChangeProperty("**/MainMenu/Bg","UIOpacityComponent","opacity",panelBgOpacity, 0.3, SINE_OUT);
+}

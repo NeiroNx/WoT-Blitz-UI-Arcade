@@ -1,0 +1,123 @@
+Header:
+    version: 127
+Prototypes:
+-   class: "UIControl"
+    name: "DevCheatsLayout"
+    size: [1024.000000, 768.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["bool", "RBEnabled", "true", "true"]
+            - ["bool", "MBEnabled", "true", "true"]
+            - ["bool", "LBEnabled", "true", "true"]
+            - ["bool", "RTEnabled", "true", "true"]
+            - ["bool", "MTEnabled", "true", "true"]
+            - ["bool", "LTEnabled", "true", "true"]
+    children:
+    -   class: "UIControl"
+        name: "LTop"
+        size: [32.000000, 32.000000]
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                topAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "parent/4"
+                verticalPolicy: "Formula"
+                verticalFormula: "parent/2"
+            UIInputEventComponent:
+                onTouchDown: "LT_DOWN"
+        bindings:
+        - ["input", "LTEnabled"]
+    -   class: "UIControl"
+        name: "MTop"
+        size: [32.000000, 32.000000]
+        components:
+            Anchor:
+                leftAnchorEnabled: false
+                hCenterAnchorEnabled: true
+                topAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "parent/2"
+                verticalPolicy: "Formula"
+                verticalFormula: "parent/2"
+            UIInputEventComponent:
+                onTouchDown: "MT_DOWN"
+        bindings:
+        - ["input", "MTEnabled"]
+    -   class: "UIControl"
+        name: "RTop"
+        size: [32.000000, 32.000000]
+        components:
+            Anchor:
+                leftAnchorEnabled: false
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "parent/4"
+                verticalPolicy: "Formula"
+                verticalFormula: "parent/2"
+            UIInputEventComponent:
+                onTouchDown: "RT_DOWN"
+        bindings:
+        - ["input", "RTEnabled"]
+    -   class: "UIControl"
+        name: "LBottom"
+        size: [32.000000, 32.000000]
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                topAnchorEnabled: false
+                bottomAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "parent/4"
+                verticalPolicy: "Formula"
+                verticalFormula: "parent/2"
+            UIInputEventComponent:
+                onTouchDown: "LB_DOWN"
+        bindings:
+        - ["input", "LBEnabled"]
+    -   class: "UIControl"
+        name: "MBottom"
+        size: [32.000000, 32.000000]
+        components:
+            Anchor:
+                leftAnchorEnabled: false
+                hCenterAnchorEnabled: true
+                topAnchorEnabled: false
+                bottomAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "parent/2"
+                verticalPolicy: "Formula"
+                verticalFormula: "parent/2"
+            UIInputEventComponent:
+                onTouchDown: "MB_DOWN"
+        bindings:
+        - ["input", "MBEnabled"]
+    -   class: "UIControl"
+        name: "RBottom"
+        size: [32.000000, 32.000000]
+        components:
+            Anchor:
+                leftAnchorEnabled: false
+                rightAnchorEnabled: true
+                topAnchorEnabled: false
+                bottomAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "parent/4"
+                verticalPolicy: "Formula"
+                verticalFormula: "parent/2"
+            UIInputEventComponent:
+                onTouchDown: "RB_DOWN"
+        bindings:
+        - ["input", "RBEnabled"]

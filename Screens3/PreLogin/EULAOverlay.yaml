@@ -1,0 +1,94 @@
+Header:
+    version: 134
+Prototypes:
+-   class: "UIControl"
+    name: "EULAOverlay"
+    size: [1280.000000, 640.000000]
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "OVERLAY_OPEN_FINISH,~res:/UI/Screens3/PreLogin/EULAOverlay.animation;,"
+        LinearLayout:
+            orientation: "TopDown"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        ModalInput: {}
+        UIShortcutEventComponent:
+            shortcuts: "CLOSE_OVERLAY,Escape;CLOSE_OVERLAY,Back"
+        UIDataParamsComponent:
+            params:
+            - ["string", "url", "\"\"", "\"http://ya.ru\""]
+            events:
+            - "BACK_EVENT"
+        UIDataLocalVarsComponent:
+            data:
+            - ["string", "loadingUrl", "\"\""]
+            - ["bool", "showLoading", "true"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["bool", "loadingUrlEmpty", "loadingUrl != \"\""]
+        UIChildComponent0:
+            prototypePath: "~res:/UI/Screens3/Lobby/Common/Overlay/OverlayBasic.yaml"
+            args:
+                "content": "EULAContent"
+            eventActions:
+            - ["OVERLAY_CLOSE_START", "OVERLAY_CLOSE_START", ""]
+            - ["BACK_EVENT", "BACK_EVENT", ""]
+            - ["OVERLAY_OPEN_FINISH", "OVERLAY_OPEN_FINISH", ""]
+        UIDataOnEventComponent0:
+            eventName: "PAGE_LOADED"
+            modelFieldExpression: "showLoading"
+            dataExpression: "false"
+        UIDataOnEventComponent1:
+            eventName: "OVERLAY_CLOSE_START"
+            modelFieldExpression: "loadingUrl"
+            dataExpression: "\"\""
+Slots:
+-   class: "UIControl"
+    name: "EULAContent"
+    size: [1322.000000, 627.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+    children:
+    -   class: "UIControl"
+        name: "WebViewControl"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                childType: "kControl"
+                condition: "loadingUrl != \"\""
+                control: "WebView"
+    -   class: "UIControl"
+        name: "LoadingControl"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                condition: "showLoading"
+                prototypePath: "~res:/UI/Screens3/Common/LoadingSpinner.yaml"
+-   class: "UIWebView"
+    name: "WebView"
+    backgroundTransparency: true
+    contentSourceType: "Url"
+    pageLoadedEventName: "PAGE_LOADED"
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+    bindings:
+    - ["visible", "not loadingUrl.empty()"]
+    - ["url", "loadingUrl"]

@@ -1,0 +1,98 @@
+Header:
+    version: 134
+Prototypes:
+-   class: "UIControl"
+    name: "HpBonusIndicator"
+    size: [36.000000, 18.000000]
+    pivot: [0.500000, 0.500000]
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "OnCapturedByAlly,~res:/UI/Screens3/Battle/HUD/GameModes/HpBonusIndicatorAlly.animation;OnCapturedByEnemy,~res:/UI/Screens3/Battle/HUD/GameModes/HpBonusIndicatorEnemy.animation"
+        UIOpacityComponent:
+            opacity: 0.000000
+        Anchor:
+            bottomAnchorEnabled: true
+            bottomAnchor: 2.000000
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        size: [54.000000, 18.000000]
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+        children:
+        -   class: "UIControl"
+            name: "Background"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_STRETCH_BOTH"
+                    sprite: "~res:/Gfx/UI/BattleScreenHUD/HotKeyShadow"
+                    color: [1.000000, 1.000000, 1.000000, 0.784314]
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                    vCenterAnchor: -1.000000
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "parent*1.5"
+                    verticalPolicy: "Formula"
+                    verticalFormula: "parent*1.5"
+        -   class: "UIControl"
+            name: "ValueContainer"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                    vCenterAnchor: -1.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            children:
+            -   class: "UIControl"
+                name: "Icon"
+                position: [1.000000, 4.330000]
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    Background:
+                        drawType: "DRAW_SCALE_PROPORTIONAL"
+                        sprite: "~res:/Gfx/Battle/icons/2020-halloween/icon_plus"
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        hCenterAnchor: -17.000000
+                        vCenterAnchorEnabled: true
+                        vCenterAnchor: 1.000000
+                        bottomAnchorEnabled: false
+                    SizePolicy:
+                        horizontalPolicy: "Formula"
+                        horizontalFormula: "parent*0.34"
+                        verticalPolicy: "Formula"
+                        verticalFormula: "parent*0.7"
+            -   class: "UIControl"
+                name: "Text"
+                size: [32.000000, 32.000000]
+                input: false
+                classes: "battle-points"
+                components:
+                    UITextComponent:
+                        text: "10%"
+                        color: [1.000000, 1.000000, 1.000000, 1.000000]
+                        fitting: "FITTING_FILL"
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        hCenterAnchor: 5.000000
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "Formula"
+                        horizontalFormula: "parent*0.55"
+                        verticalPolicy: "Formula"
+                        verticalFormula: "parent*1.5"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Battle/HUD/GameModes/GameMode.style.yaml"

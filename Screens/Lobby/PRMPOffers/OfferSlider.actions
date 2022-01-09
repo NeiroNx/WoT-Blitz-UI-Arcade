@@ -1,0 +1,74 @@
+action ChangeOffer()
+{
+  parallel
+  {
+    {
+      Opacity(currentImagePath, opacity=0.0, time=1, interpolation=EASE_OUT);
+    }
+
+    {
+      Opacity(nextImagePath, opacity=0.0, time=0);
+      ChangeProperty(nextImagePath, "UIUrlImageComponent", "imageUrl", currentUrl);
+      Opacity(nextImagePath, opacity=1.0, time=1, interpolation=EASE_OUT);
+    }
+
+    {
+      ChangeProperty("**/OfferDependentButtons", "Anchor", "topAnchor", 100, 0.5, SINE_OUT);
+      ChangeData(currentButtonVisible, actionButtonVisible);
+      ChangeData(currentButtonText, actionButtonCaption);
+      ChangeData(currentTankPreviewActive, tankPreviewActive);
+      ChangeProperty("**/OfferDependentButtons", "Anchor", "topAnchor", 0, 0.5, SINE_OUT);
+    }
+    {
+      ChangeProperty("**/VideoButtonWrapper/WatchVideoButton", "Anchor", "topAnchor", -100, 0.5, SINE_OUT);
+      ChangeData(currentVideoAvailable, hasVideo);
+      ChangeProperty("**/VideoButtonWrapper/WatchVideoButton", "Anchor", "topAnchor", 0, 0.5, SINE_OUT);
+    }
+    {
+      ChangeProperty("**/PreviousOfferButton", "Anchor", "leftAnchor", -200, 0.5, SINE_OUT);
+      ChangeData(currentPreviousOfferAvailable, previousOfferAvailable);
+      ChangeProperty("**/PreviousOfferButton", "Anchor", "leftAnchor", 24, 0.5, SINE_OUT);
+    }
+    {
+      ChangeProperty("**/NextOfferButton", "Anchor", "rightAnchor", -200, 0.5, SINE_OUT);
+      ChangeData(currentNextOfferAvailable, nextOfferAvailable);
+      ChangeProperty("**/NextOfferButton", "Anchor", "rightAnchor", 24, 0.5, SINE_OUT);
+    }
+  }
+  ChangeData(firstImage, not firstImage);
+  if (not isNull(currentOffer))
+  {
+    Event("OFFER_CHANGED", arg1=currentOffer.id);
+  }
+}
+
+action SizeChanged()
+{
+  Scroll("**/OffersContainer", sliderWidth * model.currentIndex, 0);
+  Opacity("./OffersContainer", 1.0, 0.5);
+}
+
+action CloseOffersShortcut()
+{
+  DirectEvent("PLAY_SOUND", "**/CloseButton");
+  Event("CLOSE_OFFER", arg1=currentOffer.id);
+}
+
+action SyncCurrentOfferData()
+{
+  Wait(0.1);
+  if (not isNull(currentOffer))
+  {
+    ChangeData(currentButtonVisible, actionButtonVisible);
+    ChangeData(currentButtonText, actionButtonCaption);
+    ChangeData(currentTankPreviewActive, tankPreviewActive);
+    ChangeData(currentVideoAvailable, hasVideo);
+    ChangeData(currentPreviousOfferAvailable, previousOfferAvailable);
+    ChangeData(currentNextOfferAvailable, nextOfferAvailable);
+
+    if (not isNull(currentOffer.multiOffer))
+    {
+        DirectEvent("FORCE_MULTIOFFER_INIT", "**/scrollContainerControl/OfferWrapper" + str(model.currentIndex));
+    }
+  }
+}

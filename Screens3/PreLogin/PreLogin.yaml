@@ -1,0 +1,281 @@
+Header:
+    version: 141
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/BlurDynamicLite.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "PreLogin"
+    size: [1024.000000, 768.000000]
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens3/PreLogin/PreLogin.animation"
+        Anchor:
+            leftAnchorEnabled: true
+            rightAnchorEnabled: true
+            topAnchorEnabled: true
+            bottomAnchorEnabled: true
+        UIDataParamsComponent:
+            params:
+            - ["AppDataModel", "app", "null", "{ }"]
+            - ["PreLoginData", "preLoginData", "null", "{ \"activePreLoginScreen\" = ePreLoginScreen.SmartDlcInitialization; }"]
+            - ["DevButtonsData", "devButtonsData", "null", "{ }"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["bool", "isBlurVisible", "preLoginData.activePreLoginScreen == ePreLoginScreen.Entry or preLoginData.activePreLoginScreen == ePreLoginScreen.NewAccount or preLoginData.activePreLoginScreen == ePreLoginScreen.DemoNickname"]
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/PreLogin/PreLogin.actions"
+        UIEventOnDataComponent0:
+            watchedDataExpression: "preLoginData.activePreLoginScreen"
+            eventName: "CONTENT_APPEARENCE"
+    children:
+    -   class: "UIControl"
+        name: "KeyArt"
+        input: false
+        components:
+            UIPostProcessSourceComponent0:
+                id: "BLUR_SRC"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                condition: "preLoginData.isNewcommersLogin"
+                prototypePath: "~res:/UI/Screens3/Common/KeyArtNewcommersNA.yaml"
+            UIChildComponent1:
+                condition: "not preLoginData.isNewcommersLogin"
+                prototypePath: "~res:/UI/Screens3/Common/KeyArt.yaml"
+        bindings:
+        - ["visible", "not isBlurVisible"]
+    -   prototype: "BlurDynamicLite/BlurDynamicLite"
+        name: "BlurLite"
+        components:
+            UIPostProcessInputComponent:
+                id: "BLUR_SRC"
+        bindings:
+        - ["visible", "isBlurVisible"]
+    -   class: "UIControl"
+        name: "ContentLayer"
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+        children:
+        -   class: "UIControl"
+            name: "Content"
+            input: false
+            components:
+                UIOpacityComponent:
+                    opacity: 0.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                UIChildComponent0:
+                    condition: "preLoginData.activePreLoginScreen == ePreLoginScreen.EULAConfirmation"
+                    prototypePath: "~res:/UI/Screens3/PreLogin/EULAConfirmation.yaml"
+                    args:
+                        "isEULAConfirmed": "preLoginData.isEULAConfirmed"
+                    eventActions:
+                    - ["PRIVACY_PRESSED", "PRIVACY_PRESSED", ""]
+                    - ["EULA_PRESSED", "EULA_PRESSED", ""]
+                    - ["CONFIRM_EULA", "CONFIRM_EULA", ""]
+                    - ["EULA_CONFIRMATION_CHECKED", "EULA_CONFIRMATION_CHECKED", ""]
+                UIChildComponent1:
+                    condition: "preLoginData.activePreLoginScreen == ePreLoginScreen.ServerSelection"
+                    prototypePath: "~res:/UI/Screens3/PreLogin/ServerSelection.yaml"
+                    args:
+                        "preLoginData": "preLoginData"
+                    eventActions:
+                    - ["ON_TOGGLE_CHANGED", "ON_TOGGLE_CHANGED", ""]
+                    - ["REGION_SELECTED", "REGION_SELECTED", "_event"]
+                    - ["REGIONS_FILTER_CHANGED", "REGIONS_FILTER_CHANGED", "_event"]
+                    - ["CONFIRM_REGION", "CONFIRM_REGION", ""]
+                UIChildComponent2:
+                    condition: "preLoginData.activePreLoginScreen == ePreLoginScreen.NewGame"
+                    prototypePath: "~res:/UI/Screens3/PreLogin/NewGame.yaml"
+                    args:
+                        "app": "app"
+                        "preLoginData": "preLoginData"
+                    eventActions:
+                    - ["EXIT_PRESSED", "EXIT_PRESSED", ""]
+                    - ["SELECT_SERVER_DOWN", "SELECT_SERVER_DOWN", ""]
+                    - ["KEYART_DOWN", "KEYART_DOWN", ""]
+                    - ["DIVIDER_DOWN", "DIVIDER_DOWN", ""]
+                    - ["FADE_DOWN", "FADE_DOWN", ""]
+                    - ["LOGIN_PRESSED", "LOGIN_PRESSED", ""]
+                    - ["NEW_GAME_PRESSED", "NEW_GAME_PRESSED", ""]
+                    - ["REGION_SELECTION_PRESSED", "REGION_SELECTION_PRESSED", ""]
+                UIChildComponent3:
+                    condition: "preLoginData.activePreLoginScreen == ePreLoginScreen.Entry"
+                    prototypePath: "~res:/UI/Screens3/PreLogin/Entry.yaml"
+                    args:
+                        "preLoginData": "preLoginData"
+                    eventActions:
+                    - ["FIELD_CLICKED", "FIELD_CLICKED", "_event"]
+                    - ["EDITING_STARTED", "EDITING_STARTED", "_event"]
+                    - ["RESET_PASSWORD_PRESSED", "RESET_PASSWORD_PRESSED", ""]
+                    - ["NEW_ACCOUNT_PRESSED", "NEW_ACCOUNT_PRESSED", ""]
+                    - ["EXTERNAL_LOGIN_PRESSED", "EXTERNAL_LOGIN_PRESSED", "_event"]
+                    - ["BACK_PRESSED", "BACK_PRESSED", ""]
+                    - ["MAIL_CHANGED", "MAIL_CHANGED", "_event"]
+                    - ["PASSWORD_CHANGED", "PASSWORD_CHANGED", "_event"]
+                    - ["LOGIN_PRESSED", "LOGIN_PRESSED", ""]
+                    - ["REGION_SELECTION_PRESSED", "REGION_SELECTION_PRESSED", ""]
+                UIChildComponent4:
+                    condition: "preLoginData.activePreLoginScreen == ePreLoginScreen.NewAccount"
+                    prototypePath: "~res:/UI/Screens3/PreLogin/NewAccount.yaml"
+                    args:
+                        "preLoginData": "preLoginData"
+                    eventActions:
+                    - ["FIELD_CLICKED", "FIELD_CLICKED", "_event"]
+                    - ["EDITING_STARTED", "EDITING_STARTED", "_event"]
+                    - ["MAIL_CHANGED", "MAIL_CHANGED", "_event"]
+                    - ["PASSWORD_CHANGED", "PASSWORD_CHANGED", "_event"]
+                    - ["USER_NAME_CHANGED", "USER_NAME_CHANGED", "_event"]
+                    - ["RELOAD_CAPTCHA", "RELOAD_CAPTCHA", ""]
+                    - ["CAPTCHA_CHANGED", "CAPTCHA_CHANGED", "_event"]
+                    - ["BACK_PRESSED", "BACK_PRESSED", ""]
+                    - ["REGION_SELECTION_PRESSED", "REGION_SELECTION_PRESSED", ""]
+                    - ["CREATE_PRESSED", "CREATE_PRESSED", ""]
+                UIChildComponent5:
+                    condition: "preLoginData.activePreLoginScreen == ePreLoginScreen.FacebookAuth"
+                    prototypePath: "~res:/UI/Screens3/PreLogin/FacebookLogin.yaml"
+                    args:
+                        "preLoginData": "preLoginData"
+                    eventActions:
+                    - ["INIT_FB_WEB_VIEW", "INIT_FB_WEB_VIEW", ""]
+                    - ["URL_CHANGED", "URL_CHANGED", "_event"]
+                    - ["CLOSE_NOTIFICATION", "CLOSE_NOTIFICATION", ""]
+                UIChildComponent6:
+                    condition: "preLoginData.activePreLoginScreen == ePreLoginScreen.DemoNickname"
+                    prototypePath: "~res:/UI/Screens3/PreLogin/NicknameConfiguration.yaml"
+                    args:
+                        "nicknameData": "preLoginData.nicknameData"
+                        "isChina": "preLoginData.isChina"
+                    eventActions:
+                    - ["FIELD_CLICKED", "FIELD_CLICKED", "_event"]
+                    - ["EDITING_STARTED", "EDITING_STARTED", "_event"]
+                    - ["NICKNAME_CHANGED", "NICKNAME_CHANGED", "_event.nickname"]
+                    - ["CAPTCHA_CHANGED", "NICKNAME_CAPTCHA_CHANGED", "_event.captcha"]
+                    - ["RELOAD_CAPTCHA", "NICKNAME_RELOAD_CAPTCHA", ""]
+                    - ["CONFIRM_NICKNAME", "CONFIRM_NICKNAME", ""]
+                    - ["CANCEL_NICKNAME_CONFIGURATION", "CANCEL_NICKNAME_CONFIGURATION", ""]
+                UIChildComponent7:
+                    condition: "preLoginData.activePreLoginScreen == ePreLoginScreen.ExternalNetworkNickname"
+                    prototypePath: "~res:/UI/Screens3/PreLogin/NicknameConfiguration.yaml"
+                    args:
+                        "nicknameData": "preLoginData.nicknameData"
+                        "isChina": "preLoginData.isChina"
+                    eventActions:
+                    - ["FIELD_CLCKED", "FIELD_CLICKED", "_event"]
+                    - ["EDITING_STARTED", "EDITING_STARTED", "_event"]
+                    - ["NICKNAME_CHANGED", "NICKNAME_CHANGED", "_event.nickname"]
+                    - ["CAPTCHA_CHANGED", "NICKNAME_CAPTCHA_CHANGED", "_event.captcha"]
+                    - ["RELOAD_CAPTCHA", "NICKNAME_RELOAD_CAPTCHA", ""]
+                    - ["CONFIRM_NICKNAME", "CONFIRM_NICKNAME", ""]
+                    - ["CANCEL_NICKNAME_CONFIGURATION", "CANCEL_NICKNAME_CONFIGURATION", ""]
+                UIChildComponent8:
+                    condition: "preLoginData.activePreLoginScreen == ePreLoginScreen.SmartDlcInitialization"
+                    prototypePath: "~res:/UI/Screens3/PreLogin/SmartDlcInitialization.yaml"
+                    args:
+                        "loading": "preLoginData.smartDlcLoading"
+                UIChildComponent9:
+                    condition: "preLoginData.activePreLoginScreen == ePreLoginScreen.NewGameNetEase"
+                    prototypePath: "~res:/UI/Screens3/PreLogin/NewGameNetEase.yaml"
+                    args:
+                        "preLoginData": "preLoginData"
+                        "app": "app"
+                    eventActions:
+                    - ["REGION_SELECTION_PRESSED", "REGION_SELECTION_PRESSED", ""]
+                    - ["EXIT_PRESSED", "EXIT_PRESSED", ""]
+                    - ["AGE_RATING_PRESSED", "AGE_RATING_PRESSED", ""]
+                    - ["USER_CENTER_PRESSED", "USER_CENTER_PRESSED", ""]
+                    - ["PLAY_PRESSED", "PLAY_PRESSED", ""]
+    -   class: "UIControl"
+        name: "VersionLayer"
+        enabled: true
+        input: false
+        refreshStylesOnInteract: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/PreLogin/Version.yaml"
+                args:
+                    "buildInfo": "preLoginData.version.buildInfo"
+                    "versionText": "preLoginData.version.text"
+    -   class: "UIControl"
+        name: "OverlayLayer"
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+        children:
+        -   class: "UIControl"
+            name: "Content"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                UIChildComponent0:
+                    condition: "preLoginData.activePreLoginOverlay == eActiveOverlay.EULA"
+                    prototypePath: "~res:/UI/Screens3/PreLogin/EULAOverlay.yaml"
+                    args:
+                        "url": "preLoginData.overlayUrl"
+                    eventActions:
+                    - ["BACK_EVENT", "OVERLAY_CLOSE", ""]
+                UIChildComponent1:
+                    condition: "preLoginData.activePreLoginOverlay == eActiveOverlay.AgeRatingTips"
+                    prototypePath: "~res:/UI/Screens3/PreLogin/AgeRatingTipsOverlay.yaml"
+                    args:
+                        "title": "preLoginData.ageRatingTitle"
+                        "info": "preLoginData.ageRatingInfo"
+                    eventActions:
+                    - ["OVERLAY_CLOSE", "OVERLAY_CLOSE", ""]
+    -   class: "UIControl"
+        name: "HintLayer"
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+    -   class: "UIControl"
+        name: "DialogLayer"
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+    -   class: "UIControl"
+        name: "HelperButtons"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Anchor:
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+            UIChildComponent0:
+                condition: "(not isNull(devButtonsData)) and (preLoginData.activePreLoginScreen == ePreLoginScreen.NewGameNetEase or preLoginData.activePreLoginScreen == ePreLoginScreen.NewGame or preLoginData.activePreLoginScreen == ePreLoginScreen.Entry)"
+                prototypePath: "~res:/UI/Screens3/PreLogin/HelperButtons.yaml"
+                args:
+                    "devButtonsData": "devButtonsData"
+                eventActions:
+                - ["SVN_SCREEN_BUTTON", "SVN_SCREEN_BUTTON", ""]
+                - ["DEV_OPTIONS", "DEV_OPTIONS", ""]
+                - ["CHOOSE_CLUSTER", "CHOOSE_CLUSTER", ""]
+                - ["TUTORIAL_OPTIONS", "TUTORIAL_OPTIONS", ""]
+                - ["CONVERT_REPLAY", "CONVERT_REPLAY", ""]
+                - ["START_REPLAY", "START_REPLAY", ""]
+                - ["MY_REPLAYS", "MY_REPLAYS", ""]
+                - ["GRAPHIC_OPTIONS", "GRAPHIC_OPTIONS", ""]

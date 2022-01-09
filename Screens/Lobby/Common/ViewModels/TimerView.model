@@ -1,0 +1,7 @@
+isExpiring = (endTime - serverTime) < alertTime;
+
+bgColorClass = when isExpiring -> "color-red", "color-white";
+bgStyleClasses = bgColorClass;
+
+textColorClass = when isExpiring -> "text-color-red", "text-color-white";
+textStyleClasses = "text1 " + textColorClass;

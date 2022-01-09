@@ -1,0 +1,40 @@
+action HANDLE_EVENT(string eventName)
+{
+    if (eventName == "ANIMATE_AMMO_SELL")
+    {
+		Event("AnimateAmmoSlider", arg1=-120);
+    }
+    if (eventName == "ANIMATE_AMMO_BUY")
+    {
+		Event("AnimateAmmoSlider", arg1=120);
+    }
+}
+
+action AnimateAmmoSlider(int deltaX)
+{
+    //ensure child screen is loaded
+    Wait(0.1);
+ 
+	MoveToControl("**/thumbHidden", "**/thumbSpriteControl", time = 0);
+ 
+    repeat(9999)
+    {
+        if(isValueHighlighted and not needAnimationStop)
+        {
+			Opacity("**/thumbHidden", 1.0, time=0);
+			parallel
+            {
+				MoveRel("**/thumbHidden", dx = deltaX, time = 1.0, interpolation=SINE_OUT );
+                Opacity("**/thumbHidden", 0.0, time=1.0, interpolation=SINE_OUT);
+            }
+			MoveRel("**/thumbHidden", dx = -deltaX, time = 0);
+        }
+        else
+        {
+			//MoveRel("**/thumbHidden", dx = -deltaX, time = 0);
+            //Opacity("**/thumbHidden", 1.0, time=0);
+            //Can't stop animation so just wait for leave the screen
+            Wait(60);
+        }
+    }
+}

@@ -1,0 +1,20 @@
+Header:
+    version: "92"
+Prototypes:
+-   class: "UIControl"
+    name: "CommentedControl"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        Anchor:
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["float", "sizeCoefficientByX", "300.000000", "300.000000"]
+            - ["float", "sizeCoefficientByY", "300.000000", "300.000000"]
+    bindings:
+    - ["SizePolicy.horizontalValue", "sizeCoefficientByX"]
+    - ["SizePolicy.verticalValue", "sizeCoefficientByY"]

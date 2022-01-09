@@ -1,0 +1,69 @@
+Header:
+    version: "84"
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Inventory/Common/RightPanelContent.yaml"
+Prototypes:
+-   prototype: "RightPanelContent/RightPanelContent"
+    name: "RightPanelContent"
+    components:
+        LinearLayout:
+            enabled: true
+            padding: "0"
+            spacing: 0.000000
+        UIDataParamsComponent:
+            params:
+            - ["ProfileViewModel", "profile", "null", "{ }"]
+    children:
+    -   class: "UIControl"
+        name: "Spacer"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "FixedSize"
+                verticalValue: 8.000000
+    -   class: "UIControl"
+        name: "MedalsList"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            GridLayout:
+                columnCount: 2
+                columnWidth: 150.000000
+                columnDynamicSpacing: true
+                typeRowCountCalculation: "byControls"
+                rowHeight: 170.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfChildrenSum"
+            UIDataParamsComponent:
+                params:
+                - ["ProfileViewModel", "profile", "null", "{ }"]
+                args:
+                    "profile": "profile"
+                events:
+                - "SHOW_ACHIEVEMENT_INFO"
+            UIRepeatComponent:
+                control: "~res:/UI/Screens3/Lobby/Profile/Common/AchievementItem.yaml"
+                dataContainer: "profile.selectedTankAchievements"
+                args:
+                    "visible": "true"
+                    "showDescription": "true"
+                    "achievement": "_item"
+                eventActions:
+                - ["ON_PRESSED", "SHOW_ACHIEVEMENT_INFO", "_event"]
+                elementName: "_item.name"
+                holderName: "_item.name"
+                lazyLoading: true
+                loadingDistance: 120.000000
+                unloadingDistance: 240.000000
+    -   class: "UIControl"
+        name: "Spacer_1"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "FixedSize"
+                verticalValue: 32.000000

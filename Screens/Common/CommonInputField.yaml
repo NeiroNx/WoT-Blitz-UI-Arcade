@@ -1,0 +1,74 @@
+Header:
+    version: "20"
+ImportedPackages:
+- "~res:/UI/Screens/Fonts.yaml"
+- "~res:/UI/Screens/Common/TextFieldPanel.yaml"
+Controls:
+-   class: "UIControl"
+    name: "CommonInputField"
+    size: [300.000000, 70.000000]
+    children:
+    -   class: "UIControl"
+        name: "UIControl1"
+        noInput: true
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+        children:
+        -   prototype: "TextFieldPanel/TextFieldPanel"
+            name: "inputBg"
+            size: [292.000000, 50.000000]
+            components:
+                Anchor:
+                    leftAnchor: 4.000000
+                    rightAnchor: 4.000000
+                    topAnchorEnabled: false
+                    vCenterAnchorEnabled: true
+        -   class: "UITextField"
+            name: "inputMsg"
+            position: [12.000000, 12.000000]
+            size: [276.000000, 46.000000]
+            font: "WarHeliosCondC_21"
+            shadowcolor: [0.000000, 0.000000, 0.000000, 0.294100]
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 12.000000
+                    rightAnchorEnabled: true
+                    rightAnchor: 12.000000
+                    topAnchorEnabled: true
+                    topAnchor: 12.000000
+                    bottomAnchorEnabled: true
+                    bottomAnchor: 12.000000
+                Background:
+                    color: [0.000000, 0.000000, 0.000000, 1.000000]
+                    leftRightStretchCap: 10.000000
+                    topBottomStretchCap: 10.000000
+                Focus: {}
+        -   class: "UIStaticText"
+            name: "inputMsgHint"
+            position: [10.000000, 10.000000]
+            size: [280.000000, 50.000000]
+            noInput: true
+            classes: "text1 color=text-color-blue"
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 10.000000
+                    rightAnchorEnabled: true
+                    rightAnchor: 10.000000
+                    topAnchorEnabled: true
+                    topAnchor: 10.000000
+                    bottomAnchorEnabled: true
+                    bottomAnchor: 10.000000
+                Background:
+                    align: ["LEFT", "TOP"]
+                Focus: {}
+                UITextComponent:
+                    text: "enterMessageHint"
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                    align: ["LEFT", "VCENTER"]
+                    useRtlAlign: "DONT_USE"

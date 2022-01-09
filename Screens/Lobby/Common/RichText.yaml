@@ -1,0 +1,37 @@
+Header:
+    version: "31"
+Controls:
+-   class: "UIControl"
+    name: "RichText"
+    size: [389.000000, 32.000000]
+    input: false
+    classes: "text-color-ignore-parent"
+    components:
+        FlowLayout:
+            hSpacing: 5.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "PercentOfChildrenSum"
+        Background: {}
+        RichContent:
+            text: ""
+            baseClasses: "text-color-white text1"
+        RichContentAliases0:
+            aliases: "text_blue,<span class=\"text-color-blue text1\" />;timer,<object name=\"Timer\" path=\"~res:/UI/Screens/Lobby/Comon/Timer.yaml\" prototype=\"Timer\" />;price,<object class=\"gold\" name=\"Price\" path=\"~res:/UI/Screens/Lobby/Common/Price.yaml\" prototype=\"Price\" />;player_name_with_tag,<object path=\"~res:/UI/Screens/Common/PlayerNameWithTag.yaml\" prototype=\"PlayerNameWithTag\" />;player_teams_header_text,<span class=\"header1\" />;clan_name_with_tag,<object path=\"~res:/UI/Screens/Common/ClanNameWithTag.yaml\" prototype=\"ClanNameWithTag\" />;player_name_with_tag_header1,<object path=\"~res:/UI/Screens/Common/PlayerNameWithTag.yaml\" prototype=\"PlayerNameWithTagHeader1\" />;clan_name_with_tag_header1,<object path=\"~res:/UI/Screens/Common/ClanNameWithTag.yaml\" prototype=\"ClanNameWithTagHeader1\" />;elite_vehicle_icon,<object control=\"EliteIcon\" path=\"~res:/UI/Screens/Lobby/Common/CommonIcons.yaml\" />;elite_premium_vehicle_icon,<object control=\"ElitePremiumIcon\" path=\"~res:/UI/Screens/Lobby/Common/CommonIcons.yaml\" />;"
+        RichContentAliases1:
+            aliases: "text1,<span class=\"text1\" />;text2_blue,<span class=\"text-color-blue text2\" />;text2_white_bold,<span class=\"text-color-white header4\" />;"
+        RichContentAliases2:
+            aliases: "header3,<span class=\"header3\" />;"
+        RichContentAliases3:
+            aliases: "text_white_bold,<span class=\"text-color-white header3\" />;text_mono,<span class=\"text-mono\" />;text_white,<span class=\"text-color-white text1\" />;text_common,<span class=\"text-color-common header3\" />;text_rare,<span class=\"text-color-rare header3\" />;text_unique,<span class=\"text-color-unique header3\" />;text_legendary,<span class=\"text-color-legendary header3\" />;"
+        RichContentAliases4:
+            aliases: "resource_small,<object control=\"ResourceSmall\" path =\"~res:/UI/Screens/Lobby/Common/RichTextResource.yaml\"/>;vehicle_description,<object control=\"VehicleInfoWithName\" path =\"~res:/UI/Screens/Lobby/Common/RichTextVehicle.yaml\"/>"
+        UIDataSourceComponent0:
+            sourceType: "Reflection"
+            source: "~res:/UI/Examples/Model/Lobby/Common/RichText.model"
+        UIDataSourceComponent1:
+            sourceType: "File"
+            source: "~res:/UI/Screens/Lobby/Common/ViewModel/RichText.model"
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Fonts.yaml"

@@ -1,0 +1,27 @@
+Header:
+    version: 134
+Prototypes:
+-   class: "UIControl"
+    name: "FooterCurrencies"
+    input: false
+    components:
+        LinearLayout:
+            spacing: 4.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "PercentOfFirstChild"
+        UIDataParamsComponent:
+            params:
+            - ["bool", "canAfford", "true", "true"]
+            - ["vector<ResourceDetailed>", "currenciesVector", "[ ]", "[ { }; { }; ]"]
+            - ["map<string,ResourceDetailed>", "currenciesMap", "{ }", "{ \"a\" = { }; \"b\" = { }; }"]
+        UIRepeatComponent:
+            control: "~res:/UI/Screens3/Lobby/Common/Resource/CurrencyAdapter.yaml"
+            dataContainer: "when currenciesMap.Size() > 0 -> currenciesMap, when currenciesVector.Size() > 0 -> currenciesVector, null"
+            args:
+                "currencySize": "eCurrencySize.BODY"
+                "canAfford": "canAfford"
+                "resource": "_item"
+                "forceFullValue": "true"
+    bindings:
+    - ["visible", "currenciesVector.Size() > 0 or currenciesMap.Size() > 0"]

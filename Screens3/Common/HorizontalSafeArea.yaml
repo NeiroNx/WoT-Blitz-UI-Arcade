@@ -1,0 +1,57 @@
+Header:
+    version: "106"
+Prototypes:
+-   class: "UIControl"
+    name: "HorizontalSafeArea"
+    size: [960.000000, 50.000000]
+    input: false
+    components:
+        LinearLayout: {}
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfMaxChild"
+        UIDataParamsComponent:
+            params:
+            - ["control", "content", "null", "null"]
+            - ["int", "padding", "0", "16"]
+    children:
+    -   class: "UIControl"
+        name: "LeftInset"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "safeAreaInsets.left"
+                verticalPolicy: "PercentOfParent"
+    -   class: "UIControl"
+        name: "SafeArea"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfFirstChild"
+        children:
+        -   class: "UIControl"
+            name: "Content"
+            input: false
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    rightAnchorEnabled: true
+                SizePolicy:
+                    verticalPolicy: "PercentOfFirstChild"
+                UIChildComponent0:
+                    childType: "kControl"
+                    condition: "not isNull(content)"
+                    control: "content"
+            bindings:
+            - ["Anchor.leftAnchor", "padding"]
+            - ["Anchor.rightAnchor", "padding"]
+    -   class: "UIControl"
+        name: "RightInset"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "safeAreaInsets.right"
+                verticalPolicy: "PercentOfParent"

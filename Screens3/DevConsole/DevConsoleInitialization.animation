@@ -1,0 +1,10 @@
+animation Initialization
+{
+  ChangeProperty("./Console", "Anchor", "topAnchor", -500); 
+  Opacity("./Console", 0.0);
+  parallel
+  {
+    Opacity("./Console", 1.0, 0.5, EASE_IN);
+    ChangeProperty("./Console", "Anchor", "topAnchor", 0, 0.5, EASE_IN); 
+  }
+}

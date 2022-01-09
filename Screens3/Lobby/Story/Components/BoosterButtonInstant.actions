@@ -1,0 +1,4 @@
+action ON_TOUCH(int id)
+{
+    Event("SELECT_STEP", arg1 = id);
+}

@@ -1,0 +1,127 @@
+Header:
+    version: 128
+Prototypes:
+-   class: "UIControl"
+    name: "TooltipNewbieSelectTank"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens3/NewbieLobby/Tooltips/TooltipNewbieSelectTankShow.animation"
+        UIOpacityComponent: {}
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["eBlitzDevice", "deviceType", "null", "eBlitzDevice.DEVICE_DESKTOP"]
+            - ["int", "offsetX", "0", "100"]
+            - ["string", "attachId", "\"\"", "\"\""]
+            events:
+            - "FINISH_HIDE_POPUP_ANIMATION"
+        UIDataLocalVarsComponent:
+            data:
+            - ["int", "offset", "0"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["string", "attachIdForChild", "attachId + \"_child\""]
+    children:
+    -   class: "UIControl"
+        name: "ArrowBottom"
+        input: false
+        classes: "blue-curious-blue-bg"
+        components:
+            Background:
+                drawType: "DRAW_ALIGNED"
+                sprite: "~res:/Gfx/Lobby/backgrounds/bg_triangle_8.psd"
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                align: []
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "Formula"
+                verticalFormula: "content+16"
+            UIAttachLayoutSlaveComponent:
+                masterAlign: "BottomCenter"
+                slaveAlign: "TopCenter"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+        bindings:
+        - ["UIAttachLayoutSlaveComponent.attachId", "attachId"]
+        - ["UIAttachLayoutSlaveComponent.additionalOffset", "vec2(offsetX * 0.500000, 0)"]
+        children:
+        -   class: "UIControl"
+            name: "Anchor"
+            size: [1.000000, 1.000000]
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                    vCenterAnchor: 2.000000
+                UIAttachLayoutMasterComponent: {}
+            bindings:
+            - ["Anchor.hCenterAnchor", "offsetX * 0.500000"]
+            - ["UIAttachLayoutMasterComponent.attachId", "attachIdForChild"]
+    -   class: "UIControl"
+        name: "Slave"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "firstChild + 32"
+                verticalPolicy: "Formula"
+                verticalFormula: "firstChild"
+            UIAttachLayoutSmartSlaveComponent:
+                slaveAlign: "Bottom"
+        bindings:
+        - ["UIAttachLayoutSmartSlaveComponent.attachId", "attachIdForChild"]
+        children:
+        -   class: "UIControl"
+            name: "SlaveContent"
+            size: [32.000000, 32.000000]
+            input: false
+            classes: "blue-curious-blue-bg"
+            components:
+                Background:
+                    sprite: "~res:/Gfx/UI/CommonUIElements/square_BigAngle.psd"
+                    leftRightStretchCap: 5.000000
+                    topBottomStretchCap: 5.000000
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "maxChild + 32"
+                    verticalPolicy: "Formula"
+                    verticalFormula: "maxChild + 32"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+            children:
+            -   class: "UIControl"
+                name: "RichTextCenter"
+                input: false
+                components:
+                    RichContent:
+                        baseClasses: "t-subtitle regular color=white-wild-sand-text"
+                    RichContentAliases0:
+                        aliases:
+                        - ["white_bold", "<span class=\"t-subtitle bold color=white-wild-sand-text\" />"]
+                        - ["orange", "<span class=\"t-subtitle regular color=orange-orange-peel-text\" />"]
+                        - ["yellow_bold", "<span class=\"t-subtitle bold color=yellow-lightning-text\" />"]
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        horizontalMax: 368.000000
+                        verticalPolicy: "PercentOfChildrenSum"
+                    FlowLayout:
+                        hDynamicPadding: true
+                        hDynamicInLinePadding: true
+                        hSpacing: 4.000000
+                        useRtl: true
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+                bindings:
+                - ["RichContent.text", "when deviceType == eBlitzDevice.DEVICE_DESKTOP -> localize(\"NewbieHangar/Tooltips/DesktopSelectTank\"), localize(\"NewbieHangar/Tooltips/SelectTank\")"]

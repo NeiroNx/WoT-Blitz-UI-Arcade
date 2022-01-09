@@ -1,0 +1,4 @@
+animation HeaderInfoOnInit
+{
+    Event("UPDATE_FLOW_LAYOUT");
+}

@@ -1,0 +1,20 @@
+animation FINISH()
+{
+	Event("ON_PROGRESS_STATE_FINISHED", ".", eNewbieProgressionStepType.ReceivedAvatar);
+
+	ChangeData(inputDisabled, true);
+	ChangeData(turnOffAvatarPositioning, true);
+
+	parallel
+	{
+		Scale("**/AvatarEffect", 0, 0, 1.0);
+		Opacity("**/Additional", opacity=0.0, time=0.4, interpolation=EASE_IN);
+		Scale("**/NewAvatarWrapper", 0.38, 0.38, 1.0, EASE_OUT);
+		MoveToMaster("**/NewAvatarWrapper", "TOP_LEFT_CORNER", 0, 0, 1.0, EASE_OUT);
+		Opacity("**/Button", 0.0, 0.4, EASE_OUT);
+		ChangeProperty("**/Button", "Anchor", "vCenterAnchor", 50, time = 0.4, interpolation=EASE_OUT);
+	}
+	
+	Event("ANCHOR_AVATAR");
+	Event("ON_FINISHED");
+}

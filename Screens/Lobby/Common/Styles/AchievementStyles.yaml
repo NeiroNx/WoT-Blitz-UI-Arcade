@@ -1,0 +1,66 @@
+Header:
+    version: "23"
+StyleSheets:
+-   selector: ".animation-hide"
+    properties:
+        visible: false
+-   selector: ".anomation-show"
+    properties:
+        visible: true
+-   selector: ".animation-1 #Background #Icon"
+    properties:
+        scale:
+            value: [1.500000, 1.500000]
+            transitionTime: 0.230000
+            transitionFunction: "EASE_OUT"
+        visible: true
+        bg-color:
+            value: [1.000000, 1.000000, 1.000000, 0.500000]
+            transitionTime: 0.250000
+            transitionFunction: "LINEAR"
+-   selector: ".animation-2 #Background #Icon"
+    properties:
+        scale:
+            value: [1.150000, 1.150000]
+            transitionTime: 0.200000
+            transitionFunction: "EASE_OUT"
+        visible: true
+        bg-color:
+            value: [1.000000, 1.000000, 1.000000, 1.000000]
+            transitionTime: 0.220000
+            transitionFunction: "LINEAR"
+-   selector: ".animation-3 #Background #Icon"
+    properties:
+        scale:
+            value: [1.000000, 1.000000]
+            transitionTime: 0.200000
+            transitionFunction: "LINEAR"
+        visible: true
+        bg-color:
+            value: [1.000000, 1.000000, 1.000000, 0.360000]
+            transitionTime: 0.500000
+            transitionFunction: "LINEAR"
+-   selector: ".no-animation #Background #Icon"
+    properties:
+        visible: false
+-   selector: ".achiev-item.flexible"
+    properties:
+        sizePolicy-horizontalPolicy: "PercentOfMaxChild"
+-   selector: ".achiev-item.flexible ? #Progress"
+    properties:
+        sizePolicy-horizontalPolicy: "PercentOfMaxChild"
+-   selector: ".achiev-item.flexible #background"
+    properties:
+        sizePolicy-horizontalPolicy: "Formula"
+-   selector: ".achiev-item"
+    properties:
+        sizePolicy-horizontalPolicy: "Ignore"
+-   selector: ".achiev-item #background"
+    properties:
+        sizePolicy-horizontalPolicy: "PercentOfParent"
+-   selector: ".achiev-item ? #Progress"
+    properties:
+        sizePolicy-horizontalPolicy: "PercentOfParent"
+-   selector: ".achiev-item.flexible-progress ? #Progress"
+    properties:
+        sizePolicy-horizontalPolicy: "PercentOfMaxChild"

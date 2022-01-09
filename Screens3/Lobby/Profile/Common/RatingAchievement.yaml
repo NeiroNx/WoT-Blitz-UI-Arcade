@@ -1,0 +1,86 @@
+Header:
+    version: "96"
+Prototypes:
+-   class: "UIControl"
+    name: "RatingAcheivement"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 52.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 52.000000
+        UIDataParamsComponent:
+            params:
+            - ["AchievementViewModel", "achievement", "null", "{ }"]
+        UIDataLocalsComponent:
+            locals:
+            - ["int", "value", "achievement.value"]
+    children:
+    -   class: "UIControl"
+        name: "Visual"
+        size: [88.000000, 92.000000]
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "Icon"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                UITextureComponent:
+                    drawType: "DRAW_SCALE_PROPORTIONAL"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 70.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 70.000000
+            bindings:
+            - ["UITextureComponent.spritePath", "achievement.iconPath"]
+            - ["UITextureComponent.frame", "achievement.iconFrame"]
+        -   class: "UIControl"
+            name: "Counter"
+            size: [24.000000, 21.000000]
+            input: false
+            components:
+                Background: {}
+                Anchor:
+                    rightAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 24.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 20.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+            bindings:
+            - ["visible", "value > 0"]
+            - ["classes", "when achievement.isSeries -> \"red-tamarillo-bg\", \"gray-cape-cod-bg\""]
+            children:
+            -   class: "UIControl"
+                name: "Text"
+                input: false
+                classes: "t-overline bold color=white-wild-sand-text"
+                components:
+                    UITextComponent:
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+                bindings:
+                - ["UITextComponent.text", "str(value)"]

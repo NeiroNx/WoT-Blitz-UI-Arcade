@@ -1,0 +1,54 @@
+Header:
+    version: 121
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/Notifications/NotificationBase.yaml"
+Prototypes:
+-   class: "UIControl"
+    customClass: "UIGenericNotification"
+    name: "ParentalControlNotification"
+    size: [32.000000, 32.000000]
+    input: true
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfFirstChild"
+            verticalPolicy: "PercentOfFirstChild"
+        UIDataParamsComponent: {}
+    children:
+    -   prototype: "NotificationBase/NotificationBase"
+        name: "NotificationBase"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "isButtonVisible": "false"
+                    "content": "Content"
+                    "iconPath": "\"~res:/Gfx/Lobby/icons/icon_attention_s\""
+Slots:
+-   class: "UIControl"
+    name: "Content"
+    size: [379.000000, 60.000000]
+    input: false
+    components:
+        Anchor:
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "Formula"
+            verticalFormula: "when parent == 0 -> childrenSum, min(parent, childrenSum)"
+    children:
+    -   class: "UIControl"
+        name: "Text"
+        input: false
+        classes: "t-caption regular color=white-wild-sand-70-text"
+        components:
+            UITextComponent:
+                colorInheritType: "COLOR_IGNORE_PARENT"
+                align: ["LEFT", "VCENTER"]
+                useRtlAlign: "USE_BY_SYSTEM"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "FixedSize"
+                verticalValue: 20.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+        bindings:
+        - ["UITextComponent.text", "localize(\"notification/parental_control_enabled\")"]

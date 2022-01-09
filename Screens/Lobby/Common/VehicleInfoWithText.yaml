@@ -1,0 +1,67 @@
+Header:
+    version: "28"
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/Common/VehicleInfo.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "VehicleInfoWithName"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        LinearLayout: {}
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "PercentOfMaxChild"
+        UIDataSourceComponent0:
+            sourceType: "Reflection"
+            source: "~res:/UI/Examples/Model/Lobby/HangarTank.model"
+        UIDataSourceComponent1:
+            sourceType: "File"
+            source: "~res:/UI/Screens/Lobby/Common/ViewModel/VehicleDescription.model"
+    children:
+    -   prototype: "VehicleInfo/VehicleInfo"
+        name: "VehicleInfo"
+        components:
+            LinearLayout:
+                spacing: -4.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+        children:
+        -   path: "EliteIcon"
+            components:
+                IgnoreLayout: {}
+                Background: {}
+            bindings:
+            - ["visible", "isElite", "Read"]
+            - ["Background.frame", "tankEliteFrame", "Read"]
+        -   path: "ClassIcon"
+            components:
+                Background: {}
+            bindings:
+            - ["Background.frame", "tankClassFrame", "Read"]
+        -   path: "LevelIcon"
+            components:
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                Background:
+                    align: ["LEFT", "VCENTER"]
+            bindings:
+            - ["SizePolicy.horizontalValue", "levelNumberWidth + 5", "Read"]
+            - ["Background.frame", "levelNumberFrame", "Read"]
+    -   class: "UIControl"
+        name: "VehicleName"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            Anchor:
+                vCenterAnchorEnabled: true
+            UITextComponent:
+                colorInheritType: "COLOR_IGNORE_PARENT"
+            StyleSheet:
+                inheritsStylesFromParent: true
+                styles: "~res:/UI/Screens/Fonts.yaml"
+        bindings:
+        - ["classes", "\"text1 \" + vehicleNameStyle", "Read"]
+        - ["UITextComponent.text", "localize(name)", "Read"]

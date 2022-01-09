@@ -1,0 +1,124 @@
+Header:
+    version: 134
+Prototypes:
+-   class: "UIControl"
+    name: "BundleContent"
+    size: [240.000000, 47.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "FixedSize"
+            verticalValue: 47.000000
+        UIDataParamsComponent:
+            params:
+            - ["ShopProduct", "product", "null", "{ }"]
+            - ["bool", "onlyFirst", "false", "false"]
+        UIDataLocalVarsComponent:
+            data:
+            - ["int", "maxContentSlots", "4"]
+            - ["int", "persistentSlots", "maxContentSlots - 1"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["bool", "allContentFits", "product.cardContent.Size() <= maxContentSlots"]
+            - ["int", "contentSlotsToShow", "when onlyFirst -> 1, allContentFits -> product.cardContent.Size(), persistentSlots"]
+    children:
+    -   class: "UIControl"
+        name: "VisualContent"
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                spacing: 8.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   class: "UIControl"
+            name: "ContentHolder"
+            input: false
+            components:
+                LinearLayout:
+                    spacing: 8.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIRepeatComponent:
+                    control: "~res:/UI/Screens3/Lobby/Shop/BundleItem.yaml"
+                    dataContainer: "product.cardContent"
+                    args:
+                        "resource": "product.content[_item]"
+                        "visible": "_index < contentSlotsToShow"
+        -   class: "UIControl"
+            name: "MoreContent"
+            input: false
+            classes: "t-headline bold white-wild-sand-text"
+            components:
+                UITextComponent: {}
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 40.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 40.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml"
+            bindings:
+            - ["visible", "not allContentFits"]
+            - ["UITextComponent.text", "\"+\" + str(product.cardContent.Size() - persistentSlots)"]
+    -   class: "UIControl"
+        name: "FadeGradient"
+        input: false
+        classes: "grey-shark-bg"
+        components:
+            Background:
+                drawType: "DRAW_SCALE_TO_RECT"
+                sprite: "~res:/Gfx/Lobby/backgrounds/bg_gradient_vertical_0-100"
+            UIOpacityComponent:
+                opacity: 0.800000
+            Anchor:
+                bottomAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "FixedSize"
+                verticalValue: 35.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+    -   class: "UIControl"
+        name: "TextContent"
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                bottomAnchorEnabled: true
+            LinearLayout:
+                spacing: 8.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   class: "UIControl"
+            name: "ContentHolder"
+            input: false
+            components:
+                LinearLayout:
+                    spacing: 8.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIRepeatComponent:
+                    control: "~res:/UI/Screens3/Lobby/Shop/BundleItemText.yaml"
+                    dataContainer: "product.cardContent"
+                    args:
+                        "resource": "product.content[_item]"
+                        "visible": "_index < contentSlotsToShow"
+        -   class: "UIControl"
+            name: "MoreContentSpacer"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 40.000000
+            bindings:
+            - ["visible", "not allContentFits"]

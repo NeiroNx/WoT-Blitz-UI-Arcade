@@ -1,0 +1,96 @@
+Header:
+    version: "21"
+ImportedPackages:
+- "~res:/UI/Screens/Common/StyledButton.yaml"
+- "~res:/UI/Screens/Common.yaml"
+- "~res:/UI/Screens/Common/Selection.yaml"
+- "~res:/UI/Screens/Common/StyledBackButton.yaml"
+- "~res:/UI/Styles/ButtonSoundStyles.yaml"
+- "~res:/UI/Screens/Lobby/Common/RichText.yaml"
+- "~res:/UI/Screens/Fonts.yaml"
+StyleSheets:
+-   selector: ".text"
+    properties:
+        text-fontName: "WarHeliosCondC_21"
+Controls:
+-   prototype: "Common/Dialog"
+    customClass: "SVNLockedResourcesDialog"
+    name: "SVNLockedResourcesDialog"
+    components:
+        SizePolicy:
+            verticalPolicy: "PercentOfChildrenSum"
+        Anchor:
+            hCenterAnchorEnabled: true
+            vCenterAnchorEnabled: true
+    children:
+    -   path: "Middle"
+        position: [0.000000, 54.000000]
+        size: [500.000000, 378.000000]
+        selected: false
+        components:
+            LinearLayout:
+                orientation: "TopDown"
+                padding: 25.000000
+                spacing: 10.000000
+            SizePolicy:
+                verticalPolicy: "PercentOfChildrenSum"
+            Anchor:
+                topAnchor: 54.000000
+        children:
+        -   prototype: "RichText/RichText"
+            name: "Description"
+            size: [264.000000, 32.000000]
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfChildrenSum"
+                RichContent:
+                    text: "Text"
+                    baseClasses: "text text-color-blue"
+        -   prototype: "StyledButton/StyledButton"
+            name: "CustomCheckoutButton"
+            classes: "button button-color-green button-ok-sound"
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 20.000000
+                    rightAnchorEnabled: true
+                    rightAnchor: 20.000000
+            children:
+            -   path: "Caption"
+                components:
+                    UITextComponent:
+                        text: "Checkout to another directory"
+        -   prototype: "StyledButton/StyledButton"
+            name: "UseExistingButton"
+            classes: "button button-color-red button-ok-sound"
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 20.000000
+                    rightAnchorEnabled: true
+                    rightAnchor: 20.000000
+            children:
+            -   path: "Caption"
+                components:
+                    UITextComponent:
+                        text: "Use existing (unsafe)"
+        -   prototype: "StyledButton/StyledButton"
+            name: "UpdateButton"
+            classes: "button button-color-red button-ok-sound"
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 20.000000
+                    rightAnchorEnabled: true
+                    rightAnchor: 20.000000
+            children:
+            -   path: "Caption"
+                components:
+                    UITextComponent:
+                        text: "Update (unsafe)"
+    -   path: "Top/TitleText"
+        classes: "header1 text-color-white"
+        components:
+            UITextComponent:
+                text: "Resources are locked"

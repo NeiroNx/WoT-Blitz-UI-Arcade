@@ -1,0 +1,4 @@
+action START_CLOSING_ANIMATION
+{
+    ChangeProperty ("**/HeaderCurrencyContainer","UIOpacityComponent", "opacity", 0.0, 0.15, EASE_IN);
+}

@@ -1,0 +1,12 @@
+action OnSliderShown()
+{
+    if (firstShow)
+    {
+        ChangeData(readyToShow, true);
+    }
+
+    if (new)
+    {
+        Event("ON_SLIDER_SHOWN");
+    }
+}

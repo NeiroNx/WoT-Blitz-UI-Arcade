@@ -1,0 +1,206 @@
+Header:
+    version: 121
+Prototypes:
+-   class: "UIControl"
+    name: "BoosterGroup"
+    size: [300.000000, 80.000000]
+    input: false
+    classes: "boosters-group"
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfChildrenSum"
+        StyleSheet:
+            styles: "~res:/UI/Screens/Lobby/Boosters/BoostersScreen.styles.yaml;~res:/UI/Screens/Fonts.yaml;~res:/UI/Screens/Lobby/Common/Resource/ResourceStyle.yaml;~res:/UI/Styles/SlotStyles.yaml;~res:/UI/Styles/SafeAreaStyles.yaml"
+    children:
+    -   class: "UIControl"
+        name: "Header"
+        classes: "section-header1"
+        components:
+            Background: {}
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+            SizePolicy:
+                verticalPolicy: "FixedSize"
+                verticalValue: 50.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens/Lobby/Common/SectionHeader1.yaml"
+        children:
+        -   class: "UIControl"
+            name: "TitleContainer"
+            input: false
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 10.000000
+                    rightAnchorEnabled: true
+                    rightAnchor: 40.000000
+                    topAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                LinearLayout:
+                    spacing: 10.000000
+                UIAnchorSafeAreaComponent:
+                    leftSafeInset: "INSET"
+            children:
+            -   class: "UIStaticText"
+                name: "Title"
+                classes: "header2"
+                components:
+                    UITextComponent:
+                        text: "Universal"
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                        align: ["LEFT", "VCENTER"]
+                    Anchor:
+                        leftAnchorEnabled: true
+                        leftAnchor: 10.000000
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens/Fonts.yaml"
+        -   class: "UIControl"
+            name: "Icon"
+            input: false
+            components:
+                Background:
+                    sprite: "~res:/Gfx/UI/CommonUIElements/IconArrowDropDownMenu"
+                    frame: 0
+                Anchor:
+                    rightAnchorEnabled: true
+                    rightAnchor: 5.000000
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 30.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 50.000000
+    -   class: "UIControl"
+        name: "Contents"
+        position: [44.000000, 50.000000]
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+            SizePolicy:
+                verticalPolicy: "PercentOfChildrenSum"
+            UIAnchorSafeAreaComponent:
+                leftSafeInset: "INSET"
+            FlowLayout:
+                enabled: true
+                hSpacing: 15.000000
+                vPadding: "15.000000"
+                vSpacing: 15.000000
+-   class: "UIControl"
+    name: "ItemPrototype"
+    input: false
+    classes: "slot"
+    components:
+        Background: {}
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfMaxChild"
+        StyleSheet:
+            styles: "~res:/UI/Screens/Lobby/Boosters/BoostersScreen.styles.yaml;~res:/UI/Screens/Fonts.yaml;~res:/UI/Screens/Lobby/Common/Resource/ResourceStyle.yaml;~res:/UI/Styles/SlotStyles.yaml;~res:/UI/Styles/SafeAreaStyles.yaml"
+    children:
+    -   class: "UIControl"
+        name: "EmptySlot"
+        classes: "button empty-slot"
+        components:
+            Background: {}
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                verticalPolicy: "FixedSize"
+                verticalValue: 120.000000
+        children:
+        -   class: "UIControl"
+            name: "EmptySlotContent"
+            input: false
+            components:
+                Background:
+                    colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 120.000000
+            children:
+            -   class: "UIControl"
+                name: "Background"
+                input: false
+                classes: "slot-bg uninstalled"
+                components:
+                    Background:
+                        drawType: "DRAW_TILED_MULTILAYER"
+                        mask: "~res:/Gfx/UI/LobbyCommon/Button/mask.psd"
+                        detail: "~res:/Gfx/UI/LobbyCommon/Button/detail.psd"
+                        gradient: "~res:/Gfx/UI/LobbyCommon/Button/gradient.psd"
+                        contour: "~res:/Gfx/UI/LobbyCommon/Button/countur.psd"
+                        gradientMode: "Overlay"
+                        colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                        leftRightStretchCap: 15.000000
+                        topBottomStretchCap: 15.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+            -   class: "UIControl"
+                name: "Image"
+                input: false
+                components:
+                    Background: {}
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+            -   class: "UIControl"
+                name: "AddButton"
+                input: false
+                components:
+                    Background: {}
+                    Anchor:
+                        rightAnchorEnabled: true
+                        topAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 53.000000
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 53.000000
+            -   class: "UIControl"
+                name: "ItemCount"
+                input: false
+                classes: "resource-count"
+                components:
+                    Background: {}
+                    Anchor:
+                        leftAnchorEnabled: true
+                        leftAnchor: 4.000000
+                        topAnchorEnabled: true
+                        topAnchor: 4.000000
+                    LinearLayout:
+                        padding: "4.000000"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        horizontalValue: 100.000000
+                        verticalPolicy: "PercentOfMaxChild"
+                children:
+                -   class: "UIStaticText"
+                    name: "Label"
+                    classes: "text2-small text-color-white"
+                    components:
+                        UITextComponent:
+                            text: "0"
+                            colorInheritType: "COLOR_MULTIPLY_ALPHA_ONLY"
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfContent"
+    -   class: "UIControl"
+        name: "FilledSlot"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"

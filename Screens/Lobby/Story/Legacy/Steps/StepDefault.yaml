@@ -1,0 +1,440 @@
+Header:
+    version: "93"
+Prototypes:
+-   class: "UIControl"
+    name: "Content"
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens/Lobby/Story/Legacy/Steps/StepInit.animation;SHRINK,~res:/UI/Screens/Lobby/Story/Legacy/Steps/StepShrink.animation;EXPAND,~res:/UI/Screens/Lobby/Story/Legacy/Steps/StepExpand.animation"
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfMaxChild"
+        UIDataParamsComponent:
+            params:
+            - ["StoryStepView", "model", "null", "{ isSelected = false; isHighlighted = false; step = { rewards = [ { type = ResourceType.stuff; }; ]; }; }"]
+            - ["StoryStepModel", "inProgressStep", "null", "{ }"]
+            - ["bool", "showLabel", "false", "true"]
+            - ["bool", "showVehicleInfo", "true", "false"]
+            - ["string", "progressColor", "\"blue-curious-blue-bg\"", "\"blue-curious-blue-bg\""]
+            - ["bool", "showEffects", "true", "true"]
+            - ["bool", "showUnlockIcon", "false", "false"]
+            events:
+            - "SHOW_STEP_INFO(int id)"
+            - "SELECT_STEP(int id)"
+        UIDataLocalsComponent:
+            locals:
+            - ["bool", "isReadyToComplete", "model.step.net.price.Empty()"]
+            - ["bool", "isEffectVisible", "isReadyToComplete and not model.step.isFinished and showEffects"]
+            - ["bool", "isRepeatable", "model.step.repeats.toFinish != 1"]
+            - ["bool", "showRepeats", "model.step.repeats.toFinish > 1 and not model.step.isFinished"]
+            - ["bool", "showProgress", "model.isSelected"]
+            - ["string", "buttonColorStyle", "when model.step.isFinished -> \"button-color-green\", isRepeatable -> \"button-color-orange\", \"button-color-gray\""]
+            - ["string", "repeatsLeft", "when model.step.repeats.toFinish != 0 and isRepeatable -> \"x\" + str(model.step.repeats.toFinish - model.step.repeats.timesCompleted), \"\""]
+            - ["float", "xScaleFactor", "0.700000"]
+            - ["float", "yScaleFactor", "0.700000"]
+    children:
+    -   class: "UIControl"
+        name: "ExpandedState"
+        pivot: [0.500000, 0.500000]
+        input: false
+        components:
+            UIOpacityComponent: {}
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                orientation: "TopDown"
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 100.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 115.000000
+            UIEventOnDataComponent0:
+                watchedDataExpression: "model.isSelected"
+                ifExpression: "not model.isSelected"
+                eventName: "SHRINK"
+            UIEventOnDataComponent1:
+                watchedDataExpression: "model.isSelected"
+                ifExpression: "model.isSelected"
+                eventName: "EXPAND"
+        children:
+        -   class: "UIControl"
+            name: "SelectionInside"
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_TILED_MULTILAYER"
+                    mask: "~res:/Gfx/UI/CommonUIElements/Button/mask"
+                    detail: "~res:/Gfx/UI/CommonUIElements/Button/detail"
+                    gradient: "~res:/Gfx/UI/CommonUIElements/Button/gray_gradient"
+                    contour: "~res:/Gfx/UI/CommonUIElements/Button/gray_contour"
+                    gradientMode: "Overlay"
+                    color: [0.400000, 0.400000, 0.400000, 1.000000]
+                    leftRightStretchCap: 10.000000
+                    topBottomStretchCap: 10.000000
+                IgnoreLayout: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+        -   class: "UIControl"
+            name: "Content"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            children:
+            -   class: "UIParticles"
+                name: "ToComleteUnder"
+                input: false
+                effectPath: "~res:/3d/FX/UI/steps_event_glow.sc2"
+                autoStart: true
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                bindings:
+                - ["visible", "isEffectVisible and model.isSelected"]
+            -   class: "UIControl"
+                name: "Reward"
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                    UIChildComponent0:
+                        childType: "kOldExpression"
+                        control: "\"~res:/UI/Screens/Lobby/Story/Legacy/Steps/Rewards/RewardHolder.yaml\""
+                        args:
+                            "resource": "model.step.rewards[0]"
+                            "showVehicleInfo": "true"
+                            "showVehicleName": "false"
+                            "showUnlockIcon": "showUnlockIcon"
+        -   class: "UIControl"
+            name: "InputArea"
+            classes: "button-open-sound"
+            components:
+                IgnoreLayout: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                UIInputEventComponent:
+                    onTouchUpInside: "SHOW_STEP_INFO"
+                    onTouchUpInsideData: "model.step.id"
+                Sound: {}
+                StyleSheet:
+                    styles: "~res:/UI/Styles/ButtonSoundStyles.yaml;~res:/UI/Screens/Lobby/Story/Styles/StoryStepStyles.yaml"
+            bindings:
+            - ["input", "model.isSelected"]
+        -   class: "UIControl"
+            name: "Button"
+            components:
+                Background:
+                    drawType: "DRAW_TILED_MULTILAYER"
+                    mask: "~res:/Gfx/UI/CommonUIElements/Button/mask"
+                    detail: "~res:/Gfx/UI/CommonUIElements/Button/detail"
+                    gradientMode: "Overlay"
+                    perPixelAccuracy: "PER_PIXEL_ACCURACY_FORCED"
+                    leftRightStretchCap: 20.000000
+                    topBottomStretchCap: 20.000000
+                ClipContent: {}
+                Anchor:
+                    bottomAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 50.000000
+                UIInputEventComponent:
+                    onTouchUpInside: "SHOW_STEP_INFO"
+                    onTouchUpInsideData: "model.step.id"
+                Sound: {}
+                StyleSheet:
+                    styles: "~res:/UI/Styles/ButtonStyle.yaml;~res:/UI/Styles/ButtonSoundStyles.yaml"
+            bindings:
+            - ["input", "model.isSelected"]
+            - ["classes", "\"button button-open-sound \" + buttonColorStyle"]
+            children:
+            -   class: "UIControl"
+                name: "TextTerms"
+                input: false
+                classes: "header5 text-color-white"
+                components:
+                    UITextComponent:
+                        text: "template_event/ProgressStage/StepTree/TermsButton"
+                        colorInheritType: "COLOR_MULTIPLY_ALPHA_ONLY"
+                        fitting: "FITTING_REDUCE"
+                    Anchor:
+                        leftAnchorEnabled: true
+                        leftAnchor: 4.000000
+                        rightAnchorEnabled: true
+                        rightAnchor: 4.000000
+                        topAnchorEnabled: true
+                        bottomAnchorEnabled: true
+                    StyleSheet:
+                        styles: "~res:/UI/Screens/Fonts.yaml;~res:/UI/Screens/FontsColors.yaml"
+                bindings:
+                - ["visible", "not model.step.isFinished"]
+            -   class: "UIControl"
+                name: "TextRewards"
+                input: false
+                classes: "header5 text-color-white"
+                components:
+                    UITextComponent:
+                        text: "template_event/ProgressStage/StepTree/RewardsButton"
+                        colorInheritType: "COLOR_MULTIPLY_ALPHA_ONLY"
+                        fitting: "FITTING_REDUCE"
+                    Anchor:
+                        leftAnchorEnabled: true
+                        leftAnchor: 4.000000
+                        rightAnchorEnabled: true
+                        rightAnchor: 4.000000
+                        topAnchorEnabled: true
+                        bottomAnchorEnabled: true
+                    StyleSheet:
+                        styles: "~res:/UI/Screens/Fonts.yaml;~res:/UI/Screens/FontsColors.yaml"
+                bindings:
+                - ["visible", "model.step.isFinished"]
+        -   class: "UIControl"
+            name: "Selection"
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_STRETCH_BOTH"
+                    sprite: "~res:/Gfx/UI/LobbyCommon/dynamic_control"
+                    frame: 1
+                    color: [0.325490, 0.572549, 0.160784, 1.000000]
+                    leftRightStretchCap: 6.000000
+                    topBottomStretchCap: 6.000000
+                IgnoreLayout:
+                    enabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+    -   class: "UIControl"
+        name: "NormalState"
+        pivot: [0.500000, 0.500000]
+        input: false
+        components:
+            UIOpacityComponent: {}
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 85.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 70.000000
+        children:
+        -   class: "UIControl"
+            name: "Button"
+            components:
+                Background:
+                    drawType: "DRAW_TILED_MULTILAYER"
+                    mask: "~res:/Gfx/UI/CommonUIElements/Button/mask"
+                    detail: "~res:/Gfx/UI/CommonUIElements/Button/detail"
+                    gradientMode: "Overlay"
+                    perPixelAccuracy: "PER_PIXEL_ACCURACY_FORCED"
+                    leftRightStretchCap: 20.000000
+                    topBottomStretchCap: 20.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                UIInputEventComponent:
+                    onTouchUpInside: "SELECT_STEP"
+                    onTouchUpInsideData: "model.step.id"
+                    onDoubleTouch: "SHOW_STEP_INFO"
+                    onDoubleTouchData: "model.step.id"
+                Sound: {}
+                StyleSheet:
+                    styles: "~res:/UI/Styles/ButtonStyle.yaml;~res:/UI/Styles/ButtonSoundStyles.yaml"
+            bindings:
+            - ["input", "not model.isSelected"]
+            - ["classes", "\"button button-choose-sound \" + buttonColorStyle"]
+        -   class: "UIParticles"
+            name: "ToComleteUnder"
+            input: false
+            effectPath: "~res:/3d/FX/UI/steps_event_glow.sc2"
+            autoStart: true
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+            bindings:
+            - ["visible", "isEffectVisible and not model.isSelected"]
+        -   class: "UIControl"
+            name: "Reward"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                UIChildComponent0:
+                    childType: "kOldExpression"
+                    control: "\"~res:/UI/Screens/Lobby/Story/Legacy/Steps/Rewards/RewardHolder.yaml\""
+                    args:
+                        "resource": "model.step.rewards[0]"
+                        "showVehicleInfo": "showVehicleInfo"
+                        "showVehicleName": "true"
+                        "showUnlockIcon": "showUnlockIcon"
+        -   class: "UIControl"
+            name: "Level"
+            input: false
+            classes: "header3 text-color-white-70"
+            components:
+                UITextComponent: {}
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 4.000000
+                    topAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens/Fonts.yaml;~res:/UI/Screens/FontsColors.yaml"
+            bindings:
+            - ["visible", "showLabel"]
+            - ["UITextComponent.text", "model.step.id"]
+        -   class: "UIControl"
+            name: "Highlight"
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_STRETCH_BOTH"
+                    sprite: "~res:/Gfx/UI/Story/btn_glow"
+                    color: [0.325490, 0.572549, 0.160784, 1.000000]
+                    leftRightStretchCap: 9.000000
+                    topBottomStretchCap: 9.000000
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: -4.000000
+                    rightAnchorEnabled: true
+                    rightAnchor: -4.000000
+                    topAnchorEnabled: true
+                    topAnchor: -4.000000
+                    bottomAnchorEnabled: true
+                    bottomAnchor: -4.000000
+            bindings:
+            - ["visible", "model.isHighlighted"]
+        -   class: "UIParticles"
+            name: "ToCompleteOver"
+            input: false
+            effectPath: "~res:/3d/FX/UI/steps_event_unlock.sc2"
+            autoStart: true
+            startDelay: 0.005000
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+            bindings:
+            - ["visible", "isEffectVisible and not model.isSelected"]
+        -   class: "UIControl"
+            name: "CheckMark"
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_STRETCH_BOTH"
+                    sprite: "~res:/Gfx/UI/LobbyCommon/mark"
+                    frame: 5
+                    perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                Anchor:
+                    rightAnchorEnabled: true
+                    rightAnchor: -7.000000
+                    bottomAnchorEnabled: true
+                    bottomAnchor: -7.000000
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 24.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 24.000000
+            bindings:
+            - ["visible", "model.step.isFinished"]
+        -   class: "UIControl"
+            name: "Repeats"
+            input: false
+            components:
+                UITextureComponent:
+                    spritePath: "~res:/Gfx/UI/LobbyCommon/DiscountBig"
+                    drawType: "DRAW_SCALE_TO_RECT"
+                Anchor:
+                    rightAnchorEnabled: true
+                    rightAnchor: -4.000000
+                    bottomAnchorEnabled: true
+                    bottomAnchor: 4.000000
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 36.000000
+                    horizontalMax: 94.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 16.000000
+                    verticalMax: 54.000000
+            bindings:
+            - ["visible", "showRepeats and not model.step.isFinished"]
+            children:
+            -   class: "UIControl"
+                name: "Text"
+                input: false
+                classes: "header5 fs-13 text-color-white"
+                components:
+                    UITextComponent:
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        hCenterAnchor: 1.000000
+                        vCenterAnchorEnabled: true
+                        vCenterAnchor: -1.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens/Fonts.yaml;~res:/UI/Screens/FontsColors.yaml"
+                bindings:
+                - ["UITextComponent.text", "repeatsLeft"]
+    -   class: "UIControl"
+        name: "Progress"
+        input: false
+        components:
+            Anchor:
+                bottomAnchorEnabled: true
+                bottomAnchor: -16.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "FixedSize"
+                verticalValue: 12.000000
+        bindings:
+        - ["visible", "showProgress and not model.step.isFinished"]
+        children:
+        -   class: "UIControl"
+            name: "Bg"
+            input: false
+            classes: "black-70-bg"
+            components:
+                Background:
+                    drawType: "DRAW_STRETCH_BOTH"
+                    sprite: "~res:/Gfx/UI/CommonUIElements/square_BigAngle"
+                    leftRightStretchCap: 8.000000
+                    topBottomStretchCap: 8.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "Value"
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "parent - 8"
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 4.000000
+                UIChildComponent0:
+                    childType: "kOldExpression"
+                    control: "\"~res:/UI/Screens/Lobby/Story/Legacy/Steps/StepProgressBar.yaml\""
+                    args:
+                        "data": "model.step"
+                        "priceItem": "model.step.price[0]"
+                        "color": "progressColor"

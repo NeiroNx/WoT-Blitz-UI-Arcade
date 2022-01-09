@@ -1,0 +1,115 @@
+Header:
+    version: 140
+Prototypes:
+-   class: "UIControl"
+    name: "ShopSectionItem"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfFirstChild"
+            verticalPolicy: "PercentOfFirstChild"
+        UIDataParamsComponent:
+            params:
+            - ["ShopBadgesSection", "badges", "null", "{ }"]
+            - ["bool", "initializationEnded", "false", "true"]
+            - ["bool", "blurEnabled", "false", "true"]
+            - ["float", "shopScrollBottomOffset", "0.000000", "40.000000"]
+            - ["float", "shopScrollTopOffset", "0.000000", "48.000000"]
+            - ["int64", "serverTime", "0L", "0L"]
+            - ["bool", "arabicLocalization", "false", "false"]
+            - ["bool", "debugMode", "false", "false"]
+            - ["bool", "smallScreen", "false", "true"]
+            - ["bool", "selected", "false", "true"]
+            - ["int", "selectedSubItemIndex", "0", "0"]
+            - ["DailyChestsCommonData", "dailyChestsCommon", "null", "{ }"]
+            - ["bool", "validItem", "true", "true"]
+            - ["ShopSectionItem", "item", "null", "{ }"]
+            - ["bool", "firstShowAnimationAllowed", "false", "true"]
+            - ["set<int>", "newSliders", "null", "[ 0; ]"]
+            events:
+            - "ON_SELECT_PRODUCT(int itemIndex)"
+            - "ON_CHEST_CLICKED(int id)"
+            - "ON_PRODUCT_CLICKED(int id)"
+            - "DEV_BUY_PRODUCT(int id)"
+            - "GO_TO_GROUP(int id)"
+            - "GO_TO_PRODUCT(int id)"
+            - "ON_PRODUCT_SHOWN(int id)"
+            - "ON_SLIDER_SHOWN(int id)"
+        UIChildComponent0:
+            condition: "validItem and not isNull(item.slider)"
+            prototypePath: "~res:/UI/Screens3/Lobby/Shop/ShopSlider/ShopSlider.yaml"
+            args:
+                "badges": "badges"
+                "initializationEnded": "initializationEnded"
+                "blurEnabled": "blurEnabled"
+                "slider": "item.slider"
+                "serverTime": "serverTime"
+                "arabicLocalization": "arabicLocalization"
+                "debugMode": "debugMode"
+                "shopScrollTopOffset": "shopScrollTopOffset"
+                "shopScrollBottomOffset": "shopScrollBottomOffset"
+                "selected": "selected"
+                "firstShowAnimationAllowed": "firstShowAnimationAllowed"
+                "new": "newSliders.Contains(item.slider.id)"
+            eventActions:
+            - ["ON_PRODUCT_CLICKED", "ON_PRODUCT_CLICKED", "_event.id"]
+            - ["DEV_BUY_PRODUCT", "DEV_BUY_PRODUCT", "_event.id"]
+            - ["GO_TO_PRODUCT", "GO_TO_PRODUCT", "_event.id"]
+            - ["ON_SLIDER_SHOWN", "ON_SLIDER_SHOWN", "item.slider.id"]
+        UIChildComponent1:
+            condition: "validItem and not isNull(item.chest)"
+            prototypePath: "~res:/UI/Screens3/Lobby/Chests/DailyChestSlot.yaml"
+            args:
+                "initializationEnded": "initializationEnded"
+                "shopScrollBottomOffset": "shopScrollBottomOffset"
+                "shopScrollTopOffset": "shopScrollTopOffset"
+                "blurEnabled": "blurEnabled"
+                "dailyChestsCommon": "dailyChestsCommon"
+                "dailyChest": "item.chest"
+                "arabicLocalization": "arabicLocalization"
+                "serverTime": "serverTime"
+                "selected": "selected"
+            eventActions:
+            - ["ON_CHEST_CLICKED", "ON_CHEST_CLICKED", "_event"]
+        UIChildComponent2:
+            condition: "validItem and not isNull(item.product)"
+            prototypePath: "~res:/UI/Screens3/Lobby/Shop/ShopProduct.yaml"
+            args:
+                "badge": "when not isNull(badges) and badges.products.Contains(item.product.id) -> badges.products[item.product.id], null"
+                "initializationEnded": "initializationEnded"
+                "blurEnabled": "blurEnabled"
+                "product": "item.product"
+                "serverTime": "serverTime"
+                "arabicLocalization": "arabicLocalization"
+                "debugMode": "debugMode"
+                "shopScrollTopOffset": "shopScrollTopOffset"
+                "shopScrollBottomOffset": "shopScrollBottomOffset"
+                "selected": "selected"
+                "firstShowAnimationAllowed": "firstShowAnimationAllowed"
+            eventActions:
+            - ["ON_PRODUCT_CLICKED", "ON_PRODUCT_CLICKED", "_event.id"]
+            - ["DEV_BUY_PRODUCT", "DEV_BUY_PRODUCT", "_event.id"]
+            - ["GO_TO_PRODUCT", "GO_TO_PRODUCT", "_event.id"]
+            - ["ON_PRODUCT_SHOWN", "ON_PRODUCT_SHOWN", "_event.id"]
+        UIChildComponent3:
+            condition: "validItem and not isNull(item.smallGroup)"
+            prototypePath: "~res:/UI/Screens3/Lobby/Shop/ShopProductSmallGroup.yaml"
+            args:
+                "group": "item.smallGroup"
+                "badges": "badges"
+                "initializationEnded": "initializationEnded"
+                "debugMode": "debugMode"
+                "shopScrollTopOffset": "shopScrollTopOffset"
+                "shopScrollBottomOffset": "shopScrollBottomOffset"
+                "selected": "selected"
+                "selectedSubItemIndex": "selectedSubItemIndex"
+                "blurEnabled": "blurEnabled"
+                "arabicLocalization": "arabicLocalization"
+                "firstShowAnimationAllowed": "firstShowAnimationAllowed"
+            eventActions:
+            - ["ON_PRODUCT_CLICKED", "ON_PRODUCT_CLICKED", "_event.id"]
+            - ["DEV_BUY_PRODUCT", "DEV_BUY_PRODUCT", "_event.id"]
+            - ["GO_TO_PRODUCT", "GO_TO_PRODUCT", "_event.id"]
+            - ["ON_PRODUCT_SHOWN", "ON_PRODUCT_SHOWN", "_event.id"]
+    bindings:
+    - ["visible", "validItem"]

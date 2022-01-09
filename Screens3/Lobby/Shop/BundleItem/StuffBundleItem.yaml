@@ -1,0 +1,65 @@
+Header:
+    version: 133
+Prototypes:
+-   class: "UIControl"
+    name: "StuffBundleItem"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 40.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 40.000000
+        UIDataParamsComponent:
+            params:
+            - ["ResourceDetailed", "resource", "null", "{ }"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["string", "iconPath", "when empty(resource.stuff.iconUrl) -> resource.stuff.icon, \"\""]
+    children:
+    -   class: "UIControl"
+        name: "Grade"
+        input: false
+        components:
+            UITextureComponent:
+                spritePath: "~res:/Gfx/UI/Storage/Items_back"
+                materialPath: "~res:/Materials.custom/2d.Textured.AlphaGrad.material"
+                materialParams: "maxU,0.77"
+                drawType: "DRAW_SCALE_PROPORTIONAL"
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 40.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 40.000000
+        bindings:
+        - ["visible", "not resource.stuff.hideGrade"]
+        - ["UITextureComponent.color", "when resource.stuff.grade == ArtefactGrade.common -> rgba(4214879, 1.000000), resource.stuff.grade == ArtefactGrade.rare -> rgba(408010, 1.000000), resource.stuff.grade == ArtefactGrade.unique -> rgba(6948762, 1.000000), resource.stuff.grade == ArtefactGrade.legendary -> rgba(14588165, 1.000000), rgba(16777215, 0.000000)"]
+    -   class: "UIControl"
+        name: "Icon"
+        input: false
+        components:
+            UITextureComponent:
+                drawType: "DRAW_SCALE_PROPORTIONAL"
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 40.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 40.000000
+        bindings:
+        - ["visible", "not empty(iconPath)"]
+        - ["UITextureComponent.spritePath", "iconPath"]
+    -   class: "UIControl"
+        name: "UrlIcon"
+        input: false
+        components:
+            Background:
+                drawType: "DRAW_SCALE_PROPORTIONAL"
+            UIUrlImageComponent: {}
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 40.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 40.000000
+        bindings:
+        - ["visible", "not empty(resource.stuff.iconUrl)"]
+        - ["UIUrlImageComponent.imageUrl", "resource.stuff.iconUrl"]

@@ -1,0 +1,14 @@
+animation InternalTrackAnimationHide
+{
+    parallel
+    {
+        {
+            Opacity("**/TrackIconWrapper", opacity=0.0, time=0.3, interpolation=LINEAR);
+            Event("INTERNAL_TRACK_HIDE_ANIMATION_COMPLETE");
+        }
+        {
+            WaitEvent("INTERNAL_TRACK_SHOW_ANIMATION");
+            Stop();
+        }
+    }
+}

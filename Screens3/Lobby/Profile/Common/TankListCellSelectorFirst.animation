@@ -1,0 +1,14 @@
+animation BrightAnimated
+{
+	if (selected)
+	{
+		parallel 
+		{
+			sequence
+			{
+				ChangeProperty("**/Bright", "UIOpacityComponent", "opacity", 1, 0, SINE_OUT);
+				ChangeProperty("**/Bright", "SizePolicy", "horizontalValue", 100, 0.15, SINE_IN_SINE_OUT);
+			}
+		}
+	}
+}

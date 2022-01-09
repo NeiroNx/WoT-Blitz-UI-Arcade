@@ -1,0 +1,35 @@
+Header:
+    version: 125
+StyleSheets:
+-   selectors:
+    - ".social-button:hover * .content-area"
+    properties:
+        opacity-opacity:
+            value: 0.700000
+            transitionTime: 0.150000
+            transitionFunction: "EASE_IN_EASY_OUT"
+-   selectors:
+    - ".social-button * .content-area"
+    properties:
+        opacity-opacity:
+            value: 1.000000
+            transitionTime: 0.150000
+            transitionFunction: "EASE_IN_EASY_OUT"
+-   selectors:
+    - ".social-button:pressed_inside * .content-area"
+    properties:
+        scale:
+            value: [0.920000, 0.920000]
+            transitionTime: 0.000000
+            transitionFunction: "EASE_IN_EASY_OUT"
+-   selectors:
+    - ".social-button * .content-area"
+    properties:
+        scale:
+            value: [1.000000, 1.000000]
+            transitionTime: 0.000000
+            transitionFunction: "EASE_IN_EASY_OUT"
+-   selectors:
+    - ".social-button:disabled * .content-area"
+    properties:
+        opacity-opacity: 0.500000

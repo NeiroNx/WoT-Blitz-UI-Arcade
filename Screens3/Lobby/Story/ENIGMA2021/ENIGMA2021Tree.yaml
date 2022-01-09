@@ -1,0 +1,373 @@
+Header:
+    version: 133
+Prototypes:
+-   class: "UIControl"
+    name: "ENIGMA2021Tree"
+    input: false
+    components:
+        Anchor:
+            hCenterAnchorEnabled: true
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 960.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 512.000000
+        UIDataParamsComponent:
+            params:
+            - ["StoryView", "storyView", "null", "{ }"]
+            - ["ResourceModel", "statsGold", "null", "{ }"]
+            events:
+            - "DESELECT"
+            - "SHOW_STEP_INFO(int id)"
+            - "SELECT_STEP(int id)"
+        UIDataLocalBindingsComponent:
+            data:
+            - ["StoryStepView", "goldView", "storyView.tree.groups.common.steps[12]"]
+            - ["ResourceDetailed", "goldPrice", "when goldView.step.price[0].type == ResourceType.gold -> goldView.step.price[0], null"]
+    children:
+    -   class: "UIControl"
+        name: "TapArea"
+        exclusiveInput: true
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIInputEventComponent:
+                onTouchUpInside: "DESELECT"
+    -   class: "UIControl"
+        name: "Bg"
+        visible: true
+        enabled: true
+        input: false
+        components:
+            UITextureComponent:
+                spritePath: "~res:/Gfx/Lobby/events/2021-enigma/bg_front"
+                drawType: "DRAW_SCALE_TO_RECT"
+                perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+                vCenterAnchor: 16.000000
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 1618.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 910.000000
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                orientation: "TopDown"
+                padding: "0; 4"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "Top"
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    topAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                    verticalValue: 281.000000
+            children:
+            -   class: "UIControl"
+                name: "Item1"
+                input: false
+                components:
+                    Anchor:
+                        leftAnchorEnabled: true
+                        leftAnchor: 104.000000
+                        topAnchorEnabled: true
+                        topAnchor: 107.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfFirstChild"
+                        verticalPolicy: "PercentOfFirstChild"
+                    UIChildComponent0:
+                        prototypePath: "~res:/UI/Screens3/Lobby/Story/Components/Repeatable.yaml"
+                        args:
+                            "selectionType": "eSelectionBorderType.kR20"
+                            "roundedCorners": "20"
+                            "isBgVisible": "false"
+                            "model": "storyView.tree.groups.common.steps[1]"
+                            "showInfinity": "false"
+                            "stepSize": "eStepSize.S"
+                        eventActions:
+                        - ["DESELECT", "DESELECT", ""]
+                        - ["SELECT_STEP", "SELECT_STEP", "_event.id"]
+                        - ["SHOW_STEP_INFO", "SHOW_STEP_INFO", "_event.id"]
+            -   class: "UIControl"
+                name: "Item2"
+                input: false
+                components:
+                    Anchor:
+                        leftAnchorEnabled: true
+                        leftAnchor: 239.000000
+                        topAnchorEnabled: true
+                        topAnchor: 70.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfFirstChild"
+                        verticalPolicy: "PercentOfFirstChild"
+                    UIChildComponent0:
+                        prototypePath: "~res:/UI/Screens3/Lobby/Story/Components/Repeatable.yaml"
+                        args:
+                            "selectionType": "eSelectionBorderType.kR20"
+                            "roundedCorners": "20"
+                            "isBgVisible": "false"
+                            "showInfinity": "false"
+                            "model": "storyView.tree.groups.common.steps[2]"
+                            "stepSize": "eStepSize.S"
+                        eventActions:
+                        - ["DESELECT", "DESELECT", ""]
+                        - ["SELECT_STEP", "SELECT_STEP", "_event.id"]
+                        - ["SHOW_STEP_INFO", "SHOW_STEP_INFO", "_event.id"]
+            -   class: "UIControl"
+                name: "Item3"
+                input: false
+                components:
+                    Anchor:
+                        leftAnchorEnabled: true
+                        leftAnchor: 216.000000
+                        topAnchorEnabled: true
+                        topAnchor: 225.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfFirstChild"
+                        verticalPolicy: "PercentOfFirstChild"
+                    UIChildComponent0:
+                        prototypePath: "~res:/UI/Screens3/Lobby/Story/Components/Repeatable.yaml"
+                        args:
+                            "selectionType": "eSelectionBorderType.kR20"
+                            "roundedCorners": "20"
+                            "isBgVisible": "false"
+                            "showInfinity": "false"
+                            "model": "storyView.tree.groups.common.steps[3]"
+                            "stepSize": "eStepSize.S"
+                        eventActions:
+                        - ["DESELECT", "DESELECT", ""]
+                        - ["SELECT_STEP", "SELECT_STEP", "_event.id"]
+                        - ["SHOW_STEP_INFO", "SHOW_STEP_INFO", "_event.id"]
+            -   class: "UIControl"
+                name: "Item4"
+                input: false
+                components:
+                    Anchor:
+                        rightAnchorEnabled: true
+                        rightAnchor: 103.000000
+                        topAnchorEnabled: true
+                        topAnchor: 106.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfFirstChild"
+                        verticalPolicy: "PercentOfFirstChild"
+                    UIChildComponent0:
+                        prototypePath: "~res:/UI/Screens3/Lobby/Story/Components/Repeatable.yaml"
+                        args:
+                            "selectionType": "eSelectionBorderType.kR20"
+                            "roundedCorners": "20"
+                            "isBgVisible": "false"
+                            "showInfinity": "false"
+                            "model": "storyView.tree.groups.common.steps[4]"
+                            "stepSize": "eStepSize.S"
+                        eventActions:
+                        - ["DESELECT", "DESELECT", ""]
+                        - ["SELECT_STEP", "SELECT_STEP", "_event.id"]
+                        - ["SHOW_STEP_INFO", "SHOW_STEP_INFO", "_event.id"]
+            -   class: "UIControl"
+                name: "Item5"
+                input: false
+                components:
+                    Anchor:
+                        rightAnchorEnabled: true
+                        rightAnchor: 240.000000
+                        topAnchorEnabled: true
+                        topAnchor: 64.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfFirstChild"
+                        verticalPolicy: "PercentOfFirstChild"
+                    UIChildComponent0:
+                        prototypePath: "~res:/UI/Screens3/Lobby/Story/Components/Repeatable.yaml"
+                        args:
+                            "selectionType": "eSelectionBorderType.kR20"
+                            "roundedCorners": "20"
+                            "isBgVisible": "false"
+                            "showInfinity": "false"
+                            "model": "storyView.tree.groups.common.steps[5]"
+                            "stepSize": "eStepSize.S"
+                        eventActions:
+                        - ["DESELECT", "DESELECT", ""]
+                        - ["SELECT_STEP", "SELECT_STEP", "_event.id"]
+                        - ["SHOW_STEP_INFO", "SHOW_STEP_INFO", "_event.id"]
+            -   class: "UIControl"
+                name: "Item6"
+                input: false
+                components:
+                    Anchor:
+                        rightAnchorEnabled: true
+                        rightAnchor: 216.500000
+                        topAnchorEnabled: true
+                        topAnchor: 222.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfFirstChild"
+                        verticalPolicy: "PercentOfFirstChild"
+                    UIChildComponent0:
+                        prototypePath: "~res:/UI/Screens3/Lobby/Story/Components/Repeatable.yaml"
+                        args:
+                            "selectionType": "eSelectionBorderType.kR20"
+                            "roundedCorners": "20"
+                            "isBgVisible": "false"
+                            "showInfinity": "false"
+                            "model": "storyView.tree.groups.common.steps[6]"
+                            "stepSize": "eStepSize.S"
+                        eventActions:
+                        - ["DESELECT", "DESELECT", ""]
+                        - ["SELECT_STEP", "SELECT_STEP", "_event.id"]
+                        - ["SHOW_STEP_INFO", "SHOW_STEP_INFO", "_event.id"]
+            -   class: "UIControl"
+                name: "Item7"
+                input: false
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        hCenterAnchor: -1.000000
+                        topAnchorEnabled: true
+                        topAnchor: 61.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfFirstChild"
+                        verticalPolicy: "PercentOfFirstChild"
+                    UIChildComponent0:
+                        prototypePath: "~res:/UI/Screens3/Lobby/Story/Components/Repeatable.yaml"
+                        args:
+                            "selectionType": "eSelectionBorderType.kR20"
+                            "roundedCorners": "20"
+                            "isBgVisible": "false"
+                            "showInfinity": "false"
+                            "model": "storyView.tree.groups.common.steps[7]"
+                            "stepSize": "eStepSize.L"
+                        eventActions:
+                        - ["DESELECT", "DESELECT", ""]
+                        - ["SELECT_STEP", "SELECT_STEP", "_event.id"]
+                        - ["SHOW_STEP_INFO", "SHOW_STEP_INFO", "_event.id"]
+        -   class: "UIControl"
+            name: "Bottom"
+            position: [0.000000, 326.000000]
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    bottomAnchorEnabled: false
+                LinearLayout:
+                    padding: "16"
+                    dynamicPadding: true
+                    spacing: 48.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   class: "UIControl"
+                name: "Item8"
+                input: false
+                components:
+                    Anchor:
+                        bottomAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfFirstChild"
+                        verticalPolicy: "PercentOfFirstChild"
+                    UIChildComponent0:
+                        prototypePath: "~res:/UI/Screens3/Lobby/Story/Components/Repeatable.yaml"
+                        args:
+                            "isForceLongLabel": "true"
+                            "model": "storyView.tree.groups.common.steps[8]"
+                            "showInfinity": "true"
+                            "stepSize": "eStepSize.S"
+                        eventActions:
+                        - ["DESELECT", "DESELECT", ""]
+                        - ["SELECT_STEP", "SELECT_STEP", "_event.id"]
+                        - ["SHOW_STEP_INFO", "SHOW_STEP_INFO", "_event.id"]
+            -   class: "UIControl"
+                name: "Item9"
+                input: false
+                components:
+                    Anchor:
+                        bottomAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfFirstChild"
+                        verticalPolicy: "PercentOfFirstChild"
+                    UIChildComponent0:
+                        prototypePath: "~res:/UI/Screens3/Lobby/Story/Components/Repeatable.yaml"
+                        args:
+                            "isForceLongLabel": "true"
+                            "showInfinity": "true"
+                            "model": "storyView.tree.groups.common.steps[9]"
+                            "stepSize": "eStepSize.S"
+                        eventActions:
+                        - ["DESELECT", "DESELECT", ""]
+                        - ["SELECT_STEP", "SELECT_STEP", "_event.id"]
+                        - ["SHOW_STEP_INFO", "SHOW_STEP_INFO", "_event.id"]
+            -   class: "UIControl"
+                name: "Item12"
+                input: false
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        bottomAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfFirstChild"
+                        verticalPolicy: "PercentOfFirstChild"
+                    UIChildComponent0:
+                        prototypePath: "~res:/UI/Screens3/Lobby/Story/Components/Steps/EnigmaRepeatable.yaml"
+                        args:
+                            "text": "storyView.tree.groups.common.steps[12].step.rewards[0].stuff.title"
+                            "model": "storyView.tree.groups.common.steps[12]"
+                            "canAfford": "when not isNull(statsGold) and not isNull(goldPrice) -> goldPrice.basic.quantity <= statsGold.quantity, false"
+                        eventActions:
+                        - ["DESELECT", "DESELECT", ""]
+                        - ["SELECT_STEP", "SELECT_STEP", "_event.id"]
+                        - ["SHOW_STEP_INFO", "SHOW_CHEST_INFO", "_event.id"]
+            -   class: "UIControl"
+                name: "Item10"
+                input: false
+                components:
+                    Anchor:
+                        bottomAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfFirstChild"
+                        verticalPolicy: "PercentOfFirstChild"
+                    UIChildComponent0:
+                        prototypePath: "~res:/UI/Screens3/Lobby/Story/Components/Repeatable.yaml"
+                        args:
+                            "isForceLongLabel": "true"
+                            "showInfinity": "true"
+                            "model": "storyView.tree.groups.common.steps[10]"
+                            "stepSize": "eStepSize.S"
+                        eventActions:
+                        - ["DESELECT", "DESELECT", ""]
+                        - ["SELECT_STEP", "SELECT_STEP", "_event.id"]
+                        - ["SHOW_STEP_INFO", "SHOW_STEP_INFO", "_event.id"]
+            -   class: "UIControl"
+                name: "Item11"
+                input: false
+                components:
+                    Anchor:
+                        bottomAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfFirstChild"
+                        verticalPolicy: "PercentOfFirstChild"
+                    UIChildComponent0:
+                        prototypePath: "~res:/UI/Screens3/Lobby/Story/Components/Repeatable.yaml"
+                        args:
+                            "isForceLongLabel": "true"
+                            "showInfinity": "true"
+                            "model": "storyView.tree.groups.common.steps[11]"
+                            "stepSize": "eStepSize.S"
+                        eventActions:
+                        - ["DESELECT", "DESELECT", ""]
+                        - ["SELECT_STEP", "SELECT_STEP", "_event.id"]
+                        - ["SHOW_STEP_INFO", "SHOW_STEP_INFO", "_event.id"]

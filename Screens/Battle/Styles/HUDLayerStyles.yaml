@@ -1,0 +1,301 @@
+Header:
+    version: 140
+StyleSheets:
+-   selectors:
+    - ".postmortem-table.enemy #RibbonContainer"
+    properties:
+        visible: true
+-   selectors:
+    - ".postmortem-table.enemy #TableContainer #PlayerInfoTable #Background-image"
+    properties:
+        bg-color: [1.000000, 0.000000, 0.000000, 1.000000]
+-   selectors:
+    - ".postmortem-table.enemy #RibbonContainer #RibbonContent #Background"
+    properties:
+        bg-color: [1.000000, 0.000000, 0.000000, 1.000000]
+-   selectors:
+    - ".postmortem-table.enemy #RibbonContainer #RightPart"
+    properties:
+        bg-color: [1.000000, 0.000000, 0.000000, 1.000000]
+-   selectors:
+    - ".postmortem-table.enemy #RibbonContainer #LeftPart"
+    properties:
+        bg-color: [1.000000, 0.000000, 0.000000, 1.000000]
+-   selectors:
+    - ".postmortem-table.ally #TableContainer #PlayerInfoTable #Background-image"
+    properties:
+        bg-color: [0.133333, 0.874510, 0.011765, 1.000000]
+-   selectors:
+    - ".postmortem-table.ally #RibbonContainer"
+    properties:
+        visible: false
+-   selectors:
+    - ".postmortem-table.self #TableContainer #PlayerInfoTable #Background-image"
+    properties:
+        bg-color: [1.000000, 1.000000, 1.000000, 1.000000]
+-   selectors:
+    - ".postmortem-table.self #RibbonContainer"
+    properties:
+        visible: true
+-   selectors:
+    - ".postmortem-table.self #RibbonContainer #RibbonContent #Background"
+    properties:
+        bg-color: [1.000000, 1.000000, 1.000000, 1.000000]
+-   selectors:
+    - ".postmortem-table.self #RibbonContainer #RightPart"
+    properties:
+        bg-color: [1.000000, 1.000000, 1.000000, 1.000000]
+-   selectors:
+    - ".postmortem-table.self #RibbonContainer #LeftPart"
+    properties:
+        bg-color: [1.000000, 1.000000, 1.000000, 1.000000]
+-   selectors:
+    - ".postmortem-caption.caption-show"
+    properties:
+        visible: true
+-   selectors:
+    - ".postmortem-caption.caption-hide"
+    properties:
+        visible: false
+-   selectors:
+    - ".postText"
+    properties:
+        text-fontName: "WarHeliosCondC_19"
+        text-shadowOffset: [1.000000, 1.000000]
+        text-color: [1.000000, 1.000000, 1.000000, 1.000000]
+-   selectors:
+    - ".postHeader"
+    properties:
+        text-fontName: "WarHeliosCondC_Bold_21"
+        text-shadowOffset: [1.000000, 1.000000]
+        text-color: [1.000000, 1.000000, 1.000000, 1.000000]
+-   selectors:
+    - ".intersecting_with_chat_commands:disabled"
+    properties:
+        bg-color: [1.000000, 1.000000, 1.000000, 0.498039]
+-   selectors:
+    - "#CaptureState.neutral_current"
+    properties:
+        bg-color: [1.000000, 1.000000, 1.000000, 1.000000]
+-   selectors:
+    - "#CaptureState.enemy_current"
+    properties:
+        bg-color: [1.000000, 0.000000, 0.000000, 1.000000]
+-   selectors:
+    - "#CaptureState.ally_current"
+    properties:
+        bg-color: [0.000000, 1.000000, 0.000000, 1.000000]
+-   selectors:
+    - "#CaptureState.enemy_progress #Progress"
+    properties:
+        bg-color: [1.000000, 0.000000, 0.000000, 1.000000]
+-   selectors:
+    - "#CaptureState.ally_progress #Progress"
+    properties:
+        bg-color: [0.000000, 1.000000, 0.000000, 1.000000]
+-   selectors:
+    - ".hud-scale.Phone"
+    properties:
+        scale: [1.500000, 1.500000]
+        sizePolicy-verticalValue: 150.000000
+-   selectors:
+    - ".hud-scale"
+    properties:
+        scale: [1.000000, 1.000000]
+        sizePolicy-verticalValue: 100.000000
+-   selectors:
+    - ".bg-hud-scale.Phone"
+    properties:
+        sizePolicy-verticalValue: 150.000000
+        sizePolicy-horizontalValue: 150.000000
+-   selectors:
+    - ".bg-hud-scale"
+    properties:
+        sizePolicy-verticalValue: 100.000000
+        sizePolicy-horizontalValue: 100.000000
+-   selectors:
+    - ".damaged-module-scale"
+    properties:
+        sizePolicy-verticalValue: 26.000000
+        sizePolicy-horizontalValue: 38.000000
+-   selectors:
+    - ".damaged-module-scale.Phone"
+    properties:
+        sizePolicy-verticalValue: 39.000000
+        sizePolicy-horizontalValue: 57.000000
+-   selectors:
+    - ".health-size"
+    properties:
+        sizePolicy-verticalValue: 20.000000
+        sizePolicy-horizontalValue: 380.000000
+-   selectors:
+    - ".health-size.Phone"
+    properties:
+        sizePolicy-verticalValue: 20.000000
+        sizePolicy-horizontalValue: 380.000000
+-   selectors:
+    - ".health-font"
+    properties:
+        text-fontName: "WarHeliosCondC_Bold_13"
+-   selectors:
+    - ".health-font.Phone"
+    properties:
+        text-fontName: "WarHeliosCondC_Bold_19"
+-   selectors:
+    - ".damaged-module-scaling"
+    properties:
+        sizePolicy-verticalValue: 100.000000
+        sizePolicy-horizontalValue: 100.000000
+-   selectors:
+    - ".damaged-module-scaling.Phone"
+    properties:
+        sizePolicy-verticalValue: 150.000000
+        sizePolicy-horizontalValue: 150.000000
+-   selectors:
+    - ".tutorial-size"
+    properties:
+        sizePolicy-verticalValue: 32.000000
+-   selectors:
+    - ".chat-command-base-a #BaseName"
+    properties:
+        bg-frame: 2
+-   selectors:
+    - ".chat-command-base-b #BaseName"
+    properties:
+        bg-frame: 3
+-   selectors:
+    - ".chat-command-base-c #BaseName"
+    properties:
+        bg-frame: 4
+-   selectors:
+    - ".chat-command-base-d #BaseName"
+    properties:
+        bg-frame: 5
+-   selectors:
+    - ".chat-command-base-e #BaseName"
+    properties:
+        bg-frame: 6
+-   selectors:
+    - ".chat-command-base-f #BaseName"
+    properties:
+        bg-frame: 7
+-   selectors:
+    - ".mission-text-color"
+    properties:
+        text-color: [0.792000, 0.906000, 0.698000, 1.000000]
+-   selectors:
+    - ".waiting.rating-battle #Countdown"
+    properties:
+        visible: true
+-   selectors:
+    - ".waiting.rating-battle #CombatMission"
+    properties:
+        visible: false
+-   selectors:
+    - ".waiting.rating-battle #ArenaState"
+    - ".waiting.countdown-rating #Countdown"
+    properties:
+        text-color: [1.000000, 1.000000, 1.000000, 1.000000]
+-   selectors:
+    - ".waiting.regular-battle #ArenaState"
+    - ".waiting.countdown-regular #Countdown"
+    properties:
+        text-color: [0.705882, 1.000000, 0.466667, 1.000000]
+-   selectors:
+    - ".waiting.regular-battle #Countdown"
+    properties:
+        visible: false
+-   selectors:
+    - ".waiting #CombatMission"
+    - ".waiting #ArenaState"
+    properties:
+        visible: true
+-   selectors:
+    - ".prebattle #CombatMission"
+    - ".prebattle #ArenaState"
+    - ".prebattle #Countdown"
+    properties:
+        visible: true
+-   selectors:
+    - ".prebattle #ArenaState"
+    - ".prebattle #Countdown"
+    properties:
+        text-color: [0.705882, 1.000000, 0.466667, 1.000000]
+-   selectors:
+    - ".prebattle #Countdown"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/BattleScreenHUD/CountdownBeforeBattleGlow.psd"
+-   selectors:
+    - ".battle #CombatMission"
+    - ".battle #Countdown"
+    properties:
+        visible: false
+-   selectors:
+    - ".battle #ArenaState"
+    - ".battle #Countdown"
+    properties:
+        text-color: [0.705882, 1.000000, 0.466667, 1.000000]
+-   selectors:
+    - ".battle #ArenaState"
+    properties:
+        visible: true
+-   selectors:
+    - ".afterbattle #CombatMission"
+    - ".afterbattle #Countdown"
+    properties:
+        visible: false
+-   selectors:
+    - ".afterbattle #ArenaState"
+    properties:
+        visible: true
+-   selectors:
+    - ".afterbattle #ArenaState"
+    - ".afterbattle #Countdown"
+    properties:
+        text-color: [0.705882, 1.000000, 0.466667, 1.000000]
+-   selectors:
+    - ".countdown-visible"
+    properties:
+        visible: true
+-   selectors:
+    - ".countdown-invisible"
+    properties:
+        visible: false
+-   selectors:
+    - ".battle-period-counter"
+    properties:
+        text-color: [1.000000, 1.000000, 1.000000, 1.000000]
+-   selectors:
+    - ".no-battle-period-counter"
+    properties:
+        text-color: [1.000000, 0.200000, 0.100000, 1.000000]
+-   selectors:
+    - ".roll-button"
+    properties:
+        bg-frame: 0
+-   selectors:
+    - ".roll-button:selected"
+    properties:
+        bg-frame: 1
+-   selectors:
+    - ".hide-replay"
+    properties:
+        visible: true
+-   selectors:
+    - ".hide-replay.ReplayShowing .hide-replay.hide-fps"
+    properties:
+        visible: false
+-   selectors:
+    - ".hide-replay.hide-fps"
+    properties:
+        visible: false
+-   selectors:
+    - ".health-layer-size"
+    properties:
+        sizePolicy-horizontalValue: 376.000000
+        sizePolicy-verticalValue: 16.000000
+-   selectors:
+    - ".health-layer-size.Phone"
+    properties:
+        sizePolicy-horizontalValue: 376.000000
+        sizePolicy-verticalValue: 16.000000

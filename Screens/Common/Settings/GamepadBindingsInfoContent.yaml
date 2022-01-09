@@ -1,0 +1,544 @@
+Header:
+    version: 115
+Prototypes:
+-   class: "UIControl"
+    name: "Content"
+    size: [1076.000000, 460.000000]
+    input: false
+    components:
+        LinearLayout:
+            spacing: 80.000000
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 1046.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 460.000000
+    children:
+    -   class: "UIControl"
+        name: "LeftNote"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Background:
+                sprite: "~res:/Gfx/Lobby/backgrounds/nintendo-switch/bg_switch-scheme_left_note"
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 250.000000
+                topAnchorEnabled: true
+                topAnchor: 43.000000
+                vCenterAnchorEnabled: false
+            IgnoreLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+    -   class: "UIControl"
+        name: "LeftList"
+        position: [1.000000, 0.000000]
+        size: [260.000000, 32.000000]
+        input: false
+        components:
+            LinearLayout:
+                orientation: "TopDown"
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 260.000000
+                verticalPolicy: "PercentOfChildrenSum"
+        children:
+        -   class: "UIControl"
+            name: "Spacer"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 16.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 18.000000
+        -   class: "UIControl"
+            name: "ControlName"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+                    rightAnchor: 12.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens/Common/Settings/GamepadControlName.yaml"
+                    args:
+                        "switchControl": "eNintendoSwitchControls.LeftTrigger"
+                        "nameValue": "\"Switch/GamepadScreen/ZL/SniperMode\""
+                        "descriptionValue": "\"\""
+                        "isleftToRight": "false"
+                        "descVisible": "false"
+                    eventActions: []
+        -   class: "UIControl"
+            name: "Spacer_1"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 16.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 8.000000
+        -   class: "UIControl"
+            name: "ControlName_1"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+                    rightAnchor: 12.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens/Common/Settings/GamepadControlName.yaml"
+                    args:
+                        "switchControl": "eNintendoSwitchControls.LeftShoulder"
+                        "nameValue": "\"Switch/GamepadScreen/L/FreeCamera\""
+                        "descriptionValue": "\"\""
+                        "isleftToRight": "false"
+                        "descVisible": "false"
+                    eventActions: []
+        -   class: "UIControl"
+            name: "Spacer_2"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 16.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 32.000000
+        -   class: "UIControl"
+            name: "ControlName_2"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+                    rightAnchor: 12.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens/Common/Settings/GamepadControlName.yaml"
+                    args:
+                        "switchControl": "eNintendoSwitchControls.Minus"
+                        "nameValue": "\"Switch/GamepadScreen/PushLeftStick/ListOfPlayers\""
+                        "descriptionValue": "\"\""
+                        "isleftToRight": "false"
+                        "descVisible": "false"
+                    eventActions: []
+        -   class: "UIControl"
+            name: "Spacer_3"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 16.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 72.000000
+        -   class: "UIControl"
+            name: "ControlName_3"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+                    rightAnchor: 12.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens/Common/Settings/GamepadControlName.yaml"
+                    args:
+                        "switchControl": "eNintendoSwitchControls.LeftThumbstick"
+                        "nameValue": "\"Switch/GamepadScreen/LeftStick/TankControl\""
+                        "descriptionValue": "\"\""
+                        "isleftToRight": "false"
+                        "descVisible": "false"
+                    eventActions: []
+        -   class: "UIControl"
+            name: "Spacer_5"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 16.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 88.000000
+        -   class: "UIControl"
+            name: "ControlName_5"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+                    rightAnchor: 12.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens/Common/Settings/GamepadControlName.yaml"
+                    args:
+                        "switchControl": "eNintendoSwitchControls.Up"
+                        "nameValue": "\"Switch/GamepadScreen/Up/Reload\""
+                        "descriptionValue": "\"\""
+                        "isleftToRight": "false"
+                        "descVisible": "false"
+                    eventActions: []
+        -   class: "UIControl"
+            name: "Spacer_6"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 16.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 8.000000
+        -   class: "UIControl"
+            name: "ControlName_6"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+                    rightAnchor: 12.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens/Common/Settings/GamepadControlName.yaml"
+                    args:
+                        "switchControl": "eNintendoSwitchControls.Left"
+                        "nameValue": "\"Switch/GamepadScreen/Left/ShellChoice\""
+                        "descriptionValue": "\"\""
+                        "isleftToRight": "false"
+                        "descVisible": "false"
+                    eventActions: []
+        -   class: "UIControl"
+            name: "Spacer_7"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 16.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 8.000000
+        -   class: "UIControl"
+            name: "ControlName_7"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+                    rightAnchor: 12.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens/Common/Settings/GamepadControlName.yaml"
+                    args:
+                        "switchControl": "eNintendoSwitchControls.Down"
+                        "nameValue": "\"Switch/GamepadScreen/Down/FollowAim\""
+                        "descriptionValue": "\"\""
+                        "isleftToRight": "false"
+                        "descVisible": "false"
+                    eventActions: []
+        -   class: "UIControl"
+            name: "Spacer_8"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 16.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 8.000000
+        -   class: "UIControl"
+            name: "ControlName_8"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+                    rightAnchor: 12.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens/Common/Settings/GamepadControlName.yaml"
+                    args:
+                        "switchControl": "eNintendoSwitchControls.Right"
+                        "nameValue": "\"Switch/GamepadScreen/Right/ShellChoice\""
+                        "descriptionValue": "\"\""
+                        "isleftToRight": "false"
+                        "descVisible": "false"
+                    eventActions: []
+    -   class: "UIControl"
+        name: "ControlScheme"
+        position: [340.000000, 80.000000]
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+                vCenterAnchor: 13.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfMaxChild"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Common/NintendoSwitch/Scheme/NintendoSwitchScheme.yaml"
+                args:
+                    "enabled": "[ eNintendoSwitchControls.RightThumbstick; eNintendoSwitchControls.A; eNintendoSwitchControls.B; eNintendoSwitchControls.X; eNintendoSwitchControls.Y; eNintendoSwitchControls.Left; eNintendoSwitchControls.Right; eNintendoSwitchControls.Up; eNintendoSwitchControls.Down; eNintendoSwitchControls.LeftThumbstick; eNintendoSwitchControls.LeftThumbstickAxis; eNintendoSwitchControls.LeftShoulder; eNintendoSwitchControls.LeftTrigger; eNintendoSwitchControls.LeftTrigger; eNintendoSwitchControls.RightThumbstick; eNintendoSwitchControls.RightThumbstickAxis; eNintendoSwitchControls.RightThumbstickAxis; eNintendoSwitchControls.RightShoulder; eNintendoSwitchControls.RightTrigger; ]"
+    -   class: "UIControl"
+        name: "RightList"
+        position: [784.000000, 0.000000]
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            LinearLayout:
+                orientation: "TopDown"
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 260.000000
+                verticalPolicy: "PercentOfChildrenSum"
+        children:
+        -   class: "UIControl"
+            name: "Spacer"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 16.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 18.000000
+        -   class: "UIControl"
+            name: "ControlName"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 18.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens/Common/Settings/GamepadControlName.yaml"
+                    args:
+                        "switchControl": "eNintendoSwitchControls.RightTrigger"
+                        "nameValue": "\"Switch/GamepadScreen/ZR/Fire\""
+                        "descriptionValue": "\"\""
+                        "isleftToRight": "true"
+                        "descVisible": "false"
+                    eventActions: []
+        -   class: "UIControl"
+            name: "Spacer_2"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 16.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 64.000000
+        -   class: "UIControl"
+            name: "ControlName_2"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 18.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens/Common/Settings/GamepadControlName.yaml"
+                    args:
+                        "switchControl": "eNintendoSwitchControls.Plus"
+                        "nameValue": "\"Switch/GamepadScreen/Pluse/Settings\""
+                        "descriptionValue": "\"Открыть / Закрыть\""
+                        "isleftToRight": "true"
+                        "descVisible": "false"
+                    eventActions: []
+        -   class: "UIControl"
+            name: "Spacer_3"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 16.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 56.000000
+        -   class: "UIControl"
+            name: "ControlName_3"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 18.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens/Common/Settings/GamepadControlName.yaml"
+                    args:
+                        "switchControl": "eNintendoSwitchControls.X"
+                        "nameValue": "\"Switch/GamepadScreen/X/Consumable1\""
+                        "descriptionValue": "\"\""
+                        "isleftToRight": "true"
+                        "descVisible": "false"
+                    eventActions: []
+        -   class: "UIControl"
+            name: "Spacer_5"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 16.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 8.000000
+        -   class: "UIControl"
+            name: "ControlName_5"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 18.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens/Common/Settings/GamepadControlName.yaml"
+                    args:
+                        "switchControl": "eNintendoSwitchControls.A"
+                        "nameValue": "\"Switch/GamepadScreen/A/Consumable2\""
+                        "descriptionValue": "\"\""
+                        "isleftToRight": "true"
+                        "descVisible": "false"
+                    eventActions: []
+        -   class: "UIControl"
+            name: "Spacer_6"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 16.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 8.000000
+        -   class: "UIControl"
+            name: "ControlName_6"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 18.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens/Common/Settings/GamepadControlName.yaml"
+                    args:
+                        "switchControl": "eNintendoSwitchControls.B"
+                        "nameValue": "\"Switch/GamepadScreen/B/Consumable3\""
+                        "descriptionValue": "\"\""
+                        "isleftToRight": "true"
+                        "descVisible": "false"
+                    eventActions: []
+        -   class: "UIControl"
+            name: "Spacer_7"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 16.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 8.000000
+        -   class: "UIControl"
+            name: "ControlName_7"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 18.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens/Common/Settings/GamepadControlName.yaml"
+                    args:
+                        "switchControl": "eNintendoSwitchControls.Y"
+                        "nameValue": "\"Switch/GamepadScreen/Y/Ability\""
+                        "descriptionValue": "\"\""
+                        "isleftToRight": "true"
+                        "descVisible": "false"
+                    eventActions: []
+        -   class: "UIControl"
+            name: "Spacer_4"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 16.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 96.000000
+        -   class: "UIControl"
+            name: "ControlName_4"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 18.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens/Common/Settings/GamepadControlName.yaml"
+                    args:
+                        "switchControl": "eNintendoSwitchControls.RightThumbstick"
+                        "nameValue": "\"Switch/GamepadScreen/RightStick/CameraControl\""
+                        "descriptionValue": "\"\""
+                        "isleftToRight": "true"
+                        "descVisible": "false"
+                    eventActions: []
+    -   class: "UIControl"
+        name: "LeftNote_1"
+        position: [735.000000, 30.000000]
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Background:
+                sprite: "~res:/Gfx/Lobby/backgrounds/nintendo-switch/bg_switch-scheme_right_note"
+            Anchor:
+                leftAnchorEnabled: false
+                rightAnchorEnabled: true
+                rightAnchor: 246.000000
+                topAnchorEnabled: true
+                topAnchor: 46.000000
+            IgnoreLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"

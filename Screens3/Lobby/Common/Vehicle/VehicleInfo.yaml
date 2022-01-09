@@ -1,0 +1,110 @@
+Header:
+    version: 140
+Prototypes:
+-   class: "UIControl"
+    name: "VehicleInfo"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfFirstChild"
+        UIDataParamsComponent:
+            params:
+            - ["eTankClass", "class", "eTankClass.TANK_CLASS_LIGHT", "eTankClass.TANK_CLASS_AT_SPG"]
+            - ["int", "level", "1", "2"]
+            - ["eVehicleDescriptionType", "type", "eVehicleDescriptionType.NORMAL", "eVehicleDescriptionType.PREMIUMISED"]
+            - ["bool", "elite", "false", "true"]
+            - ["string", "richTextStyle", "\"\"", "\"\""]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["int", "tankTypeFrame", "type + 0"]
+            - ["string", "classStyle", "toLowerCaseNotForLocalizedText(str(class, eTankClass))"]
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Lobby/Common/Vehicle/VehicleInfo.style.yaml"
+    bindings:
+    - ["classes", "\"root \" + richTextStyle"]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            Anchor:
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                spacing: 2.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfMaxChild"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Lobby/Common/Vehicle/VehicleInfo.style.yaml"
+        bindings:
+        - ["classes", "\"content \" + richTextStyle"]
+        children:
+        -   class: "UIControl"
+            name: "Tier"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+            bindings:
+            - ["visible", "elite"]
+            children:
+            -   class: "UIControl"
+                name: "Elite"
+                input: false
+                components:
+                    UITextureComponent:
+                        spritePath: "~res:/Gfx/Lobby/icons/tank-tiers/icon_laurel_pack.psd"
+                        drawType: "DRAW_SCALE_PROPORTIONAL_ONE"
+                        perPixelAccuracy: "PER_PIXEL_ACCURACY_FORCED"
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 20.000000
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 24.000000
+                bindings:
+                - ["UITextureComponent.frame", "tankTypeFrame"]
+            -   class: "UIControl"
+                name: "Class"
+                input: false
+                components:
+                    UITextureComponent: {}
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 12.000000
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 24.000000
+                bindings:
+                - ["classes", "classStyle"]
+                - ["UITextureComponent.frame", "tankTypeFrame"]
+        -   class: "UIControl"
+            name: "OnlyClass"
+            input: false
+            components:
+                UITextureComponent: {}
+                Anchor:
+                    hCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 12.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 24.000000
+            bindings:
+            - ["visible", "not elite"]
+            - ["classes", "classStyle"]
+            - ["UITextureComponent.frame", "tankTypeFrame"]
+        -   class: "UIControl"
+            name: "Level"
+            input: false
+            components:
+                Background: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfParent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml"
+            bindings:
+            - ["Background.sprite", "\"~res:/Gfx/Lobby/icons/tank-tiers/icon_level_\" + str(level) + \"_pack.psd\""]
+            - ["Background.frame", "tankTypeFrame"]

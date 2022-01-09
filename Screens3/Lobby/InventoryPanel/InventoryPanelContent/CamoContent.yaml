@@ -1,0 +1,48 @@
+Header:
+    version: 125
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/InventoryPanel/InventoryPanelContent/EquipmentSlot.yaml"
+- "~res:/UI/Screens3/Lobby/InventoryPanel/InventoryPanelContent/CamoSlot.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "CamoContent"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        LinearLayout:
+            spacing: 4.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "PercentOfMaxChild"
+        UIDataParamsComponent:
+            params:
+            - ["OwnedTank", "tank", "null", "{ }"]
+            - ["InventoryPanelCamoViewModel", "camo", "null", "{ }"]
+            - ["bool", "attachmentIsLocked", "false", "false"]
+            - ["bool", "hasValidCamo", "true", "true"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["bool", "hasValidAttachment", "not isNull(tank) and tank.camouflages.Size() >= 4 and tank.camouflages[3].valid"]
+            - ["bool", "hasValidCamo", "camo.isUniqueInvisExist or (not isNull(tank) and tank.camouflages.Size() >= 3 and (tank.camouflages[0].valid or tank.camouflages[1].valid or tank.camouflages[2].valid))"]
+            - ["string", "camoStyle", "when hasValidCamo -> \"camo_filled\", when not camo.customSetIsLocked -> \"camo_empty\", \"\""]
+    children:
+    -   prototype: "CamoSlot/Slot"
+        name: "Camouflage"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "isCamo": "true"
+                    "filled": "hasValidCamo"
+                    "visible": "camo.hasVisibleCamouflages"
+                    "isSlotLocked": "false"
+        bindings:
+        - ["classes", "filledStyle + \" \" + isCamoStyle + \" \""]
+    -   prototype: "CamoSlot/Slot"
+        name: "Attachment"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "isCamo": "false"
+                    "filled": "hasValidAttachment"
+                    "visible": "not camo.customSetIsLocked"
+                    "isSlotLocked": "attachmentIsLocked"

@@ -1,0 +1,90 @@
+Header:
+    version: 134
+Prototypes:
+-   class: "UIControl"
+    name: "HpLossCounter"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        Anchor:
+            topAnchorEnabled: true
+            topAnchor: -38.000000
+        LinearLayout: {}
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "FixedSize"
+            verticalValue: 38.000000
+    children:
+    -   class: "UIControl"
+        name: "Counter"
+        size: [32.000000, 32.000000]
+        input: false
+        classes: "battle-points grey-shark-70-bg white-wild-sand-text"
+        components:
+            Background:
+                drawType: "DRAW_STRETCH_HORIZONTAL"
+                sprite: "~res:/Gfx/UI/BattleScreenHUD/HotKeyShadow"
+            UITextComponent:
+                text: "-7%"
+            Anchor:
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Battle/HUD/GameModes/GameMode.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+    -   class: "UIControl"
+        name: "Icon"
+        size: [32.000000, 32.000000]
+        pivot: [0.500000, 0.500000]
+        input: false
+        components:
+            Anchor:
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   class: "UIControl"
+            name: "Fade_1"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_TO_RECT"
+                    sprite: "~res:/Gfx/Battle/icons/2020-halloween/icon_flame"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    horizontalValue: 80.000000
+                    verticalPolicy: "PercentOfContent"
+                    verticalValue: 80.000000
+        -   class: "UIControl"
+            name: "Fade"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_TO_RECT"
+                    sprite: "~res:/Gfx/Battle/icons/2020-halloween/icon_flame"
+                    color: [0.047059, 0.090196, 0.105882, 0.862745]
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    horizontalValue: 80.000000
+                    verticalPolicy: "PercentOfContent"
+                    verticalValue: 80.000000
+        -   class: "UIControl"
+            name: "Fire"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_TO_RECT"
+                    sprite: "~res:/Gfx/Battle/icons/2020-halloween/icon_flame"
+                UIClipPolygon: {}
+                ProgressClip:
+                    orientation: "BottomUp"
+                    progress: 0.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    horizontalValue: 80.000000
+                    verticalPolicy: "PercentOfContent"
+                    verticalValue: 80.000000

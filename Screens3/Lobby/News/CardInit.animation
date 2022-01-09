@@ -1,0 +1,13 @@
+animation CARD_INIT_ANIMATION ()
+{
+	if(shouldAnimateOnStart){
+		ChangeProperty("**/contentWrapper", "Anchor", "topAnchor", 30);
+	    Opacity ("**/contentWrapper", 0);
+	    Wait(animationIndex * 0.1 + 0.1);
+	    parallel 
+	    {
+	    	ChangeProperty("**/contentWrapper", "Anchor", "topAnchor", 0, 0.4, SINE_OUT);
+	    	Opacity ("**/contentWrapper", 1, 0.6, SINE_OUT);
+	    }
+	}
+}

@@ -1,0 +1,13 @@
+Header:
+    version: 128
+Prototypes:
+-   class: "UIControl"
+    name: "SwitchSurvey"
+    size: [1200.000000, 900.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIChildComponent0:
+            prototypePath: "~res:/UI/Screens3/Common/OverlayBlur.yaml"

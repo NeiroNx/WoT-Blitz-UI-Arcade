@@ -1,0 +1,14 @@
+Header:
+    version: 133
+Prototypes:
+-   class: "UIControl"
+    name: "Indicator"
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens3/Lobby/Shop/ShopProduct/VisibilityIndicator.animation"
+        UIDataParamsComponent:
+            events:
+            - "ON_VISIBLE"
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/Lobby/Shop/ShopProduct/VisibilityIndicator.actions"

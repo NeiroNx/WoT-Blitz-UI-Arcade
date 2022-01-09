@@ -1,0 +1,28 @@
+animation NY2022TreeOnInit
+{
+    repeat
+    {
+        repeat (4)
+        {
+            ChangeData(lightningOpacity, 1.0, 3.0, SINE_OUT);
+            Wait(5.0);
+            ChangeData(lightningOpacity, 0.3, 3.0, SINE_OUT);
+            Wait(3.0);
+        }
+
+        {
+            ChangeData(lightningOpacity, 0.7, 2.0, SINE_OUT); 
+            Wait(2.0);
+            ChangeData(lightningOpacity, 0.3, 0.02, SINE_IN);
+            Wait(0.05);
+            ChangeData(lightningOpacity, 0.7, 0.02, SINE_IN);
+            Wait(0.02);
+            ChangeData(lightningOpacity, 0.5, 0.02, SINE_IN);
+            Wait(0.02);
+            ChangeData(lightningOpacity, 0.4, 0.04, SINE_IN);
+            Wait(0.04);
+            ChangeData(lightningOpacity, 0.3, 0.02, SINE_IN);
+            Wait(0.02);
+        }
+    } 
+}

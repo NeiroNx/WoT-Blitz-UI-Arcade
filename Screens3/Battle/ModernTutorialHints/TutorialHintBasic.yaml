@@ -1,0 +1,69 @@
+Header:
+    version: 128
+ImportedPackages:
+- "~res:/UI/Screens3/Battle/ModernTutorialHints/TutorialHintProtoTitled.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "HintContainer"
+    size: [32.000000, 32.000000]
+    input: false
+    classes: "ArrowNone"
+    components:
+        Anchor: {}
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 0.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 0.000000
+        UIDataParamsComponent:
+            params:
+            - ["string", "title", "\"\"", "\"Title title title\""]
+            - ["string", "icon", "\"\"", "\"~res:/Gfx/Battle/icons/2020-halloween/icon_up\""]
+            - ["string", "text", "\"\"", "\"Basic <highlight>hint</highlight> text\""]
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Battle/ModernTutorialHints/TutorialHints.style.yaml"
+    children:
+    -   prototype: "TutorialHintProtoTitled/Hint"
+        name: "Hint"
+        components:
+            Anchor: {}
+            UIDataParamsComponent:
+                args:
+                    "title": "title"
+                    "icon": "icon"
+                    "text": "text"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Battle/ModernTutorialHints/TutorialHints.style.yaml"
+    -   class: "UIControl"
+        name: "ArrowClip"
+        size: [16.000000, 8.000000]
+        input: false
+        components:
+            ClipContent: {}
+            Anchor: {}
+            SizePolicy: {}
+        children:
+        -   class: "UIControl"
+            name: "Arrow"
+            input: false
+            classes: "grey-shark-50-bg"
+            components:
+                Background:
+                    drawType: "DRAW_FILL"
+                    spriteModification: ["FLIP_VERTICAL"]
+                    color: [0.117647, 0.133333, 0.137255, 0.701961]
+                    colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                    align: []
+                    leftRightStretchCap: 8.000000
+                    topBottomStretchCap: 8.000000
+                UIRoundedCornersComponent:
+                    radius: "8"
+                    isRound: false
+                Anchor: {}
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 16.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 16.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/Battle/ModernTutorialHints/TutorialHints.style.yaml"

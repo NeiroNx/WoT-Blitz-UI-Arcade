@@ -1,0 +1,4 @@
+animation Init
+{
+  Event("SET_SKIP_NOT_TUTOR_FLAG", arg1=true);
+}

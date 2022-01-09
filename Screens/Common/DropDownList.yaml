@@ -1,0 +1,167 @@
+Header:
+    version: "108"
+ImportedPackages:
+- "~res:/UI/Screens/Fonts.yaml"
+- "~res:/UI/Screens/Lobby/Chat/ChatMessageStyle.yaml"
+- "~res:/UI/Styles/ButtonStyle.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "DropDownControl"
+    size: [150.000000, 180.000000]
+    input: false
+    components:
+        Background:
+            drawType: "DRAW_STRETCH_BOTH"
+            sprite: "~res:/Gfx/UI/CommonUIElements/search_back"
+            colorInherit: "COLOR_REPLACE_ALPHA_ONLY"
+            leftRightStretchCap: 4.000000
+            topBottomStretchCap: 4.000000
+        Anchor:
+            leftAnchorEnabled: true
+            hCenterAnchorEnabled: true
+            rightAnchorEnabled: true
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfFirstChild"
+        UIDataParamsComponent:
+            params:
+            - ["int", "selectedItemIndex", "0", "0"]
+            - ["map<int,string>", "dropDownItems", "{ }", "{ 0 = \"Europe1\"; 1 = \"Asia1\"; 2 = \"America1\"; }"]
+            events:
+            - "ON_CURRENT_ITEM_CHANGED"
+        UIDataLocalsComponent:
+            locals:
+            - ["int", "selectedElement", "selectedItemIndex"]
+            - ["bool", "listVisible", "false"]
+        UIDataOnEventComponent0:
+            eventName: "SHOW_DROPDOWN_LIST"
+            modelFieldExpression: "listVisible"
+            dataExpression: "not listVisible"
+        UIDataOnEventComponent1:
+            eventName: "ON_ITEM_SELECTED"
+            modelFieldExpression: "selectedElement"
+            dataExpression: "_event"
+        UIDataOnEventComponent2:
+            eventName: "ON_ITEM_SELECTED"
+            modelFieldExpression: "listVisible"
+            dataExpression: "not listVisible"
+        UIEventOnDataComponent0:
+            watchedDataExpression: "selectedElement"
+            eventName: "ON_CURRENT_ITEM_CHANGED"
+            eventData: "dropDownItems[selectedElement]"
+    children:
+    -   class: "UIControl"
+        name: "MainControl"
+        size: [233.000000, 76.000000]
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                hCenterAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+            LinearLayout:
+                spacing: 10.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfMaxChild"
+            UIInputEventComponent:
+                onTouchDown: "SHOW_DROPDOWN_LIST"
+        children:
+        -   class: "UIControl"
+            name: "Vertical"
+            input: false
+            components:
+                Anchor:
+                    vCenterAnchorEnabled: true
+                LinearLayout:
+                    orientation: "TopDown"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfChildrenSum"
+            children:
+            -   class: "UIStaticText"
+                name: "Text"
+                components:
+                    UITextComponent:
+                        fontName: "WarHeliosCondC_25"
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+                bindings:
+                - ["UITextComponent.text", "when Empty(dropDownItems) -> \"\", localize(dropDownItems[selectedElement])"]
+        -   class: "UIControl"
+            name: "Button"
+            position: [105.000000, 0.000000]
+            size: [45.000000, 45.000000]
+            input: true
+            components:
+                Background:
+                    drawType: "DRAW_TILED_MULTILAYER"
+                    mask: "~res:/Gfx/UI/CommonUIElements/Button/mask"
+                    detail: "~res:/Gfx/UI/CommonUIElements/Button/detail"
+                    gradient: "~res:/Gfx/UI/CommonUIElements/Button/gray_gradient.txt"
+                    contour: "~res:/Gfx/UI/CommonUIElements/Button/gray_contour.txt"
+                    gradientMode: "Overlay"
+                    colorInherit: "COLOR_MULTIPLY_ON_PARENT"
+                    perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                    leftRightStretchCap: 4.000000
+                    topBottomStretchCap: 4.000000
+                Anchor:
+                    vCenterAnchorEnabled: true
+                UIInputEventComponent:
+                    onTouchDown: "SHOW_DROPDOWN_LIST"
+            children:
+            -   class: "UIControl"
+                name: "Arrow"
+                position: [7.000000, 7.000000]
+                size: [30.000000, 30.000000]
+                input: false
+                components:
+                    Background:
+                        sprite: "~res:/Gfx/UI/CommonUIElements/IconArrowDropDownMenu"
+                        colorInherit: "COLOR_MULTIPLY_ON_PARENT"
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                bindings:
+                - ["Background.spriteModification", "when listVisible -> 2, 0"]
+    -   class: "UIControl"
+        name: "DropDownList"
+        size: [32.000000, 32.000000]
+        input: true
+        exclusiveInput: true
+        components:
+            Background:
+                drawType: "DRAW_STRETCH_BOTH"
+                sprite: "~res:/Gfx/UI/CommonUIElements/popup_new"
+                align: ["HCENTER"]
+                leftRightStretchCap: 14.000000
+                topBottomStretchCap: 14.000000
+            Anchor:
+                leftAnchorEnabled: true
+                topAnchorEnabled: true
+                topAnchor: 45.000000
+            LinearLayout:
+                orientation: "TopDown"
+            IgnoreLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfChildrenSum"
+            UISwitchBarComponent:
+                onSelectElement: "ON_ITEM_SELECTED"
+                onSelectElementData: "_selectedElement"
+            UIRepeatComponent:
+                control: "~res:/UI/Screens/Common/DropDownListItem.yaml"
+                dataContainer: "dropDownItems"
+                args:
+                    "itemId": "_index"
+                    "text": "_item"
+            UILayerComponent:
+                layer: 1
+        bindings:
+        - ["visible", "listVisible"]
+        - ["UISwitchBarComponent.selectedElement", "selectedElement"]

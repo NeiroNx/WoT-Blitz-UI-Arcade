@@ -1,0 +1,174 @@
+Header:
+    version: "106"
+ImportedPackages:
+- "~res:/UI/Screens/Common/Settings/SettingsCommon.yaml"
+- "~res:/UI/Styles/SafeAreaStyles.yaml"
+- "~res:/UI/Screens/Battle/ControlsEditor/BattleControlsEditorCommon.yaml"
+Controls:
+-   class: "UIControl"
+    name: "Page"
+    size: [1025.000000, 688.000000]
+    input: false
+    components:
+        Background:
+            drawType: "DRAW_SCALE_PROPORTIONAL_ONE"
+            sprite: "~res:/Gfx/UI/EditorControlsScreen/background/Background"
+        ClipContent: {}
+        Anchor:
+            leftAnchorEnabled: true
+            leftAnchor: 0.000000
+            rightAnchorEnabled: true
+            rightAnchor: 0.000000
+            topAnchorEnabled: true
+            topAnchor: 0.000000
+            bottomAnchorEnabled: true
+            bottomAnchor: 0.000000
+        StyleSheet:
+            styles: "~res:/UI/Screens/Common/Settings/BattleControlsLayoutPage.yaml"
+    children:
+    -   class: "UIControl"
+        name: "battleControlsField"
+        size: [1025.000000, 768.000000]
+        classes: "smart-inset"
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 0.000000
+                rightAnchorEnabled: true
+                rightAnchor: 0.000000
+                topAnchorEnabled: true
+                topAnchor: -80.000000
+                bottomAnchorEnabled: true
+                bottomAnchor: 0.000000
+            UIAnchorSafeAreaComponent: {}
+        children:
+        -   class: "UIControl"
+            customClass: "UIBattleControlsInputLayer"
+            name: "inputLayer"
+            size: [1025.000000, 768.000000]
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 0.000000
+                    rightAnchorEnabled: true
+                    rightAnchor: 0.000000
+                    topAnchorEnabled: true
+                    topAnchor: 0.000000
+                    bottomAnchorEnabled: true
+                    bottomAnchor: 0.000000
+    -   class: "UIControl"
+        name: "header"
+        size: [1025.000000, 80.000000]
+        input: false
+        classes: "section-header1"
+        components:
+            Background: {}
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+        children:
+        -   prototype: "SettingsCommon/SliderWithCaption"
+            name: "SliderWithCaption"
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    rightAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                UIAnchorSafeAreaComponent:
+                    rightSafeInset: "INSET"
+            children:
+            -   path: "ValueAndCaption/GroupCaption"
+                visible: false
+            -   path: "ValueAndCaption/Value"
+                visible: false
+        -   class: "UIControl"
+            name: "TextContainer"
+            size: [205.000000, 40.000000]
+            input: false
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 20.000000
+                    topAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                LinearLayout:
+                    spacing: 3.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIAnchorSafeAreaComponent:
+                    leftSafeInset: "INSET"
+                    rightSafeInset: "INSET"
+            children:
+            -   class: "UIStaticText"
+                name: "elementSizeText"
+                classes: "header3"
+                components:
+                    UITextComponent:
+                        text: "#settings:Controls/TouchSettings/Tune/ElementSize"
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                        align: ["LEFT", "BOTTOM"]
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+            -   class: "UIStaticText"
+                name: "elementSize"
+                classes: "header3"
+                components:
+                    UITextComponent:
+                        text: "100%"
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                        align: ["LEFT", "BOTTOM"]
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+        -   class: "UIStaticText"
+            name: "comment"
+            size: [961.000000, 40.000000]
+            classes: "text2 text-color-blue"
+            components:
+                UITextComponent:
+                    text: "#settings:Controls/TouchSettings/Tune/ElementSize/Comment"
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                    align: ["LEFT", "TOP"]
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 20.000000
+                    rightAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                UIAnchorSafeAreaComponent:
+                    leftSafeInset: "INSET"
+                    rightSafeInset: "INSET"
+    -   class: "UIControl"
+        name: "AimControlHolder"
+        size: [32.000000, 32.000000]
+        input: false
+        classes: "smart-inset"
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+                topAnchor: -80.000000
+                bottomAnchorEnabled: true
+            UIAnchorSafeAreaComponent: {}
+        children:
+        -   class: "UIControl"
+            name: "AimControl"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 300.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 300.000000

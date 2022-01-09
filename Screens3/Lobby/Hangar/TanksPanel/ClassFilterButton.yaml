@@ -1,0 +1,32 @@
+Header:
+    version: "92"
+Prototypes:
+-   class: "UIControl"
+    name: "ClassFilterButton"
+    input: false
+    components:
+        Anchor:
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 56.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 56.000000
+        UIDataParamsComponent:
+            params:
+            - ["eTankClass", "class", "eTankClass.TANK_CLASS_LIGHT", "eTankClass.TANK_CLASS_HEAVY"]
+            - ["bool", "active", "false", "true"]
+            - ["bool", "enabled", "true", "true"]
+            events:
+            - "ON_CLICK_BUTTON"
+        UIDataLocalControlComponent0:
+            name: "TierIcon"
+            prototypePath: "~res:/UI/Screens3/Lobby/Hangar/TanksPanel/IconContent.yaml"
+            args:
+                "iconPath": "when class == eTankClass.TANK_CLASS_LIGHT -> \"~res:/Gfx/Lobby/icons/icon_tank-class_light\", class == eTankClass.TANK_CLASS_MEDIUM -> \"~res:/Gfx/Lobby/icons/icon_tank-class_medium\", class == eTankClass.TANK_CLASS_HEAVY -> \"~res:/Gfx/Lobby/icons/icon_tank-class_heavy\", class == eTankClass.TANK_CLASS_AT_SPG -> \"~res:/Gfx/Lobby/icons/icon_tank-class_at-spg\", \"\""
+        UIChildComponent0:
+            prototypePath: "~res:/UI/Screens3/Lobby/Hangar/TanksPanel/FilterButton.yaml"
+            args:
+                "active": "active"
+                "enabled": "enabled"
+                "content": "TierIcon"

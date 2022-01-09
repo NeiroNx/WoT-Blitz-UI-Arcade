@@ -1,0 +1,149 @@
+Header:
+    version: 134
+Prototypes:
+-   class: "UIControl"
+    name: "CkeckBox"
+    input: true
+    components:
+        UIOpacityComponent: {}
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            verticalPolicy: "FixedSize"
+        UIDataParamsComponent:
+            params:
+            - ["eCheckBoxSize", "size", "eCheckBoxSize.NORMAL", "eCheckBoxSize.BIG"]
+            - ["bool", "isActive", "false", "true"]
+            - ["bool", "isEnabled", "true", "true"]
+            - ["bool", "showValidate", "false", "true"]
+            - ["bool", "validatedWithError", "false", "false"]
+            - ["bool", "attractAttention", "true", "true"]
+            - ["string", "bgStyle", "\"white-wild-sand-15-bg\"", "\"black-50-bg\""]
+            events:
+            - "CHECK_PRESSED"
+        Sound: {}
+    bindings:
+    - ["enabled", "isEnabled"]
+    - ["UIOpacityComponent.opacity", "when isEnabled -> 1, 0.500000"]
+    - ["SizePolicy.horizontalValue", "when size == eCheckBoxSize.NORMAL -> 32, 48"]
+    - ["SizePolicy.verticalValue", "when size == eCheckBoxSize.NORMAL -> 32, 48"]
+    children:
+    -   class: "UIControl"
+        name: "TapArea"
+        pivot: [0.500000, 0.500000]
+        classes: "checkbox-tap-area check-box"
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+            UIInputEventComponent:
+                onTouchUpInside: "CHECK_PRESSED"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Lobby/Common/TapArea.style.yaml"
+        children:
+        -   class: "UIControl"
+            name: "Content"
+            pivot: [0.500000, 0.500000]
+            input: false
+            classes: "content-area"
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    rightAnchorEnabled: true
+                    topAnchorEnabled: true
+                    bottomAnchorEnabled: true
+            children:
+            -   class: "UIControl"
+                name: "Background"
+                input: false
+                components:
+                    Background:
+                        drawType: "DRAW_STRETCH_BOTH"
+                        sprite: "~res:/Gfx/Lobby/backgrounds/bg_r4"
+                        leftRightStretchCap: 4.000000
+                        topBottomStretchCap: 4.000000
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+                bindings:
+                - ["classes", "bgStyle"]
+            -   class: "UIControl"
+                name: "Hover"
+                input: false
+                classes: "hover white-wild-sand-10-bg"
+                components:
+                    Background:
+                        drawType: "DRAW_STRETCH_BOTH"
+                        sprite: "~res:/Gfx/Lobby/backgrounds/bg_r4"
+                        leftRightStretchCap: 4.000000
+                        topBottomStretchCap: 4.000000
+                    UIOpacityComponent: {}
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/Common/Hover.style.yaml"
+            -   class: "UIControl"
+                name: "Error"
+                input: false
+                classes: "red-red-bg"
+                components:
+                    Background:
+                        drawType: "DRAW_STRETCH_BOTH"
+                        sprite: "~res:/Gfx/Lobby/backgrounds/bg_border_1px_r4"
+                        leftRightStretchCap: 4.000000
+                        topBottomStretchCap: 4.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+                bindings:
+                - ["visible", "validatedWithError"]
+            -   class: "UIControl"
+                name: "Icon"
+                input: false
+                classes: "orange-orange-peel-bg"
+                components:
+                    Background:
+                        drawType: "DRAW_SCALE_PROPORTIONAL"
+                        sprite: "~res:/Gfx/Lobby/icons/icon_tick_l"
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        verticalPolicy: "FixedSize"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+                bindings:
+                - ["visible", "isActive"]
+                - ["SizePolicy.horizontalValue", "when size == eCheckBoxSize.NORMAL -> 24, 32"]
+                - ["SizePolicy.verticalValue", "when size == eCheckBoxSize.NORMAL -> 24, 32"]
+            -   class: "UIParticles"
+                name: "Particle"
+                position: [24.000000, 24.000000]
+                size: [48.000000, 48.000000]
+                pivot: [0.500000, 0.500000]
+                input: false
+                effectPath: "~res:/3d/FX/UI/EULA_BlinkFX/Blink.sc2"
+                autoStart: true
+                startDelay: 1.000000
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                    ScalePolicy:
+                        horizontalFormula: "size.X / 48"
+                        verticalFormula: "size.Y / 48"
+                bindings:
+                - ["visible", "attractAttention and isEnabled and not isActive"]

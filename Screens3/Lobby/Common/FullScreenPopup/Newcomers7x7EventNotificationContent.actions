@@ -1,0 +1,100 @@
+action Start(float time)
+{
+    parallel
+    {
+        ChangeData(scale5x5, 1.0, time);
+        ChangeData(opacity5x5, 1.0, time);
+    }
+    Event("Change", arg1 = changeTime);
+}
+
+action Change(float time)
+{
+    Wait(0.5);
+    parallel
+    {
+        ChangeData(scale5x5, 0.2, time);
+        ChangeData(scale7x7, 1.2, time);
+
+        ChangeData(opacity5x5, 0.0, time);
+        ChangeData(opacity7x7, 1.0, time);
+
+        {
+            ChangeData(isVisibleFlash, true);
+            ChangeData(scaleFlash, 6.0, time / 3.0);
+            Wait(time / 3.0);
+            ChangeData(scaleFlash, 0.2, time / 3.0);
+            ChangeData(isVisibleFlash, false);
+        }
+
+        {
+            ChangeData(opacityBase, 0.2, time * 0.5, SINE_OUT);
+            ChangeData(opacityBase, 1.0, time * 0.5, SINE_IN);
+        }
+    }
+    ChangeData(scale7x7, 1.0, time * 0.5);
+    Event("Move", arg1 = moveTime);
+}
+
+action Move(float time)
+{
+    Wait(0.5);
+    parallel
+    {
+        ChangeData(scaleBase, 0.2, time);
+        ChangeData(opacityBase, 0.0, time);
+
+        ChangeData(scale7x7, 0.8, time * 0.6);
+        ChangeData(topAnchor, -107.0, time * 0.6);
+
+        {
+            Wait(time * 0.6);
+            Event("Map", arg1 = mapTime);
+        }
+    }
+}
+
+action Map(float time)
+{
+    parallel
+    {
+        ChangeData(scale7x7, 1.2, time);
+        ChangeData(scaleMap, 1.1, time);
+        ChangeData(opacityMap, 1.0, time);
+    }
+    parallel
+    {
+        ChangeData(scale7x7, 1.0, time * 0.5);
+        ChangeData(scaleMap, 1.0, time * 0.5);
+    }
+    parallel
+    {
+        Event("Heartbeat", arg1 = 0.55);
+        Event("MapExpand", arg1 = expandTime);
+    }
+}
+
+action MapExpand(float time)
+{
+    Wait(0.8);
+    ChangeData(scaleFactor, 1.2, time);
+
+    {
+        ChangeProperty("**/ButtonPositive", "Anchor", "topAnchorEnabled", true);
+        ChangeProperty("**/ButtonPositive", "Anchor", "topAnchor", 40.0);
+        parallel
+        {
+            ChangeData(opacityButton, 1.0, 0.4, EASE_OUT);
+            ChangeProperty("**/ButtonPositive", "Anchor", "topAnchor", 0.0, 0.4, EASE_OUT);
+        }
+    }
+}
+
+action Heartbeat(float time)
+{
+    repeat
+    {
+        ChangeData(scale7x7, 1.05, time);
+        ChangeData(scale7x7, 1.0, time * 0.5);
+    }
+}

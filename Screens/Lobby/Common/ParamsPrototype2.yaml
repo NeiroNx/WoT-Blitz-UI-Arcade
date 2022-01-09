@@ -1,0 +1,371 @@
+Header:
+    version: "44"
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/Common/RichText.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "NumberValuePrototype"
+    input: false
+    classes: ""
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "FixedSize"
+            verticalValue: 32.000000
+        UIDataSourceComponent0:
+            source: "~res:/UI/Examples/Model/Lobby/Common/HangarTankParams/VehicleNumberParam.model"
+        UIDataSourceComponent1:
+            sourceType: "File"
+            source: "~res:/UI/Screens/Lobby/Common/ViewModels/HangarTankParams/VehicleNumberParamView.model"
+        UIDataSourceComponent2:
+            sourceType: "Expression"
+            source: "{goodLevel = -1}"
+        StyleSheet:
+            styles: "~res:/UI/Styles/BackgroundStyles.yaml;~res:/UI/Screens/Fonts.yaml;~res:/UI/Screens/Lobby/Common/Styles/VehicleParamsPrototypeStyles.yaml"
+    children:
+    -   class: "UIControl"
+        name: "ValueContainer"
+        position: [0.000000, 3.000000]
+        size: [119.000000, 26.000000]
+        input: false
+        components:
+            LinearLayout:
+                orientation: "LeftToRight"
+                padding: "2.000000"
+                spacing: 8.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "FixedSize"
+                verticalValue: 26.000000
+        children:
+        -   class: "UIControl"
+            name: "DeltaValue"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfParent"
+                Anchor:
+                    enabled: true
+                    vCenterAnchorEnabled: true
+                Background:
+                    colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                UITextComponent:
+                    align: ["RIGHT", "VCENTER"]
+            bindings:
+            - ["visible", "deltaFlag", "Read"]
+            - ["classes", "deltaValueTextStyle", "Read"]
+            - ["UITextComponent.text", "deltaValueStr", "Read"]
+        -   class: "UIControl"
+            name: "Delta"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 10.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 7.000000
+                Anchor:
+                    vCenterAnchorEnabled: true
+                    vCenterAnchor: 1.000000
+                Background:
+                    drawType: "DRAW_SCALE_TO_RECT"
+                    sprite: "~res:/Gfx/UI/Hangar/CharacterArrow.psd"
+                StyleSheet:
+                    styles: "~res:/UI/Screens/Lobby/Common/Styles/VehicleParamsPrototypeStyles.yaml"
+            bindings:
+            - ["visible", "deltaFlag != 0", "Read"]
+            - ["classes", "arrowStyle", "Read"]
+        -   class: "UIControl"
+            name: "Value"
+            input: false
+            classes: "header4 text-color-white"
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                UITextComponent:
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                    align: ["RIGHT", "VCENTER"]
+            bindings:
+            - ["UITextComponent.text", "valueStr", "Read"]
+-   class: "UIControl"
+    name: "NumberBaseDeltaPrototype"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+        UIDataSourceComponent0:
+            source: "~res:/UI/Examples/Model/Lobby/Common/HangarTankParams/VehicleNumberParam.model"
+        UIDataSourceComponent1:
+            sourceType: "File"
+            source: "~res:/UI/Screens/Lobby/Common/ViewModels/HangarTankParams/VehicleNumberParamView.model"
+        UIDataSourceComponent2:
+            sourceType: "Expression"
+            source: "{goodLevel = -1}"
+        StyleSheet:
+            styles: "~res:/UI/Screens/Lobby/Common/Styles/VehicleParamsPrototypeStyles.yaml;~res:/UI/Screens/Fonts.yaml"
+    children:
+    -   class: "UIControl"
+        name: "ValueContainer"
+        position: [0.000000, 3.000000]
+        size: [119.000000, 26.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "FixedSize"
+                verticalValue: 26.000000
+        children:
+        -   class: "UIControl"
+            name: "DeltaValue"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                Anchor:
+                    enabled: true
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                Background:
+                    colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                UITextComponent:
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+            bindings:
+            - ["visible", "deltaFlag", "Read"]
+            - ["classes", "deltaValueBaseTextStyle", "Read"]
+            - ["UITextComponent.text", "deltaValueStr", "Read"]
+-   class: "UIControl"
+    name: "NumberBaseValuePrototype"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+        UIDataSourceComponent0:
+            source: "~res:/UI/Examples/Model/Lobby/Common/HangarTankParams/VehicleNumberParam.model"
+        UIDataSourceComponent1:
+            sourceType: "File"
+            source: "~res:/UI/Screens/Lobby/Common/ViewModels/HangarTankParams/VehicleNumberParamView.model"
+        UIDataSourceComponent2:
+            sourceType: "Expression"
+            source: "{goodLevel = -1}"
+        StyleSheet:
+            styles: "~res:/UI/Screens/Fonts.yaml"
+    children:
+    -   class: "UIControl"
+        name: "ValueContainer"
+        position: [0.000000, 3.000000]
+        size: [119.000000, 26.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfChildrenSum"
+        children:
+        -   class: "UIControl"
+            name: "Value"
+            size: [32.000000, 32.000000]
+            input: false
+            classes: "header4"
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                UITextComponent:
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+            bindings:
+            - ["UITextComponent.text", "valueStr", "Read"]
+-   class: "UIControl"
+    name: "SectionHeader"
+    size: [400.000000, 48.000000]
+    input: true
+    classes: "button button-choose-sound"
+    components:
+        LinearLayout:
+            enabled: false
+            padding: "20.000000"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "FixedSize"
+            verticalValue: 48.000000
+        Background: {}
+        UIInputEventComponent:
+            onTouchUpInside: "ON_CHANGE_EXPEND"
+        Sound: {}
+        StyleSheet:
+            styles: "~res:/UI/Styles/ButtonStyle.yaml;~res:/UI/Styles/ButtonSoundStyles.yaml"
+    children:
+    -   class: "UIControl"
+        name: "Bg"
+        input: false
+        classes: "white-bg-10"
+        components:
+            IgnoreLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+            Anchor:
+                leftAnchorEnabled: true
+                topAnchorEnabled: true
+                topAnchor: 1.000000
+                bottomAnchorEnabled: true
+            Background:
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+            StyleSheet:
+                styles: "~res:/UI/Styles/BackgroundStyles.yaml"
+    -   class: "UIControl"
+        name: "Title"
+        input: false
+        classes: "header5 text-color-white"
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+            Anchor:
+                enabled: true
+                leftAnchorEnabled: true
+                leftAnchor: 20.000000
+                rightAnchorEnabled: false
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+            UITextComponent:
+                text: "Header"
+                colorInheritType: "COLOR_MULTIPLY_ALPHA_ONLY"
+                align: ["LEFT", "VCENTER"]
+            StyleSheet:
+                styles: "~res:/UI/Screens/Fonts.yaml"
+    -   class: "UIControl"
+        name: "Icon"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            Anchor:
+                rightAnchorEnabled: true
+                rightAnchor: 20.000000
+                vCenterAnchorEnabled: true
+            Background:
+                sprite: "~res:/Gfx/UI/CommonUIElements/IconArrowDropDownMenu.psd"
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+-   class: "UIControl"
+    name: "SubsectionTriplesHeader"
+    size: [400.000000, 52.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfMaxChild"
+        StyleSheet:
+            styles: "~res:/UI/Styles/BackgroundStyles.yaml;~res:/UI/Screens/Fonts.yaml;~res:/UI/Screens/FontsColors.yaml"
+    children:
+    -   class: "UIControl"
+        name: "Bg"
+        size: [32.000000, 32.000000]
+        visible: false
+        input: false
+        classes: "white-bg-05"
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            Background: {}
+    -   class: "UIControl"
+        name: "Container"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            LinearLayout:
+                padding: "20.000000"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfMaxChild"
+            Anchor:
+                vCenterAnchorEnabled: true
+        children:
+        -   class: "UIControl"
+            name: "Title"
+            position: [20.000000, 0.000000]
+            size: [100.000000, 32.000000]
+            input: false
+            components:
+                LinearLayout:
+                    spacing: 5.000000
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 200.000000
+                    verticalPolicy: "PercentOfMaxChild"
+                Anchor:
+                    vCenterAnchorEnabled: true
+            children:
+            -   prototype: "RichText/RichText"
+                name: "RichText"
+                size: [158.000000, 49.000000]
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 150.000000
+                    RichContent:
+                        text: "Среднее бронирование, <text_units>мм</text_units>"
+                        baseClasses: "text2 text-color-white"
+                    RichContentAliases5:
+                        aliases: "text_units,<span class=\"text2 text-color-white-50\" />;"
+                    StyleSheet:
+                        inheritsStylesFromParent: false
+                        styles: "~res:/UI/Screens/Fonts.yaml;~res:/UI/Screens/Lobby/Common/Styles/VehicleParamsTableStyles.yaml"
+        -   class: "UIControl"
+            name: "Info"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+-   class: "UIControl"
+    name: "SubsectionHeader"
+    size: [400.000000, 52.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfChildrenSum"
+        StyleSheet:
+            styles: "~res:/UI/Styles/BackgroundStyles.yaml;~res:/UI/Screens/Fonts.yaml;~res:/UI/Screens/FontsColors.yaml"
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        position: [16.000000, 9.000000]
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            LinearLayout:
+                spacing: 5.000000
+            SizePolicy:
+                verticalPolicy: "FixedSize"
+                verticalValue: 32.000000
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 20.000000
+                rightAnchorEnabled: true
+                vCenterAnchorEnabled: true
+        children:
+        -   prototype: "RichText/RichText"
+            name: "RichText"
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                Anchor:
+                    vCenterAnchorEnabled: true
+                RichContent:
+                    text: "Среднее бронирование, <text_units>мм</text_units>"
+                    baseClasses: "text2 text-color-white"
+                RichContentAliases5:
+                    aliases: "text_units,<span class=\"text2 text-color-white-50\" />;"
+                StyleSheet:
+                    inheritsStylesFromParent: false
+                    styles: "~res:/UI/Screens/Fonts.yaml;~res:/UI/Screens/Lobby/Common/Styles/VehicleParamsTableStyles.yaml"

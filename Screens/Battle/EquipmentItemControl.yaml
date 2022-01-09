@@ -1,0 +1,124 @@
+Header:
+    version: "106"
+ImportedPackages:
+- "~res:/UI/Styles/Lobby/Inventory/InventoryNormalStyles.yaml"
+- "~res:/UI/Styles/Battle/EquipmentItem.yaml"
+- "~res:/UI/Screens/Fonts.yaml"
+Prototypes:
+-   class: "UIControl"
+    customClass: "UIEquipmentItemControl"
+    name: "EquipmentItemControl"
+    size: [63.000000, 63.000000]
+    pivot: [0.500000, 0.500000]
+    classes: "equipment_item equipment_state=not_available in_cooldown=in_cooldown_no blink=blink_no ability=ability_enabled pulse=pulse_no"
+    components:
+        Background:
+            drawType: "DRAW_SCALE_PROPORTIONAL_ONE"
+            sprite: "~res:/Gfx/UI/BattleScreenHUD/EquipmentKeys"
+            colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+        StyleSheet:
+            styles: "~res:/UI/Styles/Battle/EquipmentItem.yaml;~res:/UI/Styles/Lobby/Inventory/InventoryNormalStyles.yaml"
+    children:
+    -   class: "UIControl"
+        name: "pulsation"
+        pivot: [0.500000, 0.500000]
+        input: false
+        components:
+            Background:
+                drawType: "DRAW_SCALE_PROPORTIONAL_ONE"
+                sprite: "~res:/Gfx/UI/BattleScreenHUD/EquipmentKeys"
+                frame: 8
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+            Anchor:
+                leftAnchorEnabled: true
+                hCenterAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+    -   class: "UIControl"
+        name: "cooldownFill"
+        pivot: [0.500000, 0.500000]
+        input: false
+        components:
+            Background:
+                drawType: "DRAW_SCALE_PROPORTIONAL_ONE"
+                sprite: "~res:/Gfx/UI/BattleScreenHUD/EquipmentKeys"
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+        children:
+        -   class: "UIControl"
+            name: "clipRect"
+            pivot: [0.500000, 0.500000]
+            input: false
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 6.000000
+                    rightAnchorEnabled: true
+                    rightAnchor: 6.000000
+                    topAnchorEnabled: true
+                    topAnchor: 7.000000
+                    bottomAnchorEnabled: true
+                    bottomAnchor: 8.000000
+    -   class: "UIControl"
+        name: "iconContainer"
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+        children:
+        -   class: "UIControl"
+            name: "icon"
+            pivot: [0.500000, 0.500000]
+            input: false
+            classes: "small"
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_PROPORTIONAL_ONE"
+                    colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 8.000000
+                    rightAnchorEnabled: true
+                    rightAnchor: 8.000000
+                    topAnchorEnabled: true
+                    topAnchor: 8.000000
+                    bottomAnchorEnabled: true
+                    bottomAnchor: 8.000000
+    -   class: "UIStaticText"
+        name: "label"
+        pivot: [0.500000, 0.500000]
+        classes: "header4"
+        components:
+            UITextComponent:
+                shadowOffset: [1.000000, 1.000000]
+                shadowColor: [0.000000, 0.000000, 0.000000, 0.498039]
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+            StyleSheet:
+                styles: "~res:/UI/Screens/Fonts.yaml"
+    -   class: "UIControl"
+        name: "blinkLayer"
+        pivot: [0.500000, 0.500000]
+        input: false
+        components:
+            Background:
+                drawType: "DRAW_SCALE_PROPORTIONAL"
+                sprite: "~res:/Gfx/UI/BattleScreenHUD/EquipmentBlinkAnimation"
+                frame: 0
+                colorInherit: "COLOR_MULTIPLY_ON_PARENT"
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true

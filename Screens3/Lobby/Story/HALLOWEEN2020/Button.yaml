@@ -1,0 +1,104 @@
+Header:
+    version: 115
+Prototypes:
+-   class: "UIControl"
+    name: "Button"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfFirstChild"
+            verticalPolicy: "PercentOfFirstChild"
+        UIDataParamsComponent:
+            params:
+            - ["int64", "serverTime", "1561565973L", "1561565973L"]
+            - ["Story", "story", "null", "{ }"]
+            - ["int", "progressValue", "0", "50"]
+            - ["int", "progressMax", "0", "100"]
+            - ["eBlitzDevice", "deviceType", "eBlitzDevice.DEVICE_DESKTOP", "eBlitzDevice.DEVICE_DESKTOP"]
+            - ["bool", "isReady", "false", "false"]
+            events:
+            - "STORY_BUTTON_PRESSED(string storyName)"
+        UIDataLocalBindingsComponent:
+            data:
+            - ["int", "level", "when not isNull(story.inProgressStep) -> story.inProgressStep.id, story.tree.steps.Size() - 2"]
+            - ["string", "fx", "when level < 10 -> \"~res:/3d/FX/UI/Halloween2020/Fire.sc2\", level < 46 -> \"~res:/3d/FX/UI/Halloween2020/GreenFire.sc2\", \"~res:/3d/FX/UI/Halloween2020/VioletFire.sc2\""]
+            - ["string", "icon", "when level < 10 -> \"~res:/Gfx/Lobby/events/event_2020-halloween_button_grade1\", level < 46 -> \"~res:/Gfx/Lobby/events/event_2020-halloween_button_grade2\", \"~res:/Gfx/Lobby/events/event_2020-halloween_button_grade3\""]
+    children:
+    -   class: "UIControl"
+        name: "ContentHolder"
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                childType: "kPrototype"
+                prototypePath: "~res:/UI/Screens3/Lobby/Hangar/Story/StoryButtonWidget.yaml"
+                args:
+                    "serverTime": "serverTime"
+                    "story": "story"
+                    "progressValue": "progressValue"
+                    "progressMax": "progressMax"
+                    "imagePath": "icon"
+                    "showFx": "isReady"
+                    "isReady": "isReady"
+                    "deviceType": "deviceType"
+                    "imageOverlay": "LevelWrapper"
+                    "imageUnderlay": "FxWrapper"
+                    "showLevel": "false"
+                eventActions:
+                - ["ON_TOUCH", "STORY_BUTTON_PRESSED", "story.name"]
+Slots:
+-   class: "UIControl"
+    name: "LevelWrapper"
+    size: [96.000000, 96.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+    children:
+    -   class: "UIControl"
+        name: "Level"
+        input: false
+        classes: "t-headline bold not-localize grey-shark-text"
+        components:
+            UITextComponent: {}
+            Anchor:
+                hCenterAnchorEnabled: true
+                topAnchorEnabled: true
+                topAnchor: 63.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml"
+        bindings:
+        - ["UITextComponent.text", "level"]
+-   class: "UIControl"
+    name: "FxWrapper"
+    size: [96.000000, 96.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+    bindings:
+    - ["visible", "isReady"]
+    children:
+    -   class: "UIParticles"
+        name: "Fx"
+        scale: [0.750000, 0.900000]
+        pivot: [0.500000, 0.500000]
+        input: false
+        autoStart: true
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+                vCenterAnchor: -11.000000
+        bindings:
+        - ["effectPath", "fx"]

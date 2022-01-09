@@ -1,0 +1,48 @@
+Header:
+    version: 128
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/Tabs/IconTab.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "IconTabsBar"
+    size: [96.000000, 0.000000]
+    input: false
+    components:
+        LinearLayout:
+            useRtl: true
+        SizePolicy: {}
+        UISwitchBarComponent:
+            onSelectElement: "ON_SELECT_TAB"
+            onSelectElementData: "when info[_selectedElement].isLocked -> activeTab, _selectedElement"
+            selectionEventType: "TOUCH_UP"
+        UIDataParamsComponent:
+            params:
+            - ["bool", "showTabDescription", "false", "false"]
+            - ["bool", "showSelectionLine", "true", "true"]
+            - ["bool", "verticalTabBar", "false", "true"]
+            - ["int", "activeTab", "0", "2"]
+            - ["vector<TabIconInfo>", "info", "null", "[ { \"badge\" = { \"type\" = eBadgeType.EMPTY; \"value\" = \" \"; }; }; { \"badge\" = { \"value\" = \"\"; }; }; { \"badge\" = { \"type\" = eBadgeType.EMPTY; \"value\" = \" \"; }; }; ]"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["eOrientation", "orientation", "when verticalTabBar -> eOrientation.TopDown, eOrientation.LeftToRight"]
+            - ["string", "style", "when orientation == eOrientation.LeftToRight or orientation == eOrientation.RightToLeft -> \"horizontal\", \"vertical\""]
+        UIRepeatComponent:
+            control: "~res:/UI/Screens3/Lobby/Common/Tabs/IconTab.yaml"
+            dataContainer: "info"
+            args:
+                "verticalTabBar": "verticalTabBar"
+                "showTabDescription": "showTabDescription"
+                "showSelectionLine": "showSelectionLine"
+                "isSelected": "_index == activeTab"
+                "tabID": "_index"
+                "tabInfo": "_item"
+            eventActions:
+            - ["ON_SELECT_TAB", "ON_SELECT_TAB", ""]
+        UIIdentifierComponent:
+            id: "tank_modules_info_tabs"
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Lobby/Common/Tabs/TabsBar.style.yaml"
+    bindings:
+    - ["classes", "style"]
+    - ["LinearLayout.orientation", "orientation"]
+    - ["UISwitchBarComponent.selectedElement", "activeTab"]

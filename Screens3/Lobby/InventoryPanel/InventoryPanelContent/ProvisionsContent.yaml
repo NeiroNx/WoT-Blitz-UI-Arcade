@@ -1,0 +1,63 @@
+Header:
+    version: "79"
+Prototypes:
+-   class: "UIControl"
+    name: "ProvisionsContent"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        LinearLayout:
+            spacing: 8.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "PercentOfMaxChild"
+        UIDataParamsComponent:
+            params:
+            - ["OwnedTank", "tank", "null", "{ }"]
+        UIDataLocalsComponent:
+            locals:
+            - ["vector<EquipmentModel>", "emptyModels", "[ ]"]
+            - ["vector<EquipmentModel>", "models", "when not isNull(tank) -> tank.provisions, emptyModels"]
+            - ["int", "slotsCount", "when not isNull(tank) -> tank.info.provisionSlots, 0"]
+    children:
+    -   class: "UIControl"
+        name: "Slot0"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            UIAttachLayoutMasterComponent:
+                attachId: "PROVISIONS_UNLOCKED"
+            UIChildComponent:
+                control: "\"~res:/UI/Screens3/Lobby/InventoryPanel/InventoryPanelContent/EquipmentSlot.yaml\""
+                args:
+                    "isSlotLocked": "false"
+                    "visible": "slotsCount > 0"
+                    "model": "when models.Size() > 0 -> models[0], null"
+        bindings:
+        - ["visible", "slotsCount > 0"]
+    -   class: "UIControl"
+        name: "Slot1"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            UIChildComponent:
+                control: "\"~res:/UI/Screens3/Lobby/InventoryPanel/InventoryPanelContent/EquipmentSlot.yaml\""
+                args:
+                    "isSlotLocked": "false"
+                    "visible": "slotsCount > 1"
+                    "model": "when models.Size() > 1 -> models[1], null"
+        bindings:
+        - ["visible", "slotsCount > 1"]
+    -   class: "UIControl"
+        name: "Slot2"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            UIChildComponent:
+                control: "\"~res:/UI/Screens3/Lobby/InventoryPanel/InventoryPanelContent/EquipmentSlot.yaml\""
+                args:
+                    "isSlotLocked": "false"
+                    "visible": "slotsCount > 2"
+                    "model": "when models.Size() > 2 -> models[2], null"
+        bindings:
+        - ["visible", "slotsCount > 2"]

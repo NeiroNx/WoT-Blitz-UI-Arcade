@@ -1,0 +1,51 @@
+Header:
+    version: "92"
+Prototypes:
+-   class: "UIControl"
+    name: "LevelCell"
+    size: [216.000000, 24.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 216.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 24.000000
+        UIDataParamsComponent:
+            params:
+            - ["int", "level", "8", "5"]
+    children:
+    -   class: "UIControl"
+        name: "Value"
+        size: [32.000000, 32.000000]
+        input: false
+        classes: "t-button bold white-wild-sand-50-text"
+        components:
+            UITextComponent: {}
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml"
+        bindings:
+        - ["UITextComponent.text", "roman(level)"]
+    -   class: "UIControl"
+        name: "Separator"
+        size: [32.000000, 32.000000]
+        input: false
+        classes: "white-wild-sand-15-bg"
+        components:
+            Background: {}
+            Anchor:
+                rightAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 1.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 12.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"

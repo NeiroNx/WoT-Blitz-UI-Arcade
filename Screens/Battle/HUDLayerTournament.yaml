@@ -1,0 +1,881 @@
+Header:
+    version: 120
+ImportedPackages:
+- "~res:/UI/Screens/Fonts.yaml"
+- "~res:/UI/Screens/Battle/GunStatus.yaml"
+- "~res:/UI/Screens/Battle/VehicleUIObjectMarker.yaml"
+StyleSheets:
+-   selectors:
+    - ".redTeam"
+    properties:
+        bg-color: [1.000000, 0.109804, 0.278431, 1.000000]
+-   selectors:
+    - ".blueTeam"
+    properties:
+        bg-color: [0.196078, 0.450980, 0.976471, 1.000000]
+-   selectors:
+    - ".alive ? ? #back"
+    properties:
+        bg-color: [0.129412, 0.172549, 0.215686, 0.698039]
+-   selectors:
+    - ".redTeamLight"
+    properties:
+        bg-color: [1.000000, 0.494118, 0.588235, 1.000000]
+-   selectors:
+    - ".blueTeamLight"
+    properties:
+        bg-color: [0.494118, 0.654902, 0.988235, 1.000000]
+-   selectors:
+    - ".dead ? ? #back"
+    properties:
+        bg-color: [1.000000, 1.000000, 1.000000, 0.200000]
+-   selectors:
+    - ".invisible ? ? #Bulb"
+    - ".invisible #Bulb"
+    properties:
+        visible: false
+-   selectors:
+    - ".red ? ? #Health"
+    properties:
+        bg-color: [1.000000, 0.109804, 0.278431, 1.000000]
+-   selectors:
+    - ".red ? ? #HealthRay"
+    properties:
+        bg-color: [1.000000, 0.494118, 0.588235, 1.000000]
+-   selectors:
+    - ".red ? #HealthBack"
+    properties:
+        bg-color: [0.317647, 0.156863, 0.188235, 0.392157]
+-   selectors:
+    - ".blue ? ? #Health"
+    properties:
+        bg-color: [0.196078, 0.450980, 0.976471, 1.000000]
+-   selectors:
+    - ".blue ? ? #HealthRay"
+    properties:
+        bg-color: [0.494118, 0.654902, 0.988235, 1.000000]
+-   selectors:
+    - ".blue ? #HealthBack"
+    properties:
+        bg-color: [0.109804, 0.258824, 0.560784, 0.392157]
+-   selectors:
+    - ".right ? .damaged"
+    properties:
+        linearLayout-orientation: "RightToLeft"
+-   selectors:
+    - ".right ? ? .flipable"
+    properties:
+        bg-spriteModification: ["FLIP_HORIZONTAL"]
+-   selectors:
+    - ".right ? ? .movable"
+    properties:
+        anchor-leftAnchorEnabled: false
+        anchor-rightAnchorEnabled: true
+-   selectors:
+    - ".left ? ? .movable"
+    properties:
+        anchor-leftAnchorEnabled: true
+        anchor-rightAnchorEnabled: false
+-   selectors:
+    - ".left ? ? ? .movable"
+    - ".right ? ? ? .invertMove"
+    properties:
+        text-align: ["LEFT", "VCENTER"]
+        anchor-leftAnchorEnabled: true
+        anchor-rightAnchorEnabled: false
+-   selectors:
+    - ".left ? ? ? .invertMove"
+    properties:
+        text-align: ["RIGHT", "VCENTER"]
+        anchor-leftAnchorEnabled: false
+        anchor-rightAnchorEnabled: true
+-   selectors:
+    - ".right ? ? ? .movable"
+    properties:
+        text-align: ["LEFT", "VCENTER"]
+        anchor-leftAnchorEnabled: false
+        anchor-rightAnchorEnabled: true
+-   selectors:
+    - ".right"
+    properties:
+        linearLayout-orientation: "RightToLeft"
+-   selectors:
+    - ".dead ? .damaged"
+    properties:
+        visible: false
+-   selectors:
+    - ".selectElement ? #marker #Select"
+    properties:
+        visible: false
+-   selectors:
+    - ".selectElement:selected ? #marker #Select"
+    properties:
+        visible: true
+-   selectors:
+    - ".text-color-white-transparent"
+    properties:
+        text-color: [1.000000, 1.000000, 1.000000, 0.600000]
+Prototypes:
+-   class: "UIControl"
+    customClass: "UITeamPanel"
+    name: "TeamPanelTournament"
+    size: [256.000000, 52.000000]
+    input: true
+    tag: 66
+    components:
+        IgnoreLayout: {}
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Battle/HUDLayerTournament.yaml"
+    children:
+    -   class: "UIControl"
+        customClass: "UITankPanelTournament"
+        name: "UITankPanel"
+        position: [0.000000, 0.000000]
+        size: [256.000000, 52.000000]
+        input: true
+        classes: "status=alive placement=left selectElement state=invisible"
+        components:
+            LinearLayout: {}
+        children:
+        -   class: "UIControl"
+            name: "markerContainer"
+            position: [0.000000, 0.000000]
+            size: [263.000000, 52.000000]
+            input: false
+            components:
+                ClipContent: {}
+            children:
+            -   class: "UIControl"
+                name: "marker"
+                size: [256.000000, 52.000000]
+                input: false
+                components:
+                    UIOpacityComponent: {}
+                children:
+                -   class: "UIControl"
+                    name: "back"
+                    position: [0.000000, 2.000000]
+                    input: false
+                    classes: "flipable"
+                    components:
+                        Background:
+                            sprite: "~res:/Gfx/UI/BattleScreenHUD/tournament_hud/player_info"
+                            colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfContent"
+                -   class: "UIControl"
+                    name: "Health1"
+                    size: [256.000000, 44.000000]
+                    input: false
+                    classes: "color=redTeamLight flipable"
+                    components:
+                        Background:
+                            sprite: "~res:/Gfx/UI/BattleScreenHUD/tournament_hud/player_info"
+                            colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                -   class: "UIControl"
+                    name: "Health2"
+                    size: [256.000000, 44.000000]
+                    input: false
+                    classes: "color=redTeam flipable"
+                    components:
+                        Background:
+                            sprite: "~res:/Gfx/UI/BattleScreenHUD/tournament_hud/player_info"
+                            colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                -   class: "UIControl"
+                    name: "shadow"
+                    position: [3.000000, 46.000000]
+                    input: false
+                    classes: "flipable movable"
+                    components:
+                        Background:
+                            sprite: "~res:/Gfx/UI/BattleScreenHUD/tournament_hud/shadow"
+                            colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                        Anchor:
+                            leftAnchor: 3.000000
+                            rightAnchor: 3.000000
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfContent"
+                -   class: "UIControl"
+                    name: "Bulb"
+                    size: [26.000000, 42.000000]
+                    input: false
+                    classes: "movable flipable"
+                    components:
+                        Background:
+                            sprite: "~res:/Gfx/UI/BattleScreenHUD/tournament_hud/player_BULB.psd"
+                        Anchor: {}
+                -   class: "UIControl"
+                    name: "textContainer"
+                    size: [218.000000, 46.000000]
+                    input: false
+                    classes: "movable"
+                    components:
+                        Background:
+                            colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                        Anchor:
+                            leftAnchor: 26.000000
+                            rightAnchor: 26.000000
+                    children:
+                    -   class: "UIStaticText"
+                        name: "playerName"
+                        position: [0.000000, -2.000000]
+                        size: [0.000000, 25.000000]
+                        classes: "header2 text-color-white movable"
+                        components:
+                            UITextComponent:
+                                colorInheritType: "COLOR_MULTIPLY_ALPHA_ONLY"
+                            Anchor:
+                                topAnchorEnabled: true
+                                topAnchor: -2.000000
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfContent"
+                                horizontalMax: 145.000000
+                                verticalPolicy: "FixedSize"
+                                verticalValue: 25.000000
+                    -   class: "UIStaticText"
+                        name: "tankName"
+                        position: [0.000000, 22.000000]
+                        size: [0.000000, 22.000000]
+                        classes: "header3 text-color-white-transparent movable"
+                        components:
+                            UITextComponent:
+                                colorInheritType: "COLOR_MULTIPLY_ALPHA_ONLY"
+                            Anchor:
+                                bottomAnchorEnabled: true
+                                bottomAnchor: 2.000000
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfContent"
+                                horizontalMax: 145.000000
+                                verticalPolicy: "FixedSize"
+                                verticalValue: 22.000000
+                            DebugRender:
+                                enabled: false
+                    -   class: "UIStaticText"
+                        name: "healthValue"
+                        size: [73.000008, 20.000000]
+                        classes: "header3 text-color-white invertMove"
+                        components:
+                            UITextComponent:
+                                colorInheritType: "COLOR_MULTIPLY_ALPHA_ONLY"
+                            Anchor:
+                                vCenterAnchorEnabled: true
+                                vCenterAnchor: -2.000000
+                -   class: "UIControl"
+                    name: "Select"
+                    position: [-62.000000, 2.000000]
+                    input: false
+                    classes: "flipable movable"
+                    components:
+                        Background:
+                            sprite: "~res:/Gfx/UI/BattleScreenHUD/tournament_hud/player_info_select.psd"
+                        Anchor:
+                            leftAnchor: -62.000000
+                            rightAnchor: -62.000000
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfContent"
+                -   class: "UIStaticText"
+                    name: "Index"
+                    size: [15.000000, 15.000000]
+                    classes: "text3-small text-color-white-transparent"
+                    components:
+                        UITextComponent:
+                            text: "2"
+                        Anchor:
+                            bottomAnchorEnabled: true
+                            bottomAnchor: 9.000000
+                        SizePolicy:
+                            horizontalPolicy: "FixedSize"
+                            horizontalValue: 15.000000
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 15.000000
+        -   class: "UIControl"
+            name: "DamagedContainer"
+            position: [263.000000, 0.000000]
+            size: [200.000000, 46.000000]
+            input: false
+            components:
+                ClipContent: {}
+                FlowLayout:
+                    enabled: false
+                    hSpacing: 2.000000
+                    vSpacing: 2.000000
+            children:
+            -   class: "UIControl"
+                name: "Modules"
+                input: false
+                classes: "damaged"
+                components:
+                    LinearLayout:
+                        padding: "2.000000"
+                        spacing: 2.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                        verticalValue: 50.000000
+            -   class: "UIControl"
+                name: "Crew"
+                position: [0.000000, 23.000000]
+                input: false
+                classes: "damaged"
+                components:
+                    LinearLayout:
+                        padding: "2.000000"
+                        spacing: 2.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                        verticalValue: 50.000000
+    -   class: "UIControl"
+        name: "arrow"
+        visible: false
+        input: false
+        components:
+            Background:
+                sprite: "~res:/Gfx/UI/BattleScreenHUD/Arrow"
+-   class: "UIControl"
+    customClass: "UIHeaderHealthBar"
+    name: "UIHeaderHealthBar"
+    size: [185.000000, 26.000000]
+    input: false
+    components:
+        Background:
+            drawType: "DRAW_SCALE_TO_RECT"
+            sprite: "~res:/Gfx/UI/BattleScreenHUD/tournament_hud/2x2"
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Battle/HUDLayerTournament.yaml"
+-   class: "UIControl"
+    name: "TeamNameWithTagContainer"
+    input: false
+    components:
+        Anchor:
+            topAnchorEnabled: true
+            topAnchor: 9.000000
+        LinearLayout:
+            dynamicPadding: true
+            spacing: 5.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "PercentOfMaxChild"
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Battle/HUDLayerTournament.yaml"
+    children:
+    -   class: "UIControl"
+        name: "TeamTag"
+        input: false
+        classes: "header3 color=text-color-white"
+        components:
+            UITextComponent:
+                colorInheritType: "COLOR_IGNORE_PARENT"
+                align: ["LEFT", "VCENTER"]
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+    -   class: "UIControl"
+        name: "TeamTitle"
+        input: false
+        classes: "header3 color=text-color-white"
+        components:
+            UITextComponent:
+                colorInheritType: "COLOR_IGNORE_PARENT"
+                fitting: "FITTING_POINTS"
+                align: ["LEFT", "VCENTER"]
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                horizontalMax: 170.000000
+                verticalPolicy: "PercentOfContent"
+-   class: "UIControl"
+    name: "ObserverBattleStatusControl"
+    position: [0.000000, 5.000000]
+    pivot: [0.500000, 0.000000]
+    input: false
+    components:
+        Background:
+            sprite: "~res:/Gfx/UI/BattleScreenHUD/tournament_hud/up_bar"
+        Anchor:
+            hCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfContent"
+            verticalPolicy: "PercentOfContent"
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Battle/HUDLayerTournament.yaml"
+    children:
+    -   prototype: "UIHeaderHealthBar"
+        name: "HealthBarLeft"
+        position: [3.000000, 0.000000]
+        size: [356.000000, 43.000000]
+        pivot: [0.000000, 0.000000]
+        classes: "team=redTeamLight"
+    -   prototype: "UIHeaderHealthBar"
+        name: "HealthBarLeft2"
+        position: [3.000000, 0.000000]
+        size: [356.000000, 43.000000]
+        pivot: [0.000000, 0.000000]
+        classes: "team=redTeam"
+    -   class: "UIStaticText"
+        name: "HealthLeft"
+        position: [0.000000, 9.000000]
+        size: [331.000000, 26.000000]
+        classes: "header3 text-color-white"
+        components:
+            UITextComponent:
+                colorInheritType: "COLOR_IGNORE_PARENT"
+                align: ["RIGHT", "VCENTER"]
+    -   prototype: "TeamNameWithTagContainer"
+        name: "LeftTeamNameWithTagContainer"
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 28.000000
+    -   prototype: "UIHeaderHealthBar"
+        name: "HealthBarRight"
+        position: [478.000000, 0.000000]
+        size: [356.000000, 43.000000]
+        classes: "team=blueTeamLight"
+    -   prototype: "UIHeaderHealthBar"
+        name: "HealthBarRight2"
+        position: [478.000000, 0.000000]
+        size: [356.000000, 43.000000]
+        classes: "team=blueTeam"
+    -   class: "UIStaticText"
+        name: "HealthRight"
+        position: [505.000000, 10.000000]
+        size: [331.000000, 26.000000]
+        classes: "header3 text-color-white"
+        components:
+            UITextComponent:
+                colorInheritType: "COLOR_IGNORE_PARENT"
+                align: ["LEFT", "VCENTER"]
+    -   prototype: "TeamNameWithTagContainer"
+        name: "RightTeamNameWithTagContainer"
+        components:
+            Anchor:
+                rightAnchorEnabled: true
+                rightAnchor: 28.000000
+    -   class: "UIControl"
+        name: "Container"
+        size: [110.000000, 32.000000]
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+                vCenterAnchor: -2.000000
+            LinearLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+        children:
+        -   class: "UIStaticText"
+            name: "ScoreLeft"
+            position: [0.000000, 0.000000]
+            size: [20.000000, 30.000000]
+            classes: "header1 text-color-white"
+            components:
+                UITextComponent:
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+        -   class: "UIStaticText"
+            name: "UIBattleTimer"
+            size: [70.000000, 30.000000]
+            classes: "header1"
+            components:
+                UITextComponent:
+                    color: [1.000000, 1.000000, 1.000000, 0.600000]
+                DebugRender:
+                    enabled: false
+                    drawColor: [0.000000, 0.000000, 1.000000, 1.000000]
+        -   class: "UIStaticText"
+            name: "ScoreRight"
+            size: [20.000000, 30.000000]
+            classes: "header1 text-color-white"
+            components:
+                UITextComponent:
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+-   class: "UIControl"
+    name: "VehicleMarker"
+    position: [0.000000, 0.000000]
+    size: [152.000000, 80.000000]
+    pivot: [0.600000, 1.000000]
+    input: false
+    classes: "vis=visible"
+    components:
+        LinearLayout:
+            skipInvisible: false
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            horizontalMin: 120.000000
+            verticalPolicy: "PercentOfMaxChild"
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Battle/HUDLayerTournament.yaml"
+    children:
+    -   class: "UIControl"
+        name: "Bulb"
+        input: false
+        components:
+            Background:
+                sprite: "~res:/Gfx/UI/BattleScreenHUD/tournament_hud/Bulb.psd"
+            Anchor:
+                bottomAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 32.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 32.000000
+    -   class: "UIControl"
+        name: "MarkerBlock"
+        input: false
+        classes: "team=blue"
+        components:
+            LinearLayout:
+                orientation: "BottomUp"
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                horizontalMin: 120.000000
+                verticalPolicy: "PercentOfChildrenSum"
+                verticalMin: 80.000000
+        children:
+        -   class: "UIControl"
+            name: "BarBlock"
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_FILL"
+                    color: [0.000000, 0.000000, 0.000000, 0.564706]
+                LinearLayout:
+                    orientation: "TopDown"
+                    padding: "2.000000"
+                    spacing: 2.000000
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 120.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 14.000000
+            children:
+            -   class: "UIControl"
+                name: "HealthBack"
+                position: [2.000000, 2.000000]
+                size: [116.000000, 4.000000]
+                input: false
+                components:
+                    Background:
+                        drawType: "DRAW_FILL"
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 116.000000
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 4.000000
+                children:
+                -   class: "UIControl"
+                    name: "HealthRay"
+                    size: [116.000000, 4.000000]
+                    input: false
+                    components:
+                        Background:
+                            drawType: "DRAW_FILL"
+                        IgnoreLayout: {}
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfParent"
+                -   class: "UIControl"
+                    name: "Health"
+                    size: [116.000000, 4.000000]
+                    input: false
+                    components:
+                        Background:
+                            drawType: "DRAW_FILL"
+                        IgnoreLayout: {}
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfParent"
+            -   prototype: "GunStatus/GunStatus"
+                name: "LoadState"
+                position: [2.000000, 8.000000]
+                size: [116.000000, 4.000000]
+                classes: "style=spectator-style"
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 116.000000
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 4.000000
+            -   prototype: "VehicleUIObjectMarker/DamagePointTournament"
+                name: "DamagePoint"
+        -   class: "UIControl"
+            name: "Container"
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                LinearLayout:
+                    orientation: "TopDown"
+                    spacing: -5.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfChildrenSum"
+            children:
+            -   class: "UIControl"
+                name: "NameShadow"
+                size: [54.000000, 24.200001]
+                pivot: [0.500000, 1.000000]
+                input: false
+                components:
+                    Background:
+                        drawType: "DRAW_TILED"
+                        sprite: "~res:/Gfx/UI/BattleScreenHUD/tournament_hud/shadow-rext.psd"
+                        color: [1.000000, 1.000000, 1.000000, 0.392157]
+                        leftRightStretchCap: 10.000000
+                        topBottomStretchCap: 10.000000
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                    LinearLayout:
+                        padding: "5.000000"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        verticalPolicy: "PercentOfContent"
+                        verticalValue: 110.000000
+                children:
+                -   class: "UIStaticText"
+                    name: "tankName"
+                    size: [44.000000, 22.000000]
+                    classes: "header3 text-color-white"
+                    components:
+                        UITextComponent:
+                            text: "MC-1"
+                            colorInheritType: "COLOR_IGNORE_PARENT"
+                            perPixelAccuracyType: "PER_PIXEL_ACCURACY_DISABLED"
+                            align: ["LEFT", "VCENTER"]
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                            vCenterAnchorEnabled: true
+                            vCenterAnchor: -1.000000
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+            -   class: "UIControl"
+                name: "NameShadow"
+                size: [207.000000, 24.200001]
+                pivot: [0.500000, 1.000000]
+                input: false
+                components:
+                    Background:
+                        drawType: "DRAW_TILED"
+                        sprite: "~res:/Gfx/UI/BattleScreenHUD/tournament_hud/shadow-rext.psd"
+                        color: [1.000000, 1.000000, 1.000000, 0.392157]
+                        leftRightStretchCap: 10.000000
+                        topBottomStretchCap: 10.000000
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                    LinearLayout:
+                        padding: "5.000000"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        verticalPolicy: "PercentOfContent"
+                        verticalValue: 110.000000
+                children:
+                -   class: "UIStaticText"
+                    name: "playerName"
+                    size: [197.000000, 22.000000]
+                    classes: "header3 text-color-white"
+                    components:
+                        UITextComponent:
+                            text: "wot236 long name [T44]"
+                            colorInheritType: "COLOR_IGNORE_PARENT"
+                            perPixelAccuracyType: "PER_PIXEL_ACCURACY_DISABLED"
+                            align: ["LEFT", "VCENTER"]
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                            vCenterAnchorEnabled: true
+                            vCenterAnchor: -1.000000
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+Controls:
+-   class: "UIControl"
+    name: "SupremacyPointsViewObserver"
+    size: [500.000000, 30.000000]
+    pivot: [0.500000, 0.000000]
+    input: false
+    components:
+        Background:
+            drawType: "DRAW_SCALE_TO_RECT"
+            sprite: "~res:/Gfx/UI/BattleScreenHUD/tournament_hud/up_bar"
+        Anchor:
+            hCenterAnchorEnabled: true
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Battle/HUDLayerTournament.yaml"
+    children:
+    -   prototype: "UIHeaderHealthBar"
+        name: "bar1"
+        position: [0.000000, -2.000000]
+        size: [248.000000, 25.000000]
+        pivot: [0.000000, 0.000000]
+        classes: "team=redTeam"
+    -   class: "UIStaticText"
+        name: "value1"
+        position: [0.000000, 0.000000]
+        size: [54.000000, 20.000000]
+        classes: "header3 text-color-white"
+        components:
+            UITextComponent:
+                text: "300"
+                colorInheritType: "COLOR_IGNORE_PARENT"
+                align: ["RIGHT", "VCENTER"]
+    -   prototype: "UIHeaderHealthBar"
+        name: "bar2"
+        position: [252.000000, -2.000000]
+        size: [248.000000, 25.000000]
+        classes: "team=blueTeam"
+    -   class: "UIStaticText"
+        name: "value2"
+        position: [446.000000, 0.000000]
+        size: [54.000000, 20.000000]
+        classes: "header3 text-color-white"
+        components:
+            UITextComponent:
+                text: "300"
+                colorInheritType: "COLOR_IGNORE_PARENT"
+                align: ["LEFT", "VCENTER"]
+-   prototype: "TeamPanelTournament"
+    name: "TeamPanelTournament1"
+    position: [0.000000, 160.000000]
+    components:
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Battle/HUDLayerTournament.yaml"
+-   prototype: "TeamPanelTournament"
+    name: "TeamPanelTournament2"
+    position: [723.000000, 160.000000]
+    components:
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Battle/HUDLayerTournament.yaml"
+    children:
+    -   path: "UITankPanel"
+        classes: "status=alive placement=right selectElement"
+        children: []
+    -   path: "UITankPanel/markerContainer/marker"
+        position: [7.000000, 0.000000]
+        children: []
+    -   path: "UITankPanel/markerContainer/marker/Health1"
+        classes: "color=blueTeamLight flipable"
+    -   path: "UITankPanel/markerContainer/marker/Health2"
+        classes: "color=blueTeam flipable"
+    -   path: "UITankPanel/markerContainer/marker/Index"
+        components:
+            Anchor:
+                rightAnchorEnabled: true
+-   prototype: "ObserverBattleStatusControl"
+    name: "ObserverBattleStatusControl1"
+    components:
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Battle/HUDLayerTournament.yaml"
+-   prototype: "VehicleMarker"
+    name: "SpectatorAllyTeamVehicleMarker"
+    pivot: [0.500000, 1.000000]
+    components:
+        LinearLayout:
+            skipInvisible: true
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Battle/HUDLayerTournament.yaml"
+    children:
+    -   path: "Bulb"
+        visible: false
+        components:
+            Anchor:
+                bottomAnchor: 3.000000
+    -   path: "MarkerBlock"
+        components:
+            LinearLayout:
+                spacing: 4.000000
+        children: []
+    -   path: "MarkerBlock/BarBlock"
+        components:
+            SizePolicy:
+                verticalValue: 32.000000
+        children: []
+    -   path: "MarkerBlock/BarBlock/HealthBack"
+        components:
+            SizePolicy:
+                verticalValue: 22.000000
+        children:
+        -   class: "UIControl"
+            name: "HealthText"
+            size: [74.000000, 22.000000]
+            input: false
+            classes: "header5 text-color-white"
+            components:
+                UITextComponent:
+                    text: "1178/2000"
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                    perPixelAccuracyType: "PER_PIXEL_ACCURACY_DISABLED"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfParent"
+-   prototype: "VehicleMarker"
+    name: "SpectatorEnemyTeamVehicleMarker"
+    pivot: [0.500000, 1.000000]
+    components:
+        LinearLayout:
+            skipInvisible: true
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Battle/HUDLayerTournament.yaml"
+    children:
+    -   path: "Bulb"
+        visible: false
+        components:
+            Anchor:
+                bottomAnchor: 3.000000
+    -   path: "MarkerBlock"
+        components:
+            LinearLayout:
+                spacing: 4.000000
+        children: []
+    -   path: "MarkerBlock/BarBlock"
+        components:
+            SizePolicy:
+                verticalValue: 26.000000
+        children: []
+    -   path: "MarkerBlock/BarBlock/HealthBack"
+        components:
+            SizePolicy:
+                verticalValue: 22.000000
+        children:
+        -   class: "UIControl"
+            name: "HealthText"
+            size: [74.000000, 22.000000]
+            input: false
+            classes: "header5 text-color-white"
+            components:
+                UITextComponent:
+                    text: "1178/2000"
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                    perPixelAccuracyType: "PER_PIXEL_ACCURACY_DISABLED"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfParent"
+    -   path: "MarkerBlock/BarBlock/LoadState"
+        visible: false
+        children: []
+-   prototype: "VehicleMarker"
+    name: "SpectatorBothVehicleMarker"
+    components:
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Battle/HUDLayerTournament.yaml"
+    children:
+    -   path: "Bulb"
+        components:
+            Anchor:
+                bottomAnchor: -6.000000

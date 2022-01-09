@@ -1,0 +1,49 @@
+Header:
+    version: 133
+Prototypes:
+-   class: "UIControl"
+    name: "BasicIcon"
+    size: [96.000000, 96.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            horizontalMin: 0.001000
+            verticalPolicy: "PercentOfParent"
+            verticalMin: 0.001000
+        UIDataParamsComponent:
+            params:
+            - ["ResourceType", "type", "ResourceType.undefined", "ResourceType.slots"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["string", "spriteType", "when type == ResourceType.gold -> \"~res:/Gfx/Lobby/currency/currency_gold_xl\", type == ResourceType.credits -> \"~res:/Gfx/Lobby/currency/currency_silver_xl\", type == ResourceType.free_xp -> \"~res:/Gfx/Lobby/currency/currency_free-xp_xl\", type == ResourceType.elite_xp -> \"~res:/Gfx/Lobby/currency/currency_elite-xp_xl\", type == ResourceType.xp -> \"~res:/Gfx/Lobby/currency/currency_battle-xp_xl\", type == ResourceType.tankmenXP -> \"~res:/Gfx/Lobby/currency/currency_crew-xp_xl\", type == ResourceType.slots -> \"~res:/Gfx/Lobby/certificates/certificate_slot_2\", type == ResourceType.premium -> \"~res:/Gfx/Lobby/currency/currency_premium_xl\", \"\""]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        pivot: [0.500000, 0.500000]
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 96.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 96.000000
+            ScalePolicy:
+                horizontalFormula: "min(1.0, min(parentSize.X / size.X, parentSize.Y / size.Y))"
+                verticalFormula: "min(1.0, min(parentSize.X / size.X, parentSize.Y / size.Y))"
+        children:
+        -   class: "UIControl"
+            name: "Icon"
+            input: false
+            components:
+                UITextureComponent:
+                    drawType: "DRAW_SCALE_PROPORTIONAL"
+                    perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            bindings:
+            - ["UITextureComponent.spritePath", "spriteType"]

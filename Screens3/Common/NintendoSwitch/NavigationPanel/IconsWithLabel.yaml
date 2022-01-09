@@ -1,0 +1,50 @@
+Header:
+    version: 133
+Prototypes:
+-   class: "UIControl"
+    name: "IconsWithLabel"
+    components:
+        LinearLayout:
+            spacing: 8.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "PercentOfFirstChild"
+        UIDataParamsComponent:
+            params:
+            - ["string", "text", "\"A\"", "\"BUTTON LABEL\""]
+            - ["vector<eNintendoSwitchControls>", "nsControls", "{ }", "[ eNintendoSwitchControls.A; ]"]
+    children:
+    -   class: "UIControl"
+        name: "Icon"
+        position: [8.000000, 4.000000]
+        input: false
+        components:
+            Anchor:
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                spacing: 4.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfFirstChild"
+            UIRepeatComponent:
+                control: "~res:/UI/Screens3/Common/NintendoSwitch/Controls/NintendoSwitchControl.yaml"
+                dataContainer: "nsControls"
+                args:
+                    "switchControl": "_item"
+    -   class: "UIControl"
+        name: "Text"
+        position: [12.000000, 10.000000]
+        input: false
+        classes: "t-caps bold white-wild-sand-text align-left "
+        components:
+            UITextComponent:
+                fitting: "FITTING_POINTS"
+            Anchor:
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml"
+        bindings:
+        - ["UITextComponent.text", "localize(text)"]

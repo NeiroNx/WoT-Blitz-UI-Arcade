@@ -1,0 +1,62 @@
+Header:
+    version: "84"
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/Story/Legacy/Utils/Resource/Detailed/ResourcePrototype.yaml"
+Controls:
+-   prototype: "ResourcePrototype/Content"
+    name: "Content"
+    components:
+        UIDataParamsComponent:
+            params:
+            - ["ResourceDetailed", "data", "null", "{ \"type\" = ResourceType.vehicle; \"vehicle\" = { }; }"]
+            - ["bool", "showEye", "false", "true"]
+        UIDataLocalsComponent:
+            locals:
+            - ["string", "title", "data.vehicle.info.shortName"]
+            - ["string", "description", "\"storage/Items/Vehicle\""]
+            - ["eVehicleDescriptionType", "vehicleType", "when data.vehicle.info.isPremium -> eVehicleDescriptionType.PREMIUM, data.vehicle.info.isCollectible -> eVehicleDescriptionType.COLLECTIBLE, data.vehicle.stats.isPremiumized -> eVehicleDescriptionType.PREMIUMISED, eVehicleDescriptionType.NORMAL"]
+    children:
+    -   path: "Layout"
+        position: [0.000000, 16.000000]
+        children: []
+    -   path: "Layout/Image/IconContainer/Icon"
+        components:
+            UITextureComponent: {}
+        bindings:
+        - ["UITextureComponent.spritePath", "data.vehicle.info.bigIconPath"]
+    -   class: "UIControl"
+        name: "VehicleInfo"
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 8.000000
+                topAnchorEnabled: true
+                topAnchor: 8.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent:
+                control: "\"~res:/UI/Screens3/Lobby/Common/Vehicle/VehicleInfo.yaml\""
+                args:
+                    "class": "data.vehicle.info.tankClass"
+                    "level": "data.vehicle.info.level"
+                    "type": "vehicleType"
+                    "elite": "data.vehicle.stats.isElite"
+    -   class: "UIControl"
+        name: "EyeIcon"
+        input: false
+        components:
+            Background:
+                sprite: "~res:/Gfx/UI/LobbyCommon/eyeIcon"
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+            Anchor:
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 64.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 32.000000
+        bindings:
+        - ["visible", "showEye"]

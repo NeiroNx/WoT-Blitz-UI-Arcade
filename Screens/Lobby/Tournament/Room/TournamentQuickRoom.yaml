@@ -1,0 +1,1117 @@
+Header:
+    version: "106"
+ImportedPackages:
+- "~res:/UI/Screens/Common/StyledButton.yaml"
+- "~res:/UI/Styles/DesktopStyles.yaml"
+- "~res:/UI/Screens/Lobby/Clan/ClanCommon.yaml"
+- "~res:/UI/Screens/Common.yaml"
+- "~res:/UI/Screens/Lobby/Clan/Roster.yaml"
+- "~res:/UI/Screens/CommonStyles.yaml"
+- "~res:/UI/Screens/Fonts.yaml"
+- "~res:/UI/Screens/Common/StyledSmallButton.yaml"
+- "~res:/UI/Screens/Dialogs.yaml"
+- "~res:/UI/Styles/Battle/BattleHUD.yaml"
+- "~res:/UI/Screens/Lobby/Common/RichText.yaml"
+- "~res:/UI/Screens/Common/ScrollBar.yaml"
+- "~res:/UI/Screens/Lobby/Common/Footer.yaml"
+- "~res:/UI/Styles/SafeAreaStyles.yaml"
+- "~res:/UI/Screens/Lobby/Common/SafeAreaSpacer.yaml"
+- "~res:/UI/Screens/Lobby/Common/Timer.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "StateContainer"
+    position: [0.000000, 15.000000]
+    size: [255.000000, 162.000000]
+    input: false
+    components:
+        Anchor:
+            hCenterAnchorEnabled: true
+        LinearLayout:
+            orientation: "TopDown"
+            spacing: 6.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfChildrenSum"
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Lobby/Tournament/Room/TournamentQuickRoom.yaml"
+    children:
+    -   class: "UIControl"
+        name: "AnimateIcon"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 130.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 130.000000
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens/Lobby/Tournament/Room/QuickTournamentWaitIcon.yaml"
+    -   class: "UIStaticText"
+        name: "Title"
+        size: [245.000000, 26.000000]
+        classes: "header3 text-color-white"
+        components:
+            UITextComponent:
+                text: "Header3"
+                colorInheritType: "COLOR_IGNORE_PARENT"
+                multiline: "MULTILINE_ENABLED"
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 10.000000
+                hCenterAnchorEnabled: true
+                rightAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfContent"
+Controls:
+-   class: "UIControl"
+    name: "ScreenContainer"
+    size: [960.000000, 640.000000]
+    input: false
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        StyleSheet:
+            styles: "~res:/UI/Screens/Lobby/Tournament/Room/TournamentQuickRoom.yaml;~res:/UI/Styles/BackgroundStyles.yaml;~res:/UI/Screens/Lobby/Training/Styles/PrebattleRoomStyles.yaml;~res:/UI/Styles/ButtonSoundStyles.yaml"
+    children:
+    -   class: "UIControl"
+        name: "TopPanel"
+        position: [0.000000, 0.000000]
+        size: [960.000000, 90.000000]
+        classes: "limited-width"
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+            LinearLayout:
+                safeAreaPaddingInset: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "FixedSize"
+                verticalValue: 90.000000
+        children:
+        -   class: "UIControl"
+            name: "Bg"
+            position: [0.000000, 0.000000]
+            size: [960.000000, 90.000000]
+            input: false
+            classes: "panel-background"
+            components:
+                Background:
+                    drawType: "DRAW_FILL"
+                Anchor:
+                    leftAnchorEnabled: true
+                    rightAnchorEnabled: true
+                    topAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                IgnoreLayout: {}
+        -   class: "UIControl"
+            name: "MapContainer"
+            visible: true
+            classes: "map-white-back"
+            components:
+                Background:
+                    drawType: "DRAW_FILL"
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 90.000000
+                    verticalPolicy: "PercentOfParent"
+            children:
+            -   class: "UIControl"
+                name: "MapAndCount"
+                visible: true
+                classes: "miniMapType=map-random"
+                components:
+                    Background: {}
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 90.000000
+                        verticalPolicy: "PercentOfParent"
+                children:
+                -   class: "UIControl"
+                    name: "RespawnMarkersContainer"
+                    size: [90.000000, 90.000000]
+                    components:
+                        Background: {}
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfParent"
+                    children:
+                    -   class: "UIControl"
+                        name: "markerPrototype"
+                        size: [17.000000, 17.000000]
+                        pivot: [0.500000, 0.500000]
+                        input: false
+                        classes: "spawn-team-color=ally-color-bg"
+                        components:
+                            Background:
+                                drawType: "DRAW_SCALE_TO_RECT"
+                                sprite: "~res:/Gfx/UI/BattleScreenHUD/MinimapRespawn"
+                                perPixelAccuracy: "PER_PIXEL_ACCURACY_DISABLED"
+                -   class: "UIControl"
+                    name: "WinsCountContainer"
+                    position: [0.000000, 0.000000]
+                    size: [90.000000, 90.000000]
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfParent"
+                    children:
+                    -   class: "UIStaticText"
+                        name: "WinsCount"
+                        size: [80.000000, 62.000000]
+                        classes: "fs-50 bold"
+                        components:
+                            UITextComponent:
+                                text: "0:0"
+                                colorInheritType: "COLOR_IGNORE_PARENT"
+                            Anchor:
+                                leftAnchorEnabled: true
+                                leftAnchor: 5.000000
+                                rightAnchorEnabled: true
+                                rightAnchor: 5.000000
+                                vCenterAnchorEnabled: true
+                                vCenterAnchor: -2.000000
+                            SizePolicy:
+                                verticalPolicy: "PercentOfContent"
+        -   class: "UIControl"
+            name: "DescriptionPanel"
+            position: [90.000000, 0.000000]
+            input: false
+            classes: "panel-background"
+            components:
+                LinearLayout:
+                    orientation: "TopDown"
+                    padding: "10.000000"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            children:
+            -   class: "UIControl"
+                name: "HorizContainer1"
+                input: false
+                components:
+                    LinearLayout:
+                        padding: "10.000000"
+                        useRtl: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                children:
+                -   class: "UIControl"
+                    name: "GrLeft"
+                    components:
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            horizontalValue: 50.000000
+                            verticalPolicy: "PercentOfMaxChild"
+                        FlowLayout:
+                            hSpacing: 10.000000
+                            useRtl: true
+                    children:
+                    -   class: "UIStaticText"
+                        name: "LivesLeft"
+                        classes: "text2 text-color-white"
+                        components:
+                            UITextComponent:
+                                text: "quickRooms/Lives"
+                                colorInheritType: "COLOR_IGNORE_PARENT"
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfContent"
+                                verticalPolicy: "PercentOfContent"
+                    -   class: "UIStaticText"
+                        name: "LivesLeftText"
+                        classes: "text2 text-color-blue"
+                        components:
+                            UITextComponent:
+                                text: "value"
+                                colorInheritType: "COLOR_IGNORE_PARENT"
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfContent"
+                                verticalPolicy: "PercentOfContent"
+                -   class: "UIControl"
+                    name: "GrRight"
+                    components:
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            horizontalValue: 85.000000
+                            verticalPolicy: "PercentOfMaxChild"
+                        FlowLayout:
+                            hSpacing: 10.000000
+                            useRtl: true
+                    children:
+                    -   class: "UIStaticText"
+                        name: "TermsOfVictoryLab"
+                        classes: "text2 text-color-white"
+                        components:
+                            UITextComponent:
+                                text: "#training_rooms:RoomScreen/TermsOfVictory"
+                                colorInheritType: "COLOR_IGNORE_PARENT"
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfContent"
+                                verticalPolicy: "PercentOfContent"
+                    -   class: "UIStaticText"
+                        name: "TermsOfVictoryTxt"
+                        classes: "text2 text-color-blue"
+                        components:
+                            UITextComponent:
+                                text: "value"
+                                colorInheritType: "COLOR_IGNORE_PARENT"
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfContent"
+                                verticalPolicy: "PercentOfContent"
+            -   class: "UIControl"
+                name: "HorizContainer2"
+                position: [0.000000, 45.000000]
+                input: false
+                components:
+                    LinearLayout:
+                        padding: "10.000000"
+                        useRtl: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                children:
+                -   class: "UIControl"
+                    name: "GrRight"
+                    position: [10.000000, 6.000000]
+                    components:
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            horizontalValue: 50.000000
+                            verticalPolicy: "PercentOfMaxChild"
+                        FlowLayout:
+                            hSpacing: 10.000000
+                            useRtl: true
+                    children:
+                    -   class: "UIStaticText"
+                        name: "LevelLab"
+                        classes: "text2 text-color-white"
+                        components:
+                            UITextComponent:
+                                text: "#training_rooms:RoomScreen/VehicleLevel"
+                                colorInheritType: "COLOR_IGNORE_PARENT"
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfContent"
+                                verticalPolicy: "PercentOfContent"
+                    -   class: "UIStaticText"
+                        name: "LevelTxt"
+                        position: [142.000000, 0.000000]
+                        size: [38.000000, 23.000000]
+                        classes: "text2 text-color-blue"
+                        components:
+                            UITextComponent:
+                                text: "value"
+                                colorInheritType: "COLOR_IGNORE_PARENT"
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfContent"
+                                verticalPolicy: "PercentOfContent"
+                -   class: "UIControl"
+                    name: "GrLeft"
+                    position: [232.222229, 6.000000]
+                    components:
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            horizontalValue: 85.000000
+                            verticalPolicy: "PercentOfMaxChild"
+                        FlowLayout:
+                            hSpacing: 10.000000
+                            useRtl: true
+                    children:
+                    -   class: "UIStaticText"
+                        name: "MapLab"
+                        classes: "text2 text-color-white"
+                        components:
+                            UITextComponent:
+                                text: "#training_rooms:RoomScreen/Map"
+                                colorInheritType: "COLOR_IGNORE_PARENT"
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfContent"
+                                verticalPolicy: "PercentOfContent"
+                    -   class: "UIStaticText"
+                        name: "MapTxt"
+                        classes: "text2 text-color-blue"
+                        components:
+                            UITextComponent:
+                                text: "value"
+                                colorInheritType: "COLOR_IGNORE_PARENT"
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfContent"
+                                verticalPolicy: "PercentOfContent"
+        -   class: "UIControl"
+            name: "SwitchPanel"
+            input: false
+            classes: "panel-background"
+            components:
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 250.000000
+                    verticalPolicy: "PercentOfParent"
+            children:
+            -   prototype: "StyledButton/StyledButton"
+                name: "AboutTournament"
+                size: [230.000000, 64.000000]
+                visible: true
+                components:
+                    Anchor:
+                        enabled: true
+                        leftAnchorEnabled: true
+                        leftAnchor: 10.000000
+                        rightAnchorEnabled: true
+                        rightAnchor: 10.000000
+                        vCenterAnchorEnabled: true
+                    Sound:
+                        touchUpInside: "GUI/buttons/open"
+                children:
+                -   path: "Caption"
+                    classes: "header3"
+                    components:
+                        UITextComponent:
+                            text: "tournaments/Button/About"
+            -   class: "UIControl"
+                name: "ListLine"
+                size: [1.000000, 90.000000]
+                input: false
+                components:
+                    Background:
+                        drawType: "DRAW_FILL"
+                        color: [1.000000, 1.000000, 1.000000, 0.141176]
+                        perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                    Anchor:
+                        leftAnchorEnabled: true
+                        topAnchorEnabled: true
+                        bottomAnchorEnabled: true
+                    IgnoreLayout: {}
+    -   class: "UIControl"
+        name: "PrebattleContainer"
+        position: [0.000000, 90.000000]
+        input: false
+        classes: "limited-width"
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "CenterContainer"
+            size: [420.000000, 456.000000]
+            input: false
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 270.000000
+                    rightAnchorEnabled: true
+                    rightAnchor: 270.000000
+                    bottomAnchorEnabled: false
+                SizePolicy:
+                    verticalPolicy: "PercentOfParent"
+                UIAnchorSafeAreaComponent:
+                    leftSafeInset: "INSET"
+                    rightSafeInset: "INSET"
+    -   prototype: "Footer/Footer"
+        name: "Footer"
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                bottomAnchorEnabled: true
+            SizePolicy:
+                verticalPolicy: "Formula"
+                verticalFormula: "94 + safeAreaInsets.bottom*(6/10)"
+            UIAnchorSafeAreaComponent:
+                bottomSafeInset: "NONE"
+                bottomInsetCorrection: 0.000000
+        children:
+        -   path: "FooterBackground"
+            components:
+                UIAnchorSafeAreaComponent:
+                    bottomSafeInset: "NONE"
+        -   class: "UIControl"
+            name: "Container"
+            size: [960.000000, 94.000000]
+            input: false
+            classes: "notch-tightly-bottom-inset"
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    rightAnchorEnabled: true
+                    topAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                UIAnchorSafeAreaComponent: {}
+            children:
+            -   class: "UIControl"
+                name: "Controlls"
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                    LinearLayout:
+                        padding: "8.000000"
+                        safeAreaPaddingInset: true
+                        spacing: 8.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                children:
+                -   class: "UIControl"
+                    name: "Left"
+                    position: [8.000000, 0.000000]
+                    components:
+                        LinearLayout:
+                            dynamicPadding: true
+                            spacing: 8.000000
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfParent"
+                    children:
+                    -   prototype: "StyledSmallButton/StyledSmallButton"
+                        name: "ButtonToTeamA"
+                        position: [0.000000, 15.000000]
+                        classes: "button button-color-gray left-green-icon button-choose-sound"
+                        components:
+                            Anchor:
+                                vCenterAnchorEnabled: true
+                        children:
+                        -   path: "icon"
+                            components:
+                                Background:
+                                    sprite: "~res:/Gfx/UI/Training/AddRemovePlayer.psd"
+                                    frame: 0
+                    -   prototype: "StyledSmallButton/StyledSmallButton"
+                        name: "ButtonProfile"
+                        classes: "button button-color-gray button-open-sound"
+                        components:
+                            Anchor:
+                                vCenterAnchorEnabled: true
+                        children:
+                        -   path: "icon"
+                            components:
+                                Background:
+                                    sprite: "~res:/Gfx/UI/Hangar/SidebarIcons"
+                                    frame: 3
+                    -   prototype: "StyledSmallButton/StyledSmallButton"
+                        name: "ButtonToQueue"
+                        classes: "button button-color-gray button-choose-sound"
+                        components:
+                            Background:
+                                frame: 0
+                            Anchor:
+                                vCenterAnchorEnabled: true
+                        children:
+                        -   path: "icon"
+                            components:
+                                Background:
+                                    sprite: "~res:/Gfx/UI/Training/icon_team_controls"
+                                    frame: 4
+                    -   prototype: "StyledSmallButton/StyledSmallButton"
+                        name: "ButtonSpectator"
+                        size: [80.000000, 64.000000]
+                        classes: "button button-color-gray button-choose-sound"
+                        components:
+                            Anchor:
+                                vCenterAnchorEnabled: true
+                            UIAttachLayoutMasterComponent:
+                                attachId: "PrebattleRoomSpectator"
+                        children:
+                        -   path: "icon"
+                            components:
+                                Background:
+                                    sprite: "~res:/Gfx/UI/Tournament/spec_icon.psd"
+                    -   class: "UIStaticText"
+                        name: "Hint"
+                        visible: false
+                        classes: "text2 text-color-white"
+                        components:
+                            UITextComponent:
+                                text: ""
+                                color: [0.647059, 0.725490, 0.800000, 1.000000]
+                                multiline: "MULTILINE_ENABLED"
+                                fitting: "FITTING_REDUCE"
+                            Anchor:
+                                leftAnchorEnabled: false
+                                hCenterAnchorEnabled: true
+                                vCenterAnchorEnabled: true
+                            IgnoreLayout: {}
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                horizontalValue: 90.000000
+                                verticalPolicy: "PercentOfParent"
+                -   class: "UIControl"
+                    name: "Center"
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "FixedSize"
+                            horizontalValue: 4.000000
+                            verticalPolicy: "PercentOfParent"
+                    children:
+                    -   class: "UIControl"
+                        name: "ListLine"
+                        size: [2.000000, 92.000000]
+                        input: false
+                        components:
+                            Background:
+                                drawType: "DRAW_FILL"
+                                color: [1.000000, 1.000000, 1.000000, 0.141176]
+                                perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                            Anchor:
+                                hCenterAnchorEnabled: true
+                                topAnchorEnabled: true
+                                topAnchor: 2.000000
+                                bottomAnchorEnabled: true
+                            IgnoreLayout: {}
+                            UIAnchorSafeAreaComponent:
+                                bottomSafeInset: "REVERSE"
+                -   class: "UIControl"
+                    name: "Right"
+                    components:
+                        LinearLayout:
+                            dynamicPadding: true
+                            spacing: 8.000000
+                        SizePolicy:
+                            horizontalPolicy: "Formula"
+                            horizontalFormula: "max(parent/2, childrenSum)"
+                            verticalPolicy: "PercentOfParent"
+                    children:
+                    -   prototype: "StyledButton/StyledButton"
+                        name: "SelectVehicle"
+                        size: [200.000000, 64.000000]
+                        classes: "button button-color-gray button-open-sound"
+                        components:
+                            Anchor:
+                                leftAnchorEnabled: true
+                                leftAnchor: 10.000000
+                                vCenterAnchorEnabled: true
+                        children:
+                        -   path: "Caption"
+                            classes: "header3 text-color-white"
+                            components:
+                                UITextComponent:
+                                    text: "#training_rooms:RoomScreen/ChooseButton"
+                                    fitting: "FITTING_REDUCE"
+                    -   prototype: "StyledButton/StyledButton"
+                        name: "NotReady"
+                        size: [200.000000, 64.000000]
+                        classes: "button button-color-gray button-choose-sound"
+                        components:
+                            Anchor:
+                                rightAnchorEnabled: true
+                                rightAnchor: 10.000000
+                                vCenterAnchorEnabled: true
+                        children:
+                        -   path: "Caption"
+                            classes: "header3 text-color-white"
+                            components:
+                                UITextComponent:
+                                    text: "#training_rooms:RoomScreen/NotReadyButton"
+                    -   prototype: "StyledButton/StyledButton"
+                        name: "ReadyButton"
+                        size: [200.000000, 64.000000]
+                        classes: "button button-color-green button-ok-sound"
+                        components:
+                            Anchor:
+                                rightAnchorEnabled: true
+                                rightAnchor: 10.000000
+                                vCenterAnchorEnabled: true
+                        children:
+                        -   path: "Caption"
+                            visible: true
+                            classes: "header3 text-color-white"
+                            components:
+                                UITextComponent:
+                                    text: "#training_rooms:RoomScreen/ReadyButton"
+                    -   prototype: "StyledButton/StyledButton"
+                        name: "StopAttemptButton"
+                        size: [200.000000, 64.000000]
+                        visible: true
+                        classes: "button button-color-red button-ok-sound"
+                        components:
+                            Anchor:
+                                rightAnchorEnabled: true
+                                rightAnchor: 10.000000
+                                vCenterAnchorEnabled: true
+                        children:
+                        -   path: "Caption"
+                            visible: true
+                            classes: "header3 text-color-white"
+                            components:
+                                UITextComponent:
+                                    text: "quickRooms/EndAttempt/BattlesFought/Button"
+            -   class: "UIControl"
+                name: "VehicleIconWrapper"
+                size: [250.000000, 63.000000]
+                scale: [1.000000, 1.000000]
+                visible: false
+                components:
+                    Anchor:
+                        leftAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                    IgnoreLayout: {}
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 250.000000
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 63.000000
+                children:
+                -   class: "UIControl"
+                    name: "SelectedVehicleIcon"
+                    position: [153.000000, 0.000000]
+                    size: [97.000000, 63.000000]
+                    components:
+                        Background:
+                            drawType: "DRAW_SCALE_PROPORTIONAL_ONE"
+                        Anchor:
+                            rightAnchorEnabled: true
+                -   class: "UIStaticText"
+                    name: "SelectedVehicleLevel"
+                    classes: "header4"
+                    components:
+                        UITextComponent:
+                            text: "X"
+                            color: [0.752941, 0.705882, 0.607843, 1.000000]
+                            align: ["RIGHT", "TOP"]
+                        Anchor:
+                            leftAnchorEnabled: true
+                            leftAnchor: 0.000000
+                            rightAnchorEnabled: true
+                            rightAnchor: 83.000000
+                            topAnchorEnabled: true
+                            bottomAnchorEnabled: true
+                -   class: "UIStaticText"
+                    name: "SelectedVehicleName"
+                    classes: "text2-small text-color-blue"
+                    components:
+                        UITextComponent:
+                            align: ["RIGHT", "VCENTER"]
+                        Anchor:
+                            leftAnchorEnabled: true
+                            rightAnchorEnabled: true
+                            rightAnchor: 83.000000
+                            topAnchorEnabled: true
+                            bottomAnchorEnabled: true
+-   class: "UIControl"
+    name: "QuickPanel"
+    size: [250.000000, 488.000000]
+    input: false
+    classes: "panel-background iconType=quick-search-icon playerRole=quick-role-noncaptain"
+    components:
+        Background:
+            drawType: "DRAW_FILL"
+        Anchor:
+            rightAnchorEnabled: true
+            topAnchorEnabled: true
+            bottomAnchorEnabled: true
+        LinearLayout:
+            orientation: "TopDown"
+        SizePolicy:
+            horizontalPolicy: "Formula"
+            horizontalFormula: "safeAreaInsets.right+250"
+            verticalPolicy: "PercentOfParent"
+            verticalMax: 488.000000
+        StyleSheet:
+            styles: "~res:/UI/Screens/Lobby/Tournament/Room/Styles/TournamentQuickRoomStyles.yaml;~res:/UI/Styles/BackgroundStyles.yaml;~res:/UI/Screens/Lobby/Tournament/Room/TournamentQuickRoom.yaml"
+    children:
+    -   class: "UIStaticText"
+        name: "Header"
+        position: [0.000000, 0.000000]
+        size: [250.000000, 40.000000]
+        classes: "text1"
+        components:
+            Background:
+                drawType: "DRAW_FILL"
+                color: [0.274510, 0.368627, 0.431373, 1.000000]
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+            SizePolicy: {}
+        children:
+        -   class: "UIControl"
+            name: "ListLine"
+            size: [250.000000, 1.000000]
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_FILL"
+                    color: [1.000000, 1.000000, 1.000000, 0.141176]
+                    perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                Anchor:
+                    leftAnchorEnabled: true
+                    rightAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                IgnoreLayout: {}
+        -   class: "UIControl"
+            name: "TeamMark"
+            size: [32.000000, 32.000000]
+            classes: "red-mark"
+            components:
+                Background:
+                    sprite: "~res:/Gfx/UI/Training/image_clan"
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 4.000000
+                    vCenterAnchorEnabled: true
+        -   class: "UIControl"
+            name: "TeamNameWithTag"
+            size: [250.000000, 40.000000]
+            input: false
+            components:
+                Background:
+                    colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                LinearLayout:
+                    padding: "15.000000"
+                    spacing: 5.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            children:
+            -   class: "UIStaticText"
+                name: "Tag"
+                size: [0.000000, 40.000000]
+                classes: "header4 clan-tag"
+                components:
+                    Background:
+                        colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfParent"
+            -   class: "UIStaticText"
+                name: "Name"
+                position: [20.000000, 0.000000]
+                size: [0.000000, 40.000000]
+                classes: "header4"
+                components:
+                    Background:
+                        colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                    UITextComponent:
+                        fitting: "FITTING_POINTS"
+                        align: ["LEFT", "VCENTER"]
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfParent"
+    -   class: "UIControl"
+        name: "Bottom"
+        size: [250.000000, 1.000000]
+        input: false
+        components:
+            Background:
+                drawType: "DRAW_FILL"
+                color: [1.000000, 1.000000, 1.000000, 0.141176]
+                perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                bottomAnchorEnabled: true
+            IgnoreLayout: {}
+    -   class: "UIControl"
+        name: "Left"
+        size: [1.000000, 488.000000]
+        input: false
+        components:
+            Background:
+                drawType: "DRAW_FILL"
+                color: [1.000000, 1.000000, 1.000000, 0.141176]
+                perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+            Anchor:
+                leftAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+            IgnoreLayout: {}
+    -   class: "UIControl"
+        name: "Right"
+        size: [1.000000, 488.000000]
+        input: false
+        components:
+            Background:
+                drawType: "DRAW_FILL"
+                color: [1.000000, 1.000000, 1.000000, 0.141176]
+                perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+            Anchor:
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+            IgnoreLayout: {}
+    -   class: "UIControl"
+        name: "VerticalScrollView"
+        position: [-1.000000, 40.000000]
+        size: [250.000000, 448.000000]
+        input: false
+        components:
+            LinearLayout:
+                orientation: "RightToLeft"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   prototype: "SafeAreaSpacer/SafeAreaSpacer"
+            name: "SafeAreaSpacer"
+            size: [0.000000, 448.000000]
+        -   prototype: "ScrollBar/VerticalScrollBar"
+            name: "VerticalScrollBar"
+            classes: ""
+            components:
+                SizePolicy:
+                    verticalPolicy: "PercentOfParent"
+                ScrollBarDelegate:
+                    delegate: "../ScrollArea"
+        -   class: "UIScrollView"
+            name: "ScrollArea"
+            autoUpdate: true
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            children:
+            -   class: "UIScrollViewContainer"
+                name: "scrollContainerControl"
+                position: [0.000000, 0.000000]
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfMaxChild"
+                children:
+                -   prototype: "StateContainer"
+                    name: "WaitContainer"
+                    children:
+                    -   path: "AnimateIcon"
+                        components:
+                            UIChildComponent0:
+                                prototypePath: "~res:/UI/Screens/Lobby/Tournament/Room/QuickTournamentWaitIcon.yaml"
+                    -   path: "Title"
+                        components:
+                            UITextComponent:
+                                text: "quickRooms/EnemySearch/Status/GatherTeam"
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfContent"
+                    -   prototype: "Timer/Timer"
+                        name: "WaitTimer"
+                        components:
+                            Anchor:
+                                hCenterAnchorEnabled: true
+                        children:
+                        -   path: "Time"
+                            classes: "text2 text-color-white"
+                    -   class: "UIStaticText"
+                        name: "Hint"
+                        position: [10.000000, 197.000000]
+                        size: [230.000000, 92.000000]
+                        classes: "text2 text-color-blue"
+                        components:
+                            UITextComponent:
+                                text: "quickRooms/EnemySearch/GatherTeam/Description"
+                                colorInheritType: "COLOR_IGNORE_PARENT"
+                                multiline: "MULTILINE_ENABLED"
+                            Anchor:
+                                leftAnchorEnabled: true
+                                leftAnchor: 10.000000
+                                hCenterAnchorEnabled: true
+                                rightAnchorEnabled: true
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                verticalPolicy: "PercentOfContent"
+                    -   prototype: "StyledButton/StyledButton"
+                        name: "PauseButton"
+                        classes: "button button-color-gray button-choose-sound"
+                        components:
+                            Anchor:
+                                hCenterAnchorEnabled: true
+                                hCenterAnchor: 5.000000
+                        children:
+                        -   path: "Caption"
+                            components:
+                                UITextComponent:
+                                    text: "quickRooms/Pause/Button"
+                    -   class: "UIStaticText"
+                        name: "HintNoPauses"
+                        size: [230.000000, 23.000000]
+                        classes: "text2 text-color-blue"
+                        components:
+                            UITextComponent:
+                                text: "quickRooms/EnemySearch/SearchPaused/NoPauses"
+                                colorInheritType: "COLOR_IGNORE_PARENT"
+                                multiline: "MULTILINE_ENABLED"
+                            Anchor:
+                                leftAnchorEnabled: true
+                                leftAnchor: 10.000000
+                                hCenterAnchorEnabled: true
+                                rightAnchorEnabled: true
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                verticalPolicy: "PercentOfContent"
+                -   prototype: "StateContainer"
+                    name: "SearchContainer"
+                    children:
+                    -   path: "AnimateIcon"
+                        components:
+                            UIChildComponent0:
+                                prototypePath: "~res:/UI/Screens/Lobby/Tournament/Room/QuickTournamentSearchIcon.yaml"
+                    -   path: "Title"
+                        components:
+                            UITextComponent:
+                                text: "quickRooms/EnemySearch/Status/SearchInProgress"
+                    -   class: "UIStaticText"
+                        name: "Opponents"
+                        size: [230.000000, 23.000000]
+                        classes: "text2 text-color-blue"
+                        components:
+                            UITextComponent:
+                                text: "quickRooms/EnemySearch/SearchInProgress/TeamsInQueue"
+                                colorInheritType: "COLOR_IGNORE_PARENT"
+                                multiline: "MULTILINE_ENABLED"
+                            Anchor:
+                                leftAnchorEnabled: true
+                                leftAnchor: 10.000000
+                                hCenterAnchorEnabled: true
+                                rightAnchorEnabled: true
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                verticalPolicy: "PercentOfContent"
+                    -   class: "UIStaticText"
+                        name: "Hint"
+                        size: [230.000000, 46.000000]
+                        classes: "text2 text-color-blue"
+                        components:
+                            UITextComponent:
+                                text: "quickRooms/EnemySearch/SearchInProgress/ApproximateTime"
+                                colorInheritType: "COLOR_IGNORE_PARENT"
+                                multiline: "MULTILINE_ENABLED"
+                            Anchor:
+                                leftAnchorEnabled: true
+                                leftAnchor: 10.000000
+                                hCenterAnchorEnabled: true
+                                rightAnchorEnabled: true
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                verticalPolicy: "PercentOfContent"
+                    -   prototype: "StyledButton/StyledButton"
+                        name: "PauseButton"
+                        classes: "button button-color-gray button-choose-sound"
+                        components:
+                            Anchor:
+                                hCenterAnchorEnabled: true
+                                hCenterAnchor: 5.000000
+                        children:
+                        -   path: "Caption"
+                            components:
+                                UITextComponent:
+                                    text: "quickRooms/Pause/Button"
+                    -   class: "UIStaticText"
+                        name: "HintNoPauses"
+                        size: [230.000000, 23.000000]
+                        classes: "text2 text-color-blue"
+                        components:
+                            UITextComponent:
+                                text: "quickRooms/EnemySearch/SearchPaused/NoPauses"
+                                colorInheritType: "COLOR_IGNORE_PARENT"
+                                multiline: "MULTILINE_ENABLED"
+                            Anchor:
+                                leftAnchorEnabled: true
+                                leftAnchor: 10.000000
+                                hCenterAnchorEnabled: true
+                                rightAnchorEnabled: true
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                verticalPolicy: "PercentOfContent"
+                -   prototype: "StateContainer"
+                    name: "PauseContainer"
+                    children:
+                    -   path: "AnimateIcon"
+                        components:
+                            UIChildComponent0:
+                                prototypePath: "~res:/UI/Screens/Lobby/Tournament/Room/QuickTournamentPauseIcon.yaml"
+                    -   path: "Title"
+                        components:
+                            UITextComponent:
+                                text: "quickRooms/EnemySearch/Status/SearchPaused"
+                    -   class: "UIStaticText"
+                        name: "Pauses"
+                        size: [230.000000, 23.000000]
+                        classes: "text2 text-color-blue"
+                        components:
+                            UITextComponent:
+                                text: "quickRooms/EnemySearch/SearchPaused/PausesLeft"
+                                colorInheritType: "COLOR_IGNORE_PARENT"
+                                multiline: "MULTILINE_ENABLED"
+                            Anchor:
+                                leftAnchorEnabled: true
+                                leftAnchor: 10.000000
+                                hCenterAnchorEnabled: true
+                                rightAnchorEnabled: true
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                verticalPolicy: "PercentOfContent"
+                    -   class: "UIStaticText"
+                        name: "Hint"
+                        size: [230.000000, 46.000000]
+                        classes: "text2 text-color-blue"
+                        components:
+                            UITextComponent:
+                                text: "quickRooms/EnemySearch/SearchPaused/Captain/Description"
+                                colorInheritType: "COLOR_IGNORE_PARENT"
+                                multiline: "MULTILINE_ENABLED"
+                            Anchor:
+                                leftAnchorEnabled: true
+                                leftAnchor: 10.000000
+                                hCenterAnchorEnabled: true
+                                rightAnchorEnabled: true
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                verticalPolicy: "PercentOfContent"
+                    -   prototype: "StyledButton/StyledButton"
+                        name: "PauseButton"
+                        classes: "button button-color-gray button-choose-sound"
+                        components:
+                            Anchor:
+                                hCenterAnchorEnabled: true
+                                hCenterAnchor: 5.000000
+                        children:
+                        -   path: "Caption"
+                            components:
+                                UITextComponent:
+                                    text: "quickRooms/Start/Button"
+                    -   class: "UIStaticText"
+                        name: "HintNoPauses"
+                        size: [230.000000, 23.000000]
+                        classes: "text2 text-color-blue"
+                        components:
+                            UITextComponent:
+                                text: "quickRooms/EnemySearch/SearchPaused/NoPauses"
+                                colorInheritType: "COLOR_IGNORE_PARENT"
+                                multiline: "MULTILINE_ENABLED"
+                            Anchor:
+                                leftAnchorEnabled: true
+                                leftAnchor: 10.000000
+                                hCenterAnchorEnabled: true
+                                rightAnchorEnabled: true
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                verticalPolicy: "PercentOfContent"
+                    -   class: "UIStaticText"
+                        name: "SearchResumeWarning"
+                        size: [240.000000, 69.000000]
+                        classes: "text2 text-color-blue"
+                        components:
+                            UITextComponent:
+                                text: "quickRooms/EnemySearch/SearchPaused/Players/Description"
+                                colorInheritType: "COLOR_IGNORE_PARENT"
+                                multiline: "MULTILINE_ENABLED"
+                            Anchor:
+                                hCenterAnchorEnabled: true
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                verticalPolicy: "PercentOfContent"

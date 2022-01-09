@@ -1,0 +1,8 @@
+animation SubscriptionStageInitialization
+{
+    if (stage.state == eSubscriptionStageState.kReady
+        or stage.state == eSubscriptionStageState.kNotReady)
+    {
+        Opacity("./TimerAnchor/Timer", opacity=1.0, time=timerAnimationTime);
+    }
+}

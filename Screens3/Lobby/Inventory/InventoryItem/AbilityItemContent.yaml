@@ -1,0 +1,61 @@
+Header:
+    version: "83"
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/Resource/Currency.yaml"
+- "~res:/UI/Screens3/Lobby/Common/Selection.yaml"
+- "~res:/UI/Screens3/Lobby/Common/Resource/Currencies.yaml"
+- "~res:/UI/Screens3/Common/DiscountLabel.yaml"
+- "~res:/UI/Screens3/Lobby/Common/Badge.yaml"
+- "~res:/UI/Screens3/Lobby/Common/CheckMark.yaml"
+Controls:
+-   class: "UIControl"
+    name: "AbilityItemContent"
+    size: [120.000000, 160.000000]
+    input: false
+    components:
+        UIOpacityComponent: {}
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UISwitchBarElementComponent: {}
+        UIDataParamsComponent:
+            params:
+            - ["bool", "isSelected", "false", "true"]
+            - ["AbilityItem", "ability", "null", "{ }"]
+        Sound: {}
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens3/Lobby/Inventory/Abilities/AbilityItemImage.style.yaml"
+    bindings:
+    - ["classes", "\"ability_item \" + ability.abilityTypeName"]
+    - ["UISwitchBarElementComponent.id", "ability.compactDescr"]
+    children:
+    -   class: "UIControl"
+        name: "imgWrapper"
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                topAnchorEnabled: false
+                topAnchor: 0.000000
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 96.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 96.000000
+        children:
+        -   class: "UIControl"
+            name: "Img"
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_TO_RECT"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "min(parentRest, content)"
+                    verticalPolicy: "Formula"
+                    verticalFormula: "min(parentRest, content)"

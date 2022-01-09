@@ -1,0 +1,251 @@
+Header:
+    version: 135
+StyleSheets:
+-   selectors:
+    - ".equipment_item.teapudding * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Provisions/teapudding.txt"
+-   selectors:
+    - ".equipment_item.largeRecoverkit * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Consumables/largeRecoverkit.txt"
+-   selectors:
+    - ".equipment_item.berserk * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Consumables/berserk.txt"
+-   selectors:
+    - ".equipment_item.afterburning * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Consumables/afterburning.txt"
+-   selectors:
+    - ".equipment_item.onigiri * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Provisions/onigiri.txt"
+-   selectors:
+    - ".equipment_item.chinafood * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Provisions/chinafood.txt"
+-   selectors:
+    - ".equipment_item.autofire * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Consumables/autofire.txt"
+-   selectors:
+    - ".equipment_item.russ-food * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Provisions/russ-food.txt"
+-   selectors:
+    - ".equipment_item.chocolate * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Provisions/chocolate.txt"
+-   selectors:
+    - ".equipment_item.cocacola * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Provisions/cocacola.txt"
+-   selectors:
+    - ".equipment_item.largeRepairkit * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Consumables/largeRepairkit.txt"
+-   selectors:
+    - ".equipment_item.smallRepairkit * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Consumables/smallRepairkit.txt"
+-   selectors:
+    - ".equipment_item.largeMedkit * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Consumables/largeMedkit.txt"
+-   selectors:
+    - ".equipment_item.autoExtinguishers * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Consumables/autoExtinguishers.txt"
+-   selectors:
+    - ".equipment_item.hot_coffee * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Provisions/hot_coffee.txt"
+-   selectors:
+    - ".equipment_item.chocolate_bar * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Provisions/chocolate_bar.txt"
+-   selectors:
+    - ".equipment_item.cocacola_can * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Provisions/cocacola_can.txt"
+-   selectors:
+    - ".equipment_item.condensed_milk * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Provisions/condensed_milk.txt"
+-   selectors:
+    - ".equipment_item.black_tea * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Provisions/black_tea.txt"
+-   selectors:
+    - ".equipment_item.white_rice * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Provisions/white_rice.txt"
+-   selectors:
+    - ".equipment_item.regular_ration * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Provisions/regular_ration.txt"
+-   selectors:
+    - ".equipment_item.pasty * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Provisions/pasty.txt"
+-   selectors:
+    - ".equipment_item.ration_other * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Provisions/other_big-food.txt"
+-   selectors:
+    - ".equipment_item.regular_ration_other * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Provisions/other_small-food.txt"
+-   selectors:
+    - ".equipment_item.regular_fuel * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Provisions/regular_fuel.txt"
+-   selectors:
+    - ".equipment_item.improved_fuel * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Provisions/improved_fuel.txt"
+-   selectors:
+    - ".equipment_item.safety_set * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Provisions/safety_set.txt"
+-   selectors:
+    - ".equipment_item.superburner * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Consumables/superburner.txt"
+-   selectors:
+    - ".equipment_item.contusion * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Consumables/contusion.txt"
+-   selectors:
+    - ".equipment_item.aim * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Consumables/aim.txt"
+-   selectors:
+    - ".equipment_item.reload * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Consumables/reload.txt"
+-   selectors:
+    - ".equipment_item.anti-high-explosive * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Provisions/antiFragmentationLining.txt"
+-   selectors:
+    - ".equipment_item.сamouflage-paint * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Provisions/CamouflagePaint.txt"
+-   selectors:
+    - ".1st_april.equipment_item.largeRepairkit * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Event/largeRepairkit_apr.txt"
+-   selectors:
+    - ".equipment_item.forsage * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2020_Mad-games/big/consumable_forsage_m"
+-   selectors:
+    - ".equipment_item.buff * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2020_Mad-games/big/consumable_buff_1_m"
+-   selectors:
+    - ".equipment_item.dash * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2020_Mad-games/big/consumable_dash_m"
+-   selectors:
+    - ".equipment_item.hunters * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2020_Mad-games/big/consumable_hunters_m"
+-   selectors:
+    - ".equipment_item.moonwalk * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2020_Mad-games/big/consumable_moonwalk_m"
+-   selectors:
+    - ".equipment_item.ram * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2020_Mad-games/big/consumable_ram_m"
+-   selectors:
+    - ".equipment_item.shield * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2020_Mad-games/big/consumable_shield_m"
+-   selectors:
+    - ".equipment_item.stealth * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2020_Mad-games/big/consumable_stealth_m"
+-   selectors:
+    - ".equipment_item.vampire * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2020_Mad-games/big/consumable_vampire-heal_m"
+-   selectors:
+    - ".equipment_item.victim * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2020_Mad-games/big/consumable_victim_m"
+-   selectors:
+    - ".equipment_item.provisions_cheese * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Provisions/provisions_cheese"
+-   selectors:
+    - ".equipment_item.provisions_roll * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Provisions/provisions_roll"
+-   selectors:
+    - ".equipment_item.healing-kit * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Consumables/RepairHP.psd"
+-   selectors:
+    - ".equipment_item.shield-kit * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Consumables/DynamicShield.psd"
+-   selectors:
+    - ".equipment_item.comeback-kit * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Provisions/Comeback.psd"
+-   selectors:
+    - ".equipment_item.small-hp-stock * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Provisions/add_HP_normal.psd"
+-   selectors:
+    - ".equipment_item.large-hp-stock * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Provisions/add_HP_big.psd"
+-   selectors:
+    - ".equipment_item.provision_crispbread * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Provisions/provision_crispbread_m"
+-   selectors:
+    - ".equipment_item.provision_salmon * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Provisions/provision_salmon_m"
+-   selectors:
+    - ".equipment_item.provision_czech-hq * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Provisions/provision_czech-hq_m"
+-   selectors:
+    - ".equipment_item.provision_czech-regular * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Provisions/provision_czech-regular_m"
+-   selectors:
+    - ".equipment_item.jump * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2021_Lunar/big/consumable_jump_m"
+-   selectors:
+    - ".equipment_item.ration_polish_hq * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Provisions/provision_polish-hq_m"
+-   selectors:
+    - ".equipment_item.ration_polish_regular * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Provisions/provision_polish-regular_m"
+-   selectors:
+    - ".equipment_item.tungstentip * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/Polish-consumables/big/consumable_tungsten-tip_m"
+-   selectors:
+    - ".equipment_item.provision_improved-gear-oil * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Provisions/provision_improved-gear-oil_m"
+-   selectors:
+    - ".equipment_item.provision_gear-oil * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Provisions/provision_gear-oil_m"
+-   selectors:
+    - ".equipment_item.gunpowder * .equipment-img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Provisions/provision_improved-gunpowder_m"

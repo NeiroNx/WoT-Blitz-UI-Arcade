@@ -1,0 +1,15 @@
+Header:
+    version: "53"
+StyleSheets:
+-   selector: ".link-row #TextContainer"
+    properties:
+        bg-color: [1.000000, 1.000000, 1.000000, 1.000000]
+-   selector: ".link-row.disabled #TextContainer"
+    properties:
+        bg-color: [1.000000, 1.000000, 1.000000, 0.501961]
+-   selector: ".link-row * #Icon"
+    properties:
+        bg-frame: 36
+-   selector: ".link-row.external-link * #Icon"
+    properties:
+        bg-frame: 43

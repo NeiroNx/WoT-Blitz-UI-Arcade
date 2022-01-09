@@ -1,0 +1,124 @@
+Header:
+    version: "96"
+Controls:
+-   class: "UIControl"
+    name: "Content"
+    size: [960.000000, 640.000000]
+    input: false
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["StoryView", "storyView", "null", "{ }"]
+            - ["StatsDataModel", "statsData", "null", "{ }"]
+            - ["int64", "serverTime", "0L", "1554299463L"]
+            - ["bool", "isHangarPreviousScreen", "false", "true"]
+            - ["bool", "neteaseAvailable", "false", "false"]
+            events:
+            - "SELECT_STEP(int id)"
+            - "SHOW_STEP_INFO(int id)"
+            - "DESELECT"
+            - "COMPLETE_STEP"
+            - "SHOW_STORY_INFO"
+            - "SHOW_STEP_INFO_FOOTER"
+            - "WEB_INTERACTION_BUTTON_PRESSED"
+            - "SHOW_DETAILED_INFO"
+            - "BACK_EVENT"
+    children:
+    -   class: "UIControl"
+        name: "Bg"
+        input: false
+        components:
+            ClipContent: {}
+            IgnoreLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            StyleSheet:
+                styles: "~res:/UI/Screens/Lobby/Story/Legacy/StoryTreeProgress.style.yaml"
+        bindings:
+        - ["classes", "storyView.story.name"]
+        children:
+        -   class: "UIControl"
+            name: "Layout"
+            pivot: [0.500000, 0.500000]
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+                ScalePolicy:
+                    horizontalFormula: "max(1.0, max(parentSize.X / size.X, parentSize.Y / size.Y))"
+                    verticalFormula: "max(1.0, max(parentSize.X / size.X, parentSize.Y / size.Y))"
+            children:
+            -   class: "UIControl"
+                name: "Top"
+                input: false
+                components:
+                    UITextureComponent: {}
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+    -   class: "UIControl"
+        name: "Header"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                childType: "kOldExpression"
+                control: "\"~res:/UI/Screens/Lobby/Story/Legacy/StoryTreeHeader.yaml\""
+                args:
+                    "story": "storyView.story"
+                    "statsData": "statsData"
+                    "serverTime": "serverTime"
+                    "isHangarPreviousScreen": "isHangarPreviousScreen"
+                    "neteaseAvailable": "neteaseAvailable"
+                eventActions:
+                - ["WEB_INTERACTION_BUTTON_PRESSED", "WEB_INTERACTION_BUTTON_PRESSED", "_event"]
+                - ["HEADER_DETAILED_INFO_BUTTON_PRESSED", "SHOW_DETAILED_INFO", "_event"]
+                - ["BACK_EVENT", "BACK_EVENT", "_event"]
+    -   class: "UIControl"
+        name: "Center"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                childType: "kOldExpression"
+                control: "\"~res:/UI/Screens/Lobby/Story/Legacy/StoryTree.yaml\""
+                args:
+                    "storyView": "storyView"
+                eventActions:
+                - ["SELECT_STEP", "SELECT_STEP", "_event.id"]
+                - ["SHOW_STEP_INFO", "SHOW_STEP_INFO", "_event.id"]
+                - ["DESELECT", "DESELECT", ""]
+    -   class: "UIControl"
+        name: "Footer"
+        input: false
+        components:
+            LinearLayout:
+                orientation: "TopDown"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                childType: "kOldExpression"
+                control: "\"~res:/UI/Screens/Lobby/Story/Legacy/StoryTreeFooter.yaml\""
+                args:
+                    "story": "storyView.story"
+                    "statsData": "statsData"
+                    "selectedStep": "storyView.selectedStep"
+                eventActions:
+                - ["FOOTER_COMPLETE_BUTTON_PRESSED", "COMPLETE_STEP", "_event"]
+                - ["FOOTER_INFO_BUTTON_PRESSED", "SHOW_STORY_INFO", "_event"]
+                - ["INFO_FOOTER_PRESSED", "SHOW_STEP_INFO_FOOTER", "_event"]

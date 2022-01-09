@@ -1,0 +1,35 @@
+Header:
+    version: 121
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/Notifications/Popups/KarmaRich.yaml"
+Controls:
+-   prototype: "KarmaRich/KarmaRich"
+    customClass: "UIKarmaComplimentNotification"
+    name: "KarmaCompliment"
+    classes: ""
+    components:
+        UIDataParamsComponent:
+            params:
+            - ["string", "userName", "\"\"", "\"user\""]
+            - ["string", "reasonKey", "\"\"", "\"Karma/Compliments/SociablePlayer\""]
+    children:
+    -   path: "Body/icon"
+        classes: "notification-icon-like white-wild-sand-bg"
+    -   path: "Body/Content"
+        components:
+            SizePolicy:
+                horizontalFormula: "parent-155"
+        children: []
+    -   path: "Body/Content/Title"
+        classes: "t-caption bold green-green-text"
+        components:
+            UITextComponent:
+                text: "hangarNotification/complimentReceived/header"
+                useRtlAlign: "USE_BY_SYSTEM"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+    -   path: "Body/Content/Description"
+        components:
+            RichContent: {}
+        bindings:
+        - ["RichContent.text", "format(localize(\"hangarNotification/complimentReceived/descr\"), { \"reason\" = localize(reasonKey); \"userName\" = userName; })"]

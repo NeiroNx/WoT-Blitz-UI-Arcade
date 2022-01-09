@@ -1,0 +1,143 @@
+Header:
+    version: 121
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/NotificationButtonWithText.yaml"
+Prototypes:
+-   class: "UIControl"
+    customClass: "UIDeviceConnectedNotification"
+    name: "DeviceConnectedNotification"
+    size: [616.000000, 64.000000]
+    input: true
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+            padding: "8;0"
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfMaxChild"
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Lobby/Common/Notification.style.yaml"
+    children:
+    -   class: "UIControl"
+        name: "NotificationItem"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 608.000000
+                verticalPolicy: "PercentOfMaxChild"
+            UIDataParamsComponent:
+                params:
+                - ["bool", "isSuggestionHint", "false", "true"]
+                - ["bool", "isButtonVisible", "false", "true"]
+                events:
+                - "ON_SETTINGS_PRESSED"
+            UIDataLocalBindingsComponent:
+                data:
+                - ["string", "changedText", "when isTouchScreen -> localize(\"#notification:Devices/TouchType\"), localize(\"#notification:Devices/MouseKeyboardType\")"]
+                - ["string", "suggestionText", "localize(\"#notification:Devices/ChangeToKeybordMouse\")"]
+                - ["string", "resultText", "when isSuggestionHint -> suggestionText, changedText"]
+        children:
+        -   class: "UIControl"
+            name: "Content"
+            pivot: [0.500000, 0.500000]
+            input: false
+            components:
+                UIOpacityComponent: {}
+                Anchor:
+                    leftAnchorEnabled: true
+                    rightAnchorEnabled: true
+                    topAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                LinearLayout: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   class: "UIControl"
+                name: "Bg"
+                input: false
+                components:
+                    Background:
+                        drawType: "DRAW_STRETCH_BOTH"
+                        sprite: "~res:/Gfx/Lobby/backgrounds/bg_dark_r8"
+                        leftRightStretchCap: 8.000000
+                        topBottomStretchCap: 8.000000
+                    IgnoreLayout: {}
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+            -   class: "UIControl"
+                name: "Status"
+                input: false
+                components:
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    LinearLayout:
+                        padding: "16"
+                        spacing: 16.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "Formula"
+                        verticalFormula: "maxChild + 16"
+                children:
+                -   class: "UIControl"
+                    name: "Icon"
+                    position: [15.000000, 8.000000]
+                    size: [24.000000, 24.000000]
+                    input: false
+                    components:
+                        Background: {}
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                            vCenterAnchor: 0.000000
+                    bindings:
+                    - ["Background.sprite", "when isSuggestionHint -> \"~res:/Gfx/Lobby/icons/icon_keyboard_s\", \"~res:/Gfx/Lobby/icons/icon_touch_s\""]
+                -   class: "UIControl"
+                    name: "Result"
+                    position: [61.000000, 8.000000]
+                    input: false
+                    classes: "t-overline regular color=white-wild-sand-70-text"
+                    components:
+                        UITextComponent:
+                            multiline: "MULTILINE_ENABLED"
+                            fitting: "FITTING_POINTS"
+                            align: ["LEFT", "VCENTER"]
+                            useRtlAlign: "USE_BY_SYSTEM"
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "Formula"
+                            verticalFormula: "when content > 48 -> 64, 48"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+                    bindings:
+                    - ["UITextComponent.text", "resultText"]
+            -   class: "UIControl"
+                name: "NotificationButtonHolder"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfMaxChild"
+                        verticalPolicy: "PercentOfParent"
+                bindings:
+                - ["visible", "isSuggestionHint and isButtonVisible"]
+                children:
+                -   prototype: "NotificationButtonWithText/NotificationButtonWithText"
+                    name: "NotificationButtonWithText"
+                    position: [480.000000, 0.000000]
+                    components:
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                            vCenterAnchorEnabled: true
+                        UIInputEventComponent:
+                            onTouchUpInside: "ON_SETTINGS_PRESSED"
+                        UIDataParamsComponent:
+                            args:
+                                "text": "\"#notification:Devices/SettingsButton\""
+                            eventActions:
+                            - ["ON_SETTINGS_PRESSED", "ON_SETTINGS_PRESSED", ""]

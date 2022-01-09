@@ -1,0 +1,12 @@
+Header:
+    version: "39"
+StyleSheets:
+-   selector: ".copy-button:pressed_inside"
+    properties:
+        bg-color: [0.227451, 0.227451, 0.227451, 0.392157]
+-   selector: ".copy-button:normal"
+    properties:
+        bg-color: [0.227451, 0.227451, 0.227451, 0.784314]
+-   selector: ".copy-button:disabled"
+    properties:
+        bg-color: [0.227451, 0.227451, 0.227451, 0.392157]

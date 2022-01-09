@@ -1,0 +1,18 @@
+action AnimateNumber
+{
+  if (initialNumber < targetNumber)
+  {
+    BroadcastEvent("AnimateDigit", ".");
+    Wait(animationTime);
+  }
+}
+
+action ForceUpdate
+{
+	BroadcastEvent("FORCE_UPDATE");
+}
+
+action StopAnimateNumber
+{
+	BroadcastEvent("Animate", arg1=true);
+}

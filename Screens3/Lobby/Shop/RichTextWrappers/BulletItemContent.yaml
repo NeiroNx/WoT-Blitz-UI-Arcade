@@ -1,0 +1,53 @@
+Header:
+    version: "102"
+Prototypes:
+-   class: "UIControl"
+    name: "BulletItem"
+    size: [189.000000, 32.000000]
+    input: false
+    components:
+        LinearLayout:
+            spacing: 8.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfMaxChild"
+    children:
+    -   class: "UIControl"
+        name: "bulletWrapper"
+        input: false
+        components:
+            Anchor:
+                topAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "FixedSize"
+                verticalValue: 20.000000
+        children:
+        -   class: "UIControl"
+            name: "Bullet"
+            size: [32.000000, 32.000000]
+            input: false
+            classes: "white-wild-sand-bg"
+            components:
+                Background: {}
+                UIRoundedCornersComponent:
+                    radius: "30"
+                Anchor:
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 4.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 4.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+    -   class: "UIControl"
+        name: "Content"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfChildrenSum"
+            FlowLayout:
+                hSpacing: 4.000000

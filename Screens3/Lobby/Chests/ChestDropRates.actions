@@ -1,0 +1,5 @@
+action BackEvent()
+{
+    PlaySound("GUI/buttons/close");
+  	Event("BACK_EVENT");
+}

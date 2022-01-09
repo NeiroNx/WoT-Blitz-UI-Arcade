@@ -1,0 +1,138 @@
+Header:
+    version: 135
+Prototypes:
+-   class: "UIControl"
+    name: "OLIVER2021Tree"
+    size: [960.000000, 592.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["eBlitzDevice", "deviceType", "eBlitzDevice.DEVICE_PHONE", "eBlitzDevice.DEVICE_PHONE"]
+            - ["StoryView", "storyView", "null", "{ }"]
+            - ["int64", "serverTime", "0L", "1556668800L"]
+            - ["bool", "isGfx2", "false", "false"]
+            - ["eTutorialHighlights", "highlightControl", "eTutorialHighlights.kUnknown", "eTutorialHighlights.kUnknown"]
+            events:
+            - "DESELECT"
+            - "SHOW_STEP_INFO(int id)"
+            - "SELECT_STEP(int id)"
+        UIDataLocalVarsComponent:
+            data:
+            - ["int", "gfx", "when isGfx2 -> 2, 1"]
+    children:
+    -   class: "UIControl"
+        name: "Fade"
+        input: false
+        classes: "black-70-bg"
+        components:
+            Background:
+                drawType: "DRAW_SCALE_TO_RECT"
+                sprite: "~res:/Gfx/Lobby/backgrounds/bg_gradient_vertical_0-100"
+            Anchor:
+                hCenterAnchorEnabled: true
+                bottomAnchorEnabled: true
+            IgnoreLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+                verticalValue: 60.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+    -   class: "UIControl"
+        name: "SafeArea"
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                topAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "parent - safeAreaInsets.left - safeAreaInsets.right"
+                verticalPolicy: "Formula"
+                verticalFormula: "parent - safeAreaInsets.bottom"
+        children:
+        -   class: "UIControl"
+            name: "StepsHolder"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens3/Common/HorizontalScrollView.yaml"
+                    args:
+                        "content": "Content"
+                        "centerContent": "true"
+                        "verticalPolicy": "eSizePolicy.PercentOfParent"
+                        "bottomDistance": "4"
+                        "isClipEnabled": "false"
+Slots:
+-   class: "UIControl"
+    name: "Content"
+    size: [960.000000, 640.000000]
+    input: false
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+            dynamicPadding: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfLastChild"
+            verticalPolicy: "PercentOfParent"
+    children:
+    -   class: "UIControl"
+        name: "TapArea"
+        input: true
+        components:
+            IgnoreLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIInputEventComponent:
+                onTouchUpInside: "DESELECT"
+    -   class: "UIControl"
+        name: "Spacer"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "Formula"
+                verticalFormula: "when screenHeight < 900 -> 140, 220"
+    -   class: "UIControl"
+        name: "StepsArea"
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+        children:
+        -   class: "UIControl"
+            name: "Steps"
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    topAnchorEnabled: true
+                LinearLayout: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIRepeatComponent:
+                    control: "~res:/UI/Screens3/Lobby/Story/Components/Steps/Line.yaml"
+                    dataContainer: "storyView.tree.groups[\"common\"].steps"
+                    args:
+                        "model": "_item"
+                        "highlightControl": "highlightControl"
+                        "isFirst": "_index == 0"
+                        "masterId": "\"\""
+                        "priceIcon": "\"\""
+                        "mainRewardIndex": "when _index == 2 or _index == 3 or _index == 4 or _index == 5 -> 1, 0"
+                    eventActions:
+                    - ["DESELECT", "DESELECT", ""]
+                    - ["SELECT_STEP", "SELECT_STEP", "_event.id"]
+                    - ["SHOW_STEP_INFO", "SHOW_STEP_INFO", "_event.id"]

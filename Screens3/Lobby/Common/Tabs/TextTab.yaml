@@ -1,0 +1,202 @@
+Header:
+    version: 138
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/BadgeHolder.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "TextTab"
+    components:
+        LinearLayout: {}
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "FixedSize"
+            verticalValue: 48.000000
+        UIAttachLayoutMasterComponent: {}
+        UIInputEventComponent:
+            onTouchUpInside: "ON_PRESSED"
+        UISwitchBarElementComponent: {}
+        UIDataParamsComponent:
+            params:
+            - ["bool", "zeroCounterVisible", "false", "false"]
+            - ["bool", "isSelected", "false", "true"]
+            - ["TabTextInfo", "tabInfo", "null", "{ \"badge\" = { \"type\" = eBadgeType.DIGIT; \"value\" = \"12\"; }; \"counter\" = 5; }"]
+            - ["int", "tabID", "0", "0"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["bool", "isLocked", "tabInfo.isLocked"]
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/Lobby/Common/Tabs/Tab.actions"
+        UIEventOnDataComponent0:
+            watchedDataExpression: "isSelected"
+            ifExpression: "_value == true"
+            eventName: "ON_SELECTED"
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Lobby/Common/Tabs/Tab.style.yaml"
+    bindings:
+    - ["classes", "\"tab \" + (when isLocked -> \"locked\", \"\")"]
+    - ["UIAttachLayoutMasterComponent.attachId", "tabInfo.attachId"]
+    - ["UISwitchBarElementComponent.id", "tabID"]
+    children:
+    -   class: "UIControl"
+        name: "LeftSpacer"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 24.000000
+                verticalPolicy: "PercentOfParent"
+    -   class: "UIControl"
+        name: "ItemCount"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Anchor:
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfMaxChild"
+            UIChildComponent0:
+                condition: "tabInfo.counter > 0 or zeroCounterVisible"
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/ItemCount.yaml"
+                args:
+                    "count": "tabInfo.counter"
+                    "roundedCorners": "true"
+        bindings:
+        - ["visible", "tabInfo.counter > 0 or zeroCounterVisible"]
+    -   class: "UIControl"
+        name: "Spacer"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 8.000000
+                verticalPolicy: "PercentOfParent"
+    -   class: "UIControl"
+        name: "ContentArea"
+        input: false
+        components:
+            Anchor:
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "Content"
+            pivot: [0.500000, 0.500000]
+            input: false
+            classes: "content"
+            components:
+                UIOpacityComponent: {}
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                LinearLayout: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfMaxChild"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Lobby/Common/Tabs/Tab.style.yaml"
+            children:
+            -   class: "UIControl"
+                name: "Locked"
+                input: false
+                tag: -5
+                classes: "grey-shark-70-bg"
+                components:
+                    Background:
+                        drawType: "DRAW_SCALE_TO_RECT"
+                        sprite: "~res:/Gfx/Lobby/icons/icon_lock"
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 24.000000
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 24.000000
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+                bindings:
+                - ["visible", "isLocked"]
+            -   class: "UIControl"
+                name: "Spacer2"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 8.000000
+                        verticalPolicy: "PercentOfParent"
+                bindings:
+                - ["visible", "isLocked"]
+            -   class: "UIControl"
+                name: "Name"
+                pivot: [0.500000, 0.500000]
+                visible: true
+                selected: false
+                input: false
+                classes: "t-overline bold white-wild-sand-text"
+                components:
+                    UITextComponent: {}
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        horizontalMin: 64.000000
+                        horizontalMax: 320.000000
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml"
+                bindings:
+                - ["UITextComponent.text", "capitalize(tabInfo.text)"]
+        -   class: "UIControl"
+            name: "Selection"
+            pivot: [0.500000, 0.500000]
+            input: false
+            classes: "selection orange-orange-peel-bg"
+            components:
+                Background: {}
+                UIOpacityComponent: {}
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 4.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/Lobby/Common/Tabs/Tab.style.yaml"
+            bindings:
+            - ["visible", "isSelected"]
+    -   class: "UIControl"
+        name: "RightSpacer"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 8.000000
+                verticalPolicy: "PercentOfParent"
+        bindings:
+        - ["visible", "tabInfo.badge.type != eBadgeType.EMPTY"]
+    -   prototype: "BadgeHolder/BadgeHolder"
+        name: "BadgeHolder"
+        position: [154.000000, 12.000000]
+        components:
+            Anchor:
+                topAnchorEnabled: true
+            UIDataParamsComponent:
+                args:
+                    "type": "tabInfo.badge.type"
+                    "value": "tabInfo.badge.value"
+        bindings:
+        - ["visible", "type == eBadgeType.DIGIT and value != \"0\""]
+        - ["Anchor.vCenterAnchor", "when type == eBadgeType.EMPTY -> -9, 0"]
+    -   class: "UIControl"
+        name: "RightSpacer"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 24.000000
+                verticalPolicy: "PercentOfParent"
+        bindings:
+        - ["visible", "tabInfo.badge.type == eBadgeType.EMPTY"]

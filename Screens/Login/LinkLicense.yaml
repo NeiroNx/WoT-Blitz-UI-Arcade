@@ -1,0 +1,15 @@
+Header:
+    version: "24"
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/Common/Link.yaml"
+Controls:
+-   prototype: "Link/Link"
+    name: "LinkLicense"
+    components:
+        StyleSheet:
+            styles: "~res:/UI/Screens/Fonts.yaml;~res:/UI/Screens/Login/LinkLicense.yaml"
+    children:
+    -   path: "Text"
+        components:
+            UITextComponent:
+                text: "#eula:confirmation_link_1"

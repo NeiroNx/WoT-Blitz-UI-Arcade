@@ -1,0 +1,64 @@
+Header:
+    version: 140
+Prototypes:
+-   class: "UIControl"
+    name: "PlayerAvatar"
+    input: false
+    classes: "avatar-type=icon-default size-64"
+    components:
+        ClipContent:
+            enabled: true
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            verticalPolicy: "FixedSize"
+        UIDataParamsComponent:
+            events:
+            - "AVATAR_IMAGE_LOADED"
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Lobby/Common/Resource/Style/PlayerAvatarStyles.yaml"
+    children:
+    -   class: "UIControl"
+        name: "Back"
+        input: false
+        components:
+            Background:
+                drawType: "DRAW_STRETCH_BOTH"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+    -   class: "UIControl"
+        name: "Avatar"
+        input: false
+        components:
+            Background:
+                drawType: "DRAW_TILED_MULTILAYER"
+                gradient: "~res:/Gfx/UI/CommonUIElements/avatars/avatar-default-icon.psd"
+                perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+            UIUrlImageComponent:
+                imageLoadedEvent: "AVATAR_IMAGE_LOADED"
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                verticalPolicy: "FixedSize"
+    -   class: "UIControl"
+        name: "Grade"
+        input: false
+        components:
+            Background:
+                perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+    -   class: "UIControl"
+        name: "GradeTeamPanel"
+        components:
+            Background:
+                drawType: "DRAW_FILL"
+            Anchor: {}
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 4.000000
+                verticalPolicy: "PercentOfParent"

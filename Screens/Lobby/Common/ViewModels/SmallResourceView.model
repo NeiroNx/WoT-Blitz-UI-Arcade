@@ -1,0 +1,40 @@
+showQuantity = quantity > 0 or not empty(localizedQuantity);
+quanitityStringed = when
+                    not empty(localizedQuantity) -> localizedQuantity,
+                    type == ResourceType.premium -> timeDiffShort(quantity),
+                    str1000Separated(quantity);
+
+showBonusQuantity = bonusQuantity > 0;
+bonusQuanitityStringed = format("+%(value)", { value = str1000Separated(bonusQuantity) });
+
+epsilon = 0.00001;
+hasDiscount = -epsilon > discount.value or discount.value > epsilon;
+discountString = str(discount.value * 100, 0) + "%";
+
+resourceTypeClass = when
+                    type == ResourceType.vehicle -> "resource-vehicle",
+                    type == ResourceType.gold -> "resource-gold",
+                    type == ResourceType.unlocks -> "resource-unlock",
+                    type == ResourceType.free_xp -> "resource-free-xp",
+                    type == ResourceType.premium -> "resource-premium",
+                    type == ResourceType.xp -> "resource-xp",
+                    type == ResourceType.tankmenXP -> "resource-crew-xp",
+                    type == ResourceType.credits -> "resource-credit",
+                    type == ResourceType.stuff -> "resource-stuff",
+                    type == ResourceType.slots -> "resource-slot",
+                    type == ResourceType.achievement -> "resource-rare-achievement",
+                    type == ResourceType.real_currency -> "resource-real-currency",
+                    "";
+
+gradeClass = when grade != ArtefactGrade.unknown
+                    -> "grade " + str(grade, ArtefactGrade)
+                    ,  "";
+
+gradeHideClass = when showGrade -> "",
+                                   "hide-grade";
+
+resourceClasses = "resource resource-type=" + resourceTypeClass + " grade-state=" + gradeHideClass;
+
+showImageURL = not empty(imageURL) and type == ResourceType.stuff;
+
+showBuiltInIcon = not empty(icon) and type == ResourceType.stuff and not showImageURL;

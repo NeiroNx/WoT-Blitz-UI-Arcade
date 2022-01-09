@@ -1,0 +1,167 @@
+action ImageLoaded
+{
+    if (show and (not evenCycle or not isNull(nextProduct)) and blurEnabled)
+    {
+        if (productCount > 1)
+        {
+            RenderPostProcess("**/CounterWrapper/BlurWrapper/Blur", force = true);
+            Opacity("**/CounterWrapper/BlurWrapper", 1, 0.2);
+        }
+        DirectEvent("ShowBlur", content + "/Content");
+    }
+
+    if (not imageLoaded)
+    {
+        ChangeData(imageLoaded, true);
+
+        if (not animating)
+        {
+            if (not firstShow)
+            {
+                ChangeData(animating, true);
+                Event("OrdinaryShow");
+            }
+
+            if (firstShow and readyToShow)
+            {
+                Event("OnReadyForFirstShow");
+            }
+        }
+    }
+}
+
+action OrdinaryShow()
+{
+    Wait(0.5);
+    Event("ShowContent");
+}
+
+action ShowContent
+{
+    ChangeData(show, true);
+    WaitEvent("FIRST_LOADED");
+    parallel
+    {
+        Opacity(content, 1.0, fadeInTime, EASE_IN);
+        Opacity("**/Image", opacity=1.0, time=0.5, interpolation=EASE_IN);
+    }
+    Event("ReinitSlider");
+}
+
+action OnReadyForFirstShow
+{
+    if (not animating)
+    {
+        ChangeData(animating, true);
+        Event("ShowFirstTime");
+    }
+}
+
+action ShowFirstTime
+{
+    if (readyToShow)
+    {
+        Event("SHOWN");
+        parallel
+        {
+            Opacity("**/Placeholder", opacity=1.0, time=firstShowOpacityTime, interpolation=EASE_IN);
+            ChangeProperty("**/Placeholder", "Anchor", "topAnchor", 32, firstShowDropTime, BOUNCE_OUT);
+        }
+        parallel
+        {
+            Scale("**/Placeholder", x=0.01, time=firstShowFoldTime, interpolation=EASE_IN);
+            sequence
+            {
+                Wait(firstShowFoldTime - firstShowOpacityTime);
+                Opacity("**/Placeholder", opacity=0.0, time=firstShowOpacityTime, interpolation=EASE_OUT);
+            }
+            sequence
+            {
+                Wait(firstShowFoldTime - 0.1);
+                StartParticles("**/BlinkFx");
+            }
+        }
+        Scale("**/ImagesWrapper", x=0.01);
+        parallel
+        {
+            Opacity("**/ImagesWrapper/Image", opacity=1.0, time=firstShowOpacityTime, interpolation=EASE_IN);
+            Scale("**/ImagesWrapper", x=1.0, time=firstShowFoldTime, interpolation=EASE_IN);
+        }
+        Opacity("**/Placeholder", opacity=1.0);
+        Scale("**/Placeholder", x=1.0);
+
+        Event("ShowContent");
+    }
+}
+
+action StartSlider(bool start)
+{
+    if (productCount > 1 and start)
+    {
+        repeat
+        {
+            ChangeProperty("**/CounterWrapper/bg", "SizePolicy", "horizontalValue", 0);
+            ChangeProperty("**/CounterWrapper/bg", "SizePolicy", "horizontalValue", 100, cycleTime, LINEAR, true);
+            if (nextIndex + 1 < productCount)
+            {
+                ChangeData(nextIndex, nextIndex + 1);
+            }
+            else
+            {
+                ChangeData(nextIndex, 0);
+            }
+            Wait(0.1);
+            if (blurEnabled)
+            {
+                Event("HideBlur", content + "/Content");
+                Event("HideBlur", nextContent + "/Content");
+            }
+            Event("UpdateModelCurrentIndex", arg1 = nextIndex);
+            parallel
+            {
+                Opacity("**/ImageNext", 1, 0.5);
+                ChangeProperty("**/ImageNext", "Anchor", "topAnchor", 0, 0.5, EASE_IN_EASE_OUT);
+                Opacity("**/Image", 0, 0.5);
+                Opacity(content, 0, 0.5);
+                Opacity(nextContent, 1, 0.5);
+            }
+            ChangeData(evenCycle, not evenCycle);
+            ChangeData(currentIndex, nextIndex);
+            Wait(0.1);
+            Opacity("**/Image", 1);
+            Opacity("**/ImageNext", 0);
+            ChangeProperty("**/ImageNext", "Anchor", "topAnchor", -336, 0);
+            ChangeProperty("**/CounterWrapper/bg", "SizePolicy", "horizontalValue", 0);
+            if (blurEnabled)
+            {
+                Event("ShowBlur", content + "/Content");
+            }
+        }
+    }
+}
+
+action ReinitSlider()
+{
+    Event("StartSlider", arg1 = false);
+    ChangeData(nextIndex, 0);
+    ChangeData(currentIndex, 0);
+    Event("UpdateModelCurrentIndex", arg1 = currentIndex);
+    ChangeData(evenCycle, true);
+    Opacity("**/Image", 1);
+    Opacity(content, 1);
+    Opacity(nextContent, 0);
+    Opacity("**/Counter", 1, 0.2);
+    if (blurEnabled)
+    {
+        Event("ShowBlur", content + "/Content");
+    }
+    if (productCount > 1)
+    {
+        ChangeData(cycleInProgress, true);
+        Event("StartSlider", arg1 = true);
+    }
+    else
+    {
+        ChangeData(cycleInProgress, false);
+    }
+}

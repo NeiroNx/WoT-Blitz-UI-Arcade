@@ -1,0 +1,168 @@
+action ShowNicknameError(string text)
+{
+  Event("ProcessError", arg1=text, arg2=nicknameMasterId);
+}
+
+action ShowCaptchaError(string text)
+{
+  Event("ProcessError", arg1=text, arg2=captchaMasterId);
+}
+
+action ProcessError(string text, string masterId)
+{
+  if (currentError != text or currentMasterId != masterId)
+  {
+    ChangeData(nextError, text);
+    ChangeData(nextMasterId, masterId);
+    if (errorShown)
+    {
+      Event("HideError");
+    }
+    else
+    {
+      Event("ShowNextError");
+    }
+  }
+}
+
+action HideError
+{
+  DirectEvent("ANIMATE_POPUP_ON_HIDE", "**/HintLayer/Slave");
+}
+
+action FINISH_HIDE_POPUP_ANIMATION
+{
+  ChangeData(currentError, "");
+  ChangeData(currentMasterId, "");
+  if (not empty(nextError))
+  {
+    DirectEvent("_INIT", "**/HintLayer/Slave");
+    Event("ShowNextError");
+  }
+  else
+  {
+    ChangeData(errorShown, false);
+  }
+}
+
+action ShowNextError
+{
+  ChangeData(currentError, nextError);
+  ChangeData(nextError, "");
+  ChangeData(currentMasterId, nextMasterId);
+  ChangeData(nextMasterId, "");
+  ChangeData(errorShown, true);
+}
+
+action ResetError
+{
+  Event("HideError");
+}
+
+action NICKNAME_TEXT_CHANGED(string text, bool resetSelectedHint)
+{
+  if (text != nicknameData.nickname)
+  {
+    if (not empty(currentError) and currentMasterId == nicknameMasterId)
+    {
+      Event("HideError");
+    }
+
+    Event("NICKNAME_CHANGED", arg1=text);
+    DirectEvent("EDIT_ENDED", "Scroll/scrollContainerControl/Forms/InterativeHolder/Nicknames/NicknameEdit/TextField", arg1=text);
+  }
+
+  if (resetSelectedHint and not empty(selectedHint))
+  {
+    ChangeData(selectedHint, "");
+  }
+}
+
+action CAPTCHA_TEXT_CHANGED(string text)
+{
+  if (text != nicknameData.captchaInput)
+  {
+    if (not empty(currentError) and currentMasterId == captchaMasterId)
+    {
+      Event("HideError");
+    }
+
+    Event("CAPTCHA_CHANGED", arg1=text);
+  }
+}
+
+action BACK_SHORTCUT
+{
+  PlaySound("GUI/buttons/close");
+  Event("CANCEL_NICKNAME_CONFIGURATION");
+}
+
+action OnNicknameHintPressed(string hint)
+{
+  ChangeData(selectedHint, hint);
+  Event("NICKNAME_TEXT_CHANGED", arg1=hint, arg2=false);
+}
+
+action RequestAnimateSuggestions
+{
+  if (suggestionsShown)
+  {
+    Event("AnimateSuggestions", arg1=false, arg2=hintsHideTime);
+    WaitEvent("SUGGESTIONS_HIDDEN");
+  }
+  ChangeData(nicknameData.displaySuggestions, nicknameData.suggestions);
+  if (not nicknameData.displaySuggestions.Empty())
+  {
+    Event("AnimateSuggestions", arg1=true, arg2=hintsShowTime);
+  }
+}
+
+action AnimateSuggestions(bool show, float time)
+{
+  if (show)
+  {
+    ChangeData(suggestionsShown, true);
+    parallel
+    {
+      ChangeProperty("Scroll/scrollContainerControl/Forms/InterativeHolder/Nicknames/NicknameVariants", "SizePolicy", "verticalValue", 100.0, time);
+      {
+        Wait(time * 0.7);
+        BroadcastEvent("AnimateHint", "Scroll/scrollContainerControl/Forms/InterativeHolder/Nicknames/NicknameVariants/Variants", arg1=true, arg2=0.1, arg3=0.1);
+      }
+    }
+  }
+  else
+  {
+    parallel
+    {
+      BroadcastEvent("AnimateHint", "Scroll/scrollContainerControl/Forms/InterativeHolder/Nicknames/NicknameVariants/Variants", arg1=false, arg2=0.1, arg3=0.1);
+      {
+        Wait(time * 0.7);
+        ChangeProperty("Scroll/scrollContainerControl/Forms/InterativeHolder/Nicknames/NicknameVariants", "SizePolicy", "verticalValue", 0.0, time);
+      }
+    }
+    ChangeData(suggestionsShown, false);
+    Event("SUGGESTIONS_HIDDEN");
+  }
+}
+
+action CONFIRMATION_REQUESTED
+{
+  ChangeData(nextError, "");
+  ChangeData(nextMasterId, "");
+  Event("CONFIRM_NICKNAME");
+}
+
+action CONFIRMATION_SHORTCUT
+{
+  if (canConfirm)
+  {
+    PlaySound("GUI/buttons/ok");
+    Event("CONFIRMATION_REQUESTED");
+  }
+}
+
+action KEYBOARD_EVENT(float height)
+{
+    ChangeData(keyboardHeight, height, time = 0.3, interpolation = EASE_OUT);
+}

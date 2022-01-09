@@ -1,0 +1,145 @@
+Header:
+    version: 133
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/Button.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "TaskJournalNewbieFinished"
+    size: [960.000000, 640.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent: {}
+        UIDataLocalBindingsComponent:
+            data:
+            - ["string", "imagePath", "\"~res:/Gfx/Lobby/icons/icon_personal-task_l\""]
+        UIIdentifierComponent:
+            id: "newbie_journal_finished"
+    children:
+    -   class: "UIControl"
+        name: "ContentHolder"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/FullScreenPopup/FullscreenPopupWithContentSlot.yaml"
+                args:
+                    "fadeOpacity": "0.300000"
+                    "disableInput": "true"
+                    "contentControl": "Content"
+                    "isButtonVisible": "false"
+                    "padding": "0"
+                eventActions:
+                - ["CLOSE_NOTIFICATION", "BACK_EVENT", ""]
+Slots:
+-   class: "UIControl"
+    name: "Content"
+    input: false
+    components:
+        Anchor:
+            hCenterAnchorEnabled: true
+            vCenterAnchorEnabled: true
+        LinearLayout:
+            orientation: "TopDown"
+            spacing: 32.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfChildrenSum"
+    children:
+    -   class: "UIControl"
+        name: "MainContent"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                orientation: "TopDown"
+                spacing: 24.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfChildrenSum"
+        children:
+        -   class: "UIControl"
+            name: "ImageAndText"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                LinearLayout:
+                    orientation: "TopDown"
+                    spacing: 16.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfChildrenSum"
+            children:
+            -   class: "UIControl"
+                name: "Image"
+                size: [60.000000, 80.000000]
+                input: false
+                components:
+                    Background:
+                        drawType: "DRAW_SCALE_PROPORTIONAL"
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 96.000000
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 96.000000
+                bindings:
+                - ["Background.sprite", "imagePath"]
+            -   class: "UIControl"
+                name: "Header"
+                position: [81.000000, 119.000000]
+                input: false
+                classes: "t-title light color=white-wild-sand-text"
+                components:
+                    UITextComponent:
+                        text: "missionJournal/tutor/NewbieTaskJournalFinishedDialog/title"
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                        align: ["LEFT", "VCENTER"]
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+            -   class: "UIControl"
+                name: "Description"
+                input: false
+                classes: "t-subtitle regular light color=white-wild-sand-text"
+                components:
+                    UITextComponent:
+                        text: "missionJournal/tutor/NewbieTaskJournalFinishedDialog/description"
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                        multiline: "MULTILINE_ENABLED"
+                        align: ["HCENTER", "VCENTER"]
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+        -   prototype: "Button/Button"
+            name: "ButtonPositive"
+            position: [-60.000000, 0.000000]
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                UIDataParamsComponent:
+                    args:
+                        "size": "eButtonSize.NORMAL"
+                        "type": "eButtonType.POSITIVE"
+                        "enabled": "true"
+                        "caption": "\"#common:DialogButton/OK\""
+                    eventActions:
+                    - ["ON_CLICK_BUTTON", "ACCENT_CLICKED", ""]
+                UIIdentifierComponent:
+                    id: "ok_button"

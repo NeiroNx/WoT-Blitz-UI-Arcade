@@ -1,0 +1,193 @@
+Header:
+    version: 130
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/RichText.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "TableRow"
+    size: [308.000000, 32.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "FixedSize"
+            verticalValue: 40.000000
+        UIDataParamsComponent:
+            params:
+            - ["bool", "isLast", "false", "false"]
+            - ["int", "progress", "0", "42"]
+            - ["SkillLevel", "level", "null", "{ }"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["float", "lvl", "when level.trained or level.selected -> 1.000000, 0.500000"]
+            - ["string", "textStyle", "when level.trained or level.selected -> \"t-subtitle regular white-wild-sand-text\", \"t-subtitle regular white-wild-sand-50-text\""]
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Font.style.yaml"
+    children:
+    -   class: "UIControl"
+        name: "ProgressBackground"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                horizontalValue: 113.000000
+                verticalPolicy: "PercentOfParent"
+        bindings:
+        - ["visible", "level.selected"]
+        children:
+        -   class: "UIControl"
+            name: "ProgressBar"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens3/Lobby/Common/ProgressBar.yaml"
+                    args:
+                        "progressColor": "\"white-wild-sand-10-bg\""
+                        "value": "progress"
+    -   class: "UIControl"
+        name: "Content"
+        position: [0.000000, 8.000000]
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                useRtl: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "Level"
+            position: [0.000000, 10.000000]
+            input: false
+            components:
+                UITextComponent:
+                    multiline: "MULTILINE_ENABLED"
+                    align: ["HCENTER", "VCENTER"]
+                Anchor:
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 90.000000
+                    verticalPolicy: "PercentOfContent"
+            bindings:
+            - ["classes", "textStyle"]
+            - ["UITextComponent.text", "level.level"]
+        -   class: "UIControl"
+            name: "Separator"
+            size: [32.000000, 32.000000]
+            input: false
+            classes: "white-wild-sand-5-bg"
+            components:
+                Background: {}
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 1.000000
+                    verticalPolicy: "PercentOfParent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "Effect"
+            position: [102.000000, 0.000000]
+            input: false
+            components:
+                UITextComponent:
+                    multiline: "MULTILINE_ENABLED"
+                    align: ["HCENTER", "VCENTER"]
+                Anchor:
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 90.000000
+                    verticalPolicy: "PercentOfContent"
+            bindings:
+            - ["classes", "textStyle"]
+            - ["UITextComponent.text", "str(level.effect) + \"%\""]
+        -   class: "UIControl"
+            name: "Separator_1"
+            size: [32.000000, 32.000000]
+            input: false
+            classes: "white-wild-sand-5-bg"
+            components:
+                Background: {}
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 1.000000
+                    verticalPolicy: "PercentOfParent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "Xp"
+            position: [182.000000, 10.000000]
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                UIOpacityComponent: {}
+                Anchor:
+                    vCenterAnchorEnabled: true
+                LinearLayout:
+                    useRtl: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 125.000000
+                    verticalPolicy: "PercentOfMaxChild"
+            bindings:
+            - ["UIOpacityComponent.opacity", "lvl"]
+            children:
+            -   class: "UIControl"
+                name: "Spacer"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 8.000000
+                        verticalPolicy: "PercentOfParent"
+            -   prototype: "RichText/RichText"
+                name: "RichText"
+                components:
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "Formula"
+                        horizontalFormula: "min(parentRest, childrenSum)"
+                    UIDataParamsComponent:
+                        args:
+                            "baseFontSize": "\"t-body\""
+                            "baseFontStyle": "\"regular\""
+                            "baseFontColor": "\"white-wild-sand-50-text\""
+                            "key": "\"%(resource1)\""
+                            "resource1Model": "{ \"quantity\" = level.xp; \"type\" = ResourceType.tankmenXP; }"
+                            "resource2Model": "null"
+                            "resource3Model": "null"
+                            "resource4Model": "null"
+        -   class: "UIControl"
+            name: "Separator_2"
+            size: [32.000000, 32.000000]
+            input: false
+            classes: "white-wild-sand-5-bg"
+            components:
+                Background: {}
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                IgnoreLayout: {}
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 308.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 1.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+            bindings:
+            - ["visible", "not isLast"]

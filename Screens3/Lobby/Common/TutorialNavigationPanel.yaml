@@ -1,0 +1,26 @@
+Header:
+    version: "111"
+Prototypes:
+-   class: "UIControl"
+    name: "NavigationPanelHangarTutorialContent"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        LinearLayout:
+            spacing: 24.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "PercentOfMaxChild"
+        UIDataParamsComponent:
+            params:
+            - ["eTutorialHighlights", "currentHiglightControl", "eTutorialHighlights.kUnknown", "eTutorialHighlights.kResearchButton"]
+        UIDataLocalsComponent:
+            locals:
+            - ["map<eTutorialHighlights,eNintendoSwitchControls>", "labelsForTutorial", "{ eTutorialHighlights.kModuleHangar = eNintendoSwitchControls.Y; eTutorialHighlights.kResearchButton = eNintendoSwitchControls.Y; eTutorialHighlights.kBack = eNintendoSwitchControls.B; eTutorialHighlights.kMenuButton = eNintendoSwitchControls.B; eTutorialHighlights.kTree = eNintendoSwitchControls.Down; eTutorialHighlights.kNation = eNintendoSwitchControls.VArrows; eTutorialHighlights.kBuy = eNintendoSwitchControls.Y; eTutorialHighlights.kToHangarButton = eNintendoSwitchControls.Y; eTutorialHighlights.kBattleButton = eNintendoSwitchControls.X; eTutorialHighlights.kBattleButtonDLC = eNintendoSwitchControls.X; eTutorialHighlights.kModuleGunUpdateHangar = eNintendoSwitchControls.Y; eTutorialHighlights.kTankFirstLevel = eNintendoSwitchControls.VArrows; eTutorialHighlights.kBuyButton = eNintendoSwitchControls.Y; }"]
+        UIChildComponent0:
+            condition: "labelsForTutorial.Contains(currentHiglightControl)"
+            prototypePath: "~res:/UI/Screens3/Common/NintendoSwitch/NavigationPanel/IconWithLabel.yaml"
+            args:
+                "text": "str(currentHiglightControl, eTutorialHighlights, \"keyForSwitchButtons\")"
+                "icon": "when labelsForTutorial.Contains(currentHiglightControl) -> labelsForTutorial[currentHiglightControl], \"\""
+        UIShadowHoleComponent: {}

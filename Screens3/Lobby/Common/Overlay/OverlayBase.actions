@@ -1,0 +1,41 @@
+action INIT 
+{
+    if (wasPushed)
+    {
+        ChangeProperty("**/Overlay", "SizePolicy", "verticalValue", overlayPercentHeight);
+    }
+}
+
+action OVERLAY_SIZE_CHANGED
+{
+    if (wasPushed and not screenWasOpen)
+    {
+        MoveRel("**/Overlay", 0, overlayCalculatedSize);
+        Event("FINISH_PREPARE_OVERLAY");
+        ChangeData(screenWasOpen, true);
+    }
+}
+
+action FINISH_PREPARE_OVERLAY
+{
+    parallel
+    {
+        Event("START_OVERLAY_OPENING_FOR_BATYA");
+        DirectEvent("START_OVERLAY_OPENING", "**/BlurAndFade");
+        MoveRel("**/Overlay", 0, -overlayCalculatedSize, overlayOpeningTime, SINE_OUT);
+        ChangeProperty("**/Overlay", "UIOpacityComponent", "opacity", 1, overlayOpeningTime, EASE_OUT);
+    }
+    Event ("OVERLAY_OPEN_FINISH");
+}
+
+action CLOSE_OVERLAY
+{
+  parallel 
+  {
+    DirectEvent("START_OVERLAY_CLOSING", "**/BlurAndFade");
+    PlaySound("GUI/buttons/close");
+    MoveRel("**/Overlay", 0, overlayCalculatedSize, overlayClosingTime, EASE_IN);
+    ChangeProperty("**/Overlay", "UIOpacityComponent", "opacity", 0, overlayClosingTime, EASE_IN);
+  }
+  Event ("BACK_EVENT");
+}

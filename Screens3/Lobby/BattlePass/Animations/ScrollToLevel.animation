@@ -1,0 +1,37 @@
+animation ScrollToLevel
+{
+     ScrollToEnsureControlOnScreen("test");
+   if (battlePassView.levelIndexForScroll >= 0)
+   {
+        ScrollToEnsureControlOnScreen("**/level" + str(battlePassView.levelIndexForScroll), 3, eScrollToControlPolicy.kCenter);
+   }
+   else
+   {
+        if (not battlePassView.returnedFromShowcase)
+        {
+	     if (battlePassView.previousActiveLevelIndex != -1 and battlePassView.previousActiveLevelIndex != battlePass.activeLevelIndex)
+	     {
+               if (isCompleted and not isNull(battlePass.chest))
+               {
+                    ScrollToEnsureControlOnScreen("**/Chest" , (currentLevelProgress + currentLevelIndex * 10 - oldLevelIndex * 10 - oldLevelProgress) * 0.05 + 1.0, eScrollToControlPolicy.kCenter);
+               }
+               else
+               {
+                    ScrollToEnsureControlOnScreen("**/level" + str(battlePass.activeLevelIndex), (currentLevelProgress + currentLevelIndex * 10 - oldLevelIndex * 10 - oldLevelProgress) * 0.05 + 0.5, eScrollToControlPolicy.kCenter);
+               }
+          }
+	     else
+	     {
+               if (isCompleted and not isNull(battlePass.chest))
+               {
+                    ScrollToEnsureControlOnScreen("**/Chest", 0, eScrollToControlPolicy.kCenter);
+               }
+               else
+               {
+                    ScrollToEnsureControlOnScreen("**/level" + str(battlePass.activeLevelIndex), 0, eScrollToControlPolicy.kCenter);
+               } 
+          }
+        }
+   }
+   Event("ON_SCROLL_ENDED");
+}

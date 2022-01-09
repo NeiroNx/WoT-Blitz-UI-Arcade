@@ -1,0 +1,73 @@
+Header:
+    version: 120
+Prototypes:
+-   class: "UIControl"
+    name: "PopupLayer"
+    visible: false
+    components:
+        UIAnimationComponent:
+            animations: "SET_SKIP_NOT_TUTOR_FLAG,~res:/UI/Screens3/Lobby/PopupLayer.animation"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        ModalInput: {}
+        UIInputEventComponent:
+            onTouchUpInside: "POPUP_ON_CLOSE_ACTION"
+        UIVirtualActionEventComponent0:
+            virtualKeyAction: "Escape"
+            keyDownEvent: "POPUP_ON_CLOSE_ACTION_BY_SHORTCUT"
+        UIVirtualActionEventComponent1:
+            virtualKeyAction: "Extra1"
+            keyDownEvent: "SERVICE_1"
+        UIVirtualActionEventComponent2:
+            virtualKeyAction: "Extra2"
+            keyDownEvent: "SERVICE_2"
+        UIVirtualActionEventComponent3:
+            virtualKeyAction: "ActionLeft"
+            keyDownEvent: "SKIP_HINT"
+        UIVirtualActionEventComponent4:
+            virtualKeyAction: "ActionRight"
+            keyDownEvent: "SKIP_HINT"
+        UIVirtualActionEventComponent5:
+            virtualKeyAction: "ActionUp"
+            keyDownEvent: "ACTION_UP"
+        UIVirtualActionEventComponent6:
+            virtualKeyAction: "ActionDown"
+            keyDownEvent: "ACTION_DOWN"
+        UIVirtualActionEventComponent7:
+            virtualKeyAction: "BasePrevious"
+            keyDownEvent: "SKIP_HINT_BASE_PREVIOUS"
+        UIVirtualActionEventComponent8:
+            virtualKeyAction: "BaseNext"
+            keyDownEvent: "SKIP_HINT_BASE_NEXT"
+        UIVirtualActionEventComponent9:
+            virtualKeyAction: "OptionalPrevious"
+            keyDownEvent: "SKIP_HINT"
+        UIVirtualActionEventComponent10:
+            virtualKeyAction: "OptionalNext"
+            keyDownEvent: "SKIP_HINT"
+        UIVirtualActionEventComponent11:
+            virtualKeyAction: "Options"
+            keyDownEvent: "SKIP_HINT"
+        UIVirtualActionEventComponent12:
+            virtualKeyAction: "More"
+            keyDownEvent: "SKIP_HINT"
+        UIShortcutEventComponent:
+            shortcuts: "POPUP_ON_CLOSE_ACTION,Escape;POPUP_ON_CLOSE_ACTION,Back"
+        UIDataParamsComponent:
+            params:
+            - ["TutorialDataModel", "tutorialData", "{ }", "{ }"]
+            events:
+            - "SKIP_HINT"
+            - "ACTION_UP"
+            - "ACTION_DOWN"
+            - "SERVICE_2"
+            - "SERVICE_1"
+            - "POPUP_ON_CLOSE_ACTION_BY_SHORTCUT"
+            - "POPUP_ON_CLOSE_ACTION"
+            - "SET_SKIP_NOT_TUTOR_FLAG_EVENT"
+            - "SKIP_HINT_BASE_NEXT"
+            - "SKIP_HINT_BASE_PREVIOUS"
+        UILayerComponent: {}
+    bindings:
+    - ["UILayerComponent.layer", "when tutorialData.currentHint == eTutorialHint.kSpendFreeXP and tutorialData.currentHighlightControl == eTutorialHighlights.kResearchDialogFreeXP -> 1, 0"]

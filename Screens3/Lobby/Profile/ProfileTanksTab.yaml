@@ -1,0 +1,443 @@
+Header:
+    version: 128
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Profile/Common/Spacer.yaml"
+- "~res:/UI/Screens3/Common/VerticalScrollBar.yaml"
+- "~res:/UI/Screens3/Lobby/Profile/Common/ImageTabWithSort.yaml"
+- "~res:/UI/Screens3/Lobby/Inventory/Common/RightPanelTabsHeaderCapsTitle.yaml"
+- "~res:/UI/Screens3/Lobby/Inventory/Common/DynamicTopSpacer.yaml"
+- "~res:/UI/Screens3/Lobby/Inventory/Common/DynamicHorizontalPadding.yaml"
+- "~res:/UI/Screens3/Lobby/Common/ToggleWithLabel.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "TanksTab"
+    size: [1102.000000, 919.000000]
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "SWITCH_SORT_TYPE, ~res:/UI/Screens3/Lobby/Profile/Animations/ScrollToStart.animation"
+        LinearLayout:
+            orientation: "TopDown"
+            padding: "8;0"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["ProfileViewModel", "profile", "null", "{ }"]
+            events:
+            - "ON_TANK_CLICKED"
+            - "ON_ONLY_HANGAR_VEHICLE_CHANGED(bool isTurnedOn)"
+            - "SWITCH_SORT_TYPE"
+        UIDataLocalVarsComponent:
+            data:
+            - ["int", "activeTab", "0"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["bool", "isSelfProfile", "profile.profileType == ePlayerProfileType.SELF"]
+            - ["VehicleDataModel", "selectedVehicle", "profile.selectedVehicle"]
+            - ["string", "selectedCellName", "when isNull(selectedVehicle) -> \"\", format(\"TankCell:%(tNation):%(tName)\", { \"tNation\" = str(selectedVehicle.nation, eNation, \"autotests\"); \"tName\" = selectedVehicle.technicalName; })"]
+            - ["bool", "tankListEmpty", "profile.tankListCells.Size() == 0"]
+            - ["string", "tankAwardTabPath", "\"~res:/UI/Screens3/Lobby/Profile/Common/TanksAwardsTabContent.yaml\""]
+            - ["string", "tankStatsTabPath", "\"~res:/UI/Screens3/Lobby/Profile/Common/TankStatTabContent.yaml\""]
+        UIDataOnEventComponent0:
+            eventName: "ON_SELECT_TAB"
+            modelFieldExpression: "activeTab"
+            dataExpression: "_event"
+    children:
+    -   prototype: "DynamicTopSpacer/DynamicTopSpacer"
+        name: "DynamicTopSpacer"
+    -   class: "UIControl"
+        name: "Content"
+        position: [80.000000, 0.000000]
+        classes: "inventory-limited-width"
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+            LinearLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Common/Desktop.style.yaml"
+        children:
+        -   prototype: "DynamicHorizontalPadding/DynamicHorizontalPadding"
+            name: "DynamicHorizontalPadding"
+            classes: "padding fixed-padding desktop-unvisible"
+        -   class: "UIControl"
+            name: "LeftWrapper"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                LinearLayout: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            children:
+            -   class: "UIControl"
+                name: "SafeAreaInset"
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "Formula"
+                        horizontalFormula: "safeAreaInsets.left"
+                        verticalPolicy: "PercentOfParent"
+            -   class: "UIControl"
+                name: "Left"
+                input: false
+                components:
+                    LinearLayout:
+                        orientation: "TopDown"
+                        padding: "8; 0"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                children:
+                -   class: "UIControl"
+                    name: "HeaderWrapper"
+                    input: false
+                    components:
+                        LinearLayout:
+                            orientation: "TopDown"
+                            padding: "8"
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfChildrenSum"
+                    children:
+                    -   class: "UIControl"
+                        name: "Header"
+                        position: [0.000000, 8.000000]
+                        input: false
+                        components:
+                            LinearLayout:
+                                padding: "8; 16"
+                                spacing: 24.000000
+                                dynamicSpacing: true
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                verticalPolicy: "FixedSize"
+                                verticalValue: 48.000000
+                        children:
+                        -   class: "UIControl"
+                            name: "Left"
+                            position: [33.500000, 0.000000]
+                            components:
+                                LinearLayout:
+                                    spacing: 8.000000
+                                    dynamicSpacing: true
+                                SizePolicy:
+                                    horizontalPolicy: "PercentOfChildrenSum"
+                                    horizontalMin: 176.000000
+                                    verticalPolicy: "PercentOfParent"
+                            children:
+                            -   prototype: "ImageTabWithSort/ImageTabWithSort"
+                                name: "SortByLevel"
+                                components:
+                                    UIDataParamsComponent:
+                                        args:
+                                            "inverseSort": "profile.inverseSort"
+                                            "selected": "profile.sortMode == eTankSortMode.SORT_BY_LEVEL"
+                                            "type": "eTankSortMode.SORT_BY_LEVEL"
+                                        eventActions:
+                                        - ["ON_CLICK_BUTTON", "SWITCH_SORT_TYPE", "eTankSortMode.SORT_BY_LEVEL"]
+                            -   prototype: "ImageTabWithSort/ImageTabWithSort"
+                                name: "SortByClass"
+                                position: [97.500000, 0.000000]
+                                components:
+                                    UIDataParamsComponent:
+                                        args:
+                                            "inverseSort": "profile.inverseSort"
+                                            "selected": "profile.sortMode == eTankSortMode.SORT_BY_CLASS"
+                                            "type": "eTankSortMode.SORT_BY_CLASS"
+                                        eventActions:
+                                        - ["ON_CLICK_BUTTON", "SWITCH_SORT_TYPE", "eTankSortMode.SORT_BY_CLASS"]
+                            -   prototype: "ImageTabWithSort/ImageTabWithSort"
+                                name: "SortByNation"
+                                position: [195.000000, 0.000000]
+                                components:
+                                    UIDataParamsComponent:
+                                        args:
+                                            "inverseSort": "profile.inverseSort"
+                                            "selected": "profile.sortMode == eTankSortMode.SORT_BY_NATION"
+                                            "type": "eTankSortMode.SORT_BY_NATION"
+                                        eventActions:
+                                        - ["ON_CLICK_BUTTON", "SWITCH_SORT_TYPE", "eTankSortMode.SORT_BY_NATION"]
+                        -   class: "UIControl"
+                            name: "Right"
+                            position: [208.000000, 0.000000]
+                            size: [356.500000, 64.000000]
+                            components:
+                                LinearLayout:
+                                    spacing: 8.000000
+                                SizePolicy:
+                                    horizontalPolicy: "PercentOfParent"
+                                    verticalPolicy: "PercentOfParent"
+                            children:
+                            -   class: "UIControl"
+                                name: "Spacer"
+                                size: [32.000000, 32.000000]
+                                input: false
+                                components:
+                                    SizePolicy:
+                                        horizontalPolicy: "PercentOfParent"
+                                        verticalPolicy: "PercentOfParent"
+                            -   prototype: "ImageTabWithSort/ImageTabWithSort"
+                                name: "SortByBattlesLevel"
+                                components:
+                                    SizePolicy:
+                                        horizontalPolicy: "PercentOfParent"
+                                        horizontalValue: 100.000000
+                                        horizontalMin: 64.000000
+                                        horizontalMax: 128.000000
+                                    UIDataParamsComponent:
+                                        args:
+                                            "inverseSort": "profile.inverseSort"
+                                            "selected": "profile.sortMode == eTankSortMode.SORT_BY_BATTLES"
+                                            "type": "eTankSortMode.SORT_BY_BATTLES"
+                                        eventActions:
+                                        - ["ON_CLICK_BUTTON", "SWITCH_SORT_TYPE", "eTankSortMode.SORT_BY_BATTLES"]
+                            -   prototype: "ImageTabWithSort/ImageTabWithSort"
+                                name: "SortByVictories"
+                                position: [97.500000, 0.000000]
+                                components:
+                                    SizePolicy:
+                                        horizontalPolicy: "PercentOfParent"
+                                        horizontalValue: 100.000000
+                                        horizontalMin: 64.000000
+                                        horizontalMax: 128.000000
+                                    UIDataParamsComponent:
+                                        args:
+                                            "inverseSort": "profile.inverseSort"
+                                            "selected": "profile.sortMode == eTankSortMode.SORT_BY_WINS"
+                                            "type": "eTankSortMode.SORT_BY_WINS"
+                                        eventActions:
+                                        - ["ON_CLICK_BUTTON", "SWITCH_SORT_TYPE", "eTankSortMode.SORT_BY_WINS"]
+                            -   prototype: "ImageTabWithSort/ImageTabWithSort"
+                                name: "SortByExperience"
+                                position: [195.000000, 0.000000]
+                                components:
+                                    SizePolicy:
+                                        horizontalPolicy: "PercentOfParent"
+                                        horizontalValue: 100.000000
+                                        horizontalMin: 64.000000
+                                        horizontalMax: 128.000000
+                                    UIDataParamsComponent:
+                                        args:
+                                            "inverseSort": "profile.inverseSort"
+                                            "selected": "profile.sortMode == eTankSortMode.SORT_BY_EXPERIENCE"
+                                            "type": "eTankSortMode.SORT_BY_EXPERIENCE"
+                                        eventActions:
+                                        - ["ON_CLICK_BUTTON", "SWITCH_SORT_TYPE", "eTankSortMode.SORT_BY_EXPERIENCE"]
+                            -   prototype: "ImageTabWithSort/ImageTabWithSort"
+                                name: "SortByMiddleDamage"
+                                position: [292.500000, 0.000000]
+                                components:
+                                    SizePolicy:
+                                        horizontalPolicy: "PercentOfParent"
+                                        horizontalValue: 100.000000
+                                        horizontalMin: 64.000000
+                                        horizontalMax: 128.000000
+                                    UIDataParamsComponent:
+                                        args:
+                                            "inverseSort": "profile.inverseSort"
+                                            "selected": "profile.sortMode == eTankSortMode.SORT_BY_AVERAGE_DAMAGE"
+                                            "type": "eTankSortMode.SORT_BY_AVERAGE_DAMAGE"
+                                        eventActions:
+                                        - ["ON_CLICK_BUTTON", "SWITCH_SORT_TYPE", "eTankSortMode.SORT_BY_AVERAGE_DAMAGE"]
+                -   class: "UIControl"
+                    name: "VehicleListContainer"
+                    input: false
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfParent"
+                    children:
+                    -   class: "UIScrollView"
+                        name: "UIScrollView"
+                        size: [800.000000, 800.000000]
+                        autoUpdate: true
+                        centerContent: false
+                        components:
+                            Anchor:
+                                leftAnchorEnabled: true
+                                rightAnchorEnabled: true
+                                topAnchorEnabled: true
+                                bottomAnchorEnabled: true
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                verticalPolicy: "PercentOfParent"
+                        children:
+                        -   class: "UIScrollViewContainer"
+                            name: "scrollContainerControl"
+                            components:
+                                UIAnimationComponent:
+                                    animations: "_INIT,~res:/UI/Screens3/Lobby/Profile/Animations/ScrollToTank.animation"
+                                Anchor: {}
+                                LinearLayout:
+                                    orientation: "TopDown"
+                                    spacing: 1.000000
+                                SizePolicy:
+                                    horizontalPolicy: "PercentOfParent"
+                                    verticalPolicy: "PercentOfChildrenSum"
+                                UIRepeatComponent:
+                                    control: "~res:/UI/Screens3/Lobby/Profile/Common/TankListCell.yaml"
+                                    dataContainer: "profile.tankListCells"
+                                    args:
+                                        "tankStatsModel": "_item.tankStatsModel"
+                                        "vehicleDataModel": "_item.vehicleDataModel"
+                                        "selectedTankCompDescr": "profile.selectedTankCompDescr"
+                                        "itemCompDescr": "_item.itemCompDescr"
+                                        "battles": "_item.battles"
+                                        "winsPercent": "_item.winsPercent"
+                                        "avgExperience": "_item.avgExperience"
+                                        "avgDamage": "_item.avgDamage"
+                                    eventActions:
+                                    - ["ON_TANK_CLICKED", "ON_TANK_CLICKED", "_event"]
+                                    elementNameExpression: "format(\"TankCell:%(tNation):%(tName)\", { \"tNation\" = str(_item.nationID, eNation, \"autotests\"); \"tName\" = _item.vehicleDataModel.technicalName; })"
+                                    loadingPolicy: "Lazy"
+                                    loadingDistance: 160.000000
+                                    unloadingDistance: 320.000000
+                    -   prototype: "VerticalScrollBar/VerticalScrollBar"
+                        name: "VerticalScrollBar"
+                        components:
+                            Anchor:
+                                rightAnchorEnabled: true
+                                rightAnchor: -8.000000
+                                topAnchorEnabled: true
+                                bottomAnchorEnabled: true
+                            IgnoreLayout: {}
+                            ScrollBarDelegate:
+                                delegate: "../UIScrollView"
+                        children:
+                        -   path: "slider"
+                            visible: true
+                            children: []
+                -   class: "UIControl"
+                    name: "Footer"
+                    size: [32.000000, 32.000000]
+                    input: false
+                    components:
+                        LinearLayout:
+                            spacing: 16.000000
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 80.000000
+                    bindings:
+                    - ["visible", "isSelfProfile"]
+                    children:
+                    -   prototype: "ToggleWithLabel/ToggleWithLabel"
+                        name: "ToggleWithLabel"
+                        components:
+                            Anchor:
+                                vCenterAnchorEnabled: true
+                            UIDataParamsComponent:
+                                args:
+                                    "text": "\"#achievementScreen:Tanks/GarageOnly\""
+                                    "isDarkMode": "false"
+                                    "turnedOn": "profile.showTankInGarageOnly"
+                                eventActions:
+                                - ["ON_TOGGLE_CHANGED", "ON_ONLY_HANGAR_VEHICLE_CHANGED", "_event.isTurnedOn"]
+        -   class: "UIControl"
+            name: "Spacer"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 16.000000
+                    verticalPolicy: "PercentOfParent"
+        -   class: "UIControl"
+            name: "RightPanelWrapper"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                LinearLayout:
+                    orientation: "TopDown"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfParent"
+            children:
+            -   class: "UIControl"
+                name: "RightPanel"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfMaxChild"
+                        verticalPolicy: "PercentOfParent"
+                    UIChildComponent0:
+                        prototypePath: "~res:/UI/Screens3/Lobby/Inventory/Common/RightPanel.yaml"
+                        args:
+                            "content": "RightPanelContent"
+                            "header": "RightPanelHeader"
+            -   class: "UIControl"
+                name: "Spacer"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 16.000000
+        -   prototype: "DynamicHorizontalPadding/DynamicHorizontalPadding"
+            name: "DynamicHorizontalPadding_1"
+            classes: "padding only-notch-padding desktop-unvisible"
+Slots:
+-   class: "UIControl"
+    name: "RightPanelHeader"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        LinearLayout:
+            spacing: 20.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfMaxChild"
+    children:
+    -   prototype: "RightPanelTabsHeaderCapsTitle/RightPanelTabsHeaderCapsTitle"
+        name: "RightPanelTabsHeaderCapsTitle"
+        position: [116.000000, 0.000000]
+        components:
+            UIDataParamsComponent:
+                args:
+                    "activeTab": "activeTab"
+                    "title": "when activeTab == eProfileVehicleTab.kStats -> localize(\"#achievementScreen:Tanks/TanksResults\"), when activeTab == eProfileVehicleTab.kAwards -> localize(\"#achievementScreen:Tanks/Achievements\"), \"\""
+                    "info": "[ { \"sprite\" = \"~res:/Gfx/Lobby/icons/icon_list_s\"; }; { \"sprite\" = \"~res:/Gfx/Lobby/icons/icon_medal_s\"; }; ]"
+-   class: "UIControl"
+    name: "RightPanelContent"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfChildrenSum"
+    children:
+    -   class: "UIControl"
+        name: "StatsTab"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfChildrenSum"
+            UIChildComponent0:
+                childType: "kOldExpression"
+                control: "when activeTab == eProfileVehicleTab.kStats and not isNull(profile.selectedTankDossierDescription) and not tankListEmpty -> tankStatsTabPath, \"\""
+                args:
+                    "dossier": "profile.selectedTankDossierDescription"
+        bindings:
+        - ["visible", "when activeTab == eProfileVehicleTab.kStats and not isNull(profile.selectedTankDossierDescription) -> true, false"]
+    -   class: "UIControl"
+        name: "AwardsTab"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfChildrenSum"
+            UIChildComponent0:
+                childType: "kOldExpression"
+                control: "when activeTab == eProfileVehicleTab.kAwards -> tankAwardTabPath, \"\""
+                args:
+                    "profile": "profile"
+        bindings:
+        - ["visible", "when activeTab == eProfileVehicleTab.kAwards -> true, false"]

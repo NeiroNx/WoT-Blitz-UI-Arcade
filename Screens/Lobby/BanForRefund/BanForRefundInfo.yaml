@@ -1,0 +1,146 @@
+Header:
+    version: 127
+ImportedPackages:
+- "~res:/UI/Screens/Hangar/BasePopup.yaml"
+- "~res:/UI/Screens/Common/StyledBackButton.yaml"
+- "~res:/UI/Screens/Common/ScrollBar.yaml"
+- "~res:/UI/Screens3/Lobby/Common/Blur.yaml"
+Controls:
+-   class: "UIControl"
+    name: "BanInfo"
+    size: [960.000000, 640.000000]
+    components:
+        Anchor:
+            leftAnchorEnabled: true
+            rightAnchorEnabled: true
+            topAnchorEnabled: true
+            bottomAnchorEnabled: true
+        UIDataSourceComponent0:
+            source: "~res:/UI/Examples/Model/Lobby/BanForRefund/BanForRefund.model"
+    children:
+    -   prototype: "Blur/Blur"
+        name: "BlurBG"
+        components:
+            Background:
+                usePostProcessedSprite: false
+            UIPostProcessTextureComponent0:
+                scale: 0.200000
+            UIPostProcessTextureComponent1:
+                scale: 0.200000
+            UIPostProcessTextureComponent2:
+                scale: 0.200000
+        children:
+        -   class: "UIControl"
+            name: "Background"
+            classes: "screen-background"
+            components:
+                Background:
+                    color: [0.058824, 0.109804, 0.141176, 1.000000]
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                StyleSheet:
+                    styles: "~res:/UI/Styles/BackgroundStyles.yaml"
+    -   prototype: "StyledBackButton/StyledBackButton"
+        name: "BackButton"
+        position: [86.000000, 129.000000]
+        classes: "button button-color-gray button-close-sound"
+        components:
+            StyleSheet:
+                inheritsStylesFromParent: false
+                styles: "~res:/UI/Screens/Common/StyledButton.yaml;~res:/UI/Styles/ButtonSoundStyles.yaml"
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+                vCenterAnchor: -30.000000
+            LinearLayout:
+                orientation: "TopDown"
+                spacing: 30.000000
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 580.000000
+                verticalPolicy: "PercentOfChildrenSum"
+        children:
+        -   class: "UIControl"
+            name: "Title1"
+            input: false
+            classes: "header3 color=text-color-white"
+            components:
+                UITextComponent:
+                    text: "refund_ban/InfoScreen/WhatHappenedTitle"
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                    multiline: "MULTILINE_ENABLED"
+                    align: ["LEFT", "VCENTER"]
+                    useRtlAlign: "USE_BY_SYSTEM"
+                Anchor:
+                    leftAnchorEnabled: true
+                    rightAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens/Fonts.yaml"
+        -   class: "UIControl"
+            name: "Description1"
+            input: false
+            classes: "text1 color=text-color-blue"
+            components:
+                UITextComponent:
+                    text: "refund_ban/InfoScreen/CommonDescription"
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                    multiline: "MULTILINE_ENABLED"
+                    align: ["LEFT", "VCENTER"]
+                    useRtlAlign: "USE_BY_SYSTEM"
+                Anchor:
+                    leftAnchorEnabled: true
+                    rightAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens/Fonts.yaml"
+        -   class: "UIControl"
+            name: "Title2"
+            input: false
+            classes: "header3 color=text-color-white"
+            components:
+                UITextComponent:
+                    text: "refund_ban/InfoScreen/WhatNextTitle"
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                    multiline: "MULTILINE_ENABLED"
+                    align: ["LEFT", "VCENTER"]
+                    useRtlAlign: "USE_BY_SYSTEM"
+                Anchor:
+                    leftAnchorEnabled: true
+                    rightAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens/Fonts.yaml"
+        -   class: "UIControl"
+            name: "Description2"
+            input: false
+            classes: "text-color-ignore-parent"
+            components:
+                RichContent:
+                    baseClasses: "text-color-blue text1"
+                RichContentAliases0:
+                    aliases:
+                    - ["link-support", "<object name=\"LinkSupport\" path=\"~res:/UI/Screens/Lobby/BanForRefund/LinkSupport.yaml\" prototype=\"LinkSupport\" />"]
+                Anchor:
+                    leftAnchorEnabled: true
+                    rightAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfChildrenSum"
+                FlowLayout:
+                    hSpacing: 5.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens/Fonts.yaml"
+            bindings:
+            - ["RichContent.text", "when (unbanPermitted) -> localize(\"refund_ban/InfoScreen/MakeRefundDescription\"), localize(\"refund_ban/InfoScreen/ContactPlayerSupportDescription\")"]

@@ -1,0 +1,22 @@
+animation LoaderCircle(bool replacing)
+{
+	ChangeProperty("**/Loader","RadialProgressComponent","progress", 0);
+	repeat  
+	{
+		parallel 
+		{
+			sequence 
+			{
+				Rotate ("**/Loader", 0);
+				Rotate ("**/Loader", 720, animationTime);
+			}
+
+			sequence 
+			{
+				ChangeProperty("**/Loader","RadialProgressComponent","progress", 0.90000, animationTime/2);
+				ChangeProperty("**/Loader","RadialProgressComponent","progress", 0, animationTime/2);
+			}
+			
+		}
+	}
+}

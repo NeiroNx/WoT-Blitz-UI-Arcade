@@ -1,0 +1,135 @@
+Header:
+    version: "79"
+Prototypes:
+-   class: "UIControl"
+    name: "Header"
+    size: [1040.000000, 48.000000]
+    classes: "button-choose-sound section-header long-element"
+    components:
+        UIAnimationComponent:
+            animations: "ON_PRESSED,~res:/UI/Screens3/Lobby/Profile/Common/SectionHeader.animation"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "FixedSize"
+            verticalValue: 48.000000
+        UIInputEventComponent:
+            onTouchUpInside: "ON_PRESSED"
+        UIDataParamsComponent:
+            params:
+            - ["string", "title", "\"\"", "\"title\""]
+            - ["string", "counter", "\"\"", "\"5/10\""]
+            - ["bool", "expanded", "true", "true"]
+            events:
+            - "ON_PRESSED"
+        Sound: {}
+        StyleSheet:
+            styles: "~res:/UI/Screens3/ButtonSound.style.yaml"
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        position: [520.000000, 24.000000]
+        pivot: [0.500000, 0.500000]
+        input: false
+        classes: "content-area"
+        components:
+            UIOpacityComponent: {}
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Lobby/Profile/Common/SectionHeader.style.yaml"
+        children:
+        -   class: "UIControl"
+            name: "Hover"
+            input: false
+            classes: "hover white-wild-sand-10-bg"
+            components:
+                Background:
+                    drawType: "DRAW_STRETCH_BOTH"
+                    sprite: "~res:/Gfx/Lobby/backgrounds/bg_r1"
+                    leftRightStretchCap: 2.000000
+                    topBottomStretchCap: 1.000000
+                UIOpacityComponent: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/Lobby/Profile/Common/SectionHeader.style.yaml"
+        -   class: "UIControl"
+            name: "Background"
+            input: false
+            classes: "white-wild-sand-15-bg"
+            components:
+                Background:
+                    drawType: "DRAW_STRETCH_BOTH"
+                    sprite: "~res:/Gfx/Lobby/backgrounds/bg_r1"
+                    leftRightStretchCap: 2.000000
+                    topBottomStretchCap: 1.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "Title"
+            input: false
+            classes: "t-caps bold color=white-wild-sand-text"
+            components:
+                UITextComponent: {}
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml"
+            bindings:
+            - ["UITextComponent.text", "title"]
+        -   class: "UIControl"
+            name: "Container"
+            input: false
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                LinearLayout:
+                    dynamicPadding: true
+                    spacing: 8.000000
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "childrenSum + 16"
+                    verticalPolicy: "PercentOfChildrenSum"
+            children:
+            -   class: "UIControl"
+                name: "Counter"
+                input: false
+                classes: "t-caps bold color=white-wild-sand-50-text"
+                components:
+                    UITextComponent: {}
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml"
+                bindings:
+                - ["UITextComponent.text", "counter"]
+            -   class: "UIControl"
+                name: "Expander"
+                pivot: [0.500000, 0.500000]
+                input: false
+                components:
+                    Background:
+                        drawType: "DRAW_SCALE_PROPORTIONAL"
+                        sprite: "~res:/Gfx/Lobby/icons/icon_chevron_n"
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 24.000000
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 24.000000

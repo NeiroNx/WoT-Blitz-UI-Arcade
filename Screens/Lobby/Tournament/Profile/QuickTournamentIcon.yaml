@@ -1,0 +1,86 @@
+Header:
+    version: "108"
+Prototypes:
+-   class: "UIControl"
+    name: "QuickTournamentIcon"
+    size: [40.000000, 40.000000]
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens/Lobby/Tournament/Profile/QuickTournamentIcon.animation"
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 40.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 40.000000
+        UIDataParamsComponent:
+            params:
+            - ["float", "scale", "0.400000", "0.400000"]
+        UIDataLocalsComponent:
+            locals:
+            - ["float", "scaleSave", "0.400000"]
+    children:
+    -   class: "UIControl"
+        name: "BlueCircle"
+        size: [40.000000, 40.000000]
+        input: false
+        components:
+            UITextureComponent:
+                spritePath: "~res:/Gfx/Lobby/backgrounds/tournament/bg_quick-tournaments_3"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+    -   class: "UIControl"
+        name: "Light1"
+        position: [23.000000, 14.000000]
+        size: [40.000000, 40.000000]
+        pivot: [0.500000, 0.500000]
+        visible: true
+        input: false
+        components:
+            UITextureComponent:
+                spritePath: "~res:/Gfx/Lobby/backgrounds/tournament/bg_quick-tournaments_4"
+    -   class: "UIControl"
+        name: "Light2"
+        position: [33.000000, 18.000000]
+        size: [40.000000, 40.000000]
+        scale: [0.050000, 0.050000]
+        pivot: [0.500000, 0.500000]
+        visible: true
+        input: false
+        components:
+            UITextureComponent:
+                spritePath: "~res:/Gfx/Lobby/backgrounds/tournament/bg_quick-tournaments_4"
+    -   class: "UIControl"
+        name: "Light3"
+        position: [13.000000, 11.000000]
+        size: [40.000000, 40.000000]
+        scale: [0.050000, 0.050000]
+        pivot: [0.500000, 0.500000]
+        visible: true
+        input: false
+        components:
+            UITextureComponent:
+                spritePath: "~res:/Gfx/Lobby/backgrounds/tournament/bg_quick-tournaments_4"
+    -   class: "UIControl"
+        name: "Fire"
+        size: [32.000000, 32.000000]
+        visible: true
+        input: false
+        components:
+            UITextureComponent:
+                spritePath: "~res:/Gfx/Lobby/backgrounds/tournament/bg_quick-tournaments_2"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+    -   class: "UIControl"
+        name: "WhiteCircle"
+        size: [32.000000, 32.000000]
+        visible: true
+        input: false
+        components:
+            UITextureComponent:
+                spritePath: "~res:/Gfx/Lobby/backgrounds/tournament/bg_quick-tournaments_1"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"

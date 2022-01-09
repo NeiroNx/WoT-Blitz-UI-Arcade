@@ -1,0 +1,109 @@
+Header:
+    version: "93"
+Controls:
+-   class: "UIControl"
+    name: "Content"
+    size: [130.000000, 106.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["StuffResource", "stuff", "null", "{ title = \"storage/Items/FreeXPBooster/Regular/Title\"; description = \"storage/Items/FreeXPBooster/Rare/Description\"; icon = \"~res:/Gfx/Shared/boosters/booster_free-xp\"; iconUrl = \"\"; quantity = 20; lifetime = 604800L; grade = ArtefactGrade.rare; type = ArtefactType.booster; itemCompactDescr = 0; isEnough = false; }"]
+            - ["bool", "showUnlockIcon", "false", "true"]
+        UIDataLocalsComponent:
+            locals: []
+    children:
+    -   class: "UIControl"
+        name: "Grade"
+        input: false
+        components:
+            UITextureComponent:
+                spritePath: "~res:/Gfx/UI/Storage/Items_back.psd"
+                drawType: "DRAW_SCALE_PROPORTIONAL"
+                perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "min(99, parent -2)"
+                verticalPolicy: "Formula"
+                verticalFormula: "min(68, parent -2)"
+        bindings:
+        - ["visible", "not showUnlockIcon"]
+        - ["UITextureComponent.color", "when stuff.grade == ArtefactGrade.common -> rgba(4214879, 1.000000), stuff.grade == ArtefactGrade.rare -> rgba(408010, 1.000000), stuff.grade == ArtefactGrade.unique -> rgba(6948762, 1.000000), stuff.grade == ArtefactGrade.legendary -> rgba(14588165, 1.000000), rgba(16777215, 0.000000)"]
+    -   class: "UIControl"
+        name: "IconContainer"
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "Padding"
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "min(96, parent - 16)"
+                    verticalPolicy: "Formula"
+                    verticalFormula: "min(96, parent - 16)"
+            children:
+            -   class: "UIControl"
+                name: "Icon"
+                input: false
+                components:
+                    UITextureComponent:
+                        drawType: "DRAW_SCALE_PROPORTIONAL"
+                        perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                bindings:
+                - ["visible", "empty(stuff.iconUrl) and not showUnlockIcon"]
+                - ["UITextureComponent.spritePath", "stuff.icon"]
+            -   class: "UIControl"
+                name: "IconUrl"
+                input: false
+                components:
+                    Background:
+                        drawType: "DRAW_SCALE_PROPORTIONAL"
+                        perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                    UIUrlImageComponent:
+                        placeholderScenePath: "~res:/UI/Screens/Common/LoadingControl.yaml"
+                        placeholderControlName: "LoadingControl"
+                        downscaleEnabled: false
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                bindings:
+                - ["visible", "not empty(stuff.iconUrl) and not showUnlockIcon"]
+                - ["UIUrlImageComponent.imageUrl", "stuff.iconUrl"]
+            -   class: "UIControl"
+                name: "DefaultIcon"
+                input: false
+                components:
+                    UITextureComponent:
+                        spritePath: "~res:/Gfx/UI/BattleLoadingScreen/Tips/camouflage_tank.psd"
+                        drawType: "DRAW_SCALE_PROPORTIONAL_ONE"
+                        perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        horizontalMax: 96.000000
+                        verticalPolicy: "PercentOfParent"
+                        verticalMax: 60.000000
+                bindings:
+                - ["visible", "showUnlockIcon"]

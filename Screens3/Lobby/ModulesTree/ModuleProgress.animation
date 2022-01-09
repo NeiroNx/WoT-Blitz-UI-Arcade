@@ -1,0 +1,14 @@
+animation MODULE_PROGRESS_BAR
+{
+	if (lastDisplayedTankXp >= 0 and lastDisplayedTankXp < tankXp and lastDisplayedTankXp < cost and not isAnimationInProgress)
+	{
+		ChangeData(isAnimationInProgress, true);
+		ChangeProperty("**/ParticleAnchor","SizePolicy","horizontalValue",0); 
+		StartParticles("**/Particle");
+		ChangeProperty("**/ParticleAnchor","SizePolicy","horizontalValue",100, 0.7, interpolation=SINE_IN_SINE_OUT); 
+		Wait(1.0);
+		StopParticles("**/Particle");
+		Event("ON_ANIMATION_ENDED");
+		ChangeData(isAnimationInProgress, false);
+	}
+}

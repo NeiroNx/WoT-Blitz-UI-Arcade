@@ -1,0 +1,5 @@
+animation OnAction
+{
+	DirectEvent("PLAY_SOUND", "**/ButtonPositive");
+	Event("ON_CLICK_ACTION");
+}

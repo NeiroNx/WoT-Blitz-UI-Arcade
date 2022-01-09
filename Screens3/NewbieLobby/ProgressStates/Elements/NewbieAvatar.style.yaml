@@ -1,0 +1,23 @@
+Header:
+    version: 123
+StyleSheets:
+-   selectors:
+    - ".grade-common * #Grade"
+    properties:
+        bg-color: [0.580392, 0.635294, 0.686275, 1.000000]
+-   selectors:
+    - ".grade-rare * #Grade"
+    properties:
+        bg-color: [0.301961, 0.482353, 1.000000, 1.000000]
+-   selectors:
+    - ".grade-unique * #Grade"
+    properties:
+        bg-color: [0.717647, 0.243137, 0.945098, 1.000000]
+-   selectors:
+    - ".grade-legendary * #Grade"
+    properties:
+        bg-color: [1.000000, 0.780392, 0.270588, 1.000000]
+-   selectors:
+    - ".grade-unknown * #Grade"
+    properties:
+        visible: false

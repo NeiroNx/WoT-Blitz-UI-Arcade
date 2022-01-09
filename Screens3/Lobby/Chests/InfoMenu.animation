@@ -1,0 +1,13 @@
+animation Init()
+{
+	if (itemCollapsed)
+	{
+		ChangeProperty("**/Info", "SizePolicy", "verticalValue", 100, 0);
+		ChangeProperty("**/Info", "UIOpacityComponent", "opacity", 1.0, 0.6, EASE_OUT);
+	}
+	else
+	{
+		ChangeProperty("**/Info", "SizePolicy", "verticalValue", 0, 0);
+		ChangeProperty("**/Info", "UIOpacityComponent", "opacity", 0.0, 0.6, EASE_OUT);
+	}	
+}

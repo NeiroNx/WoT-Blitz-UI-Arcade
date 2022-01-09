@@ -1,0 +1,20 @@
+animation StoryButtonOnInit
+{
+    parallel
+    {
+        if (deviceType == eBlitzDevice.DEVICE_DESKTOP)
+        {
+            ChangeProperty("**/TapArea", "SizePolicy", "horizontalPolicy", 1);
+            ChangeProperty("**/TapArea", "SizePolicy", "verticalPolicy", 1);
+            ChangeProperty("**/TapArea", "SizePolicy", "horizontalValue", 96);
+            ChangeProperty("**/TapArea", "SizePolicy", "verticalValue", 96);
+        }
+        else
+        {
+            ChangeProperty("**/TapArea", "SizePolicy", "horizontalPolicy", 7);
+            ChangeProperty("**/TapArea", "SizePolicy", "verticalPolicy", 7);
+            ChangeProperty("**/TapArea", "SizePolicy", "horizontalValue", 100);
+            ChangeProperty("**/TapArea", "SizePolicy", "verticalValue", 100);
+        }
+    }
+}

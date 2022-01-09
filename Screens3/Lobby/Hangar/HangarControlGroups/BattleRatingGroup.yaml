@@ -1,0 +1,121 @@
+Header:
+    version: "56"
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/BattleRating.yaml"
+Controls:
+-   class: "UIControl"
+    name: "BattleRatingContainer"
+    size: [105.000000, 31.000000]
+    input: false
+    classes: "rating-container"
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+        UIDataParamsComponent:
+            params:
+            - ["bool", "hasRating", "true"]
+            - ["int", "rating", "3234"]
+            - ["int", "ratingDiff", "8"]
+            - ["string", "leagueType", "\"silver\""]
+            - ["bool", "isCalibration", "false"]
+    children:
+    -   class: "UIControl"
+        name: "Background"
+        position: [-26.250000, 0.000000]
+        size: [157.500000, 31.000000]
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                topAnchorEnabled: true
+            LinearLayout: {}
+            IgnoreLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                horizontalValue: 150.000000
+        children:
+        -   class: "UIControl"
+            name: "LeftPart"
+            size: [78.750000, 31.000000]
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_STRETCH_BOTH"
+                    sprite: "~res:/Gfx/UI/LobbyCommon/TextExchangeBack"
+                Anchor:
+                    topAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+        -   class: "UIControl"
+            name: "RightPart"
+            size: [78.750000, 31.000000]
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_STRETCH_BOTH"
+                    sprite: "~res:/Gfx/UI/LobbyCommon/TextExchangeBack"
+                    spriteModification: ["FLIP_HORIZONTAL"]
+                Anchor:
+                    topAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+    -   class: "UIControl"
+        name: "BattleRating"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+                bottomAnchor: 3.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent:
+                control: "\"~res:/UI/Screens3/Lobby/Common/BattleRating.yaml\""
+                args:
+                    "visible": "hasRating"
+                    "rating": "3234"
+                    "ratingDiff": "8"
+                    "leagueType": "\"silver\""
+                    "isCalibration": "false"
+    -   class: "UIControl"
+        name: "Calibration"
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+                bottomAnchor: 3.000000
+            LinearLayout:
+                spacing: 2.000000
+                useRtl: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfParent"
+        bindings:
+        - ["visible", "not hasRating", "Read"]
+        children:
+        -   class: "UIControl"
+            name: "Icon"
+            size: [30.000000, 0.000000]
+            components:
+                Background:
+                    sprite: "~res:/Gfx/UI/LobbyCommon/league_small"
+                    frame: 6
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfParent"
+        -   class: "UIStaticText"
+            name: "Caption"
+            size: [0.000000, 0.000000]
+            classes: "regular"
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfParent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml"

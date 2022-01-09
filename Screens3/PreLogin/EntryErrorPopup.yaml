@@ -1,0 +1,30 @@
+Header:
+    version: 133
+Prototypes:
+-   class: "UIControl"
+    name: "EntryErrorPopup"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens3/PreLogin/EntryErrorPopupInit.animation;ANIMATE_POPUP_ON_HIDE,~res:/UI/Screens3/PreLogin/EntryErrorPopupHide.animation"
+        UIOpacityComponent:
+            ignoreParentOpacity: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfMaxChild"
+        UIAttachLayoutSlaveComponent:
+            attachId: "ENTRY_BOTTOM_CONTAINER"
+            masterAlign: "TopCenter"
+            slaveAlign: "BottomCenter"
+            additionalOffset: [0.000000, -8.000000]
+        UIDataParamsComponent:
+            params:
+            - ["string", "errorText", "\"\"", "\"Пароль или логин введены неверно\""]
+        UIChildComponent0:
+            prototypePath: "~res:/UI/Screens3/Lobby/Common/ColoredPopover.yaml"
+            args:
+                "text": "errorText"
+                "startVisible": "true"
+                "textStyle": "\"regular t-body white-wild-sand-text\""
+                "bgStyle": "\"red-tamarillo-bg\""

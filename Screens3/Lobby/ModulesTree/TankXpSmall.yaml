@@ -1,0 +1,68 @@
+Header:
+    version: "96"
+Prototypes:
+-   class: "UIControl"
+    name: "TankXp"
+    input: false
+    components:
+        Anchor:
+            vCenterAnchorEnabled: true
+        LinearLayout:
+            spacing: 2.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "FixedSize"
+            verticalValue: 20.000000
+        UIDataParamsComponent:
+            params:
+            - ["bool", "isElite", "false", "false"]
+            - ["ResourceModel", "resource", "null", "{ }"]
+        UIDataLocalsComponent:
+            locals:
+            - ["string", "iconSprite", "when isElite -> \"~res:/Gfx/Lobby/currency/currency_elite-xp_s\", \"~res:/Gfx/Lobby/currency/currency_battle-xp_s\""]
+            - ["string", "quanitityStringed", "shortStr(resource.quantity)"]
+    children:
+    -   class: "UIControl"
+        name: "Value"
+        input: false
+        classes: "bold t-caption white-wild-sand-text"
+        components:
+            UITextComponent:
+                fitting: "FITTING_POINTS"
+                align: ["RIGHT", "VCENTER"]
+                useRtlAlign: "USE_BY_CONTENT"
+            Anchor:
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml"
+        bindings:
+        - ["UITextComponent.text", "quanitityStringed"]
+    -   class: "UIControl"
+        name: "Back"
+        input: false
+        components:
+            Anchor:
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 16.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 16.000000
+        children:
+        -   class: "UIControl"
+            name: "Icon"
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_PROPORTIONAL"
+                    frame: 0
+                    colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                    perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            bindings:
+            - ["Background.sprite", "iconSprite"]

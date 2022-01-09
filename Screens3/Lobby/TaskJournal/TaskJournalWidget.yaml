@@ -1,0 +1,328 @@
+Header:
+    version: 128
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/ProgressBar.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "TaskJournalWidget"
+    size: [32.000000, 32.000000]
+    input: false
+    classes: ""
+    components:
+        UIAnimationComponent:
+            animations: "SHOW_TASK_JOURNAL_WIDGET,~res:/UI/Screens3/Lobby/TaskJournal/Animations/TaskJournalWidget.animation"
+        Anchor:
+            leftAnchorEnabled: true
+            vCenterAnchorEnabled: true
+        LinearLayout: {}
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "FixedSize"
+            verticalValue: 73.000000
+        UIDataParamsComponent:
+            params:
+            - ["TaskJournalWidgetView", "model", "null", "{ }"]
+            events:
+            - "TASK_JOURNAL_PRESSED(int slotIndex)"
+        UIDataLocalVarsComponent:
+            data:
+            - ["float", "bgProgress", "0.000000"]
+            - ["float", "lineProgress", "0.000000"]
+            - ["float", "displayingProgress", "1.000000"]
+    children:
+    -   class: "UIControl"
+        name: "Left"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 88.000000
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "Bg"
+            position: [-12.000000, 0.000000]
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            bindings:
+            - ["SizePolicy.horizontalValue", "bgProgress"]
+            children:
+            -   class: "UIControl"
+                name: "BlackBg"
+                size: [32.000000, 32.000000]
+                input: false
+                classes: "black-bg"
+                components:
+                    Background: {}
+                    UIOpacityComponent:
+                        opacity: 0.600000
+                    IgnoreLayout: {}
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+            -   class: "UIControl"
+                name: "BgFill"
+                size: [32.000000, 32.000000]
+                visible: true
+                input: false
+                classes: "blue-murzillah-bg"
+                components:
+                    Background: {}
+                    UIOpacityComponent:
+                        opacity: 0.500000
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+            -   class: "UIControl"
+                name: "Gradient"
+                position: [160.000000, 0.000000]
+                size: [32.000000, 32.000000]
+                input: false
+                classes: "blue-murzillah-bg"
+                components:
+                    Background:
+                        drawType: "DRAW_SCALE_TO_RECT"
+                        sprite: "~res:/Gfx/Lobby/backgrounds/bg_gradient_horizontal_0-100"
+                        spriteModification: ["FLIP_HORIZONTAL"]
+                    UIOpacityComponent:
+                        opacity: 0.800000
+                    Anchor:
+                        hCenterAnchorEnabled: false
+                        rightAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "LeftLine"
+            size: [32.000000, 32.000000]
+            input: false
+            classes: "blue-curious-blue-bg"
+            components:
+                Background: {}
+                Anchor:
+                    leftAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 2.000000
+                    verticalPolicy: "PercentOfParent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+            bindings:
+            - ["SizePolicy.verticalValue", "lineProgress"]
+    -   class: "UIControl"
+        name: "Right"
+        classes: "button-open-sound touchable"
+        components:
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "lastChild + 24"
+                verticalPolicy: "PercentOfParent"
+            UIInputEventComponent:
+                onTouchUpInside: "TASK_JOURNAL_PRESSED"
+                onTouchUpInsideData: "model.activeTask.slotIndex"
+            Sound: {}
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/ButtonSound.style.yaml;~res:/UI/Screens3/Common/Touch.style.yaml"
+        bindings:
+        - ["input", "bgProgress > 90.000000"]
+        children:
+        -   class: "UIControl"
+            name: "Bg"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            bindings:
+            - ["SizePolicy.horizontalValue", "bgProgress"]
+            children:
+            -   class: "UIControl"
+                name: "BlackBg"
+                size: [32.000000, 32.000000]
+                input: false
+                classes: "black-bg"
+                components:
+                    Background: {}
+                    UIOpacityComponent:
+                        opacity: 0.600000
+                    IgnoreLayout: {}
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+            -   class: "UIControl"
+                name: "BgFill"
+                size: [32.000000, 32.000000]
+                visible: true
+                input: false
+                classes: "blue-murzillah-bg"
+                components:
+                    Background: {}
+                    UIOpacityComponent:
+                        opacity: 0.500000
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+            -   class: "UIControl"
+                name: "Gradient"
+                position: [160.000000, 0.000000]
+                size: [32.000000, 32.000000]
+                input: false
+                classes: "blue-murzillah-bg"
+                components:
+                    Background:
+                        drawType: "DRAW_SCALE_TO_RECT"
+                        sprite: "~res:/Gfx/Lobby/backgrounds/bg_gradient_horizontal_0-100"
+                    UIOpacityComponent:
+                        opacity: 0.800000
+                    Anchor:
+                        hCenterAnchorEnabled: false
+                        rightAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "Formula"
+                        horizontalFormula: "min(parent, 132)"
+                        verticalPolicy: "PercentOfParent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "RightLine"
+            size: [32.000000, 32.000000]
+            input: false
+            classes: "blue-curious-blue-bg"
+            components:
+                Background: {}
+                Anchor:
+                    rightAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 2.000000
+                    verticalPolicy: "PercentOfParent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+            bindings:
+            - ["SizePolicy.verticalValue", "lineProgress"]
+        -   class: "UIControl"
+            name: "Content"
+            position: [16.000000, 8.000000]
+            size: [32.000000, 32.000000]
+            pivot: [0.500000, 0.500000]
+            input: false
+            classes: "touch-scale"
+            components:
+                UIOpacityComponent:
+                    opacity: 0.000000
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                LinearLayout:
+                    orientation: "TopDown"
+                    dynamicPadding: true
+                    spacing: 0.000000
+                    dynamicSpacing: true
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "firstChild"
+                    verticalPolicy: "Formula"
+                    verticalFormula: "parent - 16"
+            children:
+            -   class: "UIControl"
+                name: "TaskName"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfMaxChild"
+                        verticalPolicy: "PercentOfMaxChild"
+                children:
+                -   class: "UIControl"
+                    name: "Text"
+                    input: false
+                    classes: "t-body regular color=white-wild-sand-text"
+                    components:
+                        UITextComponent:
+                            colorInheritType: "COLOR_IGNORE_PARENT"
+                            multiline: "MULTILINE_ENABLED"
+                            align: ["LEFT", "VCENTER"]
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            horizontalMin: 250.000000
+                            horizontalMax: 300.000000
+                            verticalPolicy: "PercentOfContent"
+                            verticalMax: 40.000000
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+                    bindings:
+                    - ["UITextComponent.text", "model.activeTask.title"]
+            -   class: "UIControl"
+                name: "TaskProgress"
+                position: [0.000000, 38.000000]
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                    LinearLayout:
+                        spacing: 8.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfMaxChild"
+                children:
+                -   prototype: "ProgressBar/ProgressBar"
+                    name: "ProgressBar"
+                    position: [0.000000, 8.000000]
+                    components:
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            horizontalValue: 100.000000
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 4.000000
+                        UIDataParamsComponent:
+                            args:
+                                "value": "model.activeTask.currentProgress * 100"
+                                "maximum": "model.activeTask.totalProgress * 100"
+                -   class: "UIControl"
+                    name: "ProgressValue"
+                    position: [248.000000, 8.000000]
+                    input: false
+                    classes: "t-body regular color=white-wild-sand-text"
+                    components:
+                        UITextComponent:
+                            colorInheritType: "COLOR_IGNORE_PARENT"
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfContent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+                    bindings:
+                    - ["UITextComponent.text", "str(model.activeTask.currentProgress) + \" / \" + str(model.activeTask.totalProgress)"]

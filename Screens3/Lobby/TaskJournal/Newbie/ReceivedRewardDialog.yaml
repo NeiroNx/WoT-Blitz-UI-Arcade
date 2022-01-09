@@ -1,0 +1,39 @@
+Header:
+    version: 138
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/CongratulationsDialog.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "ReceivedRewardDialog"
+    size: [960.000000, 640.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["int", "tasksCompleted", "0", "0"]
+            - ["int", "tasksNeeded", "0", "0"]
+            - ["eBlitzDevice", "deviceType", "eBlitzDevice.DEVICE_DESKTOP", "eBlitzDevice.DEVICE_DESKTOP"]
+            - ["vector<ResourceDetailed>", "rewards", "[ ]", "[ { \"type\" = ResourceType.premium; }; { \"type\" = ResourceType.gold; }; { \"type\" = ResourceType.credits; }; { \"type\" = ResourceType.stuff; }; { \"type\" = ResourceType.unlocks; }; { \"type\" = ResourceType.vehicle; }; ]"]
+            - ["string", "background", "\"\"", "\"\""]
+            events:
+            - "BACK_EVENT"
+            - "ON_REWARD_CLICKED(int index)"
+    children:
+    -   prototype: "CongratulationsDialog/CongratulationsDialog"
+        name: "CongratulationsDialog"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "enableAppearingAnimation": "true"
+                    "deviceType": "deviceType"
+                    "rewards": "rewards"
+                    "description": "when rewards.Size() > 1 -> \"clanMissions/rewardScreen/description\", \"clanMissions/rewardScreen/descriptionSingle\""
+                    "header": "\"clanMissions/rewardScreen/title\""
+                    "buttonText": "\"clanMissions/rewardScreen/claimRewardButton\""
+                    "background": "background"
+                eventActions:
+                - ["BACK_EVENT", "BACK_EVENT", ""]
+                - ["ON_REWARD_CLICKED", "ON_REWARD_CLICKED", "_event.index"]

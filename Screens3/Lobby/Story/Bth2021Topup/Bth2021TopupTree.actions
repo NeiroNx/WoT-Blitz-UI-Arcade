@@ -1,0 +1,44 @@
+action SCROLL_TO_STEP(int stepId, string path)
+{
+    parallel
+    {
+        ScrollToEnsureControlOnScreen(path, 0.6, yPolicy = eScrollToControlPolicy.kCenter);
+        Event("SELECT_STEP", arg1 = stepId);
+    }
+}
+
+action SCREEN_SIZE_CHANGED(vector2 size)
+{
+    if (not floatEqual(screenSize.X, size.X) or not floatEqual(screenSize.Y, size.Y))
+    {
+        ChangeData(screenSize, size);
+    }
+}
+
+action SCROLL_TO_FIRST_NOT_FINISHED(int index)
+{
+    if (not storyView.story.tree.steps[order[index]].isFinished)
+    {
+        ScrollToEnsureControlOnScreen("**/Step" + str(order[index]), 0.0, yPolicy = eScrollToControlPolicy.kCenter);
+    }
+    else
+    {
+        if (index != (order.Size() - 1))
+        {
+            ChangeData(stepIndex, index + 1);
+            Event("SCROLL_TO_FIRST_NOT_FINISHED", arg1 = stepIndex);
+        }
+    }
+}
+
+action ON_SCREEN_SIZE_CHANGED()
+{
+    if (not isNull(storyView.selectedStep))
+    {
+        ScrollToEnsureControlOnScreen("**/Step" + str(storyView.selectedStep.id), 0.0, yPolicy = eScrollToControlPolicy.kCenter);
+    }
+    else
+    {
+        Event("SCROLL_TO_FIRST_NOT_FINISHED", arg1 = stepIndex);
+    }
+}

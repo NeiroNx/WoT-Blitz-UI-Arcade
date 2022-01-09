@@ -1,0 +1,48 @@
+Header:
+    version: 133
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/Button.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "FooterButton"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfFirstChild"
+            verticalPolicy: "PercentOfFirstChild"
+        UIDataParamsComponent:
+            params:
+            - ["eTutorialHighlights", "currentHiglight", "eTutorialHighlights.kUnknown", "eTutorialHighlights.kModule"]
+            - ["eModulesAction", "action", "eModulesAction.NONE", "eModulesAction.INSTALL"]
+            events:
+            - "MODULES_MAIN_ACTION"
+        UIDataLocalBindingsComponent:
+            data:
+            - ["string", "caption", "when action == eModulesAction.RESEARCH -> \"#modules_tech_tree:ResearchButton\", action == eModulesAction.INSTALL -> \"#modules_tech_tree:InstallButton\", action == eModulesAction.BUY -> \"#modules_tech_tree:BuyButton\", action == eModulesAction.SELL -> \"#modules_tech_tree:SellButton\", action == eModulesAction.REPAIR -> \"hangar/RepairButton\", action == eModulesAction.SHOW_TANK -> \"#modules_tech_tree:ModulesButton\", \"\""]
+            - ["eButtonType", "buttonType", "when action == eModulesAction.SELL or action == eModulesAction.REPAIR -> eButtonType.NEGATIVE, action == eModulesAction.SHOW_TANK -> eButtonType.OPTIONAL_LIGHT, eButtonType.POSITIVE"]
+        UILayerComponent: {}
+        UIIdentifierComponent:
+            id: "footer_action_button"
+            params:
+            - ["string", "action_type", "str(int(action), eModulesAction)"]
+            - ["int", "button_type", "int(buttonType)"]
+    bindings:
+    - ["visible", "action != eModulesAction.NONE"]
+    - ["UILayerComponent.layer", "when currentHiglight == eTutorialHighlights.kResearchButton or currentHiglight == eTutorialHighlights.kBuyButton -> 1, 0"]
+    children:
+    -   prototype: "Button/Button"
+        name: "Button"
+        components:
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 176.000000
+            UIDataParamsComponent:
+                args:
+                    "caption": "caption"
+                    "type": "buttonType"
+                    "size": "eButtonSize.NORMAL"
+                    "sound": "eButtonSound.OK"
+                    "enabled": "true"
+                eventActions:
+                - ["ON_CLICK_BUTTON", "MODULES_MAIN_ACTION", ""]

@@ -1,0 +1,5 @@
+animation ItemSelected(int itemDescr)
+{
+	PlaySound(sound="GUI/buttons/choose");
+	Event("ITEM_SELECTED", arg1=itemDescr);
+}

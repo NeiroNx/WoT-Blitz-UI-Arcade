@@ -1,0 +1,20 @@
+Header:
+    version: 133
+Prototypes:
+-   class: "UIControl"
+    name: "StuffBundleItemText"
+    input: false
+    classes: "t-caption regular white-wild-sand-text"
+    components:
+        UITextComponent: {}
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 40.000000
+            verticalPolicy: "PercentOfContent"
+        UIDataParamsComponent:
+            params:
+            - ["StuffResource", "stuff", "null", "{ }"]
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Font.style.yaml"
+    bindings:
+    - ["UITextComponent.text", "when stuff.quantity < 2 -> \"\", (\"x\" + shortStr(stuff.quantity, 1000))"]

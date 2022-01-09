@@ -1,0 +1,12 @@
+animation BattleButton
+{
+	PlaySound(sound="GUI/buttons/play");
+	if(isPrebattleTraining and isGeneralPackLoaded)
+	{
+		Event("ON_MY_TRAINING_ROOM");
+	}
+	else
+	{
+	   Event("BATTLE_BUTTON_PRESSED", arg1=isEnabled);
+	}
+}

@@ -1,0 +1,66 @@
+Header:
+    version: 128
+Prototypes:
+-   class: "UIControl"
+    name: "Currency"
+    input: false
+    components:
+        Anchor:
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfFirstChild"
+            verticalPolicy: "PercentOfFirstChild"
+        UIAttachLayoutMasterComponent: {}
+        UIDataParamsComponent:
+            params:
+            - ["bool", "catchInput", "true", "true"]
+            - ["string", "attachId", "\"\"", "\"\""]
+            - ["bool", "reloading", "false", "true"]
+            - ["eCurrencySize", "currencySize", "eCurrencySize.BIG", "eCurrencySize.SMALL"]
+            - ["bool", "forButton", "false", "false"]
+            - ["bool", "canAfford", "true", "true"]
+            - ["bool", "isPlusTopPaneVisible", "false", "false"]
+            - ["int64", "serverTime", "0L", "0L"]
+            - ["bool", "plusVisible", "false", "false"]
+            - ["ResourceModel", "resource", "null", "{ \"quantity\" = 1380000; \"type\" = ResourceType.unlocks; }"]
+            - ["bool", "forceFullValue", "true", "true"]
+            - ["bool", "hideGrade", "false", "false"]
+            - ["bool", "hideValue", "false", "false"]
+            - ["bool", "shortTime", "false", "false"]
+            events:
+            - "ON_CURRENCY_CLICKED"
+    bindings:
+    - ["UIAttachLayoutMasterComponent.attachId", "attachId"]
+    children:
+    -   class: "UIControl"
+        name: "Private"
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIInputEventComponent:
+                onTouchUpInside: "ON_CURRENCY_CLICKED"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/CurrencyPrivate.yaml"
+                args:
+                    "reloading": "reloading"
+                    "currencySize": "currencySize"
+                    "forButton": "forButton"
+                    "canAfford": "canAfford"
+                    "isPlusTopPaneVisible": "isPlusTopPaneVisible"
+                    "serverTime": "serverTime"
+                    "plusVisible": "plusVisible"
+                    "type": "resource.type"
+                    "quantity": "resource.quantity"
+                    "bonusQuantity": "resource.bonusQuantity"
+                    "localizedQuantity": "resource.localizedQuantity"
+                    "icon": "resource.icon"
+                    "imageURL": "resource.imageURL"
+                    "grade": "resource.grade"
+                    "showGrade": "resource.showGrade"
+                    "forceFullValue": "forceFullValue"
+                    "forceHideGrade": "hideGrade"
+                    "forceHideValue": "hideValue"
+                    "shortTime": "shortTime"
+        bindings:
+        - ["input", "catchInput"]

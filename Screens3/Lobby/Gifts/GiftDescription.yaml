@@ -1,0 +1,174 @@
+Header:
+    version: 140
+Prototypes:
+-   class: "UIControl"
+    name: "GiftDescription"
+    size: [340.000000, 1145.500000]
+    input: false
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+            padding: "8"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfChildrenSum"
+        UIDataParamsComponent:
+            params:
+            - ["Gift", "gift", "null", "{ }"]
+        UIDataLocalVarsComponent:
+            data:
+            - ["ePlayerSize", "playerNameSize", "ePlayerSize.kNormal"]
+    children:
+    -   class: "UIControl"
+        name: "Header"
+        input: false
+        components:
+            LinearLayout:
+                spacing: 16.000000
+                useRtl: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   class: "UIControl"
+            name: "GiftIcon"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 80.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 97.000000
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens3/Lobby/Gifts/GiftIcon.yaml"
+        -   class: "UIControl"
+            name: "RightPart"
+            input: false
+            components:
+                LinearLayout:
+                    orientation: "TopDown"
+                    padding: "16"
+                    spacing: 10.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfChildrenSum"
+            children:
+            -   class: "UIControl"
+                name: "GradeWrapper"
+                input: false
+                components:
+                    Anchor:
+                        leftAnchorEnabled: true
+                        useRtl: true
+                    LinearLayout:
+                        spacing: 8.000000
+                        useRtl: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 24.000000
+                children:
+                -   class: "UIControl"
+                    name: "Grade"
+                    input: false
+                    components:
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfChildrenSum"
+                            verticalPolicy: "PercentOfChildrenSum"
+                        UIChildComponent0:
+                            prototypePath: "~res:/UI/Screens3/Lobby/Common/GradesSmall.yaml"
+                            args:
+                                "grade": "ArtefactGrade.legendary"
+            -   class: "UIControl"
+                name: "ResourceName"
+                size: [32.000000, 32.000000]
+                input: false
+                classes: "regular t-subtitle white-wild-sand-text"
+                components:
+                    UITextComponent:
+                        text: "storage/Items/Gift/Title"
+                        multiline: "MULTILINE_ENABLED"
+                        align: ["LEFT", "VCENTER"]
+                        useRtlAlign: "USE_BY_SYSTEM"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/Font.style.yaml"
+    -   class: "UIControl"
+        name: "Descriptions"
+        input: false
+        components:
+            LinearLayout:
+                orientation: "TopDown"
+                spacing: 32.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfChildrenSum"
+        children:
+        -   class: "UIControl"
+            name: "Description"
+            size: [255.000000, 60.000000]
+            input: false
+            components:
+                RichContent:
+                    text: "storage/Items/Gift/Description"
+                    baseClasses: "regular t-body white-wild-sand-70-text"
+                RichContentAliases0:
+                    aliases:
+                    - ["initiator", "<control class=\"\" control=\"~res:/UI/Screens3/Lobby/Common/PlayerName.yaml\" args1=\"playerName=gift.initiator.name\" args2=\"clanTag=gift.initiatorClanTag\" args3=\"playerNameSize=playerNameSize\"/>"]
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfChildrenSum"
+                FlowLayout:
+                    hDynamicPadding: false
+                    alignment: "Left"
+                    hSpacing: 4.000000
+                    useRtl: true
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "DateAndTime"
+            input: false
+            components:
+                LinearLayout:
+                    orientation: "TopDown"
+                    spacing: 8.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfChildrenSum"
+            children:
+            -   class: "UIControl"
+                name: "Title"
+                size: [32.000000, 32.000000]
+                input: false
+                classes: "bold t-caps white-wild-sand-text"
+                components:
+                    UITextComponent:
+                        multiline: "MULTILINE_ENABLED"
+                        align: ["LEFT", "VCENTER"]
+                        useRtlAlign: "USE_BY_SYSTEM"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/Font.style.yaml"
+                bindings:
+                - ["UITextComponent.text", "capitalize(localize(\"storage/Items/Gift/DateAndTime/Title\"))"]
+            -   class: "UIControl"
+                name: "Description"
+                input: false
+                classes: "regular t-body white-wild-sand-70-text"
+                components:
+                    UITextComponent:
+                        multiline: "MULTILINE_ENABLED"
+                        align: ["LEFT", "VCENTER"]
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+                bindings:
+                - ["UITextComponent.text", "localize(\"storage/Items/Gift/DateAndTime/Description\", { \"date\" = date(gift.receivedAt); \"time\" = date(gift.receivedAt, \"%H:%M\"); })"]

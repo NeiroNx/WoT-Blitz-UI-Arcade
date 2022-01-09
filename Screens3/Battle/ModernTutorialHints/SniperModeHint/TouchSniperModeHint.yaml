@@ -1,0 +1,158 @@
+Header:
+    version: 133
+ImportedPackages:
+- "~res:/UI/Screens3/Battle/ModernTutorialHints/Common/Glow.yaml"
+- "~res:/UI/Screens3/Battle/ModernTutorialHints/Common/HintWithFrames.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "TouchSniperModeHint"
+    position: [-500.000000, 0.000000]
+    size: [1200.000000, 720.000000]
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens3/Battle/ModernTutorialHints/SniperModeHint/TouchSniperModeHintInit.animation;Disappear,~res:/UI/Screens3/Battle/ModernTutorialHints/SniperModeHint/TouchSniperModeHintHide.animation"
+        UIOpacityComponent:
+            opacity: 1.000000
+        Anchor:
+            hCenterAnchorEnabled: true
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["bool", "isLeftHanded", "false", "false"]
+            - ["rect", "sniperButtonRect", "rect(0, 0, 0, 0)", "rect(1000, 500, 100, 100)"]
+    children:
+    -   class: "UIControl"
+        name: "SniperModeButton"
+        input: false
+        components:
+            UIOpacityComponent: {}
+            Anchor:
+                enabled: true
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+                vCenterAnchor: -100.000000
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                verticalPolicy: "FixedSize"
+            UIAttachLayoutSlaveComponent: {}
+        bindings:
+        - ["SizePolicy.horizontalValue", "sniperButtonRect.Width"]
+        - ["SizePolicy.verticalValue", "sniperButtonRect.Height"]
+        children:
+        -   class: "UIControl"
+            name: "Icon"
+            visible: true
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_TO_RECT"
+                    sprite: "~res:/Gfx/Battle/HUD/controls/button_sniper"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+        -   prototype: "Glow/Glow"
+            name: "Glow"
+    -   class: "UIControl"
+        name: "ButtonAttachPlaceholder"
+        position: [500.000000, 500.000000]
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                topAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                verticalPolicy: "FixedSize"
+            UIAttachLayoutMasterComponent:
+                attachId: "button_attach_placeholder"
+        bindings:
+        - ["Anchor.leftAnchor", "sniperButtonRect.X"]
+        - ["Anchor.topAnchor", "sniperButtonRect.Y"]
+        - ["SizePolicy.horizontalValue", "sniperButtonRect.Width"]
+        - ["SizePolicy.verticalValue", "sniperButtonRect.Height"]
+    -   class: "UIControl"
+        name: "Hint"
+        visible: false
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                orientation: "BottomUp"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                horizontalMax: 1200.000000
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "BottomSpacer"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "Formula"
+                    verticalFormula: "when (parent > 640 and parent < 900) -> 500, screenHeight*0.7"
+        -   class: "UIControl"
+            name: "Top"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                LinearLayout:
+                    orientation: "RightToLeft"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            children:
+            -   class: "UIControl"
+                name: "RightSpacer"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 120.000000
+                        verticalPolicy: "PercentOfParent"
+            -   class: "UIControl"
+                name: "Content"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    Anchor:
+                        bottomAnchorEnabled: true
+                    LinearLayout:
+                        orientation: "TopDown"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfMaxChild"
+                        verticalPolicy: "PercentOfMaxChild"
+                children:
+                -   prototype: "HintWithFrames/HintHolder"
+                    name: "HintHolder"
+                    components:
+                        UIDataParamsComponent:
+                            args:
+                                "masterY": "sniperButtonRect.Width"
+                                "masterX": "sniperButtonRect.Height"
+                                "icon": "\"~res:/Gfx/Battle/tips/notifications/target\""
+                                "text": "\"#battle_hints:sniper_mode/hint1\""
+                                "title": "\"#battle_hints:sniper_mode/title\""
+                                "frameTargetId": "\"button_attach_placeholder\""
+                    children:
+                    -   path: "HintBlurred"
+                        components:
+                            UIAnimationComponent:
+                                animations: "ShowHint,~res:/UI/Screens3/Battle/ModernTutorialHints/Common/HintBlurredInit.animation;Disappear,~res:/UI/Screens3/Battle/ModernTutorialHints/Common/HintBlurredHide.animation"
+                        children: []
+                    -   path: "HintFramesPrototype"
+                        components:
+                            UIAnimationComponent:
+                                animations: "ShowFrames,~res:/UI/Screens3/Battle/ModernTutorialHints/Common/HintFramesInit.animation;SurroundControl,~res:/UI/Screens3/Battle/ModernTutorialHints/Common/HintFramesSurround.animation;PointToControl,~res:/UI/Screens3/Battle/ModernTutorialHints/Common/HintFramesPointTo.animation"
+                        children: []

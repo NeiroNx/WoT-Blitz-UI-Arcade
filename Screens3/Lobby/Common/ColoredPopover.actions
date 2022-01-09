@@ -1,0 +1,20 @@
+action SHOW_POPOVER(float delay)
+{
+  Wait(delay);
+  parallel
+  {
+    Opacity("**/Content", 1, animationTime, SINE_OUT);
+    ChangeProperty("**/Content", "Anchor", "vCenterAnchor", 0, animationTime, SINE_OUT);
+  }
+}
+
+action HIDE_POPOVER(float delay)
+{
+  Wait(delay);
+  parallel
+  {
+    Opacity("**/Content", 0, animationTime, SINE_OUT);
+    ChangeProperty("**/Content", "Anchor", "vCenterAnchor", anchorOffset, animationTime, SINE_OUT);
+  }
+  Event("POPOVER_HIDDEN");
+}

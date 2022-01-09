@@ -1,0 +1,44 @@
+action SCROLL_TO_STEP(int stepId, string path)
+{
+    parallel
+    {
+        if (scrollSize.X > screenSize.X)
+        {
+            ScrollToEnsureControlOnScreen(path, 0.6, xPolicy = eScrollToControlPolicy.kCenter);
+        }
+        Event("SELECT_STEP", arg1 = stepId);
+    }
+}
+
+action SCREEN_SIZE_CHANGED(vector2 size)
+{
+    ChangeData(screenSize, size);
+}
+
+action SCROLL_SIZE_CHANGED(vector2 size)
+{
+    ChangeData(scrollSize, size);
+}
+
+action ON_SCREEN_SIZE_CHANGED()
+{
+    if (scrollSize.X > screenSize.X)
+    {
+        if (not isNull(storyView.selectedStep) and storyView.tree.groups.common.steps.Contains(storyView.selectedStep.id))
+        {
+            ScrollToEnsureControlOnScreen("**/Step" + str(storyView.selectedStep.id), 0.0, xPolicy = eScrollToControlPolicy.kCenter);
+        }
+        else
+        {
+            if (not isNull(storyView.story.inProgressStep) and storyView.tree.groups.common.steps.Contains(storyView.story.inProgressStep.id))
+            {
+                ScrollToEnsureControlOnScreen("**/Step" + str(storyView.story.inProgressStep.id), 0.0, xPolicy = eScrollToControlPolicy.kCenter);
+            }
+            else
+            {
+                ScrollToEnsureControlOnScreen("**/Step" + str(storyView.tree.groups.common.steps.Size() + 30), 0.0, xPolicy = eScrollToControlPolicy.kCenter);
+            }
+        }
+    }
+    
+}

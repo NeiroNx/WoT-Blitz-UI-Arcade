@@ -1,0 +1,207 @@
+Header:
+    version: "85"
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/Story/StoryRewardPrototypes.yaml"
+- "~res:/UI/Screens/Lobby/Common/SectionHeader3.yaml"
+Controls:
+-   class: "UIControl"
+    name: "Content"
+    size: [960.000000, 640.000000]
+    input: false
+    classes: "color-dialog-bg"
+    components:
+        UIAnimationComponent:
+            animations: "SCROLL_TO_CURRENCIES,~res:/UI/Screens/Lobby/Story/Legacy/ScrollToCurrencies.animation"
+        Background:
+            drawType: "DRAW_FILL"
+        LinearLayout:
+            orientation: "TopDown"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["StoryView", "storyView", "null", "{ story = { stage = { proxies = { prx_victory2019 = { type = ResourceType.stuff; stuff = { name = \"prx_victory2019\"; title = \"storage/Items/spring_event_2019/Title\"; description = \"storage/Items/spring_event_2019/Description\"; icon = \"~res:/Gfx/UI/StorageItemIcons/prx_spr19.psd\"; iconUrl = \"\"; quantity = 50; grade = ArtefactGrade.common; }; }; }; }; currencyTitles = { prx_victory2019 = \"\"; }; currencyDescriptions = { prx_victory2019 = \"victory_day_event/currency/terms\"; }; }; }"]
+            - ["StatsDataModel", "statsData", "null", "{ }"]
+            - ["int64", "serverTime", "0L", "1554299463L"]
+            - ["bool", "isHangarPreviousScreen", "false", "true"]
+            events:
+            - "ON_ITEM_PRESSED(ResourceType type, int itemCompactDescr)"
+            - "COMPLETE_STEP"
+            - "SHOW_STORY_INFO"
+            - "BACK_EVENT"
+        StyleSheet:
+            styles: "~res:/UI/Styles/ColorStyles.yaml"
+    children:
+    -   class: "UIControl"
+        name: "Header"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent:
+                control: "\"~res:/UI/Screens/Lobby/Story/Legacy/StoryHeader.yaml\""
+                args:
+                    "story": "storyView.story"
+                    "statsData": "statsData"
+                    "serverTime": "serverTime"
+                    "isHangarPreviousScreen": "isHangarPreviousScreen"
+                eventActions:
+                - ["BACK_EVENT", "BACK_EVENT", "_event"]
+    -   prototype: "StoryRewardPrototypes/StepScrollView"
+        name: "StepScrollView"
+        children:
+        -   path: "scrollContainerControl"
+            children:
+            -   class: "UIControl"
+                name: "Header"
+                input: false
+                components:
+                    ClipContent: {}
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 70.000000
+                children:
+                -   class: "UIControl"
+                    name: "Left"
+                    position: [0.000000, 0.000000]
+                    size: [513.500000, 70.000000]
+                    input: false
+                    components:
+                        Background:
+                            drawType: "DRAW_SCALE_TO_RECT"
+                            sprite: "~res:/Gfx/UI/LobbyCommon/bgMedalsLeft"
+                            align: ["RIGHT", "VCENTER"]
+                        Anchor:
+                            leftAnchorEnabled: true
+                            hCenterAnchorEnabled: true
+                            topAnchorEnabled: true
+                -   class: "UIControl"
+                    name: "Right"
+                    position: [513.500000, 0.000000]
+                    size: [513.500000, 70.000000]
+                    input: false
+                    components:
+                        Background:
+                            drawType: "DRAW_SCALE_TO_RECT"
+                            sprite: "~res:/Gfx/UI/LobbyCommon/bgMedalsRight"
+                            align: ["LEFT", "VCENTER"]
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                            rightAnchorEnabled: true
+                            topAnchorEnabled: true
+                -   class: "UIControl"
+                    name: "Content"
+                    input: false
+                    components:
+                        Anchor:
+                            leftAnchorEnabled: true
+                            rightAnchorEnabled: true
+                            topAnchorEnabled: true
+                            bottomAnchorEnabled: true
+                -   class: "UIControl"
+                    name: "RewardTitle"
+                    input: false
+                    classes: "header1"
+                    components:
+                        UITextComponent:
+                            text: "template_event/CompleteStep/StepScreen/Reward"
+                            colorInheritType: "COLOR_IGNORE_PARENT"
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfContent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens/Fonts.yaml;~res:/UI/Screens/FontsColors.yaml"
+            -   prototype: "StoryRewardPrototypes/Rewards"
+                name: "Rewards"
+                input: false
+                components:
+                    UIRepeatComponent:
+                        control: "~res:/UI/Screens/Lobby/Story/Legacy/Utils/Resource/ResourceDetailedHolder.yaml"
+                        dataContainer: "storyView.selectedStep.rewards"
+                        args:
+                            "data": "_item"
+                            "isFinished": "storyView.selectedStep.isFinished"
+                        eventActions:
+                        - ["ON_ITEM_PRESSED", "ON_ITEM_PRESSED", "_item.type, _event.itemCompactDescr"]
+            -   class: "UIControl"
+                name: "CurrencyDescriptionContainer"
+                input: false
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                    LinearLayout:
+                        orientation: "TopDown"
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 900.000000
+                        verticalPolicy: "PercentOfChildrenSum"
+                bindings:
+                - ["visible", "not storyView.selectedStep.isFinished"]
+                children:
+                -   prototype: "SectionHeader3/SectionHeader3"
+                    name: "ConditionsHeader"
+                    input: false
+                    children:
+                    -   path: "Left"
+                        input: false
+                    -   path: "Right"
+                        input: false
+                    -   class: "UIControl"
+                        name: "Label"
+                        input: false
+                        classes: "header3 text-color-white"
+                        components:
+                            UITextComponent:
+                                text: "template_event/CompleteStep/StepScreen/Currencies"
+                                colorInheritType: "COLOR_IGNORE_PARENT"
+                            Anchor:
+                                hCenterAnchorEnabled: true
+                                vCenterAnchorEnabled: true
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfContent"
+                                verticalPolicy: "PercentOfContent"
+                            StyleSheet:
+                                styles: "~res:/UI/Screens/Fonts.yaml;~res:/UI/Screens/FontsColors.yaml"
+                -   class: "UIControl"
+                    name: "CurrencyDescriptions"
+                    input: false
+                    components:
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                        LinearLayout:
+                            orientation: "TopDown"
+                            padding: "10.000000"
+                            spacing: 20.000000
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfChildrenSum"
+                        UIRepeatComponent:
+                            control: "~res:/UI/Screens/Lobby/Story/Legacy/CurrencyDescriptionHolder.yaml"
+                            dataContainer: "storyView.story.stage.proxies"
+                            args:
+                                "story": "storyView.story"
+                                "proxy": "_item"
+    -   class: "UIControl"
+        name: "Footer"
+        input: false
+        components:
+            LinearLayout:
+                orientation: "TopDown"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent:
+                control: "\"~res:/UI/Screens/Lobby/Story/Legacy/StoryFooter.yaml\""
+                args:
+                    "story": "storyView.story"
+                    "statsData": "statsData"
+                    "selectedStep": "storyView.selectedStep"
+                eventActions:
+                - ["FOOTER_COMPLETE_BUTTON_PRESSED", "COMPLETE_STEP", "_event"]
+                - ["FOOTER_INFO_BUTTON_PRESSED", "SHOW_STORY_INFO", "_event"]

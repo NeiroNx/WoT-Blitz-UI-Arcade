@@ -1,0 +1,38 @@
+Header:
+    version: 125
+StyleSheets:
+-   selectors:
+    - ".tank_class_light"
+    properties:
+        texture-spritePath: "~res:/Gfx/Lobby/icons/tank-tiers/icon_tank-class_light_pack.psd"
+-   selectors:
+    - ".tank_class_medium"
+    properties:
+        texture-spritePath: "~res:/Gfx/Lobby/icons/tank-tiers/icon_tank-class_medium_pack.psd"
+-   selectors:
+    - ".tank_class_heavy"
+    properties:
+        texture-spritePath: "~res:/Gfx/Lobby/icons/tank-tiers/icon_tank-class_heavy_pack.psd"
+-   selectors:
+    - ".tank_class_at_spg"
+    properties:
+        texture-spritePath: "~res:/Gfx/Lobby/icons/tank-tiers/icon_tank-class_at-spg_pack.psd"
+-   selectors:
+    - ".root.t-subtitle"
+    properties:
+        sizePolicy-verticalPolicy: "FixedSize"
+        sizePolicy-verticalValue: 24.000000
+-   selectors:
+    - ".content.t-subtitle"
+    properties:
+        anchor-vCenterAnchor: 2.500000
+-   selectors:
+    - ".root.t-body"
+    properties:
+        sizePolicy-verticalPolicy: "FixedSize"
+        sizePolicy-verticalValue: 20.000000
+-   selectors:
+    - ".root"
+    properties:
+        sizePolicy-verticalPolicy: "PercentOfFirstChild"
+        sizePolicy-verticalValue: 100.000000

@@ -1,0 +1,19 @@
+Header:
+    version: "83"
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/Notifications/SystemNotificationPrototype.yaml"
+Controls:
+-   prototype: "SystemNotificationPrototype/Notification"
+    customClass: "UIGenericNotification"
+    name: "SubscriptionExpiredNotification"
+    children:
+    -   path: "NotificationItem/Content/Status/Icon"
+        components:
+            Background:
+                sprite: "~res:/Gfx/Lobby/icons/icon_subscription_s"
+            StyleSheet:
+                styles: "~res:/UI/Screens/Lobby/Notifications/Popups/Notification.style.yaml"
+    -   path: "NotificationItem/Content/Status/Result"
+        components:
+            UITextComponent:
+                text: "HANGAR_NOTIFICATION_SUBSCRIPTION_EXPIRED"

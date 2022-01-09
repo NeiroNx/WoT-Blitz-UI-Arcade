@@ -1,0 +1,44 @@
+Header:
+    version: 140
+ImportedPackages:
+- "~res:/UI/Screens3/Common/PopupMenuWithMultiResources.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "RewardInfoPopup"
+    size: [960.000000, 640.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["bool", "turnOffChestPreview", "false", "false"]
+            - ["ePositionAlign", "align", "ePositionAlign.Top", "ePositionAlign.Top"]
+            - ["string", "masterId", "\"\"", "\"level_0_0_0\""]
+            - ["RewardPopupModel", "resourcesModel", "null", "{ \"resources\" = [ { \"resource\" = { \"type\" = ResourceType.slots; \"basic\" = { \"quantity\" = 2000000; }; \"stuff\" = null; }; }; { }; ]; }"]
+            events:
+            - "ON_ACTION"
+            - "FINISH_HIDE_POPUP_ANIMATION"
+            - "POPUP_ON_CLOSE_ACTION"
+            - "ON_POPUP_BUTTON_CLICKED"
+        UIDataLocalBindingsComponent:
+            data: []
+        UILayerComponent:
+            layer: 1
+    children:
+    -   prototype: "PopupMenuWithMultiResources/Slave"
+        name: "Slave"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "turnOffChestPreview": "turnOffChestPreview"
+                    "resourcesModel": "resourcesModel"
+                    "slaveAlign": "align"
+                    "masterId": "masterId"
+                    "isAlignLeft": "true"
+                eventActions:
+                - ["FINISH_HIDE_POPUP_ANIMATION", "FINISH_HIDE_POPUP_ANIMATION", ""]
+                - ["POPUP_ON_CLOSE_ACTION", "POPUP_ON_CLOSE_ACTION", ""]
+                - ["ON_CLICK_BUTTON", "ON_POPUP_BUTTON_CLICKED", "_event.resourceIndex"]
+                - ["ON_ACTION", "ON_ACTION", "_event.resourceIndex"]

@@ -1,0 +1,45 @@
+action StartLoader()
+{
+	ChangeProperty("**/Loader","RadialProgressComponent","progress", 0);
+		repeat  
+		{
+			parallel 
+			{
+				sequence 
+				{
+					Rotate ("**/Loader", 0);
+					Rotate ("**/Loader", 720, loaderAnimationTime);
+				}
+
+				sequence 
+				{
+					ChangeProperty("**/Loader","RadialProgressComponent","progress", 0.90000, loaderAnimationTime/2);
+					ChangeProperty("**/Loader","RadialProgressComponent","progress", 0, loaderAnimationTime/2);
+				}
+				
+			}
+		}
+		
+}
+
+action RefreshError()
+{
+	if (isLoading)
+	{
+		ChangeData(loadingOpacity, 0.0, opacityAnimationTime/2);
+	}
+	ChangeData(errorOpacity, (when isError -> 1.0, 0.0), (when isLoading -> opacityAnimationTime/2, opacityAnimationTime));
+}
+
+action RefreshLoading()
+{
+	if (not isError and errorOpacity > 0.5)
+	{
+		ChangeData(errorOpacity, 0.0, opacityAnimationTime/2);
+	}
+	ChangeData(loadingOpacity, (when isLoading -> 1.0, 0.0), opacityAnimationTime);
+	if (not isLoading and isError and errorOpacity < 0.5)
+	{
+		ChangeData(errorOpacity, 1.0, opacityAnimationTime/2);
+	}
+}

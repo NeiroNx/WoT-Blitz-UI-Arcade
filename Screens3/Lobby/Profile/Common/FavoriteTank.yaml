@@ -1,0 +1,342 @@
+Header:
+    version: 125
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/Vehicle/VehicleInfo.yaml"
+- "~res:/UI/Screens3/Lobby/ModulesTree/TankXpSmall.yaml"
+- "~res:/UI/Screens3/Lobby/Profile/Common/FavoriteTankStatCell.yaml"
+- "~res:/UI/Screens3/Lobby/Common/RichText.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "FavoriteTank"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 188.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 324.000000
+        UIDataParamsComponent:
+            params:
+            - ["string", "textStyle", "\"t-body bold\"", "\"t-body bold\""]
+            - ["int", "level", "0", "7"]
+            - ["RatingFavoriteVehicleViewModel", "model", "null", "{ }"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["string", "color", "when isNull(model) -> \"white-wild-sand-text\", model.info.vehicle.isPremium or model.stats.isPremiumized -> \"yellow-lightning-text\", model.info.vehicle.isCollectible -> \"blue-rimmi-text\", \"white-wild-sand-text\""]
+            - ["VehicleDataModel", "emptyModel", "{ }"]
+            - ["VehicleDataModel", "vehicle", "when not isNull(model) -> model.info.vehicle, emptyModel"]
+            - ["int", "battlesPlayed", "when not isNull(model) -> model.info.battlesCount, 0"]
+            - ["float", "winRate", "when not isNull(model) -> when battlesPlayed > 0 -> 100.000000 * model.info.wins / battlesPlayed, 0.000000, 0.000000"]
+            - ["int", "avgXp", "when not isNull(model) -> when battlesPlayed > 0 -> int(ceil(float(model.info.xp) / battlesPlayed)), 0, 0"]
+            - ["int", "avgDamage", "when not isNull(model) -> when battlesPlayed > 0 -> int(ceil(float(model.info.damage) / battlesPlayed)), 0, 0"]
+            - ["bool", "isElite", "when not isNull(model) -> model.stats.isElite, false"]
+            - ["bool", "isPremiumized", "when not isNull(model) -> model.stats.isPremiumized, false"]
+            - ["vector<AchievementViewModel>", "emptyAchievements", "[ ]"]
+            - ["vector<AchievementViewModel>", "achievements", "when not isNull(model) -> model.achievements, emptyAchievements"]
+            - ["string", "nationSprite", "when vehicle.nation == eNation.USA -> \"usa\", vehicle.nation == eNation.GERMANY -> \"germany\", vehicle.nation == eNation.USSR -> \"ussr\", vehicle.nation == eNation.UK -> \"uk\", vehicle.nation == eNation.JAPAN -> \"japan\", vehicle.nation == eNation.CHINA -> \"china\", vehicle.nation == eNation.FRANCE -> \"france\", vehicle.nation == eNation.OTHER -> \"other\", \"\""]
+            - ["string", "subnationSprite", "when vehicle.subnation == \"finland\" -> \"finland\", vehicle.subnation == \"poland\" -> \"poland\", vehicle.subnation == \"sweden\" -> \"sweden\", vehicle.subnation == \"italy\" -> \"italy\", vehicle.subnation == \"australia\" -> \"australia\", vehicle.subnation == \"canada\" -> \"canada\", vehicle.subnation == \"czech\" -> \"czech\", \"\""]
+            - ["string", "finalSprite", "when empty(subnationSprite) -> nationSprite, subnationSprite"]
+            - ["string", "flagSpritePath", "when not empty(finalSprite) -> \"~res:/Gfx/Lobby/flags/flag_tank-node_I_\" + (finalSprite), \"\""]
+    children:
+    -   class: "UIControl"
+        name: "ContentWrapper"
+        pivot: [0.500000, 0.500000]
+        input: false
+        components:
+            UIOpacityComponent: {}
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+            LinearLayout:
+                padding: "8"
+            StyleSheet: {}
+        bindings:
+        - ["visible", "not isNull(model)"]
+        children:
+        -   class: "UIControl"
+            name: "Background"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                IgnoreLayout: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            children:
+            -   class: "UIControl"
+                name: "Bg"
+                size: [32.000000, 32.000000]
+                input: false
+                classes: "black-15-bg"
+                components:
+                    Background: {}
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+            -   class: "UIControl"
+                name: "NationFlag"
+                size: [176.000000, 64.000000]
+                input: false
+                components:
+                    UITextureComponent:
+                        drawType: "DRAW_SCALE_PROPORTIONAL"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfContent"
+                bindings:
+                - ["UITextureComponent.spritePath", "flagSpritePath"]
+            -   class: "UIControl"
+                name: "Hover"
+                size: [32.000000, 32.000000]
+                visible: false
+                input: false
+                classes: "white-wild-sand-10-bg"
+                components:
+                    Background: {}
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "Content"
+            input: false
+            components:
+                LinearLayout:
+                    orientation: "TopDown"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            children:
+            -   class: "UIControl"
+                name: "TopBar"
+                input: false
+                components:
+                    Anchor:
+                        leftAnchorEnabled: true
+                        topAnchorEnabled: true
+                        topAnchor: 4.000000
+                    LinearLayout:
+                        spacing: 16.000000
+                        dynamicSpacing: true
+                    IgnoreLayout: {}
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfMaxChild"
+                children:
+                -   prototype: "VehicleInfo/VehicleInfo"
+                    name: "VehicleInfo"
+                    components:
+                        UIDataParamsComponent:
+                            args:
+                                "class": "vehicle.tankClass"
+                                "level": "vehicle.level"
+                                "type": "when vehicle.isPremium -> eVehicleDescriptionType.PREMIUM, vehicle.isCollectible -> eVehicleDescriptionType.COLLECTIBLE, isPremiumized -> eVehicleDescriptionType.PREMIUMISED, eVehicleDescriptionType.NORMAL"
+                                "elite": "isElite"
+            -   class: "UIControl"
+                name: "TankView"
+                position: [20.000000, 64.000000]
+                input: false
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        topAnchorEnabled: true
+                        topAnchor: 4.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 124.000000
+                    StyleSheet:
+                        styles: ""
+                children:
+                -   class: "UIControl"
+                    name: "TankIcon"
+                    position: [36.000000, 4.000000]
+                    size: [97.000000, 60.000000]
+                    input: false
+                    components:
+                        Background:
+                            drawType: "DRAW_SCALE_PROPORTIONAL_ONE"
+                            perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                            bottomAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "FixedSize"
+                            horizontalValue: 148.000000
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 92.000000
+                    bindings:
+                    - ["Background.sprite", "vehicle.bigIconPath"]
+            -   class: "UIControl"
+                name: "TankNameWrapper"
+                input: false
+                components:
+                    LinearLayout:
+                        orientation: "TopDown"
+                        padding: "16;24"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfMaxChild"
+                children:
+                -   class: "UIControl"
+                    name: "Value"
+                    input: false
+                    components:
+                        UITextComponent:
+                            fitting: "FITTING_POINTS"
+                        SizePolicy:
+                            horizontalPolicy: "Formula"
+                            horizontalFormula: "min(parent, content)"
+                            verticalPolicy: "PercentOfContent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+                    bindings:
+                    - ["classes", "textStyle + \" \" + color"]
+                    - ["UITextComponent.text", "localize(vehicle.name)"]
+            -   class: "UIControl"
+                name: "Stats"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    LinearLayout:
+                        orientation: "LeftToRight"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfMaxChild"
+                children:
+                -   class: "UIControl"
+                    name: "FirstColumn"
+                    size: [32.000000, 32.000000]
+                    input: false
+                    components:
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                        LinearLayout:
+                            orientation: "TopDown"
+                            spacing: 8.000000
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfChildrenSum"
+                    children:
+                    -   prototype: "FavoriteTankStatCell/StatCell"
+                        name: "BattlesCount"
+                        components:
+                            UIDataParamsComponent:
+                                args:
+                                    "statValue": "str1000Separated(battlesPlayed)"
+                                    "statIcon": "\"~res:/Gfx/Lobby/icons/icon_battles_s\""
+                    -   prototype: "FavoriteTankStatCell/StatCell"
+                        name: "AvgDmg"
+                        components:
+                            UIDataParamsComponent:
+                                args:
+                                    "statValue": "str1000Separated(avgDamage)"
+                                    "statIcon": "\"~res:/Gfx/Lobby/icons/icon_damage_s\""
+                -   class: "UIControl"
+                    name: "SecondColumn"
+                    size: [32.000000, 32.000000]
+                    input: false
+                    components:
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                        LinearLayout:
+                            orientation: "TopDown"
+                            spacing: 8.000000
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfChildrenSum"
+                    children:
+                    -   prototype: "FavoriteTankStatCell/StatCell"
+                        name: "WinRate"
+                        components:
+                            UIDataParamsComponent:
+                                args:
+                                    "statValue": "percent(winRate, 2)"
+                                    "statIcon": "\"~res:/Gfx/Lobby/icons/icon_victory_s\""
+                    -   prototype: "FavoriteTankStatCell/StatCell"
+                        name: "AvgXp"
+                        components:
+                            UIDataParamsComponent:
+                                args:
+                                    "statValue": "str1000Separated(avgXp)"
+                                    "statIcon": "\"~res:/Gfx/Lobby/icons/icon_exp_s\""
+            -   class: "UIControl"
+                name: "Spacer"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 24.000000
+            -   class: "UIControl"
+                name: "Achievements"
+                input: false
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                    LinearLayout:
+                        spacing: 8.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        verticalPolicy: "PercentOfMaxChild"
+                    UIRepeatComponent:
+                        control: "~res:/UI/Screens3/Lobby/Profile/Common/RatingAchievement.yaml"
+                        dataContainer: "achievements"
+                        args:
+                            "achievement": "_item"
+                            "showDescription": "false"
+                            "visible": "true"
+                        elementNameExpression: "_item.name"
+    -   class: "UIControl"
+        name: "NoBattles"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        bindings:
+        - ["visible", "isNull(model)"]
+        children:
+        -   class: "UIControl"
+            name: "Bg"
+            size: [32.000000, 32.000000]
+            input: false
+            classes: "black-15-bg"
+            components:
+                Background: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+        -   prototype: "RichText/RichText"
+            name: "RichText"
+            components:
+                Anchor:
+                    leftAnchorEnabled: false
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "parent - 16"
+                FlowLayout:
+                    hDynamicInLinePadding: true
+                UIDataParamsComponent:
+                    args:
+                        "baseFontSize": "\"t-body\""
+                        "baseFontStyle": "\"regular\""
+                        "baseFontColor": "\"white-wild-sand-50-text\""
+                        "key": "localize(\"ratingBattles/FavouriteTanks/TierNotParticipated\", { \"level\" = roman(level); })"
+                        "linkKey": "\"\""
+                        "resource1Model": "null"
+                        "resource2Model": "null"
+                        "resource3Model": "null"
+                        "resource4Model": "null"
+                        "customKeyProperty": "\"\""

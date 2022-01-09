@@ -1,0 +1,290 @@
+Header:
+    version: 120
+Prototypes:
+-   class: "UIControl"
+    name: "DamageInfoMarker"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        UIOpacityComponent: {}
+        Anchor:
+            leftAnchorEnabled: true
+        LinearLayout:
+            spacing: 8.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "PercentOfMaxChild"
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens/Battle/DamageInfo/DamageInfoMarker.actions"
+        StyleSheet:
+            styles: "~res:/UI/Screens/Battle/DamageInfo/DamageInfoMarker.styles.yaml"
+    children:
+    -   class: "UIControl"
+        name: "RicochetIconWrapper"
+        size: [32.000000, 32.000000]
+        visible: true
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 24.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 24.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens/Battle/DamageInfo/DamageInfoMarker.styles.yaml"
+        children:
+        -   class: "UIControl"
+            name: "RicochetIconBg"
+            position: [12.000000, 12.000000]
+            size: [32.000000, 32.000000]
+            pivot: [0.500000, 0.500000]
+            input: false
+            classes: "black-25-bg"
+            components:
+                Background:
+                    drawType: "DRAW_ALIGNED"
+                    sprite: "~res:/Gfx/UI/BattleScreenHUD/bg_damage-info_icon-bg"
+                    perPixelAccuracy: "PER_PIXEL_ACCURACY_FORCED"
+                UIOpacityComponent:
+                    opacity: 1.000000
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 24.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 24.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "RicochetLine"
+            size: [32.000000, 32.000000]
+            input: false
+            classes: "white-wild-sand-bg"
+            components:
+                Background: {}
+                UIOpacityComponent: {}
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                    bottomAnchor: 2.000000
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 22.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 3.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "RicochetBullet"
+            size: [32.000000, 32.000000]
+            pivot: [0.500000, 0.500000]
+            input: false
+            classes: "white-wild-sand-bg"
+            components:
+                Background:
+                    drawType: "DRAW_ALIGNED"
+                    sprite: "~res:/Gfx/UI/BattleScreenHUD/icon_shooting-fb_ricochet-2_m"
+                    spriteModification: ["FLIP_VERTICAL"]
+                UIOpacityComponent: {}
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 3.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 9.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "RicochetPath"
+            size: [32.000000, 32.000000]
+            input: false
+            classes: "white-wild-sand-bg"
+            components:
+                Background:
+                    drawType: "DRAW_ALIGNED"
+                    sprite: "~res:/Gfx/UI/BattleScreenHUD/icon_shooting-fb_ricochet-1_m"
+                UIOpacityComponent: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+    -   class: "UIControl"
+        name: "IconWrapper"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 24.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 24.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens/Battle/DamageInfo/DamageInfoMarker.styles.yaml"
+        children:
+        -   class: "UIControl"
+            name: "IconBg"
+            position: [12.000000, 12.000000]
+            size: [32.000000, 32.000000]
+            pivot: [0.500000, 0.500000]
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_ALIGNED"
+                    sprite: "~res:/Gfx/UI/BattleScreenHUD/bg_damage-info_icon-bg"
+                    perPixelAccuracy: "PER_PIXEL_ACCURACY_FORCED"
+                UIOpacityComponent: {}
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 24.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 24.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens/Battle/DamageInfo/DamageInfoMarker.styles.yaml"
+        -   class: "UIControl"
+            name: "ExplosionWrapper"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+        -   class: "UIControl"
+            name: "ExplosionCircle"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_FILL"
+                    color: [1.000000, 0.000000, 0.000000, 1.000000]
+                UIOpacityComponent:
+                    opacity: 0.150000
+                UIRoundedCornersComponent:
+                    radius: "500"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 48.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 48.000000
+        -   class: "UIControl"
+            name: "Icon"
+            position: [12.000000, 12.000000]
+            size: [32.000000, 32.000000]
+            pivot: [0.500000, 0.500000]
+            input: false
+            components:
+                Background:
+                    perPixelAccuracy: "PER_PIXEL_ACCURACY_FORCED"
+                UIOpacityComponent: {}
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 24.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 24.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens/Battle/DamageInfo/DamageInfoMarker.styles.yaml"
+        -   class: "UIControl"
+            name: "BreakLine"
+            position: [12.000000, 12.000000]
+            size: [32.000000, 32.000000]
+            pivot: [0.500000, 0.500000]
+            angle: 45.000000
+            visible: true
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_FILL"
+                UIOpacityComponent: {}
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 2.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 34.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens/Battle/DamageInfo/DamageInfoMarker.styles.yaml"
+    -   class: "UIControl"
+        name: "TextWrapper"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Anchor:
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                spacing: 4.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfMaxChild"
+            StyleSheet:
+                styles: "~res:/UI/Screens/Battle/DamageInfo/DamageInfoMarker.styles.yaml"
+        children:
+        -   class: "UIControl"
+            name: "TextBg"
+            position: [12.000000, 12.000000]
+            size: [32.000000, 32.000000]
+            pivot: [0.500000, 0.500000]
+            visible: true
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_STRETCH_BOTH"
+                    sprite: "~res:/Gfx/UI/BattleScreenHUD/bg_damage-info_text-bg"
+                    perPixelAccuracy: "PER_PIXEL_ACCURACY_FORCED"
+                    leftRightStretchCap: 30.000000
+                UIOpacityComponent: {}
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: -16.000000
+                    rightAnchorEnabled: true
+                    rightAnchor: -16.000000
+                    vCenterAnchorEnabled: true
+                    vCenterAnchor: 1.000000
+                IgnoreLayout: {}
+                SizePolicy:
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 24.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens/Battle/DamageInfo/DamageInfoMarker.styles.yaml"
+        -   class: "UIControl"
+            name: "TextWithModifier"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                UIOpacityComponent: {}
+                Anchor:
+                    vCenterAnchorEnabled: true
+                LinearLayout:
+                    spacing: 4.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   class: "UIControl"
+                name: "Modifier"
+                size: [32.000000, 32.000000]
+                input: false
+                classes: "t-old-header5"
+                components:
+                    UITextComponent:
+                        perPixelAccuracyType: "PER_PIXEL_ACCURACY_FORCED"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/OldFont.style.yaml;~res:/UI/Screens/Battle/DamageInfo/DamageInfoMarker.styles.yaml"
+            -   class: "UIControl"
+                name: "Text"
+                size: [32.000000, 32.000000]
+                input: false
+                classes: "t-old-header5"
+                components:
+                    UITextComponent:
+                        perPixelAccuracyType: "PER_PIXEL_ACCURACY_FORCED"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/OldFont.style.yaml;~res:/UI/Screens/Battle/DamageInfo/DamageInfoMarker.styles.yaml"

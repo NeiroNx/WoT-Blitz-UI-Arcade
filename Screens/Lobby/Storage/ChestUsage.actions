@@ -1,0 +1,68 @@
+action ALL_ANIMATIONS_FINISHED
+{
+    ChangeData(isAnimationsFinished, true);
+    parallel
+    {
+        Event("FADE", arg1 = 0.6);
+        Event("ON_ANIMATIONS_FINISHED");
+    }
+}
+
+action FADE(float time)
+{
+    parallel
+    {
+        sequence
+        {
+            if (rewards.Empty())
+            {
+                Opacity("**/IconButtonLight/TapArea", 0.0);
+                ChangeProperty("**/IconButtonLight", "", "visible", true);
+                Opacity("**/IconButtonLight/TapArea", 1.0, time, EASE_IN_EASE_OUT);
+            }
+            else
+            {
+                ChangeProperty("**/ClaimButtonHolder", "", "visible", true);
+                Opacity("**/ClaimButtonHolder", 1.0, time, EASE_IN_EASE_OUT);
+            }
+        }
+
+        Opacity("**/ScrollView/HorizontalScrollBar", 1.0, time, EASE_IN_EASE_OUT);
+        Opacity("**/CongratulationsContent/Group/TextContainer", 1.0, time, EASE_IN_EASE_OUT);
+        Opacity("**/AnimationsHolder", 0.0);
+
+        sequence
+        {
+            ChangeProperty("**/Fade", "", "visible", true);
+            Opacity("**/Fade", 0.5, time, EASE_IN_EASE_OUT);
+        }
+
+        ChangeData(startProgressAnimation, true);
+    }
+}
+
+action BOX_ANIMATION_FINISHED()
+{
+    if (rewards.Empty())
+    {
+        Event("FADE", arg1 = 0.6);
+    }
+    else
+    {
+        Opacity("**/AnimationsHolder", 1.0);
+        BroadcastEvent("START_ANIMATIONS");
+    }
+}
+
+action SKIP_ANIMATIONS
+{
+    parallel
+    {
+        if (not isAnimationsFinished)
+        {
+            Event("STOP_ANIMATION");
+        }
+        TriggerSceneAction("SkipMotion", "**/UI3DView");
+    }
+    Event("ALL_ANIMATIONS_FINISHED");
+}

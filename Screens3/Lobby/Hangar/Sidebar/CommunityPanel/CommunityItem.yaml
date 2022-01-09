@@ -1,0 +1,141 @@
+Header:
+    version: "74"
+Prototypes:
+-   class: "UIControl"
+    name: "CommunityItem"
+    size: [380.000000, 77.000000]
+    classes: "community-item long-element button-open-sound"
+    components:
+        LinearLayout:
+            padding: "16"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "FixedSize"
+            verticalValue: 72.000000
+        UIInputEventComponent:
+            onTouchUpInside: "COMMUNITY_SELECT"
+        UIDataParamsComponent:
+            params:
+            - ["string", "sprite", "\"~res:/Gfx/UI/LobbyCommon/social_icon\"", "\"~res:/Gfx/UI/LobbyCommon/social_icon\""]
+            - ["int", "frame", "0", "0"]
+            - ["string", "text", "localize(\"HANGAR\")", "localize(\"HANGAR\")"]
+            events:
+            - "COMMUNITY_SELECT"
+        Sound: {}
+        StyleSheet:
+            styles: "~res:/UI/Screens3/SmartDLC.style.yaml;~res:/UI/Screens3/ButtonSound.style.yaml"
+    children:
+    -   class: "UIControl"
+        name: "Hover"
+        size: [32.000000, 32.000000]
+        input: false
+        classes: "hover black-15-bg"
+        components:
+            Background: {}
+            IgnoreLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/Lobby/Hangar/Sidebar/CommunityPanel/CommunityItem.style.yaml"
+    -   class: "UIControl"
+        name: "ContentWrapper"
+        size: [380.000000, 64.000000]
+        pivot: [0.500000, 0.500000]
+        input: false
+        classes: "content-area"
+        components:
+            UIOpacityComponent: {}
+            Anchor:
+                topAnchorEnabled: true
+            LinearLayout:
+                spacing: 16.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Lobby/Hangar/Sidebar/CommunityPanel/CommunityItem.style.yaml"
+        children:
+        -   class: "UIControl"
+            name: "TitleWrapper"
+            position: [0.000000, 0.000000]
+            size: [174.000000, 64.000000]
+            input: false
+            components:
+                Anchor:
+                    vCenterAnchorEnabled: true
+                LinearLayout:
+                    spacing: 8.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   class: "UIControl"
+                name: "icon"
+                input: false
+                components:
+                    Background: {}
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 48.000000
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 48.000000
+                bindings:
+                - ["Background.sprite", "sprite", "Read"]
+                - ["Background.frame", "frame", "Read"]
+            -   class: "UIControl"
+                name: "Title"
+                input: false
+                classes: "t-caption bold white-wild-sand-text"
+                components:
+                    UITextComponent:
+                        fitting: "FITTING_POINTS"
+                        align: ["LEFT", "TOP"]
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml"
+                bindings:
+                - ["UITextComponent.text", "text", "Read"]
+        -   class: "UIControl"
+            name: "Arrow"
+            input: false
+            classes: "white-wild-sand-50-bg"
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_PROPORTIONAL"
+                    sprite: "~res:/Gfx/Lobby/icons/icon_external-link_square"
+                    frame: 0
+                Anchor:
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 24.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 24.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+    -   class: "UIControl"
+        name: "Separator"
+        position: [16.000000, 63.000000]
+        size: [32.000000, 32.000000]
+        input: false
+        classes: "separator white-wild-sand-5-bg"
+        components:
+            Background: {}
+            Anchor:
+                hCenterAnchorEnabled: true
+                bottomAnchorEnabled: true
+            IgnoreLayout: {}
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "parent - 32"
+                verticalPolicy: "FixedSize"
+                verticalValue: 1.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/Lobby/Hangar/Sidebar/CommunityPanel/CommunityItem.style.yaml"

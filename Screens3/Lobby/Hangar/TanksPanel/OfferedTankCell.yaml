@@ -1,0 +1,251 @@
+Header:
+    version: "102"
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/Vehicle/VehicleInfo.yaml"
+- "~res:/UI/Screens3/Common/DiscountLabel.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "OferredTankCell"
+    components:
+        UIAnimationComponent:
+            animations: "TANK_PRESSED,~res:/UI/Screens3/Lobby/Hangar/TanksPanel/OfferedTankCell.animation"
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 168.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 104.000000
+        UIInputEventComponent:
+            onTouchUpInside: "TANK_PRESSED"
+        UIDataParamsComponent:
+            params:
+            - ["OfferedTank", "tank", "null", "{ }"]
+            - ["bool", "isLoading", "false", "false"]
+            - ["bool", "selected", "false", "false"]
+            - ["PrebattleDataModel", "prebattle", "null", "{ }"]
+            events:
+            - "ON_TANK_PRESS"
+        UIDataLocalsComponent:
+            locals:
+            - ["vector<string>", "reducedTankNames", "[ \"#japan_vehicles:Firefly_GuP_short\"; \"#japan_vehicles:IS-2_GuP_short\"; \"#japan_vehicles:Pz_IV_AusfH_short\"; \"#japan_vehicles:Hetzer_GuP_short\"; \"#japan_vehicles:PzVI_GuP_short\"; ]"]
+            - ["string", "tankNameThickness", "when selected -> \"bold\", \"regular\""]
+            - ["string", "tankNameColor", "when tank.info.isPremium or tank.stats.isPremiumized -> \"yellow-lightning-text\", tank.info.isCollectible -> \"blue-rimmi-text\", \"white-wild-sand-text\""]
+            - ["float", "discountPercentage", "tank.discountValue * 100.000000"]
+            - ["bool", "playerInPrebattle", "not isNull(prebattle) and not isNull(prebattle.settings) and prebattle.settings.prebattleType != PrebattleType.UNDEFINED"]
+            - ["bool", "playerReadyForPrebattle", "playerInPrebattle and prebattle.accountInfo.isReady and not isNull(prebattle.accountInfo.tank)"]
+            - ["bool", "showDiscount", "tank.hasDiscount and discountPercentage >= 1.000000 and not (isLoading or playerReadyForPrebattle)"]
+            - ["string", "cellStyle", "(when selected -> \"selected \", \"button-choose-sound \") + \"carousel-tank pressed-opacity\""]
+        Sound: {}
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Common/Touch.style.yaml;~res:/UI/Screens3/ButtonSound.style.yaml"
+    bindings:
+    - ["enabled", "not playerReadyForPrebattle"]
+    - ["classes", "cellStyle"]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        position: [84.000000, 52.000000]
+        size: [168.000000, 104.000000]
+        pivot: [0.500000, 0.500000]
+        input: false
+        classes: "content-area"
+        components:
+            UIOpacityComponent: {}
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+        children:
+        -   class: "UIControl"
+            name: "BG"
+            input: false
+            classes: "black-15-bg"
+            components:
+                Background:
+                    drawType: "DRAW_FILL"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "Selector"
+            size: [32.000000, 32.000000]
+            input: false
+            classes: "orange-orange-peel-bg"
+            components:
+                Background: {}
+                Anchor:
+                    bottomAnchorEnabled: true
+                    bottomAnchor: -8.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 4.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+            bindings:
+            - ["visible", "selected"]
+        -   class: "UIControl"
+            name: "Flag"
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_ALIGNED"
+                    sprite: "~res:/Gfx/Lobby/flags/flag_carousel_gold"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+        -   class: "UIControl"
+            name: "Hover"
+            input: false
+            classes: "hover white-wild-sand-25-bg"
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_TO_RECT"
+                    sprite: "~res:/Gfx/Lobby/backgrounds/bg_radial-gradient_quarter"
+                UIOpacityComponent: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/Common/Hover.style.yaml"
+        -   class: "UIControl"
+            name: "TankImage"
+            input: false
+            components:
+                UITextureComponent: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            bindings:
+            - ["UITextureComponent.spritePath", "tank.bigIconWithCamo"]
+        -   class: "UIControl"
+            name: "Frame"
+            visible: false
+            input: false
+            classes: "orange-orange-peel-border"
+            components:
+                BorderComponent:
+                    border-thickness: 2U
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+            bindings:
+            - ["BorderComponent.border-visible", "selected"]
+        -   class: "UIControl"
+            name: "InfoContainer"
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            children:
+            -   prototype: "VehicleInfo/VehicleInfo"
+                name: "VehicleInfo"
+                components:
+                    Anchor:
+                        leftAnchorEnabled: true
+                        leftAnchor: 8.000000
+                        topAnchorEnabled: true
+                        topAnchor: 4.000000
+                    UIDataParamsComponent:
+                        args:
+                            "class": "tank.info.tankClass"
+                            "level": "tank.info.level"
+                            "type": "when tank.info.isPremium -> eVehicleDescriptionType.PREMIUM, tank.info.isCollectible -> eVehicleDescriptionType.COLLECTIBLE, eVehicleDescriptionType.NORMAL"
+                            "elite": "tank.stats.isElite"
+            -   prototype: "DiscountLabel/DiscountLabel"
+                name: "DiscountLabel"
+                components:
+                    Anchor:
+                        rightAnchorEnabled: true
+                        rightAnchor: -4.000000
+                        topAnchorEnabled: true
+                        topAnchor: -4.000000
+                    UIDataParamsComponent:
+                        args:
+                            "discountReason": "eDiscountReason.ACTION"
+                            "discount": "tank.discountValue"
+                            "display": "showDiscount"
+            -   class: "UIControl"
+                name: "SquadMatchStatus"
+                input: false
+                classes: "t-caps bold red-red-text"
+                components:
+                    UITextComponent:
+                        text: "#DOES NOT FIT"
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                        align: ["LEFT", "BOTTOM"]
+                    Anchor:
+                        leftAnchorEnabled: true
+                        leftAnchor: 8.000000
+                        bottomAnchorEnabled: true
+                        bottomAnchor: 20.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+                bindings:
+                - ["visible", "not isNull(prebattle) and not isNull(prebattle.squadTeamMateInfo) and isNull(prebattle.accountInfo)"]
+            -   class: "UIControl"
+                name: "NameContainer"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    Anchor:
+                        leftAnchorEnabled: true
+                        leftAnchor: 6.000000
+                        rightAnchorEnabled: true
+                        rightAnchor: 8.000000
+                        bottomAnchorEnabled: true
+                        bottomAnchor: 2.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfMaxChild"
+                    UIChildComponent0:
+                        condition: "reducedTankNames.Contains(tank.info.shortName)"
+                        prototypePath: "~res:/UI/Screens3/Lobby/Hangar/TanksPanel/TankReducedName.yaml"
+                        args:
+                            "resultStyle": "\"t-body bold \" + tankNameColor"
+                            "name": "tank.info.shortName"
+                    UIChildComponent1:
+                        condition: "not reducedTankNames.Contains(tank.info.shortName)"
+                        prototypePath: "~res:/UI/Screens3/Lobby/Hangar/TanksPanel/TankName.yaml"
+                        args:
+                            "resultStyle": "\"t-body bold \" + tankNameColor"
+                            "name": "tank.info.shortName"
+        -   class: "UIControl"
+            name: "FadeImage"
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_TO_RECT"
+                    sprite: "~res:/Gfx/UI/LobbyCommon/DarkBackground"
+                    frame: 2
+                Anchor:
+                    leftAnchorEnabled: true
+                    rightAnchorEnabled: true
+                    topAnchorEnabled: true
+                    bottomAnchorEnabled: true
+            bindings:
+            - ["visible", "isLoading or playerReadyForPrebattle"]
+            children:
+            -   class: "UIControl"
+                name: "LoadingSpinner"
+                input: false
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfFirstChild"
+                        verticalPolicy: "PercentOfFirstChild"
+                    UIChildComponent0:
+                        condition: "isLoading"
+                        prototypePath: "~res:/UI/Screens3/Common/LoadingSpinner.yaml"
+                bindings:
+                - ["visible", "isLoading"]

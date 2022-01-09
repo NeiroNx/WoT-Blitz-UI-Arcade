@@ -1,0 +1,63 @@
+animation AnimateProgress(eClanRewardState newState, int newProgress, float progressAnimationTime, float basicAnimationTime)
+{
+	if (newState == eClanRewardState.Closed)
+	{
+		ChangeProperty(".", "SizePolicy", "verticalValue", baseHeight);
+		ChangeData(rewardOpacity, 0.5);
+		Color("Bg", rgba(#f5f5f5, 0.15));
+		Color("./ProgressBar/Value", rgba(#e6c38a, 1.0));
+	}
+	else
+	{
+		if (newState == eClanRewardState.InProgress)
+		{
+			parallel 
+			{
+				ChangeProperty(".", "SizePolicy", "verticalValue", baseHeight + deltaHeight, basicAnimationTime);
+				ChangeData(rewardOpacity, 1.0, basicAnimationTime);
+				Color("Bg", rgba(#f5f5f5, 0.15), basicAnimationTime);
+				Color("./ProgressBar/Value", rgba(#e6c38a, 1.0), 0.0);
+				ChangeData(displayingProgress, newProgress, progressAnimationTime);
+			}
+		}
+		else
+		{
+			if (newState == eClanRewardState.Completed)
+			{
+				parallel
+				{
+					ChangeProperty(".", "SizePolicy", "verticalValue", baseHeight, basicAnimationTime);
+					ChangeData(rewardOpacity, 1.0, basicAnimationTime);
+					Color("Bg", rgba(#000000, 0.15), basicAnimationTime);
+					Color("./ProgressBar/Value", rgba(#e6c38a, 1.0), 0.0);
+					ChangeData(displayingProgress, newProgress, progressAnimationTime);
+				}	
+			}
+			else
+			{
+				if (newState == eClanRewardState.CanBeTaken)
+				{
+					parallel
+					{
+						ChangeProperty(".", "SizePolicy", "verticalValue", baseHeight, 0.0);
+						ChangeData(rewardOpacity, 1.0, basicAnimationTime);
+						Color("Bg", rgba(#3d990f, 0.20), basicAnimationTime);
+						Color("./ProgressBar/Value", rgba(#3d990f, 1.0), basicAnimationTime);
+						ChangeData(displayingProgress, newProgress, progressAnimationTime);
+					}
+				}
+				else // newState == eClanRewardState.CannotBeTaken
+				{
+					parallel
+					{
+						ChangeProperty(".", "SizePolicy", "verticalValue", baseHeight, 0.0);
+						ChangeData(rewardOpacity, 0.5, basicAnimationTime);
+						Color("Bg", rgba(#3d990f, 0.20), basicAnimationTime);
+						Color("./ProgressBar/Value", rgba(#3d990f, 1.0), basicAnimationTime);
+						ChangeData(displayingProgress, newProgress, progressAnimationTime);
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,4 @@
+animation OnHide
+{
+    BroadcastEvent("ANIMATE_POPUP_ON_HIDE");
+}

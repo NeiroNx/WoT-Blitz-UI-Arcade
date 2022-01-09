@@ -1,0 +1,111 @@
+Header:
+    version: 127
+Prototypes:
+-   class: "UIControl"
+    name: "MapHolder"
+    size: [960.000000, 640.000000]
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens3/PreLogin/ScrollToBestServer.animation"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["PreLoginData", "preLoginData", "null", "{ \"regionsList\" = [ { \"layoutCoordX\" = 0.200000; \"layoutCoordY\" = 0.450000; \"index\" = 0; }; { \"index\" = 1; \"layoutCoordX\" = 0.800000; \"layoutCoordY\" = 0.600000; }; { \"index\" = 2; \"layoutCoordX\" = 0.640000; \"layoutCoordY\" = 0.350000; }; { \"index\" = 3; \"layoutCoordX\" = 0.640000; \"layoutCoordY\" = 0.520000; }; { \"index\" = 4; \"layoutCoordX\" = 0.521000; \"layoutCoordY\" = 0.390000; }; { \"index\" = 5; \"layoutCoordX\" = 0.300000; \"layoutCoordY\" = 0.650000; }; ]; \"currentRegion\" = { \"index\" = 0; \"layoutCoordX\" = 0.200000; \"layoutCoordY\" = 0.450000; }; \"currentRegionIndex\" = 0; }"]
+            events:
+            - "REGION_SELECTED"
+        UIDataLocalVarsComponent:
+            data:
+            - ["float", "mapOffset", "preLoginData.currentRegion.layoutCoordX * 960.000000 - 160"]
+    children:
+    -   class: "UIControl"
+        name: "HorizontalScrollView"
+        size: [200.000000, 200.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            StyleSheet: {}
+        children:
+        -   class: "UIScrollView"
+            name: "ScrollArea"
+            autoUpdate: true
+            centerContent: true
+            returnSpeed: 0.100000
+            scrollSpeed: 0.100000
+            components:
+                ClipContent:
+                    enabled: false
+                    left: false
+                    right: false
+                    top: false
+                    bottom: false
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            children:
+            -   class: "UIScrollViewContainer"
+                name: "scrollContainerControl"
+                position: [-0.000000, 0.000000]
+                scrollDirection: "kHorizontal"
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfMaxChild"
+                        verticalPolicy: "PercentOfMaxChild"
+                children:
+                -   class: "UIControl"
+                    name: "Control"
+                    size: [32.000000, 32.000000]
+                    input: true
+                    components:
+                        LinearLayout: {}
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfChildrenSum"
+                            verticalPolicy: "PercentOfMaxChild"
+                    children:
+                    -   class: "UIControl"
+                        name: "SpacerLeft"
+                        size: [32.000000, 32.000000]
+                        input: false
+                        components:
+                            SizePolicy:
+                                horizontalPolicy: "FixedSize"
+                                horizontalValue: 320.000000
+                                verticalPolicy: "PercentOfParent"
+                    -   class: "UIControl"
+                        name: "Map"
+                        size: [960.000000, 640.000000]
+                        input: false
+                        components:
+                            Background:
+                                drawType: "DRAW_SCALE_TO_RECT"
+                                sprite: "~res:/Gfx/Lobby/backgrounds/server-screen/server-screen_map"
+                                frame: 0
+                            SizePolicy:
+                                horizontalPolicy: "FixedSize"
+                                horizontalValue: 960.000000
+                                verticalPolicy: "FixedSize"
+                                verticalValue: 640.000000
+                            UIRepeatComponent:
+                                control: "~res:/UI/Screens3/PreLogin/ServerMapElement.yaml"
+                                dataContainer: "preLoginData.regionsList"
+                                args:
+                                    "isSelected": "_item.index == preLoginData.currentRegionIndex"
+                                    "descr": "_item"
+                                eventActions:
+                                - ["REGION_SELECTED", "REGION_SELECTED", "_event"]
+                    -   class: "UIControl"
+                        name: "SpacerRight"
+                        size: [32.000000, 32.000000]
+                        input: false
+                        components:
+                            SizePolicy:
+                                horizontalPolicy: "FixedSize"
+                                horizontalValue: 320.000000
+                                verticalPolicy: "PercentOfParent"

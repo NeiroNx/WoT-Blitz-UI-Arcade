@@ -1,0 +1,21 @@
+animation ScrollToCurrentStep
+{
+    if ( scrollSize > scrollParentSize and selectedStepPosition > 0 )
+    {
+        if ( selectedStepPosition <= ( scrollParentSize / 2.0 - offset) )
+        {
+            Scroll (".", 0, 0, 0.6);
+        }
+        else 
+        {
+            if ( selectedStepPosition >= ( scrollSize - scrollParentSize / 2.0 - offset) )
+            {
+                Scroll (".", scrollSize - scrollParentSize, 0, 0.6);
+            }
+            else
+            {
+                Scroll (".", selectedStepPosition - scrollParentSize / 2.0 + offset, 0, 0.6);
+            }
+        }
+    }
+}

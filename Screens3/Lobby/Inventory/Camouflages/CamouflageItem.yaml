@@ -1,0 +1,238 @@
+Header:
+    version: 133
+ImportedPackages:
+- "~res:/UI/Screens3/Common/DiscountLabel.yaml"
+- "~res:/UI/Screens3/Lobby/Common/Resource/Currencies.yaml"
+- "~res:/UI/Screens3/Lobby/Common/CheckMark.yaml"
+- "~res:/UI/Screens3/Lobby/Common/BadgeHolder.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "CamouflageItem"
+    classes: "camouflage-item button-choose-sound"
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfFirstChild"
+            verticalPolicy: "PercentOfFirstChild"
+        UIInputEventComponent:
+            onTouchUpInside: "ON_CAMO_CLICKED"
+            onTouchUpInsideData: "camoItem.itemId"
+        UIDataParamsComponent:
+            params:
+            - ["int", "currentItem", "0", "1"]
+            - ["int", "selectedItem", "0", "1"]
+            - ["CamouflageItem", "camoItem", "null", "{ \"hasBadge\" = true; \"itemId\" = 1; \"state\" = eCamoInShopState.UNLOCK_INTERNAL_BUNDLE; }"]
+            events:
+            - "ON_CAMO_CLICKED"
+        UIDataLocalBindingsComponent:
+            data:
+            - ["bool", "hasCertificate", "camoItem.state == eCamoInShopState.UNLOCK_ITEM"]
+            - ["bool", "current", "camoItem.itemId == currentItem"]
+            - ["Discount", "emptyDiscount", "{ }"]
+            - ["Discount", "discount", "when camoItem.unlockPrice.resources.Empty() -> emptyDiscount, camoItem.unlockPrice.resources[0].discount"]
+            - ["bool", "selected", "camoItem.itemId == selectedItem"]
+            - ["bool", "locked", "not (camoItem.state == eCamoInShopState.INSTALL or camoItem.state == eCamoInShopState.UNINSTALL or camoItem.state == eCamoInShopState.RETURN or camoItem.state == eCamoInShopState.REPLACE or hasCertificate)"]
+        UIChildComponent0:
+            condition: "selected"
+            prototypePath: "~res:/UI/Screens3/Lobby/Inventory/Camouflages/SelectedCamo.yaml"
+        Sound: {}
+        UIIdentifierComponent:
+            id: "camo_item"
+            params:
+            - ["int", "item_id", "camoItem.itemId"]
+            - ["string", "item_name", "camoItem.name"]
+            - ["bool", "locked", "locked or camoItem.state == eCamoInShopState.UNLOCK_ITEM"]
+            - ["bool", "installed", "camoItem.state == eCamoInShopState.UNINSTALL"]
+            - ["bool", "selected", "selected"]
+        StyleSheet:
+            styles: "~res:/UI/Screens3/ButtonSound.style.yaml;~res:/UI/Screens3/Common/Touch.style.yaml"
+    bindings:
+    - ["input", "not selected"]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        position: [36.000000, 36.000000]
+        pivot: [0.500000, 0.500000]
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Common/Touch.style.yaml"
+        children:
+        -   class: "UIControl"
+            name: "Item"
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 72.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 72.000000
+            children:
+            -   class: "UIControl"
+                name: "Texture"
+                input: false
+                components:
+                    ClipContent: {}
+                    UITextureComponent: {}
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                bindings:
+                - ["UITextureComponent.spritePath", "camoItem.texturePath"]
+            -   class: "UIControl"
+                name: "BackgroundGradient"
+                input: false
+                classes: "black-25-bg"
+                components:
+                    Background: {}
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+                bindings:
+                - ["visible", "locked"]
+            -   class: "UIControl"
+                name: "Lock"
+                input: false
+                components:
+                    UITextureComponent:
+                        spritePath: "~res:/Gfx/Lobby/icons/icon_lock_open_s"
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+                bindings:
+                - ["visible", "locked and (not camoItem.unlockItem.resources.Empty() or camoItem.unlockPrice.resources.Empty())"]
+            -   class: "UIControl"
+                name: "HoverBorder"
+                size: [72.000000, 72.000000]
+                input: false
+                classes: "hover white-wild-sand-25-border"
+                components:
+                    UIOpacityComponent: {}
+                    BorderComponent:
+                        border-thickness: 2U
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/Common/Hover.style.yaml"
+            -   class: "UIControl"
+                name: "ResourceWrapper"
+                size: [32.000000, 32.000000]
+                input: false
+                classes: "black-70-bg"
+                components:
+                    Background:
+                        drawType: "DRAW_STRETCH_BOTH"
+                        sprite: "~res:/Gfx/Lobby/backgrounds/bg_gradient_vertical_0-100"
+                    Anchor:
+                        bottomAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfMaxChild"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+                children:
+                -   prototype: "Currencies/Resources"
+                    name: "Resources"
+                    components:
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                            bottomAnchorEnabled: true
+                            bottomAnchor: 2.000000
+                        UIDataParamsComponent:
+                            args:
+                                "currencySize": "eCurrencySize.SMALL"
+                                "forButton": "false"
+                                "canAfford": "null"
+                                "showDiscount": "false"
+                                "visible": "locked and not camoItem.unlockPrice.resources.Empty() and camoItem.unlockItem.resources.Empty() and not hasCertificate"
+                                "price": "camoItem.unlockPrice"
+            -   class: "UIControl"
+                name: "SelectionBorder"
+                size: [32.000000, 32.000000]
+                input: false
+                classes: "orange-orange-peel-border"
+                components:
+                    BorderComponent:
+                        border-thickness: 2U
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+                bindings:
+                - ["visible", "selected"]
+            -   prototype: "CheckMark/CheckMark"
+                name: "CheckMark"
+                components:
+                    Anchor:
+                        rightAnchorEnabled: true
+                        rightAnchor: -8.000000
+                        bottomAnchorEnabled: true
+                        bottomAnchor: -8.000000
+                    UIDataParamsComponent:
+                        args:
+                            "isVisible": "current"
+        -   prototype: "DiscountLabel/DiscountLabel"
+            name: "DiscountLabel"
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: -8.000000
+                    topAnchorEnabled: true
+                    topAnchor: -8.000000
+                UIDataParamsComponent:
+                    args:
+                        "discountReason": "discount.reason"
+                        "discount": "discount.value"
+                        "display": "not floatEqual(discount.value, 0.000000) and not hasCertificate"
+                UIDataLocalBindingsComponent:
+                    data:
+                    - ["int", "height", "when size == eDiscountLabelSize.Big -> 40, size == eDiscountLabelSize.Medium -> 34, 24"]
+                    - ["float", "value", "floor(discount * 100.000000)"]
+                    - ["string", "discountStr", "when value > 0 -> percent(-value, 0), \"%\""]
+                    - ["string", "fontStyle", "\"white-wild-sand-text bold not-localize \" + str(size, eDiscountLabelSize, \"fontSize\")"]
+            bindings:
+            - ["visible", "display"]
+        -   prototype: "BadgeHolder/BadgeHolder"
+            name: "BadgeHolder"
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+                    topAnchorEnabled: true
+                UIDataParamsComponent:
+                    args:
+                        "type": "when camoItem.hasBadge -> eBadgeType.CAMOUFLAGE, eBadgeType.EMPTY"
+                        "value": "\"\""
+            bindings:
+            - ["Anchor.rightAnchor", "when value == \" \" -> 4, -8"]
+            - ["Anchor.topAnchor", "when value == \" \" -> 4, -8"]
+        -   class: "UIControl"
+            name: "CertificateHolder"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: -8.000000
+                    topAnchorEnabled: true
+                    topAnchor: -8.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIChildComponent0:
+                    condition: "hasCertificate"
+                    prototypePath: "~res:/UI/Screens3/Lobby/Common/CertificateItem.yaml"

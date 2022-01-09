@@ -1,0 +1,5 @@
+animation StartHangar
+{
+	PlaySound("GUI/buttons/ok");
+	Event("START_HANGAR_CLICKED");
+}

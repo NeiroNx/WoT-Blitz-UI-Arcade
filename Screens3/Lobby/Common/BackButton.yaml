@@ -1,0 +1,130 @@
+Header:
+    version: 127
+Prototypes:
+-   class: "UIControl"
+    name: "BackButton"
+    input: false
+    classes: "back-button"
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens3/Lobby/Common/BackButtonInit.animation"
+        Anchor:
+            topAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "Formula"
+            horizontalFormula: "max(parent, 88)"
+            verticalPolicy: "FixedSize"
+            verticalValue: 48.000000
+        UIDataParamsComponent:
+            params:
+            - ["bool", "isEmitSounds", "true", "true"]
+            - ["int", "tutorialLayer", "0", "0"]
+            - ["bool", "isInitiallyClickable", "true", "true"]
+            events:
+            - "ON_CLICK_BUTTON"
+        UIDataLocalVarsComponent:
+            data:
+            - ["bool", "isClickable", "isInitiallyClickable"]
+        UIDataOnEventComponent0:
+            eventName: "kBackButtonInit"
+            modelFieldExpression: "isClickable"
+            dataExpression: "true"
+        UILayerComponent: {}
+        UIIdentifierComponent:
+            id: "prototype_back_button"
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Lobby/Common/BackButton.style.yaml"
+    bindings:
+    - ["UILayerComponent.layer", "tutorialLayer"]
+    children:
+    -   class: "UIControl"
+        name: "AttachMaster"
+        input: false
+        components:
+            Anchor:
+                rightAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 88.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 48.000000
+            UIAttachLayoutMasterComponent:
+                attachId: "BACK"
+    -   class: "UIControl"
+        name: "TapArea"
+        exclusiveInput: true
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+            UIInputEventComponent:
+                onTouchUpInside: "ON_CLICK_BUTTON"
+            Sound: {}
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Lobby/Common/BackButton.style.yaml;~res:/UI/Screens3/ButtonSound.style.yaml"
+        bindings:
+        - ["input", "isClickable"]
+        - ["classes", "\"tap-area pressed-opacity \" + (when isEmitSounds -> \"button-close-sound\", \"\")"]
+        children:
+        -   class: "UIControl"
+            name: "Pressed"
+            input: false
+            classes: "pressed-style white-wild-sand-5-bg"
+            components:
+                Background: {}
+                UIOpacityComponent: {}
+                Anchor:
+                    leftAnchorEnabled: true
+                    rightAnchorEnabled: true
+                    topAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/Lobby/Common/BackButton.style.yaml"
+        -   class: "UIControl"
+            name: "Hover"
+            input: false
+            classes: "hover white-wild-sand-10-bg"
+            components:
+                Background: {}
+                UIOpacityComponent: {}
+                Anchor:
+                    leftAnchorEnabled: true
+                    rightAnchorEnabled: true
+                    topAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/Lobby/Common/BackButton.style.yaml"
+        -   class: "UIControl"
+            name: "IconWrapper"
+            input: false
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 88.000000
+                    verticalPolicy: "PercentOfParent"
+            children:
+            -   class: "UIControl"
+                name: "Icon"
+                pivot: [0.500000, 0.500000]
+                input: false
+                classes: "content white-wild-sand-bg"
+                components:
+                    Background:
+                        drawType: "DRAW_SCALE_PROPORTIONAL"
+                        sprite: "~res:/Gfx/Lobby/icons/icon_arrow-back"
+                    UIOpacityComponent: {}
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 24.000000
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 24.000000
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Lobby/Common/BackButton.style.yaml;~res:/UI/Screens3/Color.style.yaml"

@@ -1,0 +1,86 @@
+Header:
+    version: 115
+Prototypes:
+-   class: "UIControl"
+    name: "AllArrows"
+    input: false
+    components:
+        Anchor:
+            vCenterAnchorEnabled: true
+            vCenterAnchor: 50.000000
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            verticalPolicy: "FixedSize"
+        UIAttachLayoutSlaveComponent:
+            x: true
+        UIDataParamsComponent:
+            params:
+            - ["bool", "flipVertical", "false", "true"]
+            - ["int", "arrowsCount", "3", "3"]
+            - ["float", "animationTime", "0.000000", "0.000000"]
+            - ["eNintendoSwitchControls", "nsControl", "eNintendoSwitchControls.LeftThumbstick", "eNintendoSwitchControls.LeftThumbstick"]
+            - ["vector<eSideType>", "arrowSides", "[ ]", "[ eSideType.Left; ]"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["vector2", "offset", "when flipVertical -> vec2(0, -128), vec2(0, 0)"]
+    bindings:
+    - ["SizePolicy.horizontalValue", "208"]
+    - ["SizePolicy.verticalValue", "208"]
+    - ["UIAttachLayoutSlaveComponent.attachId", "str(nsControl)"]
+    - ["UIAttachLayoutSlaveComponent.additionalOffset", "offset"]
+    children:
+    -   class: "UIControl"
+        name: "PointingArrowRight"
+        position: [128.000000, 80.000000]
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfMaxChild"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Common/PointingArrow/PointingArrow.yaml"
+        bindings:
+        - ["visible", "not Empty(arrowSides) and Contains(arrowSides, eSideType.Right)"]
+    -   class: "UIControl"
+        name: "PointingArrowLeft"
+        position: [80.000000, 128.000000]
+        size: [32.000000, 32.000000]
+        angle: 180.000000
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfMaxChild"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Common/PointingArrow/PointingArrow.yaml"
+        bindings:
+        - ["visible", "not Empty(arrowSides) and Contains(arrowSides, eSideType.Left)"]
+    -   class: "UIControl"
+        name: "PointingArrowBottom"
+        position: [128.000000, 128.000000]
+        size: [32.000000, 32.000000]
+        angle: 90.000000
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfMaxChild"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Common/PointingArrow/PointingArrow.yaml"
+        bindings:
+        - ["visible", "not Empty(arrowSides) and Contains(arrowSides, eSideType.Bottom)"]
+    -   class: "UIControl"
+        name: "PointingArrowTop"
+        position: [80.000000, 80.000000]
+        size: [32.000000, 32.000000]
+        angle: -90.000000
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfMaxChild"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Common/PointingArrow/PointingArrow.yaml"
+        bindings:
+        - ["visible", "not Empty(arrowSides) and Contains(arrowSides, eSideType.Top)"]

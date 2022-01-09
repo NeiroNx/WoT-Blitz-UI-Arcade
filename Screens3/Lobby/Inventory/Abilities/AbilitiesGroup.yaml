@@ -1,0 +1,63 @@
+Header:
+    version: "92"
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Profile/Common/SectionHeader.yaml"
+- "~res:/UI/Screens3/Lobby/Profile/Common/HorizontalDividerWithCaption.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "AbilitiesGroup"
+    size: [640.000000, 240.000000]
+    input: false
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+            spacing: 16.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            horizontalValue: 100.000000
+            verticalPolicy: "PercentOfChildrenSum"
+        UIDataParamsComponent:
+            params:
+            - ["eAbilityGroupCriteria", "groupCriteria", "eAbilityGroupCriteria.kAbilityGrade", "eAbilityGroupCriteria.kAbilityGrade"]
+            - ["int", "selectedCompDescr", "0", "2547"]
+            - ["AbilityGroup", "group", "null", "{ }"]
+        UIDataLocalsComponent:
+            locals:
+            - ["string", "title", "when groupCriteria == eAbilityGroupCriteria.kAbilityGrade -> when group.abilityGrade == -1 -> localize(\"#abilityScreen:PreinstalledAbilitiesGroupTitle\"), when group.abilityGrade == 1 -> localize(\"#abilityScreen:FirstGradeAbilitiesGroupTitle\"), when group.abilityGrade == 2 -> localize(\"#abilityScreen:SecondGradeAbilitiesGroupTitle\"), when group.abilityGrade == 3 -> localize(\"#abilityScreen:ThirdGradeAbilitiesGroupTitle\"), \"\", \"\""]
+            - ["bool", "expanded", "true"]
+        UIDataOnEventComponent0:
+            eventName: "ON_PRESSED"
+            modelFieldExpression: "expanded"
+            dataExpression: "not expanded"
+    children:
+    -   prototype: "HorizontalDividerWithCaption/HorizontalDividerWithCaption"
+        name: "HorizontalDividerWithCaption"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "text": "title"
+    -   class: "UIControl"
+        name: "Content"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "Formula"
+                verticalFormula: "childrenSum + 8"
+            FlowLayout:
+                hDynamicPadding: true
+                hSpacing: 16.000000
+                vSpacing: 16.000000
+            UIRepeatComponent:
+                control: "~res:/UI/Screens3/Lobby/Inventory/InventoryItem/InventoryItem.yaml"
+                dataContainer: "group.abilityItems"
+                args:
+                    "isInstalled": "_item.abilityGrade == -1"
+                    "isSelected": "selectedCompDescr == _item.compactDescr"
+                    "modelAbility": "_item"
+                    "contentType": "eItemPlaceholderContentType.kAbilityContent"
+                eventActions:
+                - ["ON_PRESSED", "SHOW_ACHIEVEMENT_INFO", "_event"]
+        bindings:
+        - ["visible", "expanded"]

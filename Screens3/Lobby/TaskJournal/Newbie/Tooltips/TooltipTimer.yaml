@@ -1,0 +1,41 @@
+Header:
+    version: 133
+ImportedPackages:
+- "~res:/UI/Screens3/Common/PopupMenuWithRichText.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "TooltipQuestLocked"
+    size: [960.000000, 640.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["int", "slotIndex", "0", "0"]
+            - ["int", "unlockLevel", "0", "0"]
+            events:
+            - "FINISH_HIDE_POPUP_ANIMATION"
+            - "POPUP_ON_CLOSE_ACTION"
+        UIDataLocalBindingsComponent:
+            data: []
+    children:
+    -   prototype: "PopupMenuWithRichText/Slave"
+        name: "Slave"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "offset": "16"
+                    "title": "\"\""
+                    "text": "localize(\"missionJournal/newbie/timerTooltip\")"
+                    "slaveAlign": "ePositionAlign.Right"
+                    "masterId": "\"NEWBIE_KEY_REWARDS_TIMER\""
+                eventActions:
+                - ["FINISH_HIDE_POPUP_ANIMATION", "FINISH_HIDE_POPUP_ANIMATION", ""]
+                - ["POPUP_ON_CLOSE_ACTION", "POPUP_ON_CLOSE_ACTION", ""]
+        children:
+        -   path: "Content/Text"
+            components:
+                SizePolicy:
+                    horizontalMax: 246.000000

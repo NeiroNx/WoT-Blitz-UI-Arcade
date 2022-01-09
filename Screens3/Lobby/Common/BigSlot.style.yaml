@@ -1,0 +1,23 @@
+Header:
+    version: 120
+ImportedPackages:
+- "~res:/UI/Screens3/Common/Touch.style.yaml"
+- "~res:/UI/Screens3/Common/Hover.style.yaml"
+StyleSheets:
+-   selectors:
+    - ".slot"
+    properties:
+        opacity-opacity: 1.000000
+-   selectors:
+    - ".slot.disabled"
+    properties:
+        opacity-opacity: 0.250000
+-   selectors:
+    - ".slot * .background"
+    - ".slot:hover * .hover"
+    properties:
+        opacity-opacity: 0.150000
+-   selectors:
+    - ".slot * .hover"
+    properties:
+        opacity-opacity: 0.000000

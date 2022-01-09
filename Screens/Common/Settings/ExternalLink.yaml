@@ -1,0 +1,21 @@
+Header:
+    version: "43"
+Prototypes:
+-   class: "UIControl"
+    name: "ExternalLink"
+    size: [225.000000, 45.000000]
+    input: true
+    children:
+    -   class: "UIControl"
+        name: "Title"
+        size: [94.000000, 22.000000]
+        input: false
+        classes: "header4"
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UITextComponent:
+                text: "title"
+            StyleSheet:
+                styles: "~res:/UI/Screens/Fonts.yaml"

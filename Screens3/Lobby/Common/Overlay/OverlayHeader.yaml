@@ -1,0 +1,108 @@
+Header:
+    version: "106"
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/PlayerName.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "Header"
+    size: [800.000000, 80.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "FixedSize"
+            verticalValue: 80.000000
+        UIDataParamsComponent:
+            params:
+            - ["string", "clanTag", "\"\"", "\"WG\""]
+            - ["string", "playerName", "\"\"", "\"Konstantinopolsky\""]
+            - ["string", "title", "\"Overlay Title\"", "\"Overlay Title\""]
+            - ["string", "titleStyle", "\"t-subtitle regular white-wild-sand-50-text\"", "\"t-subtitle regular white-wild-sand-50-text\""]
+            - ["bool", "isBgVisible", "false", "false"]
+            - ["bool", "isSeparatorVisible", "false", "false"]
+        UIDataLocalsComponent:
+            locals:
+            - ["bool", "showPlayerName", "not empty(playerName)"]
+    children:
+    -   class: "UIControl"
+        name: "Bg"
+        size: [32.000000, 32.000000]
+        input: false
+        classes: "grey-shark-90-bg"
+        components:
+            Background:
+                drawType: "DRAW_FILL"
+            UIRoundedCornersComponent:
+                radius: "16; 16; 0;"
+            IgnoreLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+        bindings:
+        - ["visible", "isBgVisible"]
+    -   class: "UIControl"
+        name: "Separator"
+        size: [32.000000, 32.000000]
+        input: false
+        classes: "white-wild-sand-5-bg"
+        components:
+            Background: {}
+            Anchor:
+                bottomAnchorEnabled: true
+            IgnoreLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "FixedSize"
+                verticalValue: 1.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+        bindings:
+        - ["visible", "isSeparatorVisible"]
+    -   class: "UIControl"
+        name: "OverlayTitle"
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                orientation: "TopDown"
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfChildrenSum"
+        children:
+        -   class: "UIControl"
+            name: "Title"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                UITextComponent: {}
+                Anchor:
+                    hCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml"
+            bindings:
+            - ["classes", "titleStyle"]
+            - ["UITextComponent.text", "localize(title)"]
+        -   class: "UIControl"
+            name: "PlayerName"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens3/Lobby/Common/PlayerName.yaml"
+                    args:
+                        "playerName": "playerName"
+                        "clanTag": "clanTag"
+            bindings:
+            - ["visible", "showPlayerName"]

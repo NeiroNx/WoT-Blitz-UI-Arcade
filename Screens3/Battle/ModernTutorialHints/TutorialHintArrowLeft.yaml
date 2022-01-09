@@ -1,0 +1,28 @@
+Header:
+    version: 127
+ImportedPackages:
+- "~res:/UI/Screens3/Battle/ModernTutorialHints/TutorialHintBasic.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "TutorialHintArrowLeft"
+    size: [48.000000, 48.000000]
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens3/Battle/ModernTutorialHints/FadeIn.animation;Disappear,~res:/UI/Screens3/Battle/ModernTutorialHints/FadeOut.animation"
+        UIOpacityComponent: {}
+        UIAttachLayoutSlaveComponent:
+            slaveSizePolicy: "MasterSize"
+        UIDataParamsComponent:
+            params:
+            - ["string", "icon", "\"\"", "\"~res:/Gfx/Battle/icons/2020-halloween/icon_up\""]
+            - ["string", "text", "\"\"", "\"Basic <highlight>hint</highlight> text\""]
+    children:
+    -   prototype: "TutorialHintBasic/HintContainer"
+        name: "HintContainer"
+        classes: "ArrowLeft"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "text": "text"
+                    "icon": "icon"

@@ -1,0 +1,18 @@
+commonValue = when deltaFlag == 1 -> comparedValue, displayValue;
+lessValue = when displayValue < comparedValue -> displayValue, comparedValue;
+biggerValue = when displayValue > comparedValue -> displayValue, comparedValue;
+
+commonBarEndValue = when deltaFlag != 0 -> lessValue, commonValue;
+
+biggerBarStartValue = lessValue;
+lessBarStartValue = lessValue;
+
+biggerBarEndValue = biggerValue;
+lessBarEndValue = biggerValue;
+
+maxBarStartValue = when deltaFlag != 0 -> biggerValue, commonValue;
+maxBarEndValue = maxValue;
+
+fullBarStartValue = maxValue;
+
+rightDisplayValueExtreme = when deltaFlag == 1 -> biggerValueRightExtreme, commonValueRightExtreme;

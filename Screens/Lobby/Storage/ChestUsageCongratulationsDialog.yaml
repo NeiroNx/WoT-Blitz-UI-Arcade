@@ -1,0 +1,36 @@
+Header:
+    version: 133
+Prototypes:
+-   class: "UIControl"
+    name: "StoryCongratulationsDialog"
+    size: [960.000000, 640.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["string", "background", "\"\"", "\"\""]
+            - ["vector<ResourceDetailed>", "rewards", "[ ]", "[ { \"type\" = ResourceType.premium; }; { \"type\" = ResourceType.gold; }; { \"type\" = ResourceType.credits; }; { \"type\" = ResourceType.stuff; }; { \"type\" = ResourceType.unlocks; }; { \"type\" = ResourceType.vehicle; }; ]"]
+            - ["eBlitzDevice", "deviceType", "eBlitzDevice.DEVICE_DESKTOP", "eBlitzDevice.DEVICE_DESKTOP"]
+            events:
+            - "ON_CLOSE"
+    children:
+    -   class: "UIControl"
+        name: "ContentHolder"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/CongratulationsDialog.yaml"
+                args:
+                    "background": "background"
+                    "header": "\"ChestUsage/CongratulationsDialog/Header\""
+                    "description": "\"ChestUsage/CongratulationsDialog/Description\""
+                    "rewards": "rewards"
+                    "deviceType": "deviceType"
+                eventActions:
+                - ["BACK_EVENT", "ON_CLOSE", ""]

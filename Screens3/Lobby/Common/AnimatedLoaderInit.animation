@@ -1,0 +1,4 @@
+animation Initialize(bool replacing)
+{
+	ChangeData(show, false);
+}

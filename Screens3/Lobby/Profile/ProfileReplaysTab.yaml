@@ -1,0 +1,7 @@
+Header:
+    version: "65"
+Prototypes:
+-   class: "UIControl"
+    name: "Control"
+    size: [32.000000, 32.000000]
+    input: false

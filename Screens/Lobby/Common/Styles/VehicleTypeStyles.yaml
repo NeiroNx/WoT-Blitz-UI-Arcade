@@ -1,0 +1,215 @@
+Header:
+    version: "58"
+StyleSheets:
+-   selector: ".default"
+    properties:
+        bg-sprite: ""
+-   selector: ".prem"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/LobbyCommon/TankTypesSmall"
+        bg-frame: 5
+-   selector: ".elite"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/LobbyCommon/TankTypesSmall"
+        bg-frame: 0
+-   selector: ".prem.light #Class"
+    properties:
+        bg-frame: 6
+-   selector: ".prem.medium #Class"
+    properties:
+        bg-frame: 7
+-   selector: ".prem.heavy #Class"
+    properties:
+        bg-frame: 8
+-   selector: ".prem.destroyer #Class"
+    properties:
+        bg-frame: 9
+-   selector: ".coll.light #Class"
+    properties:
+        bg-frame: 16
+-   selector: ".coll.medium #Class"
+    properties:
+        bg-frame: 17
+-   selector: ".coll.heavy #Class"
+    properties:
+        bg-frame: 18
+-   selector: ".coll.destroyer #Class"
+    properties:
+        bg-frame: 19
+-   selector: ".default.light #Class"
+    properties:
+        bg-frame: 1
+-   selector: ".default.medium #Class"
+    properties:
+        bg-frame: 2
+-   selector: ".default.heavy #Class"
+    properties:
+        bg-frame: 3
+-   selector: ".default.destroyer #Class"
+    properties:
+        bg-frame: 4
+-   selector: ".default-lvl.lvl-1"
+    properties:
+        bg-frame: 0
+        sizePolicy-horizontalValue: 60.000000
+-   selector: ".default-lvl.lvl-2"
+    properties:
+        bg-frame: 1
+        sizePolicy-horizontalValue: 70.000000
+-   selector: ".default-lvl.lvl-3"
+    properties:
+        bg-frame: 2
+        sizePolicy-horizontalValue: 80.000000
+-   selector: ".default-lvl.lvl-4"
+    properties:
+        bg-frame: 3
+        sizePolicy-horizontalValue: 80.000000
+-   selector: ".default-lvl.lvl-5"
+    properties:
+        bg-frame: 4
+        sizePolicy-horizontalValue: 70.000000
+-   selector: ".default-lvl.lvl-6"
+    properties:
+        bg-frame: 5
+        sizePolicy-horizontalValue: 90.000000
+-   selector: ".default-lvl.lvl-7"
+    properties:
+        bg-frame: 6
+-   selector: ".default-lvl.lvl-8"
+    properties:
+        bg-frame: 7
+        sizePolicy-horizontalValue: 110.000000
+-   selector: ".default-lvl.lvl-9"
+    properties:
+        bg-frame: 8
+        sizePolicy-horizontalValue: 90.000000
+-   selector: ".default-lvl.lvl-10"
+    properties:
+        bg-frame: 9
+        sizePolicy-horizontalValue: 70.000000
+-   selector: ".prem-lvl.lvl-1"
+    properties:
+        bg-frame: 10
+        sizePolicy-horizontalValue: 60.000000
+-   selector: ".prem-lvl.lvl-2"
+    properties:
+        bg-frame: 11
+        sizePolicy-horizontalValue: 70.000000
+-   selector: ".prem-lvl.lvl-3"
+    properties:
+        bg-frame: 12
+        sizePolicy-horizontalValue: 80.000000
+-   selector: ".prem-lvl.lvl-4"
+    properties:
+        bg-frame: 13
+        sizePolicy-horizontalValue: 80.000000
+-   selector: ".prem-lvl.lvl-5"
+    properties:
+        bg-frame: 14
+        sizePolicy-horizontalValue: 70.000000
+-   selector: ".prem-lvl.lvl-6"
+    properties:
+        bg-frame: 15
+        sizePolicy-horizontalValue: 90.000000
+-   selector: ".prem-lvl.lvl-7"
+    properties:
+        bg-frame: 16
+-   selector: ".prem-lvl.lvl-8"
+    properties:
+        bg-frame: 17
+        sizePolicy-horizontalValue: 110.000000
+-   selector: ".prem-lvl.lvl-9"
+    properties:
+        bg-frame: 18
+        sizePolicy-horizontalValue: 90.000000
+-   selector: ".prem-lvl.lvl-10"
+    properties:
+        bg-frame: 19
+        sizePolicy-horizontalValue: 70.000000
+-   selector: ".coll-lvl.lvl-1"
+    properties:
+        bg-frame: 30
+        sizePolicy-horizontalValue: 60.000000
+-   selector: ".coll-lvl.lvl-2"
+    properties:
+        bg-frame: 31
+        sizePolicy-horizontalValue: 70.000000
+-   selector: ".coll-lvl.lvl-3"
+    properties:
+        bg-frame: 32
+        sizePolicy-horizontalValue: 80.000000
+-   selector: ".coll-lvl.lvl-4"
+    properties:
+        bg-frame: 33
+        sizePolicy-horizontalValue: 80.000000
+-   selector: ".coll-lvl.lvl-5"
+    properties:
+        bg-frame: 34
+        sizePolicy-horizontalValue: 70.000000
+-   selector: ".coll-lvl.lvl-6"
+    properties:
+        bg-frame: 35
+        sizePolicy-horizontalValue: 90.000000
+-   selector: ".coll-lvl.lvl-7"
+    properties:
+        bg-frame: 36
+-   selector: ".coll-lvl.lvl-8"
+    properties:
+        bg-frame: 37
+        sizePolicy-horizontalValue: 110.000000
+-   selector: ".coll-lvl.lvl-9"
+    properties:
+        bg-frame: 38
+        sizePolicy-horizontalValue: 90.000000
+-   selector: ".coll-lvl.lvl-10"
+    properties:
+        bg-frame: 39
+        sizePolicy-horizontalValue: 70.000000
+-   selector: ".flag-ussr"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/flags/flag_text_ussr"
+-   selector: ".flag-usa"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/flags/flag_text_usa"
+-   selector: ".flag-china"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/flags/flag_text_china"
+-   selector: ".flag-japan"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/flags/flag_text_japan"
+-   selector: ".flag-uk"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/flags/flag_text_uk"
+-   selector: ".flag-germany"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/flags/flag_text_germany"
+-   selector: ".flag-france"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/flags/flag_text_france"
+-   selector: ".flag-other"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/flags/flag_text_other"
+-   selector: ".flag-finland"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/flags/flag_text_finland"
+-   selector: ".flag-poland"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/flags/flag_text_poland"
+-   selector: ".flag-sweden"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/flags/flag_text_sweden"
+-   selector: ".flag-italy"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/flags/flag_text_italy"
+-   selector: ".flag-australia"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/flags/flag_text_australia"
+-   selector: ".flag-canada"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/flags/flag_text_canada"
+-   selector: ".flag-czech"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/flags/flag_text_czech"
+-   selector: ".flag-european"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/flags/flag_text_european"

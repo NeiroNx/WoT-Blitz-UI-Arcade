@@ -1,0 +1,128 @@
+Header:
+    version: "110"
+Prototypes:
+-   class: "UIControl"
+    customClass: "UIResourceMediumControl"
+    name: "ResourceMedium"
+    size: [95.000000, 50.000000]
+    input: false
+    classes: "resource resource-type=resource-stuff quantity=quantity-on grade=unknown"
+    components:
+        LinearLayout:
+            spacing: 5.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "PercentOfMaxChild"
+        StyleSheet:
+            styles: "~res:/UI/Screens/Lobby/Common/Resource/Style/ResourceMedium.yaml"
+-   class: "UIControl"
+    name: "ResourceMediumBinded"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        LinearLayout:
+            spacing: 5.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "PercentOfMaxChild"
+        UIDataParamsComponent:
+            params:
+            - ["ResourceModel", "resource", "null", "{ \"quantity\" = 1380000; \"type\" = ResourceType.gold; \"discount\" = { \"value\" = 0.000000; }; }"]
+        UIDataLocalsComponent:
+            locals:
+            - ["bool", "hasDiscount", "-0.000010 > resource.discount.value or resource.discount.value > 0.000010"]
+            - ["bool", "showImageURL", "not empty(resource.imageURL) and resource.type == ResourceType.stuff"]
+            - ["bool", "showBuiltInIcon", "not empty(resource.icon) and resource.type == ResourceType.stuff and not showImageURL"]
+            - ["string", "gradeClass", "when resource.grade != ArtefactGrade.unknown -> \"grade \" + str(resource.grade, ArtefactGrade), \"\""]
+            - ["string", "bonusQuanitityStringed", "format(\"+%(value)\", { \"value\" = str1000Separated(resource.bonusQuantity); })"]
+            - ["string", "quantityString", "when not empty(resource.localizedQuantity) -> resource.localizedQuantity, resource.type == ResourceType.premium -> timeDiffShort(resource.quantity), str1000Separated(resource.quantity)"]
+            - ["string", "resourceTypeClass", "when resource.type == ResourceType.vehicle -> \"resource-vehicle\", resource.type == ResourceType.gold -> \"resource-gold\", resource.type == ResourceType.unlocks -> \"resource-unlock\", resource.type == ResourceType.free_xp -> \"resource-free-xp\", resource.type == ResourceType.premium -> \"resource-premium\", resource.type == ResourceType.xp -> \"resource-xp\", resource.type == ResourceType.tankmenXP -> \"resource-crew-xp\", resource.type == ResourceType.credits -> \"resource-credit\", resource.type == ResourceType.stuff -> \"resource-stuff\", resource.type == ResourceType.slots -> \"resource-slot\", resource.type == ResourceType.achievement -> \"resource-rare-achievement\", resource.type == ResourceType.real_currency -> \"resource-real-currency\", \"\""]
+            - ["string", "resourceClasses", "\"resource resource-type=\" + resourceTypeClass"]
+        StyleSheet:
+            styles: "~res:/UI/Screens/Lobby/Common/Resource/Style/ResourceMedium.yaml"
+    bindings:
+    - ["classes", "resourceClasses"]
+    children:
+    -   class: "UIStaticText"
+        name: "Value"
+        classes: "header1"
+        components:
+            UITextComponent:
+                fontName: "WarHeliosCondC_Bold_25"
+                colorInheritType: "COLOR_MULTIPLY_ALPHA_ONLY"
+            Anchor:
+                vCenterAnchorEnabled: true
+                vCenterAnchor: -1.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens/Fonts.yaml"
+        bindings:
+        - ["visible", "resource.quantity > 0 or not empty(resource.localizedQuantity)"]
+        - ["UITextComponent.text", "quantityString"]
+    -   class: "UIControl"
+        name: "Back"
+        position: [45.000000, 1.000000]
+        size: [50.000000, 50.000000]
+        input: false
+        components:
+            Background:
+                drawType: "DRAW_SCALE_PROPORTIONAL"
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+        children:
+        -   class: "UIControl"
+            name: "IconBack"
+            size: [50.000000, 50.000000]
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+        -   class: "UIControl"
+            name: "StuffIcon"
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_PROPORTIONAL"
+                    colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                    perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            bindings:
+            - ["visible", "showBuiltInIcon"]
+            - ["Background.sprite", "resource.icon"]
+        -   class: "UIControl"
+            name: "ImageURLIcon"
+            input: false
+            classes: "item_icon"
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_PROPORTIONAL"
+                    colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                    perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                UIUrlImageComponent:
+                    downscaleEnabled: false
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            bindings:
+            - ["visible", "showImageURL"]
+            - ["UIUrlImageComponent.imageUrl", "resource.imageURL"]
+        -   class: "UIControl"
+            name: "Icon"
+            position: [9.000000, 8.500000]
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_PROPORTIONAL"
+                    colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                    perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    hCenterAnchor: 0.500000
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"

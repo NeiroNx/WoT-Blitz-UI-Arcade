@@ -1,0 +1,98 @@
+Header:
+    version: "92"
+StyleSheets:
+-   selectors:
+    - ".optional_device_item.aimingStabilizer ? #Img"
+    - ".optional_device_item.aimingStabilizer #Img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/OptionalDevices/aimingStabilizer.txt"
+-   selectors:
+    - ".optional_device_item.barrelPrecisionChannel ? #Img"
+    - ".optional_device_item.barrelPrecisionChannel #Img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/OptionalDevices/barrelPrecisionChannel.txt"
+-   selectors:
+    - ".optional_device_item.calibratedShells ? #Img"
+    - ".optional_device_item.calibratedShells #Img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/OptionalDevices/calibratedShells.txt"
+-   selectors:
+    - ".optional_device_item.camouflageNet ? #Img"
+    - ".optional_device_item.camouflageNet #Img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/OptionalDevices/camouflageNet.txt"
+-   selectors:
+    - ".optional_device_item.coatedOptics ? #Img"
+    - ".optional_device_item.coatedOptics #Img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/OptionalDevices/coatedOptics.txt"
+-   selectors:
+    - ".optional_device_item.enhancedAimDrives ? #Img"
+    - ".optional_device_item.enhancedAimDrives #Img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/OptionalDevices/enhancedAimDrives.txt"
+-   selectors:
+    - ".optional_device_item.equipmentStorageSystem ? #Img"
+    - ".optional_device_item.equipmentStorageSystem #Img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/OptionalDevices/equipmentStorageSystem.txt"
+-   selectors:
+    - ".optional_device_item.highQualityAssembly ? #Img"
+    - ".optional_device_item.highQualityAssembly #Img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/OptionalDevices/highQualityAssembly.txt"
+-   selectors:
+    - ".optional_device_item.improvedBattleCompartment ? #Img"
+    - ".optional_device_item.improvedBattleCompartment #Img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/OptionalDevices/improvedBattleCompartment.txt"
+-   selectors:
+    - ".optional_device_item.improvedControls ? #Img"
+    - ".optional_device_item.improvedControls #Img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/OptionalDevices/improvedControls.txt"
+-   selectors:
+    - ".optional_device_item.improvedVentilation ? #Img"
+    - ".optional_device_item.improvedVentilation #Img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/OptionalDevices/improvedVentilation.txt"
+-   selectors:
+    - ".optional_device_item.increasedPowderCharge ? #Img"
+    - ".optional_device_item.increasedPowderCharge #Img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/OptionalDevices/increasedPowderCharge.txt"
+-   selectors:
+    - ".optional_device_item.multiLayerArmor ? #Img"
+    - ".optional_device_item.multiLayerArmor #Img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/OptionalDevices/multiLayerArmor.txt"
+-   selectors:
+    - ".optional_device_item.perfectEquipment ? #Img"
+    - ".optional_device_item.perfectEquipment #Img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/OptionalDevices/perfectEquipment.txt"
+-   selectors:
+    - ".optional_device_item.protectedModules ? #Img"
+    - ".optional_device_item.protectedModules #Img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/OptionalDevices/protectedModules.txt"
+-   selectors:
+    - ".optional_device_item.rammer ? #Img"
+    - ".optional_device_item.rammer #Img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/OptionalDevices/rammer.txt"
+-   selectors:
+    - ".optional_device_item.recycledEngineSpeed ? #Img"
+    - ".optional_device_item.recycledEngineSpeed #Img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/OptionalDevices/recycledEngineSpeed.txt"
+-   selectors:
+    - ".optional_device_item.reinforcedCaterpillars ? #Img"
+    - ".optional_device_item.reinforcedCaterpillars #Img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/OptionalDevices/reinforcedCaterpillars.txt"
+-   selectors:
+    - ".optional_device_item.toolbox ? #Img"
+    - ".optional_device_item.toolbox #Img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/OptionalDevices/toolbox.txt"

@@ -1,0 +1,190 @@
+Header:
+    version: 135
+Prototypes:
+-   class: "UIControl"
+    name: "FooterLockedReasonPopup"
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens3/Common/TooltipShow.animation;_FINISH,~res:/UI/Screens3/Common/TooltipHide.animation;ANIMATE_POPUP_ON_HIDE,~res:/UI/Screens3/Common/TooltipHide.animation"
+        UIOpacityComponent: {}
+        SizePolicy:
+            horizontalPolicy: "Formula"
+            horizontalFormula: "maxChild + 32"
+            verticalPolicy: "Formula"
+            verticalFormula: "maxChild + 32"
+        UIAttachLayoutSmartSlaveComponent:
+            attachId: "STORY_FOOTER_MAIN_BUTTON"
+        UIDataParamsComponent:
+            params:
+            - ["eStageType", "stageType", "eStageType.PROCESS", "eStageType.PROCESS"]
+            - ["StoryStepModel", "selectedStep", "null", "{ }"]
+            events:
+            - "FINISH_HIDE_POPUP_ANIMATION"
+            - "POPUP_ON_CLOSE_ACTION"
+            - "CONTINUE"
+        UIDataLocalVarsComponent:
+            data:
+            - ["int", "offset", "0"]
+            - ["string", "selectedSide", "\"\""]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["string", "textKey", "when stageType == eStageType.PROCESS -> localize(\"template_event/progress_stage/tooltip/buy_button\"), localize(\"template_event/buy_stage/tooltip/buy_button\")"]
+        UIDataOnEventComponent0:
+            eventName: "SELECTED_SIDE"
+            modelFieldExpression: "selectedSide"
+            dataExpression: "_event"
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        position: [16.000000, 16.000000]
+        input: true
+        classes: "gray-cape-cod-bg"
+        components:
+            Background:
+                drawType: "DRAW_STRETCH_BOTH"
+                sprite: "~res:/Gfx/UI/CommonUIElements/square_BigAngle.psd"
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                leftRightStretchCap: 8.000000
+                topBottomStretchCap: 8.000000
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 16.000000
+                rightAnchorEnabled: true
+                rightAnchor: 16.000000
+                topAnchorEnabled: true
+                topAnchor: 16.000000
+                bottomAnchorEnabled: true
+                bottomAnchor: 16.000000
+            LinearLayout:
+                orientation: "TopDown"
+                padding: "16"
+                spacing: 0.000000
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "maxChild + 32"
+                verticalPolicy: "PercentOfChildrenSum"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+        children:
+        -   class: "UIControl"
+            name: "Text"
+            input: false
+            components:
+                RichContent:
+                    baseClasses: "t-subtitle regular color=white-wild-sand-text"
+                RichContentAliases0:
+                    aliases:
+                    - ["proxies_icon", " <control class=\"\" control=\"~res:/UI/Screens3/Lobby/Story/FooterCurrenciesIcons.yaml\" args1=\"currenciesMap=selectedStep.net.price\"/>"]
+                    - ["proxies_name", " <control class=\"\" control=\"~res:/UI/Screens3/Lobby/Story/FooterCurrenciesNames.yaml\" args1=\"currenciesMap=selectedStep.net.price\"/>"]
+                    - ["proxies", " <control class=\"\" control=\"~res:/UI/Screens3/Lobby/Story/FooterCurrencies.yaml\" args1=\"canAfford=true\" args2=\"currenciesVector=[]\" args3=\"currenciesMap=selectedStep.requiredProxyForBuyout\"/>"]
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    horizontalMax: 368.000000
+                    verticalPolicy: "PercentOfChildrenSum"
+                FlowLayout:
+                    alignment: "Center"
+                    hSpacing: 4.000000
+                    useRtl: true
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/Common/PopupMenu.style.yaml"
+            bindings:
+            - ["RichContent.text", "textKey"]
+    -   class: "UIControl"
+        name: "ArrowTop"
+        input: false
+        classes: "gray-cape-cod-bg"
+        components:
+            Background:
+                drawType: "DRAW_ALIGNED"
+                sprite: "~res:/Gfx/Lobby/backgrounds/bg_triangle_8.psd"
+                spriteModification: ["FLIP_VERTICAL"]
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                align: []
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "Formula"
+                verticalFormula: "content+16"
+            UIAttachLayoutSlaveComponent:
+                attachId: "STORY_FOOTER_MAIN_BUTTON"
+                masterAlign: "TopCenter"
+                slaveAlign: "BottomCenter"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+        bindings:
+        - ["visible", "selectedSide == \"top\""]
+    -   class: "UIControl"
+        name: "ArrowBottom"
+        input: false
+        classes: "gray-cape-cod-bg"
+        components:
+            Background:
+                drawType: "DRAW_ALIGNED"
+                sprite: "~res:/Gfx/Lobby/backgrounds/bg_triangle_8.psd"
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                align: []
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "Formula"
+                verticalFormula: "content+16"
+            UIAttachLayoutSlaveComponent:
+                attachId: "STORY_FOOTER_MAIN_BUTTON"
+                masterAlign: "BottomCenter"
+                slaveAlign: "TopCenter"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+        bindings:
+        - ["visible", "selectedSide == \"bottom\""]
+    -   class: "UIControl"
+        name: "ArrowRight"
+        pivot: [0.500000, 0.500000]
+        angle: 90.000000
+        input: false
+        classes: "gray-cape-cod-bg"
+        components:
+            Background:
+                drawType: "DRAW_ALIGNED"
+                sprite: "~res:/Gfx/Lobby/backgrounds/bg_triangle_8.psd"
+                spriteModification: ["FLIP_VERTICAL"]
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                align: []
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "content+10"
+                verticalPolicy: "PercentOfContent"
+            UIAttachLayoutSlaveComponent:
+                attachId: "STORY_FOOTER_MAIN_BUTTON"
+                masterAlign: "RightCenter"
+                slaveAlign: "LeftCenter"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+        bindings:
+        - ["visible", "selectedSide == \"right\""]
+    -   class: "UIControl"
+        name: "ArrowLeft"
+        pivot: [0.500000, 0.500000]
+        angle: -90.000000
+        input: false
+        classes: "gray-cape-cod-bg"
+        components:
+            Background:
+                drawType: "DRAW_ALIGNED"
+                sprite: "~res:/Gfx/Lobby/backgrounds/bg_triangle_8.psd"
+                spriteModification: ["FLIP_VERTICAL"]
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                align: []
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "content+10"
+                verticalPolicy: "PercentOfContent"
+            UIAttachLayoutSlaveComponent:
+                attachId: "STORY_FOOTER_MAIN_BUTTON"
+                masterAlign: "LeftCenter"
+                slaveAlign: "RightCenter"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+        bindings:
+        - ["visible", "selectedSide == \"left\""]

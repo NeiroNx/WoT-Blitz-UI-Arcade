@@ -1,0 +1,162 @@
+Header:
+    version: 133
+Prototypes:
+-   class: "UIControl"
+    name: "Hint"
+    input: false
+    components:
+        LinearLayout:
+            dynamicPadding: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfMaxChild"
+        UIDataParamsComponent:
+            params:
+            - ["string", "title", "\"\"", "\"Hint title\""]
+            - ["string", "backgroundStyle", "\"grey-shark-70-bg\"", "\"grey-shark-70-bg\""]
+            - ["string", "icon", "\"\"", "\"~res:/Gfx/Battle/icons/2020-halloween/icon_up\""]
+            - ["string", "text", "\"\"", "\"hello <highlight>hello</highlight> <switchButtonZL/> <switchButtonZR/> <switchButtonLeftAxis/>  <switchButtonRightAxis/>hjkhkasd asds ad asd ad ad asd asjhljh  ;\""]
+        UIDataLocalVarsComponent:
+            data:
+            - ["bool", "titleVisible", "title != \"\""]
+            - ["bool", "iconVisible", "icon != \"\""]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        position: [16.000000, 16.000000]
+        input: false
+        components:
+            Background: {}
+            UIRoundedCornersComponent:
+                radius: " 8"
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 0.000000
+                rightAnchorEnabled: true
+                rightAnchor: 0.000000
+                topAnchorEnabled: true
+                topAnchor: 0.000000
+                bottomAnchorEnabled: true
+                bottomAnchor: 0.000000
+            LinearLayout:
+                orientation: "LeftToRight"
+                padding: "8;16"
+                spacing: 8.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "Formula"
+                verticalFormula: "maxChild + 32"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+        bindings:
+        - ["classes", "backgroundStyle"]
+        children:
+        -   class: "UIControl"
+            name: "Icon"
+            input: false
+            components:
+                UITextureComponent:
+                    drawType: "DRAW_SCALE_PROPORTIONAL"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 80.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 80.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Battle/ModernTutorialHints/TutorialHints.style.yaml"
+            bindings:
+            - ["visible", "iconVisible"]
+            - ["UITextureComponent.spritePath", "icon"]
+        -   class: "UIControl"
+            name: "IconPlaceholder"
+            size: [0.000000, 0.000000]
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+            bindings:
+            - ["visible", "not iconVisible"]
+        -   class: "UIControl"
+            name: "TextContainer"
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                    useRtl: true
+                LinearLayout:
+                    orientation: "TopDown"
+                    spacing: 4.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    horizontalMax: 256.000000
+                    verticalPolicy: "PercentOfChildrenSum"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/OldFont.style.yaml;~res:/UI/Screens3/Color.style.yaml;"
+            children:
+            -   class: "UIControl"
+                name: "Title"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    RichContent:
+                        baseClasses: "t-old-header5 color=white-wild-sand-text"
+                    RichContentAliases0:
+                        aliases:
+                        - ["switchButtonLeftAxis", "<control control=\"~res:/UI/Screens3/Common/NintendoSwitch/Controls/NintendoSwitchControl.yaml\" args1=\"switchControl=eNintendoSwitchControls.LeftThumbstickAxis\"/>"]
+                        - ["switchButtonRightAxis", "<control control=\"~res:/UI/Screens3/Common/NintendoSwitch/Controls/NintendoSwitchControl.yaml\" args1=\"switchControl=eNintendoSwitchControls.RightThumbstickAxis\"/>"]
+                        - ["switchButtonZR", "<control control=\"~res:/UI/Screens3/Common/NintendoSwitch/Controls/NintendoSwitchControl.yaml\" args1=\"switchControl=eNintendoSwitchControls.RightTrigger\"/>"]
+                    RichContentAliases1:
+                        aliases:
+                        - ["highlight", "<span class=\"t-old-text2-small orange-orange-peel-text\" />"]
+                    Anchor:
+                        leftAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                        useRtl: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        horizontalMax: 256.000000
+                        verticalPolicy: "PercentOfChildrenSum"
+                    FlowLayout:
+                        hSpacing: 4.000000
+                        useRtl: true
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/OldFont.style.yaml;~res:/UI/Screens3/Color.style.yaml;"
+                bindings:
+                - ["visible", "titleVisible"]
+                - ["RichContent.text", "localize(title)"]
+            -   class: "UIControl"
+                name: "Text"
+                input: false
+                components:
+                    RichContent:
+                        baseClasses: "t-old-text2-small color=white-wild-sand-text"
+                    RichContentAliases0:
+                        aliases:
+                        - ["highlight", "<span class=\"t-old-text2-small orange-orange-peel-text\" />"]
+                    RichContentAliases1:
+                        aliases:
+                        - ["switchButtonLeftAxis", "<control control=\"~res:/UI/Screens3/Common/NintendoSwitch/Controls/NintendoSwitchControl.yaml\" args1=\"switchControl=eNintendoSwitchControls.LeftThumbstickAxis\"/>"]
+                        - ["switchButtonRightAxis", "<control control=\"~res:/UI/Screens3/Common/NintendoSwitch/Controls/NintendoSwitchControl.yaml\" args1=\"switchControl=eNintendoSwitchControls.RightThumbstickAxis\"/>"]
+                        - ["switchButtonZL", "<control control=\"~res:/UI/Screens3/Common/NintendoSwitch/Controls/NintendoSwitchControl.yaml\" args1=\"switchControl=eNintendoSwitchControls.LeftTrigger\"/>"]
+                        - ["switchButtonZR", "<control control=\"~res:/UI/Screens3/Common/NintendoSwitch/Controls/NintendoSwitchControl.yaml\" args1=\"switchControl=eNintendoSwitchControls.RightTrigger\"/>"]
+                    Anchor:
+                        leftAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                        vCenterAnchor: -2.000000
+                        useRtl: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        horizontalMax: 256.000000
+                        verticalPolicy: "PercentOfChildrenSum"
+                    FlowLayout:
+                        hSpacing: 4.000000
+                        useRtl: true
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/OldFont.style.yaml;~res:/UI/Screens3/Color.style.yaml;"
+                bindings:
+                - ["RichContent.text", "localize(text)"]

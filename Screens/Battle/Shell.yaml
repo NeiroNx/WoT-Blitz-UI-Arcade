@@ -1,0 +1,57 @@
+Header:
+    version: 130
+Prototypes:
+-   class: "UIControl"
+    name: "Shell"
+    size: [32.000000, 32.000000]
+    pivot: [0.500000, 0.500000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfMaxChild"
+        StyleSheet:
+            styles: "~res:/UI/Screens/Battle/Styles/ShellStyles.yaml"
+    children:
+    -   class: "UIControl"
+        name: "Inactive"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Background:
+                sprite: "~res:/Gfx/UI/BattleScreenHUD/PumpDrum.psd"
+                color: [1.000000, 1.000000, 1.000000, 0.784314]
+            UIClipPolygon: {}
+            ProgressClip:
+                orientation: "TopDown"
+                progress: 0.500000
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+    -   class: "UIControl"
+        name: "Active"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Background:
+                sprite: "~res:/Gfx/UI/BattleScreenHUD/PumpDrum.psd"
+                frame: 1
+                color: [0.431373, 0.666667, 0.196078, 0.941176]
+            UIClipPolygon: {}
+            ProgressClip:
+                orientation: "BottomUp"
+                progress: 0.500000
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+    -   class: "UIControl"
+        name: "Full"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Background:
+                sprite: "~res:/Gfx/UI/BattleScreenHUD/PumpDrum.psd"
+                frame: 2
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"

@@ -1,0 +1,9 @@
+action UpdateRowsPosition(float posY)
+{
+	Event("UPDATE_ROWS_POSITIONS", arg1 = posY);
+}
+
+action ScrollToMyPosition()
+{
+	ScrollToEnsureControlOnScreen("**/position" + str(week.playerLeaderboardPosition - 1), time=2.0, yPolicy=eScrollToControlPolicy.kCenter);
+}

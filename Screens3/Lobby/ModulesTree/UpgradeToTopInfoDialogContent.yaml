@@ -1,0 +1,69 @@
+Header:
+    version: "83"
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/IconButton.yaml"
+- "~res:/UI/Screens3/Lobby/Inventory/Ammo/InventoryAmmoInfoBody.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "PremuimInfoDialogContent"
+    position: [100.000000, 287.000000]
+    size: [600.000000, 193.000000]
+    input: false
+    components:
+        Anchor:
+            hCenterAnchorEnabled: true
+            vCenterAnchorEnabled: true
+        LinearLayout:
+            orientation: "LeftToRight"
+            spacing: 24.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            horizontalMax: 600.000000
+            verticalPolicy: "PercentOfMaxChild"
+    children:
+    -   class: "UIControl"
+        name: "TextContainer"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            LinearLayout:
+                orientation: "TopDown"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfChildrenSum"
+        children:
+        -   class: "UIControl"
+            name: "PremiumVehicleLabel"
+            input: false
+            classes: "t-body bold color=white-wild-sand-text align-left"
+            components:
+                UITextComponent:
+                    text: "#modules_tech_tree:TopModules/AboutTopModules/Header"
+                    multiline: "MULTILINE_ENABLED"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml"
+        -   class: "UIControl"
+            name: "Spacer"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 24.000000
+        -   class: "UIControl"
+            name: "BenefitsLabel"
+            input: false
+            classes: "t-body regular color=white-wild-sand-50-text align-left"
+            components:
+                UITextComponent:
+                    text: "#modules_tech_tree:TopModules/AboutTopModules/Description"
+                    multiline: "MULTILINE_ENABLED"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml"

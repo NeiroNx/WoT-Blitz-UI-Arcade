@@ -1,0 +1,5 @@
+action AnimateProgress()
+{
+	Wait(0.5);
+	ChangeData(cachedTankDisplayValue, tankDisplayValue, 0.5);
+}

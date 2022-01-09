@@ -1,0 +1,6 @@
+animation Initialize
+{
+    Opacity("./Content/Image", 0.0);
+    Opacity("./Content/Content", 0.0);
+    Event("Timeout");
+}

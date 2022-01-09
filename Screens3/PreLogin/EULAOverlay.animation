@@ -1,0 +1,5 @@
+animation OnOverlayOpened
+{
+    Wait(0.1);
+    ChangeData(loadingUrl, url);
+}

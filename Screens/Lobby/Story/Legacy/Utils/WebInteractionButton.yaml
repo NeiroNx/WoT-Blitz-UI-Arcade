@@ -1,0 +1,115 @@
+Header:
+    version: "96"
+ImportedPackages:
+- "~res:/UI/Screens/Common/StyledButton.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "WebInteraction"
+    input: false
+    components:
+        Background:
+            drawType: "DRAW_SCALE_TO_RECT"
+            sprite: "~res:/Gfx/UI/Hangar/BlackGradTile"
+        LinearLayout:
+            spacing: 10.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "PercentOfMaxChild"
+        UIDataParamsComponent:
+            params:
+            - ["WebInteraction", "web", "{ }", "{ }"]
+            - ["string", "icon", "\"~res:/Gfx/UI/Story/Web_btn\"", "\"~res:/Gfx/UI/Story/Web_btn\""]
+            events:
+            - "ON_BUTTON_PRESSED"
+    children:
+    -   class: "UIControl"
+        name: "CaptionsLayout"
+        input: false
+        components:
+            Anchor:
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                orientation: "TopDown"
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfChildrenSum"
+            StyleSheet:
+                styles: "~res:/UI/Screens/Fonts.yaml;~res:/UI/Screens/FontsColors.yaml"
+        children:
+        -   class: "UIControl"
+            name: "ButtonTitle"
+            input: false
+            classes: "text1 text-color-white"
+            components:
+                UITextComponent:
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                    multiline: "MULTILINE_ENABLED"
+                    align: ["RIGHT"]
+                Anchor:
+                    leftAnchorEnabled: true
+                    rightAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    horizontalMax: 250.000000
+                    verticalPolicy: "PercentOfContent"
+            bindings:
+            - ["visible", "not empty(web.buttonName)"]
+            - ["UITextComponent.text", "localize(web.buttonName)"]
+        -   class: "UIControl"
+            name: "ButtonDescription"
+            input: false
+            classes: "text1  text-color-blue"
+            components:
+                UITextComponent:
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                    multiline: "MULTILINE_ENABLED"
+                    align: ["RIGHT"]
+                Anchor:
+                    leftAnchorEnabled: true
+                    rightAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    horizontalMax: 250.000000
+                    verticalPolicy: "PercentOfContent"
+            bindings:
+            - ["visible", "not empty(web.buttonDescription)"]
+            - ["UITextComponent.text", "localize(web.buttonDescription)"]
+    -   prototype: "StyledButton/StyledButton"
+        name: "Button"
+        classes: "button button-color-green button-open-sound"
+        components:
+            Anchor:
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 85.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 70.000000
+            UIInputEventComponent:
+                onTouchUpInside: "ON_BUTTON_PRESSED"
+            StyleSheet:
+                inheritsStylesFromParent: false
+                styles: "~res:/UI/Styles/ButtonStyle.yaml;~res:/UI/Styles/ButtonSoundStyles.yaml"
+        children:
+        -   path: "Caption"
+            visible: false
+            components:
+                StyleSheet:
+                    styles: "~res:/UI/Screens/Fonts.yaml;~res:/UI/Screens/FontsColors.yaml"
+        -   class: "UIControl"
+            name: "Icon"
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_PROPORTIONAL"
+                    perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    horizontalMax: 50.000000
+                    verticalPolicy: "PercentOfParent"
+                    verticalMax: 50.000000
+            bindings:
+            - ["Background.sprite", "icon"]

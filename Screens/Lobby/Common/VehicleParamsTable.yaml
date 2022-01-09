@@ -1,0 +1,237 @@
+Header:
+    version: "79"
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/Common/ParamsPrototype2.yaml"
+- "~res:/UI/Screens/Common/TankBaseParamBar.yaml"
+- "~res:/UI/Screens/Common/ScrollBar.yaml"
+- "~res:/UI/Screens/Lobby/Common/RichText.yaml"
+- "~res:/UI/Screens3/Lobby/Common/VehicleParamsPanel/VehicleChangedParamsPanel.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "BaseTable"
+    size: [426.000000, 500.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 348.000000
+            verticalPolicy: "PercentOfParent"
+-   class: "UIControl"
+    name: "BaseTableHeaderBg"
+    size: [400.000000, 80.000000]
+    input: false
+    classes: "section-header1"
+    components:
+        Background: {}
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "FixedSize"
+            verticalValue: 80.000000
+        StyleSheet:
+            styles: "~res:/UI/Screens/Lobby/Common/SectionHeader1.yaml"
+-   prototype: "BaseTable"
+    name: "AdditionalTable"
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+        SizePolicy:
+            verticalPolicy: "Formula"
+            verticalFormula: "when parent == 0 -> childrenSum, min(parentRest, childrenSum)"
+        UIDataParamsComponent:
+            params:
+            - ["TankParams", "tankParams", "null", "{ }"]
+            - ["string", "sectionName", "\"changed\"", "\"changed\""]
+    children:
+    -   class: "UIControl"
+        name: "Bg"
+        visible: true
+        input: false
+        classes: "grey-shark-70-bg"
+        components:
+            Background:
+                drawType: "DRAW_STRETCH_BOTH"
+                sprite: "~res:/Gfx/Lobby/backgrounds/bg_r8.psd"
+                leftRightStretchCap: 8.000000
+                topBottomStretchCap: 8.000000
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+            IgnoreLayout: {}
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+    -   class: "UIControl"
+        name: "Spacer"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "FixedSize"
+                verticalValue: 16.000000
+    -   prototype: "BaseTableHeaderBg"
+        name: "AdditionalTableHeader"
+        components:
+            Background:
+                drawType: "DRAW_ALIGNED"
+            LinearLayout:
+                padding: "16"
+                spacing: 16.000000
+        children:
+        -   class: "UIControl"
+            name: "iconContainer"
+            visible: false
+            input: false
+            components:
+                Anchor:
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 80.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 80.000000
+            children:
+            -   class: "UIControl"
+                name: "IconGlow"
+                input: false
+                components:
+                    Background: {}
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+            -   class: "UIControl"
+                name: "icon"
+                input: false
+                components:
+                    Background:
+                        drawType: "DRAW_SCALE_TO_RECT"
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 64.000000
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 64.000000
+        -   class: "UIControl"
+            name: "Title"
+            input: false
+            classes: "t-subtitle regular white-wild-sand-text"
+            components:
+                UITextComponent:
+                    text: "Panel Title"
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                    multiline: "MULTILINE_ENABLED"
+                    align: ["LEFT", "VCENTER"]
+                Anchor:
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml"
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "Formula"
+                verticalFormula: "when parent == 0 -> childrenSum, min(parentRest, childrenSum)"
+            StyleSheet:
+                inheritsStylesFromParent: true
+                styles: "~res:/UI/Screens/Common/ScrollBar.yaml"
+        children:
+        -   class: "UIScrollView"
+            name: "ScrollArea"
+            autoUpdate: true
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "Formula"
+                    verticalFormula: "when parent == 0 -> maxChild, min(parentRest, maxChild)"
+            children:
+            -   class: "UIScrollViewContainer"
+                name: "scrollContainerControl"
+                components:
+                    LinearLayout:
+                        orientation: "TopDown"
+                        padding: "8"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfChildrenSum"
+                children:
+                -   class: "UIControl"
+                    name: "DescriptionWrapper"
+                    input: false
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfChildrenSum"
+                    children:
+                    -   class: "UIControl"
+                        name: "Description"
+                        input: false
+                        classes: "t-body regular white-wild-sand-50-text"
+                        components:
+                            UITextComponent:
+                                text: "One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin."
+                                multiline: "MULTILINE_ENABLED"
+                                align: ["LEFT", "VCENTER"]
+                                useRtlAlign: "USE_BY_CONTENT"
+                            Anchor:
+                                leftAnchorEnabled: true
+                                leftAnchor: 16.000000
+                                rightAnchorEnabled: true
+                                rightAnchor: 16.000000
+                            SizePolicy:
+                                verticalPolicy: "PercentOfContent"
+                            StyleSheet:
+                                styles: "~res:/UI/Screens3/Font.style.yaml"
+                -   class: "UIControl"
+                    name: "Spacer_2"
+                    size: [32.000000, 32.000000]
+                    input: false
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 24.000000
+                -   class: "UIControl"
+                    name: "ParamsWrapper"
+                    input: false
+                    components:
+                        LinearLayout:
+                            orientation: "LeftToRight"
+                            padding: "20"
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfChildrenSum"
+                    children:
+                    -   prototype: "VehicleChangedParamsPanel/VehicleChangedParamsPanel"
+                        name: "VehicleChangedParamsPanel"
+                        components:
+                            UIDataParamsComponent:
+                                args:
+                                    "tankParams": "tankParams"
+                                    "sectionName": "sectionName"
+                -   class: "UIControl"
+                    name: "Spacer_1"
+                    size: [32.000000, 32.000000]
+                    input: false
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 8.000000
+        -   prototype: "ScrollBar/VerticalScrollBar"
+            name: "VerticalScrollBar"
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+                    topAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                IgnoreLayout: {}
+                ScrollBarDelegate:
+                    delegate: "../ScrollArea"

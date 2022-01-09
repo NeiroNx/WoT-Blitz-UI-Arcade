@@ -1,0 +1,13 @@
+action PROGRESS_CHANGED
+{
+  if (currentProgress == accelerationProgress and currentProgress != 0.0)
+  {
+    ChangeProperty("./Content/ProgressWrapper/ProgresCenter/Progress/Bar/CurrentExp", "SizePolicy", "horizontalValue", currentProgress, time = 1.0, interpolation = EASE_OUT);
+    PlaySound(sound="GUI/notifications_FX/task_complete");
+  } 
+  else 
+  {
+    ChangeProperty("./Content/ProgressWrapper/ProgresCenter/Progress/Bar/CurrentExp", "SizePolicy", "horizontalValue", currentProgress);
+  }
+  Event("PROGRESS_ANIMATION_ENDED");
+}

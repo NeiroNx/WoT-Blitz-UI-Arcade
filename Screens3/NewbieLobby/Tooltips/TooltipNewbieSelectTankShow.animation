@@ -1,0 +1,7 @@
+animation TooltipShow
+{
+    Opacity(".", opacity=0);
+    Wait(0.1);  
+    Opacity(".", opacity=1, time=0.9, interpolation=EASE_OUT);
+    Event("TooltipShowAnimationFinished");
+}

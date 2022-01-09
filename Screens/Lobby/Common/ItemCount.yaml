@@ -1,0 +1,39 @@
+Header:
+    version: "28"
+ImportedPackages:
+- "~res:/UI/Screens/Fonts.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "ItemCount"
+    input: false
+    classes: "color-green-2"
+    components:
+        LinearLayout:
+            padding: 4.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "PercentOfMaxChild"
+        Anchor:
+            leftAnchorEnabled: true
+            leftAnchor: 3.000000
+            topAnchorEnabled: true
+            topAnchor: 3.000000
+        Background:
+            drawType: "DRAW_FILL"
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Styles/ColorStyles.yaml"
+    children:
+    -   class: "UIControl"
+        name: "Value"
+        input: false
+        classes: "text2-small color=text-color-white"
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            UITextComponent:
+                text: "55"
+                colorInheritType: "COLOR_IGNORE_PARENT"
+            StyleSheet:
+                styles: "~res:/UI/Screens/Fonts.yaml"

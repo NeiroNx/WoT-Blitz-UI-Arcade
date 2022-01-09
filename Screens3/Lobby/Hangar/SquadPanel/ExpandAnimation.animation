@@ -1,0 +1,11 @@
+animation ExpandAnimation
+{
+  if (expanded)
+  {
+      Rotate (path="**/ExpandButton/**/Icon", angle = 0, time = 0.3, interpolation=SINE_OUT);
+  }
+  else
+  {
+      Rotate (path="**/ExpandButton/**/Icon", angle = 180, time = 0.3, interpolation=SINE_OUT);
+  }
+}

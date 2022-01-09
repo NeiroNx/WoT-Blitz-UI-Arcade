@@ -1,0 +1,31 @@
+action BACK_TO_HANGAR_BUTTON_PRESS
+{
+    SetTaggedClass("TableContainer/BackToGarageButton", "pressed_tag", "pressed");
+	Wait(0.1);
+    PlaySound("GUI/buttons/close");
+    SetTaggedClass("TableContainer/BackToGarageButton", "pressed_tag", "");
+    Event("EXIT_TO_HANGAR");
+}
+
+action SWITCH_TO_NEXT_PLAYER_BUTTON_PRESS
+{
+    SetTaggedClass("NextPlayerButton", "pressed_tag", "pressed");
+	Wait(0.1);
+    PlaySound("GUI/buttons/choose");
+    SetTaggedClass("NextPlayerButton", "pressed_tag", "");
+    Event("SWITCH_TO_NEXT_PLAYER");
+}
+
+action SWITCH_TO_PREV_PLAYER_BUTTON_PRESS
+{
+    SetTaggedClass("PrevPlayerButton", "pressed_tag", "pressed");
+	Wait(0.1);
+    PlaySound("GUI/buttons/choose");
+    SetTaggedClass("PrevPlayerButton", "pressed_tag", "");
+    Event("SWITCH_TO_PREV_PLAYER");
+}
+
+action POSTMORTEM_AVATAR_IMAGE_LOADED
+{
+    PlayFrameAnimation("**/Avatar", -1, 12);
+}

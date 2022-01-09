@@ -1,0 +1,17 @@
+action START_OVERLAY_OPENING
+{
+	if (imageLoaded)
+	{
+		Opacity("**/ImageWrapper", opacity=0.0);
+	}
+}
+
+action BACK_EVENT
+{
+  Event ("ON_SELECT_AIM_CHANGED",arg1 = selectedAim);
+}
+
+action IMAGE_LOADED
+{
+	Opacity("**/ImageWrapper", opacity=1.0, time=0.8, interpolation=SINE_OUT);	
+}

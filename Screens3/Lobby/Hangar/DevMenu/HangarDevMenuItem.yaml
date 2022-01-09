@@ -1,0 +1,38 @@
+Header:
+    version: 134
+Controls:
+-   class: "UIControl"
+    name: "HangarDevMenuItem"
+    size: [203.000000, 32.000000]
+    classes: "simple-button grey-shark-50-bg"
+    components:
+        Background: {}
+        UIOpacityComponent: {}
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 200.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 40.000000
+        UIInputEventComponent:
+            onTouchUpInside: "ON_CLICK"
+        UIDataParamsComponent:
+            params:
+            - ["eDevMenuType", "id", "eDevMenuType.DebugUISettings", "eDevMenuType.DebugUISettings"]
+            events:
+            - "ON_CLICK"
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Lobby/Hangar/DevMenu/SimpleButton.style.yaml"
+    children:
+    -   class: "UIControl"
+        name: "Title"
+        size: [32.000000, 32.000000]
+        input: false
+        classes: "t-button light"
+        components:
+            UITextComponent:
+                colorInheritType: "COLOR_IGNORE_PARENT"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        bindings:
+        - ["UITextComponent.text", "str(id, eDevMenuType, \"name\")"]

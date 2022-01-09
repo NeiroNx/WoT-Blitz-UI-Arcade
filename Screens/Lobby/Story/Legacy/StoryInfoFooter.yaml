@@ -1,0 +1,36 @@
+Header:
+    version: "83"
+Controls:
+-   class: "UIControl"
+    name: "StoryInfoFooter"
+    size: [960.000000, 94.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfFirstChild"
+        UIDataParamsComponent:
+            params:
+            - ["Story", "story", "null", "{ }"]
+            - ["StoryStepModel", "selectedStep", "null", "{ }"]
+            events:
+            - "INFO_FOOTER_PRESSED"
+        UIDataLocalsComponent:
+            locals:
+            - ["string", "infoFooterPackage", "when isNull(selectedStep) -> \"~res:/UI/Screens/Lobby/Story/Legacy/StoryInfoFooterNotSelected.yaml\", \"~res:/UI/Screens/Lobby/Story/Legacy/StoryInfoFooterSelected.yaml\""]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        size: [960.000000, 94.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent:
+                control: "infoFooterPackage"
+                args:
+                    "story": "story"
+                    "selectedStep": "selectedStep"
+                eventActions:
+                - ["INFO_FOOTER_PRESSED", "INFO_FOOTER_PRESSED", "_event"]

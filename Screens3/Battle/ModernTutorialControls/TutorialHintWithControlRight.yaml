@@ -1,0 +1,207 @@
+Header:
+    version: "112"
+Prototypes:
+-   class: "UIControl"
+    name: "Hint"
+    input: false
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+            dynamicPadding: true
+            spacing: -8.000000
+        SizePolicy:
+            horizontalPolicy: "Formula"
+            horizontalFormula: "maxChild + 32"
+            verticalPolicy: "Formula"
+            verticalFormula: "maxChild + 32"
+        UIAttachLayoutSlaveComponent:
+            masterAlign: "Center"
+            slaveAlign: "RightCenter"
+            additionalOffset: [-72.000000, 0.000000]
+        UIDataParamsComponent:
+            params:
+            - ["ePositionAlign", "side", "ePositionAlign.Right", "ePositionAlign.Right"]
+            - ["eNintendoSwitchControls", "switchControl", "eNintendoSwitchControls.X", "eNintendoSwitchControls.A"]
+            - ["string", "key", "\"\"", "\"Press %(button) to pay respect\""]
+        UIDataLocalsComponent:
+            locals:
+            - ["string", "buttonAlias", "when isNull(switchControl) -> \"\", \"<button/>\""]
+            - ["string", "finalString", "localize(key, { \"button\" = buttonAlias; })"]
+    bindings:
+    - ["UIAttachLayoutSlaveComponent.attachId", "str(switchControl)"]
+    children:
+    -   class: "UIControl"
+        name: "ArrowTop"
+        input: false
+        classes: "grey-shark-50-bg"
+        components:
+            Background:
+                drawType: "DRAW_FILL"
+                spriteModification: ["FLIP_VERTICAL"]
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                align: []
+            UIRoundedCornersComponent:
+                radius: "8"
+                isRound: false
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 16.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 16.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+        bindings:
+        - ["visible", "side == ePositionAlign.Bottom"]
+    -   class: "UIControl"
+        name: "ContentAndHorizontalArrows"
+        position: [16.000000, 16.000000]
+        size: [209.000000, 56.000000]
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 16.000000
+                rightAnchorEnabled: true
+                rightAnchor: 16.000000
+                topAnchorEnabled: true
+                topAnchor: 16.000000
+                bottomAnchorEnabled: true
+                bottomAnchor: 16.000000
+            LinearLayout:
+                orientation: "LeftToRight"
+                dynamicPadding: true
+                spacing: -8.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   class: "UIControl"
+            name: "ArrowLeft"
+            input: false
+            classes: "grey-shark-50-bg"
+            components:
+                Background:
+                    drawType: "DRAW_FILL"
+                    spriteModification: ["FLIP_VERTICAL"]
+                    colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                    align: []
+                UIRoundedCornersComponent:
+                    radius: "8"
+                    isRound: false
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 16.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 16.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+            bindings:
+            - ["visible", "side == ePositionAlign.Right"]
+        -   class: "UIControl"
+            name: "Content"
+            position: [16.000000, 16.000000]
+            classes: "grey-shark-70-bg"
+            components:
+                Background:
+                    drawType: "DRAW_FILL"
+                    colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                    leftRightStretchCap: 8.000000
+                    topBottomStretchCap: 8.000000
+                UIRoundedCornersComponent:
+                    radius: "4"
+                Anchor:
+                    leftAnchorEnabled: true
+                    rightAnchorEnabled: true
+                    topAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                LinearLayout:
+                    orientation: "TopDown"
+                    padding: "16"
+                    spacing: 0.000000
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "maxChild + 32"
+                    verticalPolicy: "PercentOfChildrenSum"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+            children:
+            -   class: "UIControl"
+                name: "Text"
+                input: false
+                components:
+                    RichContent:
+                        baseClasses: "t-old-text2-small color=white-wild-sand-text"
+                    RichContentAliases0:
+                        aliases:
+                        - ["button", "<control control=\"~res:/UI/Screens3/Common/NintendoSwitch/Controls/NintendoSwitchControl.yaml\" args1=\"switchControl=switchControl\"/>"]
+                        - ["highlight", "<span class=\"t-old-text2-small orange-orange-peel-text\" />"]
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        horizontalMax: 248.000000
+                        verticalPolicy: "PercentOfChildrenSum"
+                    FlowLayout:
+                        hSpacing: 4.000000
+                        useRtl: true
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/OldFont.style.yaml;~res:/UI/Screens3/Color.style.yaml;"
+                bindings:
+                - ["RichContent.text", "finalString"]
+        -   class: "UIControl"
+            name: "ArrowRight"
+            input: false
+            classes: "grey-shark-50-bg"
+            components:
+                Background:
+                    drawType: "DRAW_FILL"
+                    spriteModification: ["FLIP_VERTICAL"]
+                    colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                    align: []
+                UIRoundedCornersComponent:
+                    radius: "8"
+                    isRound: false
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 16.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 16.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+            bindings:
+            - ["visible", "side == ePositionAlign.Left"]
+    -   class: "UIControl"
+        name: "ArrowBottom"
+        input: false
+        classes: "grey-shark-50-bg"
+        components:
+            Background:
+                drawType: "DRAW_FILL"
+                spriteModification: ["FLIP_VERTICAL"]
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                align: []
+            UIRoundedCornersComponent:
+                radius: "8"
+                isRound: false
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 16.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 16.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+        bindings:
+        - ["visible", "side == ePositionAlign.Top"]

@@ -1,0 +1,9 @@
+Header:
+    version: "24"
+StyleSheets:
+-   selector: ".ja.bold"
+    properties:
+        text-fontPath: "~res:/Fonts/cfg/IwaGGoProBd.fntconf"
+-   selector: ".ja.regular"
+    properties:
+        text-fontPath: "~res:/Fonts/cfg/IwaGGoProMd.fntconf"

@@ -1,0 +1,29 @@
+Header:
+    version: "79"
+ImportedPackages:
+- "~res:/UI/Screens3/Common/Touch.style.yaml"
+StyleSheets:
+-   selectors:
+    - ".sort-table-button * #Content"
+    - ".sort-table-button:pressed_inside:selected * #Content"
+    properties:
+        opacity-opacity: 1.000000
+-   selectors:
+    - ".sort-table-button:pressed_inside * #Content"
+    properties:
+        opacity-opacity: 0.700000
+-   selectors:
+    - ".sort-table-button:hover * .hover"
+    - ".sort-table-button:pressed_inside * .hover"
+    properties:
+        opacity-opacity:
+            value: 1.000000
+            transitionTime: 0.150000
+            transitionFunction: "EASE_IN_EASY_OUT"
+-   selectors:
+    - ".sort-table-button * .hover"
+    properties:
+        opacity-opacity:
+            value: 0.500000
+            transitionTime: 0.150000
+            transitionFunction: "EASE_IN_EASY_OUT"

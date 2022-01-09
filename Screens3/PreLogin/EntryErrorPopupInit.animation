@@ -1,0 +1,4 @@
+animation EntryErrorPopupInit
+{
+    Opacity(".", opacity=1.0);
+}

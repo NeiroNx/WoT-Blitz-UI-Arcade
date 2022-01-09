@@ -1,0 +1,17 @@
+Header:
+    version: 130
+Prototypes:
+-   class: "UIControl"
+    name: "Link"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfMaxChild"
+        UIChildComponent0:
+            prototypePath: "~res:/UI/Screens3/Lobby/Common/RichTextLink.yaml"
+            args:
+                "key": "localize(\"#eula:confirmation_link_2\")"
+            eventActions:
+            - ["LINK_PRESSED", "PRIVACY_PRESSED", "_event"]

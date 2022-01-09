@@ -1,0 +1,4 @@
+animation SwithcFilter
+{
+	Event("SWITCH_FILTER", arg1=not showFilter);
+}

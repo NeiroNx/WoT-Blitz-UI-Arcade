@@ -1,0 +1,49 @@
+Header:
+    version: 133
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/Dialog/TextDialog.yaml"
+Controls:
+-   class: "UIControl"
+    name: "AllServersDoNotRespond"
+    size: [640.000000, 480.000000]
+    input: false
+    components:
+        Anchor:
+            leftAnchorEnabled: true
+            rightAnchorEnabled: true
+            topAnchorEnabled: true
+            bottomAnchorEnabled: true
+        ModalInput: {}
+        UIVirtualActionEventComponent0:
+            virtualKeyAction: "Escape"
+            keyDownEvent: "OPTIONAL_CLICKED"
+        UIShortcutEventComponent:
+            shortcuts: "OPTIONAL_CLICKED,Escape;OPTIONAL_CLICKED,Back"
+        UIDataParamsComponent:
+            events:
+            - "OPTIONAL_CLICKED"
+            - "CONFIRMATION"
+    children:
+    -   prototype: "TextDialog/TextDialog"
+        name: "InfoTextDialog"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "type": "eDialogType.PUSH"
+                    "header": "\"#preLogin:dialog/header/error\""
+                    "headerImage": "\"\""
+                    "accentButton": "\"#preLogin:dialog/repeat\""
+                    "optionalButton": "\"#common:DialogButton/Cancel\""
+                    "contentControl": "control(\"~res:/UI/Screens3/Lobby/Common/Dialog/TextContent.yaml\", { \"contentText\" = localize(\"#preLogin:dialog/allServersDoNotRespondDialog\"); }, [ ])"
+                eventActions:
+                - ["ACCENT_CLICKED", "CONFIRMATION", ""]
+                - ["OPTIONAL_CLICKED", "OPTIONAL_CLICKED", ""]
+        children:
+        -   path: "DialogContent"
+            components:
+                UIIdentifierComponent:
+                    id: "servers_do_not_respond"
+            children: []
+        -   path: "DialogContent/Footer/OptionalButtonContainer"
+            position: [25.000000, 24.000000]
+            children: []

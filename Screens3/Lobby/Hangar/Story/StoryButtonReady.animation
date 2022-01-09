@@ -1,0 +1,9 @@
+animation StoryButtonReady
+{
+    repeat (when isReady -> 9999, 0)
+    {
+        Scale (path=".", time = 0.8, x = 1.08, y = 1.08, interpolation=BOUNCE_IN);
+        Scale (path=".", time = 0.4, x = 1, y = 1, interpolation=BOUNCE_OUT);
+        Wait(1);
+    }
+}

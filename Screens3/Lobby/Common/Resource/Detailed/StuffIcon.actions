@@ -1,0 +1,9 @@
+action StuffIconLoaded
+{
+    Event("STUFF_ICON_LOADED");
+
+    if (stuff.type == ArtefactType.player_avatar)
+    {
+        PlayFrameAnimation("**/IconUrl", -1, 12);
+    }
+}

@@ -1,0 +1,344 @@
+Header:
+    version: 130
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/RichText.yaml"
+- "~res:/UI/Screens3/Lobby/Common/ProgressBar.yaml"
+- "~res:/UI/Screens3/Lobby/Inventory/Crew/SkillLevelProgress.yaml"
+- "~res:/UI/Screens3/Lobby/Common/RichTextSimpleParameter.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "RightPanelContent"
+    size: [308.000000, 312.000000]
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+            padding: "16;32"
+            spacing: 24.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfChildrenSum"
+        UIDataParamsComponent:
+            params:
+            - ["bool", "isMaxLevel", "false", "false"]
+            - ["SkillDescriptionModel", "description", "null", "{ }"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["string", "featuresDescription", "when not isNull(description) -> localize(description.featuresDescription, description.attributes), \"\""]
+            - ["string", "tipDescription", "when not isNull(description) -> localize(description.tipDescription, description.attributes), \"\""]
+            - ["string", "effectDescription", "when not isNull(description) -> localize(description.effectDescription, description.attributes), \"\""]
+            - ["bool", "battlesLeftVisible", "when not isNull(description) -> description.battlesLeft != 0 and not isMaxLevel, false"]
+    children:
+    -   class: "UIControl"
+        name: "Description"
+        position: [0.000000, 16.000000]
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            LinearLayout:
+                orientation: "TopDown"
+                padding: "0"
+                spacing: 32.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfChildrenSum"
+        children:
+        -   class: "UIControl"
+            name: "EffectDescription"
+            position: [0.000000, 53.000000]
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                LinearLayout:
+                    orientation: "TopDown"
+                    spacing: 16.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfChildrenSum"
+            children:
+            -   prototype: "RichText/RichText"
+                name: "RichText"
+                components:
+                    Anchor:
+                        useRtl: true
+                    SizePolicy:
+                        horizontalPolicy: "Formula"
+                        horizontalFormula: "min(parentRest, childrenSum)"
+                    UIDataParamsComponent:
+                        args:
+                            "baseFontSize": "\"t-body\""
+                            "baseFontStyle": "\"regular\""
+                            "baseFontColor": "\"white-wild-sand-50-text\""
+                            "key": "effectDescription"
+                            "resource1Model": "null"
+                            "resource2Model": "null"
+                            "resource3Model": "null"
+                            "resource4Model": "null"
+            -   class: "UIControl"
+                name: "BattlesLeft"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    LinearLayout:
+                        spacing: 4.000000
+                        useRtl: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfMaxChild"
+                bindings:
+                - ["visible", "battlesLeftVisible"]
+                children:
+                -   prototype: "RichTextSimpleParameter/RichTextSimpleParameter"
+                    name: "RichTextSimpleParameter"
+                    components:
+                        UIDataParamsComponent:
+                            args:
+                                "key": "localize(\"#crew:skills/skillDescription/battleCount\") + \" %(variableName)\""
+                                "value": "when not isNull(description) -> str1000Separated(description.battlesLeft), \"\""
+        -   class: "UIControl"
+            name: "FeaturesDescription"
+            position: [0.000000, 129.000000]
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                LinearLayout:
+                    orientation: "TopDown"
+                    spacing: 8.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfChildrenSum"
+            bindings:
+            - ["visible", "not empty(featuresDescription)"]
+            children:
+            -   class: "UIControl"
+                name: "Header"
+                input: false
+                classes: "bold t-caps white-wild-sand-text"
+                components:
+                    UITextComponent:
+                        fitting: "FITTING_POINTS"
+                        align: ["RIGHT", "VCENTER"]
+                        useRtlAlign: "USE_BY_CONTENT"
+                    Anchor:
+                        leftAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                        useRtl: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml"
+                bindings:
+                - ["UITextComponent.text", "localize(\"#crew:skills/skillDescription/features\")"]
+            -   prototype: "RichText/RichText"
+                name: "RichText"
+                components:
+                    Anchor:
+                        useRtl: true
+                    SizePolicy:
+                        horizontalPolicy: "Formula"
+                        horizontalFormula: "min(parentRest, childrenSum)"
+                    UIDataParamsComponent:
+                        args:
+                            "baseFontSize": "\"t-body\""
+                            "baseFontStyle": "\"regular\""
+                            "baseFontColor": "\"white-wild-sand-50-text\""
+                            "key": "featuresDescription"
+                            "resource1Model": "null"
+                            "resource2Model": "null"
+                            "resource3Model": "null"
+                            "resource4Model": "null"
+        -   class: "UIControl"
+            name: "TipDescription"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                LinearLayout:
+                    orientation: "TopDown"
+                    spacing: 8.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfChildrenSum"
+            bindings:
+            - ["visible", "not empty(tipDescription)"]
+            children:
+            -   class: "UIControl"
+                name: "Header"
+                input: false
+                classes: "bold t-caps white-wild-sand-text"
+                components:
+                    UITextComponent:
+                        fitting: "FITTING_POINTS"
+                        align: ["RIGHT", "VCENTER"]
+                        useRtlAlign: "USE_BY_CONTENT"
+                    Anchor:
+                        leftAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                        useRtl: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml"
+                bindings:
+                - ["UITextComponent.text", "localize(\"#crew:skills/skillDescription/hints\")"]
+            -   prototype: "RichText/RichText"
+                name: "RichText"
+                components:
+                    Anchor:
+                        useRtl: true
+                    SizePolicy:
+                        horizontalPolicy: "Formula"
+                        horizontalFormula: "min(parentRest, childrenSum)"
+                    UIDataParamsComponent:
+                        args:
+                            "baseFontSize": "\"t-body\""
+                            "baseFontStyle": "\"regular\""
+                            "baseFontColor": "\"white-wild-sand-50-text\""
+                            "key": "tipDescription"
+                            "resource1Model": "null"
+                            "resource2Model": "null"
+                            "resource3Model": "null"
+                            "resource4Model": "null"
+    -   class: "UIControl"
+        name: "Table"
+        position: [0.000000, 350.000000]
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            LinearLayout:
+                orientation: "TopDown"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfChildrenSum"
+        children:
+        -   class: "UIControl"
+            name: "Header"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                LinearLayout:
+                    useRtl: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 40.000000
+            children:
+            -   class: "UIControl"
+                name: "Level"
+                size: [32.000000, 32.000000]
+                input: false
+                classes: "bold t-caps white-wild-sand-text"
+                components:
+                    UITextComponent:
+                        text: "#crew:skills/skillDescription/table/level"
+                        multiline: "MULTILINE_ENABLED"
+                        align: ["HCENTER", "VCENTER"]
+                        useRtlAlign: "USE_BY_CONTENT"
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 90.000000
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml"
+            -   class: "UIControl"
+                name: "Separator"
+                size: [32.000000, 32.000000]
+                input: false
+                classes: "white-wild-sand-5-bg"
+                components:
+                    Background: {}
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 1.000000
+                        verticalPolicy: "PercentOfParent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+            -   class: "UIControl"
+                name: "Effect"
+                position: [103.000000, 0.000000]
+                size: [32.000000, 32.000000]
+                input: false
+                classes: "bold t-caps white-wild-sand-text"
+                components:
+                    UITextComponent:
+                        text: "#crew:skills/skillDescription/table/effect"
+                        multiline: "MULTILINE_ENABLED"
+                        align: ["HCENTER", "VCENTER"]
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 90.000000
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml"
+            -   class: "UIControl"
+                name: "Separator"
+                size: [32.000000, 32.000000]
+                input: false
+                classes: "white-wild-sand-5-bg"
+                components:
+                    Background: {}
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 1.000000
+                        verticalPolicy: "PercentOfParent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+            -   class: "UIControl"
+                name: "Xp"
+                position: [205.000000, 0.000000]
+                size: [32.000000, 32.000000]
+                input: false
+                classes: "bold t-caps white-wild-sand-text"
+                components:
+                    UITextComponent:
+                        text: "#crew:skills/skillDescription/table/needXP"
+                        multiline: "MULTILINE_ENABLED"
+                        align: ["HCENTER", "VCENTER"]
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 125.000000
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml"
+            -   class: "UIControl"
+                name: "Separator_2"
+                size: [32.000000, 32.000000]
+                input: false
+                classes: "white-wild-sand-5-bg"
+                components:
+                    Background: {}
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        bottomAnchorEnabled: true
+                    IgnoreLayout: {}
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 308.000000
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 1.000000
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "Content"
+            position: [0.000000, 40.000000]
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                LinearLayout:
+                    orientation: "TopDown"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfChildrenSum"
+                UIRepeatComponent:
+                    control: "~res:/UI/Screens3/Lobby/Inventory/Crew/SkillLevelsTableRow.yaml"
+                    dataContainer: "description.levelsTable"
+                    args:
+                        "isLast": "Size(description.levelsTable) - 1 == _index"
+                        "progress": "when not isNull(description) -> int(description.progress * 100), 0.000000"
+                        "level": "_item"

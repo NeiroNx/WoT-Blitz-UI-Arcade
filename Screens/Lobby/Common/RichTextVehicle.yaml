@@ -1,0 +1,11 @@
+Header:
+    version: "28"
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/Common/VehicleInfoWithText.yaml"
+Prototypes:
+-   prototype: "VehicleInfoWithText/VehicleInfoWithName"
+    name: "VehicleInfoWithName"
+    components:
+        UIDataSourceComponent0:
+            sourceType: "Expression"
+            source: "vehicleReflection"

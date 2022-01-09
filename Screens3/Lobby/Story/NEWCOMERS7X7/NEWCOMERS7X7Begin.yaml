@@ -1,0 +1,55 @@
+Header:
+    version: 140
+Prototypes:
+-   class: "UIControl"
+    name: "NEWCOMERS7X7Begin"
+    size: [960.000000, 592.000000]
+    input: false
+    components:
+        ClipContent: {}
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["eBlitzDevice", "deviceType", "eBlitzDevice.DEVICE_PHONE", "eBlitzDevice.DEVICE_PHONE"]
+            - ["StorySettings", "settings", "{ }", "{ }"]
+            events:
+            - "CLOSE"
+        UIDataLocalVarsComponent:
+            data:
+            - ["string", "background", "when deviceType == eBlitzDevice.DEVICE_DESKTOP and settings.art.Contains(\"desktopBackground\") -> settings.art[\"desktopBackground\"], settings.art.Contains(\"background\") -> settings.art[\"background\"], \"\""]
+    children:
+    -   class: "UIControl"
+        name: "Fade"
+        input: false
+        classes: "black-70-bg"
+        components:
+            Background:
+                drawType: "DRAW_SCALE_TO_RECT"
+                sprite: "~res:/Gfx/Lobby/backgrounds/bg_gradient_vertical_0-100"
+            Anchor:
+                hCenterAnchorEnabled: true
+                bottomAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+                verticalValue: 60.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/FullScreenPopup/NewComersEventNotification.yaml"
+                args:
+                    "image": "\"\""
+                    "header": "\"NEWCOMERS7X7/Notification/Begin/Header\""
+                    "description": "\"NEWCOMERS7X7/Notification/Begin/Description\""
+                    "vehicle": "null"
+                eventActions:
+                - ["CLOSE", "CLOSE", ""]

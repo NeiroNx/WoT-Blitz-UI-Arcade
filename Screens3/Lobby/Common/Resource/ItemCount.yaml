@@ -1,0 +1,55 @@
+Header:
+    version: 134
+Prototypes:
+-   class: "UIControl"
+    name: "ItemCount"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "Formula"
+            horizontalFormula: "when lastChild + 8 < 24 -> 24, lastChild + 8"
+            verticalPolicy: "FixedSize"
+            verticalValue: 24.000000
+        UIDataParamsComponent:
+            params:
+            - ["string", "stringedCount", "\"\"", "\"\""]
+            - ["string", "backgroundStyle", "\"\"", "\"white-wild-sand-15-bg\""]
+            - ["bool", "roundedCorners", "false", "false"]
+            - ["int", "count", "0", "15"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["string", "resultString", "when empty(stringedCount) -> str(count), stringedCount"]
+            - ["string", "resultBackgroundStyle", "when empty(backgroundStyle) -> \"gray-cape-cod-bg\", backgroundStyle"]
+            - ["int", "cornerRadius", "when roundedCorners -> 3, 0"]
+    children:
+    -   class: "UIControl"
+        name: "Background"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Background: {}
+            UIRoundedCornersComponent: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+        bindings:
+        - ["classes", "resultBackgroundStyle"]
+        - ["UIRoundedCornersComponent.radius", "cornerRadius"]
+    -   class: "UIControl"
+        name: "Count"
+        size: [32.000000, 32.000000]
+        input: false
+        classes: "white-wild-sand-text bold t-overline"
+        components:
+            UITextComponent: {}
+            Anchor:
+                hCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfParent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+        bindings:
+        - ["UITextComponent.text", "resultString"]

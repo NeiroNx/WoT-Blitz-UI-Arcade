@@ -1,0 +1,94 @@
+Header:
+    version: "44"
+StyleSheets:
+-   selector: ".resource.resource-rare-achievement ? #Icon"
+    properties:
+        visible: true
+-   selector: ".resource.resource-credit ? #Icon"
+    properties:
+        visible: true
+        bg-frame: 1
+        bg-sprite: "~res:/Gfx/UI/LobbyCommon/CurrencyIconsHuge"
+-   selector: ".resource.resource-gold ? #Icon"
+    properties:
+        visible: true
+        bg-frame: 0
+        bg-sprite: "~res:/Gfx/UI/LobbyCommon/CurrencyIconsHuge"
+-   selector: ".resource.resource-xp ? #Icon"
+    properties:
+        visible: true
+        bg-frame: 3
+        bg-sprite: "~res:/Gfx/UI/LobbyCommon/CurrencyIconsHuge"
+-   selector: ".resource.resource-free-xp ? #Icon"
+    properties:
+        visible: true
+        bg-frame: 2
+        bg-sprite: "~res:/Gfx/UI/LobbyCommon/CurrencyIconsHuge"
+-   selector: ".resource.resource-crew-xp ? #Icon"
+    properties:
+        visible: true
+        bg-frame: 4
+        bg-sprite: "~res:/Gfx/UI/LobbyCommon/CurrencyIconsHuge"
+-   selector: ".resource.resource-premium ? #Icon"
+    properties:
+        visible: true
+        bg-frame: 2
+        bg-drawType: "DRAW_STRETCH_BOTH"
+        bg-sprite: "~res:/Gfx/UI/Quests/AddCurrencyIconsHuge"
+-   selector: ".resource.resource-vehicle ? #Icon"
+    properties:
+        bg-frame: 0
+        visible: true
+        bg-sprite: "~res:/Gfx/UI/Quests/AddCurrencyIconsHuge.psd"
+-   selector: ".resource.resource-unlock ? #Icon"
+    properties:
+        visible: true
+        bg-frame: 2
+        bg-sprite: "~res:/Gfx/UI/Quests/AddCurrencyIconsHuge_200percent_cam.psd"
+-   selector: ".resource.resource-slot ? #Icon"
+    properties: {}
+-   selector: ".resource.resource-stuff ? #Grade"
+    properties:
+        visible: true
+-   selector: ".resource.resource-stuff.hide-grade ? #Grade"
+    properties:
+        visible: false
+-   selector: ".resource.resource-real-currency #Back"
+    properties:
+        visible: false
+-   selector: ".resource ? #Grade"
+    properties:
+        visible: false
+-   selector: ".resource.quantity-on #Value"
+    properties:
+        visible: true
+-   selector: ".resource.quantity-off #Value"
+    properties:
+        visible: false
+-   selector: ".resource.discount-on #DiscountLabel"
+    properties:
+        visible: true
+-   selector: ".resource.discount-off #DiscountLabel"
+    properties:
+        visible: false
+-   selector: ".resource #BonusValue"
+    properties:
+        visible: false
+-   selector: ".resource.has-bonus-value #BonusValue"
+    properties:
+        visible: true
+-   selector: ".resource.resource-prx_chest ? #Icon"
+    properties:
+        visible: true
+        bg-frame: 8
+        bg-sprite: "~res:/Gfx/UI/LobbyCommon/CurrencyIconsHuge"
+-   selector: ".resource.big-resource-credit ? #Icon"
+    properties:
+        visible: true
+        bg-sprite: "~res:/Gfx/UI/LobbyCommon/GoldSilverBig.psd"
+        bg-frame: 0
+-   selector: ".resource.big-resource-gold ? #Icon"
+    properties:
+        visible: true
+        bg-sprite: "~res:/Gfx/UI/LobbyCommon/GoldSilverBig.psd"
+        bg-frame: 1

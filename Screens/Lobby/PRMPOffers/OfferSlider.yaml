@@ -1,0 +1,461 @@
+Header:
+    version: 140
+Prototypes:
+-   class: "UIControl"
+    name: "OfferSlider"
+    size: [960.000000, 640.000000]
+    input: true
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens/Lobby/PRMPOffers/OfferSliderInit.animation"
+        ClipContent: {}
+        Anchor:
+            leftAnchorEnabled: true
+            rightAnchorEnabled: true
+            topAnchorEnabled: true
+            bottomAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UILayoutEventComponent:
+            sizeChangedEvent: "SIZE_CHANGED"
+            sizeChangedEventData: "int(_size.X)"
+        ModalInput: {}
+        UIVirtualActionEventComponent0:
+            virtualKeyAction: "Escape"
+            keyDownEvent: "CloseOffersShortcut"
+        UIShortcutEventComponent:
+            shortcuts: "CloseOffersShortcut,Back;CloseOffersShortcut,Escape;TOGGLE_DEBUG,Shift+D"
+        UIDataParamsComponent:
+            params:
+            - ["AppDataModel", "app", "null", "{ }"]
+            - ["SessionDataModel", "session", "null", "{ }"]
+            - ["PrmpOffersViewModel", "model", "null", "{ }"]
+            - ["bool", "desktop", "false", "false"]
+            - ["string", "taxMessage", "\"\"", "\"All prices include taxes\""]
+            - ["bool", "nintendoSwitch", "false", "true"]
+            events:
+            - "PURGE_OFFER(int64 offerId)"
+            - "SHOW_OPTION_PRODUCT(int64 offerId, int32 productIndex)"
+            - "PURCHASE_SPECIFIC_PRODUCT(int64 offerId, int32 productIndex)"
+            - "PREVIEW_TANK(string tankName)"
+            - "PREVIEW_TANK_DESCR(int tankDescr)"
+            - "CLOSE_OFFER(int64 offerId)"
+            - "OFFER_ACTION(int64 offerId)"
+            - "OFFER_SLIDE(int64 offerId)"
+            - "OFFER_CHANGED(int64 offerId)"
+            - "VIDEO_START"
+            - "VIDEO_FINISHED"
+            - "VIDEO_TOUCH"
+            - "WATCH_OFFER_VIDEO(int64 offerId)"
+            - "PREVIOUS_OFFER"
+            - "NEXT_OFFER"
+        UIDataLocalVarsComponent:
+            data:
+            - ["string", "currentButtonText", "\"\""]
+            - ["bool", "currentTankPreviewActive", "false"]
+            - ["bool", "currentButtonVisible", "false"]
+            - ["bool", "currentVideoAvailable", "false"]
+            - ["bool", "currentPreviousOfferAvailable", "false"]
+            - ["bool", "currentNextOfferAvailable", "false"]
+            - ["bool", "debugMode", "false"]
+            - ["int", "sliderWidth", "0"]
+            - ["bool", "firstImage", "true"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["string", "currentImagePath", "when firstImage -> \"**/Image1\", \"**/Image2\""]
+            - ["string", "nextImagePath", "when firstImage -> \"**/Image2\", \"**/Image1\""]
+            - ["PrmpOffer", "currentOffer", "model.currentOffer"]
+            - ["bool", "realCurrency", "not isNull(currentOffer) and not isNull(currentOffer.basicOffer) and not (currentOffer.basicOffer.offeredProduct.salePrice.resources.Empty()) and currentOffer.basicOffer.offeredProduct.salePrice.resources[0].type == ResourceType.real_currency"]
+            - ["string", "actionButtonCaption", "when isNull(currentOffer) -> \"\", not isNull(currentOffer.basicOffer) and not (currentOffer.basicOffer.buttonText.empty()) -> currentOffer.basicOffer.buttonText, not nintendoSwitch and not isNull(currentOffer.basicOffer) and not isNull(currentOffer.basicOffer.piggyBank) -> \"#common:Button/Claim\", currentOffer.type == ePrmpOfferType.kMessage -> \"#common:DialogButton/OK\", currentOffer.type == ePrmpOfferType.kDeepLink or currentOffer.type == ePrmpOfferType.kWebLink -> \"#common:DialogButton/Go\", nintendoSwitch and realCurrency and (currentOffer.type == ePrmpOfferType.kServerPremium or currentOffer.type == ePrmpOfferType.kProduct) -> \"shop/eShop/NS\", currentOffer.type == ePrmpOfferType.kServerPremium or currentOffer.type == ePrmpOfferType.kProduct -> \"#common:DialogButton/Buy\", \"\""]
+            - ["bool", "actionButtonVisible", "not isNull(currentOffer) and not isNull(currentOffer.basicOffer)"]
+            - ["bool", "tankPreviewActive", "not isNull(currentOffer) and currentOffer.timeLimited and not isNull(currentOffer.basicOffer) and currentOffer.basicOffer.offeredProduct.previewTank != 0"]
+            - ["string", "currentUrl", "when not isNull(currentOffer) -> currentOffer.backgroundUrl, \"\""]
+            - ["int64", "currentOfferId", "when not isNull(currentOffer) -> currentOffer.id, 0L"]
+            - ["bool", "hasVideo", "not nintendoSwitch and not isNull(currentOffer) and currentOffer.hasVideo"]
+            - ["bool", "previousOfferAvailable", "model.offers.Size() > 1 and model.currentIndex > 0"]
+            - ["bool", "nextOfferAvailable", "(model.currentIndex + 1) < model.offers.Size()"]
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens/Lobby/PRMPOffers/OfferSlider.actions"
+        UIDataOnEventComponent0:
+            eventName: "SIZE_CHANGED"
+            modelFieldExpression: "sliderWidth"
+            dataExpression: "_event"
+        UIDataOnEventComponent1:
+            eventName: "TOGGLE_DEBUG"
+            modelFieldExpression: "debugMode"
+            dataExpression: "not debugMode"
+        UIEventOnDataComponent0:
+            watchedDataExpression: "sliderWidth"
+            ifExpression: "sliderWidth > 0"
+            eventName: "SizeChanged"
+        UIEventOnDataComponent1:
+            watchedDataExpression: "model.currentIndex"
+            eventName: "ChangeOffer"
+    bindings:
+    - ["visible", "not model.offers.Empty()"]
+    children:
+    -   class: "UIControl"
+        name: "Background"
+        input: false
+        components:
+            ClipContent: {}
+            IgnoreLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "bg"
+            input: false
+            classes: "black-bg"
+            components:
+                Background: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "Image1"
+            pivot: [0.500000, 0.500000]
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_TO_RECT"
+                UIOpacityComponent:
+                    opacity: 0.000000
+                UIUrlImageComponent:
+                    placeholderScenePath: "~res:/UI/Screens/Common/LoadingControl.yaml"
+                    placeholderControlName: "LoadingControl"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                ScalePolicy:
+                    horizontalFormula: "(when parentSize.Y / parentSize.X > 0.75 -> parentSize.Y / 0.75, parentSize.X) / size.Y"
+                    verticalFormula: "(when parentSize.Y / parentSize.X > 0.75 -> parentSize.Y, parentSize.X * 0.75) / size.Y"
+            bindings:
+            - ["UIUrlImageComponent.imageUrl", ""]
+        -   class: "UIControl"
+            name: "Image2"
+            pivot: [0.500000, 0.500000]
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_TO_RECT"
+                UIOpacityComponent:
+                    opacity: 0.000000
+                UIUrlImageComponent:
+                    placeholderScenePath: "~res:/UI/Screens/Common/LoadingControl.yaml"
+                    placeholderControlName: "LoadingControl"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                ScalePolicy:
+                    horizontalFormula: "(when parentSize.Y / parentSize.X > 0.75 -> parentSize.Y / 0.75, parentSize.X) / size.Y"
+                    verticalFormula: "(when parentSize.Y / parentSize.X > 0.75 -> parentSize.Y, parentSize.X * 0.75) / size.Y"
+    -   class: "UIScrollView"
+        name: "OffersContainer"
+        autoUpdate: true
+        components:
+            UIOpacityComponent: {}
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIScrollViewContainer"
+            name: "scrollContainerControl"
+            input: false
+            scrollDirection: "kHorizontal"
+            components:
+                LinearLayout:
+                    skipInvisible: true
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "childrenCount * parent"
+                    verticalPolicy: "PercentOfParent"
+                UIRepeatComponent:
+                    control: "~res:/UI/Screens/Lobby/PRMPOffers/OfferWrapper.yaml"
+                    dataContainer: "model.offers"
+                    args:
+                        "width": "sliderWidth"
+                        "session": "session"
+                        "offer": "_item"
+                        "selected": "model.currentIndex == _index"
+                        "desktop": "desktop"
+                        "taxMessage": "taxMessage"
+                        "nintendoSwitch": "nintendoSwitch"
+                        "debugMode": "app.constants.developerUI and debugMode"
+                        "index": "_index"
+                    eventActions:
+                    - ["PURCHASE_SPECIFIC_PRODUCT", "PURCHASE_SPECIFIC_PRODUCT", "_event.offerId, _event.productIndex"]
+                    - ["PURGE_OFFER", "PURGE_OFFER", "_event.offerId"]
+                    - ["SHOW_OPTION_PRODUCT", "SHOW_OPTION_PRODUCT", "_event.offerId, _event.productIndex"]
+                    - ["PREVIEW_TANK", "PREVIEW_TANK", "_event.tankName"]
+                    - ["PREVIEW_TANK_DESCR", "PREVIEW_TANK_DESCR", "_event.tankDescr"]
+                    - ["OFFER_ACTION", "OFFER_ACTION", "_event"]
+    -   class: "UIControl"
+        name: "Footer"
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                bottomAnchorEnabled: true
+                bottomAnchor: 20.000000
+            SizePolicy:
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   class: "UIControl"
+            name: "OfferDependentButtons"
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    topAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   class: "UIControl"
+                name: "PreviewButton"
+                input: false
+                components:
+                    Anchor:
+                        leftAnchorEnabled: true
+                        leftAnchor: -64.000000
+                    IgnoreLayout: {}
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfFirstChild"
+                        verticalPolicy: "PercentOfFirstChild"
+                    UIChildComponent0:
+                        condition: "currentTankPreviewActive"
+                        prototypePath: "~res:/UI/Screens3/Lobby/Common/IconButton.yaml"
+                        args:
+                            "type": "eButtonType.OPTIONAL_LIGHT"
+                            "image": "\"~res:/Gfx/Lobby/icons/icon_eye_s\""
+                            "visible": "true"
+                        eventActions:
+                        - ["ON_CLICK_BUTTON", "PREVIEW_TANK_DESCR", "currentOffer.basicOffer.offeredProduct.previewTank"]
+            -   class: "UIControl"
+                name: "OfferActionButton"
+                input: false
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        topAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfFirstChild"
+                        verticalPolicy: "PercentOfFirstChild"
+                    UIChildComponent0:
+                        condition: "currentButtonVisible"
+                        prototypePath: "~res:/UI/Screens3/Lobby/Common/Button.yaml"
+                        args:
+                            "isLoading": "not isNull(currentOffer) and not isNull(currentOffer.basicOffer) and currentOffer.basicOffer.offeredProduct.pendingPurchase"
+                            "type": "eButtonType.POSITIVE"
+                            "size": "eButtonSize.NORMAL"
+                            "sound": "eButtonSound.OK"
+                            "caption": "currentButtonText"
+                            "locked": "false"
+                            "enabled": "not isNull(currentOffer) and not isNull(currentOffer.basicOffer) and (not currentOffer.basicOffer.offeredProduct.xTimed or currentOffer.basicOffer.offeredProduct.availableAmount > 0)"
+                        eventActions:
+                        - ["ON_CLICK_BUTTON", "OFFER_ACTION", "currentOffer.id"]
+        -   class: "UIControl"
+            name: "PreviousOfferButton"
+            input: false
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 24.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfFirstChild"
+                    verticalPolicy: "PercentOfFirstChild"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens3/Lobby/Common/Button/TextIconButton.yaml"
+                    args:
+                        "icon": "\"~res:/Gfx/Lobby/icons/icon_arrow_s\""
+                        "iconColorStyle": "\"white-wild-sand-bg\""
+                        "iconIsLeft": "true"
+                        "caption": "localize(\"#hangar:Offer/Previous\")"
+                        "type": "eButtonType.OPTIONAL_DARK"
+                        "size": "eButtonSize.NORMAL"
+                        "sound": "eButtonSound.UNKNOWN"
+                        "enabled": "true"
+                        "locked": "false"
+                        "iconFlip": "FLIP_HORIZONTAL"
+                    eventActions:
+                    - ["ON_CLICK_BUTTON", "PREVIOUS_OFFER", ""]
+            bindings:
+            - ["visible", "currentPreviousOfferAvailable"]
+        -   class: "UIControl"
+            name: "NextOfferButton"
+            input: false
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+                    rightAnchor: 24.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens3/Lobby/Common/Button/TextIconButton.yaml"
+                    args:
+                        "icon": "\"~res:/Gfx/Lobby/icons/icon_arrow_s\""
+                        "iconColorStyle": "\"white-wild-sand-bg\""
+                        "iconIsLeft": "false"
+                        "caption": "localize(\"#hangar:Offer/Next\")"
+                        "type": "eButtonType.OPTIONAL_DARK"
+                        "size": "eButtonSize.NORMAL"
+                        "sound": "eButtonSound.UNKNOWN"
+                        "enabled": "true"
+                        "locked": "false"
+                        "iconFlip": "0"
+                    eventActions:
+                    - ["ON_CLICK_BUTTON", "NEXT_OFFER", ""]
+            bindings:
+            - ["visible", "currentNextOfferAvailable"]
+    -   class: "UIControl"
+        name: "LoadingControl"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens/Common/LoadingControl.yaml"
+        bindings:
+        - ["visible", "model.loadingInProgress"]
+    -   class: "UIControl"
+        name: "CloseButton"
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 8.000000
+                topAnchorEnabled: true
+                topAnchor: 8.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIAnchorSafeAreaComponent:
+                leftSafeInset: "INSET"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/IconButton.yaml"
+                args:
+                    "locked": "false"
+                    "visible": "true"
+                    "isBgVisible": "false"
+                    "image": "\"~res:/Gfx/Lobby/icons/icon_cross_m\""
+                    "type": "eButtonType.OPTIONAL_LIGHT"
+                    "sound": "eButtonSound.CLOSE"
+                    "enabled": "true"
+                eventActions:
+                - ["ON_CLICK_BUTTON", "CLOSE_OFFER", "currentOfferId"]
+    -   class: "UIControl"
+        name: "VideoButtonWrapper"
+        input: false
+        components:
+            Anchor:
+                rightAnchorEnabled: true
+                rightAnchor: 8.000000
+                topAnchorEnabled: true
+                topAnchor: 8.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIAnchorSafeAreaComponent:
+                rightSafeInset: "INSET"
+        children:
+        -   class: "UIControl"
+            name: "WatchVideoButton"
+            input: false
+            components:
+                Anchor:
+                    topAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfFirstChild"
+                    verticalPolicy: "PercentOfFirstChild"
+                UIAnchorSafeAreaComponent:
+                    leftSafeInset: "INSET"
+                UIChildComponent0:
+                    condition: "currentVideoAvailable"
+                    prototypePath: "~res:/UI/Screens3/Lobby/Common/IconButton.yaml"
+                    args:
+                        "locked": "false"
+                        "visible": "true"
+                        "isBgVisible": "false"
+                        "image": "\"~res:/Gfx/Lobby/icons/icon_video\""
+                        "type": "eButtonType.OPTIONAL_LIGHT"
+                        "sound": "eButtonSound.CLOSE"
+                        "enabled": "true"
+                    eventActions:
+                    - ["ON_CLICK_BUTTON", "WATCH_OFFER_VIDEO", "currentOfferId"]
+    -   class: "UIControl"
+        name: "VideoHolder"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        bindings:
+        - ["visible", "model.playingVideo"]
+        children:
+        -   class: "UIControl"
+            name: "Background"
+            input: false
+            classes: "black-bg"
+            components:
+                Background: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIMovieView"
+            name: "Video"
+            classes: "button-close-sound"
+            components:
+                UIPostProcessSourceComponent0:
+                    id: "FeaturingVideo"
+                Anchor:
+                    leftAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                    verticalValue: 101.000000
+                UIInputEventComponent:
+                    onTouchUpInside: "VIDEO_TOUCH"
+                UIMovieEventComponent:
+                    onStart: "VIDEO_START"
+                    onStop: "VIDEO_FINISHED"
+                Sound: {}
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/ButtonSound.style.yaml"
+            children:
+            -   class: "UIControl"
+                name: "PostProcessVideo"
+                visible: false
+                input: false
+                components:
+                    Background:
+                        usePostProcessedSprite: true
+                    UIPostProcessInputComponent:
+                        id: "FeaturingVideo"
+                    UIPostProcessTextureComponent0:
+                        materialPath: "~res:/Materials/2d.Textured.material"
+                        minFilter: "Linear"
+                        magFilter: "Linear"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"

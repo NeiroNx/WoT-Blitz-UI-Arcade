@@ -1,0 +1,46 @@
+Header:
+    version: "84"
+Prototypes:
+-   class: "UIControl"
+    name: "StatCell"
+    size: [80.000000, 32.000000]
+    input: false
+    components:
+        LinearLayout:
+            spacing: 6.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfMaxChild"
+        UIDataParamsComponent:
+            params:
+            - ["string", "statValue", "\"\"", "\"100500\""]
+            - ["string", "statIcon", "\"\"", "\"~res:/Gfx/Lobby/icons/icon_battles_s\""]
+    children:
+    -   class: "UIControl"
+        name: "Icon"
+        input: false
+        components:
+            UITextureComponent: {}
+            Anchor:
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+        bindings:
+        - ["UITextureComponent.spritePath", "statIcon"]
+    -   class: "UIControl"
+        name: "Text"
+        input: false
+        classes: "t-caption bold color=white-wild-sand-text not-localize"
+        components:
+            UITextComponent:
+                align: ["LEFT", "VCENTER"]
+            Anchor:
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml"
+        bindings:
+        - ["UITextComponent.text", "statValue"]

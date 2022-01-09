@@ -1,0 +1,506 @@
+Header:
+    version: 127
+ImportedPackages:
+- "~res:/UI/Screens/Common.yaml"
+- "~res:/UI/Screens/Fonts.yaml"
+- "~res:/UI/Screens/Common/Settings/SettingsCommon.yaml"
+- "~res:/UI/Styles/ButtonStyle.yaml"
+- "~res:/UI/Screens/Common/Spinner.yaml"
+- "~res:/UI/Screens/Common/TextFieldPanel.yaml"
+StyleSheets:
+-   selectors:
+    - ".text_property #Value #EditableText"
+    properties:
+        visible: true
+-   selectors:
+    - ".text_property #Value #StaticText"
+    properties:
+        visible: false
+-   selectors:
+    - ".text_property.readonly #Value #EditableText"
+    properties:
+        visible: false
+-   selectors:
+    - ".text_property.readonly #Value #StaticText"
+    properties:
+        visible: true
+-   selectors:
+    - ".bool_property #Value #Checkbox"
+    properties:
+        bg-frame: 0
+-   selectors:
+    - ".bool_property #Value #Checkbox.checked"
+    properties:
+        bg-frame: 1
+-   selectors:
+    - ".section_property.open #Value #Icon"
+    properties:
+        bg-frame: 1
+-   selectors:
+    - ".section_property #Value #Icon"
+    properties:
+        bg-frame: 0
+Prototypes:
+-   class: "UIListCell"
+    name: "PropertyCell"
+    size: [590.000000, 68.000000]
+    components:
+        LinearLayout:
+            orientation: "RightToLeft"
+            padding: "5.000000"
+            spacing: 5.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Common/PropertyCellPrototypes.yaml"
+    children:
+    -   class: "UIControl"
+        name: "Value"
+        size: [345.000000, 68.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                horizontalValue: 60.000000
+                verticalPolicy: "PercentOfParent"
+    -   class: "UIStaticText"
+        name: "Name"
+        classes: "header1 text-color-white"
+        components:
+            UITextComponent:
+                text: "Property name"
+                align: ["LEFT", "VCENTER"]
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                horizontalValue: 40.000000
+                verticalPolicy: "PercentOfParent"
+Controls:
+-   prototype: "PropertyCell"
+    name: "TextPropertyCell"
+    classes: "text_property"
+    components:
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Common/PropertyCellPrototypes.yaml"
+    children:
+    -   path: "Value"
+        components:
+            LinearLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                horizontalValue: 100.000000
+        children:
+        -   class: "UIStaticText"
+            name: "StaticText"
+            size: [72.000000, 40.000000]
+            classes: "header1"
+            components:
+                UITextComponent:
+                    text: "Testsdf"
+                Anchor:
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+        -   prototype: "TextFieldPanel/TextFieldPanel"
+            name: "EditableText"
+            position: [133.000000, 9.000000]
+            size: [200.000000, 40.000000]
+            components:
+                Anchor:
+                    topAnchorEnabled: false
+                    vCenterAnchorEnabled: true
+            children:
+            -   class: "UITextField"
+                name: "TextField"
+                size: [195.000000, 35.000000]
+                font: "WarHeliosCondC_Bold_25"
+                maxLength: 7
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                    Focus:
+                        state: "Enabled"
+    -   path: "Name"
+        components:
+            SizePolicy:
+                horizontalValue: 100.000000
+-   prototype: "PropertyCell"
+    name: "BoolPropertyCell"
+    classes: "bool_property"
+    components:
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Common/PropertyCellPrototypes.yaml"
+    children:
+    -   path: "Value"
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                horizontalValue: 100.000000
+        children:
+        -   prototype: "SettingsCommon/Switch"
+            name: "Switch"
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+    -   path: "Name"
+        components:
+            SizePolicy:
+                horizontalValue: 100.000000
+-   prototype: "PropertyCell"
+    name: "ComboPropertyCell"
+    components:
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Common/PropertyCellPrototypes.yaml"
+    children:
+    -   path: "Value"
+        children:
+        -   prototype: "Spinner/Spinner"
+            name: "Spinner"
+            size: [345.000000, 66.000000]
+            components:
+                Background:
+                    topBottomStretchCap: 10.000000
+                Anchor:
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+            children:
+            -   path: "buttonNext"
+                size: [64.000000, 64.000000]
+                components:
+                    Background:
+                        align: ["RIGHT", "TOP"]
+                        leftRightStretchCap: 25.000000
+                children: []
+            -   path: "buttonPrevious"
+                size: [64.000000, 64.000000]
+                components:
+                    Background:
+                        align: ["RIGHT", "TOP"]
+                        leftRightStretchCap: 25.000000
+                children: []
+            -   path: "content"
+                components:
+                    Anchor:
+                        leftAnchor: 48.000000
+                        rightAnchor: 48.000000
+                children: []
+            -   path: "content/spinnerText"
+                components:
+                    UITextComponent:
+                        text: "Text"
+-   prototype: "PropertyCell"
+    name: "SectionPropertyCell"
+    size: [590.000000, 60.000000]
+    classes: "section_property button-color-gray"
+    components:
+        Background:
+            drawType: "DRAW_TILED_MULTILAYER"
+            mask: "~res:/Gfx/UI/CommonUIElements/Button/mask"
+            detail: "~res:/Gfx/UI/CommonUIElements/Button/detail"
+            gradientMode: "Overlay"
+            leftRightStretchCap: 14.000000
+            topBottomStretchCap: 14.000000
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Common/PropertyCellPrototypes.yaml"
+    children:
+    -   path: "Value"
+        position: [0.000000, 0.000000]
+        size: [590.000000, 60.000000]
+        visible: true
+        components:
+            Background:
+                leftRightStretchCap: 14.000000
+            IgnoreLayout: {}
+            SizePolicy:
+                horizontalValue: 100.000000
+        children:
+        -   class: "UIControl"
+            name: "Icon"
+            position: [7.428573, 10.000000]
+            size: [40.000000, 40.000000]
+            input: false
+            components:
+                Background:
+                    sprite: "~res:/Gfx/UI/CommonUIElements/IconsSmall"
+                    colorInherit: "COLOR_MULTIPLY_ON_PARENT"
+                Anchor:
+                    vCenterAnchorEnabled: true
+    -   path: "Name"
+        position: [5.000000, 0.000000]
+        components:
+            UITextComponent:
+                align: ["HCENTER", "VCENTER"]
+            SizePolicy:
+                horizontalValue: 100.000000
+-   prototype: "PropertyCell"
+    name: "ColorPropertyCell"
+    size: [590.000000, 100.000000]
+    components:
+        LinearLayout:
+            orientation: "BottomUp"
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Common/PropertyCellPrototypes.yaml"
+    children:
+    -   path: "Value"
+        position: [0.000000, 52.500000]
+        components:
+            SizePolicy:
+                horizontalValue: 100.000000
+        children:
+        -   class: "UIControl"
+            name: "ColorBox"
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+                    rightAnchor: 5.000000
+                LinearLayout: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   class: "UIStaticText"
+                name: "LabelR"
+                size: [70.000000, 35.000000]
+                classes: "header1 text-color-red"
+                components:
+                    UITextComponent:
+                        text: "Red"
+                    Anchor:
+                        vCenterAnchorEnabled: true
+            -   prototype: "TextFieldPanel/TextFieldPanel"
+                name: "TextFieldHolderR"
+                position: [-238.000000, -13.000000]
+                size: [55.000000, 40.000000]
+                children:
+                -   class: "UITextField"
+                    name: "TextField"
+                    size: [50.000000, 35.000000]
+                    font: "WarHeliosCondC_Bold_25"
+                    components:
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                            vCenterAnchorEnabled: true
+                        Focus:
+                            state: "Enabled"
+            -   class: "UIStaticText"
+                name: "LabelG"
+                size: [70.000000, 35.000000]
+                classes: "header1"
+                components:
+                    UITextComponent:
+                        text: "Green"
+                        color: [0.000000, 1.000000, 0.000000, 1.000000]
+                    Anchor:
+                        vCenterAnchorEnabled: true
+            -   prototype: "TextFieldPanel/TextFieldPanel"
+                name: "TextFieldHolderG"
+                position: [-238.000000, -13.000000]
+                size: [55.000000, 40.000000]
+                children:
+                -   class: "UITextField"
+                    name: "TextField"
+                    size: [50.000000, 35.000000]
+                    font: "WarHeliosCondC_Bold_25"
+                    components:
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                            vCenterAnchorEnabled: true
+                        Focus:
+                            state: "Enabled"
+            -   class: "UIStaticText"
+                name: "LabelB"
+                size: [70.000000, 35.000000]
+                classes: "header1"
+                components:
+                    UITextComponent:
+                        text: "Blue"
+                        color: [0.000000, 0.000000, 1.000000, 1.000000]
+                    Anchor:
+                        vCenterAnchorEnabled: true
+            -   prototype: "TextFieldPanel/TextFieldPanel"
+                name: "TextFieldHolderB"
+                position: [-238.000000, -13.000000]
+                size: [55.000000, 40.000000]
+                children:
+                -   class: "UITextField"
+                    name: "TextField"
+                    size: [50.000000, 35.000000]
+                    font: "WarHeliosCondC_Bold_25"
+                    components:
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                            vCenterAnchorEnabled: true
+                        Focus:
+                            state: "Enabled"
+            -   class: "UIStaticText"
+                name: "LabelA"
+                size: [70.000000, 35.000000]
+                classes: "header1"
+                components:
+                    UITextComponent:
+                        text: "Alpha"
+                    Anchor:
+                        vCenterAnchorEnabled: true
+            -   prototype: "TextFieldPanel/TextFieldPanel"
+                name: "TextFieldHolderA"
+                position: [-238.000000, -13.000000]
+                size: [55.000000, 40.000000]
+                children:
+                -   class: "UITextField"
+                    name: "TextField"
+                    size: [50.000000, 35.000000]
+                    font: "WarHeliosCondC_Bold_25"
+                    components:
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                            vCenterAnchorEnabled: true
+                        Focus:
+                            state: "Enabled"
+    -   path: "Name"
+        components:
+            SizePolicy:
+                horizontalValue: 100.000000
+        children:
+        -   class: "UIControl"
+            name: "Example"
+            size: [50.000000, 35.000000]
+            components:
+                Background:
+                    drawType: "DRAW_FILL"
+                Anchor:
+                    rightAnchorEnabled: true
+                    rightAnchor: 5.000000
+                    vCenterAnchorEnabled: true
+-   prototype: "PropertyCell"
+    name: "SliderPropertyCell"
+    size: [590.000000, 100.000000]
+    components:
+        LinearLayout:
+            orientation: "BottomUp"
+            spacing: 5.000000
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Common/PropertyCellPrototypes.yaml"
+    children:
+    -   path: "Value"
+        position: [0.000000, 33.000000]
+        components:
+            SizePolicy:
+                horizontalValue: 100.000000
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   class: "UIControl"
+            name: "SliderWithText"
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+                    rightAnchor: 5.000000
+                LinearLayout: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   class: "UIStaticText"
+                name: "MinValue"
+                classes: "header1"
+                components:
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 70.000000
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 40.000000
+            -   prototype: "SettingsCommon/Slider"
+                name: "Slider"
+                size: [351.000000, 62.000000]
+                components:
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                        bottomAnchorEnabled: false
+            -   class: "UIStaticText"
+                name: "MaxValue"
+                classes: "header1"
+                components:
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 70.000000
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 40.000000
+    -   path: "Name"
+        components:
+            SizePolicy:
+                horizontalValue: 100.000000
+        children:
+        -   class: "UIStaticText"
+            name: "CurValue"
+            classes: "header1"
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+                    rightAnchor: 5.000000
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 40.000000
+-   prototype: "PropertyCell"
+    name: "TextFieldPropertyCell"
+    classes: "text_property"
+    components:
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Common/PropertyCellPrototypes.yaml"
+    children:
+    -   path: "Value"
+        components:
+            LinearLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                horizontalValue: 100.000000
+        children:
+        -   class: "UIStaticText"
+            name: "StaticText"
+            size: [72.000000, 40.000000]
+            classes: "header1"
+            components:
+                UITextComponent:
+                    text: "Testsdf"
+                Anchor:
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+        -   prototype: "TextFieldPanel/TextFieldPanel"
+            name: "EditableText"
+            position: [133.000000, 9.000000]
+            size: [300.000000, 40.000000]
+            components:
+                Anchor:
+                    topAnchorEnabled: false
+                    vCenterAnchorEnabled: true
+            children:
+            -   class: "UITextField"
+                name: "TextField"
+                size: [295.000000, 35.000000]
+                font: "WarHeliosCondC_Bold_25"
+                maxLength: 200
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                    Focus:
+                        state: "Enabled"
+    -   path: "Name"
+        components:
+            SizePolicy:
+                horizontalValue: 100.000000

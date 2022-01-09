@@ -1,0 +1,16 @@
+Header:
+    version: 133
+Prototypes:
+-   class: "UIControl"
+    name: "SelectorRounded_r20"
+    input: false
+    components:
+        Background:
+            drawType: "DRAW_STRETCH_BOTH"
+            sprite: "~res:/Gfx/Lobby/events/2021-enigma/select"
+            perPixelAccuracy: "PER_PIXEL_ACCURACY_FORCED"
+            leftRightStretchCap: 20.000000
+            topBottomStretchCap: 20.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"

@@ -1,0 +1,38 @@
+Header:
+    version: 128
+ImportedPackages:
+- "~res:/UI/Screens3/Common/Tooltip.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "TooltipTimedRewards"
+    size: [432.000000, 164.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["int", "rewardIndex", "0", "0"]
+            events:
+            - "FINISH_HIDE_POPUP_ANIMATION"
+    children:
+    -   prototype: "Tooltip/Slave"
+        name: "Slave"
+        position: [-84.000000, 65.000000]
+        components:
+            UIDataParamsComponent:
+                args:
+                    "offset": "0"
+                    "isAlignLeft": "false"
+                    "buttonVisible": "false"
+                    "rewardVisible": "false"
+                    "slaveAlign": "ePositionAlign.Bottom"
+                    "resource": "{ }"
+                    "title": "\"\""
+                    "text": "\"taskJournal/Funnel/Chest/ClaimReward\""
+                    "colorClass": "\"color=white-wild-sand-text\""
+                    "masterId": "\"TJ_NEWBIE_REWARD_\" + str(rewardIndex)"
+                eventActions:
+                - ["POPUP_ON_CLOSE_ACTION", "", ""]
+                - ["FINISH_HIDE_POPUP_ANIMATION", "FINISH_HIDE_POPUP_ANIMATION", ""]

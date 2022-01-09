@@ -1,0 +1,11 @@
+animation TornadoPulsation
+{
+  ChangeProperty(".", "UIOpacityComponent", "opacity", 0.0);
+  repeat (3)
+  {
+    Opacity(".", 1.0, 0.15, EASE_IN);
+    Wait(0.2);
+    Opacity(".", 0.0, 0.15, EASE_OUT);
+  }
+  Event("TORNADO_PULSATION_COMPLETE");
+}

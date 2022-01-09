@@ -1,0 +1,119 @@
+Header:
+    version: "92"
+Prototypes:
+-   class: "UIControl"
+    name: "ImageTabWithSort"
+    size: [48.000000, 48.000000]
+    input: true
+    classes: "sort-table-button button-choose-sound"
+    components:
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 48.000000
+            verticalPolicy: "PercentOfParent"
+        UIInputEventComponent:
+            onTouchUpInside: "ON_CLICK_BUTTON"
+            onHoverSet: "HoverAnim"
+            onHoverSetData: "true"
+            onHoverRemoved: "HoverAnim"
+            onHoverRemovedData: "false"
+        UIDataParamsComponent:
+            params:
+            - ["bool", "inverseSort", "true", "true"]
+            - ["bool", "selected", "false", "false"]
+            - ["eTankSortMode", "type", "eTankSortMode.SORT_BY_BATTLES", "eTankSortMode.SORT_BY_AVERAGE_DAMAGE"]
+            events:
+            - "ON_CLICK_BUTTON"
+        UIDataLocalsComponent:
+            locals:
+            - ["bool", "isHovered", "false"]
+            - ["string", "iconPath", "when type == eTankSortMode.SORT_BY_LEVEL -> \"~res:/Gfx/Lobby/icons/icon_tank-levels_s\", type == eTankSortMode.SORT_BY_CLASS -> \"~res:/Gfx/Lobby/icons/icon_tank-tiers_s\", type == eTankSortMode.SORT_BY_NATION -> \"~res:/Gfx/Lobby/icons/icon_tank-nations_s\", type == eTankSortMode.SORT_BY_BATTLES -> \"~res:/Gfx/Lobby/icons/icon_battles_s\", type == eTankSortMode.SORT_BY_WINS -> \"~res:/Gfx/Lobby/icons/icon_victory_s\", type == eTankSortMode.SORT_BY_EXPERIENCE -> \"~res:/Gfx/Lobby/icons/icon_exp_s\", type == eTankSortMode.SORT_BY_AVERAGE_DAMAGE -> \"~res:/Gfx/Lobby/icons/icon_damage_s\", \"\""]
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/Lobby/Profile/Common/ImageTabWithSort.actions"
+        UIDataOnEventComponent0:
+            eventName: "HOVER_START"
+            modelFieldExpression: "isHovered"
+            dataExpression: "true"
+        UIDataOnEventComponent1:
+            eventName: "HOVER_END"
+            modelFieldExpression: "isHovered"
+            dataExpression: "false"
+        Sound: {}
+        StyleSheet:
+            styles: "~res:/UI/Screens3/ButtonSound.style.yaml"
+    bindings:
+    - ["selected", "selected"]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        position: [0.000000, 0.000000]
+        size: [48.000000, 48.000000]
+        pivot: [0.500000, 0.500000]
+        input: false
+        components:
+            UIOpacityComponent: {}
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Lobby/Profile/Common/ImageTabWithSort.style.yaml"
+        children:
+        -   class: "UIControl"
+            name: "sortDirImageUp"
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_PROPORTIONAL_ONE"
+                    sprite: "~res:/Gfx/Lobby/backgrounds/bg_triangle_8"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    topAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 8.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 5.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+            bindings:
+            - ["visible", "selected and inverseSort"]
+        -   class: "UIControl"
+            name: "Icon"
+            input: false
+            components:
+                UIOpacityComponent: {}
+                UITextureComponent:
+                    perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 24.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 24.000000
+            bindings:
+            - ["UIOpacityComponent.opacity", "when selected -> 1, 0.500000"]
+            - ["UITextureComponent.spritePath", "iconPath"]
+        -   class: "UIControl"
+            name: "sortDirImageDown"
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_PROPORTIONAL_ONE"
+                    sprite: "~res:/Gfx/Lobby/backgrounds/bg_triangle_8"
+                    spriteModification: ["FLIP_VERTICAL"]
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 8.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 5.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+            bindings:
+            - ["visible", "selected and not inverseSort"]

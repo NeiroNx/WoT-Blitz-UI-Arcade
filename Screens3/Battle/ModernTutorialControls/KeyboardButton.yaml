@@ -1,0 +1,41 @@
+Header:
+    version: 127
+Prototypes:
+-   class: "UIControl"
+    name: "KeyboardButton"
+    size: [52.000000, 52.000000]
+    input: false
+    components:
+        Background:
+            drawType: "DRAW_STRETCH_BOTH"
+            sprite: "~res:/Gfx/UI/Tutorial/KeyboardMouse/butt_keyboard"
+            frame: 1
+            leftRightStretchCap: 5.000000
+            topBottomStretchCap: 15.000000
+        UIOpacityComponent:
+            opacity: 0.800000
+        LinearLayout:
+            padding: "10.000000"
+            dynamicPadding: true
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 68.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 73.000000
+    children:
+    -   class: "UIControl"
+        name: "Text"
+        size: [32.000000, 32.000000]
+        input: false
+        classes: "t-old-header1 orange-orange-peel-text"
+        components:
+            UITextComponent: {}
+            Anchor:
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+                bottomAnchor: 4.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                horizontalMin: 32.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens3/OldFont.style.yaml;~res:/UI/Screens3/Color.style.yaml;"

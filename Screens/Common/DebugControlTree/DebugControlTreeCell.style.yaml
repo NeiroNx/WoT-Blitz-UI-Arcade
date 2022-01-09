@@ -1,0 +1,20 @@
+Header:
+    version: "100"
+StyleSheets:
+-   selectors:
+    - ".treeCell:normal #MoreButton"
+    properties:
+        visible: false
+-   selectors:
+    - ".treeCell:hover #MoreButton"
+    - ".treeCell #MoreButton:hover"
+    properties:
+        visible: true
+-   selectors:
+    - ".treeCell:pressed_inside #Selection"
+    properties:
+        bg-color: [0.666667, 1.000000, 1.000000, 0.117647]
+-   selectors:
+    - ".treeCell:normal #Selection"
+    properties:
+        bg-color: [0.666667, 1.000000, 1.000000, 0.000000]

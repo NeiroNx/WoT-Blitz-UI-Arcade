@@ -1,0 +1,88 @@
+Header:
+    version: 138
+Prototypes:
+-   class: "UIControl"
+    name: "BoosterButtonInstant"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfFirstChild"
+            verticalPolicy: "PercentOfFirstChild"
+        UIDataParamsComponent:
+            params:
+            - ["StoryStepView", "stepView", "null", "{ }"]
+            events:
+            - "SELECT_STEP(int id)"
+        UIDataLocalVarsComponent:
+            data:
+            - ["int", "boosterPrice", "10"]
+            - ["string", "oneDescription", "\"HW21/BoosterButton/Instant/Description/OneResearchLevel\""]
+            - ["string", "manyDescription", "\"HW21/BoosterButton/Instant/Description/FiveResearchLevels\""]
+            - ["string", "rewardLabel", "\"Story/LevelButton/Level/Value\""]
+            - ["string", "textColor", "\"yellow-lightning-text\""]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["ResourceDetailed", "price", "when not stepView.step.price.Empty() -> stepView.step.price[0], null"]
+            - ["int", "boosterQuantity", "when not stepView.step.rewards.Empty() -> stepView.step.rewards[0].stuff.quantity / boosterPrice, 0"]
+            - ["string", "description", "when boosterQuantity == 1 -> oneDescription, boosterQuantity > 1 -> manyDescription, \"\""]
+            - ["string", "textColor", "when boosterQuantity > 1 -> \"yellow-lightning-text\", \"white-wild-sand-text\""]
+            - ["bool", "isFinished", "stepView.step.isFinished"]
+            - ["bool", "isSelected", "stepView.isSelected"]
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/Lobby/Story/Components/BoosterButtonInstant.actions"
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Story/Components/BoosterButton.yaml"
+                args:
+                    "reward": "Reward"
+                    "description": "description"
+                    "label": "Price"
+                    "proxyIcon": "null"
+                    "bgColor": "\"\""
+                    "textColor": "textColor"
+                    "hasInput": "not isFinished"
+                    "isSelected": "isSelected"
+                    "showIndicator": "false"
+                    "showInfo": "false"
+                eventActions:
+                - ["ON_TOUCH", "SELECT_STEP", "stepView.step.id"]
+Slots:
+-   class: "UIControl"
+    name: "Price"
+    input: false
+    components:
+        Anchor:
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfFirstChild"
+            verticalPolicy: "PercentOfFirstChild"
+        UIChildComponent0:
+            condition: "not isNull(price)"
+            prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/CurrencyAdapter.yaml"
+            args:
+                "currencySize": "eCurrencySize.BODY"
+                "resource": "price"
+-   class: "UIControl"
+    name: "Reward"
+    pivot: [0.500000, 0.500000]
+    input: false
+    components:
+        UITextComponent: {}
+        Anchor:
+            hCenterAnchorEnabled: true
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfContent"
+            verticalPolicy: "PercentOfContent"
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Font.style.yaml"
+    bindings:
+    - ["classes", "\"t-content-h1 bold \" + textColor"]
+    - ["UITextComponent.text", "localize(rewardLabel, { \"value\" = boosterQuantity; })"]

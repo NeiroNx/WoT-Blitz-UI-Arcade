@@ -1,0 +1,74 @@
+Header:
+    version: "63"
+Controls:
+-   class: "UIControl"
+    name: "SharedBack"
+    size: [960.000000, 640.000000]
+    visible: true
+    enabled: true
+    input: false
+    components:
+        StyleSheet:
+            inheritsStylesFromParent: false
+            styles: "~res:/UI/Screens3/Common/DebugPopup.yaml"
+    children:
+    -   class: "UIControl"
+        name: "BottomLeftPane"
+        position: [0.000000, 667.000000]
+        size: [122.000000, 101.000000]
+        visible: true
+        enabled: false
+        input: false
+        classes: "pane-bg"
+        components:
+            Background: {}
+            Anchor:
+                leftAnchorEnabled: true
+                bottomAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                horizontalValue: 15.000000
+                verticalPolicy: "PercentOfParent"
+                verticalValue: 15.000000
+            StyleSheet:
+                styles: "~res:/UI/Styles/BackgroundStyles.yaml"
+    -   class: "UIControl"
+        name: "TopLeftPane"
+        position: [30.000000, 42.000000]
+        size: [122.000000, 101.000000]
+        visible: true
+        enabled: false
+        input: false
+        classes: "pane-bg"
+        components:
+            Background: {}
+            Anchor:
+                leftAnchorEnabled: true
+                topAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                horizontalValue: 15.000000
+                verticalPolicy: "PercentOfParent"
+                verticalValue: 15.000000
+            StyleSheet:
+                styles: "~res:/UI/Styles/BackgroundStyles.yaml"
+    -   class: "UIControl"
+        name: "TopRightPane"
+        position: [902.000000, 0.000000]
+        size: [122.000000, 101.000000]
+        visible: true
+        enabled: false
+        input: false
+        classes: "pane-bg"
+        components:
+            Background: {}
+            Anchor:
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                horizontalValue: 15.000000
+                verticalPolicy: "PercentOfParent"
+                verticalValue: 15.000000
+            StyleSheet:
+                styles: "~res:/UI/Styles/BackgroundStyles.yaml"

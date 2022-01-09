@@ -1,0 +1,37 @@
+Header:
+    version: "106"
+Controls:
+-   class: "UIControl"
+    name: "Content"
+    size: [320.000000, 8.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["StoryStepModel", "data", "null", "{ }"]
+            - ["ResourceDetailed", "priceItem", "null", "{ \"type\" = ResourceType.stuff; \"stuff\" = { \"name\" = \"prx_spr19\"; \"title\" = \"storage/Items/FreeXPBooster/Regular/Title\"; \"description\" = \"storage/Items/FreeXPBooster/Rare/Description\"; \"icon\" = \"~res:/Gfx/Shared/boosters/booster_free-xp\"; \"iconUrl\" = \"\"; \"quantity\" = 100; \"lifetime\" = 604800L; \"grade\" = ArtefactGrade.rare; \"type\" = ArtefactType.booster; \"itemCompactDescr\" = 0; \"isEnough\" = false; }; }"]
+            - ["string", "color", "\"blue-curious-blue-bg\"", "\"blue-curious-blue-bg\""]
+        UIDataLocalsComponent:
+            locals:
+            - ["int", "net", "when data.net.price.Empty() or priceItem.type != ResourceType.stuff -> 0, data.net.price[priceItem.stuff.name].stuff.quantity"]
+            - ["int", "value", "when priceItem.stuff.quantity > net -> (priceItem.stuff.quantity - net), 0"]
+            - ["int", "maximum", "priceItem.stuff.quantity"]
+    children:
+    -   class: "UIControl"
+        name: "ProgressBarHolder"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/ProgressBar.yaml"
+                args:
+                    "minimum": "0"
+                    "maximum": "maximum"
+                    "value": "value"
+                    "progressColor": "color"
+                    "showGradient": "true"

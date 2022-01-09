@@ -1,0 +1,84 @@
+Header:
+    version: 135
+StyleSheets:
+-   selectors:
+    - ".1st_april.equipment_item.largeRepairkit ? #icon.small"
+    - ".1st_april.equipment_item.largeRepairkit #icon.small"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Normal/Event/largeRepairkit_apr.txt"
+-   selectors:
+    - ".equipment_item.forsage ? #icon.small"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2020_Mad-games/normal/consumable_forsage_s"
+-   selectors:
+    - ".equipment_item.buff ? #icon.small"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2020_Mad-games/normal/consumable_buff_1_s"
+-   selectors:
+    - ".equipment_item.dash ? #icon.small"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2020_Mad-games/normal/consumable_dash_s"
+-   selectors:
+    - ".equipment_item.hunters ? #icon.small"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2020_Mad-games/normal/consumable_hunters_s"
+-   selectors:
+    - ".equipment_item.moonwalk ? #icon.small"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2020_Mad-games/normal/consumable_moonwalk_s"
+-   selectors:
+    - ".equipment_item.ram ? #icon.small"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2020_Mad-games/normal/consumable_ram_s"
+-   selectors:
+    - ".equipment_item.shield ? #icon.small"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2020_Mad-games/normal/consumable_shield_s"
+-   selectors:
+    - ".equipment_item.stealth ? #icon.small"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2020_Mad-games/normal/consumable_stealth_s"
+-   selectors:
+    - ".equipment_item.vampire ? #icon.small"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2020_Mad-games/normal/consumable_vampire-heal_s"
+-   selectors:
+    - ".equipment_item.victim ? #icon.small"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2020_Mad-games/normal/consumable_victim_s"
+-   selectors:
+    - ".equipment_item.jump ? #icon.small"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2021_Lunar/normal/consumable_jump_s"
+-   selectors:
+    - ".equipment_item.gravity-burst ? #icon.small"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2021_BossMode/normal/consumable_scatter_s"
+-   selectors:
+    - ".equipment_item.healing-aura ? #icon.small"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2021_BossMode/normal/consumable_aura-of-healing_s"
+-   selectors:
+    - ".equipment_item.railgun-charger ? #icon.small"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2021_BossMode/normal/consumable_enhanced-shot_s"
+-   selectors:
+    - ".equipment_item.shield-giver-ability ? #icon.small"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2021_BossMode/normal/consumable_energy-shield_s"
+-   selectors:
+    - ".equipment_item.permanent-damage-shield ? #icon.small"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2021_BossMode/normal/consumable_damage-resistance_s"
+-   selectors:
+    - ".equipment_item.kamikaze-ability ? #icon.small"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2021_BossMode/normal/consumable_bang-boom_s"
+-   selectors:
+    - ".equipment_item.poisoned-shell ? #icon.small"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2021_BossMode/normal/consumable_poisoned-shells_s"
+-   selectors:
+    - ".equipment_item.gravity-shot ? #icon.small"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2021_BossMode/normal/consumable_gravity-shot_s"

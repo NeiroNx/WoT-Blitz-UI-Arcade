@@ -1,0 +1,28 @@
+Header:
+    version: 115
+Prototypes:
+-   class: "UIControl"
+    name: "Arrow"
+    size: [32.000000, 32.000000]
+    input: false
+    classes: "old-green-1-bg"
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens3/Common/PointingArrow/PointingArrow.animation"
+        Background:
+            drawType: "DRAW_ALIGNED"
+            sprite: "~res:/Gfx/Shared/icons/icon_chevron_xl"
+        UIOpacityComponent: {}
+        SizePolicy:
+            horizontalPolicy: "PercentOfContent"
+            verticalPolicy: "PercentOfContent"
+        UIDataParamsComponent:
+            params:
+            - ["float", "animationTime", "1.000000", "1.000000"]
+            - ["float", "delay", "0.000000", "0.000000"]
+            - ["float", "startOpacity", "0.000000", "0.000000"]
+            - ["float", "finishOpacity", "0.500000", "0.500000"]
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Color.style.yaml"
+    bindings:
+    - ["visible", "delay != -1.000000"]

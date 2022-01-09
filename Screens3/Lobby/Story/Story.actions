@@ -1,0 +1,20 @@
+action BACK_SHORTCUT
+{
+    PlaySound(sound="GUI/buttons/close");
+    Event("BACK_EVENT");
+}
+
+action SCREEN_SIZE_CHANGED(vector2 size)
+{
+    ChangeData(screenSize, size);
+}
+
+action PARALLAX_SHIFT(float shift)
+{
+    ChangeData(parallaxShift, shift);
+}
+
+action ShowFinalScreen()
+{
+    ChangeData(showFinalScreen, true);
+}

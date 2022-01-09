@@ -1,0 +1,18 @@
+animation ShowPopover
+{
+	if(isPreview)
+	{
+		parallel
+		{
+			ChangeProperty("**/PreviewPopover/Content", "UIOpacityComponent", "opacity", 0, 0);
+			ChangeProperty("**/PreviewPopover/Content", "Anchor", "vCenterAnchor", 80, 0);
+		}
+
+		Wait(0.5);
+		parallel
+		{
+			ChangeProperty("**/PreviewPopover/Content", "UIOpacityComponent", "opacity", 1, 0.3, SINE_OUT);
+			ChangeProperty("**/PreviewPopover/Content", "Anchor", "vCenterAnchor", 0, 0.3, SINE_OUT);
+		}
+	}
+}

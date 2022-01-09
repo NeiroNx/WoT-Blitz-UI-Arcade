@@ -1,0 +1,368 @@
+Header:
+    version: "21"
+ImportedPackages:
+- "~res:/UI/Screens/Common/LoadingControl.yaml"
+- "~res:/UI/Screens/Fonts.yaml"
+- "~res:/UI/Screens/Common/SmartTextField.yaml"
+- "~res:/UI/Screens/Lobby/Common/CheckBox.yaml"
+- "~res:/UI/Screens/Common/StyledButton.yaml"
+- "~res:/UI/Styles/ButtonSoundStyles.yaml"
+- "~res:/UI/Styles/BackgroundStyles.yaml"
+StyleSheets:
+-   selector: ".show-tweaks ? #TweaksContainer"
+    properties:
+        visible: true
+-   selector: ".hide-tweaks ? #TweaksContainer"
+    properties:
+        visible: false
+-   selector: ".show-tweaks ? #InfoContainer"
+    properties:
+        visible: false
+-   selector: ".hide-tweaks ? #InfoContainer"
+    properties:
+        visible: true
+-   selector: ".show-tweaks ? #LoadingControl"
+    properties:
+        visible: false
+-   selector: ".hide-tweaks ? #LoadingControl"
+    properties:
+        visible: true
+-   selector: ".show-tweaks ? #ProgressContainer"
+    properties:
+        visible: false
+-   selector: ".hide-tweaks ? #InfoContainer"
+    properties:
+        visible: true
+-   selector: ".show-custom-checkout-tf ? ? #CustomCheckoutDirContainer"
+    properties:
+        visible: true
+-   selector: ".hide-custom-checkout-tf ? ? #CustomCheckoutDirContainer"
+    properties:
+        visible: false
+-   selector: ".hide-all ? #InfoContainer"
+    properties:
+        visible: false
+-   selector: ".hide-all ? #UrlContainer"
+    properties:
+        visible: false
+-   selector: ".hide-all ? #TweaksContainer"
+    properties:
+        visible: false
+-   selector: ".hide-all ? #ProgressContainer"
+    properties:
+        visible: false
+Prototypes:
+-   class: "UIControl"
+    name: "InfoStringPrototype"
+    size: [10.000000, 0.000000]
+    components:
+        LinearLayout:
+            dynamicPadding: true
+            spacing: 10.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "PercentOfMaxChild"
+    children:
+    -   class: "UIStaticText"
+        name: "Label"
+        size: [0.000000, 0.000000]
+        classes: "header3"
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            Anchor:
+                vCenterAnchorEnabled: true
+            UITextComponent:
+                colorInheritType: "COLOR_IGNORE_PARENT"
+    -   class: "UIStaticText"
+        name: "Value"
+        size: [0.000000, 0.000000]
+        classes: "text1 text-color-blue"
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            Anchor:
+                vCenterAnchorEnabled: true
+            UITextComponent:
+                colorInheritType: "COLOR_IGNORE_PARENT"
+Controls:
+-   class: "UIControl"
+    name: "SVNScreen"
+    position: [0.000000, 0.000000]
+    size: [1024.000000, 626.000000]
+    noInput: true
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        position: [0.000000, 0.000000]
+        size: [1024.000000, 533.000000]
+        noInput: true
+        classes: "screen-background"
+        components:
+            LinearLayout:
+                orientation: "TopDown"
+                padding: 20.000000
+                spacing: 20.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            Anchor:
+                hCenterAnchorEnabled: true
+            Background: {}
+        children:
+        -   class: "UIStaticText"
+            name: "ScreenTitle"
+            classes: "header0"
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                UITextComponent:
+                    text: "<Title>"
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+        -   prototype: "LoadingControl/LoadingControl"
+            name: "LoadingControl"
+            size: [1024.000000, 19.000000]
+            children:
+            -   path: "FadeBackground"
+                visible: false
+        -   class: "UIControl"
+            name: "UrlContainer"
+            size: [1024.000000, 26.000000]
+            noInput: true
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfChildrenSum"
+            children:
+            -   prototype: "InfoStringPrototype"
+                name: "UrlInfoContainer"
+                components:
+                    Anchor:
+                        leftAnchorEnabled: true
+                        leftAnchor: 20.000000
+                children:
+                -   path: "Label"
+                    components:
+                        UITextComponent:
+                            text: "Url:"
+                -   path: "Value"
+                    components:
+                        UITextComponent:
+                            text: "<url>"
+        -   class: "UIControl"
+            name: "InfoContainer"
+            position: [0.000000, 163.000000]
+            size: [1024.000000, 52.000000]
+            noInput: true
+            components:
+                LinearLayout:
+                    orientation: "TopDown"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfChildrenSum"
+            children:
+            -   prototype: "InfoStringPrototype"
+                name: "RevisionInfoContainer"
+                components:
+                    Anchor:
+                        leftAnchorEnabled: true
+                        leftAnchor: 20.000000
+                children:
+                -   path: "Label"
+                    components:
+                        UITextComponent:
+                            text: "Revision:"
+                -   path: "Value"
+                    components:
+                        UITextComponent:
+                            text: "<revision>"
+            -   prototype: "InfoStringPrototype"
+                name: "OperationInfoContainer"
+                components:
+                    Anchor:
+                        leftAnchorEnabled: true
+                        leftAnchor: 20.000000
+                children:
+                -   path: "Label"
+                    components:
+                        UITextComponent:
+                            text: "Operation:"
+                -   path: "Value"
+                    components:
+                        UITextComponent:
+                            text: "<operation>"
+        -   class: "UIControl"
+            name: "TweaksContainer"
+            position: [0.000000, 235.000000]
+            size: [1024.000000, 232.000000]
+            noInput: true
+            components:
+                LinearLayout:
+                    orientation: "TopDown"
+                    spacing: 20.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfChildrenSum"
+            children:
+            -   class: "UIControl"
+                name: "CustomRevContainer"
+                size: [633.000000, 64.000000]
+                noInput: true
+                components:
+                    LinearLayout:
+                        padding: 20.000000
+                        spacing: 10.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        verticalPolicy: "PercentOfMaxChild"
+                children:
+                -   class: "UIStaticText"
+                    name: "CustomRevLabel"
+                    position: [20.000000, 10.000000]
+                    size: [149.000000, 32.000000]
+                    classes: "header3 text-color-white"
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                        UITextComponent:
+                            text: "<Custom revision>"
+                            colorInheritType: "COLOR_IGNORE_PARENT"
+                            align: ["LEFT", "VCENTER"]
+                -   prototype: "SmartTextField/SmartTextField"
+                    name: "CustomRevTextField"
+                    size: [200.000000, 62.000000]
+                    children:
+                    -   path: "VerticalBox/Background/TextField"
+                        keyboardType: "KEYBOARD_TYPE_NUMBER_PAD"
+                        children: []
+                -   prototype: "StyledButton/StyledButton"
+                    name: "UseHeadButton"
+                    position: [389.000000, 0.000000]
+                    size: [97.000000, 64.000000]
+                    classes: "button button-color-gray button-ok-sound"
+                    children:
+                    -   path: "Caption"
+                        position: [0.000000, 0.000000]
+                        size: [97.000000, 64.000000]
+                        components:
+                            UITextComponent:
+                                text: "Use HEAD"
+                -   prototype: "StyledButton/StyledButton"
+                    name: "UseManifestButton"
+                    position: [496.000000, 0.000000]
+                    size: [117.000000, 64.000000]
+                    classes: "button button-color-gray button-ok-sound"
+                    children:
+                    -   path: "Caption"
+                        position: [0.000000, 0.000000]
+                        size: [117.000000, 64.000000]
+                        components:
+                            UITextComponent:
+                                text: "Use manifest"
+            -   class: "UIControl"
+                name: "CustomCheckoutDirContainer"
+                size: [32.000000, 32.000000]
+                noInput: true
+                components:
+                    LinearLayout:
+                        padding: 20.000000
+                        spacing: 10.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        verticalPolicy: "PercentOfMaxChild"
+                children:
+                -   class: "UIControl"
+                    name: "Label"
+                    position: [20.000000, 0.000000]
+                    noInput: true
+                    classes: "header3 color=text-color-white"
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfContent"
+                        UITextComponent:
+                            text: "Custom dir name (only this session)"
+                            colorInheritType: "COLOR_IGNORE_PARENT"
+                            align: ["LEFT", "VCENTER"]
+                -   prototype: "SmartTextField/SmartTextField"
+                    name: "CustomCheckoutDirNameTextField"
+            -   class: "UIControl"
+                name: "ClearDocsContainer"
+                size: [249.000000, 64.000000]
+                noInput: true
+                components:
+                    LinearLayout:
+                        padding: 20.000000
+                        spacing: 10.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        verticalPolicy: "PercentOfMaxChild"
+                children:
+                -   class: "UIStaticText"
+                    name: "ClearDocsLabel"
+                    position: [20.000000, 0.000000]
+                    size: [135.000000, 64.000000]
+                    classes: "header3 text-color-white"
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                        UITextComponent:
+                            text: "Clear documents"
+                            colorInheritType: "COLOR_IGNORE_PARENT"
+                            align: ["LEFT", "VCENTER"]
+                -   prototype: "CheckBox/CheckBox"
+                    name: "ClearDocsCheckBox"
+            -   prototype: "StyledButton/StyledButton"
+                name: "ProceedButton"
+                position: [401.000000, 168.000000]
+                classes: "button button-color-gray button-ok-sound"
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                children:
+                -   path: "Caption"
+                    components:
+                        UITextComponent:
+                            text: "Proceed"
+        -   class: "UIControl"
+            name: "ProgressContainer"
+            position: [0.000000, 487.000000]
+            size: [1024.000000, 26.000000]
+            noInput: true
+            components:
+                LinearLayout:
+                    orientation: "TopDown"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfChildrenSum"
+            children:
+            -   prototype: "InfoStringPrototype"
+                name: "LastActionContainer"
+                components:
+                    LinearLayout:
+                        padding: 20.000000
+                    Anchor:
+                        leftAnchorEnabled: true
+                children:
+                -   path: "Label"
+                    components:
+                        Anchor:
+                            topAnchorEnabled: true
+                            vCenterAnchorEnabled: false
+                        UITextComponent:
+                            text: "Last action:"
+                            align: ["TOP"]
+                -   path: "Value"
+                    components:
+                        UITextComponent:
+                            text: "<last_action>"

@@ -1,0 +1,60 @@
+Header:
+    version: 138
+Prototypes:
+-   class: "UIControl"
+    name: "Parallax"
+    size: [960.000000, 640.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UILayoutEventComponent:
+            sizeChangedEvent: "SCREEN_SIZE_CHANGED"
+            sizeChangedEventData: "_size"
+        UIDataParamsComponent:
+            params:
+            - ["float", "shift", "0.000000", "0.000000"]
+            - ["control", "content", "null", "null"]
+        UIDataLocalVarsComponent:
+            data:
+            - ["vector2", "screenSize", "vec2(0.000000, 0.000000)"]
+            - ["vector2", "contentSize", "vec2(0.000000, 0.000000)"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["float", "scaleFactor", "when not floatEqual(contentSize.X, 0.000000) and not floatEqual(contentSize.Y, 0.000000) -> max(screenSize.X / contentSize.X, screenSize.Y / contentSize.Y), 1.000000"]
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/Common/Parallax.actions"
+    children:
+    -   class: "UIControl"
+        name: "ContentWrapper"
+        input: false
+        components:
+            ClipContent: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "ContentHolder"
+            pivot: [0.000000, 0.500000]
+            input: false
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfFirstChild"
+                    verticalPolicy: "PercentOfFirstChild"
+                ScalePolicy:
+                    horizontalFormula: "max(parentSize.X / size.X,parentSize.Y / size.Y)"
+                    verticalFormula: "max(parentSize.X / size.X,parentSize.Y / size.Y)"
+                UILayoutEventComponent:
+                    sizeChangedEvent: "CONTENT_SIZE_CHANGED"
+                    sizeChangedEventData: "_size"
+                UIChildComponent0:
+                    childType: "kControl"
+                    condition: "not isNull(content)"
+                    control: "content"
+            bindings:
+            - ["Anchor.leftAnchor", "shift * (screenSize.X - scaleFactor * contentSize.X)"]

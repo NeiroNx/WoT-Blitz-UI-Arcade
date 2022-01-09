@@ -1,0 +1,112 @@
+Header:
+    version: 133
+ImportedPackages:
+- "~res:/UI/Screens3/Common/LoadingOverlay.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "NewbieHangarLoading"
+    size: [1024.000000, 768.000000]
+    input: false
+    components:
+        ClipContent: {}
+        Anchor:
+            leftAnchorEnabled: true
+            rightAnchorEnabled: true
+            topAnchorEnabled: true
+            bottomAnchorEnabled: true
+        UIDataParamsComponent:
+            params:
+            - ["bool", "isNewcommersLogin", "false", "false"]
+            - ["bool", "showDownloadInfo", "false", "true"]
+            - ["bool", "showButton", "false", "false"]
+            - ["DownloadModel", "downloadModel", "null", "{ }"]
+    children:
+    -   class: "UIControl"
+        name: "KeyArt"
+        visible: true
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                condition: "isNewcommersLogin"
+                prototypePath: "~res:/UI/Screens3/Common/KeyArtNewcommersNA.yaml"
+            UIChildComponent1:
+                condition: "not isNewcommersLogin"
+                prototypePath: "~res:/UI/Screens3/Common/KeyArt.yaml"
+    -   class: "UIControl"
+        name: "LoadingContainer"
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+        bindings:
+        - ["visible", "not showButton and not showDownloadInfo"]
+        children:
+        -   prototype: "LoadingOverlay/LoadingOverlay"
+            name: "LoadingOverlay"
+            visible: true
+            components:
+                UIDataParamsComponent:
+                    args:
+                        "description": "\"hangar loading sync data\""
+                        "bgStyle": "\"\""
+            children:
+            -   path: "Description"
+                classes: ""
+                components:
+                    UITextComponent:
+                        fontName: "WarHeliosCondC_17"
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+    -   class: "UIControl"
+        name: "DownloadWrapper"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                bottomAnchorEnabled: true
+                bottomAnchor: 32.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+        children:
+        -   class: "UIControl"
+            name: "Download"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens3/Lobby/Common/DownloadProgress.yaml"
+                    args:
+                        "model": "downloadModel"
+            bindings:
+            - ["visible", "showDownloadInfo"]
+        -   class: "UIControl"
+            name: "Button"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens3/Lobby/Common/Button.yaml"
+                    args:
+                        "caption": "\"newLoginFlow/Button/Play\""
+                    eventActions:
+                    - ["ON_CLICK_BUTTON", "ON_START_TUTORIAL", ""]
+                UIIdentifierComponent:
+                    id: "play_button"
+            bindings:
+            - ["visible", "showButton"]

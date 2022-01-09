@@ -1,0 +1,37 @@
+Header:
+    version: 128
+Prototypes:
+-   class: "UIControl"
+    name: "StartQuestTooltip"
+    size: [305.000000, 88.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            events:
+            - "FINISH_HIDE_POPUP_ANIMATION"
+    children:
+    -   class: "UIControl"
+        name: "TooltipHolder"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Common/Tooltip.yaml"
+                args:
+                    "offset": "0"
+                    "isAlignLeft": "true"
+                    "buttonVisible": "false"
+                    "rewardVisible": "false"
+                    "slaveAlign": "ePositionAlign.Bottom"
+                    "resource": "{ }"
+                    "title": "\"\""
+                    "text": "\"BTH2021_MIGHT/Tooltip/StartQuest\""
+                    "colorClass": "\"color=white-wild-sand-text\""
+                    "masterId": "\"START_QUEST_BUTTON\""
+                eventActions:
+                - ["FINISH_HIDE_POPUP_ANIMATION", "FINISH_HIDE_POPUP_ANIMATION", ""]

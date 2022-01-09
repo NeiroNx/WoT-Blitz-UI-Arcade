@@ -1,0 +1,31 @@
+action ImageLoaded
+{
+    Event("IMAGE_LOADED");
+    Event("LoadContent");
+    Opacity("./Content/Image", opacity=1.0, time=0.5, interpolation=EASE_IN);
+    DirectEvent("ShowBlur", "./Content/Content/SmallContent");
+}
+
+action LoadContent
+{
+    if (not show)
+    {
+        Event("ShowContent");
+    }
+}
+
+action Timeout
+{
+    if (not show)
+    {
+        Wait(2 * loadDelay);
+        Event("LoadContent");
+    }
+}
+
+action ShowContent
+{
+    Wait(loadDelay);
+    ChangeData(show, true);
+    Opacity("./Content/Content", 1.0, fadeInTime, EASE_IN);
+}

@@ -1,0 +1,27 @@
+action ShowNewTimer
+{
+    Move("./TimerAnchor/Timer", y=timerAnimationOffset);
+    Opacity("./TimerAnchor/Timer", opacity=0.0);
+    parallel
+    {
+        Move("./TimerAnchor/Timer", y=0, time=timerAnimationTime, interpolation=LINEAR);
+        Opacity("./TimerAnchor/Timer", opacity=1.0, time=timerAnimationTime);
+    }
+}
+
+action GatherReward
+{
+    Event("BEGIN_GATHERING_ANIMATION");
+    Color (path="**/ImageWrapper/Status", color = hsba (123, 99, 75, 0));
+    Color (path="**/ImageWrapper/Image", color = rgba (255, 255, 255, 0));
+    sequence
+    {
+        parallel
+        {
+            Color (path="**/ImageWrapper/Status", color = hsba(123, 99, 75, 1), time = 0.5);
+            Move("./TimerAnchor/Timer", y=timerAnimationOffset, time=timerAnimationTime, interpolation=LINEAR);
+            Opacity("./TimerAnchor/Timer", opacity=0.0, time=timerAnimationTime);
+        }
+        Event("END_GATHERING_ANIMATION");
+    }
+}

@@ -1,0 +1,10 @@
+action START_ANIMATION()
+{
+    ChangeData(value, (when value + progress.bonus > progress.maximum -> progress.maximum, value + progress.bonus < progress.minimum -> progress.minimum, value + progress.bonus), animationTime);
+    Event("ANIMATION_FINISHED");
+}
+
+action RESET()
+{
+    ChangeData(value, progress.value);
+}

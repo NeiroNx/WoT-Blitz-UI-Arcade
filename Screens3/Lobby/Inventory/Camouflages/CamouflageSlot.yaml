@@ -1,0 +1,64 @@
+Header:
+    version: 133
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/InventorySlot.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "Slot"
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "SLOT_SELECTED_ANIMATION,~res:/UI/Screens3/Lobby/Inventory/Equipment/EquipmentSlots.animation"
+        LinearLayout:
+            orientation: "TopDown"
+            spacing: 8.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfChildrenSum"
+        UIDataParamsComponent:
+            params:
+            - ["eCamouflageKind", "selectedSlot", "eCamouflageKind.WINTER", "eCamouflageKind.SUMMER"]
+            - ["CamouflageSlotInfo", "slotInfo", "null", "{ \"slot\" = eCamouflageKind.WINTER; }"]
+            events:
+            - "ON_SLOT_CLICKED"
+        UIDataLocalBindingsComponent:
+            data:
+            - ["bool", "selected", "selectedSlot == slotInfo.slot"]
+            - ["string", "kindStr", "when slotInfo.slot == eCamouflageKind.WINTER -> \"#camouflages:Slots/Winter\", slotInfo.slot == eCamouflageKind.SUMMER -> \"#camouflages:Slots/Summer\", slotInfo.slot == eCamouflageKind.DESERT -> \"#camouflages:Slots/Desert\", slotInfo.slot == eCamouflageKind.CUSTOM_SET -> \"#customSets:Slots/customSet\", \"\""]
+    children:
+    -   class: "UIControl"
+        name: "Name"
+        input: false
+        classes: "t-caps bold white-wild-sand-50-text"
+        components:
+            UITextComponent:
+                colorInheritType: "COLOR_IGNORE_PARENT"
+                fitting: "FITTING_REDUCE"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml"
+        bindings:
+        - ["UITextComponent.text", "localize(kindStr)"]
+    -   prototype: "InventorySlot/Slot"
+        name: "CamouflageSlot"
+        position: [0.000000, 24.000000]
+        components:
+            UIDataParamsComponent:
+                args:
+                    "badges": "slotInfo.badges"
+                    "additionalStyles": "\"\""
+                    "slotId": "slotInfo.slot + 0"
+                    "disabled": "slotInfo.disabled"
+                    "texture": "when isNull(slotInfo.currentCamo) -> \"\", slotInfo.currentCamo.texturePath"
+                    "selected": "selected"
+                eventActions:
+                - ["ON_SLOT_CLICKED", "SLOT_SELECTED_ANIMATION", "_event"]
+            UIIdentifierComponent:
+                id: "camo_slot_item"
+                params:
+                - ["int", "slot_id", "slotId"]
+                - ["bool", "enabled", "not disabled"]
+                - ["bool", "selected", "selected"]
+                - ["bool", "installed", "texture"]

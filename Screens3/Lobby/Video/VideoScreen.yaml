@@ -1,0 +1,85 @@
+Header:
+    version: 140
+Prototypes:
+-   class: "UIControl"
+    name: "VideoScreen"
+    size: [1024.000000, 768.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UILayoutEventComponent:
+            sizeChangedEvent: "SIZE_CHANGE_EVENT"
+            sizeChangedEventData: "int(_size.X)"
+        ModalInput: {}
+        UIVirtualActionEventComponent0:
+            virtualKeyAction: "Escape"
+            keyDownEvent: "SKIP_VIDEO_EVENT"
+        UIShortcutEventComponent:
+            shortcuts: "ENTER_EVENT,Enter;SKIP_VIDEO_EVENT,Escape;SKIP_VIDEO_EVENT,Back"
+        UIDataParamsComponent:
+            params:
+            - ["VideoView", "videoView", "null", "{ }"]
+            events:
+            - "SKIP_VIDEO_EVENT"
+        UIDataLocalVarsComponent:
+            data:
+            - ["int", "screenWidth", "1024"]
+            - ["float", "videoMovingProgress", "0.000000"]
+        UIDataOnEventComponent0:
+            eventName: "SIZE_CHANGE_EVENT"
+            modelFieldExpression: "screenWidth"
+            dataExpression: "_event"
+    children:
+    -   class: "UIMovieView"
+        name: "Video"
+        components:
+            UIPostProcessSourceComponent0:
+                id: "VideoScreenId"
+            Anchor:
+                leftAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+                verticalValue: 101.000000
+            UIMovieEventComponent:
+                onStart: "VIDEO_START"
+                onStop: "VIDEO_STOP"
+        bindings:
+        - ["Anchor.leftAnchor", "-videoMovingProgress * screenWidth"]
+        children:
+        -   class: "UIControl"
+            name: "PostProcessVideo"
+            input: false
+            components:
+                Background:
+                    usePostProcessedSprite: true
+                UIPostProcessInputComponent:
+                    id: "VideoScreenId"
+                UIPostProcessTextureComponent0:
+                    materialPath: "~res:/Materials/2d.Textured.material"
+                    minFilter: "Linear"
+                    magFilter: "Linear"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            bindings:
+            - ["visible", "videoView.usePostProcess"]
+    -   class: "UIControl"
+        name: "DevCheatsLayout"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/PreLogin/DevCheatsLayout.yaml"
+                args:
+                    "MBEnabled": "false"
+                    "MTEnabled": "false"
+                    "RBEnabled": "false"
+        bindings:
+        - ["visible", "videoView.enableCheatLayout"]
+        - ["enabled", "videoView.enableCheatLayout"]

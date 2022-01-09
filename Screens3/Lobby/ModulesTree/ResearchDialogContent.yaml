@@ -1,0 +1,283 @@
+Header:
+    version: "111"
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/ModulesTree/ModuleNode.yaml"
+- "~res:/UI/Screens3/Lobby/ModulesTree/TankNode.yaml"
+- "~res:/UI/Screens3/Lobby/Common/Resource/Currency.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "ResearchDialogContent"
+    size: [500.000000, 628.000000]
+    input: false
+    components:
+        Anchor:
+            hCenterAnchorEnabled: true
+        LinearLayout:
+            orientation: "TopDown"
+            spacing: 24.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfChildrenSum"
+        UIDataParamsComponent:
+            params:
+            - ["bool", "hideDiscount", "false", "false"]
+            - ["eResearchDialogType", "dialogType", "eResearchDialogType.kBattleXp", "eResearchDialogType.kEliteXp"]
+            - ["ModuleNodeModel", "moduleNode", "{ \"isEmptyNode\" = true; }", "{ }"]
+            - ["VehicleNodeModel", "vehicleNode", "{ \"isEmptyNode\" = true; }", "{ }"]
+            - ["int", "battleXpNeeded", "0", "123"]
+            - ["int", "eliteXpNeeded", "0", "234"]
+            - ["int", "freeXpNeeded", "0", "345"]
+            - ["int", "goldNeeded", "0", "456"]
+        UIDataLocalsComponent:
+            locals:
+            - ["string", "text", "when dialogType == eResearchDialogType.kBattleXp -> \"#modules_tech_tree:ResearchDialog/kBattleXp\", when (dialogType == eResearchDialogType.kFreeXp or dialogType == eResearchDialogType.kEliteXp) -> \"#modules_tech_tree:ResearchDialog/kFreeOrEliteXp\", when dialogType == eResearchDialogType.kUpgradeModules -> \"#modules_tech_tree:ResearchDialog/kUpgradeModules\", when dialogType == eResearchDialogType.kNotEnoughXp -> \"#modules_tech_tree:ResearchDialog/kNotEnoughXp\", \"\""]
+            - ["ResourceModel", "battleXp", "{ \"type\" = ResourceType.xp; \"quantity\" = battleXpNeeded; }"]
+            - ["ResourceModel", "eliteXp", "{ \"type\" = ResourceType.elite_xp; \"quantity\" = eliteXpNeeded; }"]
+            - ["ResourceModel", "freeXp", "{ \"type\" = ResourceType.free_xp; \"quantity\" = freeXpNeeded; }"]
+            - ["ResourceModel", "gold", "{ \"type\" = ResourceType.gold; \"quantity\" = goldNeeded; }"]
+    children:
+    -   class: "UIControl"
+        name: "ResearchItemContainer"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "Formula"
+                verticalFormula: "maxChild"
+        bindings:
+        - ["visible", "dialogType != eResearchDialogType.kUpgradeModules"]
+        children:
+        -   class: "UIControl"
+            name: "Wrapper"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                LinearLayout:
+                    spacing: 20.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   class: "UIControl"
+                name: "Module"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfMaxChild"
+                        verticalPolicy: "PercentOfMaxChild"
+                    UIChildComponent0:
+                        childType: "kOldExpression"
+                        control: "when moduleNode.isEmptyNode -> \"\", \"~res:/UI/Screens3/Lobby/ModulesTree/ModuleNode.yaml\""
+                        args:
+                            "isSelected": "false"
+                            "module": "moduleNode"
+                            "clickable": "false"
+                bindings:
+                - ["visible", "moduleNode.isEmptyNode == false"]
+            -   class: "UIControl"
+                name: "TankNode"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfMaxChild"
+                        verticalPolicy: "PercentOfMaxChild"
+                    UIChildComponent0:
+                        childType: "kOldExpression"
+                        control: "when vehicleNode.isEmptyNode -> \"\", \"~res:/UI/Screens3/Lobby/ModulesTree/TankNode.yaml\""
+                        args:
+                            "hideDiscount": "hideDiscount"
+                            "isSelected": "false"
+                            "vehicle": "vehicleNode"
+                            "clickable": "false"
+                bindings:
+                - ["visible", "vehicleNode.isEmptyNode == false"]
+    -   class: "UIControl"
+        name: "Text"
+        position: [0.000000, 224.000000]
+        input: false
+        classes: "t-body regular white-wild-sand-70-text"
+        components:
+            UITextComponent:
+                multiline: "MULTILINE_ENABLED"
+                fitting: "FITTING_POINTS"
+            Anchor:
+                hCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml"
+        bindings:
+        - ["UITextComponent.text", "localize(text)"]
+    -   class: "UIControl"
+        name: "PriceContainer"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "Formula"
+                verticalFormula: "maxChild"
+        bindings:
+        - ["visible", "dialogType != eResearchDialogType.kNotEnoughXp"]
+        children:
+        -   class: "UIControl"
+            name: "WrapperNormal"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                LinearLayout: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfMaxChild"
+            bindings:
+            - ["visible", "dialogType != eResearchDialogType.kUpgradeModules"]
+            children:
+            -   prototype: "Currency/Currency"
+                name: "Xp"
+                components:
+                    UIDataParamsComponent:
+                        args:
+                            "currencySize": "eCurrencySize.BIG"
+                            "forButton": "false"
+                            "canAfford": "true"
+                            "isPlusTopPaneVisible": "false"
+                            "serverTime": "0L"
+                            "plusVisible": "false"
+                            "resource": "battleXp"
+                bindings:
+                - ["visible", "resource.quantity > 0"]
+            -   class: "UIControl"
+                name: "Plus1"
+                input: false
+                classes: "t-body regular white-wild-sand-70-text"
+                components:
+                    UITextComponent:
+                        text: "+"
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 20.000000
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 20.000000
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml"
+                bindings:
+                - ["visible", "freeXp.quantity > 0 and battleXp.quantity > 0"]
+            -   prototype: "Currency/Currency"
+                name: "FreeXp"
+                components:
+                    UIDataParamsComponent:
+                        args:
+                            "currencySize": "eCurrencySize.BIG"
+                            "forButton": "false"
+                            "canAfford": "true"
+                            "isPlusTopPaneVisible": "false"
+                            "serverTime": "0L"
+                            "plusVisible": "false"
+                            "resource": "freeXp"
+                bindings:
+                - ["visible", "resource.quantity > 0"]
+            -   class: "UIControl"
+                name: "Plus2"
+                input: false
+                classes: "t-body regular white-wild-sand-70-text"
+                components:
+                    UITextComponent:
+                        text: "+"
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 20.000000
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 20.000000
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml"
+                bindings:
+                - ["visible", "eliteXp.quantity > 0 and (freeXp.quantity > 0 or battleXp.quantity > 0)"]
+            -   prototype: "Currency/Currency"
+                name: "EliteXp"
+                components:
+                    UIDataParamsComponent:
+                        args:
+                            "currencySize": "eCurrencySize.BIG"
+                            "forButton": "false"
+                            "canAfford": "true"
+                            "isPlusTopPaneVisible": "false"
+                            "serverTime": "0L"
+                            "plusVisible": "false"
+                            "resource": "eliteXp"
+                bindings:
+                - ["visible", "resource.quantity > 0"]
+            -   class: "UIControl"
+                name: "Plus3"
+                input: false
+                classes: "t-body regular white-wild-sand-70-text"
+                components:
+                    UITextComponent:
+                        text: "+"
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 20.000000
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 20.000000
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml"
+                bindings:
+                - ["visible", "gold.quantity > 0 and (eliteXp.quantity > 0 or battleXp.quantity > 0 or freeXp.quantity > 0)"]
+            -   prototype: "Currency/Currency"
+                name: "Gold"
+                components:
+                    UIDataParamsComponent:
+                        args:
+                            "currencySize": "eCurrencySize.BIG"
+                            "forButton": "false"
+                            "canAfford": "true"
+                            "isPlusTopPaneVisible": "false"
+                            "serverTime": "0L"
+                            "plusVisible": "false"
+                            "resource": "gold"
+                bindings:
+                - ["visible", "resource.quantity > 0"]
+        -   class: "UIControl"
+            name: "WrapperUpgradeToTop"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                LinearLayout: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfMaxChild"
+            bindings:
+            - ["visible", "dialogType == eResearchDialogType.kUpgradeModules"]
+            children:
+            -   prototype: "Currency/Currency"
+                name: "Gold"
+                components:
+                    UIDataParamsComponent:
+                        args:
+                            "currencySize": "eCurrencySize.BIG"
+                            "forButton": "false"
+                            "canAfford": "true"
+                            "isPlusTopPaneVisible": "false"
+                            "serverTime": "0L"
+                            "plusVisible": "false"
+                            "resource": "gold"
+                bindings:
+                - ["visible", "resource.quantity > 0"]

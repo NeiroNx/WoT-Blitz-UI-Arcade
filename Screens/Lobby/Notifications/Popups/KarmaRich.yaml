@@ -1,0 +1,68 @@
+Header:
+    version: 121
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/Notifications/Popups/OldStyleRichText.yaml"
+- "~res:/UI/Screens/Lobby/Notifications/Popups/KarmaBase.yaml"
+- "~res:/UI/Screens3/Lobby/Common/NotificationButton.yaml"
+Prototypes:
+-   prototype: "KarmaBase/KarmaBase"
+    name: "KarmaRich"
+    classes: "karma type=warning"
+    components:
+        UIDataParamsComponent:
+            events:
+            - "SHOW_DETAILS"
+    children:
+    -   path: "Body"
+        children:
+        -   prototype: "KarmaBase/icon"
+            name: "icon"
+        -   prototype: "KarmaBase/Content"
+            name: "Content"
+            components:
+                Anchor:
+                    vCenterAnchorEnabled: true
+                LinearLayout:
+                    orientation: "TopDown"
+                    dynamicPadding: true
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "parent-155"
+                    verticalPolicy: "PercentOfChildrenSum"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens/Lobby/Notifications/Popups/Karma.style.yaml;~res:/UI/Screens/Lobby/Notifications/Popups/Notification.style.yaml"
+            children:
+            -   class: "UIStaticText"
+                name: "Title"
+                size: [33.000000, 24.000000]
+                classes: "t-caption bold white-wild-sand-text"
+                components:
+                    UITextComponent:
+                        text: "Title"
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                        align: ["LEFT", "VCENTER"]
+                        useRtlAlign: "USE_BY_SYSTEM"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfContent"
+            -   prototype: "OldStyleRichText/RichText"
+                name: "Description"
+                components:
+                    RichContent:
+                        text: "Default <t-caption_highlighted>bold </t-caption_highlighted> default "
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfChildrenSum"
+                    UIAnchorSafeAreaComponent:
+                        leftSafeInset: "INSET"
+                        rightSafeInset: "INSET"
+                    FlowLayout:
+                        useRtl: true
+        -   prototype: "NotificationButton/NotificationButton"
+            name: "ActionButton"
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+                IgnoreLayout: {}
+                UIInputEventComponent:
+                    onTouchUpInside: "SHOW_DETAILS"

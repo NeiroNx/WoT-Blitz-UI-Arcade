@@ -1,0 +1,25 @@
+Header:
+    version: "82"
+StyleSheets:
+-   selectors:
+    - ".left-node #ArrowsContainer"
+    properties:
+        anchor-leftAnchorEnabled: true
+        anchor-rightAnchorEnabled: false
+-   selectors:
+    - ".left-node #Content"
+    properties:
+        linearLayout-orientation: "LeftToRight"
+        anchor-leftAnchorEnabled: true
+        anchor-rightAnchorEnabled: false
+-   selectors:
+    - ".right-node #ArrowsContainer"
+    properties:
+        anchor-leftAnchorEnabled: false
+        anchor-rightAnchorEnabled: true
+-   selectors:
+    - ".right-node #Content"
+    properties:
+        linearLayout-orientation: "RightToLeft"
+        anchor-leftAnchorEnabled: false
+        anchor-rightAnchorEnabled: true

@@ -1,0 +1,4 @@
+animation TRAIN_EVENT
+{
+	Event("TRAIN", arg1=canAfford);
+}

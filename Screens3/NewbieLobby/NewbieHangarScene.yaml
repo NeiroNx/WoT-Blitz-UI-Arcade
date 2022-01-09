@@ -1,0 +1,19 @@
+Header:
+    version: 121
+Prototypes:
+-   class: "UI3DView"
+    customClass: "UIHangar3dView"
+    name: "HangarScene"
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params: []
+            events:
+            - "anim_tank_stoped"
+            - "tap_ger_ui"
+            - "tap_ussr_ui"
+            - "tap_usa_ui"
+            - "anim_stoped"
+            - "init_anim_stopped"

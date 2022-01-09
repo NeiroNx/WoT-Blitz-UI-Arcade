@@ -1,0 +1,44 @@
+Header:
+    version: "93"
+Prototypes:
+-   class: "UIControl"
+    name: "Content"
+    input: false
+    components:
+        Anchor:
+            hCenterAnchorEnabled: true
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfFirstChild"
+            verticalPolicy: "PercentOfFirstChild"
+        UIDataParamsComponent:
+            params:
+            - ["StoryStepView", "model", "null", "{ }"]
+            - ["StoryStepModel", "inProgressStep", "null", "{ }"]
+            - ["vector<int>", "milestones", "[ ]", "[ 1; ]"]
+            - ["bool", "showLabel", "false", "true"]
+            - ["bool", "showVehicleInfo", "true", "false"]
+            - ["string", "progressColor", "\"blue-curious-blue-bg\"", "\"blue-curious-blue-bg\""]
+            - ["bool", "showUnlockIcon", "false", "false"]
+            - ["bool", "showEffects", "true", "true"]
+            events:
+            - "SHOW_STEP_INFO(int id)"
+            - "SELECT_STEP(int id)"
+        UIDataLocalsComponent:
+            locals:
+            - ["string", "package", "when isNull(model.step) -> \"\", milestones.Contains(model.step.id) -> \"~res:/UI/Screens/Lobby/Story/Legacy/Steps/StepMilestone.yaml\", \"~res:/UI/Screens/Lobby/Story/Legacy/Steps/StepDefault.yaml\""]
+        UIChildComponent0:
+            childType: "kOldExpression"
+            control: "package"
+            args:
+                "model": "model"
+                "showLabel": "showLabel"
+                "showVehicleInfo": "showVehicleInfo"
+                "showProgress": "showProgress"
+                "progressColor": "progressColor"
+                "showEffects": "showEffects"
+                "inProgressStep": "inProgressStep"
+                "showUnlockIcon": "showUnlockIcon"
+            eventActions:
+            - ["SHOW_STEP_INFO", "SHOW_STEP_INFO", "_event.id"]
+            - ["SELECT_STEP", "SELECT_STEP", "_event.id"]

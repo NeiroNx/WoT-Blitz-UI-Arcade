@@ -1,0 +1,67 @@
+Header:
+    version: "83"
+ImportedPackages:
+- "~res:/UI/Screens/Common/StyledInfoButton.yaml"
+- "~res:/UI/Screens/Common/StyledButton.yaml"
+- "~res:/UI/Screens/Lobby/Common/Footer.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "StoryFooterNotSelected"
+    size: [960.000000, 0.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfFirstChild"
+        UIDataParamsComponent:
+            events:
+            - "FOOTER_COMPLETE_BUTTON_PRESSED"
+            - "FOOTER_INFO_BUTTON_PRESSED"
+    children:
+    -   prototype: "Footer/Footer"
+        name: "Content"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+            StyleSheet:
+                inheritsStylesFromParent: false
+        children:
+        -   prototype: "StyledInfoButton/StyledInfoButton"
+            name: "InfoButton"
+            classes: "button button-color-gray button-open-sound"
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: 20.000000
+                    vCenterAnchorEnabled: true
+                UIInputEventComponent:
+                    onTouchUpInside: "FOOTER_INFO_BUTTON_PRESSED"
+                StyleSheet:
+                    inheritsStylesFromParent: false
+                    styles: "~res:/UI/Styles/ButtonStyle.yaml;~res:/UI/Styles/ButtonSoundStyles.yaml"
+        -   prototype: "StyledButton/StyledButton"
+            name: "Button"
+            position: [690.000000, 12.000000]
+            enabled: false
+            classes: "button button-payment button-open-sound"
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+                    rightAnchor: 20.000000
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 250.000000
+                UIInputEventComponent:
+                    onTouchUpInside: "FOOTER_COMPLETE_BUTTON_PRESSED"
+                StyleSheet:
+                    inheritsStylesFromParent: false
+                    styles: "~res:/UI/Styles/ButtonStyle.yaml;~res:/UI/Styles/ButtonSoundStyles.yaml;~res:/UI/Screens/Common/StyledButton.yaml"
+            children:
+            -   path: "Caption"
+                components:
+                    UITextComponent:
+                        text: "#common:DialogButton/Complete"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens/Fonts.yaml;~res:/UI/Screens/FontsColors.yaml"

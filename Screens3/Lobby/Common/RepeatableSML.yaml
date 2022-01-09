@@ -1,0 +1,308 @@
+Header:
+    version: 127
+Prototypes:
+-   class: "UIControl"
+    name: "RepeatableSML"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfFirstChild"
+            verticalPolicy: "PercentOfFirstChild"
+        UIDataParamsComponent:
+            params:
+            - ["ResourceDetailed", "reward", "null", "null"]
+            - ["eStepSize", "stepSize", "eStepSize.L", "eStepSize.S"]
+            - ["map<eStepSize,vector2>", "stepSizes", "null", "{ eStepSize.XS = vec2(44.000000, 44.000000); eStepSize.S = vec2(112.000000, 112.000000); eStepSize.ML = vec2(160.000000, 160.000000); eStepSize.L = vec2(336.000000, 160.000000); }"]
+            - ["control", "fx", "null", "null"]
+            - ["control", "overlay", "null", "null"]
+            - ["bool", "isStepDone", "false", "true"]
+            - ["bool", "isSelected", "false", "false"]
+            - ["bool", "lockType", "false", "false"]
+        UIDataLocalVarsComponent:
+            data:
+            - ["vector2", "sizeVehicle", "vec2(160.000000, 128.000000)"]
+            - ["vector2", "sizeReward", "vec2(128.000000, 144.000000)"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["string", "completeIcon", "\"~res:/Gfx/Lobby/controls/progressbar/step-bg_s_ready\""]
+            - ["string", "disableIcon", "\"~res:/Gfx/Lobby/controls/progressbar/step-bg_s_disabled\""]
+            - ["string", "selectionIcon", "\"~res:/Gfx/Lobby/controls/progressbar/select_s\""]
+    children:
+    -   class: "UIControl"
+        name: "ContentHolder"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                childType: "kControl"
+                condition: "stepSize == eStepSize.S and isNull(reward)"
+                control: "RepeatableS"
+            UIChildComponent1:
+                childType: "kControl"
+                condition: "stepSize == eStepSize.L"
+                control: "RepeatableL"
+            UIChildComponent2:
+                childType: "kControl"
+                condition: "(stepSize == eStepSize.S or stepSize == eStepSize.M) and not isNull(reward) and reward.type != ResourceType.vehicle"
+                control: "RepeatableSM"
+            UIChildComponent3:
+                childType: "kControl"
+                condition: "stepSize == eStepSize.XS and isNull(reward)"
+                control: "RepeatableXS"
+    -   class: "UIControl"
+        name: "OverlayHolder"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                childType: "kControl"
+                condition: "not isNull(overlay)"
+                control: "overlay"
+Slots:
+-   class: "UIControl"
+    name: "RepeatableSM"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            verticalPolicy: "FixedSize"
+    bindings:
+    - ["SizePolicy.horizontalValue", "stepSizes[stepSize].X"]
+    - ["SizePolicy.verticalValue", "stepSizes[stepSize].Y"]
+    children:
+    -   class: "UIControl"
+        name: "RewardHolder"
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "parent - 16"
+                verticalPolicy: "Formula"
+                verticalFormula: "parent - 16"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/Detailed/Icon.yaml"
+                args:
+                    "resource": "reward"
+                    "fx": "fx"
+-   class: "UIControl"
+    name: "RepeatableS"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 80.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 80.000000
+    children:
+    -   class: "UIControl"
+        name: "Selection"
+        input: false
+        components:
+            Background: {}
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        bindings:
+        - ["visible", "isSelected"]
+        - ["Background.sprite", "selectionIcon"]
+    -   class: "UIControl"
+        name: "Ready"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Background: {}
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        bindings:
+        - ["visible", "isStepDone"]
+        - ["Background.sprite", "completeIcon"]
+    -   class: "UIControl"
+        name: "Disable"
+        input: false
+        components:
+            Background:
+                drawType: "DRAW_ALIGNED"
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        bindings:
+        - ["Background.sprite", "disableIcon"]
+    -   class: "UIControl"
+        name: "StepNumber"
+        position: [88.000000, 48.000000]
+        input: false
+        classes: "t-headline bold white-wild-sand-text"
+        components:
+            UITextComponent:
+                text: "1"
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/Font.style.yaml"
+        bindings:
+        - ["visible", "not isStepDone and not lockType"]
+    -   class: "UIControl"
+        name: "CompleteIcon"
+        input: false
+        components:
+            Background:
+                sprite: "~res:/Gfx/Lobby/icons/icon_tick_m"
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 32.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 32.000000
+        bindings:
+        - ["visible", "isStepDone"]
+    -   class: "UIControl"
+        name: "LockIcon"
+        input: false
+        components:
+            Background:
+                sprite: "~res:/Gfx/Lobby/icons/icon_lock"
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 32.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 32.000000
+        bindings:
+        - ["visible", "not isStepDone and lockType"]
+-   class: "UIControl"
+    name: "RepeatableXS"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            verticalPolicy: "FixedSize"
+    bindings:
+    - ["SizePolicy.horizontalValue", "stepSizes[eStepSize.XS].X"]
+    - ["SizePolicy.verticalValue", "stepSizes[eStepSize.XS].Y"]
+    children:
+    -   class: "UIControl"
+        name: "Ready"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Background:
+                drawType: "DRAW_SCALE_TO_RECT"
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 44.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 44.000000
+        bindings:
+        - ["visible", "isStepDone"]
+        - ["Background.sprite", "completeIcon"]
+    -   class: "UIControl"
+        name: "Disable"
+        input: false
+        components:
+            Background:
+                drawType: "DRAW_SCALE_TO_RECT"
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 44.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 44.000000
+        bindings:
+        - ["Background.sprite", "disableIcon"]
+    -   class: "UIControl"
+        name: "CompleteIcon"
+        input: false
+        classes: "black-70-bg"
+        components:
+            Background:
+                drawType: "DRAW_SCALE_TO_RECT"
+                sprite: "~res:/Gfx/Lobby/icons/icon_tick_s"
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 24.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 24.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+        bindings:
+        - ["visible", "isStepDone"]
+    -   class: "UIControl"
+        name: "LockIcon"
+        input: false
+        components:
+            Background:
+                drawType: "DRAW_SCALE_TO_RECT"
+                sprite: "~res:/Gfx/Lobby/icons/icon_lock"
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 16.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 16.000000
+        bindings:
+        - ["visible", "not isStepDone and lockType"]
+-   class: "UIControl"
+    name: "RepeatableL"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            verticalPolicy: "FixedSize"
+    bindings:
+    - ["SizePolicy.horizontalValue", "stepSizes[eStepSize.L].X"]
+    - ["SizePolicy.verticalValue", "stepSizes[eStepSize.L].Y"]
+    children:
+    -   class: "UIControl"
+        name: "RewardHolder"
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                bottomAnchorEnabled: true
+                bottomAnchor: 12.000000
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                verticalPolicy: "FixedSize"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/Detailed/Big.yaml"
+                args:
+                    "fx": "fx"
+                    "resource": "reward"
+        bindings:
+        - ["SizePolicy.horizontalValue", "when reward.type == ResourceType.vehicle -> sizeVehicle.X, sizeReward.X"]
+        - ["SizePolicy.verticalValue", "when reward.type == ResourceType.vehicle -> sizeVehicle.Y, sizeReward.Y"]

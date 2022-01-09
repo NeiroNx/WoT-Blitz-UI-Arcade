@@ -1,0 +1,54 @@
+Header:
+    version: "92"
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/Dialog/TextDialog.yaml"
+Controls:
+-   class: "UIControl"
+    name: "BuyWithExchangeDialog"
+    size: [640.000000, 480.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["ePurchaseType", "type", "ePurchaseType.BUY", "ePurchaseType.REPAIRS"]
+            - ["int", "goldToExchange", "0", "47"]
+            - ["bool", "goldIsEnough", "true", "true"]
+            - ["int", "notEnoughCredits", "0", "234"]
+            events:
+            - "OPTIONAL_CLICKED"
+            - "ON_BUY"
+        UIDataLocalsComponent:
+            locals:
+            - ["control", "creationControl", "control(\"~res:/UI/Screens3/Lobby/Common/Dialog/TextWithExchangeContent.yaml\", { goldIsEnough = goldIsEnough; notEnoughCredits = notEnoughCredits; goldToExchange = goldToExchange; text = \"notification/notEnoughResources/buyGoldAndCreateClan\"; }, [ ])"]
+            - ["control", "repairsControl", "control(\"~res:/UI/Screens3/Lobby/Common/Dialog/TextWithExchangeContent.yaml\", { goldIsEnough = goldIsEnough; notEnoughCredits = notEnoughCredits; goldToExchange = goldToExchange; text = \"notification/notEnoughResources/buyGoldAndRepair\"; }, [ ])"]
+            - ["control", "purchaseControl", "control(\"~res:/UI/Screens3/Lobby/Common/Dialog/TextWithExchangeContent.yaml\", { goldIsEnough = goldIsEnough; notEnoughCredits = notEnoughCredits; goldToExchange = goldToExchange; text = \"notification/notEnoughResources/buyGoldAndProceed\"; }, [ ])"]
+    children:
+    -   prototype: "TextDialog/TextDialog"
+        name: "ChooseTextDialog"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "accentButtonType": "eButtonType.POSITIVE"
+                    "type": "eDialogType.CHOOSE"
+                    "header": "\"\""
+                    "headerImage": "\"\""
+                    "accentButton": "\"#common:DialogButton/Approve\""
+                    "optionalButton": "\"#common:DialogButton/Cancel\""
+                    "contentControl": "when type == ePurchaseType.BUY -> purchaseControl, when type == ePurchaseType.CREATION -> creationControl, repairsControl"
+                eventActions:
+                - ["ACCENT_CLICKED", "ON_BUY", ""]
+                - ["OPTIONAL_CLICKED", "CANCEL", ""]
+            UIDataLocalsComponent:
+                locals:
+                - ["string", "accentButtonText", "localize(accentButton)"]
+                - ["string", "optionalButtonText", "localize(optionalButton)"]
+        children:
+        -   path: "DialogContent"
+            position: [480.000000, 320.000000]
+            children: []
+        -   path: "DialogContent/UIScrollView/scrollContainerControl/Content"
+            position: [24.000000, 48.000000]
+            size: [400.000000, 50.000000]

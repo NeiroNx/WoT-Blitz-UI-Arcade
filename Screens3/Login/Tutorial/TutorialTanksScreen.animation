@@ -1,0 +1,20 @@
+animation TutorialTanksScreen
+{
+    PlaySound("play_tut_2021_hang_nation_ambience");
+    Wait(0.5);
+    ChangeData(showUsa, true);
+    Wait(0.02);
+    ChangeData(showEuropean, true);
+    Wait(0.02);
+    ChangeData(showGermany, true);
+    Wait(0.02);
+    ChangeData(showUssr, true);
+    Wait(0.02);
+    ChangeData(showUk, true);
+    Wait(0.02);
+    ChangeData(showJapan, true);
+    Wait(0.02);
+    ChangeData(showChina, true);
+    Wait(0.02);
+    ChangeData(showFrance, true);
+}

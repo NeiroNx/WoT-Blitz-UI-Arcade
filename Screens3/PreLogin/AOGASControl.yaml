@@ -1,0 +1,53 @@
+Header:
+    version: 133
+Prototypes:
+-   class: "UIControl"
+    name: "AOGASControl"
+    input: false
+    components:
+        Anchor:
+            hCenterAnchorEnabled: true
+            vCenterAnchorEnabled: false
+        LinearLayout:
+            orientation: "TopDown"
+            spacing: 8.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "Formula"
+            verticalFormula: "childrenSum"
+        UIDataParamsComponent:
+            params:
+            - ["string", "description", "\"\"", "\"Description\""]
+            - ["string", "header", "\"\"", "\"Header\""]
+    children:
+    -   class: "UIControl"
+        name: "Header"
+        input: false
+        classes: "t-headline bold white-wild-sand-text"
+        components:
+            UITextComponent: {}
+            Anchor:
+                hCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+        bindings:
+        - ["UITextComponent.text", "header"]
+    -   class: "UIControl"
+        name: "Description"
+        input: false
+        classes: "t-body regular white-wild-sand-text"
+        components:
+            UITextComponent:
+                multiline: "MULTILINE_ENABLED"
+            Anchor:
+                hCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+        bindings:
+        - ["UITextComponent.text", "description"]

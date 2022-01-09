@@ -1,0 +1,226 @@
+Header:
+    version: 134
+Prototypes:
+-   class: "UIControl"
+    name: "SidebarScrollableMenu"
+    size: [88.000000, 400.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["eCurrentScreen", "currentScreen", "eCurrentScreen.kUnknown", "eCurrentScreen.kHangar"]
+            - ["eNation", "selectedNation", "eNation.USA", "eNation.USSR"]
+            - ["vector<eNation>", "nations", "[ ]", "[ eNation.USA; eNation.GERMANY; eNation.USSR; ]"]
+            - ["AccountDataModel", "account", "null", "{ }"]
+            - ["AppDataModel", "app", "null", "{ }"]
+            - ["SessionDataModel", "session", "null", "{ }"]
+            - ["bool", "squadSubMenuShow", "false", "false"]
+            - ["LobbyDataModel", "lobby", "null", "{ }"]
+            - ["int", "layer", "0", "0"]
+            - ["bool", "communitySubMenuShow", "false", "false"]
+        UIDataLocalVarsComponent:
+            data:
+            - ["float", "scrollOffsetY", "0.000000"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["bool", "hangarScreen", "currentScreen == eCurrentScreen.kHangar"]
+            - ["bool", "techTreeScreen", "currentScreen == eCurrentScreen.kTechTree"]
+            - ["bool", "layerUpForTechTree", "techTreeScreen and account.tutorialData.isTutorialActive and (account.tutorialData.currentHighlightControl == eTutorialHighlights.kTankFirstLevel or account.tutorialData.currentHighlightControl == eTutorialHighlights.kNation)"]
+            - ["bool", "layerUpForHangar", "hangarScreen and account.tutorialData.isTutorialActive"]
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/Lobby/Common/Sidebar/SideBarBottomFade.actions"
+        UILayerComponent: {}
+    bindings:
+    - ["UILayerComponent.layer", "when layerUpForTechTree or layerUpForHangar -> 1, 0"]
+    children:
+    -   class: "UIControl"
+        name: "Widgets"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                childType: "kControl"
+                condition: "currentScreen == eCurrentScreen.kHangar"
+                control: "HangarMenuWidgets"
+    -   class: "UIScrollView"
+        name: "Menu"
+        autoUpdate: true
+        components:
+            ClipContent:
+                right: false
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        bindings:
+        - ["centerContent", "currentScreen == eCurrentScreen.kTechTree"]
+        children:
+        -   class: "UIScrollViewContainer"
+            name: "scrollContainerControl"
+            scrollDirection: "kVertical"
+            components:
+                Anchor: {}
+                LinearLayout:
+                    orientation: "TopDown"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfChildrenSum"
+                UILayoutEventComponent:
+                    positionChangedEvent: "UpdateFadeVisibility"
+                    positionChangedEventData: "min(max(_size.Y - _parentSize.Y + _position.Y, 0.000000) / 72.000000, 1.000000), _position.Y"
+                    sizeChangedEvent: "UpdateFadeVisibility"
+                    sizeChangedEventData: "min(max(_size.Y - _parentSize.Y + _position.Y, 0.000000) / 72.000000, 1.000000), _position.Y"
+            children:
+            -   class: "UIControl"
+                name: "Content"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfFirstChild"
+                    UIAttachLayoutMasterComponent:
+                        attachId: "NATION"
+                    UIChildComponent0:
+                        childType: "kControl"
+                        condition: "currentScreen == eCurrentScreen.kTechTree"
+                        control: "TechTreeMenu"
+                    UIChildComponent1:
+                        childType: "kControl"
+                        condition: "currentScreen == eCurrentScreen.kHangar"
+                        control: "HangarMenu"
+                    UIShadowHoleComponent: {}
+                bindings:
+                - ["UIShadowHoleComponent.isEnabled", "layerUpForTechTree"]
+            -   class: "UIControl"
+                name: "BottomControl"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfContent"
+    -   class: "UIControl"
+        name: "BottomFade"
+        visible: true
+        input: true
+        classes: "black-bg"
+        components:
+            UIOpacityComponent: {}
+            Anchor:
+                rightAnchorEnabled: true
+                bottomAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "FixedSize"
+                verticalValue: 32.000000
+            UIInputEventComponent:
+                onTouchUpInside: "SCROLL_TO_BOTTOM"
+        children:
+        -   class: "UIControl"
+            name: "Bg"
+            size: [32.000000, 32.000000]
+            input: false
+            classes: "grey-shark-bg"
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_TO_RECT"
+                    sprite: "~res:/Gfx/Lobby/backgrounds/bg_gradient_vertical_0-100"
+                Anchor:
+                    bottomAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 72.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "Icon"
+            size: [32.000000, 32.000000]
+            input: false
+            classes: "white-wild-sand-50-bg"
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_PROPORTIONAL"
+                    sprite: "~res:/Gfx/Lobby/icons/icon_chevron_l"
+                    spriteModification: ["FLIP_VERTICAL"]
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                    bottomAnchor: 4.000000
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 24.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 24.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+Slots:
+-   class: "UIControl"
+    name: "HangarMenu"
+    size: [88.000000, 216.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfChildrenSum"
+        UIChildComponent0:
+            prototypePath: "~res:/UI/Screens3/Lobby/Common/Sidebar/SidebarHangarMenu.yaml"
+            args:
+                "communitySubMenuShow": "communitySubMenuShow"
+                "lobby": "lobby"
+                "squadSubMenuShow": "squadSubMenuShow"
+                "session": "session"
+                "app": "app"
+                "account": "account"
+-   class: "UIControl"
+    name: "TechTreeMenu"
+    size: [88.000000, 216.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfChildrenSum"
+        UIChildComponent0:
+            prototypePath: "~res:/UI/Screens3/Lobby/Common/Sidebar/SidebarTanksTreeMenu.yaml"
+            args:
+                "session": "session"
+                "account": "account"
+                "selectedNation": "selectedNation"
+                "nations": "nations"
+            eventActions:
+            - ["ON_PRESSED_TAB", "ON_NATION", "_event"]
+-   class: "UIControl"
+    name: "HangarMenuWidgets"
+    size: [88.000000, 394.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+    children:
+    -   class: "UIControl"
+        name: "TaskJournalWidget"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Anchor:
+                topAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfMaxChild"
+            UIChildComponent0:
+                condition: "account.tutorialSyncData.isQuestsAvailable and lobby.taskJournalWidgetModel.taskJournalLevel <= 1 or true"
+                prototypePath: "~res:/UI/Screens3/Lobby/TaskJournal/TaskJournalWidget.yaml"
+                args:
+                    "model": "lobby.taskJournalWidgetModel"
+                eventActions:
+                - ["TASK_JOURNAL_PRESSED", "TASK_JOURNAL_PRESSED", "eTaskJournalTab.Personal, _event.slotIndex"]
+        bindings:
+        - ["visible", "account.tutorialSyncData.isQuestsAvailable"]
+        - ["Anchor.topAnchor", "scrollOffsetY + 144"]

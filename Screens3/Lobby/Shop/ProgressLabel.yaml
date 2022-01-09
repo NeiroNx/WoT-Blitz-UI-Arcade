@@ -1,0 +1,93 @@
+Header:
+    version: 127
+Prototypes:
+-   class: "UIControl"
+    name: "ProgressLabel"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "FixedSize"
+            verticalValue: 32.000000
+        UIDataParamsComponent:
+            params:
+            - ["int", "current", "0", "3"]
+            - ["int", "total", "0", "4"]
+    children:
+    -   class: "UIControl"
+        name: "Background"
+        input: false
+        classes: "white-wild-sand-15-bg"
+        components:
+            Background: {}
+            IgnoreLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+    -   class: "UIControl"
+        name: "Progress"
+        input: false
+        classes: "blue-elm-bg"
+        components:
+            Background: {}
+            IgnoreLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+        bindings:
+        - ["SizePolicy.horizontalValue", "when total > 0 -> int((float(current) / float(total)) * 100), 0"]
+    -   class: "UIControl"
+        name: "TextHolder"
+        input: false
+        components:
+            Anchor:
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                padding: "8"
+                spacing: 6.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   class: "UIControl"
+            name: "CurrentValue"
+            input: false
+            classes: "t-subtitle bold white-wild-sand-text"
+            components:
+                UITextComponent: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml"
+            bindings:
+            - ["UITextComponent.text", "current"]
+        -   class: "UIControl"
+            name: "Slash"
+            input: false
+            classes: "t-subtitle bold white-wild-sand-text"
+            components:
+                UITextComponent:
+                    text: "/"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml"
+        -   class: "UIControl"
+            name: "MaxValue"
+            input: false
+            classes: "t-subtitle bold white-wild-sand-text"
+            components:
+                UITextComponent: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml"
+            bindings:
+            - ["UITextComponent.text", "total"]

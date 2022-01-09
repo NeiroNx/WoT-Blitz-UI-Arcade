@@ -1,0 +1,41 @@
+Header:
+    version: "79"
+ImportedPackages:
+- "~res:/UI/Screens3/Common/PopupMenuWithRichText.yaml"
+Controls:
+-   class: "UIControl"
+    name: "InviteSendHint"
+    input: false
+    components:
+        Anchor:
+            leftAnchorEnabled: true
+            rightAnchorEnabled: true
+            topAnchorEnabled: true
+            bottomAnchorEnabled: true
+        UIDataParamsComponent:
+            params:
+            - ["bool", "show", "true", "true"]
+            - ["string", "masterId", "\"\"", "\"SHOW_INVITE_HINT\""]
+            events:
+            - "POPUP_ON_CLOSE_ACTION"
+    bindings:
+    - ["visible", "show"]
+    children:
+    -   prototype: "PopupMenuWithRichText/Slave"
+        name: "Slave"
+        size: [272.000000, 64.000000]
+        components:
+            UIAnimationComponent:
+                animations: "_INIT,~res:/UI/Screens3/Lobby/Hangar/SquadPanel/InviteSendPopup.animation;_FINISH,~res:/UI/Screens3/Common/TooltipHide.animation"
+            UIDataParamsComponent:
+                args:
+                    "buttonVisible": "false"
+                    "isAlignLeft": "true"
+                    "title": "\"\""
+                    "text": "localize(\"hangar/PlatoonPanel/InviteSent\")"
+                    "colorClass": "\"color=white-wild-sand-text\""
+                    "slaveAlign": "ePositionAlign.Default"
+                    "masterId": "masterId"
+        children:
+        -   path: "Content/Text"
+            size: [208.000000, 142.000000]

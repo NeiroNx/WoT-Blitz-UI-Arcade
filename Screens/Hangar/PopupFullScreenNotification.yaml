@@ -1,0 +1,197 @@
+Header:
+    version: "96"
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/LobbyCommon.yaml"
+- "~res:/UI/Screens/Common.yaml"
+- "~res:/UI/Screens/Dialogs.yaml"
+- "~res:/UI/Screens/Common/StyledButton.yaml"
+- "~res:/UI/Screens/Common/StyledMenuButton.yaml"
+- "~res:/UI/Screens/Lobby/Common/PremDays.yaml"
+- "~res:/UI/Screens/Lobby/Common/CustomNumbers.yaml"
+- "~res:/UI/Styles/ButtonSoundStyles.yaml"
+- "~res:/UI/Screens/Fonts.yaml"
+- "~res:/UI/Styles/BackgroundStyles.yaml"
+- "~res:/UI/Screens/Hangar/BasePopup.yaml"
+- "~res:/UI/Styles/NetEaseStyles.yaml"
+- "~res:/UI/Screens/Lobby/Common/RichText.yaml"
+- "~res:/UI/Screens/Common/StyledBackButton.yaml"
+- "~res:/UI/Screens/Common/UnreadIcon.yaml"
+- "~res:/UI/Styles/SafeAreaStyles.yaml"
+StyleSheets:
+-   selectors:
+    - ".battle-rating #BattleRatingFx"
+    properties:
+        particleEffect-effectPath: "~res:/3d/FX/UI/player_profile_icon_big.sc2"
+-   selectors:
+    - ".battle-rating.bronze #BattleRatingFx"
+    properties:
+        particleEffect-effectPath: "~res:/3d/FX/UI/player_profile_icon_bronze_big.sc2"
+-   selectors:
+    - ".battle-rating.silver #BattleRatingFx"
+    properties:
+        particleEffect-effectPath: "~res:/3d/FX/UI/player_profile_icon_silver_big.sc2"
+-   selectors:
+    - ".battle-rating.gold #BattleRatingFx"
+    properties:
+        particleEffect-effectPath: "~res:/3d/FX/UI/player_profile_icon_gold_big.sc2"
+-   selectors:
+    - ".battle-rating.platinum #BattleRatingFx"
+    properties:
+        particleEffect-effectPath: "~res:/3d/FX/UI/player_profile_icon_platinum_big.sc2"
+-   selectors:
+    - ".battle-rating.diamond #BattleRatingFx"
+    properties:
+        particleEffect-effectPath: "~res:/3d/FX/UI/player_profile_icon_diamond_big.sc2"
+-   selectors:
+    - ".body-league-changed #RatingValue"
+    - ".body-calibration-completed #RatingValue"
+    - ".body-calibration-completed #TitleDescRich"
+    - ".body-recalibration #RatingValue"
+    properties:
+        visible: true
+-   selectors:
+    - ".body-calibration-start #RatingValue"
+    - ".body-reset-rating #RatingValue"
+    - ".body-league-changed #TitleDescRich"
+    - ".body-reset-rating #TitleDescRich"
+    - ".body-calibration-start #TitleDescRich"
+    - ".body-calibration-completed #DescriptionContainer #TitleDesc"
+    - ".body-recalibration #TitleDescRich"
+    properties:
+        visible: false
+-   selectors:
+    - ".body-calibration-start #LeagueBanner"
+    properties:
+        bg-frame: 6
+-   selectors:
+    - ".body-recalibration #LeagueBanner"
+    properties:
+        bg-frame: 0
+Prototypes:
+-   prototype: "BasePopup/BasePopup"
+    name: "PremiumBase"
+    components:
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Hangar/PopupFullScreenNotification.yaml"
+    children:
+    -   path: "Content"
+        children:
+        -   class: "UIControl"
+            name: "ContainerAlign"
+            components:
+                Anchor:
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                    verticalMax: 600.000000
+            children:
+            -   class: "UIControl"
+                name: "body"
+                size: [600.000000, 300.000000]
+                input: false
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        hCenterAnchor: 0.000000
+                        topAnchorEnabled: true
+                        topAnchor: 223.000000
+                children:
+                -   class: "UIStaticText"
+                    name: "descr"
+                    size: [440.000000, 287.000000]
+                    classes: "text1 text-color-blue"
+                    components:
+                        UITextComponent:
+                            text: "shop/Congrats/Description"
+                            multiline: "MULTILINE_ENABLED"
+                            align: ["LEFT", "TOP"]
+                        Anchor:
+                            leftAnchorEnabled: true
+                            leftAnchor: 160.000000
+                            rightAnchorEnabled: true
+                            topAnchorEnabled: true
+                            topAnchor: 13.000000
+                            bottomAnchorEnabled: true
+                        DebugRender:
+                            enabled: false
+                            drawColor: [1.000000, 0.000000, 0.000000, 1.000000]
+                -   class: "UIControl"
+                    name: "iconPlaceholder"
+                    size: [140.000000, 155.000000]
+                    input: false
+                    components:
+                        Anchor:
+                            leftAnchorEnabled: true
+                            hCenterAnchorEnabled: false
+                            hCenterAnchor: -300.000000
+                            topAnchorEnabled: true
+                            topAnchor: 0.000000
+                        DebugRender:
+                            enabled: false
+                            drawColor: [1.000000, 0.000000, 0.000000, 1.000000]
+                -   class: "UIStaticText"
+                    name: "congrats"
+                    size: [500.000000, 60.000000]
+                    classes: "header1 text-color-white"
+                    components:
+                        UITextComponent:
+                            text: "shop/Congrats/Title"
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                            hCenterAnchor: 0.000000
+                            topAnchorEnabled: true
+                            topAnchor: -150.000000
+                -   class: "UIStaticText"
+                    name: "titleDesc"
+                    size: [700.000000, 30.000000]
+                    classes: "text1 text-color-blue"
+                    components:
+                        UITextComponent:
+                            text: "shop/Congrats/Description"
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                            topAnchorEnabled: true
+                            topAnchor: -100.000000
+                        DebugRender:
+                            enabled: false
+                            drawColor: [1.000000, 0.000000, 0.000000, 1.000000]
+-   class: "UIControl"
+    name: "DeclineForever"
+    size: [171.000000, 27.600000]
+    classes: "button button-ok-sound"
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfLastChild"
+            verticalPolicy: "PercentOfMaxChild"
+            verticalValue: 120.000000
+        Sound: {}
+        StyleSheet:
+            inheritsStylesFromParent: true
+            styles: "~res:/UI/Screens/Hangar/PopupFullScreenNotification.yaml"
+    children:
+    -   class: "UIControl"
+        name: "UnderLine"
+        position: [0.000000, 24.000000]
+        size: [171.000000, 1.000000]
+        classes: "color-link"
+        components:
+            Background:
+                colorInherit: "COLOR_MULTIPLY_ON_PARENT"
+            Anchor:
+                leftAnchorEnabled: true
+                rightAnchorEnabled: true
+    -   class: "UIStaticText"
+        name: "Text"
+        classes: "text2 text-color-link"
+        components:
+            UITextComponent:
+                text: "rateApp/Button/DoNotAskAgain"
+                colorInheritType: "COLOR_MULTIPLY_ON_PARENT"
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"

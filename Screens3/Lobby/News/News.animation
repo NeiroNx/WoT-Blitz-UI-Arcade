@@ -1,0 +1,4 @@
+animation SCROLL
+{
+	Event("NEWS_TAB_INIT");
+}

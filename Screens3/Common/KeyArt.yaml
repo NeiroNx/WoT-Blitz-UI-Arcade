@@ -1,0 +1,7 @@
+Header:
+    version: 141
+ImportedPackages:
+- "~res:/UI/Screens3/Common/KeyArtPrototype.yaml"
+Prototypes:
+-   prototype: "KeyArtPrototype/KeyArt"
+    name: "KeyArt"

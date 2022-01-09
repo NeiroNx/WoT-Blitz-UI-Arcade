@@ -1,0 +1,21 @@
+Header:
+    version: "48"
+StyleSheets:
+-   selector: ".default-timer-color #Icon"
+    properties:
+        bg-color: [1.000000, 1.000000, 1.000000, 1.000000]
+-   selector: ".default-timer-color #Time"
+    properties:
+        text-color: [1.000000, 1.000000, 1.000000, 1.000000]
+-   selector: ".expiring-timer-color #Icon"
+    properties:
+        bg-color: [1.000000, 0.000000, 0.000000, 1.000000]
+-   selector: ".expiring-timer-color #Time"
+    properties:
+        text-color: [1.000000, 0.000000, 0.000000, 1.000000]
+-   selector: ".short-time-format"
+    properties: {}
+-   selector: ".medium-time-format"
+    properties: {}
+-   selector: ".long-time-format"
+    properties: {}

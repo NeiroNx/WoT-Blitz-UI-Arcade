@@ -1,0 +1,246 @@
+Header:
+    version: 130
+Prototypes:
+-   class: "UIControl"
+    name: "HintFramesPrototype"
+    size: [112.000000, 112.000000]
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens3/Battle/ModernTutorialHints/Common/HintFramesInit.animation;SurroundControl,~res:/UI/Screens3/Battle/ModernTutorialHints/Common/HintFramesSurround.animation;PointToControl,~res:/UI/Screens3/Battle/ModernTutorialHints/Common/HintFramesPointTo.animation"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["float", "masterX", "48.000000", "48.000000"]
+            - ["float", "masterY", "48.000000", "48.000000"]
+            - ["eTransition", "transitionType", "eTransition.Surround", "eTransition.Surround"]
+            - ["string", "controlId", "\"\"", "\"ZoomButton\""]
+    children:
+    -   class: "UIControl"
+        name: "Frames"
+        size: [112.000000, 112.000000]
+        input: false
+        components:
+            UIOpacityComponent: {}
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "LT"
+            input: false
+            components:
+                Anchor: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   class: "UIControl"
+                name: "HLine"
+                input: false
+                classes: "white-wild-sand-bg"
+                components:
+                    Background: {}
+                    Anchor:
+                        leftAnchorEnabled: true
+                        topAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 16.000000
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 2.000000
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+            -   class: "UIControl"
+                name: "VLine"
+                input: false
+                classes: "white-wild-sand-bg"
+                components:
+                    Background: {}
+                    Anchor:
+                        leftAnchorEnabled: true
+                        topAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 2.000000
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 16.000000
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "LB"
+            position: [0.000000, 96.000000]
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   class: "UIControl"
+                name: "HLine"
+                input: false
+                classes: "white-wild-sand-bg"
+                components:
+                    Background: {}
+                    Anchor:
+                        leftAnchorEnabled: true
+                        bottomAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 16.000000
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 2.000000
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+            -   class: "UIControl"
+                name: "VLine"
+                input: false
+                classes: "white-wild-sand-bg"
+                components:
+                    Background: {}
+                    Anchor:
+                        leftAnchorEnabled: true
+                        bottomAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 2.000000
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 16.000000
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "RT"
+            position: [96.000000, 0.000000]
+            size: [16.000000, 16.000000]
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   class: "UIControl"
+                name: "HLine"
+                input: false
+                classes: "white-wild-sand-bg"
+                components:
+                    Background: {}
+                    Anchor:
+                        rightAnchorEnabled: true
+                        topAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 16.000000
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 2.000000
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+            -   class: "UIControl"
+                name: "VLine"
+                input: false
+                classes: "white-wild-sand-bg"
+                components:
+                    Background: {}
+                    Anchor:
+                        rightAnchorEnabled: true
+                        topAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 2.000000
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 16.000000
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "RB"
+            position: [96.000000, 96.000000]
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   class: "UIControl"
+                name: "HLine"
+                input: false
+                classes: "white-wild-sand-bg"
+                components:
+                    Background: {}
+                    Anchor:
+                        rightAnchorEnabled: true
+                        bottomAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 16.000000
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 2.000000
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+            -   class: "UIControl"
+                name: "VLine"
+                input: false
+                classes: "white-wild-sand-bg"
+                components:
+                    Background: {}
+                    Anchor:
+                        rightAnchorEnabled: true
+                        bottomAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 2.000000
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 16.000000
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "LTFake"
+            input: false
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    topAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 16.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 16.000000
+        -   class: "UIControl"
+            name: "LBFake"
+            input: false
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 16.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 16.000000
+        -   class: "UIControl"
+            name: "RTFake"
+            input: false
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+                    topAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 16.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 16.000000
+        -   class: "UIControl"
+            name: "RBFake"
+            input: false
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 16.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 16.000000

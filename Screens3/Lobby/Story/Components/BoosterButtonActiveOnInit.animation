@@ -1,0 +1,7 @@
+animation BoosterButtonActiveOnInit
+{
+    if (isFinished)
+    {
+        Event("QUEST_BOOSTER_STEP_FINISHED");
+    }
+}

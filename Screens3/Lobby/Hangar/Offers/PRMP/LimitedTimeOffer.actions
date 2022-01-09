@@ -1,0 +1,49 @@
+action OfferRotation(bool run)
+{
+  if (run and (currentOfferIndex == index or nextOfferIndex == index))
+  {
+    Wait(offerDisplayTime - progressAnimationTime);
+    ChangeData(rotating, true);
+    Wait(progressAnimationTime);
+    if (currentOfferIndex == index and fullPiggyBank)
+    {
+      Event("STOP_FULL_PIGGY_EFFECTS");
+    }
+    MoveRel(".", dx = -width, time = 0.4, interpolation = EASE_OUT );
+    if (currentOfferIndex == index)
+    {
+      Move(".", x=width);
+      Event("ROTATION_FINISHED");
+    }
+    if (nextOfferIndex == index and fullPiggyBank and not fullPiggyEffectsShown)
+    {
+      Event("START_FULL_PIGGY_EFFECTS");
+    }
+    ChangeData(rotating, false);
+  }
+}
+
+action AnimateProgress
+{
+  if (piggyBankOffer and not rotating and not progressing and currentOfferIndex == index )
+  {
+    ChangeData(progressing, true);
+
+    Event("PIGGY_BANK_STAGE_PROGRESS", arg1=offer.basicOffer.piggyBank.stuffDescr);
+    Wait(0.25);
+
+    if (offer.basicOffer.piggyBank.previousQuantity < offer.basicOffer.piggyBank.stagedQuantity)
+    {
+      Event("SHOW_PIGGY_FILL_EFFECT", arg1=offer.basicOffer.piggyBank.current.type);
+      DirectEvent("AnimateNumber", "**/PiggyBankOffer/Status/Progress/CurrentProgress/AnimatedNumber");
+      WaitEvent("NUMBER_ANIMATION_FINISHED");
+      Event("PIGGY_BANK_SAVE_PROGRESS", arg1=offer.basicOffer.piggyBank.stuffDescr);
+      if (fullPiggyBank and not fullPiggyEffectsShown)
+      {
+        Event("START_FULL_PIGGY_EFFECTS");
+      }
+    }
+
+    ChangeData(progressing, false);
+  }
+}

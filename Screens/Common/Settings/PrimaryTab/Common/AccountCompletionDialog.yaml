@@ -1,0 +1,316 @@
+Header:
+    version: "108"
+ImportedPackages:
+- "~res:/UI/Screens/Common.yaml"
+- "~res:/UI/Screens/Common/SmartTextField.yaml"
+- "~res:/UI/Screens/Common/StyledButton.yaml"
+Controls:
+-   class: "UIControl"
+    customClass: "UIAccountCompletionDialog"
+    name: "DialogBackground"
+    size: [1024.000000, 768.000000]
+    components:
+        Background:
+            drawType: "DRAW_FILL"
+            color: [0.070588, 0.125490, 0.160784, 0.894118]
+        Anchor:
+            leftAnchorEnabled: true
+            rightAnchorEnabled: true
+            topAnchorEnabled: true
+            bottomAnchorEnabled: true
+        ModalInput: {}
+        Update: {}
+        StyleSheet:
+            styles: "~res:/UI/Screens/Common/Settings/PrimaryTab/Common/AccountCompletionDialog.yaml"
+    children:
+    -   class: "UIScrollView"
+        name: "Scroll"
+        size: [500.000000, 768.000000]
+        pivot: [0.500000, 0.000000]
+        autoUpdate: true
+        centerContent: true
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                topAnchorEnabled: true
+                bottomAnchorEnabled: true
+        children:
+        -   class: "UIScrollViewContainer"
+            name: "scrollContainerControl"
+            size: [500.000000, 741.000000]
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    rightAnchorEnabled: true
+                SizePolicy:
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   prototype: "Common/ResizableDialog"
+                name: "Dialog"
+                children:
+                -   path: "Top/TitleText"
+                    components:
+                        UITextComponent:
+                            text: "#account:Completion/Header"
+                -   path: "Middle/VerticalBox"
+                    children:
+                    -   class: "UIStaticText"
+                        name: "CodeNoAttemptsRemained"
+                        size: [460.000000, 60.000000]
+                        classes: "text1 text-color-red"
+                        components:
+                            UITextComponent:
+                                text: "profile_data_activation_failed"
+                                multiline: "MULTILINE_ENABLED"
+                            Anchor:
+                                leftAnchorEnabled: true
+                                rightAnchorEnabled: true
+                    -   class: "UIControl"
+                        name: "UserLogin"
+                        size: [460.000000, 66.000000]
+                        components:
+                            Background:
+                                drawType: "DRAW_TILED"
+                                sprite: "~res:/Gfx/UI/AccountScreen/FieldBorders"
+                                leftRightStretchCap: 9.000000
+                            Anchor:
+                                leftAnchorEnabled: true
+                                rightAnchorEnabled: true
+                        children:
+                        -   class: "UIStaticText"
+                            name: "Text"
+                            position: [10.000000, 0.000000]
+                            classes: "header1 text-color-white"
+                            components:
+                                UITextComponent:
+                                    fitting: "FITTING_POINTS"
+                                    align: ["LEFT", "VCENTER"]
+                                Anchor:
+                                    leftAnchorEnabled: true
+                                    leftAnchor: 10.000000
+                                    rightAnchorEnabled: true
+                                    rightAnchor: 150.000000
+                                    topAnchorEnabled: true
+                                    bottomAnchorEnabled: true
+                        -   prototype: "StyledButton/StyledButton"
+                            name: "ChangeButton"
+                            size: [150.000000, 68.000000]
+                            classes: "button button-color-green"
+                            components:
+                                Anchor:
+                                    rightAnchorEnabled: true
+                                    vCenterAnchorEnabled: true
+                            children:
+                            -   path: "Caption"
+                                components:
+                                    UITextComponent:
+                                        text: "#account:Completion/Button/Change"
+                    -   class: "UIStaticText"
+                        name: "CodeInfoText"
+                        size: [460.000000, 60.000000]
+                        classes: "text1 text-color-blue"
+                        components:
+                            UITextComponent:
+                                text: "profile_data_enter_activation_code_sent"
+                                multiline: "MULTILINE_ENABLED"
+                            Anchor:
+                                leftAnchorEnabled: true
+                                rightAnchorEnabled: true
+                    -   prototype: "SmartTextField/SmartTextField"
+                        name: "LoginTextField"
+                        components:
+                            Anchor:
+                                leftAnchorEnabled: true
+                                rightAnchorEnabled: true
+                        children:
+                        -   path: "VerticalBox/Background/TextField/Hint"
+                            components:
+                                UITextComponent:
+                                    text: "profile_data_your_email"
+                        -   path: "VerticalBox/NoteText"
+                            components:
+                                UITextComponent:
+                                    text: "NOTE_TEXT_EMAIL"
+                    -   prototype: "SmartTextField/SmartTextField"
+                        name: "PasswordTextField"
+                        components:
+                            Anchor:
+                                leftAnchorEnabled: true
+                                rightAnchorEnabled: true
+                        children:
+                        -   path: "VerticalBox/Background/TextField"
+                            isPassword: true
+                            children: []
+                        -   path: "VerticalBox/Background/TextField/Hint"
+                            components:
+                                UITextComponent:
+                                    text: "profile_data_password"
+                        -   path: "VerticalBox/NoteText"
+                            components:
+                                UITextComponent:
+                                    text: "NOTE_TEXT_PASSWORD_COMPLEXITY"
+                    -   class: "UIStaticText"
+                        name: "StrongPasswordText"
+                        size: [460.000000, 30.000000]
+                        visible: false
+                        classes: "text1 text-color-green"
+                        components:
+                            UITextComponent:
+                                text: "password_is_good"
+                                multiline: "MULTILINE_ENABLED"
+                            Anchor:
+                                leftAnchorEnabled: true
+                                rightAnchorEnabled: true
+                    -   prototype: "SmartTextField/SmartTextField"
+                        name: "ConfirmPasswordTextField"
+                        components:
+                            Anchor:
+                                leftAnchorEnabled: true
+                                rightAnchorEnabled: true
+                        children:
+                        -   path: "VerticalBox/Background/TextField"
+                            isPassword: true
+                            children: []
+                        -   path: "VerticalBox/Background/TextField/Hint"
+                            components:
+                                UITextComponent:
+                                    text: "profile_data_confirm_password"
+                    -   prototype: "SmartTextField/SmartTextField"
+                        name: "CodeTextField"
+                        components:
+                            Anchor:
+                                leftAnchorEnabled: true
+                                rightAnchorEnabled: true
+                        children:
+                        -   path: "VerticalBox/Background/TextField"
+                            keyboardType: "KEYBOARD_TYPE_NUMBER_PAD"
+                            children: []
+                        -   path: "VerticalBox/Background/TextField/Hint"
+                            components:
+                                UITextComponent:
+                                    text: "profile_data_enter_activation_code"
+                    -   class: "UIControl"
+                        name: "CaptchaPanel"
+                        size: [460.000000, 65.000000]
+                        input: false
+                        components:
+                            Anchor:
+                                leftAnchorEnabled: true
+                                rightAnchorEnabled: true
+                        children:
+                        -   prototype: "StyledButton/DefaultStyledButton"
+                            name: "RefreshCaptchaButton"
+                            size: [82.000000, 64.000000]
+                            components:
+                                Anchor:
+                                    leftAnchorEnabled: true
+                                    vCenterAnchorEnabled: true
+                            children:
+                            -   class: "UIControl"
+                                name: "Icon"
+                                input: false
+                                components:
+                                    Background:
+                                        sprite: "~res:/Gfx/UI/LobbyCommon/InputButton"
+                                        frame: 1
+                                        colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                                    Anchor:
+                                        leftAnchorEnabled: true
+                                        rightAnchorEnabled: true
+                                        topAnchorEnabled: true
+                                        bottomAnchorEnabled: true
+                        -   class: "UIControl"
+                            name: "CaptchaImage"
+                            size: [170.000000, 62.000000]
+                            input: false
+                            components:
+                                Background:
+                                    drawType: "DRAW_SCALE_TO_RECT"
+                                Anchor:
+                                    leftAnchorEnabled: true
+                                    leftAnchor: 76.000000
+                                    vCenterAnchorEnabled: true
+                        -   class: "UIControl"
+                            name: "ArrowIcon"
+                            input: false
+                            components:
+                                Background:
+                                    sprite: "~res:/Gfx/UI/LobbyCommon/IconsSmall"
+                                    frame: 3
+                                    spriteModification: ["FLIP_HORIZONTAL"]
+                                Anchor:
+                                    rightAnchorEnabled: true
+                                    rightAnchor: 185.000000
+                                    vCenterAnchorEnabled: true
+                        -   prototype: "SmartTextField/SmartTextField"
+                            name: "CaptchaTextField"
+                            size: [160.000000, 62.000000]
+                            visible: true
+                            components:
+                                Anchor:
+                                    leftAnchorEnabled: true
+                                    leftAnchor: 300.000000
+                                    rightAnchorEnabled: true
+                                    vCenterAnchorEnabled: false
+                            children:
+                            -   path: "VerticalBox/Background/TextField/Hint"
+                                components:
+                                    UITextComponent:
+                                        text: "HINT_TEXT_CAPTCHA"
+                    -   class: "UIStaticText"
+                        name: "CaptchaErrorText"
+                        visible: false
+                        classes: "text1 text-color-red"
+                        components:
+                            UITextComponent:
+                                multiline: "MULTILINE_ENABLED"
+                            Anchor:
+                                leftAnchorEnabled: true
+                                rightAnchorEnabled: true
+                            SizePolicy:
+                                verticalPolicy: "PercentOfContent"
+                    -   class: "UIStaticText"
+                        name: "CaptchaNoteText"
+                        size: [460.000000, 26.000000]
+                        visible: false
+                        classes: "text1 text-color-blue"
+                        components:
+                            UITextComponent:
+                                text: "NOTE_TEXT_CAPTCHA"
+                                multiline: "MULTILINE_ENABLED"
+                            Anchor:
+                                leftAnchorEnabled: true
+                                rightAnchorEnabled: true
+                    -   class: "UIControl"
+                        name: "Buttons"
+                        size: [460.000000, 74.000000]
+                        components:
+                            Anchor:
+                                leftAnchorEnabled: true
+                                rightAnchorEnabled: true
+                        children:
+                        -   prototype: "StyledButton/StyledButton"
+                            name: "CancelButton"
+                            components:
+                                Anchor:
+                                    leftAnchorEnabled: true
+                                    hCenterAnchorEnabled: true
+                                    hCenterAnchor: -10.000000
+                            children:
+                            -   path: "Caption"
+                                components:
+                                    UITextComponent:
+                                        text: "#account:Completion/Button/Cancel"
+                        -   prototype: "StyledButton/StyledButton"
+                            name: "ApplyButton"
+                            classes: "button button-color-green"
+                            components:
+                                Anchor:
+                                    hCenterAnchorEnabled: true
+                                    hCenterAnchor: 10.000000
+                                    rightAnchorEnabled: true
+                            children:
+                            -   path: "Caption"
+                                components:
+                                    UITextComponent:
+                                        text: "#account:Completion/Button/Send"

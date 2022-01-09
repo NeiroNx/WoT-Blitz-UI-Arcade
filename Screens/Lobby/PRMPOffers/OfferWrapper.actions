@@ -1,0 +1,15 @@
+action FORCE_MULTIOFFER_INIT()
+{
+    if (not isNull(offer.multiOffer))
+    {
+        DirectEvent("TryRunMoveIn", "**/MultiOffer");
+    }
+}
+
+action SCROLL_OFFER
+{
+    if (selected)
+    {
+      ScrollToEnsureControlOnScreen(".", 1);
+    }
+}

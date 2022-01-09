@@ -1,0 +1,38 @@
+Header:
+    version: "25"
+Prototypes:
+-   class: "UIControl"
+    name: "ButtonInfo"
+    position: [880.000000, 560.000000]
+    size: [50.000000, 50.000000]
+    input: true
+    classes: "button"
+    components:
+        Background: {}
+        StyleSheet:
+            styles: "~res:/UI/Styles/ButtonStyle.yaml"
+    children:
+    -   class: "UIControl"
+        name: "BG"
+        input: false
+        classes: "button-color-white-20"
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            Background:
+                drawType: "DRAW_STRETCH_BOTH"
+                sprite: "~res:/Gfx/UI/CommonUIElements/square_SmallAngle.psd"
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                leftRightStretchCap: 3.000000
+                topBottomStretchCap: 3.000000
+    -   class: "UIControl"
+        name: "Icon"
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            Background:
+                sprite: "~res:/Gfx/UI/LobbyCommon/info_button.psd"
+                colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"

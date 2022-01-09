@@ -1,0 +1,5 @@
+action ON_PROGRESS_VALUE_CHANGED(int value)
+{
+    Log("ON_PROGRESS_VALUE_CHANGED");
+    ChangeData(currentValue, value);
+}

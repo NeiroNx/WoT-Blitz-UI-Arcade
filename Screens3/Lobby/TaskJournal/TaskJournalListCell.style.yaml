@@ -1,0 +1,115 @@
+Header:
+    version: 133
+StyleSheets:
+-   selectors:
+    - ".basic"
+    properties:
+        bg-color: [0.168627, 0.627451, 0.850980, 1.000000]
+-   selectors:
+    - ".random"
+    properties:
+        bg-color: [0.901961, 0.764706, 0.541176, 1.000000]
+-   selectors:
+    - ".additional"
+    properties:
+        bg-color: [0.901961, 0.541176, 0.541176, 1.000000]
+-   selectors:
+    - ".color-golden-quest-30-bg"
+    properties:
+        bg-color: [1.000000, 0.615686, 0.000000, 0.298039]
+-   selectors:
+    - ".clan_squad"
+    properties:
+        bg-color: [0.658824, 0.901961, 0.541176, 1.000000]
+-   selectors:
+    - ".2"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/icons/icon_victory_l"
+-   selectors:
+    - ".3"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/icons/icon_battles_l"
+-   selectors:
+    - ".9"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/icons/icon_win-alive_l"
+-   selectors:
+    - ".4"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/icons/icon_video_l"
+-   selectors:
+    - ".1"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/icons/icon_community_l"
+-   selectors:
+    - ".5"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/icons/icon_consumable_l"
+-   selectors:
+    - ".0"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/task-journal/icon_play-battle_l"
+-   selectors:
+    - ".6"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/task-journal/icon_exp_l"
+-   selectors:
+    - ".7"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/task-journal/icon_destroyed-tank_l"
+-   selectors:
+    - ".10"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/task-journal/icon_squad_l"
+-   selectors:
+    - ".8"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/task-journal/icon_damage_l"
+-   selectors:
+    - ".11"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/task-journal/icon_supremacy_l"
+-   selectors:
+    - ".12"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/task-journal/icon_halloween_l"
+-   selectors:
+    - ".13"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/icons/icon_booster_l"
+-   selectors:
+    - ".14"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/icons/icon_camo_l"
+-   selectors:
+    - ".15"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/task-journal/icon_change_ammunition_l"
+-   selectors:
+    - ".16"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/task-journal/icon_consumable_repair-kit_l"
+-   selectors:
+    - ".17"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/icons/icon_currency_elite_xp_l"
+-   selectors:
+    - ".18"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/icons/icon_do_l"
+-   selectors:
+    - ".19"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/icons/icon_module-upgrade_l"
+-   selectors:
+    - ".20"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/icons/icon_other_l"
+-   selectors:
+    - ".21"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/icons/icon_sell-smth_l"
+-   selectors:
+    - ".22"
+    properties:
+        bg-sprite: "~res:/Gfx/Lobby/icons/icon_tank_l"

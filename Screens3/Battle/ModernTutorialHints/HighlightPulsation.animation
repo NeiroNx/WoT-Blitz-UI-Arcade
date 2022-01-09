@@ -1,0 +1,20 @@
+animation Pulsation
+{
+    repeat
+    {
+	    parallel 
+		{
+		    MoveRel("./Angles/AngleLeftTop", -3, -3, 0.5, EASE_IN_EASE_OUT);
+		    MoveRel("./Angles/AngleRightTop", 3, -3, 0.5, EASE_IN_EASE_OUT);
+		    MoveRel("./Angles/AngleRightBottom", 3, 3, 0.5, EASE_IN_EASE_OUT);
+		    MoveRel("./Angles/AngleLeftBottom", -3, 3, 0.5, EASE_IN_EASE_OUT);
+		}
+		parallel 
+		{
+		    MoveRel("./Angles/AngleLeftTop", 3, 3, 0.5, EASE_IN_EASE_OUT);
+		    MoveRel("./Angles/AngleRightTop", -3, 3, 0.5, EASE_IN_EASE_OUT);
+		    MoveRel("./Angles/AngleRightBottom", -3, -3, 0.5, EASE_IN_EASE_OUT);
+		    MoveRel("./Angles/AngleLeftBottom", 3, -3, 0.5, EASE_IN_EASE_OUT);
+		}
+    }
+}

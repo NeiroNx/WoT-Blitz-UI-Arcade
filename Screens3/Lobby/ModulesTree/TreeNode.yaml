@@ -1,0 +1,230 @@
+Header:
+    version: 130
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/TreeArrows/Arrow.yaml"
+- "~res:/UI/Screens3/Lobby/Common/TreeArrows/ArrowLine.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "TreeNode"
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "CHANGE_SELECT,~res:/UI/Screens3/Lobby/ModulesTree/ScrolToSelectedModule.animation"
+        Anchor: {}
+        GridCellComponent: {}
+        SizePolicy:
+            horizontalPolicy: "PercentOfFirstChild"
+            verticalPolicy: "PercentOfFirstChild"
+        UIAttachLayoutMasterComponent: {}
+        UIDataParamsComponent:
+            params:
+            - ["eTutorialOffsetType", "tutorialOffsetType", "eTutorialOffsetType.kBig", "eTutorialOffsetType.kBig"]
+            - ["eTutorialHighlights", "currentTutorialHighlight", "eTutorialHighlights.kUnknown", "eTutorialHighlights.kUnknown"]
+            - ["eTutorialLesson", "currentLesson", "eTutorialLesson.kUnknown", "eTutorialLesson.kUnknown"]
+            - ["bool", "isTutorialActive", "false", "false"]
+            - ["bool", "isSelected", "false", "true"]
+            - ["bool", "hasTankPath", "false", "true"]
+            - ["bool", "isLeftToRight", "true", "true"]
+            - ["string", "attachId", "\"\"", "\"\""]
+            - ["int", "freeXp", "0", "150"]
+            - ["eVehicleNodeStatus", "tankStatus", "eVehicleNodeStatus.OWNED", "eVehicleNodeStatus.OWNED"]
+            - ["int", "tankXp", "0", "300"]
+            - ["int", "lastDisplayedTankXp", "0", "0"]
+            - ["ModulesTreeNodeModel", "nodeModel", "null", "{ \"contentType\" = eModuleNodeContentType.VEHICLE; \"module\" = { \"status\" = eModuleNodeStatus.LOCKED; }; }"]
+            events:
+            - "ON_MODULE_PROGRESS_ANIMATION_ENDED"
+            - "SHOW_TANK_MODULES"
+            - "DOUBLE_TAP_ACTION"
+        UIDataLocalBindingsComponent:
+            data:
+            - ["int", "holeOffset", "tutorialOffsetType + 0"]
+            - ["bool", "isVehicle", "nodeModel.contentType == eModuleNodeContentType.VEHICLE"]
+            - ["bool", "isProgressVisible", "not isNull(nodeModel.module) and nodeModel.module.currentSummaryResearchPrice != 0 and (nodeModel.module.status == eModuleNodeStatus.CAN_BE_RESEARCHED or nodeModel.module.status == eModuleNodeStatus.LOCKED)"]
+            - ["string", "bgColorStyle", "when isVehicle and nodeModel.vehicle.status != eVehicleNodeStatus.LOCKED and nodeModel.vehicle.status != eVehicleNodeStatus.CAN_BE_RESEARCHED and nodeModel.vehicle.vehicleDataModel.isPremium != true -> \"grey-shark-70-bg\", \"white-wild-sand-15-bg\""]
+            - ["bool", "holeEnabled", "isTutorialActive and isSelected and not (currentTutorialHighlight == eTutorialHighlights.kBack or currentTutorialHighlight == eTutorialHighlights.kModuleInventory)"]
+            - ["string", "localAttachId", "when isSelected and isTutorialActive -> attachId, \"\""]
+            - ["string", "arrowsStyle", "when isLeftToRight == true -> \"left-node\", \"right-node\""]
+            - ["bool", "showNavigation", "hasTankPath and nodeModel.contentType == eModuleNodeContentType.VEHICLE"]
+        UIEventOnDataComponent0:
+            watchedDataExpression: "isSelected"
+            eventName: "CHANGE_SELECT"
+        UIShadowHoleComponent: {}
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Lobby/ModulesTree/TreeNode.style.yaml"
+    bindings:
+    - ["classes", "arrowsStyle"]
+    - ["GridCellComponent.column", "nodeModel.x"]
+    - ["GridCellComponent.row", "nodeModel.y"]
+    - ["UIAttachLayoutMasterComponent.attachId", "localAttachId"]
+    - ["UIShadowHoleComponent.isEnabled", "holeEnabled"]
+    - ["UIShadowHoleComponent.leftOffset", "when currentTutorialHighlight == eTutorialHighlights.kModule or currentTutorialHighlight == eTutorialHighlights.kModuleGun -> 64 + 40 + holeOffset, holeOffset"]
+    - ["UIShadowHoleComponent.rightOffset", "holeOffset"]
+    - ["UIShadowHoleComponent.topOffset", "holeOffset"]
+    - ["UIShadowHoleComponent.bottomOffset", "holeOffset"]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            Anchor:
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                spacing: 8.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "FixedSize"
+                verticalValue: 64.000000
+        children:
+        -   class: "UIControl"
+            name: "Value"
+            input: false
+            components:
+                Anchor:
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIAttachLayoutMasterComponent: {}
+                UIChildComponent0:
+                    childType: "kOldExpression"
+                    control: "when nodeModel.contentType == eModuleNodeContentType.VEHICLE -> \"~res:/UI/Screens3/Lobby/ModulesTree/TankNode.yaml\", when nodeModel.contentType == eModuleNodeContentType.MODULE -> \"~res:/UI/Screens3/Lobby/ModulesTree/ModuleNode.yaml\", \"\""
+                    args:
+                        "tankXp": "tankXp"
+                        "freeXp": "freeXp"
+                        "id": "nodeModel.compactDescr"
+                        "isSelected": "isSelected"
+                        "vehicleStatus": "tankStatus"
+                        "module": "nodeModel.module"
+                        "vehicle": "nodeModel.vehicle"
+                    eventActions:
+                    - ["DOUBLE_TAP_ACTION", "DOUBLE_TAP_ACTION", "_event"]
+            bindings:
+            - ["visible", "nodeModel.contentType != eModuleNodeContentType.EMPTY"]
+            - ["UIAttachLayoutMasterComponent.attachId", "\"MODULE_\" + str(nodeModel.compactDescr)"]
+            children:
+            -   class: "UIControl"
+                name: "Progress"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    Anchor:
+                        bottomAnchorEnabled: true
+                        bottomAnchor: -10.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 4.000000
+                    UIChildComponent0:
+                        condition: "isProgressVisible and isSelected"
+                        prototypePath: "~res:/UI/Screens3/Lobby/ModulesTree/ModuleProgressBar.yaml"
+                        args:
+                            "lastDisplayedTankXp": "lastDisplayedTankXp"
+                            "freeXp": "freeXp"
+                            "tankXp": "tankXp"
+                            "moduleCost": "when isProgressVisible -> nodeModel.module.currentSummaryResearchPrice, 0"
+                        eventActions:
+                        - ["ON_ANIMATION_ENDED", "ON_MODULE_PROGRESS_ANIMATION_ENDED", ""]
+        -   class: "UIControl"
+            name: "Navigation"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIChildComponent0:
+                    childType: "kOldExpression"
+                    control: "when showNavigation -> \"~res:/UI/Screens3/Lobby/ModulesTree/NavigationButton.yaml\", \"\""
+                    args:
+                        "bgColorStyle": "bgColorStyle"
+                        "showArrows": "nodeModel.contentType == eModuleNodeContentType.VEHICLE and (not nodeModel.vehicle.vehicleDataModel.isPremium)"
+                        "isLeft": "isLeftToRight"
+                        "tankDescr": "nodeModel.compactDescr"
+                    eventActions:
+                    - ["SHOW_TANK_MODULES", "SHOW_TANK_MODULES", "_event"]
+            bindings:
+            - ["visible", "showNavigation"]
+    -   class: "UIControl"
+        name: "ArrowsContainer"
+        input: false
+        components:
+            Anchor:
+                leftAnchor: -39.000000
+                rightAnchor: -39.000000
+                topAnchorEnabled: true
+                topAnchor: -16.000000
+                vCenterAnchorEnabled: false
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 39.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 97.000000
+        children:
+        -   prototype: "Arrow/Arrow"
+            name: "Arrow"
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+                    topAnchorEnabled: true
+                    topAnchor: 45.000000
+            bindings:
+            - ["visible", "nodeModel.hasArrowLeft"]
+        -   prototype: "ArrowLine/Line"
+            name: "LineUp"
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    topAnchorEnabled: true
+                SizePolicy:
+                    verticalValue: 48.000000
+            bindings:
+            - ["visible", "nodeModel.hasArrowUp"]
+        -   prototype: "ArrowLine/Line"
+            name: "LineDown"
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                SizePolicy:
+                    verticalValue: 48.000000
+            bindings:
+            - ["visible", "nodeModel.hasArrowDown"]
+    -   prototype: "ArrowLine/Line"
+        name: "LineRight"
+        components:
+            Anchor:
+                rightAnchorEnabled: true
+                rightAnchor: -20.000000
+                topAnchorEnabled: true
+                topAnchor: 32.000000
+            SizePolicy:
+                horizontalValue: 20.000000
+        bindings:
+        - ["visible", "nodeModel.hasArrowRight"]
+    -   prototype: "ArrowLine/Line"
+        name: "LineLeft"
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: -20.000000
+                topAnchorEnabled: true
+                topAnchor: 32.000000
+            SizePolicy:
+                horizontalValue: 13.000000
+        bindings:
+        - ["visible", "nodeModel.hasArrowLeft"]
+    -   class: "UIControl"
+        name: "ScrollBorder"
+        position: [-16.000000, -16.000000]
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: -16.000000
+                rightAnchorEnabled: true
+                rightAnchor: -16.000000
+                topAnchorEnabled: true
+                topAnchor: -16.000000
+                bottomAnchorEnabled: true
+                bottomAnchor: -16.000000

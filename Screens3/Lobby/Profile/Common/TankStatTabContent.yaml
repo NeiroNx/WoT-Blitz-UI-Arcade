@@ -1,0 +1,89 @@
+Header:
+    version: "77"
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Inventory/Common/RightPanelContent.yaml"
+- "~res:/UI/Screens3/Lobby/Profile/Common/Statistic/CommonStatisticList.yaml"
+- "~res:/UI/Screens3/Lobby/Profile/Common/HorizontalDividerWithCaption.yaml"
+- "~res:/UI/Screens3/Lobby/Profile/Common/Statistic/AverageStatisticList.yaml"
+- "~res:/UI/Screens3/Lobby/Profile/Common/Statistic/RecordsStatisticList.yaml"
+Prototypes:
+-   prototype: "RightPanelContent/RightPanelContent"
+    name: "RightPanelContent"
+    components:
+        LinearLayout:
+            spacing: 32.000000
+        UIDataParamsComponent:
+            params:
+            - ["DossierDescr", "dossier", "null", "{ }"]
+    children:
+    -   prototype: "CommonStatisticList/ContentWrapper"
+        name: "CommonStatisticContainer"
+        components:
+            LinearLayout:
+                padding: "0"
+            UIDataParamsComponent:
+                args:
+                    "dossier": "dossier"
+    -   class: "UIControl"
+        name: "Average"
+        position: [0.000000, 448.000000]
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            LinearLayout:
+                orientation: "TopDown"
+                spacing: 12.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfChildrenSum"
+        children:
+        -   prototype: "HorizontalDividerWithCaption/HorizontalDividerWithCaption"
+            name: "Header"
+            components:
+                UIDataParamsComponent:
+                    args:
+                        "text": "localize(\"#achievementScreen:Tanks/Experience\")"
+            children:
+            -   path: "LeftLine"
+                visible: false
+            -   path: "RightLine"
+                visible: false
+        -   prototype: "AverageStatisticList/ContentWrapper"
+            name: "AverageStatisticContainer"
+            components:
+                LinearLayout:
+                    padding: "0"
+                UIDataParamsComponent:
+                    args:
+                        "dossier": "dossier"
+    -   class: "UIControl"
+        name: "Record"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            LinearLayout:
+                orientation: "TopDown"
+                spacing: 12.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfChildrenSum"
+        children:
+        -   prototype: "HorizontalDividerWithCaption/HorizontalDividerWithCaption"
+            name: "Header"
+            components:
+                UIDataParamsComponent:
+                    args:
+                        "text": "localize(\"#achievementScreen:Tanks/MaxResults\")"
+            children:
+            -   path: "LeftLine"
+                visible: false
+            -   path: "RightLine"
+                visible: false
+        -   prototype: "RecordsStatisticList/ContentWrapper"
+            name: "RecordsStatisticContainer"
+            components:
+                LinearLayout:
+                    padding: "0"
+                UIDataParamsComponent:
+                    args:
+                        "dossier": "dossier"

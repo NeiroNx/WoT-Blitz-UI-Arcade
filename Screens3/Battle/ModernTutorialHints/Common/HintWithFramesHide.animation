@@ -1,0 +1,5 @@
+animation HintWithFramesHide
+{	
+	DirectEvent("Disappear", "./HintBlurred");
+	DirectEvent("Disappear", "./HintFramesPrototype");
+}

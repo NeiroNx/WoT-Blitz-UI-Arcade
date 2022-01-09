@@ -1,0 +1,69 @@
+action CONTENT_SIZE_CHANGED(vector2 size)
+{
+    ChangeData(contentSize, size);
+}
+
+action COMMON_SIZE_CHANGED(vector2 size)
+{
+    ChangeData(commonSize, size);
+}
+
+action QUEST_BOOSTER_STEP_FINISHED()
+{
+    ChangeData(isAnyQuestBoosterStepFinished, true);
+}
+
+action SCROLL_TO_STEP(int stepId, string path)
+{
+    parallel
+    {
+        if (commonSize.X > contentSize.X)
+        {
+            ScrollToEnsureControlOnScreen(path, 0.6, xPolicy = eScrollToControlPolicy.kCenter);
+        }
+        Event("SELECT_STEP", arg1 = stepId);
+    }
+}
+
+action SCROLL_POSITION_CHANGED(vector2 position)
+{
+    if (position.X > 0.0)
+    {
+        Event("PARALLAX_SHIFT", arg1 = 0.0);
+    }
+    else
+    {
+        if (position.X < (contentSize.X - commonSize.X))
+        {
+            Event("PARALLAX_SHIFT", arg1 = 1.0);
+        }
+        else
+        {
+            Event("PARALLAX_SHIFT", arg1 = position.X / (contentSize.X - commonSize.X));
+        }
+    }
+}
+
+action ON_OPEN()
+{
+    if (commonSize.X > contentSize.X)
+    {
+        if (not isNull(storyView.selectedStep) and storyView.tree.groups.common.steps.Contains(storyView.selectedStep.id))
+        {
+            ScrollToEnsureControlOnScreen("**/Step" + str(storyView.selectedStep.id), 0.0, xPolicy = eScrollToControlPolicy.kCenter);
+        }
+        else
+        {
+            if (not isNull(storyView.story.inProgressStep) and storyView.tree.groups.common.steps.Contains(storyView.story.inProgressStep.id))
+            {
+                ScrollToEnsureControlOnScreen("**/Step" + str(storyView.story.inProgressStep.id), 0.0, xPolicy = eScrollToControlPolicy.kCenter);
+            }
+            else
+            {
+                ScrollToEnsureControlOnScreen("**/Step" + str(storyView.tree.groups.common.steps.Size()), 0.0, xPolicy = eScrollToControlPolicy.kCenter);
+            }
+        }
+    }
+
+    ChangeData(contentOpacity, 1.0);
+}

@@ -1,0 +1,84 @@
+Header:
+    version: "84"
+Controls:
+-   class: "UIControl"
+    name: "UnlockReward"
+    size: [96.000000, 240.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["UnlockItemResource", "unlock", "null", "{ title = \"#vehicle_customization:camouflage/sentinel_ac_iv_ik/Name\"; description = \"\"; icon = \"~res:/Gfx/UI/CamouflagesShop/Skin/british-GB35_Sentinel_AC_IV.txt\"; type = eItemType.CAMOUFLAGE; kind = eCamouflageKind.WINTER; }"]
+            - ["bool", "isReadyToComplete", "false", "false"]
+        UIDataLocalsComponent:
+            locals:
+            - ["string", "valueString", "\"x1\""]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        size: [96.000000, 240.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "ImageContainer"
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                    bottomAnchor: 48.000000
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 70.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 70.000000
+            children:
+            -   class: "UIParticles"
+                name: "Glow"
+                input: false
+                effectPath: "~res:/3d/FX/UI/steps_event_glow.sc2"
+                autoStart: true
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                bindings:
+                - ["visible", "isReadyToComplete"]
+            -   class: "UIControl"
+                name: "Img"
+                input: false
+                components:
+                    Background:
+                        drawType: "DRAW_SCALE_PROPORTIONAL"
+                        colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                bindings:
+                - ["Background.sprite", "unlock.icon"]
+        -   class: "UIControl"
+            name: "Value"
+            input: false
+            classes: "header1 text-color-white"
+            components:
+                Background:
+                    colorInherit: "COLOR_MULTIPLY_ALPHA_ONLY"
+                UITextComponent: {}
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                    bottomAnchor: 12.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens/Fonts.yaml;~res:/UI/Screens/FontsColors.yaml"
+            bindings:
+            - ["UITextComponent.text", "valueString"]

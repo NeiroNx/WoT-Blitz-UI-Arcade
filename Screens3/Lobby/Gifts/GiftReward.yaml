@@ -1,0 +1,59 @@
+Header:
+    version: 140
+Prototypes:
+-   class: "UIControl"
+    name: "GiftReward"
+    size: [1000.000000, 800.000000]
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens3/Lobby/Gifts/GiftReward.animation"
+        ClipContent: {}
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["bool", "forceGfx2", "false", "false"]
+            - ["bool", "bgVisible", "true", "true"]
+            - ["vector<ResourceDetailed>", "rewards", "[ ]", "[ { \"type\" = ResourceType.premium; }; { \"type\" = ResourceType.gold; }; { \"type\" = ResourceType.credits; }; { \"type\" = ResourceType.stuff; }; { \"type\" = ResourceType.unlocks; }; { \"type\" = ResourceType.vehicle; }; ]"]
+            - ["eBlitzDevice", "deviceType", "eBlitzDevice.DEVICE_DESKTOP", "eBlitzDevice.DEVICE_DESKTOP"]
+            events:
+            - "BACK_EVENT"
+            - "ON_REWARD_CLICKED(int index)"
+        UIDataLocalBindingsComponent:
+            data:
+            - ["eResourceLoadingStrategy", "resolution", "when forceGfx2 -> eResourceLoadingStrategy.PreferMaxResolution, eResourceLoadingStrategy.PreferDesired"]
+        UIChildComponent0:
+            prototypePath: "~res:/UI/Screens3/Lobby/Common/CongratulationsDialog.yaml"
+            args:
+                "customBg": "when bgVisible -> Background, EmptyBg"
+                "enableAppearingAnimation": "true"
+                "buttonText": "\"#common:Button/Claim\""
+                "header": "capitalize(localize(\"shop/Congrats/Title\"))"
+                "transparentBg": "not bgVisible"
+                "rewards": "rewards"
+Slots:
+-   class: "UIControl"
+    name: "Background"
+    pivot: [0.500000, 0.500000]
+    input: false
+    components:
+        Background:
+            drawType: "DRAW_SCALE_TO_RECT"
+            sprite: "~res:/Gfx/Lobby/backgrounds/present/bg_gift"
+        UIOpacityComponent: {}
+        Anchor:
+            hCenterAnchorEnabled: true
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfContent"
+            verticalPolicy: "PercentOfContent"
+        ScalePolicy:
+            horizontalFormula: "max(parentSize.X / size.X, parentSize.Y / size.Y)"
+            verticalFormula: "max(parentSize.X / size.X, parentSize.Y / size.Y)"
+    bindings:
+    - ["Background.spriteResource", "resolution"]
+-   class: "UIControl"
+    name: "EmptyBg"
+    input: false

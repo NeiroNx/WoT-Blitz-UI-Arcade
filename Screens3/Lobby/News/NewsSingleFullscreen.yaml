@@ -1,0 +1,190 @@
+Header:
+    version: 120
+Prototypes:
+-   class: "UIControl"
+    name: "NewsSingleItemScreen"
+    size: [1067.000000, 680.000000]
+    input: false
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        ModalInput: {}
+        UIVirtualActionEventComponent0:
+            virtualKeyAction: "Escape"
+            keyDownEvent: "BACK_EVENT_BY_SHORTCUT"
+        UIDataParamsComponent:
+            params:
+            - ["RSSItem", "nextRssItem", "null", "{ \"title\" = \"Ники минаж беременна\"; \"seen\" = true; }"]
+            - ["RSSItem", "rssItem", "null", "{ \"title\" = \"Сиара залетела и родила\"; }"]
+            events: []
+        UIDataLocalVarsComponent:
+            data:
+            - ["bool", "pageLoaded", "false"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["bool", "hasNextNews", "not isNull(nextRssItem)"]
+            writeAllowed: false
+        UIDataLocalControlComponent0:
+            name: "backButton"
+            prototypePath: "~res:/UI/Screens3/Lobby/Common/BackButton.yaml"
+            eventActions:
+            - ["NEXT_NEWS_EVENT", "NEXT_NEWS_EVENT", ""]
+            - ["ON_CLICK_BUTTON", "BACK_EVENT", ""]
+        UIDataLocalControlComponent1:
+            name: "content"
+            prototypePath: "~res:/UI/Screens3/Lobby/Common/Headers/HeaderContent.yaml"
+            args:
+                "rightContent": "when isNull(nextRssItem) -> null, RightContent"
+                "leftContent": "LeftContent"
+                "backButton": "backButton"
+            eventActions:
+            - ["ON_CLICK_BUTTON", "ON_CLICK_BUTTON", ""]
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/Lobby/News/NewsSingleFullscreen.actions"
+        UIDataOnEventComponent0:
+            eventName: "PAGE_LOADED"
+            modelFieldExpression: "pageLoaded"
+            dataExpression: "true"
+    children:
+    -   class: "UIControl"
+        name: "AdditionalBg"
+        size: [32.000000, 32.000000]
+        input: false
+        classes: "black-70-bg"
+        components:
+            Background: {}
+            IgnoreLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+    -   class: "UIControl"
+        name: "NewsHeader"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "FixedSize"
+                verticalValue: 48.000000
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Headers/Header.yaml"
+                args:
+                    "content": "content"
+                    "isFullScreen": "true"
+                    "bgStyle": "\"black-15-bg\""
+                eventActions: []
+    -   class: "UIWebView"
+        name: "WebView"
+        position: [0.000000, 48.000000]
+        backgroundTransparency: true
+        contentSourceType: "Url"
+        urlChangedEventName: "URL_CHANGED"
+        urlChangedEventData: "_newURL"
+        pageLoadedEventName: "PAGE_LOADED"
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        bindings:
+        - ["visible", "pageLoaded"]
+        - ["url", "rssItem.link"]
+Slots:
+-   class: "UIControl"
+    name: "LeftContent"
+    size: [256.000000, 48.000000]
+    input: false
+    components:
+        LinearLayout: {}
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+    children:
+    -   class: "UIControl"
+        name: "Spacer"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 16.000000
+                verticalPolicy: "PercentOfParent"
+    -   class: "UIControl"
+        name: "TItle"
+        input: false
+        classes: "t-subtitle regular white-wild-sand-text"
+        components:
+            UITextComponent:
+                fitting: "FITTING_POINTS"
+                align: ["LEFT", "VCENTER"]
+            Anchor:
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "when parent == 0 -> content, min(parentRest, content)"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml"
+        bindings:
+        - ["UITextComponent.text", "rssItem.title"]
+-   class: "UIControl"
+    name: "RightContent"
+    size: [113.000000, 48.000000]
+    input: false
+    components:
+        LinearLayout:
+            spacing: 16.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "PercentOfParent"
+    children:
+    -   class: "UIControl"
+        name: "TapArea"
+        size: [32.000000, 32.000000]
+        input: true
+        components:
+            IgnoreLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+    -   class: "UIControl"
+        name: "label"
+        position: [24.000000, 0.000000]
+        input: false
+        classes: "t-subtitle regular white-wild-sand-50-text"
+        components:
+            UITextComponent:
+                fitting: "FITTING_POINTS"
+                align: ["LEFT", "VCENTER"]
+            Anchor:
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "when parent == 0 -> content, min(parentRest, content)"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml"
+        bindings:
+        - ["UITextComponent.text", "localize(\"#news:next\")"]
+    -   class: "UIControl"
+        name: "nextArticleButton"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Anchor:
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfMaxChild"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Headers/HeaderButtonWithText.yaml"
+                args:
+                    "badgeIsVisible": "not isNull(nextRssItem) and not nextRssItem.seen"
+                    "text": "when isNull(nextRssItem) -> \"\", nextRssItem.title"
+                    "sound": "eButtonSound.OPEN"
+                    "iconPath": "\"~res:/Gfx/Lobby/icons/icon_chevron_l\""
+                eventActions:
+                - ["ON_CLICK_BUTTON", "NEXT_NEWS_EVENT", ""]

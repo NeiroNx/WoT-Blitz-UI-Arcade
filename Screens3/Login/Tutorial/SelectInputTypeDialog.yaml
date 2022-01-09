@@ -1,0 +1,64 @@
+Header:
+    version: 125
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/Dialog/TextDialog.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "SelectInputTypeDialog"
+    size: [448.000000, 400.000000]
+    input: false
+    components:
+        Anchor:
+            leftAnchorEnabled: true
+            rightAnchorEnabled: true
+            topAnchorEnabled: true
+            bottomAnchorEnabled: true
+        UIVirtualActionEventComponent0:
+            virtualKeyAction: "ActionRight"
+            keyDownEvent: "SLOT_SELECTED"
+            keyDownEventData: "eInputMode.MODE_TOUCHSCREEN"
+        UIVirtualActionEventComponent1:
+            virtualKeyAction: "ActionLeft"
+            keyDownEvent: "SLOT_SELECTED"
+            keyDownEventData: "eInputMode.MODE_KEYBOARD_MOUSE"
+        UIDataLocalVarsComponent:
+            data:
+            - ["eInputMode", "selectedSlot", "eInputMode.MODE_KEYBOARD_MOUSE"]
+        UIDataLocalControlComponent0:
+            name: "InnerContent"
+            prototypePath: "~res:/UI/Screens3/Login/Tutorial/SelectInputTypeDialogContent.yaml"
+            args:
+                "selectedSlot": "selectedSlot"
+            eventActions:
+            - ["SLOT_SELECTED", "SLOT_SELECTED", "_event"]
+        UIDataOnEventComponent0:
+            eventName: "SLOT_SELECTED"
+            modelFieldExpression: "selectedSlot"
+            dataExpression: "_event"
+    children:
+    -   prototype: "TextDialog/TextDialog"
+        name: "TextDialog"
+        components:
+            UIVirtualActionEventComponent2:
+                virtualKeyAction: "ActionLeft"
+                keyDownEvent: "SEND_EVENT_TO_CONTENT"
+                keyDownEventData: "\"SelectLeft\""
+            UIVirtualActionEventComponent3:
+                virtualKeyAction: "ActionRight"
+                keyDownEvent: "SEND_EVENT_TO_CONTENT"
+                keyDownEventData: "\"SelectRight\""
+            UIDataParamsComponent:
+                args:
+                    "type": "eDialogType.PUSH"
+                    "header": "\"hangarTutorial/selectControlType/comment\""
+                    "contentControl": "InnerContent"
+                    "accentButton": "\"#common:DialogButton/Approve\""
+                eventActions:
+                - ["START_CLOSING_ANIMATION", "", ""]
+                - ["ACCENT_CLICKED", "INPUT_TYPE_SELECTED", "selectedSlot"]
+                - ["OPTIONAL_CLICKED", "", ""]
+        children:
+        -   path: "DialogContent/UIScrollView/scrollContainerControl/Content"
+            components:
+                UIChildComponent0:
+                    childType: "kControl"

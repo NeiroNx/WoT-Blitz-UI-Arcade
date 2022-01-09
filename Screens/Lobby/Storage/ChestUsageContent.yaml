@@ -1,0 +1,395 @@
+Header:
+    version: 138
+ImportedPackages:
+- "~res:/UI/Screens3/Common/HorizontalScrollBar.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "ChestUsageContent"
+    size: [960.000000, 640.000000]
+    input: false
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens/Lobby/Storage/ChestUsageContentInit.animation"
+        LinearLayout: {}
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UILayoutEventComponent:
+            sizeChangedEvent: "ScreenSizeChanged"
+            sizeChangedEventData: "_size"
+        UIDataParamsComponent:
+            params:
+            - ["vector2", "spawnPoint", "vec2(0.000000, 0.000000)", "vec2(0.000000, 0.000000)"]
+            - ["vector<ResourceDetailed>", "rewards", "[ ]", "[ { \"type\" = ResourceType.premium; \"basic\" = { \"quantity\" = 86400; }; }; { \"type\" = ResourceType.gold; \"basic\" = { \"quantity\" = 86400; }; }; { \"type\" = ResourceType.credits; \"basic\" = { \"quantity\" = 86400; }; }; { \"type\" = ResourceType.premium; \"basic\" = { \"quantity\" = 86400; }; }; { \"type\" = ResourceType.premium; \"basic\" = { \"quantity\" = 86400; }; }; { \"type\" = ResourceType.premium; \"basic\" = { \"quantity\" = 86400; }; }; ]"]
+            - ["bool", "isAnimationsFinished", "false", "false"]
+            - ["bool", "startProgressAnimation", "false", "false"]
+            - ["ChestParams", "params", "null", "{ }"]
+            - ["eBlitzDevice", "deviceType", "eBlitzDevice.DEVICE_DESKTOP", "eBlitzDevice.DEVICE_DESKTOP"]
+            events:
+            - "ON_REWARD_CLICKED(int index)"
+            - "FADE(float time)"
+            - "CLAIM_REWARDS"
+        UIDataLocalVarsComponent:
+            data:
+            - ["vector2", "screenSize", "vec2(0.000000, 0.000000)"]
+            - ["vector2", "rewardsSize", "vec2(0.000000, 0.000000)"]
+            - ["int", "playIndex", "-1"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["bool", "manyRewards", "rewardsSize.X > screenSize.X"]
+            - ["string", "headerText", "when rewards.Empty() -> \"storage/Items/Chest/EmptyChest/Title\", \"#common:Header/Congrats\""]
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens/Lobby/Storage/ChestUsageContent.actions"
+        UIDataOnEventComponent0:
+            eventName: "ANIMATION_FINISHED"
+            modelFieldExpression: "playIndex"
+            dataExpression: "_event + 1"
+        UIDataOnEventComponent1:
+            eventName: "START_ANIMATIONS"
+            modelFieldExpression: "playIndex"
+            dataExpression: "0"
+        UIEventOnDataComponent0:
+            watchedDataExpression: "playIndex"
+            ifExpression: "playIndex >= 0 and playIndex < rewards.Size()"
+            eventName: "PLAY_ANIMATION"
+            eventData: "playIndex, 0.450000"
+        UIEventOnDataComponent1:
+            watchedDataExpression: "playIndex"
+            ifExpression: "playIndex >= rewards.Size()"
+            eventName: "ALL_ANIMATIONS_FINISHED"
+    children:
+    -   class: "UIControl"
+        name: "SafeArea"
+        input: false
+        components:
+            Anchor:
+                topAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "Formula"
+                verticalFormula: "parent - safeAreaInsets.bottom"
+        children:
+        -   class: "UIControl"
+            name: "Content"
+            input: false
+            components:
+                LinearLayout:
+                    orientation: "TopDown"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            children:
+            -   class: "UIControl"
+                name: "AnimationsHolder"
+                input: false
+                components:
+                    UIOpacityComponent:
+                        opacity: 0.000000
+                    IgnoreLayout: {}
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        horizontalMax: 900.000000
+                        verticalPolicy: "PercentOfMaxChild"
+                    FlowLayout:
+                        alignment: "Center"
+                        hSpacing: 16.000000
+                    UIRepeatComponent:
+                        control: "~res:/UI/Screens3/Lobby/Common/Resource/RewardBig.yaml"
+                        dataContainer: "rewards"
+                        args:
+                            "reward": "_item"
+                            "position": "spawnPoint"
+                            "pivot": "vec2(0.500000, 0.500000)"
+                            "scale": "vec2(0.010000, 0.010000)"
+                            "opacity": "0.000000"
+                        elementNameExpression: "\"Animation\" + str(_index)"
+            -   class: "UIControl"
+                name: "CongratulationsContent"
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                children:
+                -   class: "UIControl"
+                    name: "Group"
+                    input: false
+                    components:
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        LinearLayout:
+                            orientation: "TopDown"
+                            spacing: 40.000000
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfChildrenSum"
+                    children:
+                    -   class: "UIControl"
+                        name: "TextContainer"
+                        input: false
+                        components:
+                            Background: {}
+                            UIOpacityComponent:
+                                opacity: 0.000000
+                            Anchor:
+                                hCenterAnchorEnabled: true
+                                vCenterAnchorEnabled: true
+                            LinearLayout:
+                                orientation: "TopDown"
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                verticalPolicy: "PercentOfChildrenSum"
+                        children:
+                        -   class: "UIControl"
+                            name: "Header"
+                            input: false
+                            classes: "t-title light white-wild-sand-text"
+                            components:
+                                UITextComponent: {}
+                                SizePolicy:
+                                    horizontalPolicy: "PercentOfParent"
+                                    verticalPolicy: "PercentOfContent"
+                                StyleSheet:
+                                    styles: "~res:/UI/Screens3/Font.style.yaml"
+                            bindings:
+                            - ["UITextComponent.text", "localize(headerText)"]
+                        -   class: "UIControl"
+                            name: "Comment"
+                            input: false
+                            classes: "t-body regular white-wild-sand-text"
+                            components:
+                                UITextComponent:
+                                    text: "storage/Items/Chest/EmptyChest/Description"
+                                SizePolicy:
+                                    horizontalPolicy: "PercentOfParent"
+                                    verticalPolicy: "PercentOfContent"
+                                StyleSheet:
+                                    styles: "~res:/UI/Screens3/Font.style.yaml"
+                            bindings:
+                            - ["visible", "rewards.Empty()"]
+                    -   class: "UIScrollView"
+                        name: "ScrollView"
+                        autoUpdate: true
+                        centerContent: true
+                        components:
+                            ClipContent:
+                                bottom: false
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                verticalPolicy: "PercentOfChildrenSum"
+                        children:
+                        -   class: "UIScrollViewContainer"
+                            name: "scrollContainerControl"
+                            refreshStylesOnInteract: false
+                            scrollDirection: "kHorizontal"
+                            components:
+                                SizePolicy:
+                                    horizontalPolicy: "PercentOfFirstChild"
+                                    verticalPolicy: "PercentOfFirstChild"
+                            bindings:
+                            - ["input", "isAnimationsFinished"]
+                            children:
+                            -   class: "UIControl"
+                                name: "ScrollContent"
+                                input: false
+                                components:
+                                    LinearLayout: {}
+                                    SizePolicy:
+                                        horizontalPolicy: "PercentOfChildrenSum"
+                                        verticalPolicy: "PercentOfMaxChild"
+                                children:
+                                -   class: "UIControl"
+                                    name: "LeftInset"
+                                    input: false
+                                    components:
+                                        SizePolicy:
+                                            horizontalPolicy: "Formula"
+                                            horizontalFormula: "safeAreaInsets.left + 32"
+                                            verticalPolicy: "PercentOfParent"
+                                    bindings:
+                                    - ["visible", "manyRewards"]
+                                -   class: "UIControl"
+                                    name: "Rewards"
+                                    input: false
+                                    components:
+                                        SizePolicy:
+                                            horizontalPolicy: "PercentOfChildrenSum"
+                                            verticalPolicy: "PercentOfMaxChild"
+                                        FlowLayout:
+                                            alignment: "Center"
+                                            hSpacing: 16.000000
+                                        UILayoutEventComponent:
+                                            sizeChangedEvent: "RewardsSizeChanged"
+                                            sizeChangedEventData: "_size"
+                                        UIRepeatComponent:
+                                            control: "~res:/UI/Screens3/Lobby/Common/Resource/RewardBig.yaml"
+                                            dataContainer: "rewards"
+                                            args:
+                                                "attachId": "\"reward_\" + str(_index)"
+                                                "isClickable": "true"
+                                                "opacity": "when not isAnimationsFinished -> 0.000000, when _item.type == ResourceType.stuff and not isNull(_item.stuff) and not _item.stuff.hasInStorage -> 0.700000, 1.000000"
+                                                "pivot": "vec2(0.500000, 0.500000)"
+                                                "reward": "_item"
+                                            eventActions:
+                                            - ["ON_REWARD_CLICKED", "ON_REWARD_CLICKED", "_index"]
+                                            elementNameExpression: "\"Reward\" + str(_index)"
+                                -   class: "UIControl"
+                                    name: "RightInset"
+                                    input: false
+                                    components:
+                                        SizePolicy:
+                                            horizontalPolicy: "Formula"
+                                            horizontalFormula: "safeAreaInsets.right + 32"
+                                            verticalPolicy: "PercentOfParent"
+                                    bindings:
+                                    - ["visible", "manyRewards"]
+                        -   prototype: "HorizontalScrollBar/HorizontalScrollBar"
+                            name: "HorizontalScrollBar"
+                            components:
+                                UIOpacityComponent:
+                                    opacity: 0.000000
+                                Anchor:
+                                    bottomAnchor: -8.000000
+                                ScrollBarDelegate:
+                                    delegate: ".."
+                            children:
+                            -   path: "slider"
+                                bindings:
+                                - ["input", "isAnimationsFinished"]
+                                children: []
+                    -   class: "UIControl"
+                        name: "ClaimButtonHolder"
+                        position: [386.000000, 324.000000]
+                        input: false
+                        components:
+                            UIOpacityComponent:
+                                opacity: 0.000000
+                            Anchor:
+                                hCenterAnchorEnabled: true
+                            SizePolicy:
+                                horizontalPolicy: "FixedSize"
+                                horizontalValue: 188.000000
+                                verticalPolicy: "PercentOfFirstChild"
+                            UIChildComponent0:
+                                condition: "not rewards.Empty()"
+                                prototypePath: "~res:/UI/Screens3/Lobby/Common/Button.yaml"
+                                args:
+                                    "locked": "false"
+                                    "caption": "localize(\"#common:Button/Claim\")"
+                                    "type": "eButtonType.POSITIVE"
+                                    "size": "eButtonSize.NORMAL"
+                                    "sound": "eButtonSound.UNKNOWN"
+                                    "enabled": "true"
+                                eventActions:
+                                - ["ON_CLICK_BUTTON", "CLAIM_REWARDS", ""]
+            -   class: "UIControl"
+                name: "FooterHolder"
+                input: false
+                components:
+                    UIOpacityComponent: {}
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfFirstChild"
+                    UIChildComponent0:
+                        condition: "not isNull(params) and params.isRequired"
+                        prototypePath: "~res:/UI/Screens3/Common/Footer.yaml"
+                        args:
+                            "content": "FooterContent"
+                            "bgStyle": "\"black-50-bg\""
+                            "desktopStyle": "\"\""
+                bindings:
+                - ["UIOpacityComponent.opacity", "when isAnimationsFinished -> 1.000000, 0.000000"]
+Slots:
+-   class: "UIControl"
+    name: "FooterContent"
+    size: [960.000000, 0.000000]
+    pivot: [0.000000, 0.500000]
+    input: false
+    components:
+        Anchor:
+            vCenterAnchorEnabled: true
+        LinearLayout: {}
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfMaxChild"
+    children:
+    -   class: "UIControl"
+        name: "LeftSpacer"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+    -   class: "UIControl"
+        name: "Progress"
+        input: false
+        components:
+            LinearLayout:
+                orientation: "TopDown"
+                spacing: 8.000000
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "max(firstChild, 500)"
+                verticalPolicy: "PercentOfChildrenSum"
+        children:
+        -   class: "UIControl"
+            name: "HintLabel"
+            input: false
+            classes: "t-body regular white-wild-sand-text"
+            components:
+                UITextComponent:
+                    text: "storage/Items/BlackFridayEvent/Chest/RequiredStuff"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml"
+        -   class: "UIControl"
+            name: "ProgressBarHolder"
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfFirstChild"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens3/Lobby/Common/ResourceProgressBarAnimated.yaml"
+                    args:
+                        "minimum": "params.resourceProgress.progress.minimum"
+                        "maximum": "params.resourceProgress.progress.maximum"
+                        "value": "params.resourceProgress.progress.value"
+                        "bonus": "params.resourceProgress.progress.bonus"
+                        "resource": "params.resourceProgress.resource"
+                        "colorStyle": "\"yellow-chalky-bg\""
+                        "startAnimation": "startProgressAnimation"
+                        "animationTime": "0.600000"
+                    eventActions:
+                    - ["ON_ANIMATION_FINISHED", "", ""]
+    -   class: "UIControl"
+        name: "RightSpacer"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "RewardImage"
+            input: false
+            components:
+                UITextureComponent:
+                    drawType: "DRAW_SCALE_PROPORTIONAL"
+                    perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                Anchor:
+                    leftAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "min(parent - 8, 160)"
+                    verticalPolicy: "Formula"
+                    verticalFormula: "min(parent - 8, 100)"
+            bindings:
+            - ["UITextureComponent.spritePath", "params.rewardImage"]

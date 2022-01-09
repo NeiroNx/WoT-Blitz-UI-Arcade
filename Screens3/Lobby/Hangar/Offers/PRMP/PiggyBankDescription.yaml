@@ -1,0 +1,42 @@
+Header:
+    version: 128
+Prototypes:
+-   class: "UIControl"
+    name: "PiggyBankDescription"
+    size: [300.000000, 960.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfFirstChild"
+        UIDataParamsComponent:
+            params:
+            - ["PiggyBankState", "piggyBank", "null", "{ }"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["bool", "fullMoneyBox", "piggyBank.current.quantity >= piggyBank.max.quantity"]
+        UIChildComponent0:
+            childType: "kControl"
+            condition: "fullMoneyBox"
+            control: "CompletedStatus"
+        UIChildComponent1:
+            childType: "kPrototype"
+            prototypePath: "~res:/UI/Screens3/Lobby/Hangar/Offers/PRMP/PiggyBankFillMethod.yaml"
+            args:
+                "piggyBank": "piggyBank"
+Slots:
+-   class: "UIControl"
+    name: "CompletedStatus"
+    size: [581.000000, 248.000000]
+    input: false
+    classes: "t-subtitle regular white-wild-sand-text"
+    components:
+        UITextComponent:
+            text: "piggy_bank/offer/full"
+            multiline: "MULTILINE_ENABLED"
+            align: ["LEFT", "VCENTER"]
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfContent"
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Font.style.yaml"

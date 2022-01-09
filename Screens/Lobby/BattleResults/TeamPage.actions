@@ -1,0 +1,4 @@
+action AVATAR_IMAGE_LOADED
+{
+    PlayFrameAnimation("**/Avatar", -1, 12);
+}

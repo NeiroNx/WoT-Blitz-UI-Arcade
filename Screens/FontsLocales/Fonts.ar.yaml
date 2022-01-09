@@ -1,0 +1,9 @@
+Header:
+    version: "24"
+StyleSheets:
+-   selector: ".ar.bold"
+    properties:
+        text-fontPath: "~res:/Fonts/cfg/BadiyaLTBold.fntconf"
+-   selector: ".ar.regular"
+    properties:
+        text-fontPath: "~res:/Fonts/cfg/BadiyaLTRegular.fntconf"

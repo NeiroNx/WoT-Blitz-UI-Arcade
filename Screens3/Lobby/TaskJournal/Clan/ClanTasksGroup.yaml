@@ -1,0 +1,118 @@
+Header:
+    version: 133
+Prototypes:
+-   class: "UIControl"
+    name: "ClanTasksGroup"
+    size: [800.000000, 64.000000]
+    input: false
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfChildrenSum"
+        UIAttachLayoutMasterComponent: {}
+        UIDataParamsComponent:
+            params:
+            - ["bool", "isButtonsLocked", "false", "false"]
+            - ["eClanTasksGroup", "group", "eClanTasksGroup.Daily", "eClanTasksGroup.Daily"]
+            - ["int64", "resetTime", "0L", "1L"]
+            - ["int64", "serverTime", "0L", "0L"]
+            - ["vector<TaskJournalTaskView>", "tasks", "[ ]", "[ { }; { }; { }; ]"]
+            events:
+            - "CLAN_TASKS_COLLECT_QUEST(int slotIndex)"
+            - "ON_CLAN_TASK_REWARD_CLICKED(eClanTasksGroup group, int slotIndex, int rewardIndex)"
+        UIDataLocalVarsComponent:
+            data:
+            - ["string", "attachId", "when group == eClanTasksGroup.Daily -> \"CLAN_TASKS_DAILY\", group == eClanTasksGroup.Weekly -> \"CLAN_TASKS_WEEKLY\", group == eClanTasksGroup.Taken -> \"CLAN_TASKS_COMPLETED\", \"\""]
+            - ["string", "headerCaption", "when group == eClanTasksGroup.Daily -> \"clanMissions/missionScreen/daily\", group == eClanTasksGroup.Weekly -> \"clanMissions/missionScreen/weekly\", group == eClanTasksGroup.Taken -> \"clanMissions/missionScreen/completed\", \"\""]
+    bindings:
+    - ["visible", "tasks.Size() > 0"]
+    - ["UIAttachLayoutMasterComponent.attachId", "attachId + \"_QUESTS\""]
+    children:
+    -   class: "UIControl"
+        name: "Header"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "FixedSize"
+                verticalValue: 34.000000
+        children:
+        -   class: "UIControl"
+            name: "Left"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                LinearLayout: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfParent"
+            children:
+            -   class: "UIControl"
+                name: "Caption"
+                input: false
+                classes: "t-subtitle bold color=white-wild-sand-text"
+                components:
+                    UITextComponent:
+                        colorInheritType: "COLOR_IGNORE_PARENT"
+                        align: ["LEFT", "VCENTER"]
+                    Anchor:
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+                bindings:
+                - ["UITextComponent.text", "localize(headerCaption)"]
+            -   class: "UIControl"
+                name: "CaptionAnchor"
+                size: [10.000000, 32.000000]
+                input: false
+                components:
+                    UIAttachLayoutMasterComponent: {}
+                bindings:
+                - ["UIAttachLayoutMasterComponent.attachId", "attachId + \"_CAPTION\""]
+        -   class: "UIControl"
+            name: "Timer"
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIAttachLayoutMasterComponent: {}
+                UIInputEventComponent: {}
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens3/Lobby/Common/Timer.yaml"
+                    args:
+                        "serverTime": "serverTime"
+                        "time": "resetTime"
+                        "alertTime": "0L"
+            bindings:
+            - ["visible", "resetTime != 0L"]
+            - ["UIAttachLayoutMasterComponent.attachId", "attachId + \"_TIMER\""]
+    -   class: "UIControl"
+        name: "Tasks"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            LinearLayout:
+                orientation: "TopDown"
+                spacing: 1.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfChildrenSum"
+            UIRepeatComponent:
+                control: "~res:/UI/Screens3/Lobby/TaskJournal/TaskJournalListCell.yaml"
+                dataContainer: "tasks"
+                args:
+                    "isButtonLocked": "isButtonsLocked"
+                    "task": "_item"
+                eventActions:
+                - ["APPLY_QUEST_PRESSED", "CLAN_TASKS_COLLECT_QUEST", "_event.slotIndex"]
+                - ["ON_TASK_REWARD_CLICKED", "ON_CLAN_TASK_REWARD_CLICKED", "group, _event.slotIndex, _event.rewardIndex"]
+                elementNameExpression: "\"task_slot_\" + str(_item.slotIndex)"

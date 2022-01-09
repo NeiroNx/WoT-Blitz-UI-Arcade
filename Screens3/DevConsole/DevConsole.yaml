@@ -1,0 +1,415 @@
+Header:
+    version: 140
+Prototypes:
+-   class: "UIControl"
+    name: "DevConsole"
+    size: [960.000000, 640.000000]
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens3/DevConsole/DevConsoleInitialization.animation"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        ModalInput: {}
+        UIInputEventComponent:
+            onTouchUpInside: "CLOSE_CONSOLE"
+        UIShortcutEventComponent:
+            shortcuts: "BROWSE_HISTORY_PREV,Up;BROWSE_HISTORY_NEXT,Down;SEARCH,F3;BROWSE_COMPLETIONS_NEXT,Tab;EXECUTE_COMMAND,Enter;AUTOCOMPLETE,F2;BROWSE_COMPLETIONS_PREV,SHIFT+Tab"
+        UIDataParamsComponent:
+            params:
+            - ["AppDataModel", "app", "null", "{ \"constants\" = { \"desktop\" = false; }; }"]
+            - ["DevConsoleViewModel", "console", "null", "{ }"]
+            events:
+            - "CLOSE_CONSOLE"
+            - "INPUT_CHANGED(string text)"
+            - "EXECUTE_AUTOCOMPLETION(int index)"
+            - "EXECUTE_COMMAND"
+            - "BROWSE_HISTORY_PREV"
+            - "BROWSE_HISTORY_NEXT"
+            - "BROWSE_COMPLETIONS_NEXT"
+            - "BROWSE_COMPLETIONS_PREV"
+            - "SEARCH"
+            - "AUTOCOMPLETE"
+            - "GO_TO_ARTICLE"
+        UIDataLocalVarsComponent:
+            data:
+            - ["bool", "searchActive", "false"]
+            - ["int", "searchIndex", "0"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["int", "prevHistoryIndex", "max(0, console.historyIndex - 1)"]
+            - ["int", "nextHistoryIndex", "console.historyIndex + 1"]
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/DevConsole/DevConsole.actions"
+    children:
+    -   class: "UIControl"
+        name: "Console"
+        input: false
+        classes: "grey-shark-80-bg white-wild-sand-border"
+        components:
+            Background: {}
+            UIOpacityComponent: {}
+            BorderComponent:
+                border-outer: true
+            Anchor:
+                leftAnchorEnabled: true
+                topAnchorEnabled: true
+            LinearLayout:
+                orientation: "TopDown"
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+                verticalValue: 45.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+        children:
+        -   class: "UIControl"
+            name: "Output"
+            components:
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            children:
+            -   class: "UIScrollView"
+                name: "UIScrollView"
+                autoUpdate: true
+                components:
+                    Anchor:
+                        leftAnchorEnabled: true
+                        leftAnchor: 6.000000
+                        rightAnchorEnabled: true
+                        rightAnchor: 6.000000
+                    SizePolicy:
+                        verticalPolicy: "PercentOfParent"
+                children:
+                -   class: "UIScrollViewContainer"
+                    name: "scrollContainerControl"
+                    scrollDirection: "kVertical"
+                    components:
+                        LinearLayout:
+                            orientation: "TopDown"
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfChildrenSum"
+                    children:
+                    -   class: "UIControl"
+                        name: "LogLines"
+                        input: false
+                        components:
+                            LinearLayout:
+                                orientation: "TopDown"
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                verticalPolicy: "PercentOfChildrenSum"
+                            UIRepeatComponent:
+                                control: "~res:/UI/Screens3/DevConsole/DevConsoleLine.yaml"
+                                dataContainer: "console.lines"
+                                args:
+                                    "text": "_item"
+                                    "highlight": "searchActive and _index == searchIndex"
+                                loadingPolicy: "Lazy"
+                                loadingDistance: 200.000000
+                                unloadingDistance: 300.000000
+                    -   class: "UIControl"
+                        name: "BottomScrollAnchor"
+                        input: false
+        -   class: "UIControl"
+            name: "HelpContainer"
+            input: false
+            components:
+                LinearLayout:
+                    padding: "6"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   class: "UIControl"
+                name: "Line"
+                input: false
+                classes: "white-wild-sand-10-bg"
+                components:
+                    Background: {}
+                    IgnoreLayout: {}
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 1.000000
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+            -   class: "UIControl"
+                name: "Hint"
+                input: false
+                classes: "t-body regular white-wild-sand-text"
+                components:
+                    UITextComponent:
+                        text: "Enter command or type 'help' for commands list. For more info, visit "
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfContent"
+                        verticalPolicy: "PercentOfContent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml"
+            -   class: "UIControl"
+                name: "ConfluenceLink"
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfFirstChild"
+                        verticalPolicy: "PercentOfFirstChild"
+                    UIChildComponent0:
+                        prototypePath: "~res:/UI/Screens3/Lobby/Common/RichTextLink.yaml"
+                        args:
+                            "baseFontSize": "\"t-body\""
+                            "key": "\"Confluence\""
+                        eventActions:
+                        - ["LINK_PRESSED", "GO_TO_ARTICLE", ""]
+        -   class: "UIControl"
+            name: "InterractiveControls"
+            input: false
+            classes: "grey-shark-80-bg"
+            components:
+                Background: {}
+                LinearLayout:
+                    padding: "0; 6"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 40.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+            children:
+            -   class: "UIControl"
+                name: "InputArea"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    LinearLayout: {}
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                    UILayoutEventComponent: {}
+                children:
+                -   class: "UITextField"
+                    name: "UITextField"
+                    fontPath: "~res:/Fonts/HelveticaNeueWorld-55Roman.ttf"
+                    fontSize: 15.000000
+                    textcolor: [0.960784, 0.960784, 0.960784, 1.000000]
+                    selectioncolor: [0.000000, 1.000000, 0.000000, 0.701961]
+                    startEditPolicy: "WhenFocused"
+                    stopEditPolicy: "WhenFocusLost"
+                    components:
+                        Anchor:
+                            leftAnchorEnabled: true
+                            leftAnchor: 6.000000
+                            rightAnchorEnabled: true
+                            rightAnchor: 6.000000
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfParent"
+                        UIInputEventComponent:
+                            onValueChanged: "INPUT_CHANGED"
+                            onValueChangedData: "_text"
+                            onEditingFinished: "INPUT_CHANGED"
+                            onEditingFinishedData: "_text"
+                        Focus:
+                            state: "Enabled"
+                            requestFocus: true
+                    bindings:
+                    - ["text", "console.input"]
+            -   class: "UIControl"
+                name: "AutoCompleteAnchor"
+                input: false
+                components:
+                    Anchor:
+                        leftAnchorEnabled: true
+                        topAnchorEnabled: true
+                    IgnoreLayout: {}
+                children:
+                -   class: "UIControl"
+                    name: "AutoCompletions"
+                    pivot: [0.000000, 1.000000]
+                    input: false
+                    classes: "grey-shark-bg"
+                    components:
+                        Background: {}
+                        SizePolicy:
+                            horizontalPolicy: "Formula"
+                            horizontalFormula: "firstChild + 8"
+                            verticalPolicy: "Formula"
+                            verticalFormula: "firstChild + 8"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Color.style.yaml"
+                    children:
+                    -   class: "UIControl"
+                        name: "List"
+                        input: false
+                        components:
+                            Background: {}
+                            Anchor:
+                                hCenterAnchorEnabled: true
+                                vCenterAnchorEnabled: true
+                            LinearLayout:
+                                orientation: "TopDown"
+                                padding: "4"
+                                spacing: 4.000000
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfMaxChild"
+                                verticalPolicy: "PercentOfChildrenSum"
+                            UIRepeatComponent:
+                                control: "~res:/UI/Screens3/DevConsole/DevConsoleAutocompleteItem.yaml"
+                                dataContainer: "console.completions"
+                                args:
+                                    "selected": "_index == console.selectedCompletion"
+                                    "command": "_item"
+                                eventActions:
+                                - ["PRESSED", "EXECUTE_AUTOCOMPLETION", "_index"]
+            -   class: "UIControl"
+                name: "NonDesktopControls"
+                input: false
+                components:
+                    Anchor:
+                        bottomAnchorEnabled: true
+                    LinearLayout:
+                        orientation: "TopDown"
+                        spacing: 8.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfMaxChild"
+                        verticalPolicy: "PercentOfChildrenSum"
+                bindings:
+                - ["visible", "not app.constants.desktop"]
+                children:
+                -   class: "UIControl"
+                    name: "InputConsumer"
+                    components:
+                        Anchor:
+                            rightAnchorEnabled: true
+                            bottomAnchorEnabled: true
+                        IgnoreLayout: {}
+                        SizePolicy:
+                            horizontalPolicy: "Formula"
+                            horizontalFormula: "parent + 24"
+                            verticalPolicy: "Formula"
+                            verticalFormula: "parent + 24"
+                -   class: "UIControl"
+                    name: "HistoryButtons"
+                    size: [32.000000, 32.000000]
+                    input: false
+                    components:
+                        LinearLayout:
+                            spacing: 8.000000
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfMaxChild"
+                    children:
+                    -   class: "UIControl"
+                        name: "PrevCommand"
+                        classes: "grey-shark-80-bg"
+                        components:
+                            Background: {}
+                            BorderComponent: {}
+                            LinearLayout:
+                                orientation: "TopDown"
+                                dynamicPadding: true
+                                spacing: 4.000000
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                verticalPolicy: "Formula"
+                                verticalFormula: "childrenSum + 16"
+                            UIInputEventComponent:
+                                onTouchUpInside: "BROWSE_HISTORY_PREV"
+                        children:
+                        -   class: "UIControl"
+                            name: "Title"
+                            input: false
+                            classes: "t-body bold white-wild-sand-text"
+                            components:
+                                UITextComponent:
+                                    text: "Previous:"
+                                Anchor:
+                                    hCenterAnchorEnabled: true
+                                SizePolicy:
+                                    horizontalPolicy: "PercentOfContent"
+                                    verticalPolicy: "PercentOfContent"
+                                StyleSheet:
+                                    styles: "~res:/UI/Screens3/Font.style.yaml"
+                        -   class: "UIControl"
+                            name: "Command"
+                            input: false
+                            classes: "t-body regular white-wild-sand-text"
+                            components:
+                                UITextComponent:
+                                    fitting: "FITTING_POINTS"
+                                Anchor:
+                                    hCenterAnchorEnabled: true
+                                SizePolicy:
+                                    horizontalPolicy: "Formula"
+                                    horizontalFormula: "parent - 8"
+                                    verticalPolicy: "PercentOfContent"
+                                StyleSheet:
+                                    styles: "~res:/UI/Screens3/Font.style.yaml"
+                            bindings:
+                            - ["UITextComponent.text", "when prevHistoryIndex >= 0 and prevHistoryIndex < console.commandsHistory.Size() -> console.commandsHistory[prevHistoryIndex], \"-\""]
+                    -   class: "UIControl"
+                        name: "NextCommand"
+                        classes: "grey-shark-80-bg"
+                        components:
+                            Background: {}
+                            BorderComponent: {}
+                            LinearLayout:
+                                orientation: "TopDown"
+                                dynamicPadding: true
+                                spacing: 4.000000
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                verticalPolicy: "Formula"
+                                verticalFormula: "childrenSum + 16"
+                            UIInputEventComponent:
+                                onTouchUpInside: "BROWSE_HISTORY_NEXT"
+                        children:
+                        -   class: "UIControl"
+                            name: "Title"
+                            input: false
+                            classes: "t-body bold white-wild-sand-text"
+                            components:
+                                UITextComponent:
+                                    text: "Next:"
+                                Anchor:
+                                    hCenterAnchorEnabled: true
+                                SizePolicy:
+                                    horizontalPolicy: "PercentOfContent"
+                                    verticalPolicy: "PercentOfContent"
+                                StyleSheet:
+                                    styles: "~res:/UI/Screens3/Font.style.yaml"
+                        -   class: "UIControl"
+                            name: "Command"
+                            input: false
+                            classes: "t-body regular white-wild-sand-text"
+                            components:
+                                UITextComponent:
+                                    fitting: "FITTING_POINTS"
+                                Anchor:
+                                    hCenterAnchorEnabled: true
+                                SizePolicy:
+                                    horizontalPolicy: "Formula"
+                                    horizontalFormula: "parent - 8"
+                                    verticalPolicy: "PercentOfContent"
+                                StyleSheet:
+                                    styles: "~res:/UI/Screens3/Font.style.yaml"
+                            bindings:
+                            - ["UITextComponent.text", "when nextHistoryIndex >= 0 and nextHistoryIndex < console.commandsHistory.Size() -> console.commandsHistory[nextHistoryIndex], \"-\""]
+                -   class: "UIControl"
+                    name: "ExecuteButton"
+                    classes: "t-subtitle bold white-wild-sand-text grey-shark-80-bg"
+                    components:
+                        Background: {}
+                        UITextComponent:
+                            text: "EXECUTE"
+                        BorderComponent: {}
+                        SizePolicy:
+                            horizontalPolicy: "FixedSize"
+                            horizontalValue: 300.000000
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 40.000000
+                        UIInputEventComponent:
+                            onTouchUpInside: "EXECUTE_COMMAND"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Font.style.yaml"

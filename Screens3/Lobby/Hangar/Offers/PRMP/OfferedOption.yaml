@@ -1,0 +1,430 @@
+Header:
+    version: 138
+Prototypes:
+-   class: "UIControl"
+    name: "OfferedOption"
+    classes: "offered-option button-open-sound"
+    components:
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 272.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 412.000000
+        UIInputEventComponent:
+            onTouchUpInside: "SHOW_OPTION_PRODUCT"
+            blockDuplicatedEvents: true
+        UIDataParamsComponent:
+            params:
+            - ["OfferedOption", "option", "null", "{ \"outlined\" = true; \"type\" = eOfferedOptionType.Premium; \"title\" = \"Набор one two three four five six seven \"; }"]
+            - ["bool", "persistent", "false", "true"]
+            - ["bool", "timeLimited", "false", "true"]
+            - ["bool", "desktop", "false", "true"]
+            - ["string", "taxMessage", "\"\"", "\"All prices include taxes\""]
+            - ["bool", "nintendoSwitch", "false", "true"]
+            - ["bool", "shortFullPrice", "false", "false"]
+            events:
+            - "SHOW_OPTION_PRODUCT"
+            - "PREVIEW_TANK"
+            - "PURCHASE_OPTION"
+        UIDataLocalBindingsComponent:
+            data:
+            - ["eButtonType", "buttonType", "when option.type == eOfferedOptionType.Premium -> eButtonType.ALTERNATIVE, eButtonType.POSITIVE"]
+            - ["string", "outlineColor", "when option.type == eOfferedOptionType.Simple -> \"green-la-palma-border\", option.type == eOfferedOptionType.Premium -> \"orange-orange-peel-border\", \"\""]
+            - ["bool", "requiresEShopButton", "nintendoSwitch and not option.offeredProduct.salePrice.resources.Empty() and option.offeredProduct.salePrice.resources[0].type == ResourceType.real_currency"]
+            - ["bool", "productDepleted", "option.offeredProduct.xTimed and not option.offeredProduct.pendingPurchase and option.offeredProduct.availableAmount < 1"]
+        Sound: {}
+        StyleSheet:
+            styles: "~res:/UI/Screens3/ButtonSound.style.yaml;~res:/UI/Screens3/Common/Touch.style.yaml;~res:/UI/Screens3/Common/Hover.style.yaml"
+    bindings:
+    - ["visible", "option.valid"]
+    - ["input", "not productDepleted and not option.offeredProduct.pendingPurchase"]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        pivot: [0.500000, 0.500000]
+        input: false
+        classes: "content-area"
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 272.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 412.000000
+        children:
+        -   class: "UIControl"
+            name: "Image"
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_TO_RECT"
+                UIUrlImageComponent: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            bindings:
+            - ["UIUrlImageComponent.imageUrl", "option.backgroundUrl"]
+        -   class: "UIControl"
+            name: "Description"
+            input: false
+            components:
+                ClipContent: {}
+                LinearLayout:
+                    orientation: "TopDown"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            children:
+            -   class: "UIControl"
+                name: "Header"
+                input: false
+                components:
+                    LinearLayout:
+                        padding: "18"
+                        dynamicPadding: true
+                        spacing: 12.000000
+                        useRtl: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "FixedSize"
+                        verticalValue: 76.000000
+                children:
+                -   class: "UIControl"
+                    name: "Image"
+                    input: false
+                    components:
+                        Background:
+                            drawType: "DRAW_SCALE_TO_RECT"
+                        UIUrlImageComponent: {}
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "FixedSize"
+                            horizontalValue: 48.000000
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 48.000000
+                    bindings:
+                    - ["visible", "not empty(option.titleIconUrl)"]
+                    - ["UIUrlImageComponent.imageUrl", "option.titleIconUrl"]
+                -   class: "UIControl"
+                    name: "Title"
+                    input: false
+                    classes: "t-subtitle bold white-wild-sand-text"
+                    components:
+                        UITextComponent:
+                            align: ["LEFT", "VCENTER"]
+                        SizePolicy:
+                            horizontalPolicy: "Formula"
+                            horizontalFormula: "min(content, parent)"
+                            verticalPolicy: "PercentOfParent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Font.style.yaml"
+                    bindings:
+                    - ["UITextComponent.text", "option.title"]
+            -   class: "UIControl"
+                name: "Sections"
+                input: false
+                components:
+                    LinearLayout:
+                        orientation: "TopDown"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfChildrenSum"
+                    UIRepeatComponent:
+                        control: "~res:/UI/Screens3/Lobby/Hangar/Offers/PRMP/OfferedOptionSection.yaml"
+                        dataContainer: "option.description"
+                        args:
+                            "section": "_item"
+        -   class: "UIControl"
+            name: "Outline"
+            input: false
+            components:
+                BorderComponent:
+                    border-thickness: 2U
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+            bindings:
+            - ["visible", "option.outlined"]
+            - ["classes", "outlineColor"]
+        -   class: "UIControl"
+            name: "PricingAdditionalInfo"
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    topAnchorEnabled: true
+                    topAnchor: 447.000000
+                LinearLayout:
+                    orientation: "TopDown"
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfChildrenSum"
+            bindings:
+            - ["visible", "not productDepleted"]
+            children:
+            -   class: "UIControl"
+                name: "SalePrice"
+                input: false
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfFirstChild"
+                        verticalPolicy: "PercentOfFirstChild"
+                    UIChildComponent0:
+                        condition: "(requiresEShopButton or not (option.buttonText.empty())) and not productDepleted"
+                        prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/Currencies.yaml"
+                        args:
+                            "forButton": "true"
+                            "currencySize": "eCurrencySize.BUTTON_BOLD"
+                            "price": "option.offeredProduct.salePrice"
+            -   class: "UIControl"
+                name: "PricingAdditionalInfo"
+                input: false
+                components:
+                    UIOpacityComponent:
+                        opacity: 0.500000
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                    LinearLayout:
+                        orientation: "TopDown"
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfMaxChild"
+                        verticalPolicy: "PercentOfChildrenSum"
+                children:
+                -   class: "UIControl"
+                    name: "FullPrice"
+                    input: false
+                    components:
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                        LinearLayout:
+                            spacing: 4.000000
+                            useRtl: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfChildrenSum"
+                            verticalPolicy: "PercentOfMaxChild"
+                    bindings:
+                    - ["visible", "option.offeredProduct.fullPriceValid"]
+                    children:
+                    -   class: "UIControl"
+                        name: "OldPrice"
+                        input: false
+                        classes: "t-button bold white-wild-sand-text"
+                        components:
+                            UITextComponent:
+                                text: "multi_offer/full_price"
+                            Anchor:
+                                bottomAnchorEnabled: true
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfContent"
+                                verticalPolicy: "PercentOfContent"
+                            StyleSheet:
+                                styles: "~res:/UI/Screens3/Font.style.yaml"
+                        bindings:
+                        - ["visible", "not shortFullPrice"]
+                        children:
+                        -   class: "UIControl"
+                            name: "CrossOut"
+                            input: false
+                            classes: "white-wild-sand-bg"
+                            components:
+                                Background: {}
+                                Anchor:
+                                    vCenterAnchorEnabled: true
+                                    vCenterAnchor: 1.000000
+                                IgnoreLayout: {}
+                                SizePolicy:
+                                    horizontalPolicy: "PercentOfParent"
+                                    verticalPolicy: "FixedSize"
+                                    verticalValue: 1.000000
+                                StyleSheet:
+                                    styles: "~res:/UI/Screens3/Color.style.yaml"
+                    -   class: "UIControl"
+                        name: "FullPrice"
+                        input: false
+                        components:
+                            Anchor: {}
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfFirstChild"
+                                verticalPolicy: "PercentOfFirstChild"
+                            UIChildComponent0:
+                                condition: "option.offeredProduct.fullPriceValid and not productDepleted"
+                                prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/Currencies.yaml"
+                                args:
+                                    "forButton": "false"
+                                    "currencySize": "eCurrencySize.BUTTON_BOLD"
+                                    "price": "option.offeredProduct.fullPrice"
+                                    "crossOut": "true"
+                -   class: "UIControl"
+                    name: "TaxMessage"
+                    input: false
+                    classes: "t-caps regular white-wild-sand-text"
+                    components:
+                        UITextComponent: {}
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfContent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Font.style.yaml"
+                    bindings:
+                    - ["visible", "not empty(taxMessage) and requiresEShopButton"]
+                    - ["UITextComponent.text", "taxMessage"]
+        -   class: "UIControl"
+            name: "PreviewButton"
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                    bottomAnchor: 32.000000
+                IgnoreLayout: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfFirstChild"
+                    verticalPolicy: "PercentOfFirstChild"
+                UIChildComponent0:
+                    condition: "timeLimited and option.offeredProduct.previewTank != 0 and not productDepleted"
+                    prototypePath: "~res:/UI/Screens3/Lobby/Common/IconButton.yaml"
+                    args:
+                        "enabled": "not option.offeredProduct.pendingPurchase"
+                        "type": "eButtonType.OPTIONAL_LIGHT"
+                        "image": "\"~res:/Gfx/Lobby/icons/icon_eye_s\""
+                        "visible": "true"
+                    eventActions:
+                    - ["ON_CLICK_BUTTON", "PREVIEW_TANK", ""]
+        -   class: "UIControl"
+            name: "DepletedBg"
+            input: false
+            classes: "black-50-bg"
+            components:
+                Background: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+            bindings:
+            - ["visible", "productDepleted"]
+        -   class: "UIControl"
+            name: "RemainingProducts"
+            input: false
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    leftAnchor: -4.000000
+                    bottomAnchorEnabled: true
+                    bottomAnchor: 32.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfFirstChild"
+                    verticalPolicy: "PercentOfFirstChild"
+                UIChildComponent0:
+                    condition: "option.offeredProduct.xTimed and (persistent or option.offeredProduct.availableAmount == 0)"
+                    prototypePath: "~res:/UI/Screens3/Lobby/Hangar/Offers/PRMP/Common/XTimeLabel.yaml"
+                    args:
+                        "product": "option.offeredProduct"
+        -   class: "UIControl"
+            name: "Hover"
+            input: false
+            classes: "white-wild-sand-10-bg hover"
+            components:
+                Background: {}
+                UIOpacityComponent: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/Common/Hover.style.yaml"
+        -   class: "UIControl"
+            name: "Discount"
+            input: false
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+                    rightAnchor: -4.000000
+                    topAnchorEnabled: true
+                    topAnchor: -4.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfFirstChild"
+                    verticalPolicy: "PercentOfFirstChild"
+                UIChildComponent0:
+                    condition: "option.offeredProduct.discountValue != 0 and not productDepleted"
+                    prototypePath: "~res:/UI/Screens3/Common/DiscountLabel.yaml"
+                    args:
+                        "size": "eDiscountLabelSize.Medium"
+                        "discount": "option.offeredProduct.discountValue"
+        -   class: "UIControl"
+            name: "BottomAnchor"
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    bottomAnchorEnabled: true
+            children:
+            -   class: "UIControl"
+                name: "ButtonHolder"
+                pivot: [0.500000, 0.500000]
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfLastChild"
+                        verticalPolicy: "PercentOfLastChild"
+                children:
+                -   class: "UIControl"
+                    name: "DisabledButtonBackground"
+                    input: false
+                    classes: "black-bg"
+                    components:
+                        Background: {}
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfParent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Color.style.yaml"
+                    bindings:
+                    - ["visible", "option.offeredProduct.pendingPurchase"]
+                -   class: "UIControl"
+                    name: "BuyButton"
+                    input: false
+                    components:
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfFirstChild"
+                            verticalPolicy: "PercentOfFirstChild"
+                        UIChildComponent0:
+                            condition: "not option.buttonText.empty() and not productDepleted"
+                            prototypePath: "~res:/UI/Screens3/Lobby/Common/Button.yaml"
+                            args:
+                                "isLoading": "option.offeredProduct.pendingPurchase"
+                                "caption": "option.buttonText"
+                                "size": "eButtonSize.NORMAL"
+                                "sound": "eButtonSound.OK"
+                                "type": "buttonType"
+                            eventActions:
+                            - ["ON_CLICK_BUTTON", "PURCHASE_OPTION", ""]
+                        UIChildComponent1:
+                            condition: "requiresEShopButton and not productDepleted"
+                            prototypePath: "~res:/UI/Screens3/Lobby/Common/Button.yaml"
+                            args:
+                                "isLoading": "option.offeredProduct.pendingPurchase"
+                                "type": "buttonType"
+                                "size": "eButtonSize.NORMAL"
+                                "sound": "eButtonSound.OK"
+                                "caption": "\"shop/eShop/NS\""
+                            eventActions:
+                            - ["ON_CLICK_BUTTON", "PURCHASE_OPTION", ""]
+                        UIChildComponent2:
+                            condition: "not productDepleted"
+                            prototypePath: "~res:/UI/Screens3/Lobby/Common/Button/PriceButton.yaml"
+                            args:
+                                "loading": "option.offeredProduct.pendingPurchase"
+                                "price": "option.offeredProduct.salePrice"
+                                "type": "buttonType"
+                                "desktop": "desktop"
+                            eventActions:
+                            - ["ON_CLICK_BUTTON", "PURCHASE_OPTION", ""]

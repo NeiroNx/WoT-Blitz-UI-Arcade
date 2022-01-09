@@ -1,0 +1,214 @@
+Header:
+    version: "85"
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/AmmoItem.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "InventoryAmmoInfoBody"
+    size: [700.000000, 600.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["InventoryAmmoSlot", "slot", "null", "{ shellTitle = \"Осколочно-фугасный снаряд\"; shellDesc = \"УОФ — 365БМ100\"; shellHint = \"Осколочно-фугасный снаряд (ОФ) — обладает низкой бронепробиваемостью. Если снаряд всё же пробивает броню, он низкий высокий урон. При столкновении с препятствием снаряд взрывается и может нанести небольшой урон от разлёта осколков. Наиболее эффективен при использовании в орудиях с калибром 152мм. Не рекошетит.\"; isExplosive = true; }"]
+        UIDataLocalsComponent:
+            locals:
+            - ["int", "iconFrame", "when slot.iconType == \"ap\" -> 0, when slot.iconType == \"ap_premium\" -> 1, when slot.iconType == \"ap_cr\" -> 2, when slot.iconType == \"he\" -> 3, when slot.iconType == \"he_premium\" -> 4, when slot.iconType == \"hc\" -> 5, when slot.iconType == \"atgm_heat\" -> 6, when slot.iconType == \"atgm_he\" -> 7, 0"]
+    children:
+    -   class: "UIControl"
+        name: "InfoContainer"
+        position: [100.000000, 150.000000]
+        size: [500.000000, 300.000000]
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                orientation: "TopDown"
+                spacing: 16.000000
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 500.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 300.000000
+        children:
+        -   class: "UIControl"
+            name: "HeaderGroup"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Anchor:
+                    leftAnchorEnabled: true
+                    rightAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   class: "UIControl"
+                name: "IconHolder"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    Anchor:
+                        leftAnchorEnabled: true
+                        hCenterAnchorEnabled: true
+                        hCenterAnchor: -100.000000
+                    SizePolicy:
+                        verticalPolicy: "PercentOfFirstChild"
+                children:
+                -   class: "UIControl"
+                    name: "Icon"
+                    size: [96.000000, 96.000000]
+                    input: false
+                    components:
+                        UITextureComponent:
+                            spritePath: "~res:/Gfx/UI/InventoryIcons/Big/Ammunition/ammo.psd"
+                            drawType: "DRAW_ALIGNED"
+                        Anchor:
+                            rightAnchorEnabled: true
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfContent"
+                    bindings:
+                    - ["UITextureComponent.frame", "iconFrame"]
+            -   class: "UIControl"
+                name: "TitleGroup"
+                input: false
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        hCenterAnchor: -80.000000
+                        rightAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+                    LinearLayout:
+                        orientation: "TopDown"
+                        padding: "0"
+                        spacing: 4.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfMaxChild"
+                        verticalPolicy: "PercentOfChildrenSum"
+                children:
+                -   class: "UIControl"
+                    name: "Title"
+                    input: false
+                    classes: "t-subtitle bold color=white-wild-sand-text"
+                    components:
+                        UITextComponent:
+                            colorInheritType: "COLOR_IGNORE_PARENT"
+                            align: ["LEFT", "VCENTER"]
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfContent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+                    bindings:
+                    - ["UITextComponent.text", "localize(slot.shellTitle)"]
+                -   class: "UIControl"
+                    name: "Desc"
+                    position: [0.000000, 28.000000]
+                    input: false
+                    classes: "t-body regular color=white-wild-sand-50-text"
+                    components:
+                        UITextComponent:
+                            colorInheritType: "COLOR_IGNORE_PARENT"
+                            align: ["LEFT", "VCENTER"]
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfContent"
+                            verticalPolicy: "PercentOfContent"
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+                    bindings:
+                    - ["UITextComponent.text", "localize(slot.shellDesc)"]
+        -   class: "UIControl"
+            name: "Details"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                LinearLayout:
+                    orientation: "TopDown"
+                    spacing: 8.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            children:
+            -   prototype: "AmmoItem/AmmoItem"
+                name: "CaliberGroup"
+                components:
+                    UIDataParamsComponent:
+                        args:
+                            "quantity": "str(slot.caliber)"
+                            "internalKey": "\"AMMO_INFO_CALIBER\""
+            -   prototype: "AmmoItem/AmmoItem"
+                name: "PiercingGroup"
+                components:
+                    UIDataParamsComponent:
+                        args:
+                            "quantity": "str(slot.piercingMin, 0) + \" – \" + str(slot.piercingMax, 0)"
+                            "internalKey": "\"AMMO_INFO_PENETRATION\""
+            -   prototype: "AmmoItem/AmmoItem"
+                name: "DamageGroup"
+                components:
+                    UIDataParamsComponent:
+                        args:
+                            "quantity": "str(slot.damageMin, 0) + \" – \" + str(slot.damageMax, 0)"
+                            "internalKey": "\"AMMO_INFO_DAMAGE\""
+            -   class: "UIControl"
+                name: "RadiusGroupHolder"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfFirstChild"
+                bindings:
+                - ["visible", "slot.isExplosive"]
+                children:
+                -   prototype: "AmmoItem/AmmoItem"
+                    name: "RadiusGroup"
+                    components:
+                        UIDataParamsComponent:
+                            args:
+                                "quantity": "str(slot.explosionRadius, 0)"
+                                "internalKey": "\"AMMO_INFO_EXPLODE_RADIUS\""
+            -   prototype: "AmmoItem/AmmoItem"
+                name: "CountGroup"
+                visible: true
+                components:
+                    UIDataParamsComponent:
+                        args:
+                            "quantity": "str(slot.currentAmmo) + \" / \" + str(slot.tankAmmo)"
+                            "internalKey": "\"AMMO_INFO_COUNT\""
+    -   class: "UIControl"
+        name: "Description"
+        position: [35.000000, 520.000000]
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                bottomAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                horizontalValue: 90.000000
+                horizontalMax: 800.000000
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   class: "UIControl"
+            name: "Hint"
+            input: false
+            classes: "t-body regular color=white-wild-sand-50-text"
+            components:
+                UITextComponent:
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                    multiline: "MULTILINE_ENABLED"
+                    align: ["LEFT", "VCENTER"]
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+            bindings:
+            - ["UITextComponent.text", "localize(slot.shellHint)"]

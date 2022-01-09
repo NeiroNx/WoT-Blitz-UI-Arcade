@@ -1,0 +1,127 @@
+Header:
+    version: "92"
+ImportedPackages:
+- "~res:/UI/Screens/Common/StyledButton.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "Spiner"
+    size: [400.000000, 40.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "FixedSize"
+            verticalValue: 40.000000
+        UIDataLocalsComponent:
+            locals:
+            - ["int", "league", "0"]
+        UIDataOnEventComponent0:
+            eventName: "LEFT_PRESSED"
+            modelFieldExpression: "league"
+            dataExpression: "when league > 0 -> league - 1, 4"
+        UIDataOnEventComponent1:
+            eventName: "RIGHT_PRESSED"
+            modelFieldExpression: "league"
+            dataExpression: "when league < 4 -> league + 1, 0"
+        UIEventOnDataComponent0:
+            watchedDataExpression: "league"
+            eventName: "VALUE_CHANGED"
+            eventData: "league"
+    children:
+    -   class: "UIControl"
+        name: "Actions"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Anchor:
+                rightAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                spacing: 10.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   class: "UIControl"
+            name: "ButtonLeft"
+            size: [48.000000, 32.000000]
+            input: true
+            classes: "button button-color-gray"
+            components:
+                Background:
+                    drawType: "DRAW_TILED_MULTILAYER"
+                    mask: "~res:/Gfx/UI/CommonUIElements/Button/mask"
+                    detail: "~res:/Gfx/UI/CommonUIElements/Button/detail"
+                    gradientMode: "Overlay"
+                    perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                    align: ["HCENTER", "VCENTER"]
+                    leftRightStretchCap: 20.000000
+                    topBottomStretchCap: 20.000000
+                UIInputEventComponent:
+                    onTouchUpInside: "LEFT_PRESSED"
+                StyleSheet:
+                    styles: "~res:/UI/Styles/ButtonStyle.yaml"
+            children:
+            -   class: "UIControl"
+                name: "Control_1"
+                size: [48.000000, 32.000000]
+                input: false
+                components:
+                    Background:
+                        sprite: "~res:/Gfx/UI/CommonUIElements/IconsSmall"
+                        frame: 3
+                        colorInherit: "COLOR_REPLACE_ALPHA_ONLY"
+                        perPixelAccuracy: "PER_PIXEL_ACCURACY_FORCED"
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true
+        -   class: "UIControl"
+            name: "Counter"
+            input: false
+            classes: "t-body bold color=white-wild-sand-text"
+            components:
+                UITextComponent:
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                    align: ["LEFT", "VCENTER"]
+                Anchor:
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+            bindings:
+            - ["UITextComponent.text", "league"]
+        -   class: "UIControl"
+            name: "ButtonRight"
+            size: [48.000000, 32.000000]
+            input: true
+            classes: "button button-color-gray"
+            components:
+                Background:
+                    drawType: "DRAW_TILED_MULTILAYER"
+                    mask: "~res:/Gfx/UI/CommonUIElements/Button/mask"
+                    detail: "~res:/Gfx/UI/CommonUIElements/Button/detail"
+                    gradientMode: "Overlay"
+                    perPixelAccuracy: "PER_PIXEL_ACCURACY_ENABLED"
+                    align: ["HCENTER", "VCENTER"]
+                    leftRightStretchCap: 20.000000
+                    topBottomStretchCap: 20.000000
+                UIInputEventComponent:
+                    onTouchUpInside: "RIGHT_PRESSED"
+                StyleSheet:
+                    styles: "~res:/UI/Styles/ButtonStyle.yaml"
+            children:
+            -   class: "UIControl"
+                name: "Control_1"
+                size: [48.000000, 32.000000]
+                input: false
+                components:
+                    Background:
+                        sprite: "~res:/Gfx/UI/CommonUIElements/IconsSmall"
+                        frame: 2
+                        colorInherit: "COLOR_REPLACE_ALPHA_ONLY"
+                        perPixelAccuracy: "PER_PIXEL_ACCURACY_FORCED"
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        vCenterAnchorEnabled: true

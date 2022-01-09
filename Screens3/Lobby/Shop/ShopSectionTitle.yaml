@@ -1,0 +1,133 @@
+Header:
+    version: 133
+Prototypes:
+-   class: "UIControl"
+    name: "SectionTitle"
+    input: false
+    components:
+        LinearLayout:
+            spacing: 16.000000
+            useRtl: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "PercentOfMaxChild"
+        UIDataParamsComponent:
+            params:
+            - ["bool", "debugMode", "false", "true"]
+            - ["string", "iconUrl", "\"\"", "\"\""]
+            - ["string", "name", "\"\"", "\"Section\""]
+            - ["string", "slug", "\"\"", "\"slug\""]
+            events:
+            - "GO_TO_SECTION"
+    children:
+    -   class: "UIControl"
+        name: "Icon"
+        input: false
+        components:
+            Background:
+                drawType: "DRAW_SCALE_PROPORTIONAL"
+            UIUrlImageComponent: {}
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 48.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 48.000000
+        bindings:
+        - ["UIUrlImageComponent.imageUrl", "iconUrl"]
+    -   class: "UIControl"
+        name: "Name"
+        input: false
+        classes: "t-title regular white-wild-sand-text"
+        components:
+            UITextComponent: {}
+            Anchor:
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml"
+        bindings:
+        - ["UITextComponent.text", "name"]
+    -   class: "UIControl"
+        name: "GoToSectionButton"
+        input: false
+        components:
+            Anchor:
+                rightAnchorEnabled: true
+                rightAnchor: -60.000000
+            IgnoreLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                childType: "kControl"
+                condition: "debugMode"
+                control: "DebugInfo"
+Slots:
+-   class: "UIControl"
+    name: "DebugInfo"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfFirstChild"
+            verticalPolicy: "PercentOfFirstChild"
+    children:
+    -   class: "UIControl"
+        name: "GoToSectionButton"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfFirstChild"
+                verticalPolicy: "PercentOfFirstChild"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/IconButton.yaml"
+                args:
+                    "type": "eButtonType.POSITIVE"
+                    "image": "\"~res:/Gfx/Lobby/icons/icon_external-link_square\""
+                eventActions:
+                - ["ON_CLICK_BUTTON", "GO_TO_SECTION", ""]
+    -   class: "UIControl"
+        name: "Info"
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                topAnchorEnabled: true
+                topAnchor: -30.000000
+            IgnoreLayout: {}
+            SizePolicy:
+                horizontalPolicy: "PercentOfLastChild"
+                verticalPolicy: "PercentOfLastChild"
+        children:
+        -   class: "UIControl"
+            name: "Bg"
+            input: false
+            classes: "grey-shark-bg"
+            components:
+                Background: {}
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "parent + 8"
+                    verticalPolicy: "PercentOfParent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "Slug"
+            input: false
+            classes: "t-subtitle bold white-wild-sand-text"
+            components:
+                UITextComponent: {}
+                Anchor:
+                    hCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml"
+            bindings:
+            - ["UITextComponent.text", "slug"]

@@ -1,0 +1,320 @@
+Header:
+    version: "111"
+ImportedPackages:
+- "~res:/UI/Screens3/Common/HorizontalScrollBar.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "SelectCustomAim"
+    size: [1010.000000, 822.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["eAim", "currentAim", "eAim.AIM_0", "eAim.AIM_1"]
+            events:
+            - "ON_SELECT_AIM_CHANGED"
+        UIDataLocalsComponent:
+            locals:
+            - ["bool", "imageLoaded", "false"]
+            - ["string", "overlayTitle", "\"#settings:HUD/CustomAim/SelectCustomAimScreen/Title\""]
+            - ["vector<string>", "vectorURLs", "[ \"https://stufficons.wgcdn.co/Gfx2/profile_skin_test/200605_131911_789442.png\"; \"https://stufficons.wgcdn.co/Gfx2/profile_skin_test/200605_132005_159782.png\"; \"https://stufficons.wgcdn.co/Gfx2/profile_skin_test/200605_132017_131687.png\"; ]"]
+            - ["vector<eAim>", "customizeAims", "[ eAim.AIM_0; eAim.AIM_1; eAim.AIM_2; ]"]
+            - ["int", "selectedAim", "int(currentAim)"]
+            - ["int", "selectedTab", "0"]
+            - ["vector<TabIconInfo>", "info", "[ { \"sprite\" = \"~res:/Gfx/Lobby/icons/icon_map-type_summer\"; \"text\" = \"#settings:HUD/CustomAim/SelectCustomAimScreen/TabDescription/Summer\"; }; { \"sprite\" = \"~res:/Gfx/Lobby/icons/icon_map-type_winter\"; \"text\" = \"#settings:HUD/CustomAim/SelectCustomAimScreen/TabDescription/Winter\"; }; { \"sprite\" = \"~res:/Gfx/Lobby/icons/icon_map-type_desert\"; \"text\" = \"#settings:HUD/CustomAim/SelectCustomAimScreen/TabDescription/Desert\"; }; ]"]
+            - ["string", "bg", "\"~res:/Gfx/UI/KeyArt/keyart\""]
+        UIChildComponent0:
+            prototypePath: "~res:/UI/Screens3/Lobby/Common/Overlay/OverlayBase.yaml"
+            args:
+                "overlayBgColor": "\"grey-shark-bg\""
+                "contentFullWidth": "true"
+                "content": "SelectCustomAimContent"
+            eventActions:
+            - ["START_OVERLAY_OPENING_FOR_BATYA", "START_OVERLAY_OPENING", ""]
+            - ["BACK_EVENT", "BACK_EVENT", ""]
+            - ["ON_SELECT_TAB", "ON_SELECT_TAB", ""]
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/Common/Settings/SelectCustomAimScreen.actions"
+        UIDataOnEventComponent0:
+            eventName: "ON_SELECT_TAB"
+            modelFieldExpression: "selectedTab"
+            dataExpression: "_event"
+        UIDataOnEventComponent1:
+            eventName: "ON_SELECT_AIM"
+            modelFieldExpression: "selectedAim"
+            dataExpression: "_event"
+        UIDataOnEventComponent2:
+            eventName: "IMAGE_LOADED"
+            modelFieldExpression: "imageLoaded"
+            dataExpression: "true"
+Slots:
+-   class: "UIControl"
+    name: "SelectCustomAimContent"
+    size: [960.000000, 747.000000]
+    input: false
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "Formula"
+                verticalFormula: "when parent == 0 -> freeSpace, min(freeSpace, 730)"
+        children:
+        -   class: "UIControl"
+            name: "ImageWrapper"
+            position: [32.000000, 0.000000]
+            size: [843.000000, 468.000000]
+            input: false
+            components:
+                UIOpacityComponent: {}
+                ClipContent: {}
+                Anchor:
+                    hCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "Formula"
+                    horizontalFormula: "parent - 64"
+                    verticalPolicy: "PercentOfParent"
+            children:
+            -   class: "UIControl"
+                name: "Image"
+                size: [32.000000, 32.000000]
+                input: false
+                components:
+                    Background:
+                        drawType: "DRAW_ALIGNED"
+                    UIUrlImageComponent:
+                        upscaleForHighResolution: true
+                        imageLoadedEvent: "IMAGE_LOADED"
+                    UIRoundedCornersComponent:
+                        radius: " 16; 16; 0; 0;"
+                    IgnoreLayout: {}
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                bindings:
+                - ["UIUrlImageComponent.imageUrl", "vectorURLs[selectedTab]"]
+            -   class: "UIControl"
+                name: "Fade"
+                size: [32.000000, 32.000000]
+                visible: true
+                input: false
+                components:
+                    LinearLayout: {}
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                children:
+                -   class: "UIControl"
+                    name: "TopGradient"
+                    size: [32.000000, 32.000000]
+                    input: false
+                    classes: "grey-shark-bg"
+                    components:
+                        Background:
+                            drawType: "DRAW_SCALE_TO_RECT"
+                            sprite: "~res:/Gfx/Lobby/backgrounds/bg_gradient_vertical_0-100"
+                            spriteModification: ["FLIP_VERTICAL"]
+                        Anchor:
+                            leftAnchorEnabled: true
+                            topAnchorEnabled: true
+                        IgnoreLayout: {}
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 104.000000
+                        StyleSheet:
+                            styles: "~res:/UI/Screens3/Color.style.yaml"
+                -   class: "UIControl"
+                    name: "LeftContent"
+                    size: [32.000000, 32.000000]
+                    input: false
+                    components:
+                        Anchor:
+                            topAnchorEnabled: true
+                        LinearLayout:
+                            orientation: "TopDown"
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfParent"
+                    children:
+                    -   class: "UIControl"
+                        name: "Top"
+                        input: false
+                        classes: "grey-shark-bg"
+                        components:
+                            Background:
+                                drawType: "DRAW_SCALE_TO_RECT"
+                                sprite: "~res:/Gfx/Lobby/backgrounds/bg_vignette_aim_left"
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                verticalPolicy: "PercentOfParent"
+                            StyleSheet:
+                                styles: "~res:/UI/Screens3/Color.style.yaml"
+                    -   class: "UIControl"
+                        name: "Bottom"
+                        input: false
+                        classes: "grey-shark-bg"
+                        components:
+                            Background:
+                                drawType: "DRAW_SCALE_TO_RECT"
+                                sprite: "~res:/Gfx/Lobby/backgrounds/bg_vignette_aim_left"
+                                spriteModification: ["FLIP_VERTICAL"]
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                verticalPolicy: "PercentOfParent"
+                            StyleSheet:
+                                styles: "~res:/UI/Screens3/Color.style.yaml"
+                -   class: "UIControl"
+                    name: "RightContent"
+                    position: [720.000000, 365.000000]
+                    size: [32.000000, 32.000000]
+                    input: false
+                    components:
+                        Anchor:
+                            topAnchorEnabled: true
+                        LinearLayout:
+                            orientation: "TopDown"
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfParent"
+                            verticalPolicy: "PercentOfParent"
+                    children:
+                    -   class: "UIControl"
+                        name: "Top"
+                        size: [32.000000, 32.000000]
+                        input: false
+                        classes: "grey-shark-bg"
+                        components:
+                            Background:
+                                drawType: "DRAW_SCALE_TO_RECT"
+                                sprite: "~res:/Gfx/Lobby/backgrounds/bg_vignette_aim_left"
+                                spriteModification: ["FLIP_HORIZONTAL"]
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                verticalPolicy: "PercentOfParent"
+                            StyleSheet:
+                                styles: "~res:/UI/Screens3/Color.style.yaml"
+                    -   class: "UIControl"
+                        name: "Bottom"
+                        size: [32.000000, 32.000000]
+                        input: false
+                        classes: "grey-shark-bg"
+                        components:
+                            Background:
+                                drawType: "DRAW_SCALE_TO_RECT"
+                                sprite: "~res:/Gfx/Lobby/backgrounds/bg_vignette_aim_left"
+                                spriteModification: ["FLIP_HORIZONTAL", "FLIP_VERTICAL"]
+                            SizePolicy:
+                                horizontalPolicy: "PercentOfParent"
+                                verticalPolicy: "PercentOfParent"
+                            StyleSheet:
+                                styles: "~res:/UI/Screens3/Color.style.yaml"
+        -   class: "UIControl"
+            name: "TabBar"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Anchor:
+                    rightAnchorEnabled: true
+                    rightAnchor: 16.000000
+                    vCenterAnchorEnabled: true
+                    vCenterAnchor: 8.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfChildrenSum"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens3/Lobby/Common/Tabs/IconTabsBar.yaml"
+                    args:
+                        "showTabDescription": "true"
+                        "showSelectionLine": "false"
+                        "activeTab": "selectedTab"
+                        "verticalTabBar": "true"
+                        "info": "info"
+                    eventActions:
+                    - ["ON_SELECT_TAB", "ON_SELECT_TAB", ""]
+                UIChildComponent1: {}
+        -   class: "UIControl"
+            name: "AimPreview"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens3/Common/Settings/CustomFakeAim.yaml"
+                    args:
+                        "currentAim": "customizeAims[selectedAim]"
+                        "gunHorizontalOffset": "-258"
+                        "gunVerticalOffset": "10"
+        -   class: "UIControl"
+            name: "Header"
+            size: [32.000000, 32.000000]
+            input: false
+            components:
+                Anchor: {}
+                IgnoreLayout: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfMaxChild"
+                UIChildComponent0:
+                    prototypePath: "~res:/UI/Screens3/Lobby/Common/Overlay/OverlayHeader.yaml"
+                    args:
+                        "title": "overlayTitle"
+                        "titleStyle": "\"t-subtitle regular white-wild-sand-text\""
+    -   class: "UIControl"
+        name: "Footer"
+        position: [0.000000, 539.000000]
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            LinearLayout:
+                orientation: "LeftToRight"
+                dynamicPadding: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "Formula"
+                verticalValue: 208.000000
+                verticalFormula: "when parent == 0 -> maxChild + 96, max(maxChild + 96, parentRest)"
+        children:
+        -   class: "UIControl"
+            name: "AimSelector"
+            position: [20.000000, 0.000000]
+            size: [32.000000, 32.000000]
+            components:
+                Anchor:
+                    vCenterAnchorEnabled: true
+                LinearLayout:
+                    padding: "40"
+                    spacing: 40.000000
+                SizePolicy:
+                    horizontalPolicy: "PercentOfChildrenSum"
+                    verticalPolicy: "PercentOfMaxChild"
+                UISwitchBarComponent:
+                    onSelectElement: "ON_SELECT_AIM"
+                    onSelectElementData: "_selectedElement"
+                    selectionEventType: "TOUCH_UP"
+                UIRepeatComponent:
+                    control: "~res:/UI/Screens3/Lobby/Common/RoundCustomizeButton.yaml"
+                    dataContainer: "customizeAims"
+                    args:
+                        "label": "localize(str(_item, eAim, \"name\"))"
+                        "isSelected": "int(selectedAim) == _index"
+                        "icon": "str(_item, eAim, \"icon\")"
+                        "id": "int(_item)"
+            bindings:
+            - ["UISwitchBarComponent.selectedElement", "selectedAim"]

@@ -1,0 +1,6 @@
+action UpdateFadeVisibility(float value, float offsetY)
+{
+	ChangeData(scrollOffsetY, offsetY);
+    Opacity("**/BottomFade", value);
+	ChangeProperty("**/BottomFade","","visible", value != 0);
+}

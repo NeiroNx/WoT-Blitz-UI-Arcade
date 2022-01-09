@@ -1,0 +1,53 @@
+Header:
+    version: 121
+Prototypes:
+-   class: "UIControl"
+    name: "Lock"
+    size: [88.000000, 72.000000]
+    components:
+        UIAnimationComponent:
+            animations: "SHOW_UNLOCK,~res:/UI/Screens3/NewbieLobby/ProgressStates/Animations/NationLockInit.animation"
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 88.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 72.000000
+        UIDataParamsComponent:
+            params:
+            - ["bool", "showUnlock", "false", "false"]
+            - ["float", "desintegrationPeriod", "0.000000", "2.000000"]
+        UIDataLocalVarsComponent:
+            data:
+            - ["float", "effectTime", "2.000000"]
+        UIEventOnDataComponent0:
+            watchedDataExpression: "showUnlock"
+            ifExpression: "true"
+            eventName: "SHOW_UNLOCK"
+    children:
+    -   class: "UIControl"
+        name: "LockIcon"
+        input: false
+        components:
+            Background:
+                sprite: "~res:/Gfx/Lobby/icons/icon_lock"
+            UIOpacityComponent: {}
+            Anchor:
+                rightAnchorEnabled: true
+                bottomAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 24.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 24.000000
+        children:
+        -   class: "UIParticles"
+            name: "LockDisintegration"
+            position: [8.000000, 8.000000]
+            size: [24.000000, 24.000000]
+            pivot: [0.500000, 0.500000]
+            input: false
+            effectPath: "~res:/3d/FX/UI/BattlePass/LockDesintegration.sc2"
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true

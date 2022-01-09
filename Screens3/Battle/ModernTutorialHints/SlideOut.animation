@@ -1,0 +1,12 @@
+animation SlideOut
+{
+	PlaySound(sound="play_tut_2021_ui_battle_hints_off");
+	parallel
+	{
+		Opacity(".", opacity=0.0, time=0.4, interpolation=EASE_IN);
+		MoveRel(".", 100, 0, 0.4, EASE_IN);
+	}
+	Wait(0.5);
+	MoveRel(".", -100, 0, 0.0, EASE_IN);
+	Event("OnFadeOut");
+}

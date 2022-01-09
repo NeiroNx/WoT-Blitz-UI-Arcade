@@ -1,0 +1,10 @@
+animation StepExpand
+{
+    Scale("ExpandedState", xScaleFactor, yScaleFactor);
+    parallel
+    {
+        Scale("ExpandedState", 1.0, 1.0, 0.2, EASE_OUT);
+        Opacity("ExpandedState", 1.0, 0.2, LINEAR);
+        Opacity("NormalState", 0.0, 0.2, LINEAR);
+    }
+}

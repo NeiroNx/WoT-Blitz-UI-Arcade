@@ -1,0 +1,28 @@
+Header:
+    version: "77"
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/RichTextLink.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "FooterTankLink"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        LinearLayout:
+            spacing: 5.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "PercentOfMaxChild"
+        UIDataParamsComponent:
+            params:
+            - ["TankModulesTreeModel", "modulesModel", "null", "{ }"]
+            events: []
+        UIRepeatComponent:
+            control: "~res:/UI/Screens3/Lobby/ModulesTree/TankNameLink.yaml"
+            dataContainer: "modulesModel.prevNodes"
+            args:
+                "needDelimiter": "_index > 0"
+                "name": "_item.vehicle.vehicleDataModel.shortName"
+                "tankDescr": "_item.compactDescr"
+            eventActions:
+            - ["SHOW_TANK_MODULES", "SHOW_TANK_MODULES", "_event"]

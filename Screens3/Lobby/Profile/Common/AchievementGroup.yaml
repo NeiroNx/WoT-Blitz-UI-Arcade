@@ -1,0 +1,76 @@
+Header:
+    version: "77"
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Profile/Common/SectionHeader.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "AchievementsGroup"
+    size: [1040.000000, 432.000000]
+    input: false
+    components:
+        LinearLayout:
+            orientation: "TopDown"
+            padding: "0;8"
+            spacing: 16.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            horizontalValue: 100.000000
+            verticalPolicy: "PercentOfChildrenSum"
+        UIDataParamsComponent:
+            params:
+            - ["AchievementsGroupViewModel", "group", "null", "{ }"]
+            events:
+            - "SHOW_ACHIEVEMENT_INFO"
+        UIDataLocalsComponent:
+            locals:
+            - ["string", "title", "when group.section == eAchievementsSection.kBattle -> localize(\"#achievementScreen:BattleHero\"), group.section == eAchievementsSection.kTitles -> localize(\"#achievementScreen:TitleOfHonor\"), group.section == eAchievementsSection.kEpic -> localize(\"#achievementScreen:EpicAchievemnts\"), group.section == eAchievementsSection.kCommemorative -> localize(\"#achievementScreen:CommemorateAchievements\"), group.section == eAchievementsSection.kStep -> localize(\"#achievementScreen:StepAchievements\"), group.section == eAchievementsSection.kPlatoon -> localize(\"#achievementScreen:PlatoonAchievements\"), \"\""]
+            - ["string", "counter", "str(group.ownedAchievements) + \" / \" + str(group.vector.Size())"]
+            - ["bool", "expanded", "true"]
+        UIDataOnEventComponent0:
+            eventName: "ON_PRESSED"
+            modelFieldExpression: "expanded"
+            dataExpression: "not expanded"
+    children:
+    -   prototype: "SectionHeader/Header"
+        name: "Header"
+        size: [32.000000, 32.000000]
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "FixedSize"
+                verticalValue: 48.000000
+            UIInputEventComponent:
+                onTouchUpInside: "ON_PRESSED"
+            UIDataParamsComponent:
+                args:
+                    "title": "title"
+                    "counter": "counter"
+                    "expanded": "expanded"
+                eventActions:
+                - ["ON_PRESSED", "ON_PRESSED", ""]
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/ButtonSound.style.yaml"
+    -   class: "UIControl"
+        name: "Content"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "Formula"
+                verticalFormula: "childrenSum + 8"
+            FlowLayout:
+                hDynamicPadding: true
+                hSpacing: 16.000000
+                vSpacing: 16.000000
+            UIRepeatComponent:
+                control: "~res:/UI/Screens3/Lobby/Profile/Common/AchievementItem.yaml"
+                dataContainer: "group.vector"
+                args:
+                    "achievement": "_item"
+                eventActions:
+                - ["ON_PRESSED", "SHOW_ACHIEVEMENT_INFO", "_event"]
+                elementName: "_item.name"
+                holderName: "_item.name"
+        bindings:
+        - ["visible", "expanded"]

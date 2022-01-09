@@ -1,0 +1,120 @@
+Header:
+    version: 127
+Prototypes:
+-   class: "UIControl"
+    name: "NicknameHint"
+    classes: "nickname-hint button-choose-sound"
+    components:
+        UIAnimationComponent:
+            animations: "_INIT,~res:/UI/Screens3/PreLogin/NicknameHintInitialization.animation"
+        SizePolicy:
+            horizontalPolicy: "PercentOfFirstChild"
+            verticalPolicy: "PercentOfFirstChild"
+        UIInputEventComponent:
+            onTouchUpInside: "HINT_PRESSED"
+        UIDataParamsComponent:
+            params:
+            - ["string", "text", "\"\"", "\"Абырвалг\""]
+            - ["string", "bgStyle", "\"black-25-bg\"", "\"red-tamarillo-50-bg\""]
+            - ["string", "textStyle", "\"t-body regular white-wild-sand-text\"", "\"t-body regular black-text\""]
+            - ["bool", "selected", "false", "true"]
+            - ["bool", "input", "true", "true"]
+            - ["int", "index", "0", "0"]
+            - ["int", "lastIndex", "0", "3"]
+            - ["bool", "quicked", "false", "true"]
+            events:
+            - "HINT_PRESSED"
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/PreLogin/NicknameHint.actions"
+        Sound: {}
+        StyleSheet:
+            styles: "~res:/UI/Screens3/Common/Hover.style.yaml;~res:/UI/Screens3/Common/Touch.style.yaml;~res:/UI/Screens3/ButtonSound.style.yaml"
+    bindings:
+    - ["input", "not selected and input"]
+    children:
+    -   class: "UIControl"
+        name: "AnimatedContent"
+        pivot: [0.500000, 0.500000]
+        input: false
+        components:
+            UIOpacityComponent: {}
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfMaxChild"
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   class: "UIControl"
+            name: "Content"
+            pivot: [0.500000, 0.500000]
+            input: false
+            classes: "content-area"
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfMaxChild"
+                    verticalPolicy: "PercentOfMaxChild"
+            children:
+            -   class: "UIControl"
+                name: "Background"
+                input: false
+                classes: "black-25-bg"
+                components:
+                    Background: {}
+                    UIRoundedCornersComponent:
+                        radius: "4"
+                    IgnoreLayout: {}
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+            -   class: "UIControl"
+                name: "Text"
+                input: false
+                classes: "t-body regular white-wild-sand-text"
+                components:
+                    UITextComponent: {}
+                    SizePolicy:
+                        horizontalPolicy: "Formula"
+                        horizontalFormula: "content + 32"
+                        verticalPolicy: "Formula"
+                        verticalFormula: "content + 12"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Font.style.yaml"
+                bindings:
+                - ["UITextComponent.text", "text"]
+            -   class: "UIControl"
+                name: "Fade"
+                input: false
+                classes: "black-10-bg hover"
+                components:
+                    Background: {}
+                    UIOpacityComponent: {}
+                    UIRoundedCornersComponent:
+                        radius: "4"
+                    IgnoreLayout: {}
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml;~res:/UI/Screens3/Common/Hover.style.yaml"
+            -   class: "UIControl"
+                name: "Selected"
+                input: false
+                classes: "black-25-bg"
+                components:
+                    Background: {}
+                    UIRoundedCornersComponent:
+                        radius: "4"
+                    IgnoreLayout: {}
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                    StyleSheet:
+                        styles: "~res:/UI/Screens3/Color.style.yaml"
+                bindings:
+                - ["visible", "selected"]

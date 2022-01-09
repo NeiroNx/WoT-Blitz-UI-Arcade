@@ -1,0 +1,9 @@
+animation CursorFadeInOutAnimation(string tagName, string className)
+{
+  Opacity(".", 0.0, 0.17);
+
+  SetTaggedClass(".", tagName, className);
+  SetTaggedClass("**/AtgmSightCursor", tagName, className);
+
+  Opacity(".", 1.0, 0.17);
+}

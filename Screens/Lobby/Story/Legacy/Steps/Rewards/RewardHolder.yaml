@@ -1,0 +1,43 @@
+Header:
+    version: "93"
+Controls:
+-   class: "UIControl"
+    name: "Content"
+    size: [128.000000, 128.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["ResourceDetailed", "resource", "null", "{ type = ResourceType.gold; basic = { quantity = 2000000; }; }"]
+            - ["bool", "showUnlockIcon", "false", "false"]
+            - ["bool", "showVehicleInfo", "false", "true"]
+            - ["bool", "showVehicleName", "false", "true"]
+        UIDataLocalsComponent:
+            locals:
+            - ["bool", "isBasicResource", "resource.type == ResourceType.gold or resource.type == ResourceType.free_xp or resource.type == ResourceType.premium or resource.type == ResourceType.xp or resource.type == ResourceType.tankmenXP or resource.type == ResourceType.credits or resource.type == ResourceType.slots or resource.type == ResourceType.equipment_slots"]
+            - ["string", "rewardPackage", "when isBasicResource -> \"~res:/UI/Screens/Lobby/Story/Legacy/Steps/Rewards/BasicReward.yaml\", resource.type == ResourceType.stuff -> \"~res:/UI/Screens/Lobby/Story/Legacy/Steps/Rewards/StuffReward.yaml\", resource.type == ResourceType.unlocks -> \"~res:/UI/Screens/Lobby/Story/Legacy/Steps/Rewards/UnlockReward.yaml\", resource.type == ResourceType.vehicle -> \"~res:/UI/Screens/Lobby/Story/Legacy/Steps/Rewards/VehicleReward.yaml\", \"\""]
+    children:
+    -   class: "UIControl"
+        name: "RewardHolder"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                childType: "kOldExpression"
+                control: "rewardPackage"
+                args:
+                    "type": "resource.type"
+                    "basic": "resource.basic"
+                    "stuff": "resource.stuff"
+                    "unlock": "resource.unlock"
+                    "vehicle": "resource.vehicle"
+                    "showUnlockIcon": "showUnlockIcon"
+                    "showInfo": "showVehicleInfo"
+                    "showName": "showVehicleName"
+            StyleSheet:
+                styles: "~res:/UI/Screens/Lobby/Story/Styles/StoryStepLinearRewardStyles.yaml"

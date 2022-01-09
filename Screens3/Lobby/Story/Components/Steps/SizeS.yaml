@@ -1,0 +1,60 @@
+Header:
+    version: 120
+Prototypes:
+-   class: "UIControl"
+    name: "SizeS"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 80.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 80.000000
+        UIDataParamsComponent:
+            params:
+            - ["ResourceDetailed", "reward", "null", "{ \"type\" = ResourceType.gold; }"]
+            - ["control", "overlay", "null", "null"]
+            - ["control", "fx", "null", "null"]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["bool", "isBasic", "not isNull(reward) and (reward.type == ResourceType.gold or reward.type == ResourceType.free_xp or reward.type == ResourceType.elite_xp or reward.type == ResourceType.premium or reward.type == ResourceType.xp or reward.type == ResourceType.tankmenXP or reward.type == ResourceType.credits or reward.type == ResourceType.slots or reward.type == ResourceType.equipment_slots)"]
+    children:
+    -   class: "UIControl"
+        name: "ContentHolder"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UIChildComponent0:
+                childType: "kControl"
+                condition: "not isNull(reward)"
+                control: "RewardContent"
+Slots:
+-   class: "UIControl"
+    name: "RewardContent"
+    size: [80.000000, 80.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+    children:
+    -   class: "UIControl"
+        name: "RewardHolder"
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "when isBasic -> parent - 16, parent"
+                verticalPolicy: "Formula"
+                verticalFormula: "when isBasic -> parent - 16, parent"
+            UIChildComponent0:
+                prototypePath: "~res:/UI/Screens3/Lobby/Common/Resource/Detailed/Icon.yaml"
+                args:
+                    "resource": "reward"
+                    "overlay": "overlay"
+                    "fx": "fx"

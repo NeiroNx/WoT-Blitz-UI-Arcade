@@ -1,0 +1,15 @@
+animation CloseOverlay
+{
+  Event ("OVERLAY_CLOSE_START");
+  parallel 
+  {
+    DirectEvent("START_OVERLAY_CLOSING", "**/BlurAndFade");
+    PlaySound("GUI/buttons/close");
+    ChangeProperty("**/Overlay", "SizePolicy", "verticalValue", 0, 0.3, EASE_IN);
+    ChangeProperty("**/Overlay", "UIOpacityComponent", "opacity", 0, 0.3, EASE_IN);
+  }
+  Event ("BACK_EVENT");
+}
+
+
+

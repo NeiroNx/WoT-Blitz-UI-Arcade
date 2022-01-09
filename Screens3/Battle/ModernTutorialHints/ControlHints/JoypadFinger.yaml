@@ -1,0 +1,36 @@
+Header:
+    version: 127
+ImportedPackages:
+- "~res:/UI/Screens3/Battle/ModernTutorialHints/Common/Glow.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "Control"
+    size: [0.000000, 0.000000]
+    input: false
+    components:
+        UIOpacityComponent: {}
+    children:
+    -   prototype: "Glow/Glow"
+        name: "Glow"
+    -   class: "UIControl"
+        name: "FingerPivot"
+        size: [0.000000, 0.000000]
+        input: false
+        components:
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+        children:
+        -   class: "UIControl"
+            name: "JoypadFinger"
+            position: [0.000000, 0.000000]
+            size: [200.000000, 352.000000]
+            pivot: [0.500000, 0.500000]
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_ALIGNED"
+                    sprite: "~res:/Gfx/Battle/BattleHints/hand/HandSlaid"
+                UIOpacityComponent: {}
+                Anchor:
+                    hCenterAnchorEnabled: true

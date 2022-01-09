@@ -1,0 +1,51 @@
+Header:
+    version: "70"
+Prototypes:
+-   class: "UIControl"
+    name: "NationFlag"
+    size: [32.000000, 32.000000]
+    classes: ""
+    components:
+        Background:
+            align: ["LEFT", "VCENTER"]
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 30.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 24.000000
+        StyleSheet:
+            styles: "~res:/UI/Screens/Lobby/Common/Styles/VehicleTypeStyles.yaml"
+-   class: "UIControl"
+    name: "VehicleLevel"
+    components:
+        Background:
+            sprite: "~res:/Gfx/UI/LobbyCommon/TankLevelsNew"
+            align: ["LEFT", "HCENTER", "VCENTER"]
+        SizePolicy:
+            horizontalPolicy: "PercentOfContent"
+            verticalPolicy: "PercentOfContent"
+        StyleSheet:
+            styles: "~res:/UI/Screens/Lobby/Common/Styles/VehicleTypeStyles.yaml"
+-   class: "UIControl"
+    name: "VehicleType"
+    components:
+        Background: {}
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 32.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 34.000000
+        StyleSheet:
+            styles: "~res:/UI/Screens/Lobby/Common/Styles/VehicleTypeStyles.yaml"
+    children:
+    -   class: "UIControl"
+        name: "Class"
+        components:
+            Background:
+                sprite: "~res:/Gfx/UI/LobbyCommon/TankTypesSmall"
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"

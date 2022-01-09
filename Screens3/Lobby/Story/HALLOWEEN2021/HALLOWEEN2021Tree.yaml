@@ -1,0 +1,339 @@
+Header:
+    version: 138
+Prototypes:
+-   class: "UIControl"
+    name: "HALLOWEEN2021Tree"
+    size: [960.000000, 512.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["StoryView", "storyView", "null", "{ }"]
+            events:
+            - "DESELECT"
+            - "SHOW_STEP_INFO(int id)"
+            - "SELECT_STEP(int id)"
+            - "PARALLAX_SHIFT(float shift)"
+        UIDataLocalVarsComponent:
+            data:
+            - ["vector2", "contentSize", "vec2(0.000000, 0.000000)"]
+            - ["vector2", "commonSize", "vec2(0.000000, 0.000000)"]
+            - ["int", "height", "490"]
+            - ["int", "bottomHeight", "392"]
+            - ["float", "parallaxShift", "0.000000"]
+            - ["float", "contentOpacity", "0.000000"]
+            - ["bool", "isAnyQuestBoosterStepFinished", "false"]
+            - ["string", "proxyName", "\"prx_halloween2021\""]
+        UIDataLocalBindingsComponent:
+            data:
+            - ["ResourceDetailed", "proxy", "storyView.story.stage.proxies[proxyName]"]
+        UIActionComponent:
+            actionsPath: "~res:/UI/Screens3/Lobby/Story/HALLOWEEN2021/HALLOWEEN2021Tree.actions"
+        UIEventOnDataComponent0:
+            watchedDataExpression: "contentSize"
+            ifExpression: "not floatEqual(commonSize.X, 0.000000) and not floatEqual(commonSize.Y, 0.000000)"
+            eventName: "ON_OPEN"
+        UIEventOnDataComponent1:
+            watchedDataExpression: "commonSize"
+            ifExpression: "not floatEqual(contentSize.X, 0.000000) and not floatEqual(contentSize.Y, 0.000000)"
+            eventName: "ON_OPEN"
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfParent"
+            UILayoutEventComponent:
+                sizeChangedEvent: "CONTENT_SIZE_CHANGED"
+                sizeChangedEventData: "_size"
+        children:
+        -   class: "UIControl"
+            name: "CommonArea"
+            input: false
+            components:
+                UIOpacityComponent: {}
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "PercentOfParent"
+            bindings:
+            - ["UIOpacityComponent.opacity", "contentOpacity"]
+            children:
+            -   class: "UIControl"
+                name: "StepsHolder"
+                input: false
+                components:
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfParent"
+                        verticalPolicy: "PercentOfParent"
+                    UIChildComponent0:
+                        prototypePath: "~res:/UI/Screens3/Common/HorizontalScrollView.yaml"
+                        args:
+                            "content": "CommonWrapper"
+                            "bottomDistance": "4"
+                        eventActions:
+                        - ["SCROLL_POSITION_CHANGED", "SCROLL_POSITION_CHANGED", "_event.position"]
+                        - ["ON_SCROLL_VIEW_TOUCH", "DESELECT", ""]
+        -   class: "UIControl"
+            name: "BottomArea"
+            pivot: [0.500000, 0.500000]
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfParent"
+                    verticalPolicy: "FixedSize"
+            bindings:
+            - ["SizePolicy.verticalValue", "height"]
+            children:
+            -   class: "UIControl"
+                name: "SafeArea"
+                input: false
+                components:
+                    Anchor:
+                        hCenterAnchorEnabled: true
+                        bottomAnchorEnabled: true
+                        bottomAnchor: 4.000000
+                    SizePolicy:
+                        horizontalPolicy: "FixedSize"
+                        horizontalValue: 960.000000
+                        verticalPolicy: "FixedSize"
+                bindings:
+                - ["SizePolicy.verticalValue", "bottomHeight"]
+                children:
+                -   class: "UIControl"
+                    name: "BottomHolder"
+                    input: false
+                    components:
+                        Anchor:
+                            hCenterAnchorEnabled: true
+                            topAnchorEnabled: true
+                            topAnchor: 16.000000
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfFirstChild"
+                            verticalPolicy: "FixedSize"
+                            verticalValue: 232.000000
+                        UIChildComponent0:
+                            childType: "kControl"
+                            control: "BottomWrapper"
+Slots:
+-   class: "UIControl"
+    name: "CommonWrapper"
+    pivot: [0.500000, 0.500000]
+    input: false
+    components:
+        Anchor:
+            hCenterAnchorEnabled: true
+            vCenterAnchorEnabled: true
+        SizePolicy:
+            horizontalPolicy: "PercentOfFirstChild"
+            verticalPolicy: "FixedSize"
+        UILayoutEventComponent:
+            sizeChangedEvent: "COMMON_SIZE_CHANGED"
+            sizeChangedEventData: "_size"
+    bindings:
+    - ["SizePolicy.verticalValue", "height"]
+    children:
+    -   class: "UIControl"
+        name: "SafeArea"
+        input: false
+        components:
+            Anchor:
+                bottomAnchorEnabled: true
+                bottomAnchor: 4.000000
+            SizePolicy:
+                horizontalPolicy: "Formula"
+                horizontalFormula: "firstChild + safeAreaInsets.left + safeAreaInsets.right + 48"
+                verticalPolicy: "FixedSize"
+        bindings:
+        - ["SizePolicy.verticalValue", "bottomHeight"]
+        children:
+        -   class: "UIControl"
+            name: "Content"
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    bottomAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfLastChild"
+                    verticalPolicy: "PercentOfLastChild"
+            children:
+            -   class: "UIControl"
+                name: "Arrows"
+                input: false
+                components:
+                    Anchor:
+                        leftAnchorEnabled: true
+                        leftAnchor: 120.000000
+                        vCenterAnchorEnabled: true
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfChildrenSum"
+                        verticalPolicy: "PercentOfFirstChild"
+                children:
+                -   class: "UIControl"
+                    name: "CommonArrows"
+                    input: false
+                    components:
+                        LinearLayout:
+                            spacing: 112.000000
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfChildrenSum"
+                            verticalPolicy: "PercentOfMaxChild"
+                        UIRepeatComponent:
+                            control: "~res:/UI/Screens3/Lobby/Story/HALLOWEEN2021/ArrowCopy.yaml"
+                            dataContainer: "storyView.tree.groups.common.steps"
+                            args:
+                                "isVisible": "_index != storyView.tree.groups.common.steps.Size() - 1"
+                                "width": "26.000000"
+                            loadingPolicy: "Lazy"
+                            loadingDistance: 256.000000
+                            unloadingDistance: 256.000000
+            -   class: "UIControl"
+                name: "Steps"
+                input: false
+                components:
+                    LinearLayout:
+                        spacing: 10.000000
+                    SizePolicy:
+                        horizontalPolicy: "PercentOfFirstChild"
+                        verticalPolicy: "PercentOfMaxChild"
+                children:
+                -   class: "UIControl"
+                    name: "CommonSteps"
+                    input: false
+                    components:
+                        Anchor:
+                            vCenterAnchorEnabled: true
+                        LinearLayout:
+                            spacing: 10.000000
+                        SizePolicy:
+                            horizontalPolicy: "PercentOfChildrenSum"
+                            verticalPolicy: "PercentOfMaxChild"
+                        UIRepeatComponent:
+                            control: "~res:/UI/Screens3/Lobby/Story/HALLOWEEN2021/ProgressionCopy.yaml"
+                            dataContainer: "storyView.tree.groups.common.steps"
+                            args:
+                                "topProgressColor": "rgb(11885311)"
+                                "bottomProgressColor": "rgb(12988415)"
+                                "model": "_item"
+                                "index": "_index + 1"
+                                "opacity": "contentOpacity"
+                                "mainRewardIndex": "0"
+                            eventActions:
+                            - ["SELECT_STEP", "SCROLL_TO_STEP", "_event.id, \"**/Step\" + str(_event.id)"]
+                            - ["SHOW_STEP_INFO", "SHOW_STEP_INFO", "_event.id"]
+                            elementNameExpression: "\"Step\" + str(_item.step.id)"
+                            loadingPolicy: "Lazy"
+                            loadingDistance: 256.000000
+                            unloadingDistance: 256.000000
+-   class: "UIControl"
+    name: "BottomWrapper"
+    size: [944.000000, 232.000000]
+    input: false
+    components:
+        LinearLayout:
+            spacing: 16.000000
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 944.000000
+            verticalPolicy: "PercentOfParent"
+    children:
+    -   class: "UIControl"
+        name: "QuestBoosters"
+        input: false
+        components:
+            LinearLayout:
+                spacing: 16.000000
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 368.000000
+                verticalPolicy: "PercentOfParent"
+            UIRepeatComponent:
+                control: "~res:/UI/Screens3/Lobby/Story/Components/BoosterButtonActive.yaml"
+                dataContainer: "storyView.tree.groups[\"questBoosters\"].steps"
+                args:
+                    "stepView": "_item"
+                    "image": "storyView.story.settings.art[\"image-\" + _item.step.questProxy]"
+                    "proxyIcon": "proxy"
+                    "priceInGold": "isAnyQuestBoosterStepFinished"
+                    "isTimeOver": "storyView.story.stage.type == eStageType.BUY"
+                eventActions:
+                - ["QUEST_BOOSTER_STEP_FINISHED", "QUEST_BOOSTER_STEP_FINISHED", ""]
+                - ["SELECT_STEP", "SELECT_STEP", "_event.id"]
+                - ["SHOW_STEP_INFO", "SHOW_STEP_INFO", "_event.id"]
+    -   class: "UIControl"
+        name: "PassArea"
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 560.000000
+                verticalPolicy: "PercentOfParent"
+        children:
+        -   class: "UIControl"
+            name: "Boosters"
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfFirstChild"
+                    verticalPolicy: "PercentOfParent"
+                UIChildComponent0:
+                    childType: "kControl"
+                    condition: "storyView.battlePass.isObtained"
+                    control: "PassBoosters"
+        -   class: "UIControl"
+            name: "PassButton"
+            input: false
+            components:
+                Anchor:
+                    hCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 400.000000
+                    verticalPolicy: "PercentOfParent"
+                UIChildComponent0:
+                    condition: "not storyView.battlePass.isObtained"
+                    prototypePath: "~res:/UI/Screens3/Lobby/Story/Components/PassButton.yaml"
+                    args:
+                        "price": "storyView.battlePass.price"
+                        "proxyIcon": "proxy"
+                        "image": "storyView.story.settings.art[\"passButton\"]"
+                        "isSelected": "storyView.battlePass.isSelected"
+                    eventActions:
+                    - ["ON_TOUCH", "SELECT_STEP", "0"]
+-   class: "UIControl"
+    name: "PassBoosters"
+    input: false
+    components:
+        LinearLayout:
+            spacing: 16.000000
+        SizePolicy:
+            horizontalPolicy: "PercentOfChildrenSum"
+            verticalPolicy: "PercentOfParent"
+    children:
+    -   class: "UIControl"
+        name: "InstantBoosters"
+        input: false
+        components:
+            LinearLayout:
+                spacing: 16.000000
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 368.000000
+                verticalPolicy: "PercentOfParent"
+            UIRepeatComponent:
+                control: "~res:/UI/Screens3/Lobby/Story/Components/BoosterButtonInstant.yaml"
+                dataContainer: "storyView.tree.groups[\"instantBoosters\"].steps"
+                args:
+                    "stepView": "_item"
+                eventActions:
+                - ["SELECT_STEP", "SELECT_STEP", "_event.id"]

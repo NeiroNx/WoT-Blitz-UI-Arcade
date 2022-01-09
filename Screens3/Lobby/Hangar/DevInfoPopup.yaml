@@ -1,0 +1,352 @@
+Header:
+    version: 141
+Prototypes:
+-   class: "UIControl"
+    name: "DevInfoPopup"
+    size: [334.000000, 324.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataParamsComponent:
+            params:
+            - ["HangarDevInfoViewModel", "devInfo", "null", "{ }"]
+            events:
+            - "COPY_ENTITY_ID"
+            - "COPY_SPA"
+        UIChildComponent0:
+            prototypePath: "~res:/UI/Screens3/Common/PopupMenu.yaml"
+            args:
+                "masterId": "\"DEV_INFO\""
+                "content": "Content"
+Slots:
+-   class: "UIControl"
+    name: "Content"
+    size: [32.000000, 32.000000]
+    input: false
+    components:
+        Anchor:
+            rightAnchorEnabled: true
+        LinearLayout:
+            orientation: "TopDown"
+        SizePolicy:
+            horizontalPolicy: "PercentOfMaxChild"
+            verticalPolicy: "PercentOfChildrenSum"
+    bindings:
+    - ["visible", "devInfo.visible"]
+    children:
+    -   class: "UIControl"
+        name: "TutorialQueue"
+        input: false
+        classes: "t-caption regular white-wild-sand-text"
+        components:
+            UITextComponent: {}
+            Anchor:
+                rightAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml"
+        bindings:
+        - ["UITextComponent.text", "\"Players in tutorial queue: \" + str(devInfo.tutorialQueue)"]
+    -   class: "UIControl"
+        name: "FpsContainer"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 270.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 20.000000
+        children:
+        -   class: "UIControl"
+            name: "Fps"
+            input: false
+            classes: "t-caption regular white-wild-sand-text"
+            components:
+                UITextComponent:
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                    align: ["RIGHT", "VCENTER"]
+                Anchor:
+                    rightAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 270.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 20.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml"
+            bindings:
+            - ["UITextComponent.text", "\"FPS: \" + str(devInfo.fps, 0) + \", PING: \" + str(devInfo.ping, 0)"]
+    -   class: "UIControl"
+        name: "CurrentServer"
+        input: false
+        classes: "t-caption regular white-wild-sand-text"
+        components:
+            UITextComponent:
+                colorInheritType: "COLOR_IGNORE_PARENT"
+                align: ["RIGHT", "VCENTER"]
+            Anchor:
+                rightAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 270.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 20.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+        bindings:
+        - ["UITextComponent.text", "\"Server: \" + devInfo.serverName"]
+    -   class: "UIControl"
+        name: "ClusterPlayers"
+        input: false
+        classes: "t-caption regular white-wild-sand-text"
+        components:
+            UITextComponent:
+                colorInheritType: "COLOR_IGNORE_PARENT"
+                align: ["RIGHT", "VCENTER"]
+            Anchor:
+                rightAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 270.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 20.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+        bindings:
+        - ["UITextComponent.text", "\"Cluster players: \" + str1000Separated(devInfo.clusterCCU)"]
+    -   class: "UIControl"
+        name: "RegionPlayers"
+        input: false
+        classes: "t-caption regular white-wild-sand-text"
+        components:
+            UITextComponent:
+                colorInheritType: "COLOR_IGNORE_PARENT"
+                align: ["RIGHT", "VCENTER"]
+            Anchor:
+                rightAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 270.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 20.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml;~res:/UI/Screens3/Color.style.yaml"
+        bindings:
+        - ["UITextComponent.text", "\"Region players \" + str1000Separated(devInfo.regionCCU)"]
+    -   class: "UIControl"
+        name: "AccountEntityId"
+        input: false
+        classes: "t-caption regular white-wild-sand-text"
+        components:
+            UITextComponent:
+                colorInheritType: "COLOR_IGNORE_PARENT"
+                align: ["RIGHT", "VCENTER"]
+            Anchor:
+                rightAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 270.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 20.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml"
+        bindings:
+        - ["UITextComponent.text", "\"Account entity ID: \" + str(devInfo.enityId)"]
+    -   class: "UIControl"
+        name: "Group"
+        input: false
+        components:
+            Anchor:
+                rightAnchorEnabled: true
+            LinearLayout:
+                spacing: 6.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   class: "UIControl"
+            name: "AccountDbId"
+            input: false
+            classes: "t-caption regular white-wild-sand-text"
+            components:
+                UITextComponent:
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                    align: ["LEFT", "VCENTER"]
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml"
+            bindings:
+            - ["UITextComponent.text", "\"Database ID: \" + str(devInfo.spaId)"]
+        -   class: "UIControl"
+            name: "AccountClanId"
+            input: false
+            classes: "t-caption regular white-wild-sand-text"
+            components:
+                UITextComponent:
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                    align: ["LEFT", "VCENTER"]
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml"
+            bindings:
+            - ["UITextComponent.text", "when devInfo.clanId == -1L -> \"\", \"Clan ID: \" + str(devInfo.clanId)"]
+    -   class: "UIControl"
+        name: "ServerUTCTimeContainer"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 270.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 20.000000
+        children:
+        -   class: "UIControl"
+            name: "ServerUTCTime"
+            input: false
+            classes: "t-caption regular white-wild-sand-text"
+            components:
+                UITextComponent:
+                    align: ["RIGHT", "VCENTER"]
+                Anchor:
+                    rightAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 270.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 20.000000
+                StyleSheet:
+                    styles: "~res:/UI/Screens3/Font.style.yaml"
+            bindings:
+            - ["UITextComponent.text", "\"Server UTC Time: \" + devInfo.serverTime"]
+    -   class: "UIControl"
+        name: "SmartDlcPack"
+        input: false
+        classes: "t-caption regular white-wild-sand-text"
+        components:
+            UITextComponent:
+                align: ["RIGHT", "VCENTER"]
+            Anchor:
+                rightAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 270.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 20.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml"
+        bindings:
+        - ["visible", "not empty(devInfo.smartDlc)"]
+        - ["UITextComponent.text", "devInfo.smartDlc"]
+    -   class: "UIControl"
+        name: "version"
+        input: false
+        classes: "t-caption regular white-wild-sand-text"
+        components:
+            UITextComponent:
+                align: ["RIGHT", "VCENTER"]
+            Anchor:
+                rightAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 270.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 20.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml"
+        bindings:
+        - ["UITextComponent.text", "\"Version: \" + devInfo.version"]
+    -   class: "UIControl"
+        name: "build"
+        input: false
+        classes: "t-caption regular white-wild-sand-text"
+        components:
+            UITextComponent:
+                multiline: "MULTILINE_ENABLED_BY_SYMBOL"
+                align: ["RIGHT", "VCENTER"]
+            Anchor:
+                rightAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfContent"
+                horizontalMax: 270.000000
+                verticalPolicy: "PercentOfContent"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml"
+        bindings:
+        - ["UITextComponent.text", "\"Build: \" + devInfo.buildInfo"]
+    -   class: "UIControl"
+        name: "sound"
+        input: false
+        classes: "t-caption regular white-wild-sand-text"
+        components:
+            UITextComponent:
+                multiline: "MULTILINE_ENABLED_BY_SYMBOL"
+                align: ["RIGHT", "VCENTER"]
+            Anchor:
+                rightAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 270.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 20.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml"
+        bindings:
+        - ["UITextComponent.text", "\"Sound: \" + devInfo.soundInfo"]
+    -   class: "UIControl"
+        name: "CopyButtons"
+        input: false
+        components:
+            Anchor:
+                rightAnchorEnabled: true
+            LinearLayout:
+                spacing: 8.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfMaxChild"
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Font.style.yaml"
+        bindings:
+        - ["visible", "devInfo.clipboardCopyingAvailable"]
+        children:
+        -   class: "UIControl"
+            name: "CopyEntityId"
+            classes: "t-caption regular white-wild-sand-text"
+            components:
+                UITextComponent:
+                    text: "Copy Entity ID"
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                    align: ["HCENTER", "VCENTER"]
+                BorderComponent: {}
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 100.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 40.000000
+                UIInputEventComponent:
+                    onTouchUpInside: "COPY_ENTITY_ID"
+        -   class: "UIControl"
+            name: "CopySpa"
+            classes: "t-caption regular white-wild-sand-text"
+            components:
+                UITextComponent:
+                    text: "Copy SPA"
+                    colorInheritType: "COLOR_IGNORE_PARENT"
+                    align: ["HCENTER", "VCENTER"]
+                BorderComponent: {}
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 100.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 40.000000
+                UIInputEventComponent:
+                    onTouchUpInside: "COPY_SPA"

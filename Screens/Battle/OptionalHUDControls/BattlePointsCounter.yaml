@@ -1,0 +1,80 @@
+Header:
+    version: "70"
+Prototypes:
+-   class: "UIControl"
+    name: "BattlePointsCounter"
+    input: false
+    classes: "battle-points-counter"
+    components:
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 81.000000
+            verticalPolicy: "PercentOfFirstChild"
+        StyleSheet:
+            styles: "~res:/UI/Screens/Battle/Styles/HUDLayerHellgamesStyles.yaml"
+    children:
+    -   class: "UIControl"
+        name: "Background"
+        position: [-18.000000, -1.000000]
+        size: [72.000000, 26.000000]
+        input: false
+        classes: "screen-background"
+        components:
+            Background:
+                drawType: "DRAW_STRETCH_BOTH"
+                spriteModification: ["FLIP_HORIZONTAL"]
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 0.000000
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 81.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 20.000000
+            StyleSheet:
+                styles: "~res:/UI/Styles/ColorStyles.yaml;~res:/UI/Styles/BackgroundStyles.yaml;~res:/UI/Screens/Battle/Styles/HUDLayerHellgamesStyles.yaml"
+    -   class: "UIControl"
+        name: "Back"
+        input: false
+        components:
+            Anchor:
+                leftAnchorEnabled: true
+                leftAnchor: 16.000000
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                spacing: 4.000000
+            SizePolicy:
+                horizontalPolicy: "PercentOfChildrenSum"
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   class: "UIControl"
+            name: "Icon"
+            input: false
+            classes: "battle-points-icon"
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_PROPORTIONAL_ONE"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    horizontalValue: 100.000000
+                    verticalPolicy: "PercentOfContent"
+                    verticalValue: 100.000000
+        -   class: "UIControl"
+            name: "Text"
+            input: false
+            classes: "bold fs-17"
+            components:
+                UITextComponent:
+                    text: "106"
+                Anchor:
+                    hCenterAnchorEnabled: true
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "PercentOfContent"
+                    verticalPolicy: "PercentOfContent"
+                StyleSheet:
+                    styles: "~res:/UI/Screens/Fonts.yaml;~res:/UI/Screens/FontsColors.yaml"

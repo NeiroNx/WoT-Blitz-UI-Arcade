@@ -1,0 +1,35 @@
+Header:
+    version: "23"
+ImportedPackages:
+- "~res:/UI/Screens/Battle/HotKey.yaml"
+- "~res:/UI/Screens/Common/IconButton.yaml"
+StyleSheets:
+-   selector: ".chat_button:selected"
+    properties:
+        bg-contour: "~res:/Gfx/UI/CommonUIElements/Button/green_contour.txt"
+        bg-gradient: "~res:/Gfx/UI/CommonUIElements/Button/green_gradient.txt"
+-   selector: ".chat_button"
+    properties:
+        sizePolicy-horizontalValue: 90.000000
+        sizePolicy-verticalValue: 70.000000
+-   selector: ".chat_button.Desktop"
+    properties:
+        sizePolicy-horizontalValue: 74.000000
+        sizePolicy-verticalValue: 58.000000
+Prototypes:
+-   prototype: "IconButton/IconButton"
+    name: "ChatButton"
+    exclusiveInput: false
+    classes: "button chat_button button-color-gray"
+    components:
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            verticalPolicy: "FixedSize"
+        StyleSheet:
+            styles: "~res:/UI/Screens/Battle/ChatButton.yaml;~res:/UI/Styles/ButtonStyle.yaml"
+    children:
+    -   path: "icon"
+        components:
+            Background:
+                sprite: "~res:/Gfx/UI/BattleScreenHUD/ChatIcons"
+                colorInherit: "COLOR_REPLACE_ALPHA_ONLY"

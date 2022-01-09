@@ -1,0 +1,38 @@
+action OnRecieverClicked()
+{
+	ChangeData(currentField, eGiftPostcardField.Reciever);
+}
+
+action OnRemoveReciever()
+{
+	Event("ON_RECIEVER_CHANGED", arg1 = 0L);
+	ChangeData(currentField, eGiftPostcardField.Reciever);
+}
+
+action BackEvent()
+{
+    PlaySound("GUI/buttons/close");
+  	Event("BACK_EVENT");
+}
+
+action StuffSizeChanged(int height)
+{
+	if (not (stuffH == height))
+	{
+		ChangeData(stuffH, height);
+	}
+}
+
+action CloseRequested()
+{
+	DirectEvent("CLOSE_OVERLAY", "./Overlay");
+}
+
+action MainActionRequested()
+{
+	if (not product.pendingPurchase)
+	{
+		PlaySound(sound="GUI/buttons/open");
+		Event("ON_BUY_CLICKED");
+	}
+}

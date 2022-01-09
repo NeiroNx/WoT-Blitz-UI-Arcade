@@ -1,0 +1,183 @@
+Header:
+    version: 135
+StyleSheets:
+-   selectors:
+    - ".equip_element.afterburn #Icon"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/BattleScreenHUD/EquipSmallIcons"
+        bg-frame: 0
+-   selectors:
+    - ".equip_element.berserk #Icon"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/BattleScreenHUD/EquipSmallIcons"
+        bg-frame: 1
+-   selectors:
+    - ".equip_element.buff #Icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2020_Mad-games/small/consumable_buff_1_xs"
+-   selectors:
+    - ".equip_element.dash #Icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2020_Mad-games/small/consumable_dash_xs"
+-   selectors:
+    - ".equip_element.forsage #Icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2020_Mad-games/small/consumable_forsage_xs"
+-   selectors:
+    - ".equip_element.hunters #Icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2020_Mad-games/small/consumable_hunters_xs"
+-   selectors:
+    - ".equip_element.moonwalk #Icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2020_Mad-games/small/consumable_moonwalk_xs"
+-   selectors:
+    - ".equip_element.ram #Icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2020_Mad-games/small/consumable_ram_xs"
+-   selectors:
+    - ".equip_element.shield #Icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2020_Mad-games/small/consumable_shield_xs"
+-   selectors:
+    - ".equip_element.stealth #Icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2020_Mad-games/small/consumable_stealth_xs"
+-   selectors:
+    - ".equip_element.vampire #Icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2020_Mad-games/small/consumable_vampire-heal_xs"
+-   selectors:
+    - ".equip_element.victim #Icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2020_Mad-games/small/consumable_victim_xs"
+-   selectors:
+    - ".equip_element.buf1 #Icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2020_Mad-games/small/consumable_buff_2_xs"
+-   selectors:
+    - ".equip_element.buf2 #Icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2020_Mad-games/small/consumable_buff_3_xs"
+-   selectors:
+    - ".equip_element.buf3 #Icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2020_Mad-games/small/consumable_buff_4_xs"
+-   selectors:
+    - ".equip_element.improved-afterburning #Icon"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/BattleScreenHUD/EquipSmallIcons"
+        bg-frame: 16
+-   selectors:
+    - ".equip_element.new-autoloader #Icon"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/BattleScreenHUD/EquipSmallIcons"
+        bg-frame: 17
+-   selectors:
+    - ".equip_element.сamouflage-paint #Icon"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/BattleScreenHUD/EquipSmallIcons"
+        bg-frame: 18
+-   selectors:
+    - ".equip_element.make-contusion #Icon"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/BattleScreenHUD/EquipSmallIcons"
+        bg-frame: 19
+-   selectors:
+    - ".equip_element.anti-high-explosive #Icon"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/BattleScreenHUD/EquipSmallIcons"
+        bg-frame: 20
+-   selectors:
+    - ".equip_element.fire-control-system #Icon"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/BattleScreenHUD/EquipSmallIcons"
+        bg-frame: 21
+-   selectors:
+    - ".equip_element.healing-kit #Icon"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/BattleScreenHUD/EquipSmallIcons"
+        bg-frame: 25
+-   selectors:
+    - ".equip_element.shield-kit #Icon"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/BattleScreenHUD/EquipSmallIcons"
+        bg-frame: 26
+-   selectors:
+    - ".equip_element.small-hp-stock #Icon"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/BattleScreenHUD/EquipSmallIcons"
+        bg-frame: 28
+-   selectors:
+    - ".equip_element.large-hp-stock #Icon"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/BattleScreenHUD/EquipSmallIcons"
+        bg-frame: 29
+-   selectors:
+    - ".equip_element.comeback-kit #Icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/provisions/2019_Halloween/provision_come-back-kit_xs"
+-   selectors:
+    - ".equip_element.engine-boost #Icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/provisions/2019_Halloween/provision_engine-boost_1_xs"
+-   selectors:
+    - ".equip_element.engine-boost_2 #Icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/provisions/2019_Halloween/provision_engine-boost_2_xs"
+-   selectors:
+    - ".equip_element.damage-boost #Icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/provisions/2019_Halloween/provision_damage-boost_1_xs"
+-   selectors:
+    - ".equip_element.damage-boost_2 #Icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/provisions/2019_Halloween/provision_damage-boost_2_xs"
+-   selectors:
+    - ".equip_element.reload-boost #Icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/provisions/2019_Halloween/provision_reload-boost_1_xs"
+-   selectors:
+    - ".equip_element.reload-boost_2 #Icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/provisions/2019_Halloween/provision_reload-boost_2_xs"
+-   selectors:
+    - ".equip_element.duplet #Icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/provisions/2019_Halloween/provision_duplet_xs"
+-   selectors:
+    - ".equip_element.splash #Icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2019_Halloween/consumable_splash_xs"
+-   selectors:
+    - ".equip_element.lightning #Icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2019_Halloween/consumable_lightning_1_xs"
+-   selectors:
+    - ".equip_element.lightning_2 #Icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2019_Halloween/consumable_lightning_2_xs"
+-   selectors:
+    - ".equip_element.curse #Icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2019_Halloween/consumable_curse_xs"
+-   selectors:
+    - ".equip_element.halloween_moonwalk #Icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2019_Halloween/consumable_moonwalk_xs"
+-   selectors:
+    - ".equip_element.halloween_hunters_mark #Icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2019_Halloween/consumable_hunters-mark_xs"
+-   selectors:
+    - ".equip_element.tungstentip #Icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/Polish-consumables/small/consumable_tungsten-tip_xs"
+-   selectors:
+    - ".equip_element.shield-giver-ability #Icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2021_BossMode/small/consumable_energy-shield_xs"
+-   selectors:
+    - ".equip_element.poisoned-shell #Icon"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2021_BossMode/small/consumable_poisoned-shells_xs"

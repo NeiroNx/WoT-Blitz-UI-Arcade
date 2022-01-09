@@ -1,0 +1,48 @@
+Header:
+    version: "108"
+Prototypes:
+-   class: "UIControl"
+    name: "CursorControl"
+    size: [32.000000, 32.000000]
+    pivot: [0.500000, 0.500000]
+    input: false
+    components:
+        UIOpacityComponent:
+            opacity: 0.700000
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 24.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 24.000000
+    children:
+    -   class: "UIControl"
+        name: "Big"
+        input: false
+        components:
+            Background:
+                sprite: "~res:/Gfx/Shared/controls/cursor/bg_circle-24px-2px"
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 24.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 24.000000
+            StyleSheet:
+                styles: "~res:/UI/Screens3/Color.style.yaml"
+    -   class: "UIControl"
+        name: "Small"
+        size: [32.000000, 32.000000]
+        input: false
+        components:
+            Background:
+                drawType: "DRAW_FILL"
+            UIRoundedCornersComponent:
+                radius: "8"
+            Anchor:
+                hCenterAnchorEnabled: true
+                vCenterAnchorEnabled: true
+            SizePolicy:
+                horizontalPolicy: "FixedSize"
+                horizontalValue: 4.000000
+                verticalPolicy: "FixedSize"
+                verticalValue: 4.000000
+            StyleSheet: {}

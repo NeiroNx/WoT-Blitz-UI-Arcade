@@ -1,0 +1,23 @@
+animation CongratulationsDialogOnInit
+{
+    parallel
+    {
+        if (deviceType == eBlitzDevice.DEVICE_DESKTOP)
+        {
+            ChangeProperty("**/RewardsHolder", "SizePolicy", "horizontalFormula", "min(parent, 1024)");
+            ChangeProperty("**/RewardsHolder", "SizePolicy", "verticalFormula", "childrenSum");
+
+            ChangeProperty("**/ContentWrapper", "SizePolicy", "verticalFormula", "parent - 224");
+        }
+        else
+        {
+            ChangeProperty("**/RewardsHolder", "SizePolicy", "horizontalFormula", "childrenSum + 160");
+            ChangeProperty("**/RewardsHolder", "SizePolicy", "verticalFormula", "maxChild");
+            ChangeProperty("**/ContentWrapper", "SizePolicy", "verticalFormula", "parent");
+        }
+    }
+
+    Opacity("**/ContentWrapper", 0.0);
+
+    Event("InitFinished");
+}

@@ -1,0 +1,24 @@
+Header:
+    version: "23"
+StyleSheets:
+-   selector: ".all ?"
+    properties:
+        visible: true
+-   selector: ".OBSERVE_BOTH #ObserveBoth"
+    properties:
+        visible: true
+-   selector: "#ObserveBoth"
+    properties:
+        visible: false
+-   selector: ".OBSERVE_ALLIES #ObserveAllies"
+    properties:
+        visible: true
+-   selector: "#ObserveAllies"
+    properties:
+        visible: false
+-   selector: ".STOP_OBSERVE #StopObserve"
+    properties:
+        visible: true
+-   selector: "#StopObserve"
+    properties:
+        visible: false

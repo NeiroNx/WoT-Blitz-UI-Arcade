@@ -1,0 +1,9 @@
+Header:
+    version: 134
+StyleSheets:
+-   selectors:
+    - ".battle-points"
+    properties:
+        text-fontName: "WarHeliosCondC_Bold_17"
+        text-shadowColor: [0.003922, 0.003922, 0.003922, 0.200000]
+        text-shadowOffset: [1.000000, 1.000000]

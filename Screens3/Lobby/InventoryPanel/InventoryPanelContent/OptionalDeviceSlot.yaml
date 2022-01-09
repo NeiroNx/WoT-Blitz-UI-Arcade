@@ -1,0 +1,69 @@
+Header:
+    version: "79"
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/InventoryPanel/OptionalDeviceStatusColumn.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "OptionalDeviceSlot"
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "FixedSize"
+            horizontalValue: 32.000000
+            verticalPolicy: "FixedSize"
+            verticalValue: 32.000000
+        UIDataParamsComponent:
+            params:
+            - ["OptionalDeviceSlotView", "model", "null", "{ }"]
+            - ["int", "iconFrame", "0", "2"]
+        UIDataLocalsComponent:
+            locals:
+            - ["string", "iconFrameSprite", "when iconFrame == 1 -> \"defense\", iconFrame == 0 -> \"power\", \"vitality\""]
+            - ["string", "readyForUnlockClass", "when not isNull(model) and model.readyForUnlock -> \"ready-for-unlock\", \"default-state\""]
+    bindings:
+    - ["classes", "\"optional-device-slot \" + readyForUnlockClass"]
+    children:
+    -   class: "UIControl"
+        name: "Content"
+        position: [0.000000, 3.000000]
+        input: false
+        components:
+            Anchor:
+                vCenterAnchorEnabled: true
+            LinearLayout:
+                dynamicSpacing: true
+            SizePolicy:
+                horizontalPolicy: "PercentOfParent"
+                verticalPolicy: "PercentOfMaxChild"
+        children:
+        -   prototype: "OptionalDeviceStatusColumn/OptionalDeviceStatusColumn"
+            name: "LeftColumn"
+            components:
+                UIDataParamsComponent:
+                    args:
+                        "status2": "when isNull(model) -> eOptionalDeviceStatus.EMPTY, model.readyToUnlockIndex == 2 -> eOptionalDeviceStatus.READY_TO_INSTALL, model.states[2] == eOptionalDeviceSlotState.FIRST_INSTALLED -> eOptionalDeviceStatus.INSTALLED, eOptionalDeviceStatus.EMPTY"
+                        "status1": "when isNull(model) -> eOptionalDeviceStatus.EMPTY, model.readyToUnlockIndex == 1 -> eOptionalDeviceStatus.READY_TO_INSTALL, model.states[1] == eOptionalDeviceSlotState.FIRST_INSTALLED -> eOptionalDeviceStatus.INSTALLED, eOptionalDeviceStatus.EMPTY"
+                        "status0": "when isNull(model) -> eOptionalDeviceStatus.EMPTY, model.readyToUnlockIndex == 0 -> eOptionalDeviceStatus.READY_TO_INSTALL, model.states[0] == eOptionalDeviceSlotState.FIRST_INSTALLED -> eOptionalDeviceStatus.INSTALLED, eOptionalDeviceStatus.EMPTY"
+        -   class: "UIControl"
+            name: "Icon"
+            input: false
+            components:
+                Background:
+                    drawType: "DRAW_SCALE_PROPORTIONAL"
+                Anchor:
+                    vCenterAnchorEnabled: true
+                SizePolicy:
+                    horizontalPolicy: "FixedSize"
+                    horizontalValue: 24.000000
+                    verticalPolicy: "FixedSize"
+                    verticalValue: 24.000000
+            bindings:
+            - ["Background.sprite", "\"~res:/Gfx/Lobby/icons/icon_optdev_\" + iconFrameSprite"]
+        -   prototype: "OptionalDeviceStatusColumn/OptionalDeviceStatusColumn"
+            name: "RightColumn"
+            components:
+                UIDataParamsComponent:
+                    args:
+                        "status2": "when isNull(model) -> eOptionalDeviceStatus.EMPTY, model.readyToUnlockIndex == 2 -> eOptionalDeviceStatus.READY_TO_INSTALL, model.states[2] == eOptionalDeviceSlotState.SECOND_INSTALLED -> eOptionalDeviceStatus.INSTALLED, eOptionalDeviceStatus.EMPTY"
+                        "status1": "when isNull(model) -> eOptionalDeviceStatus.EMPTY, model.readyToUnlockIndex == 1 -> eOptionalDeviceStatus.READY_TO_INSTALL, model.states[1] == eOptionalDeviceSlotState.SECOND_INSTALLED -> eOptionalDeviceStatus.INSTALLED, eOptionalDeviceStatus.EMPTY"
+                        "status0": "when isNull(model) -> eOptionalDeviceStatus.EMPTY, model.readyToUnlockIndex == 0 -> eOptionalDeviceStatus.READY_TO_INSTALL, model.states[0] == eOptionalDeviceSlotState.SECOND_INSTALLED -> eOptionalDeviceStatus.INSTALLED, eOptionalDeviceStatus.EMPTY"

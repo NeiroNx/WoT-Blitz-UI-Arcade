@@ -1,0 +1,27 @@
+Header:
+    version: 140
+ImportedPackages:
+- "~res:/UI/Screens3/Lobby/Common/FullScreenPopup/FullscreenPopupWithContentSlot.yaml"
+Prototypes:
+-   class: "UIControl"
+    name: "PremiumInfoDialog"
+    size: [960.000000, 640.000000]
+    input: false
+    components:
+        SizePolicy:
+            horizontalPolicy: "PercentOfParent"
+            verticalPolicy: "PercentOfParent"
+        UIDataLocalBindingsComponent:
+            data:
+            - ["control", "contentControl", "control(\"~res:/UI/Screens3/Lobby/ModulesTree/UpgradeToTopInfoDialogContent.yaml\", { }, [ ])"]
+    children:
+    -   prototype: "FullscreenPopupWithContentSlot/FullscreenPopupWithContentSlot"
+        name: "FullscreenPopupWithContentSlot"
+        components:
+            UIDataParamsComponent:
+                args:
+                    "contentControl": "contentControl"
+                eventActions:
+                - ["CLOSE_NOTIFICATION", "ON_CLOSE", ""]
+                - ["ACCENT_CLICKED", "", ""]
+                - ["ON_CLOSE", "ON_CLOSE", "_event"]

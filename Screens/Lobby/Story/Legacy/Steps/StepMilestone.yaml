@@ -1,0 +1,20 @@
+Header:
+    version: "93"
+ImportedPackages:
+- "~res:/UI/Screens/Lobby/Story/Legacy/Steps/StepDefault.yaml"
+Controls:
+-   prototype: "StepDefault/Content"
+    name: "Content"
+    children:
+    -   path: "ExpandedState"
+        components:
+            SizePolicy:
+                horizontalValue: 150.000000
+                verticalValue: 144.000000
+        children: []
+    -   path: "NormalState"
+        components:
+            SizePolicy:
+                horizontalValue: 130.000000
+                verticalValue: 106.000000
+        children: []

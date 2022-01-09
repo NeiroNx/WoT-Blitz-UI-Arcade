@@ -1,0 +1,139 @@
+Header:
+    version: 127
+StyleSheets:
+-   selectors:
+    - ".1st_april.ability_item.largeRepairkit * #Img"
+    properties:
+        bg-sprite: "~res:/Gfx/UI/InventoryIcons/Big/Event/largeRepairkit_apr.txt"
+-   selectors:
+    - ".ability_item.forsage * #Img"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2020_Mad-games/big/consumable_forsage_m"
+-   selectors:
+    - ".ability_item.buff * #Img"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2020_Mad-games/big/consumable_buff_1_m"
+-   selectors:
+    - ".ability_item.dash * #Img"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2020_Mad-games/big/consumable_dash_m"
+-   selectors:
+    - ".ability_item.hunters * #Img"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2020_Mad-games/big/consumable_hunters_m"
+-   selectors:
+    - ".ability_item.moonwalk * #Img"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2020_Mad-games/big/consumable_moonwalk_m"
+-   selectors:
+    - ".ability_item.ram * #Img"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2020_Mad-games/big/consumable_ram_m"
+-   selectors:
+    - ".ability_item.shield * #Img"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2020_Mad-games/big/consumable_shield_m"
+-   selectors:
+    - ".ability_item.stealth * #Img"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2020_Mad-games/big/consumable_stealth_m"
+-   selectors:
+    - ".ability_item.vampire * #Img"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2020_Mad-games/big/consumable_vampire-heal_m"
+-   selectors:
+    - ".ability_item.victim * #Img"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2020_Mad-games/big/consumable_victim_m"
+-   selectors:
+    - ".ability_item.enemy-reload-time * #Img"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2020_Mad-games/consumable_moonwalk_m"
+-   selectors:
+    - ".ability_item.reload-boost * #Img"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/provisions/2019_Halloween/provision_reload-boost_1_m"
+-   selectors:
+    - ".ability_item.reload-boost_2 * #Img"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/provisions/2019_Halloween/provision_reload-boost_2_m"
+-   selectors:
+    - ".ability_item.ramming * #Img"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/provisions/2019_Halloween/provision_ramming_1_m"
+-   selectors:
+    - ".ability_item.ramming_2 * #Img"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/provisions/2019_Halloween/provision_ramming_2_m"
+-   selectors:
+    - ".ability_item.ghost * #Img"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/provisions/2019_Halloween/provision_ghost_m"
+-   selectors:
+    - ".ability_item.engine-boost * #Img"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/provisions/2019_Halloween/provision_engine-boost_1_m"
+-   selectors:
+    - ".ability_item.engine-boost_2 * #Img"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/provisions/2019_Halloween/provision_engine-boost_2_m"
+-   selectors:
+    - ".ability_item.duplet * #Img"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/provisions/2019_Halloween/provision_duplet_m"
+-   selectors:
+    - ".ability_item.damage-boost * #Img"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/provisions/2019_Halloween/provision_damage-boost_1_m"
+-   selectors:
+    - ".ability_item.damage-boost_2 * #Img"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/provisions/2019_Halloween/provision_damage-boost_2_m"
+-   selectors:
+    - ".ability_item.comeback-kit * #Img"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/provisions/2019_Halloween/provision_come-back-kit_m"
+-   selectors:
+    - ".ability_item.return-in-time * #Img"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2019_Halloween/consumable_return-in-time_m"
+-   selectors:
+    - ".ability_item.curse * #Img"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2019_Halloween/consumable_curse_m"
+-   selectors:
+    - ".ability_item.tornado * #Img"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2019_Halloween/consumable_vortex_m"
+-   selectors:
+    - ".ability_item.pretend-dead * #Img"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2019_Halloween/consumable_pretend-dead_m"
+-   selectors:
+    - ".ability_item.splash * #Img"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2019_Halloween/consumable_splash_m"
+-   selectors:
+    - ".ability_item.lightning * #Img"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2019_Halloween/consumable_lightning_1_m"
+-   selectors:
+    - ".ability_item.lightning_2 * #Img"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2019_Halloween/consumable_lightning_2_m"
+-   selectors:
+    - ".ability_item.enemy-reload-time * #Img"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/provisions/2019_Halloween/provision_enemy-reload-time_m"
+-   selectors:
+    - ".ability_item.halloween_moonwalk * #Img"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2019_Halloween/consumable_moonwalk_m"
+-   selectors:
+    - ".ability_item.halloween_hunters_mark * #Img"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2019_Halloween/consumable_hunters-mark_m"
+-   selectors:
+    - ".ability_item.jump * #Img"
+    properties:
+        bg-sprite: "~res:/Gfx/Shared/tank-supply/consumables/2021_Lunar/big/consumable_jump_m"

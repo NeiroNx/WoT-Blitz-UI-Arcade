@@ -1,0 +1,5 @@
+animation OnSwipeOffset(float aPosition, float aProportion)
+{
+    ChangeData(offset, -aPosition);
+    ChangeData(opacity, aProportion);
+}

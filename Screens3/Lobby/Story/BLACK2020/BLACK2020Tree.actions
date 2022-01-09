@@ -1,0 +1,64 @@
+action SCROLL_TO_STEP(int stepId, string path)
+{
+    parallel
+    {
+        ScrollToEnsureControlOnScreen(path, 0.6, yPolicy = eScrollToControlPolicy.kCenter);
+        Event("SELECT_STEP", arg1 = stepId);
+    }
+}
+
+action SCROLL_TO_COMPOSITE_STEP(string name, string path)
+{
+    parallel
+    {
+        ScrollToEnsureControlOnScreen(path, 0.6, yPolicy = eScrollToControlPolicy.kCenter);
+        Event("SELECT_COMPOSITE_STEP", arg1 = name);
+    }
+}
+
+action SCREEN_SIZE_CHANGED(vector2 size)
+{
+    ChangeData(screenSize, size);
+}
+
+action SCROLL_TO_FIRST_NOT_FINISHED(int index)
+{
+    if (not isNull(compositeStep) and not isNull(compositeStep.compositeStep) and not compositeStep.compositeStep.steps.Empty() and not compositeStep.compositeStep.steps[compositeStep.compositeStep.currentIndex].isFinished)
+    {
+        ScrollToEnsureControlOnScreen("**/CompositeStep", 0.0, yPolicy = eScrollToControlPolicy.kCenter);
+    }
+    else
+    {
+        if (not storyView.story.tree.steps[order[index]].isFinished)
+        {
+            ScrollToEnsureControlOnScreen("**/Step" + str(order[index]), 0.0, yPolicy = eScrollToControlPolicy.kCenter);
+        }
+        else
+        {
+            if (index != (order.Size() - 1))
+            {
+                ChangeData(stepIndex, index + 1);
+                Event("SCROLL_TO_FIRST_NOT_FINISHED", arg1 = stepIndex);
+            }
+        }
+    }
+}
+
+action ON_SCREEN_SIZE_CHANGED()
+{
+    if (not isNull(compositeStep) and compositeStep.isSelected)
+    {
+        ScrollToEnsureControlOnScreen("**/CompositeStep", 0.0, yPolicy = eScrollToControlPolicy.kCenter);
+    }
+    else
+    {
+        if (not isNull(storyView.selectedStep))
+        {
+            ScrollToEnsureControlOnScreen("**/Step" + str(storyView.selectedStep.id), 0.0, yPolicy = eScrollToControlPolicy.kCenter);
+        }
+        else
+        {
+            Event("SCROLL_TO_FIRST_NOT_FINISHED", arg1 = stepIndex);
+        }
+    }
+}

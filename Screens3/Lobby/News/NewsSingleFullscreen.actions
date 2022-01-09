@@ -1,0 +1,5 @@
+action BACK_EVENT_BY_SHORTCUT()
+{
+	PlaySound("GUI/buttons/close");
+	Event("BACK_EVENT");
+}
